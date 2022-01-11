@@ -2,11 +2,10 @@ fig:nice-fig
 tab:nice-tab
 eq:binom
 thm:tri
-about
-does-code-folding-work-in-bookdown
-render-book
-preview-book
-hello-bookdown
+about-these-notes
+why-this-book
+how-to-use-this-book
+Chapter-2
 a-section
 cross
 chapters-and-sub-chapters

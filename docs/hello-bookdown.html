@@ -11,7 +11,7 @@
   <meta property="og:title" content="Chapter 2 Hello bookdown | EDUC 784: Regression" />
   <meta property="og:type" content="book" />
   
-  
+  <meta property="og:image" content="/images/image1.png" />
   <meta property="og:description" content="Course notes for EDUC 784" />
   <meta name="github-repo" content="peterhalpin/EDUC_784" />
 
@@ -19,7 +19,7 @@
   <meta name="twitter:title" content="Chapter 2 Hello bookdown | EDUC 784: Regression" />
   
   <meta name="twitter:description" content="Course notes for EDUC 784" />
-  
+  <meta name="twitter:image" content="/images/image1.png" />
 
 <meta name="author" content="Peter Halpin" />
 
@@ -30,7 +30,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
-  
+  <link rel="shortcut icon" href="null" type="image/x-icon" />
 <link rel="prev" href="index.html"/>
 <link rel="next" href="cross.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
@@ -218,6 +218,38 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="hello-bookdown" class="section level1" number="2">
 <h1><span class="header-section-number">Chapter 2</span> Hello bookdown</h1>
+<!-- Klude script for show/hide code buttons; needs to be after the main header in each file -->
+<!-- This part can be programmatically generated with htmltools. Thus we can control initial state from the YAML front matter-->
+<script id="code-folding-options" type="application/json">
+  {"initial-state": "hide"}
+</script>
+<script type="text/javascript">
+document.addEventListener("DOMContentLoaded", function() {
+  const languages = ['r', 'python', 'bash', 'sql', 'cpp', 'stan', 'julia', 'foldable'];
+  const options = JSON.parse(document.getElementById("code-folding-options").text);
+  const show = options["initial-state"] !== "hide";
+  Array.from(document.querySelectorAll("pre.sourceCode")).map(function(pre) {
+    const classList = pre.classList;
+    if (languages.some(x => classList.contains(x))) {
+      const div = pre.parentElement;
+      const state = show || classList.contains("fold-show") && !classList.contains("fold-hide") ? " open" : "";
+      div.outerHTML = `<details${state}><summary></summary>${div.outerHTML}</details>`;
+    }
+  });
+});
+</script>
+<style type="text/css">
+summary {
+  display: list-item;
+  text-align: right;
+}
+summary::after {
+  content: 'Code'
+}
+details[open] > summary::after {
+  content: 'Hide'
+}
+</style>
 <p>All chapters start with a first-level heading followed by your chapter title, like the line above. There should be only one first-level heading (<code>#</code>) per .Rmd file.</p>
 <div id="a-section" class="section level2" number="2.1">
 <h2><span class="header-section-number">2.1</span> A section</h2>
@@ -225,6 +257,7 @@ div.csl-indent {
 <div id="an-unnumbered-section" class="section level3 unnumbered">
 <h3>An unnumbered section</h3>
 <p>Chapters and sections are numbered by default. To un-number a heading, add a <code>{.unnumbered}</code> or the shorter <code>{-}</code> at the end of the heading, like in this section.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="hello-bookdown.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#code hide button??</span></span></code></pre></div>
 
 </div>
 </div>
@@ -249,25 +282,15 @@ div.csl-indent {
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": {
-"github": false,
-"facebook": true,
-"twitter": true,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
+"sharing": null,
 "fontsettings": {
 "theme": "white",
 "family": "sans",
 "size": 2
 },
 "edit": {
-"link": "https://github.com/peterhalpin/EDUC_784/01-intro.Rmd",
-"text": "Edit"
+"link": "https://github.com/peterhalpin/EDUC_784/edit/master/01-intro.Rmd",
+"text": "Suggest an edit"
 },
 "history": {
 "link": null,
@@ -277,14 +300,15 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["_main.pdf", "_main.epub"],
+"download": null,
 "search": {
 "engine": "fuse",
 "options": null
 },
 "toc": {
-"collapse": "subsection"
-}
+"collapse": "section"
+},
+"info": true
 });
 });
 </script>

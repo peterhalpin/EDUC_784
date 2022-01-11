@@ -5,21 +5,26 @@ date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
-# url: your book url like https://bookdown.org/yihui/bookdown
-# cover-image: path to the social sharing image like images/cover.jpg
 description: |
   Course notes for EDUC 784
 link-citations: yes
 github-repo: peterhalpin/EDUC_784
+cover-image: images/image1.png
+favicon: null
+# url: your book url like https://bookdown.org/yihui/bookdown
+# cover-image: path to the social sharing image like images/cover.jpg
 ---
 
 
 
-# About
+# About these notes
 
-This web book provides the course notes for EDUC 784. It is currently under development, so any feedback is appreciated (e.g., during class or via email). 
+This "ebook" provides the course notes for EDUC 784. It is currently under development, so any feedback is appreciated (e.g., during class,  via email, or the edit link in the header). This first chapter is just about how to use the book -- the course content starts in Chapter \@ref(Chapter-2).   
 
-<!-- Klude script for show/hide code buttons; needs to be after the main header in each file -->
+<!-- 
+Klude script for show/hide code buttons; needs to be after the main header in each file
+https://github.com/rstudio/bookdown/issues/764 
+-->
 
 ```{=html}
 <!-- This part can be programmatically generated with htmltools. Thus we can control initial state from the YAML front matter-->
@@ -50,50 +55,48 @@ summary {
   text-align: right;
 }
 summary::after {
-  content: 'Code'
+  content: 'code'
 }
 details[open] > summary::after {
-  content: 'Hide'
+  content: 'hide'
 }
 ```
+
+## Why this book
+
+There are few goals of moving from "slides + exercises" to an ebook. 
+
+* To integrate course content (text, code, examples, and exercises) into one format, rather than having multiple files to sort through on Sakai.
+* To address the perennial problem of choosing a textbook for this course -- rather than having a supplementary text, the goal is for this ebook to be the official course text.
+* Most importantly, having a course text that is "at the right level" means that I can be more liberal in assigning readings as homework *before class*, so we can spend less class time "lecturing" and more class time discussing any questions you have about the readings, going through the examples in R together, and working on assignments.  
+* As a bonus, this book is another example cool things you can do with R. It's written entirely in R -- that is crazy, right??
+
+<!-- So, my goal for this semester to be in a situation where I assign chapter of this book each week as reading, and you do the readings before coming to class. I'll provide a short summary of the content of each chapter at the beginning of class, and I'll answer any questions you have about the readings. How long we spend summarizing the content will basically depend on how much discussion y'all want to have about it. Then, we will work through an R-based example together. Once we are done the example, there will be "open lab" time work on assignments or whatever you want to do. -->
+
+This book won't replace Sakai (e.g., I still need to post assignments and grades somewhere). But, instead of the Sakai Lessons linking to a bunch of files on Sakai, they will link to this book. 
+
+
+## How to use this book
+
+The book is going to replace the lesson slides (powerpoint) and R exercises (Rmarkdown / HTML) familiar from EDUC 710. The main trick for doing this is called "code folding". 
+
+An example of code folding is given below -- you can see the histogram integrated into the text. Once you click on the button called "code" it will also show you the R code that produced the histogram. Note that you may need to scroll horizontally to see all of the text in the code window. Also note that when you hover your mouse over the code window, an icon appears in the top right corner -- this lets you copy the full block of code with one click. 
 
 
 ```{r}
-head(mtcars)
+# Here is some R code. You don't have to look at it when reading the book, but it is here when you need it
+x <- rnorm(200)
+hist(x, col = "#4B9CD3")
 ```
 
-## Does code folding work in bookdown??
 
-This is an example
+So the basic workflow of how to use this book is as follows. 
 
-```{r, echo = T}
-x <- -5:5
-plot(x, dnorm(x))
-```
+1. Before class, go through the assigned readings for conceptual understanding. You can skip all the code during your first reading.
 
-## Render book
+2. We will go through the assigned readings again in class together, focusing this time on the code, as well as any questions you have. 
 
-You can render the HTML version of this example book without changing anything:
-
-1. Find the **Build** pane in the RStudio IDE, and
-
-1. Click on **Build Book**, then select your output format, or select "All formats" if you'd like to use multiple formats from the same book source files.
-
-Or build the book from the R console:
-
-```{r, eval=FALSE}
-bookdown::render_book()
-```
-
-To render this example to PDF as a `bookdown::pdf_book`, you'll need to install XeLaTeX. You are recommended to install TinyTeX (which includes XeLaTeX): <https://yihui.org/tinytex/>.
-
-## Preview book
-
-As you work, you may start a local server to live preview this HTML book. This preview will update as you edit the book when you save individual .Rmd files. You can start the server in a work session by using the RStudio add-in "Preview book", or from the R console:
-
-```{r eval=FALSE}
-bookdown::serve_book()
-```
+Alright, let's get to it! 
 
 
 ```{r include=FALSE}

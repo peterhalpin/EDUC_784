@@ -11,7 +11,7 @@
   <meta property="og:title" content="EDUC 784: Regression" />
   <meta property="og:type" content="book" />
   
-  
+  <meta property="og:image" content="/images/image1.png" />
   <meta property="og:description" content="Course notes for EDUC 784" />
   <meta name="github-repo" content="peterhalpin/EDUC_784" />
 
@@ -19,7 +19,7 @@
   <meta name="twitter:title" content="EDUC 784: Regression" />
   
   <meta name="twitter:description" content="Course notes for EDUC 784" />
-  
+  <meta name="twitter:image" content="/images/image1.png" />
 
 <meta name="author" content="Peter Halpin" />
 
@@ -30,9 +30,9 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
-  
+  <link rel="shortcut icon" href="null" type="image/x-icon" />
 
-<link rel="next" href="hello-bookdown.html"/>
+<link rel="next" href="Chapter-2.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.5.1/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -159,17 +159,16 @@ div.csl-indent {
 <li><a href="./">Course notes for EDUC 784</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About</a>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About these notes</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#does-code-folding-work-in-bookdown"><i class="fa fa-check"></i><b>1.1</b> Does code folding work in bookdown??</a></li>
-<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#render-book"><i class="fa fa-check"></i><b>1.2</b> Render book</a></li>
-<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#preview-book"><i class="fa fa-check"></i><b>1.3</b> Preview book</a></li>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#why-this-book"><i class="fa fa-check"></i><b>1.1</b> Why this book</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#how-to-use-this-book"><i class="fa fa-check"></i><b>1.2</b> How to use this book</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="hello-bookdown.html"><a href="hello-bookdown.html"><i class="fa fa-check"></i><b>2</b> Hello bookdown</a>
+<li class="chapter" data-level="2" data-path="Chapter-2.html"><a href="Chapter-2.html"><i class="fa fa-check"></i><b>2</b> Chapter 2</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="hello-bookdown.html"><a href="hello-bookdown.html#a-section"><i class="fa fa-check"></i><b>2.1</b> A section</a>
+<li class="chapter" data-level="2.1" data-path="Chapter-2.html"><a href="Chapter-2.html#a-section"><i class="fa fa-check"></i><b>2.1</b> A section</a>
 <ul>
-<li class="chapter" data-level="" data-path="hello-bookdown.html"><a href="hello-bookdown.html#an-unnumbered-section"><i class="fa fa-check"></i>An unnumbered section</a></li>
+<li class="chapter" data-level="" data-path="Chapter-2.html"><a href="Chapter-2.html#an-unnumbered-section"><i class="fa fa-check"></i>An unnumbered section</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="cross.html"><a href="cross.html"><i class="fa fa-check"></i><b>3</b> Cross-references</a>
@@ -221,10 +220,13 @@ div.csl-indent {
 <p class="author"><em>Peter Halpin</em></p>
 <p class="date"><em>2022-01-11</em></p>
 </div>
-<div id="about" class="section level1" number="1">
-<h1><span class="header-section-number">Chapter 1</span> About</h1>
-<p>This web book provides the course notes for EDUC 784. It is currently under development, so any feedback is appreciated (e.g., during class or via email).</p>
-<!-- Klude script for show/hide code buttons; needs to be after the main header in each file -->
+<div id="about-these-notes" class="section level1" number="1">
+<h1><span class="header-section-number">Chapter 1</span> About these notes</h1>
+<p>This “ebook” provides the course notes for EDUC 784. It is currently under development, so any feedback is appreciated (e.g., during class, via email, or the edit link in the header). This first chapter is just about how to use the book – the course content starts in Chapter <a href="Chapter-2.html#Chapter-2">2</a>.</p>
+<!-- 
+Klude script for show/hide code buttons; needs to be after the main header in each file
+https://github.com/rstudio/bookdown/issues/764 
+-->
 <!-- This part can be programmatically generated with htmltools. Thus we can control initial state from the YAML front matter-->
 <script id="code-folding-options" type="application/json">
   {"initial-state": "hide"}
@@ -250,42 +252,39 @@ summary {
   text-align: right;
 }
 summary::after {
-  content: 'Code'
+  content: 'code'
 }
 details[open] > summary::after {
-  content: 'Hide'
+  content: 'hide'
 }
 </style>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mtcars)</span></code></pre></div>
-<pre><code>##                    mpg cyl disp  hp drat    wt  qsec vs am gear carb
-## Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
-## Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
-## Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
-## Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
-## Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
-## Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre>
-<div id="does-code-folding-work-in-bookdown" class="section level2" number="1.1">
-<h2><span class="header-section-number">1.1</span> Does code folding work in bookdown??</h2>
-<p>This is an example</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="index.html#cb3-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">5</span><span class="sc">:</span><span class="dv">5</span></span>
-<span id="cb3-2"><a href="index.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, <span class="fu">dnorm</span>(x))</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<div id="why-this-book" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> Why this book</h2>
+<p>There are few goals of moving from “slides + exercises” to an ebook.</p>
+<ul>
+<li>To integrate course content (text, code, examples, and exercises) into one format, rather than having multiple files to sort through on Sakai.</li>
+<li>To address the perennial problem of choosing a textbook for this course – rather than having a supplementary text, the goal is for this ebook to be the official course text.</li>
+<li>Most importantly, having a course text that is “at the right level” means that I can be more liberal in assigning readings as homework <em>before class</em>, so we can spend less class time “lecturing” and more class time discussing any questions you have about the readings, going through the examples in R together, and working on assignments.<br />
+</li>
+<li>As a bonus, this book is another example cool things you can do with R. It’s written entirely in R – that is crazy, right??</li>
+</ul>
+<!-- So, my goal for this semester to be in a situation where I assign chapter of this book each week as reading, and you do the readings before coming to class. I'll provide a short summary of the content of each chapter at the beginning of class, and I'll answer any questions you have about the readings. How long we spend summarizing the content will basically depend on how much discussion y'all want to have about it. Then, we will work through an R-based example together. Once we are done the example, there will be "open lab" time work on assignments or whatever you want to do. -->
+<p>This book won’t replace Sakai (e.g., I still need to post assignments and grades somewhere). But, instead of the Sakai Lessons linking to a bunch of files on Sakai, they will link to this book.</p>
 </div>
-<div id="render-book" class="section level2" number="1.2">
-<h2><span class="header-section-number">1.2</span> Render book</h2>
-<p>You can render the HTML version of this example book without changing anything:</p>
+<div id="how-to-use-this-book" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> How to use this book</h2>
+<p>The book is going to replace the lesson slides (powerpoint) and R exercises (Rmarkdown / HTML) familiar from EDUC 710. The main trick for doing this is called “code folding.”</p>
+<p>An example of code folding is given below – you can see the histogram integrated into the text. Once you click on the button called “code” it will also show you the R code that produced the histogram. Note that you may need to scroll horizontally to see all of the text in the code window. Also note that when you hover your mouse over the code window, an icon appears in the top right corner – this lets you copy the full block of code with one click.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Here is some R code. You don&#39;t have to look at it when reading the book, but it is here when you need it</span></span>
+<span id="cb1-2"><a href="index.html#cb1-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">200</span>)</span>
+<span id="cb1-3"><a href="index.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(x, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>So the basic workflow of how to use this book is as follows.</p>
 <ol style="list-style-type: decimal">
-<li><p>Find the <strong>Build</strong> pane in the RStudio IDE, and</p></li>
-<li><p>Click on <strong>Build Book</strong>, then select your output format, or select “All formats” if you’d like to use multiple formats from the same book source files.</p></li>
+<li><p>Before class, go through the assigned readings for conceptual understanding. You can skip all the code during your first reading.</p></li>
+<li><p>We will go through the assigned readings again in class together, focusing this time on the code, as well as any questions you have.</p></li>
 </ol>
-<p>Or build the book from the R console:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="index.html#cb4-1" aria-hidden="true" tabindex="-1"></a>bookdown<span class="sc">::</span><span class="fu">render_book</span>()</span></code></pre></div>
-<p>To render this example to PDF as a <code>bookdown::pdf_book</code>, you’ll need to install XeLaTeX. You are recommended to install TinyTeX (which includes XeLaTeX): <a href="https://yihui.org/tinytex/" class="uri">https://yihui.org/tinytex/</a>.</p>
-</div>
-<div id="preview-book" class="section level2" number="1.3">
-<h2><span class="header-section-number">1.3</span> Preview book</h2>
-<p>As you work, you may start a local server to live preview this HTML book. This preview will update as you edit the book when you save individual .Rmd files. You can start the server in a work session by using the RStudio add-in “Preview book,” or from the R console:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="index.html#cb5-1" aria-hidden="true" tabindex="-1"></a>bookdown<span class="sc">::</span><span class="fu">serve_book</span>()</span></code></pre></div>
+<p>Alright, let’s get to it!</p>
 
 </div>
 </div>
@@ -295,7 +294,7 @@ details[open] > summary::after {
         </div>
       </div>
 
-<a href="hello-bookdown.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="Chapter-2.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -309,25 +308,15 @@ details[open] > summary::after {
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": {
-"github": false,
-"facebook": true,
-"twitter": true,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
+"sharing": null,
 "fontsettings": {
 "theme": "white",
 "family": "sans",
 "size": 2
 },
 "edit": {
-"link": "https://github.com/peterhalpin/EDUC_784/index.Rmd",
-"text": "Edit"
+"link": "https://github.com/peterhalpin/EDUC_784/edit/master/index.Rmd",
+"text": "Suggest an edit"
 },
 "history": {
 "link": null,
@@ -337,14 +326,15 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["_main.pdf", "_main.epub"],
+"download": null,
 "search": {
 "engine": "fuse",
 "options": null
 },
 "toc": {
-"collapse": "subsection"
-}
+"collapse": "section"
+},
+"info": true
 });
 });
 </script>

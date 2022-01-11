@@ -1,0 +1,273 @@
+---
+title: 'EDUC 710: Correlation and Regression Demo'
+author: "Peter F Halpin"
+date: "09/24/2019; last updated 09/15/2021"
+output:
+  html_document:
+    toc: yes
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library("kableExtra")
+fig.width=3
+```
+
+# Intro
+These notes go over scatter plots, covariance, and correlation, and regression in R. 
+
+# Correlation
+
+## A hypothetical example
+
+
+In 2009 the US Army introduced its Comprehensive Soldier Fitness effort to address — since expanded and renamed Comprehensive Soldier and Family Fitness. The program teaches soldiers and family members coping strategies such as keeping a positive or optimistic outlook on life or cultivating strong social relationships.The Army began the program in 2009 amid increasing cases of suicide and mental illness. It has cost $125 million to teach the coping skills to a million soldiers. Army leaders claim that the program will provide soldiers with the tools to become emotionally resilient. 
+
+Question: Does the data support the conclusion that the program is effective in improving soldiers' mental health outcomes? Why or why not? 
+
+Note: the example is adapted from  https://www.usatoday.com/story/news/nation/2014/02/20/institute-study-prevention-military-ptsd-programs/5637987/. The data used in these practice exercises is hypothetical (i.e., made up).
+
+## Scatter plots and correlation
+Let's load the data and check out the relationship between . 
+
+```{r}
+load("MentalHealth.RData")
+attach(data)
+
+# Variable description
+desc
+
+# Check out the data
+head(data)
+
+# Scatter plot
+plot(Hours, Score, col = "#4B9CD3")
+
+# Covariance using R's built-in function
+cov(Hours, Score)
+
+# Covariance "by hand"
+N <- nrow(data)
+x_bar <- mean(Hours)
+dx <- Hours - x_bar
+
+y_bar <- mean(Score)
+dy <- Score - y_bar
+
+dev_prod <- dx*dy 
+
+cov_xy <- sum(dev_prod) / (N - 1)
+cov_xy
+
+# Correlation using R's built in function
+cor(Hours, Score)
+
+# Correlation "by hand"
+sd_x <- sd(Hours)
+sd_y <- sd(Score)
+
+cor_xy <- cov_xy / sd_x /sd_y
+cor_xy
+```
+
+Based on the correlation, there appears to be a small but negative linear association between `Hours` spent in counselling and the overall mental health `Score` of the individuals in the sample. What are your conclusions about the whether the program is effective in improving soldiers' mental health outcomes?
+
+## A closer look
+
+Let's take another look at our scatter plot, this time broken down by sympton `Severity`. 
+
+```{r}
+# Scatter plot of all the data
+plot(Hours, Score, col = "#4B9CD3")
+
+# Change the color of the points with Severity == "Low"
+points(Hours[Severity == "Low"], Score[Severity == "Low"], col = 2)
+
+# Change the color of the points with Severity == "Moderate"
+points(Hours[Severity == "Moderate"], Score[Severity == "Moderate"], col = 6)
+```
+
+Next, lets compute the correlations for the different groups:
+
+```{r, results = "hide"}
+cor(Hours[Severity == "Low"], Score[Severity == "Low"])
+cor(Hours[Severity == "Moderate"], Score[Severity == "Moderate"])
+cor(Hours[Severity == "High"], Score[Severity == "High"])
+```
+
+Do these results change your conclusions about the effectiveness of the program? Why or why not? 
+
+# Regression
+
+## The line
+
+In order to do regression, we need to remember the following things about lines: 
+
+  * Lines have two parameters. 
+  
+  * The Y-intercept tells us the value of $Y$ when $X = 0$. 
+  
+  * The slope tells us how much $Y$ increases, for each unit of increase in $X$ (aka, rise over run).
+  
+  
+The formula for a line can be written in "slope-intercept form" as follows
+
+$$ Y = a + b X $$
+
+Here $Y$ is a (linear) function of $X$. The line has two parameters, denoted $a$ and $b$. 
+
+As you can see, $a$ is the value that $Y$ is equal to when $X = 0$. This parameter is called the $Y$-intercept, because on a graph the Y-axis is denoted by a vertical line at $X = 0$. So, $a$ is the value of $Y$ when the line crosses the Y-axis. 
+
+The parameter $b$ is called the slope. It tells us, for every unit of increase in $X$, how many units $Y$ increases. Perhaps you remember the formula for the slope
+
+$$ b = \frac{\text{rise}}{\text{run}} = \frac{Y_1 - Y_2}{X_1 - X_2} $$
+
+This formula says that you can find the value of the slope parameter $b$ by taking the difference between any two values of $Y$ on the line, and dividing it by the difference of the corresponding two values of $X$. 
+
+Here is an example: 
+
+```{r, echo = F}
+# Some values for X
+X <- -20:20
+
+# Y as a linear function with a = 0 and b = 1
+Y  <-  0 + 1*X
+
+# Plot Y against X, add intercepts
+plot(X, Y, type = "l", lwd = 3, col = "#4b9cd3")
+abline(h = 0, lty = 3)
+abline(v = 0, lty = 2)
+
+# Run
+segments(x0 = 10, y0 = -20, x1 = 10, y1 = 10, lty = 3, lwd = 2, col = 2)
+segments(x0 = 15, y0 = -20, x1 = 15, y1 = 15, lty = 3, lwd = 2, col = 2)
+
+# Rise
+segments(x0 = -20, y0 = 10, x1 = 10, y1 = 10, lty = 3, lwd = 2, col = 5)
+segments(x0 = -20, y0 = 15, x1 = 15, y1 = 15, lty = 3, lwd = 2, col = 5)
+
+# Labels
+text(x = c(12.5, 5), y = c(5, 12.5), labels = c("run", "rise"), col = c(2, 5))
+```
+
+
+## The regression line
+
+The basic idea of regression is that we want to select values of the parameters $a$ and $b$ so that the resulting line best represents the relationship between two variables $Y$ and $X$. To set up this problem we need to change our notation a little bit. 
+
+In the previous section, $Y$ was a linear function of $X$. However, when considering real data, we know that this rarely happens. Two variables $Y$ and $X$ might be related, but it's not usually the case that all the points fall exactly on a straight line!
+
+In other words, we have two values of $Y$ -- the ones in our data, and the ones that result when we compute a linear function of $X$. To distinguish our actual data from the points on the line, we denote the latter as $\widehat{Y}$ (y-hat). For reasons that will soon become apparent, we also call $\widehat{Y}$ the *predicted values* of $Y$.
+
+In summary, we now we have 
+
+  * $Y, X$: two variables we want to consider the relationship between.
+  
+  * $a, b$: two parameters that describe a linear function of $X$. The parameter $a$ is still called the intercept, but $b$ is more commonly referred to as the *regression coefficient*. 
+  
+  * $\widehat{Y}$: the values of $Y$ predicted by a linear function of $X$; $\widehat{Y} = a + b X$. 
+
+Here is an example from ECLS. 
+
+```{r}
+load("ECLS2577.RData")
+attach(ecls)
+set.seed(84)
+cases <- sample(1:2577, 100)
+reading1 <- c1rrscal[cases]
+reading2 <- c2rmscal[cases]
+
+plot(reading1, reading2, col = "#4b9cd3", ylab = "Y = reading2", xlab = "X = reading1")
+
+# Add regression line
+abline(lm(reading2 ~ reading1))
+
+# Add text pointing to the line
+text(x = 50 , y = 30, labels = expression(hat(Y)~is~the~line))
+```
+
+## Estimating the regression parameters (OLS)
+
+OK, so how do we get the regression parameters? Should we just guess values of $a$ and $b$ and see what we like best -- the famous eye-ball method? 
+
+Preferably we can come up with something more data driven. To do this we need to introduce one last concept -- the deviation between $Y$ and $\widehat{Y}$.
+
+$$ e_i = Y_i - \widehat{Y_i} = Y_i - (a + b X_i) $$
+
+This special type of deviation is called a *residual*. The plot below shows the residuals for our example.
+
+
+```{r}
+plot(reading1, reading2, col = "#4b9cd3", ylab = "Y = reading2", xlab = "X = reading1")
+
+# Add the regression line
+regression <- lm(reading2 ~ reading1)   
+abline(regression)
+
+# Add the residuals
+yhat <- regression$fitted.values
+segments(x0 = reading1, y0 = yhat , x1 = reading1, y1 = reading2, col = 6)
+```
+
+One reasonable way to the select the parameters $a$ and $b$ is so that they minimize the residuals. Actually, the math works out nicer if we minimize sum of squared residuals, and abbreviated $SS_{res}$:
+
+$$ SS_{res} = \sum_i e_i^2$$
+
+If we chose $a$ and $b$ to minimize the $SS_{res}$, the type of regression is called *Ordinary Least Squares* or OLS. If you tell people you did a regression, they will assume you mean "OLS regression" unless you state otherwise. 
+
+OK, now we have a concrete problem to solve -- minimize the sum of squared residuals. If you have taken (and remember) calculus II, you know that the critical points of a function can be found by taking its partial derivatives and solving them for zero. You might also recall that a quadratic (squared) function has exactly one critical point and this is it's minimum (or maximum). If we work out the calculus, we find that the values of $a$ and $b$ that minimize the $SS_{res}$ are: 
+
+$$a = \bar{Y} - b \bar{X}$$
+
+$$b = \frac{\text{Cov}(X, Y)}{s^2_x} = r_{XY} \frac{s_y}{s_x} $$
+
+Some interesting things to point out: 
+
+  * We don't need anything other than the means, variances, and covariance to do OLS regression.
+
+  * If $X$ and $Y$ are z-scores, $a = 0$ and $b = r_{XY}$. In this sense, correlation are regression are very similar. 
+  
+  * Unlike correlation, the regression coefficient does depend on the scale of $X$ and $Y$. In particular, if we do anything to change the variance of $X$ or the variance of $Y$, we will also change the regression coefficient. 
+  
+  * Unlike correlation coefficient, which describes the "spread" of points around the regression line and is not affected by the angle or slope of the line, the regression coefficient describes the slope or angle of the line, but not the spread of the points. 
+
+## The `lm` function
+
+The function`lm`, short for "linear model", can estimate regressions and provide a lot of interesting output. The first argument of `lm` is a formula. A formula has the syntax
+
+`Y ~ model`
+
+Here `Y` denotes the outcome variable, the tilde `~` roughly means "equals", and `model` lists the variables to be used as predictors. For more information, see `help(formula)`. 
+
+Let's take a closer look.
+
+```{r}
+set.seed(84)
+cases <- sample(1:2577, 100)
+reading1 <- c1rrscal[cases]
+reading2 <- c2rmscal[cases]
+
+plot(reading1, reading2, col = "#4b9cd3", ylab = "Y = reading2", xlab = "X = reading1")
+
+# Run the regression
+regression <- lm(reading2 ~ reading1)
+
+# Print out the regression coefficients
+coef(regression)
+
+# Confirm that the slope is just the covariance divided by the variance of X
+cov_xy <- cov(reading1, reading2)
+s_x <- var(reading1)
+b <- cov_xy / s_x
+b
+
+# Confirm that the y-intercept is obtained from the two means and the slope
+xbar <- mean(reading1)
+ybar <- mean(reading2)
+
+a <- ybar - b * xbar
+a
+```
+
+What is your interpretation of the regression parameters? What is the value of reading2 when reading1 is equal to zero? How much do our predicted values of reading2 increase for each unit of increase in reading1? 

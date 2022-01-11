@@ -11,7 +11,7 @@
   <meta property="og:title" content="Chapter 3 Cross-references | EDUC 784: Regression" />
   <meta property="og:type" content="book" />
   
-  
+  <meta property="og:image" content="/images/image1.png" />
   <meta property="og:description" content="Course notes for EDUC 784" />
   <meta name="github-repo" content="peterhalpin/EDUC_784" />
 
@@ -19,7 +19,7 @@
   <meta name="twitter:title" content="Chapter 3 Cross-references | EDUC 784: Regression" />
   
   <meta name="twitter:description" content="Course notes for EDUC 784" />
-  
+  <meta name="twitter:image" content="/images/image1.png" />
 
 <meta name="author" content="Peter Halpin" />
 
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
-  
-<link rel="prev" href="hello-bookdown.html"/>
+  <link rel="shortcut icon" href="null" type="image/x-icon" />
+<link rel="prev" href="Chapter-2.html"/>
 <link rel="next" href="parts.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.5.1/jquery-3.5.1.min.js"></script>
@@ -159,17 +159,16 @@ div.csl-indent {
 <li><a href="./">Course notes for EDUC 784</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About</a>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About these notes</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#does-code-folding-work-in-bookdown"><i class="fa fa-check"></i><b>1.1</b> Does code folding work in bookdown??</a></li>
-<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#render-book"><i class="fa fa-check"></i><b>1.2</b> Render book</a></li>
-<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#preview-book"><i class="fa fa-check"></i><b>1.3</b> Preview book</a></li>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#why-this-book"><i class="fa fa-check"></i><b>1.1</b> Why this book</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#how-to-use-this-book"><i class="fa fa-check"></i><b>1.2</b> How to use this book</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="hello-bookdown.html"><a href="hello-bookdown.html"><i class="fa fa-check"></i><b>2</b> Hello bookdown</a>
+<li class="chapter" data-level="2" data-path="Chapter-2.html"><a href="Chapter-2.html"><i class="fa fa-check"></i><b>2</b> Chapter 2</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="hello-bookdown.html"><a href="hello-bookdown.html#a-section"><i class="fa fa-check"></i><b>2.1</b> A section</a>
+<li class="chapter" data-level="2.1" data-path="Chapter-2.html"><a href="Chapter-2.html#a-section"><i class="fa fa-check"></i><b>2.1</b> A section</a>
 <ul>
-<li class="chapter" data-level="" data-path="hello-bookdown.html"><a href="hello-bookdown.html#an-unnumbered-section"><i class="fa fa-check"></i>An unnumbered section</a></li>
+<li class="chapter" data-level="" data-path="Chapter-2.html"><a href="Chapter-2.html#an-unnumbered-section"><i class="fa fa-check"></i>An unnumbered section</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="cross.html"><a href="cross.html"><i class="fa fa-check"></i><b>3</b> Cross-references</a>
@@ -238,8 +237,8 @@ div.csl-indent {
 <h2><span class="header-section-number">3.2</span> Captioned figures and tables</h2>
 <p>Figures and tables <em>with captions</em> can also be cross-referenced from elsewhere in your book using <code>\@ref(fig:chunk-label)</code> and <code>\@ref(tab:chunk-label)</code>, respectively.</p>
 <p>See Figure <a href="cross.html#fig:nice-fig">3.1</a>.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="cross.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">4</span>, .<span class="dv">1</span>, .<span class="dv">1</span>))</span>
-<span id="cb6-2"><a href="cross.html#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pressure, <span class="at">type =</span> <span class="st">&#39;b&#39;</span>, <span class="at">pch =</span> <span class="dv">19</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="cross.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">4</span>, .<span class="dv">1</span>, .<span class="dv">1</span>))</span>
+<span id="cb3-2"><a href="cross.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pressure, <span class="at">type =</span> <span class="st">&#39;b&#39;</span>, <span class="at">pch =</span> <span class="dv">19</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:nice-fig"></span>
 <img src="_main_files/figure-html/nice-fig-1.png" alt="Plot with connected points showing that vapor pressure of mercury increases exponentially as temperature increases." width="80%" />
 <p class="caption">
@@ -247,10 +246,10 @@ Figure 3.1: Here is a nice figure!
 </p>
 </div>
 <p>Don’t miss Table <a href="cross.html#tab:nice-tab">3.1</a>.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="cross.html#cb7-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
-<span id="cb7-2"><a href="cross.html#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(pressure, <span class="dv">10</span>), <span class="at">caption =</span> <span class="st">&#39;Here is a nice table!&#39;</span>,</span>
-<span id="cb7-3"><a href="cross.html#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">booktabs =</span> <span class="cn">TRUE</span></span>
-<span id="cb7-4"><a href="cross.html#cb7-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="cross.html#cb4-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb4-2"><a href="cross.html#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(pressure, <span class="dv">10</span>), <span class="at">caption =</span> <span class="st">&#39;Here is a nice table!&#39;</span>,</span>
+<span id="cb4-3"><a href="cross.html#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">booktabs =</span> <span class="cn">TRUE</span></span>
+<span id="cb4-4"><a href="cross.html#cb4-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <table>
 <caption><span id="tab:nice-tab">Table 3.1: </span>Here is a nice table!</caption>
 <thead>
@@ -310,7 +309,7 @@ Figure 3.1: Here is a nice figure!
           </div>
         </div>
       </div>
-<a href="hello-bookdown.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="Chapter-2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="parts.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
@@ -325,25 +324,15 @@ Figure 3.1: Here is a nice figure!
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": {
-"github": false,
-"facebook": true,
-"twitter": true,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
+"sharing": null,
 "fontsettings": {
 "theme": "white",
 "family": "sans",
 "size": 2
 },
 "edit": {
-"link": "https://github.com/peterhalpin/EDUC_784/02-cross-refs.Rmd",
-"text": "Edit"
+"link": "https://github.com/peterhalpin/EDUC_784/edit/master/02-cross-refs.Rmd",
+"text": "Suggest an edit"
 },
 "history": {
 "link": null,
@@ -353,14 +342,15 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["_main.pdf", "_main.epub"],
+"download": null,
 "search": {
 "engine": "fuse",
 "options": null
 },
 "toc": {
-"collapse": "subsection"
-}
+"collapse": "section"
+},
+"info": true
 });
 });
 </script>

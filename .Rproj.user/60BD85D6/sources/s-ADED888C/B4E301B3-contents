@@ -1,0 +1,3 @@
+# Here is some R code. You don't have to look at it when reading the book, but it is here when you need it
+x <- rnorm(200)
+hist(x, col = "#4B9CD3")
