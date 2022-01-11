@@ -5,20 +5,20 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>EDUC 784: Regression</title>
-  <meta name="description" content="Course notes for EDUC 789" />
+  <meta name="description" content="Course notes for EDUC 784" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="EDUC 784: Regression" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="Course notes for EDUC 789" />
+  <meta property="og:description" content="Course notes for EDUC 784" />
   <meta name="github-repo" content="peterhalpin/EDUC_784" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="EDUC 784: Regression" />
   
-  <meta name="twitter:description" content="Course notes for EDUC 789" />
+  <meta name="twitter:description" content="Course notes for EDUC 784" />
   
 
 <meta name="author" content="Peter Halpin" />
@@ -156,12 +156,12 @@ div.csl-indent {
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">A Minimal Book Example</a></li>
+<li><a href="./">Course notes for EDUC 784</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#usage"><i class="fa fa-check"></i><b>1.1</b> Usage</a></li>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#does-code-folding-work-in-bookdown"><i class="fa fa-check"></i><b>1.1</b> Does code folding work in bookdown??</a></li>
 <li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#render-book"><i class="fa fa-check"></i><b>1.2</b> Render book</a></li>
 <li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#preview-book"><i class="fa fa-check"></i><b>1.3</b> Preview book</a></li>
 </ul></li>
@@ -197,7 +197,7 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
-<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+<li><a href="https://github.com/peterhalpin/EDUC_784" target="blank">Published with bookdown</a></li>
 
 </ul>
 
@@ -223,12 +223,53 @@ div.csl-indent {
 </div>
 <div id="about" class="section level1" number="1">
 <h1><span class="header-section-number">Chapter 1</span> About</h1>
-<p>This web book provides the course notes for EDUC 784. It is currently under deve lopment, so any feedback is appreciated (e.g., during class or via email).</p>
-<div id="usage" class="section level2" number="1.1">
-<h2><span class="header-section-number">1.1</span> Usage</h2>
-<p>Each <strong>bookdown</strong> chapter is an .Rmd file, and each .Rmd file can contain one (and only one) chapter. A chapter <em>must</em> start with a first-level heading: <code># A good chapter</code>, and can contain one (and only one) first-level heading.</p>
-<p>Use second-level and higher headings within chapters like: <code>## A short section</code> or <code>### An even shorter section</code>.</p>
-<p>The <code>index.Rmd</code> file is required, and is also your first book chapter. It will be the homepage when you render the book.</p>
+<p>This web book provides the course notes for EDUC 784. It is currently under development, so any feedback is appreciated (e.g., during class or via email).</p>
+<!-- Klude script for show/hide code buttons; needs to be after the main header in each file -->
+<!-- This part can be programmatically generated with htmltools. Thus we can control initial state from the YAML front matter-->
+<script id="code-folding-options" type="application/json">
+  {"initial-state": "hide"}
+</script>
+<script type="text/javascript">
+document.addEventListener("DOMContentLoaded", function() {
+  const languages = ['r', 'python', 'bash', 'sql', 'cpp', 'stan', 'julia', 'foldable'];
+  const options = JSON.parse(document.getElementById("code-folding-options").text);
+  const show = options["initial-state"] !== "hide";
+  Array.from(document.querySelectorAll("pre.sourceCode")).map(function(pre) {
+    const classList = pre.classList;
+    if (languages.some(x => classList.contains(x))) {
+      const div = pre.parentElement;
+      const state = show || classList.contains("fold-show") && !classList.contains("fold-hide") ? " open" : "";
+      div.outerHTML = `<details${state}><summary></summary>${div.outerHTML}</details>`;
+    }
+  });
+});
+</script>
+<style type="text/css">
+summary {
+  display: list-item;
+  text-align: right;
+}
+summary::after {
+  content: 'Code'
+}
+details[open] > summary::after {
+  content: 'Hide'
+}
+</style>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mtcars)</span></code></pre></div>
+<pre><code>##                    mpg cyl disp  hp drat    wt  qsec vs am gear carb
+## Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+## Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+## Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
+## Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
+## Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
+## Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre>
+<div id="does-code-folding-work-in-bookdown" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> Does code folding work in bookdown??</h2>
+<p>This is an example</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="index.html#cb3-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">5</span><span class="sc">:</span><span class="dv">5</span></span>
+<span id="cb3-2"><a href="index.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, <span class="fu">dnorm</span>(x))</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 </div>
 <div id="render-book" class="section level2" number="1.2">
 <h2><span class="header-section-number">1.2</span> Render book</h2>
@@ -238,13 +279,13 @@ div.csl-indent {
 <li><p>Click on <strong>Build Book</strong>, then select your output format, or select “All formats” if you’d like to use multiple formats from the same book source files.</p></li>
 </ol>
 <p>Or build the book from the R console:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1" aria-hidden="true" tabindex="-1"></a>bookdown<span class="sc">::</span><span class="fu">render_book</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="index.html#cb4-1" aria-hidden="true" tabindex="-1"></a>bookdown<span class="sc">::</span><span class="fu">render_book</span>()</span></code></pre></div>
 <p>To render this example to PDF as a <code>bookdown::pdf_book</code>, you’ll need to install XeLaTeX. You are recommended to install TinyTeX (which includes XeLaTeX): <a href="https://yihui.org/tinytex/" class="uri">https://yihui.org/tinytex/</a>.</p>
 </div>
 <div id="preview-book" class="section level2" number="1.3">
 <h2><span class="header-section-number">1.3</span> Preview book</h2>
 <p>As you work, you may start a local server to live preview this HTML book. This preview will update as you edit the book when you save individual .Rmd files. You can start the server in a work session by using the RStudio add-in “Preview book,” or from the R console:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="index.html#cb2-1" aria-hidden="true" tabindex="-1"></a>bookdown<span class="sc">::</span><span class="fu">serve_book</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="index.html#cb5-1" aria-hidden="true" tabindex="-1"></a>bookdown<span class="sc">::</span><span class="fu">serve_book</span>()</span></code></pre></div>
 
 </div>
 </div>
@@ -285,7 +326,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/USERNAME/REPO/edit/BRANCH/index.Rmd",
+"link": "https://github.com/peterhalpin/EDUC_784/index.Rmd",
 "text": "Edit"
 },
 "history": {

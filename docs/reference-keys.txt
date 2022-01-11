@@ -3,7 +3,7 @@ tab:nice-tab
 eq:binom
 thm:tri
 about
-usage
+does-code-folding-work-in-bookdown
 render-book
 preview-book
 hello-bookdown
