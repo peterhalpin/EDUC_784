@@ -1,0 +1,376 @@
+# Simple Regression {#Chapter-2}
+
+
+The focus of this course is linear regression with multiple predictors (AKA *multiple regression*), but we start by reviewing regression with one predictor (AKA *simple regression*). 
+
+## An example from NELS
+
+
+```{r, echo=FALSE, results='asis'}
+codefolder::bookdown(init = "hide", 
+                     style = "position: relative; top: -25px; left: 85%;   
+                     color: white;
+                     font-weight: bold;
+                     background: #4B9CD3;
+                     border: 1px #3079ED solid;
+                     box-shadow: inset 0 1px 0 #80B0FB")
+```
+
+Figure \@ref(fig:fig1) shows the relationship between Grade 8 Reading Achievement 
+and Socioeconomic Status (SES) using a subsample of the 1988 National Educational Longitudinal Survey (NELS; see https://nces.ed.gov/surveys/nels88/). 
+
+
+
+```{r fig1, fig.cap = 'Reading Achievement and SES (NELS88).', fig.align = 'center'}
+# Load and attach the NELS88 data
+load("NELS.RData")
+attach(NELS)
+
+# Scatter plot
+plot(x = ses, y = achmat08, col = "#4B9CD3", ylab = "Reading Achievement (Grade 8)", xlab = "SES")
+
+# Run the regression model
+mod <- lm(achmat08 ~ ses)
+
+# Add the regression line to the plot
+abline(mod) 
+```
+
+The strength and direction of the linear relationship between the two variables is summarized by their correlation (specifically, the Pearson product moment correlation). In this sample, the correlation is
+
+```{r}
+options(digits = 2)
+cor(achmat08, ses)
+```
+
+This is a moderate, positive correlation between Reading Achievement and SES. The correlation means that eighth graders from more well-off families (higher SES) also tended to do better in reading (higher Reading Achievement). 
+
+This relationship has been widely documented and discussed in education research (e.g., https://www.apa.org/pi/ses/resources/publications/education). What do you think about this relationship?  
+
+In terms of Figure \@ref(fig:fig1), the magnitude (strength) of the correlation can be interpreted in terms of how close the points are to the line. If the correlation was exactly one, all of the points would be on the line. If the correlation was zero, the points would be scattered without any (linear) trend at all. See the review materials in Section \@ref(review) for more info about correlation. 
+
+## The regression line
+
+```{r, echo=FALSE, results='asis'}
+codefolder::bookdown(init = "hide", 
+                     style = "position: relative; top: -25px; left: 85%;   
+                     color: white;
+                     font-weight: bold;
+                     background: #4B9CD3;
+                     border: 1px #3079ED solid;
+                     box-shadow: inset 0 1px 0 #80B0FB")
+```
+
+The line in the Figure \@ref(fig:fig1) can be represented mathematically as   
+
+\[ \hat Y = a + b X\]
+
+where 
+
+* $Y$ denotes Reading Achievement (the Y-value of the blue dots)
+* $X$ denotes SES (the X-value of the blue dots)
+* $\hat Y$ represented the values of $Y$ on the line  
+* $a$ represents the regression intercept (the value of $\hat Y$ when $X = 0$)
+* $b$ represents the regression slope (how much $\hat Y$ increases for each unit of increase in $X$)
+
+Note that $Y$ is used to represent the actual data whereas $\hat Y$ represents the points on the line. The difference $e = Y - \hat Y$ is called a *residual*. The residuals for a subset of the data points in Figure \@ref(fig:fig1) are shown in pink in Figure \@ref(fig:fig2) 
+
+```{r fig2, fig.cap = 'Residuals for a Subsample of Figure 1.', fig.align = 'center'}
+# Get predicted values from regression model
+yhat <- mod$fitted.values
+
+# select a subset of the data
+set.seed(10)
+index <- sample.int(500, 30)
+
+# plot again
+plot(x = ses[index], y = achmat08[index], ylab = "Reading Achievement (Grade 8)", xlab = "SES")
+abline(mod)
+
+# Add pink lines
+segments(x0 = ses[index], y0 = yhat[index] , x1 = ses[index], y1 = achmat08[index], col = 6, lty = 2)
+
+# Overwrite dots to make it look at bit better
+points(x = ses[index], y = achmat08[index], col = "#4B9CD3", pch = 16)
+```
+
+Intuitively, one approach to “fitting a line to the data” is to select the parameters of the line (its slope and intercept) to minimize the residuals. In ordinary least squares (OLS) regression, we minimize a related quantity, the sum of squared residuals: 
+
+\[
+\begin{align} 
+SS_{\text{res}} & = \sum_{i=1}^{N} e_i^2 \\ 
+& = \sum_{i=1}^{N} (Y_i - \hat Y_i)^2 \\ 
+& = \sum_{i=1}^{N} (Y_i - a - b X_i)^2 
+\end{align} 
+\]
+
+where $i = 1 \dots N$ indexes the respondents in the sample. OLS regression is very widely used and is the main focus of this course, although we will visit some other approaches (notably logistic regression) in the second half of the course. 
+
+Solving the  minimization problem (i.e., doing the calculus) gives the following equations for the regression parameters
+
+\[ 
+a = \bar Y - b \bar X \quad \quad b = \frac{\text{Cov}(X, Y)}{s^2_X} = r_{XY} \frac{s_X}{s_Y}
+\]
+
+If you aren't familiar with the symbols in these equations, check out the review materials in Section \@ref(Review) for a refresher.  
+
+Note that if $X$ and $Y$ are transformed to z-scores (i.e., to have mean of zero and variance of one), then 
+
+* $a = 0$
+* $b = \text{Cov}(X, Y) = r_{XY}$
+
+So, regression, correlation, and covariance are all very closely related in when we only consider two variables at a time. This is why we didn't make a big deal about simple regression in EDUC 710. But when we get to multiple regression (i.e., more than one $X$ variable), we will see that relationship between regression and correlation (and covariance) gets more complicated.   
+
+## Three uses of regression 
+
+Before moving onto more complicated regression models, let's consider why we might be interested in them first place. As discussed in the following sections, regression has three main uses:  
+
+* Prediction (focus on $\hat Y$) 
+* Causation (focus on $b$)
+* Explanation (focus on $R^2$, which is defined below)
+
+## Regression for prediction 
+
+```{r echo=FALSE, results='asis'}
+codefolder::bookdown(init = "hide", 
+                     style = "position: relative; top: -25px; left: 85%;   
+                     color: white;
+                     font-weight: bold;
+                     background: #4B9CD3;
+                     border: 1px #3079ED solid;
+                     box-shadow: inset 0 1px 0 #80B0FB")
+```
+
+Prediction (etymology: “to make known beforehand”) means that we want to use $X$ to make a guess about $Y$. This use of regression makes the most sense when we know the value of $X$ before we know the value of $Y$. 
+
+When we are interested in using values of $X$  to make predictions about (yet unobserved) values of $Y$, we use $\hat Y$ as our guess. This is why $\hat Y$ is called the "predicted value" of $Y$. 
+
+When making predictions, we usually want some additional information about how good the predictions will be. In OLS regression, this information is provided by the prediction error variance (cite)
+
+\[ s^2_{\hat Y_i} = \frac{SS_{\text{res}}}{N - 2} \left( \frac{1}{N} + \frac{(X_i - \bar X)^2}{(N-1) s^2_X} \right), \] 
+
+which leads to the t-statistic (with $N-2$ degrees of freedom) 
+
+\[ t_i = (\hat Y_i - Y_i) / s_{\hat Y_i}. \]
+
+The corresponding 95\% confidence intervals for the data in Figure \@ref(fig:fig2) are depicted in Figure \@ref(fig:fig3) as a grey band around the regression line. 
+
+```{r, fig3, warning=F, message=F, fig.cap = 'Prediction Error for Example Data.', fig.align = 'center'}
+
+# Using a different plotting function that adds prediction error bands easily
+ggplot2::ggplot(NELS[index, ], aes(x = ses, y = achmat08)) + 
+               geom_point(color='#3B9CD3', size = 2) + 
+               geom_smooth(method = lm, color = "grey35") + 
+               ylab("Reading Achievement (Grade 8)") + 
+               xlab("SES") + 
+               theme_bw()
+      
+```
+
+Prediction was the original use of regression (see https://en.wikipedia.org/wiki/Regression_toward_the_mean#History). More recent methods developed in machine learning also focus mainly on prediction -- although the methods used in machine learning are often more complicated than OLS regression, and the research context is usually quite different, the basic problem is the same. Machine learning has led to the use of out of sample predictions, rather than prediction error, as the main criterion for judging the quality of predictions made from a model. Machine learning has also introduced some new techniques for choosing which potential predictors to include in a model (i.e., "variable selection"). We will touch on these topics later in the course, although our main focus is OLS regression.  
+
+## Regression and causation
+
+Omitted variable bias stuff
+
+## Regression for explanation
+
+R-squared stuff
+
+## The `lm` function
+
+The function`lm`, short for "linear model", can estimate linear regressions using OLS and provide a lot of useful output. The main argument that the user provieds to the `lm` function is a formula. For the simple regression of Y on X, a formula has the syntax
+
+`Y ~ X `
+
+Here `Y` denotes the outcome variable, the tilde `~` roughly means "equals", and `X` is the predictor variable. We will see more complicated formulas as we go through the course. For more information on R's formula syntax, see `help(formula)`. 
+
+Let's take a closer look using the following two variables from the NELS data (see Sakai resource folder for more information on the data).
+  
+  * `achmat08`: eighth grade math achievement (percent correct on a math test)
+  
+  * `ses`: a composite measure of socio-economic status, on a scale from 0-35 
+
+```{r}
+# Load and attach the data -- see last week's exercises for details 
+load("NELS.RData")
+attach(NELS)
+plot(x = ses, y = achmat08, col = "#4B9CD3")
+
+# Regress math achievement on SES
+mod <- lm(achmat08 ~ ses)
+
+# Print out the regression coefficients
+coef(mod)
+```
+
+Let's do some quick calcuations to check that the `lm` output corresponds the formulas for the slope and intercept we used in the lesson: 
+
+$$ a = \bar Y - b \bar X \quad \text{and} \quad b = \frac{\text{Cov}(X, Y)}{s_X^2} $$
+
+```{r}
+# Confirm that the slope from lm is just the covariance divided by the variance of X
+cov_xy <- cov(achmat08, ses)
+s_x <- var(ses)
+b <- cov_xy / s_x
+b
+
+# Confirm that the y-intercept is obtained from the two means and the slope
+xbar <- mean(ses)
+ybar <- mean(achmat08)
+
+a <- ybar - b * xbar
+a
+```
+
+Let's also check our interpretation of the parameters. If the answers to these questions are not clear, please make sure to ask in class or on the Sakai forum. 
+
+* What is the value of `achmat08` when `ses` is equal to zero? 
+
+* How much do the predicted values of `achmat08` increase for each unit of increase in `ses`? 
+
+## Predicted values and residuals
+
+The `lm` function also returns the residuals $e_i$ and the predicted values $\widehat{Y_i}$, which we can access using the `$` operator.These will be useful later on for computing R-squared. For now we will just plot the two values to show that the predicted values and the residuals are uncorrelated, which was discussed in class.
+
+```{r}
+yhat <- mod$fitted.values
+res <- mod$resid
+
+# In OLS, the predicted values and the residuals are  uncorrelated:  
+plot(yhat, res, col = "#4B9CD3")
+cor(yhat, res)
+```
+
+## Variance explained
+
+Above we found out that the regression coefficient was 0.4-ish. Is that good? or average? or what? 
+
+One way to answer that question is by considering the amount of variation in $Y$ that is associated with (or explained by) its relationship with $X$. Recall from our lesson that one way to do this is via the variance decomposition
+
+$$ SS_{total} = SS_{res} + SS_{reg}$$
+
+from which we can compute the proportion of variation in Y that is associated with the regression model 
+
+$$R^2 = \frac{SS_{reg}}{SS_{total}}$$
+
+Let's compute $R^2$ for our example. 
+
+```{r}
+# Compute the sums of squares
+ybar <- mean(achmat08)
+ss_total <- sum((achmat08 - ybar)^2)
+ss_reg <- sum((yhat - ybar)^2)
+ss_res <-  sum((achmat08 - yhat)^2)
+```
+```{r}
+# Check that SS_total = SS_reg + SS_res
+ss_total
+ss_reg + ss_res
+
+# Compute R-squared
+ss_reg/ss_total
+
+# Check that R-square is really equal to the square of the PPMC
+# Note -- this is only true for simple regression
+ppmc <- cor(achmat08, ses)
+ppmc^2
+
+```
+
+## Inference
+
+At this point we can say that SES explained about 10% of the variation in eighth grade students' math achievement, in our sample. However, we haven't yet talked aboutstatistical inference, or how we can make conclusions about a population based on a sample from that population. 
+
+Let's use the `summary` function to test the coefficients in our model.
+
+```{r}
+mod <- lm(achmat08 ~ ses)
+summary(mod)
+```
+
+In the table, the t-test and p-values are for the null hypothesis that the corresponding coefficient is zero in the population. We can see that the intercept and slope are both significantly different from zero. 
+
+The text below the table summarizes the output for R-square, including the F-test, it's degrees of freedom, and the p-value. (We will talk about adjusted R-square later on.) 
+
+We can use the `confint` function to obtain confidence intervals for the regression coefficients. Use `help` to find out more about the `confint` function.
+
+```{r}
+confint(mod)
+```
+
+Be sure to remember the correct interpretation of confidence intervals: *there is a 95% chance that the interval includes the true parameter value* (not: there is a 95% chance that the parameter falls in the interval). For example, there is a 95% chance that the interval [.31, .54] includes the true regression coefficient for SES. 
+
+## Power analysis 
+
+Power analyses should ideally be done prospectively -- i.e., before the data are collected. Since this class will work with secondary data analyses, most of our analyses will be retrospective. But don't let this mislead you about the importance of statistical power -- you should always do a power analysis before collecting data!! 
+
+To do a power analsyes in R, we can install and load the `pwr` package. If you haven't installed an R package before it's pretty straight forward -- but just ask course staff or a fellow student if you run into any issues. 
+
+```{r, eval = F}
+# Install the package 
+# Note you may have to select a mirror -- I suggest using Kansas (KS) 
+install.packages("pwr")
+```
+```{r}
+# Load the package by using the library command
+library("pwr")
+```
+```{r}
+# Use the help menu to see what the package does
+help("pwr-package")
+```
+
+To do a power analysis for linear regression, it is common to use Cohen's $f^2$ as the effect size: 
+
+$$f^2 = \frac{R^2}{1-R^2}.$$
+
+Recall that $R^2$ is the proportion of variance in $Y$ explained by the model, and so $1 - R^2$ is the proportion of variance not explained by the model. Thus, $f^2$ can be interpreted as a signal to noise ratio. 
+
+In addition to the effect size, we need to know the degrees of freedom for the F-test of R-square. The `pwr` functions use the following notation:
+
+* `u` is the degrees of freedom in the numerator of an F-test. 
+* `v` is the degrees of freedom in the denominator of an F-test. 
+
+In simple regression, `u = 1` and `v = N - 2`. 
+
+### Example:  A prospective power analysis
+
+How many observations would be required to detect an effet size of R-square = .1, using $\alpha = .05$ and power = .8? To find the answer, enter the provided information into the `pwr.f2.test` function, and the function will solve for the "missing piece" -- in this case $v = N - 2$.
+
+
+```{r}
+# Use the provided values of R2, alpha, power (and u = 1) to solve for v = N - 2
+R2 <- .1
+f2 <- R2/(1-R2)
+pwr.f2.test(u = 1, f2 = f2, sig.level = .05, power = .8)
+```
+
+In this example we find that $v = 70.6$. Since $v = N - 2$, so we know that a sample size of $N = 72.6$ (rounded up to 73) is required to reject the null hypothesis that $R^2 = 0$, when the true popuation value is $R^2 = .1$, with a power of .8 and using a significance level of .05. 
+
+## Exercises
+
+Try the following (assume $\alpha = .05$ unless otherwise stated): 
+
+  1. What sample size is required to detect an R-square of .25, with a power of .9? 
+
+  2. What is the smallest R-square that can be detected with the NELS data (N = 500), using $\beta = .2$
+
+  3. What is the power of the NELS data to reject the null hypothesis when R-square = .05?
+
+### Answers 
+
+Don't read these until you've tried the exercises!
+
+```{r, results = "hide"}
+# Q1
+pwr.f2.test(u = 1, f2 = .25/.75, power = .9, sig.level = .05)
+
+# Q2
+q2 <- pwr.f2.test(u = 1, v = 498, power = .8, sig.level = .05)
+q2$f2 / (1 + q2$f2)
+
+# Q3
+pwr.f2.test(u = 1, v = 498, f2 = .05/.95, sig.level = .05)
+```
+

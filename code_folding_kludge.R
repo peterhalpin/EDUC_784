@@ -1,6 +1,7 @@
-# Chapter 2 {#Chapter-2}
-
-<!-- Klude script for show/hide code buttons; needs to be after the main header in each file -->
+<!-- 
+Klude script for show/hide code buttons; needs to be after the main header in each file
+https://github.com/rstudio/bookdown/issues/764 
+-->
 
 ```{=html}
 <!-- This part can be programmatically generated with htmltools. Thus we can control initial state from the YAML front matter-->
@@ -31,24 +32,9 @@ summary {
   text-align: right;
 }
 summary::after {
-  content: 'Code'
+  content: 'code'
 }
 details[open] > summary::after {
-  content: 'Hide'
+  content: 'hide'
 }
-```
-
-
-All chapters start with a first-level heading followed by your chapter title, like the line above. There should be only one first-level heading (`#`) per .Rmd file.
-
-## A section
-
-All chapter sections start with a second-level (`##`) or higher heading followed by your section title, like the sections above and below here. You can have as many as you want within a chapter.
-
-### An unnumbered section {-}
-
-Chapters and sections are numbered by default. To un-number a heading, add a `{.unnumbered}` or the shorter `{-}` at the end of the heading, like in this section.
-
-```{r}
-#code hide button??
 ```
