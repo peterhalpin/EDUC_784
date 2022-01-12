@@ -33,7 +33,8 @@
   <link rel="shortcut icon" href="null" type="image/x-icon" />
 <link rel="prev" href="2.8-predicted-values-and-residuals.html"/>
 <link rel="next" href="2.10-inference.html"/>
-<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.5.1/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -50,24 +51,23 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -87,7 +87,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -120,6 +120,28 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -137,11 +159,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Course notes for EDUC 784</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About This Book</a><ul>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About This Book</a>
+<ul>
 <li class="chapter" data-level="1.1" data-path="1.1-why-this-book.html"><a href="1.1-why-this-book.html"><i class="fa fa-check"></i><b>1.1</b> Why this book?</a></li>
 <li class="chapter" data-level="1.2" data-path="1.2-how-to-use-this-book.html"><a href="1.2-how-to-use-this-book.html"><i class="fa fa-check"></i><b>1.2</b> How to use this book</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="2-Chapter-2.html"><a href="2-Chapter-2.html"><i class="fa fa-check"></i><b>2</b> Simple Regression</a><ul>
+<li class="chapter" data-level="2" data-path="2-Chapter-2.html"><a href="2-Chapter-2.html"><i class="fa fa-check"></i><b>2</b> Simple Regression</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="2.1-an-example-from-nels.html"><a href="2.1-an-example-from-nels.html"><i class="fa fa-check"></i><b>2.1</b> An example from NELS</a></li>
 <li class="chapter" data-level="2.2" data-path="2.2-the-regression-line.html"><a href="2.2-the-regression-line.html"><i class="fa fa-check"></i><b>2.2</b> The regression line</a></li>
 <li class="chapter" data-level="2.3" data-path="2.3-three-uses-of-regression.html"><a href="2.3-three-uses-of-regression.html"><i class="fa fa-check"></i><b>2.3</b> Three uses of regression</a></li>
@@ -152,30 +176,36 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.8" data-path="2.8-predicted-values-and-residuals.html"><a href="2.8-predicted-values-and-residuals.html"><i class="fa fa-check"></i><b>2.8</b> Predicted values and residuals</a></li>
 <li class="chapter" data-level="2.9" data-path="2.9-variance-explained.html"><a href="2.9-variance-explained.html"><i class="fa fa-check"></i><b>2.9</b> Variance explained</a></li>
 <li class="chapter" data-level="2.10" data-path="2.10-inference.html"><a href="2.10-inference.html"><i class="fa fa-check"></i><b>2.10</b> Inference</a></li>
-<li class="chapter" data-level="2.11" data-path="2.11-power-analysis.html"><a href="2.11-power-analysis.html"><i class="fa fa-check"></i><b>2.11</b> Power analysis</a><ul>
+<li class="chapter" data-level="2.11" data-path="2.11-power-analysis.html"><a href="2.11-power-analysis.html"><i class="fa fa-check"></i><b>2.11</b> Power analysis</a>
+<ul>
 <li class="chapter" data-level="2.11.1" data-path="2.11-power-analysis.html"><a href="2.11-power-analysis.html#example-a-prospective-power-analysis"><i class="fa fa-check"></i><b>2.11.1</b> Example: A prospective power analysis</a></li>
 </ul></li>
-<li class="chapter" data-level="2.12" data-path="2.12-exercises.html"><a href="2.12-exercises.html"><i class="fa fa-check"></i><b>2.12</b> Exercises</a><ul>
+<li class="chapter" data-level="2.12" data-path="2.12-exercises.html"><a href="2.12-exercises.html"><i class="fa fa-check"></i><b>2.12</b> Exercises</a>
+<ul>
 <li class="chapter" data-level="2.12.1" data-path="2.12-exercises.html"><a href="2.12-exercises.html#answers"><i class="fa fa-check"></i><b>2.12.1</b> Answers</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="3-parts.html"><a href="3-parts.html"><i class="fa fa-check"></i><b>3</b> Parts</a></li>
-<li class="chapter" data-level="4" data-path="4-footnotes-and-citations.html"><a href="4-footnotes-and-citations.html"><i class="fa fa-check"></i><b>4</b> Footnotes and citations</a><ul>
+<li class="chapter" data-level="4" data-path="4-footnotes-and-citations.html"><a href="4-footnotes-and-citations.html"><i class="fa fa-check"></i><b>4</b> Footnotes and citations</a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="4.1-footnotes.html"><a href="4.1-footnotes.html"><i class="fa fa-check"></i><b>4.1</b> Footnotes</a></li>
 <li class="chapter" data-level="4.2" data-path="4.2-citations.html"><a href="4.2-citations.html"><i class="fa fa-check"></i><b>4.2</b> Citations</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="5-blocks.html"><a href="5-blocks.html"><i class="fa fa-check"></i><b>5</b> Blocks</a><ul>
+<li class="chapter" data-level="5" data-path="5-blocks.html"><a href="5-blocks.html"><i class="fa fa-check"></i><b>5</b> Blocks</a>
+<ul>
 <li class="chapter" data-level="5.1" data-path="5.1-equations.html"><a href="5.1-equations.html"><i class="fa fa-check"></i><b>5.1</b> Equations</a></li>
 <li class="chapter" data-level="5.2" data-path="5.2-theorems-and-proofs.html"><a href="5.2-theorems-and-proofs.html"><i class="fa fa-check"></i><b>5.2</b> Theorems and proofs</a></li>
 <li class="chapter" data-level="5.3" data-path="5.3-callout-blocks.html"><a href="5.3-callout-blocks.html"><i class="fa fa-check"></i><b>5.3</b> Callout blocks</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="6-sharing-your-book.html"><a href="6-sharing-your-book.html"><i class="fa fa-check"></i><b>6</b> Sharing your book</a><ul>
+<li class="chapter" data-level="6" data-path="6-sharing-your-book.html"><a href="6-sharing-your-book.html"><i class="fa fa-check"></i><b>6</b> Sharing your book</a>
+<ul>
 <li class="chapter" data-level="6.1" data-path="6.1-publishing.html"><a href="6.1-publishing.html"><i class="fa fa-check"></i><b>6.1</b> Publishing</a></li>
 <li class="chapter" data-level="6.2" data-path="6.2-pages.html"><a href="6.2-pages.html"><i class="fa fa-check"></i><b>6.2</b> 404 pages</a></li>
 <li class="chapter" data-level="6.3" data-path="6.3-metadata-for-sharing.html"><a href="6.3-metadata-for-sharing.html"><i class="fa fa-check"></i><b>6.3</b> Metadata for sharing</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
-<li class="chapter" data-level="7" data-path="7-cross.html"><a href="7-cross.html"><i class="fa fa-check"></i><b>7</b> Cross-references</a><ul>
+<li class="chapter" data-level="7" data-path="7-cross.html"><a href="7-cross.html"><i class="fa fa-check"></i><b>7</b> Cross-references</a>
+<ul>
 <li class="chapter" data-level="7.1" data-path="7.1-chapters-and-sub-chapters.html"><a href="7.1-chapters-and-sub-chapters.html"><i class="fa fa-check"></i><b>7.1</b> Chapters and sub-chapters</a></li>
 <li class="chapter" data-level="7.2" data-path="7.2-captioned-figures-and-tables.html"><a href="7.2-captioned-figures-and-tables.html"><i class="fa fa-check"></i><b>7.2</b> Captioned figures and tables</a></li>
 </ul></li>
@@ -199,7 +229,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="variance-explained" class="section level2">
+<div id="variance-explained" class="section level2" number="2.9">
 <h2><span class="header-section-number">2.9</span> Variance explained</h2>
 <p>Above we found out that the regression coefficient was 0.4-ish. Is that good? or average? or what?</p>
 <p>One way to answer that question is by considering the amount of variation in <span class="math inline">\(Y\)</span> that is associated with (or explained by) its relationship with <span class="math inline">\(X\)</span>. Recall from our lesson that one way to do this is via the variance decomposition</p>
@@ -207,23 +237,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>from which we can compute the proportion of variation in Y that is associated with the regression model</p>
 <p><span class="math display">\[R^2 = \frac{SS_{reg}}{SS_{total}}\]</span></p>
 <p>Let’s compute <span class="math inline">\(R^2\)</span> for our example.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="2.9-variance-explained.html#cb19-1"></a><span class="co"># Compute the sums of squares</span></span>
-<span id="cb19-2"><a href="2.9-variance-explained.html#cb19-2"></a>ybar &lt;-<span class="st"> </span><span class="kw">mean</span>(achmat08)</span>
-<span id="cb19-3"><a href="2.9-variance-explained.html#cb19-3"></a>ss_total &lt;-<span class="st"> </span><span class="kw">sum</span>((achmat08 <span class="op">-</span><span class="st"> </span>ybar)<span class="op">^</span><span class="dv">2</span>)</span>
-<span id="cb19-4"><a href="2.9-variance-explained.html#cb19-4"></a>ss_reg &lt;-<span class="st"> </span><span class="kw">sum</span>((yhat <span class="op">-</span><span class="st"> </span>ybar)<span class="op">^</span><span class="dv">2</span>)</span>
-<span id="cb19-5"><a href="2.9-variance-explained.html#cb19-5"></a>ss_res &lt;-<span class="st">  </span><span class="kw">sum</span>((achmat08 <span class="op">-</span><span class="st"> </span>yhat)<span class="op">^</span><span class="dv">2</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="2.9-variance-explained.html#cb20-1"></a><span class="co"># Check that SS_total = SS_reg + SS_res</span></span>
-<span id="cb20-2"><a href="2.9-variance-explained.html#cb20-2"></a>ss_total</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="2.9-variance-explained.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute the sums of squares</span></span>
+<span id="cb19-2"><a href="2.9-variance-explained.html#cb19-2" aria-hidden="true" tabindex="-1"></a>ybar <span class="ot">&lt;-</span> <span class="fu">mean</span>(achmat08)</span>
+<span id="cb19-3"><a href="2.9-variance-explained.html#cb19-3" aria-hidden="true" tabindex="-1"></a>ss_total <span class="ot">&lt;-</span> <span class="fu">sum</span>((achmat08 <span class="sc">-</span> ybar)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb19-4"><a href="2.9-variance-explained.html#cb19-4" aria-hidden="true" tabindex="-1"></a>ss_reg <span class="ot">&lt;-</span> <span class="fu">sum</span>((yhat <span class="sc">-</span> ybar)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb19-5"><a href="2.9-variance-explained.html#cb19-5" aria-hidden="true" tabindex="-1"></a>ss_res <span class="ot">&lt;-</span>  <span class="fu">sum</span>((achmat08 <span class="sc">-</span> yhat)<span class="sc">^</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="2.9-variance-explained.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check that SS_total = SS_reg + SS_res</span></span>
+<span id="cb20-2"><a href="2.9-variance-explained.html#cb20-2" aria-hidden="true" tabindex="-1"></a>ss_total</span></code></pre></div>
 <pre><code>## [1] 43527</code></pre>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="2.9-variance-explained.html#cb22-1"></a>ss_reg <span class="op">+</span><span class="st"> </span>ss_res</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="2.9-variance-explained.html#cb22-1" aria-hidden="true" tabindex="-1"></a>ss_reg <span class="sc">+</span> ss_res</span></code></pre></div>
 <pre><code>## [1] 43527</code></pre>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="2.9-variance-explained.html#cb24-1"></a><span class="co"># Compute R-squared</span></span>
-<span id="cb24-2"><a href="2.9-variance-explained.html#cb24-2"></a>ss_reg<span class="op">/</span>ss_total</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="2.9-variance-explained.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute R-squared</span></span>
+<span id="cb24-2"><a href="2.9-variance-explained.html#cb24-2" aria-hidden="true" tabindex="-1"></a>ss_reg<span class="sc">/</span>ss_total</span></code></pre></div>
 <pre><code>## [1] 0.1</code></pre>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="2.9-variance-explained.html#cb26-1"></a><span class="co"># Check that R-square is really equal to the square of the PPMC</span></span>
-<span id="cb26-2"><a href="2.9-variance-explained.html#cb26-2"></a><span class="co"># Note -- this is only true for simple regression</span></span>
-<span id="cb26-3"><a href="2.9-variance-explained.html#cb26-3"></a>ppmc &lt;-<span class="st"> </span><span class="kw">cor</span>(achmat08, ses)</span>
-<span id="cb26-4"><a href="2.9-variance-explained.html#cb26-4"></a>ppmc<span class="op">^</span><span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="2.9-variance-explained.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check that R-square is really equal to the square of the PPMC</span></span>
+<span id="cb26-2"><a href="2.9-variance-explained.html#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Note -- this is only true for simple regression</span></span>
+<span id="cb26-3"><a href="2.9-variance-explained.html#cb26-3" aria-hidden="true" tabindex="-1"></a>ppmc <span class="ot">&lt;-</span> <span class="fu">cor</span>(achmat08, ses)</span>
+<span id="cb26-4"><a href="2.9-variance-explained.html#cb26-4" aria-hidden="true" tabindex="-1"></a>ppmc<span class="sc">^</span><span class="dv">2</span></span></code></pre></div>
 <pre><code>## [1] 0.1</code></pre>
 </div>
             </section>

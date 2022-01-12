@@ -47,7 +47,7 @@ This is a moderate, positive correlation between Reading Achievement and SES. Th
 
 This relationship has been widely documented and discussed in education research (e.g., https://www.apa.org/pi/ses/resources/publications/education). What do you think about this relationship?  
 
-In terms of Figure \@ref(fig:fig1), the magnitude (strength) of the correlation can be interpreted in terms of how close the points are to the line. If the correlation was exactly one, all of the points would be on the line. If the correlation was zero, the points would be scattered without any (linear) trend at all. See the review materials in Section \@ref(review) for more info about correlation. 
+In terms of Figure \@ref(fig:fig1), the magnitude (strength) of the correlation can be interpreted in terms of how close the points are to the line. If the correlation was exactly one, all of the points would be on the line. If the correlation was zero, the points would be scattered without any (linear) trend at all. See the review materials in Section \@ref(Review) for more info about correlation. 
 
 ## The regression line
 
@@ -157,8 +157,10 @@ The corresponding 95\% confidence intervals for the data in Figure \@ref(fig:fig
 
 ```{r, fig3, warning=F, message=F, fig.cap = 'Prediction Error for Example Data.', fig.align = 'center'}
 
-# Using a different plotting function that adds prediction error bands easily
-ggplot2::ggplot(NELS[index, ], aes(x = ses, y = achmat08)) + 
+# Using a different plotting library that adds prediction error bands easily
+library(ggplot2)
+
+ggplot(NELS[index, ], aes(x = ses, y = achmat08)) + 
                geom_point(color='#3B9CD3', size = 2) + 
                geom_smooth(method = lm, color = "grey35") + 
                ylab("Reading Achievement (Grade 8)") + 
