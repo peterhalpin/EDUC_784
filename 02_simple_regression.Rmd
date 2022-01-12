@@ -3,8 +3,8 @@
 
 The focus of this course is linear regression with multiple predictors (AKA *multiple regression*), but we start by reviewing regression with one predictor (AKA *simple regression*). 
 
-## An example from NELS
-
+## An example from NELS {#Example-2}
+ 
 
 ```{r, echo=FALSE, results='asis'}
 codefolder::bookdown(init = "hide", 
@@ -49,7 +49,7 @@ This relationship has been widely documented and discussed in education research
 
 In terms of Figure \@ref(fig:fig1), the magnitude (strength) of the correlation can be interpreted in terms of how close the points are to the line. If the correlation was exactly one, all of the points would be on the line. If the correlation was zero, the points would be scattered without any (linear) trend at all. See the review materials in Section \@ref(Review) for more info about correlation. 
 
-## The regression line
+## The regression line {#regression-line}
 
 ```{r, echo=FALSE, results='asis'}
 codefolder::bookdown(init = "hide", 
@@ -145,19 +145,15 @@ Prediction (etymology: “to make known beforehand”) means that we want to use
 
 When we are interested in using values of $X$  to make predictions about (yet unobserved) values of $Y$, we use $\hat Y$ as our guess. This is why $\hat Y$ is called the "predicted value" of $Y$. 
 
-When making predictions, we usually want some additional information about how good the predictions will be. In OLS regression, this information is provided by the prediction error variance (cite)
+When making predictions, we usually want some additional information about how good the predictions will be. In OLS regression, this information is provided by the prediction error variance (cite: Fox)
 
-\[ s^2_{\hat Y_i} = \frac{SS_{\text{res}}}{N - 2} \left( \frac{1}{N} + \frac{(X_i - \bar X)^2}{(N-1) s^2_X} \right), \] 
+\[ s^2_{\hat Y_i} = \frac{SS_{\text{res}}}{N - 2} \left( \frac{1}{N} + \frac{(X_i - \bar X)^2}{(N-1) s^2_X} \right). \] 
 
-which leads to the t-statistic (with $N-2$ degrees of freedom) 
-
-\[ t_i = (\hat Y_i - Y_i) / s_{\hat Y_i}. \]
-
-The corresponding 95\% confidence intervals for the data in Figure \@ref(fig:fig2) are depicted in Figure \@ref(fig:fig3) as a grey band around the regression line. 
+The prediction errors for the data in Figure \@ref(fig:fig2) are depicted in Figure \@ref(fig:fig3) as a grey band around the regression line. 
 
 ```{r, fig3, warning=F, message=F, fig.cap = 'Prediction Error for Example Data.', fig.align = 'center'}
 
-# Using a different plotting library that adds prediction error bands easily
+# Using a different plotting library that adds prediction error bands (need to double check computation)
 library(ggplot2)
 
 ggplot(NELS[index, ], aes(x = ses, y = achmat08)) + 
@@ -169,15 +165,108 @@ ggplot(NELS[index, ], aes(x = ses, y = achmat08)) +
       
 ```
 
+Notice that the prediction error variance increases with $SS_{\text{res}}$ -- in other words, the larger the residuals (Figure \@ref(fig:fig2)), the worse the prediction error. As we will see in this Section (\@ref(Review)), one way to reduce $SS_{\text{res}}$ is to add more predictors into the model -- i.e., multiple regression.  
+
+
+### More about Prediction
+
 Prediction was the original use of regression (see https://en.wikipedia.org/wiki/Regression_toward_the_mean#History). More recent methods developed in machine learning also focus mainly on prediction -- although the methods used in machine learning are often more complicated than OLS regression, and the research context is usually quite different, the basic problem is the same. Machine learning has led to the use of out of sample predictions, rather than prediction error, as the main criterion for judging the quality of predictions made from a model. Machine learning has also introduced some new techniques for choosing which potential predictors to include in a model (i.e., "variable selection"). We will touch on these topics later in the course, although our main focus is OLS regression.  
 
 ## Regression and causation
 
-Omitted variable bias stuff
+A causal interpretation of regression means that that changing $X$ by one unit will change $Y$ by $b$ units. This is a much stronger interpretation than prediction because it requires stronger assumptions. In particular, regression parameters can only be interpreted causally when all variables that are correlated with $Y$ and $X$ are included as predictors in the model. 
+
+When a variable is left out, this is called *omitted variable bias*. This situation is nicely explained by Gelman and Hill (cite: Gelman), and a modified version of their discussion is provided below. This discussion is a bit technical, but the take-home message is summarized in the following points
+
+* When a predictor variable that is correlated with $Y$ and $X$ is left out of a regression model, this is called omitted variable bias.
+* The overall idea is basically the same as saying "correlation does not imply causation" or the notion of spurious correlations.
+* This is also an example of what is called "endogeneity" in regression (etymology: originating from within).
+* In order to avoid omitted variable bias, we want to include more than one predictor in our regression models -- i.e., multiple regression.
+
+### Omitted variable bias* 
+
+We start by assuming a "true" regression model with two predictors. In the context of our example, this means that there is one other variable, in addition to SES, that is important for predicting Reading Achievement. Of course, there are many predictors of Reading Achievement (see Section \@ref(Example-2)), but we only need two to explain the problem of omitted variable bias. 
+
+Let's write the "true" model as: 
+
+\begin{equation} 
+\hat Y = a + b_1 X_1 + b_2 X_2 
+(\#eq:2parm)
+\end{equation}
+
+where $X_1$ is SES and $X_2$ is any other variable that is correlated with both $Y$ and $X_1$ (e.g., number of books in the household). 
+
+Next, imagine that instead of using the model in \@ref(eq:2parm), we analyse the data using the model with just SES. In our example, this would reflect a situation in which we don't have data on the number of books in the house, so we have to make due with just SES, leading to the usual regression line (Section \@ref(regression-line)):
+
+\[ 
+\hat Y = a^* + b^*_1 X_1. 
+(\#eq:1parm)
+\]
+
+The problem of omitted variable bias is that $b_1 \neq b^*_1$ -- i.e., the regression parameter in the true model is not the same as the regression parameter in our data-analytic model with only one predictor. This is perhaps surprising -- leaving out the number of books in the household gives us the wrong regression parameter for SES! 
+
+To see why, start by writing $X_2$ as a function of $X_1$. 
+
+\[
+X_2 = \alpha + \beta X_1 + \epsilon. 
+(\#eq:X2)
+\]
+
+(Side note: by adding the residual into the model for $X_2$, we ensure the equality holds for $X_2$ not just $\hat X_2$ -- more on this later.) 
+
+Then we use Equation \@ref(eq:X2) to substitute for $X_2$ in Equation \@ref(eq:2parm), 
+
+\begin{align} 
+\hat Y & = a + b_1 X_1 + b_2 X_2 \\
+\hat Y & = a + b_1 X_1 + b_2 (\alpha + \beta X_1 + \epsilon) \\
+\hat Y & = \color{orange}{(a + \alpha + \epsilon)} + \color{green}{(b_1 + b_2\beta)} X_1. 
+(\#eq:3parm)
+\end{align}
+
+Notice that in the last line of Equation \@ref(eq:3parm), $Y$ is predicted using only $X_1$, so it is equivalent to Equation \@ref(eq:1parm). Based on this comparison, we can write
+
+* $a^* = \color{orange}{(a + \alpha + \epsilon)}$
+* $b^*_1 = \color{green}{(b_1 + b_2\beta)}$
+
+This last equation for $b^*_1$ is what we are interested in. It shows that the regression parameter in our data analytic model using just SES, $b^*_1$, is not equal to the "true" regression parameter using both predictors, $b_1$. 
+
+This is what omitted variable means -- leaving out $X_2$ in Equation \@ref(eq:1parm) gives us the wrong regression parameter for $X_1$. This is one of the main motivations for including more than one predictor variable in a regression model -- i.e., to avoid omitted variable bias.
+
+
+Notice that there two special situations in which omitted variable bias is not a problem: 
+
+* when the two predictors are not linearly related -- i.e., $\beta = 0$, or
+* when the second predictor is not linearly related to $Y$ -- i.e., $b_2 = 0$.  
+
+We will discuss the interpretation of these situations in class. 
+
 
 ## Regression for explanation
 
-R-squared stuff
+In the social sciences, many uses of regression fall somewhere between prediction and causation. We want to do more than just predict outcomes of interest, but we often don't have a basis for making strong assumptions required for causal interpretation of regression coefficients. This grey area between prediction and causation can be referred to as explanation. 
+
+In terms of our example, we might want to explain why eighth graders differ in there Reading Achievement in terms of a large number of potential predictors, such as 
+
+* Student factors
+  * attendence
+  * past academic performance in Reading
+  * past academic performance in other subjects (Question: why include this? Hint: see previous section)
+* School factors
+  * their ELA teacher
+  * the school they attend
+  * their peers (e.g., the school's catchment area) 
+* Home factors
+  * SES
+  * Number of books in the household
+  * Maternal education
+
+Even this long list leaves out potential omitted variables. But, by including more than one predictor, we can get "closer" to a causal interpretation through "statistical controls" (See Chapter 3). 
+
+When the goal of an analysis is explanation, it usual to focus on the proportion of variation in the outcome variable that is explained by the predictor(s)
+
+This proportion of variance is denoted $R^2$ ("R-squared") and is the first topic we address in our next lesson ...
+
+## End of first lesson
 
 ## The `lm` function
 
