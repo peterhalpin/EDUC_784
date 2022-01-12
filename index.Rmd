@@ -11,76 +11,43 @@ link-citations: yes
 github-repo: peterhalpin/EDUC_784
 cover-image: images/image1.png
 favicon: null
-# url: your book url like https://bookdown.org/yihui/bookdown
-# cover-image: path to the social sharing image like images/cover.jpg
 ---
 
+# About This Book
 
-
-# About this book
 
 This "ebook" provides the course notes for EDUC 784. It is currently under development, so any feedback is appreciated (e.g., during class,  via email, or the edit link in the header). This first chapter is just about how to use the book -- the course content starts in Chapter \@ref(Chapter-2).   
-
-<!-- 
-Klude script for show/hide code buttons; needs to be after the main header in each file
-https://github.com/rstudio/bookdown/issues/764 
--->
-
-```{=html}
-<!-- This part can be programmatically generated with htmltools. Thus we can control initial state from the YAML front matter-->
-<script id="code-folding-options" type="application/json">
-  {"initial-state": "hide"}
-</script>
-```
-
-```{js, echo = F}
-document.addEventListener("DOMContentLoaded", function() {
-  const languages = ['r', 'python', 'bash', 'sql', 'cpp', 'stan', 'julia', 'foldable'];
-  const options = JSON.parse(document.getElementById("code-folding-options").text);
-  const show = options["initial-state"] !== "hide";
-  Array.from(document.querySelectorAll("pre.sourceCode")).map(function(pre) {
-    const classList = pre.classList;
-    if (languages.some(x => classList.contains(x))) {
-      const div = pre.parentElement;
-      const state = show || classList.contains("fold-show") && !classList.contains("fold-hide") ? " open" : "";
-      div.outerHTML = `<details${state}><summary></summary>${div.outerHTML}</details>`;
-    }
-  });
-});
-```
-
-```{css, echo = F}
-summary {
-  display: list-item;
-  text-align: right;
-}
-summary::after {
-  content: 'code'
-}
-details[open] > summary::after {
-  content: 'hide'
-}
-```
 
 ## Why this book? 
 
 There are few goals of moving from "slides + exercises" to an ebook. 
 
 * To integrate course content (text, code, examples, and exercises) into one format, rather than having multiple files to sort through on Sakai.
-* To address the perennial problem of choosing a textbook for this course -- rather than having a supplementary text, the goal is for this ebook to be the official course text.
+* To address the perennial problem of choosing a textbook for this course -- rather than having a required text, the goal is for this ebook to be the official course text. For supplementary texts, see the course syllabus. 
 * Most importantly, having a course text that is "at the right level" means that I can be more liberal in assigning readings as homework *before class*, so we can spend less class time "lecturing" and more class time discussing any questions you have about the readings, going through the examples in R together, and working on assignments.  
 * As a bonus, this book is another example cool things you can do with R. It's written entirely in R -- that is crazy, right??
 
-<!-- So, my goal for this semester to be in a situation where I assign chapter of this book each week as reading, and you do the readings before coming to class. I'll provide a short summary of the content of each chapter at the beginning of class, and I'll answer any questions you have about the readings. How long we spend summarizing the content will basically depend on how much discussion y'all want to have about it. Then, we will work through an R-based example together. Once we are done the example, there will be "open lab" time work on assignments or whatever you want to do. -->
+<!-- So, my goal for this semester to be in a situation where I assign chapter of this book each week as reading, and you do the readings before coming to class. I'll provide a short summary of the content of each chapter at the beginning of class, and I'll answer any questions you have about the readings. How long we spend summarizing the content will basically depend on how much discussion y'all want to have about it. Then, we will work through an R-based example together. Once we are done the example, there will be "open lab" time work on assignments or whatever you want to do. 
 
-This book won't replace Sakai (e.g., I still need to post assignments and grades somewhere). But, instead of the Sakai Lessons linking to a bunch of files on Sakai, they will link to this book. 
+This book won't replace Sakai (e.g., I still need to post assignments and grades somewhere). But, instead of the Sakai Lessons linking to a bunch of files on Sakai, they will link to this book. -->
 
 
 ## How to use this book
 
-The book is going to replace the lesson slides (powerpoint) and R exercises (Rmarkdown / HTML) familiar from EDUC 710. The main trick for doing this is called "code folding". 
+```{r codefolder, echo=FALSE, results='asis'}
+codefolder::bookdown(init = "hide", 
+                     style = "position: relative; top: -25px; left: 85%;   
+                     color: white;
+                     font-weight: bold;
+                     background: #4B9CD3;
+                     border: 1px #3079ED solid;
+                     box-shadow: inset 0 1px 0 #80B0FB")
+```
 
-An example of code folding is given below -- you can see the histogram integrated into the text. Once you click on the button called "code" it will also show you the R code that produced the histogram. Note that you may need to scroll horizontally to see all of the text in the code window. Also note that when you hover your mouse over the code window, an icon appears in the top right corner -- this lets you copy the full block of code with one click. 
+
+The book replaces the lesson slides (powerpoint) and R exercises (Rmarkdown / HTML) familiar from EDUC 710. The main trick for doing this is called "code folding". (Note: I am still working out some bugs...)
+
+An example of code folding is given on this page. Below you can see a histogram integrated into the text. Once you click on the button called "Show Code" on the top of the page, the R code that produced the histogram will also be visible. Note that you may need to scroll horizontally to see all of the text in the code window. Also note that when you hover your mouse over the code window, an icon appears in the top right corner -- this lets you copy the full block of code with one click. 
 
 
 ```{r}
@@ -99,9 +66,3 @@ So the basic workflow of how to use this book is as follows.
 Alright, let's get to it! 
 
 
-```{r include=FALSE}
-# automatically create a bib database for R packages
-knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'rmarkdown'
-), 'packages.bib')
-```

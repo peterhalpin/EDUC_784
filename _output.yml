@@ -14,5 +14,9 @@ bookdown::gitbook:
       text: "Suggest an edit"
     download: null
     sharing: null
+  split_by: section+number
+  #includes:
+  #    in_header: header.html
 
+bookdown::word_document2: default  # for cross-references
 
