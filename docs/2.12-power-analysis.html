@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 2 Simple Regression | EDUC 784: Regression</title>
+  <title>2.12 Power analysis | EDUC 784: Regression</title>
   <meta name="description" content="Course notes for EDUC 784" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 2 Simple Regression | EDUC 784: Regression" />
+  <meta property="og:title" content="2.12 Power analysis | EDUC 784: Regression" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="/images/image1.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="peterhalpin/EDUC_784" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 2 Simple Regression | EDUC 784: Regression" />
+  <meta name="twitter:title" content="2.12 Power analysis | EDUC 784: Regression" />
   
   <meta name="twitter:description" content="Course notes for EDUC 784" />
   <meta name="twitter:image" content="/images/image1.png" />
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="null" type="image/x-icon" />
-<link rel="prev" href="1.2-how-to-use-this-book.html"/>
-<link rel="next" href="2.1-Example-2.html"/>
+<link rel="prev" href="2.11-inference.html"/>
+<link rel="next" href="2.13-exercises.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.5.1/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -191,17 +191,51 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="Chapter-2" class="section level1" number="2">
-<h1><span class="header-section-number">Chapter 2</span> Simple Regression</h1>
-<p>The focus of this course is linear regression with multiple predictors (AKA <em>multiple regression</em>), but we start by reviewing regression with one predictor (AKA <em>simple regression</em>).</p>
+<div id="power-analysis" class="section level2" number="2.12">
+<h2><span class="header-section-number">2.12</span> Power analysis</h2>
+<p>Power analyses should ideally be done prospectively – i.e., before the data are collected. Since this class will work with secondary data analyses, most of our analyses will be retrospective. But don’t let this mislead you about the importance of statistical power – you should always do a power analysis before collecting data!!</p>
+<p>To do a power analsyes in R, we can install and load the <code>pwr</code> package. If you haven’t installed an R package before it’s pretty straight forward – but just ask course staff or a fellow student if you run into any issues.</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="2.12-power-analysis.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install the package </span></span>
+<span id="cb32-2"><a href="2.12-power-analysis.html#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Note you may have to select a mirror -- I suggest using Kansas (KS) </span></span>
+<span id="cb32-3"><a href="2.12-power-analysis.html#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;pwr&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="2.12-power-analysis.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the package by using the library command</span></span>
+<span id="cb33-2"><a href="2.12-power-analysis.html#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;pwr&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="2.12-power-analysis.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the help menu to see what the package does</span></span>
+<span id="cb34-2"><a href="2.12-power-analysis.html#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">help</span>(<span class="st">&quot;pwr-package&quot;</span>)</span></code></pre></div>
+<p>To do a power analysis for linear regression, it is common to use Cohen’s <span class="math inline">\(f^2\)</span> as the effect size:</p>
+<p><span class="math display">\[f^2 = \frac{R^2}{1-R^2}.\]</span></p>
+<p>Recall that <span class="math inline">\(R^2\)</span> is the proportion of variance in <span class="math inline">\(Y\)</span> explained by the model, and so <span class="math inline">\(1 - R^2\)</span> is the proportion of variance not explained by the model. Thus, <span class="math inline">\(f^2\)</span> can be interpreted as a signal to noise ratio.</p>
+<p>In addition to the effect size, we need to know the degrees of freedom for the F-test of R-square. The <code>pwr</code> functions use the following notation:</p>
+<ul>
+<li><code>u</code> is the degrees of freedom in the numerator of an F-test.</li>
+<li><code>v</code> is the degrees of freedom in the denominator of an F-test.</li>
+</ul>
+<p>In simple regression, <code>u = 1</code> and <code>v = N - 2</code>.</p>
+<div id="example-a-prospective-power-analysis" class="section level3" number="2.12.1">
+<h3><span class="header-section-number">2.12.1</span> Example: A prospective power analysis</h3>
+<p>How many observations would be required to detect an effet size of R-square = .1, using <span class="math inline">\(\alpha = .05\)</span> and power = .8? To find the answer, enter the provided information into the <code>pwr.f2.test</code> function, and the function will solve for the “missing piece” – in this case <span class="math inline">\(v = N - 2\)</span>.</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="2.12-power-analysis.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the provided values of R2, alpha, power (and u = 1) to solve for v = N - 2</span></span>
+<span id="cb35-2"><a href="2.12-power-analysis.html#cb35-2" aria-hidden="true" tabindex="-1"></a>R2 <span class="ot">&lt;-</span> .<span class="dv">1</span></span>
+<span id="cb35-3"><a href="2.12-power-analysis.html#cb35-3" aria-hidden="true" tabindex="-1"></a>f2 <span class="ot">&lt;-</span> R2<span class="sc">/</span>(<span class="dv">1</span><span class="sc">-</span>R2)</span>
+<span id="cb35-4"><a href="2.12-power-analysis.html#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="fu">pwr.f2.test</span>(<span class="at">u =</span> <span class="dv">1</span>, <span class="at">f2 =</span> f2, <span class="at">sig.level =</span> .<span class="dv">05</span>, <span class="at">power =</span> .<span class="dv">8</span>)</span></code></pre></div>
+<pre><code>## 
+##      Multiple regression power calculation 
+## 
+##               u = 1
+##               v = 71
+##              f2 = 0.11
+##       sig.level = 0.05
+##           power = 0.8</code></pre>
+<p>In this example we find that <span class="math inline">\(v = 70.6\)</span>. Since <span class="math inline">\(v = N - 2\)</span>, so we know that a sample size of <span class="math inline">\(N = 72.6\)</span> (rounded up to 73) is required to reject the null hypothesis that <span class="math inline">\(R^2 = 0\)</span>, when the true popuation value is <span class="math inline">\(R^2 = .1\)</span>, with a power of .8 and using a significance level of .05.</p>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="1.2-how-to-use-this-book.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="2.1-Example-2.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="2.11-inference.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="2.13-exercises.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

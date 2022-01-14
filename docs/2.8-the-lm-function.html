@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 2 Simple Regression | EDUC 784: Regression</title>
+  <title>2.8 The lm function | EDUC 784: Regression</title>
   <meta name="description" content="Course notes for EDUC 784" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 2 Simple Regression | EDUC 784: Regression" />
+  <meta property="og:title" content="2.8 The lm function | EDUC 784: Regression" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="/images/image1.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="peterhalpin/EDUC_784" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 2 Simple Regression | EDUC 784: Regression" />
+  <meta name="twitter:title" content="2.8 The lm function | EDUC 784: Regression" />
   
   <meta name="twitter:description" content="Course notes for EDUC 784" />
   <meta name="twitter:image" content="/images/image1.png" />
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="null" type="image/x-icon" />
-<link rel="prev" href="1.2-how-to-use-this-book.html"/>
-<link rel="next" href="2.1-Example-2.html"/>
+<link rel="prev" href="2.7-end-of-first-lesson.html"/>
+<link rel="next" href="2.9-predicted-values-and-residuals.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.5.1/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -191,17 +191,65 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="Chapter-2" class="section level1" number="2">
-<h1><span class="header-section-number">Chapter 2</span> Simple Regression</h1>
-<p>The focus of this course is linear regression with multiple predictors (AKA <em>multiple regression</em>), but we start by reviewing regression with one predictor (AKA <em>simple regression</em>).</p>
+<div id="the-lm-function" class="section level2" number="2.8">
+<h2><span class="header-section-number">2.8</span> The <code>lm</code> function</h2>
+<p>The function<code>lm</code>, short for “linear model,” can estimate linear regressions using OLS and provide a lot of useful output. The main argument that the user provieds to the <code>lm</code> function is a formula. For the simple regression of Y on X, a formula has the syntax</p>
+<p><code>Y ~ X</code></p>
+<p>Here <code>Y</code> denotes the outcome variable, the tilde <code>~</code> roughly means “equals,” and <code>X</code> is the predictor variable. We will see more complicated formulas as we go through the course. For more information on R’s formula syntax, see <code>help(formula)</code>.</p>
+<p>Let’s take a closer look using the following two variables from the NELS data (see Sakai resource folder for more information on the data).</p>
+<ul>
+<li><p><code>achmat08</code>: eighth grade math achievement (percent correct on a math test)</p></li>
+<li><p><code>ses</code>: a composite measure of socio-economic status, on a scale from 0-35</p></li>
+</ul>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="2.8-the-lm-function.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load and attach the data -- see last week&#39;s exercises for details </span></span>
+<span id="cb7-2"><a href="2.8-the-lm-function.html#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;NELS.RData&quot;</span>)</span>
+<span id="cb7-3"><a href="2.8-the-lm-function.html#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(NELS)</span></code></pre></div>
+<pre><code>## The following objects are masked from NELS (pos = 4):
+## 
+##     absent12, achmat08, achmat10, achmat12, achrdg08, achrdg10,
+##     achrdg12, achsci08, achsci10, achsci12, achsls08, achsls10,
+##     achsls12, advmath8, alcbinge, algebra8, apoffer, approg, cigarett,
+##     computer, cuts12, edexpect, excurr12, expinc30, famsize, gender,
+##     homelang, hsprog, hwkin12, hwkout12, id, late12, marijuan, numinst,
+##     nursery, parmarl8, region, schattrt, schtyp8, ses, slfcnc08,
+##     slfcnc10, slfcnc12, tcherint, unitcalc, unitengl, unitmath, urban</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="2.8-the-lm-function.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> ses, <span class="at">y =</span> achmat08, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="2.8-the-lm-function.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Regress math achievement on SES</span></span>
+<span id="cb10-2"><a href="2.8-the-lm-function.html#cb10-2" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(achmat08 <span class="sc">~</span> ses)</span>
+<span id="cb10-3"><a href="2.8-the-lm-function.html#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="2.8-the-lm-function.html#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Print out the regression coefficients</span></span>
+<span id="cb10-5"><a href="2.8-the-lm-function.html#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(mod)</span></code></pre></div>
+<pre><code>## (Intercept)         ses 
+##       48.68        0.43</code></pre>
+<p>Let’s do some quick calcuations to check that the <code>lm</code> output corresponds the formulas for the slope and intercept we used in the lesson:</p>
+<p><span class="math display">\[ a = \bar Y - b \bar X \quad \text{and} \quad b = \frac{\text{Cov}(X, Y)}{s_X^2} \]</span></p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="2.8-the-lm-function.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Confirm that the slope from lm is just the covariance divided by the variance of X</span></span>
+<span id="cb12-2"><a href="2.8-the-lm-function.html#cb12-2" aria-hidden="true" tabindex="-1"></a>cov_xy <span class="ot">&lt;-</span> <span class="fu">cov</span>(achmat08, ses)</span>
+<span id="cb12-3"><a href="2.8-the-lm-function.html#cb12-3" aria-hidden="true" tabindex="-1"></a>s_x <span class="ot">&lt;-</span> <span class="fu">var</span>(ses)</span>
+<span id="cb12-4"><a href="2.8-the-lm-function.html#cb12-4" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> cov_xy <span class="sc">/</span> s_x</span>
+<span id="cb12-5"><a href="2.8-the-lm-function.html#cb12-5" aria-hidden="true" tabindex="-1"></a>b</span></code></pre></div>
+<pre><code>## [1] 0.43</code></pre>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="2.8-the-lm-function.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Confirm that the y-intercept is obtained from the two means and the slope</span></span>
+<span id="cb14-2"><a href="2.8-the-lm-function.html#cb14-2" aria-hidden="true" tabindex="-1"></a>xbar <span class="ot">&lt;-</span> <span class="fu">mean</span>(ses)</span>
+<span id="cb14-3"><a href="2.8-the-lm-function.html#cb14-3" aria-hidden="true" tabindex="-1"></a>ybar <span class="ot">&lt;-</span> <span class="fu">mean</span>(achmat08)</span>
+<span id="cb14-4"><a href="2.8-the-lm-function.html#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="2.8-the-lm-function.html#cb14-5" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> ybar <span class="sc">-</span> b <span class="sc">*</span> xbar</span>
+<span id="cb14-6"><a href="2.8-the-lm-function.html#cb14-6" aria-hidden="true" tabindex="-1"></a>a</span></code></pre></div>
+<pre><code>## [1] 49</code></pre>
+<p>Let’s also check our interpretation of the parameters. If the answers to these questions are not clear, please make sure to ask in class or on the Sakai forum.</p>
+<ul>
+<li><p>What is the value of <code>achmat08</code> when <code>ses</code> is equal to zero?</p></li>
+<li><p>How much do the predicted values of <code>achmat08</code> increase for each unit of increase in <code>ses</code>?</p></li>
+</ul>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="1.2-how-to-use-this-book.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="2.1-Example-2.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="2.7-end-of-first-lesson.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="2.9-predicted-values-and-residuals.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

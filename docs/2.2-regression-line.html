@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 2 Simple Regression | EDUC 784: Regression</title>
+  <title>2.2 The regression line | EDUC 784: Regression</title>
   <meta name="description" content="Course notes for EDUC 784" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 2 Simple Regression | EDUC 784: Regression" />
+  <meta property="og:title" content="2.2 The regression line | EDUC 784: Regression" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="/images/image1.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="peterhalpin/EDUC_784" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 2 Simple Regression | EDUC 784: Regression" />
+  <meta name="twitter:title" content="2.2 The regression line | EDUC 784: Regression" />
   
   <meta name="twitter:description" content="Course notes for EDUC 784" />
   <meta name="twitter:image" content="/images/image1.png" />
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="null" type="image/x-icon" />
-<link rel="prev" href="1.2-how-to-use-this-book.html"/>
-<link rel="next" href="2.1-Example-2.html"/>
+<link rel="prev" href="2.1-Example-2.html"/>
+<link rel="next" href="2.3-three-uses-of-regression.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.5.1/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -191,17 +191,97 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="Chapter-2" class="section level1" number="2">
-<h1><span class="header-section-number">Chapter 2</span> Simple Regression</h1>
-<p>The focus of this course is linear regression with multiple predictors (AKA <em>multiple regression</em>), but we start by reviewing regression with one predictor (AKA <em>simple regression</em>).</p>
+<div id="regression-line" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> The regression line</h2>
+<input onclick="codefolder(&#39;pre.sourceCode&#39;);" type="button" value="Hide Code" id="codefolder-button" style="position: relative; top: -25px; left: 85%;   &#10;                     color: white;&#10;                     font-weight: bold;&#10;                     background: #4B9CD3;&#10;                     border: 1px #3079ED solid;&#10;                     box-shadow: inset 0 1px 0 #80B0FB"/>
+<script>
+  function codefolder(query) {
+
+    var x = document.querySelectorAll(query);
+    if (x.length === 0) return;
+
+    function toggle_vis(o) {
+      var d = o.style.display;
+      o.style.display = (d === 'block' || d === '') ? 'none':'block';
+    }
+
+    for (i = 0; i < x.length; i++) {
+      var y = x[i];
+      toggle_vis(y);
+    }
+
+    var elem = document.getElementById("codefolder-button");
+    if (elem.value === "Hide Code") elem.value = "Show Code";
+    else elem.value = "Hide Code";
+  }
+</script>
+<script>
+  window.addEventListener('load', function () {
+    codefolder('pre.sourceCode');
+  });
+</script>
+<p>The line in the Figure <a href="2.1-Example-2.html#fig:fig1">2.1</a> can be represented mathematically as</p>
+<p><span class="math display">\[ \hat Y = a + b X\]</span></p>
+<p>where</p>
+<ul>
+<li><span class="math inline">\(Y\)</span> denotes Reading Achievement (the Y-value of the blue dots)</li>
+<li><span class="math inline">\(X\)</span> denotes SES (the X-value of the blue dots)</li>
+<li><span class="math inline">\(\hat Y\)</span> represented the values of <span class="math inline">\(Y\)</span> on the line<br />
+</li>
+<li><span class="math inline">\(a\)</span> represents the regression intercept (the value of <span class="math inline">\(\hat Y\)</span> when <span class="math inline">\(X = 0\)</span>)</li>
+<li><span class="math inline">\(b\)</span> represents the regression slope (how much <span class="math inline">\(\hat Y\)</span> increases for each unit of increase in <span class="math inline">\(X\)</span>)</li>
+</ul>
+<p>Note that <span class="math inline">\(Y\)</span> is used to represent the actual data whereas <span class="math inline">\(\hat Y\)</span> represents the points on the line. The difference <span class="math inline">\(e = Y - \hat Y\)</span> is called a <em>residual</em>. The residuals for a subset of the data points in Figure <a href="2.1-Example-2.html#fig:fig1">2.1</a> are shown in pink in Figure <a href="2.2-regression-line.html#fig:fig2">2.2</a></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="2.2-regression-line.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get predicted values from regression model</span></span>
+<span id="cb5-2"><a href="2.2-regression-line.html#cb5-2" aria-hidden="true" tabindex="-1"></a>yhat <span class="ot">&lt;-</span> mod<span class="sc">$</span>fitted.values</span>
+<span id="cb5-3"><a href="2.2-regression-line.html#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="2.2-regression-line.html#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># select a subset of the data</span></span>
+<span id="cb5-5"><a href="2.2-regression-line.html#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">10</span>)</span>
+<span id="cb5-6"><a href="2.2-regression-line.html#cb5-6" aria-hidden="true" tabindex="-1"></a>index <span class="ot">&lt;-</span> <span class="fu">sample.int</span>(<span class="dv">500</span>, <span class="dv">30</span>)</span>
+<span id="cb5-7"><a href="2.2-regression-line.html#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="2.2-regression-line.html#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># plot again</span></span>
+<span id="cb5-9"><a href="2.2-regression-line.html#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> ses[index], <span class="at">y =</span> achmat08[index], <span class="at">ylab =</span> <span class="st">&quot;Reading Achievement (Grade 8)&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;SES&quot;</span>)</span>
+<span id="cb5-10"><a href="2.2-regression-line.html#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(mod)</span>
+<span id="cb5-11"><a href="2.2-regression-line.html#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="2.2-regression-line.html#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Add pink lines</span></span>
+<span id="cb5-13"><a href="2.2-regression-line.html#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="fu">segments</span>(<span class="at">x0 =</span> ses[index], <span class="at">y0 =</span> yhat[index] , <span class="at">x1 =</span> ses[index], <span class="at">y1 =</span> achmat08[index], <span class="at">col =</span> <span class="dv">6</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span>
+<span id="cb5-14"><a href="2.2-regression-line.html#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-15"><a href="2.2-regression-line.html#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Overwrite dots to make it look at bit better</span></span>
+<span id="cb5-16"><a href="2.2-regression-line.html#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(<span class="at">x =</span> ses[index], <span class="at">y =</span> achmat08[index], <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>, <span class="at">pch =</span> <span class="dv">16</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig2"></span>
+<img src="_main_files/figure-html/fig2-1.png" alt="Residuals for a Subsample of Figure 1." width="672" />
+<p class="caption">
+Figure 2.2: Residuals for a Subsample of Figure 1.
+</p>
+</div>
+<p>Intuitively, one approach to “fitting a line to the data” is to select the parameters of the line (its slope and intercept) to minimize the residuals. In ordinary least squares (OLS) regression, we minimize a related quantity, the sum of squared residuals:</p>
+<p><span class="math display">\[
+\begin{align} 
+SS_{\text{res}} &amp; = \sum_{i=1}^{N} e_i^2 \\ 
+&amp; = \sum_{i=1}^{N} (Y_i - \hat Y_i)^2 \\ 
+&amp; = \sum_{i=1}^{N} (Y_i - a - b X_i)^2 
+\end{align} 
+\]</span></p>
+<p>where <span class="math inline">\(i = 1 \dots N\)</span> indexes the respondents in the sample. OLS regression is very widely used and is the main focus of this course, although we will visit some other approaches (notably logistic regression) in the second half of the course.</p>
+<p>Solving the minimization problem (i.e., doing the calculus) gives the following equations for the regression parameters</p>
+<p><span class="math display">\[ 
+a = \bar Y - b \bar X \quad \quad b = \frac{\text{Cov}(X, Y)}{s^2_X} = r_{XY} \frac{s_X}{s_Y}
+\]</span></p>
+<p>If you aren’t familiar with the symbols in these equations, check out the review materials in Section <a href="#Review"><strong>??</strong></a> for a refresher.</p>
+<p>Note that if <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are transformed to z-scores (i.e., to have mean of zero and variance of one), then</p>
+<ul>
+<li><span class="math inline">\(a = 0\)</span></li>
+<li><span class="math inline">\(b = \text{Cov}(X, Y) = r_{XY}\)</span></li>
+</ul>
+<p>So, regression, correlation, and covariance are all very closely related in when we only consider two variables at a time. This is why we didn’t make a big deal about simple regression in EDUC 710. But when we get to multiple regression (i.e., more than one <span class="math inline">\(X\)</span> variable), we will see that relationship between regression and correlation (and covariance) gets more complicated.</p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="1.2-how-to-use-this-book.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="2.1-Example-2.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="2.1-Example-2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="2.3-three-uses-of-regression.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
