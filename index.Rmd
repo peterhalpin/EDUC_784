@@ -15,17 +15,31 @@ favicon: null
 
 # About This Book
 
+```{r, echo = F}
+button_css <-  "position: relative; 
+                top: -25px; 
+                left: 85%;   
+                color: white;
+                font-weight: bold;
+                background: #4B9CD3;
+                border: 1px #3079ED solid;
+                box-shadow: inset 0 1px 0 #80B0FB"
+```
 
-This "ebook" provides the course notes for EDUC 784. It is currently under development, so any feedback is appreciated (e.g., during class,  via email, or the edit link in the header). This first chapter is just about how to use the book -- the course content starts in Chapter \@ref(Chapter-2).   
+
+This "ebook" provides the course notes for EDUC 784. It is currently under development, so any feedback is appreciated (e.g., during class,  via email, or the edit link in the header). This first chapter is just about how to use the book -- the course content starts in Chapter \@ref(chapter_2).   
 
 ## Why this book? 
 
-There are few goals of moving from "textbook + slides + exercises" to an ebook. 
+There are a few goals of moving from "textbook + slides + exercises" to an ebook. 
 
 * To integrate course content (slides, readings, code, examples, and exercises) into one format, rather than having multiple files to sort through on Sakai.
+
 * To address the perennial problem of choosing a textbook for this course -- rather than having a required text, the goal is for this ebook to become the official course text. For supplementary texts, see the course syllabus. 
-* Most importantly, having a course text that is tightly aligned with the course content means that I can be more liberal in assigning readings as homework *before class*, so we can spend less time lecturing and more time discussing any questions you have about the readings, going through the examples in R together, and working on assignments.  
-* As a bonus, this book is another example cool things you can do with R. It's written in R (https://bookdown.org) -- that is crazy, right??
+
+* Most importantly, having a course text that is tightly aligned with the course content means that I can be more liberal in assigning readings as homework *before class*, so we can spend less time in lecture and more time discussing any questions you have about the readings, going through the examples in R together, and working on assignments.  
+
+* As a bonus, this book is another example of cool things you can do with R. It's written in R (https://bookdown.org) -- that is crazy, right??
 
 <!-- So, my goal for this semester to be in a situation where I assign chapter of this book each week as reading, and you do the readings before coming to class. I'll provide a short summary of the content of each chapter at the beginning of class, and I'll answer any questions you have about the readings. How long we spend summarizing the content will basically depend on how much discussion y'all want to have about it. Then, we will work through an R-based example together. Once we are done the example, there will be "open lab" time work on assignments or whatever you want to do. 
 
@@ -36,18 +50,13 @@ This book won't replace Sakai (e.g., I still need to post assignments and grades
 
 ```{r codefolder, echo=FALSE, results='asis'}
 codefolder::bookdown(init = "hide", 
-                     style = "position: relative; top: -25px; left: 85%;   
-                     color: white;
-                     font-weight: bold;
-                     background: #4B9CD3;
-                     border: 1px #3079ED solid;
-                     box-shadow: inset 0 1px 0 #80B0FB")
+                     style = button_css)
 ```
 
 
-The book combines lesson slides (Powerpoint / PDF) and R coding exercises (Rmarkdown / HTML) familiar from EDUC 710, and, to a lesser extent, the optional course textbooks (see syllabus). You have already seen that the chapter sections of this book are quite short, closer to "slide sized" than "book-section sized". This is so that they can double as course slides. 
+The book combines lesson slides (Powerpoint / PDF) and R coding exercises (Rmarkdown / HTML) familiar from EDUC 710. You have already seen that the chapter sections of this book are quite short, closer to "slide sized" than "book-section sized". This is so that they can double as course slides. 
 
-The main trick for incorporating R exercises is called "code folding". (Note: I am still working out some bugs...) An example of code folding is given on this page. Below you can see a histogram integrated into the text. By clicking on the button called "Show Code" on the top of the page, the R code that produced the histogram will also be visible. Notice that you may need to scroll horizontally to see all of the text in the code window. Also notice that when you hover your mouse over the code window, an icon appears in the top right corner -- this lets you copy the block of code with one click. 
+The main trick for incorporating R exercises is called "code folding". An example of code folding is given on this page. Below, a histogram integrated into the text. By clicking on the button called "Show Code" on the top of the page, the R code that produced the histogram will also be visible. Notice that you may need to scroll horizontally to see all of the text in the code window. Also notice that when you hover your mouse over the code window, an icon appears in the top right corner -- this lets you copy the block of code with one click. 
 
 
 ```{r}
@@ -57,11 +66,11 @@ hist(x, col = "#4B9CD3")
 ```
 
 
-So the basic workflow of how to use this book is as follows. 
+In summary, the basic workflow is as follows. 
 
 1. Before class, go through the assigned readings for conceptual understanding. You can skip all the code during your first reading.
 
-2. We will go through the assigned readings again in class together (as slide show), this time focusing any questions you have and on doing R exercizes. 
+2. We will go through the assigned readings again in class together, this time focusing on any questions you have and on doing R exercises. 
 
 Alright, let's get to it! 
 

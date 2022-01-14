@@ -24,7 +24,7 @@
 <meta name="author" content="Peter Halpin" />
 
 
-<meta name="date" content="2022-01-12" />
+<meta name="date" content="2022-01-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,8 +33,7 @@
   <link rel="shortcut icon" href="null" type="image/x-icon" />
 <link rel="prev" href="2.4-regression-for-prediction.html"/>
 <link rel="next" href="2.6-regression-for-explanation.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
-<script src="libs/jquery-3.5.1/jquery-3.5.1.min.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,23 +50,24 @@
 
 
 
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -87,7 +87,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -137,22 +137,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Course notes for EDUC 784</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About This Book</a>
-<ul>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About This Book</a><ul>
 <li class="chapter" data-level="1.1" data-path="1.1-why-this-book.html"><a href="1.1-why-this-book.html"><i class="fa fa-check"></i><b>1.1</b> Why this book?</a></li>
 <li class="chapter" data-level="1.2" data-path="1.2-how-to-use-this-book.html"><a href="1.2-how-to-use-this-book.html"><i class="fa fa-check"></i><b>1.2</b> How to use this book</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="2-Chapter-2.html"><a href="2-Chapter-2.html"><i class="fa fa-check"></i><b>2</b> Simple Regression</a>
-<ul>
+<li class="chapter" data-level="2" data-path="2-Chapter-2.html"><a href="2-Chapter-2.html"><i class="fa fa-check"></i><b>2</b> Simple Regression</a><ul>
 <li class="chapter" data-level="2.1" data-path="2.1-Example-2.html"><a href="2.1-Example-2.html"><i class="fa fa-check"></i><b>2.1</b> An example from NELS</a></li>
 <li class="chapter" data-level="2.2" data-path="2.2-regression-line.html"><a href="2.2-regression-line.html"><i class="fa fa-check"></i><b>2.2</b> The regression line</a></li>
 <li class="chapter" data-level="2.3" data-path="2.3-three-uses-of-regression.html"><a href="2.3-three-uses-of-regression.html"><i class="fa fa-check"></i><b>2.3</b> Three uses of regression</a></li>
-<li class="chapter" data-level="2.4" data-path="2.4-regression-for-prediction.html"><a href="2.4-regression-for-prediction.html"><i class="fa fa-check"></i><b>2.4</b> Regression for prediction</a>
-<ul>
+<li class="chapter" data-level="2.4" data-path="2.4-regression-for-prediction.html"><a href="2.4-regression-for-prediction.html"><i class="fa fa-check"></i><b>2.4</b> Regression for prediction</a><ul>
 <li class="chapter" data-level="2.4.1" data-path="2.4-regression-for-prediction.html"><a href="2.4-regression-for-prediction.html#more-about-prediction"><i class="fa fa-check"></i><b>2.4.1</b> More about Prediction</a></li>
 </ul></li>
-<li class="chapter" data-level="2.5" data-path="2.5-regression-and-causation.html"><a href="2.5-regression-and-causation.html"><i class="fa fa-check"></i><b>2.5</b> Regression and causation</a>
-<ul>
+<li class="chapter" data-level="2.5" data-path="2.5-regression-and-causation.html"><a href="2.5-regression-and-causation.html"><i class="fa fa-check"></i><b>2.5</b> Regression and causation</a><ul>
 <li class="chapter" data-level="2.5.1" data-path="2.5-regression-and-causation.html"><a href="2.5-regression-and-causation.html#omitted-variable-bias"><i class="fa fa-check"></i><b>2.5.1</b> Omitted variable bias*</a></li>
 </ul></li>
 <li class="chapter" data-level="2.6" data-path="2.6-regression-for-explanation.html"><a href="2.6-regression-for-explanation.html"><i class="fa fa-check"></i><b>2.6</b> Regression for explanation</a></li>
@@ -161,12 +157,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.9" data-path="2.9-predicted-values-and-residuals.html"><a href="2.9-predicted-values-and-residuals.html"><i class="fa fa-check"></i><b>2.9</b> Predicted values and residuals</a></li>
 <li class="chapter" data-level="2.10" data-path="2.10-variance-explained.html"><a href="2.10-variance-explained.html"><i class="fa fa-check"></i><b>2.10</b> Variance explained</a></li>
 <li class="chapter" data-level="2.11" data-path="2.11-inference.html"><a href="2.11-inference.html"><i class="fa fa-check"></i><b>2.11</b> Inference</a></li>
-<li class="chapter" data-level="2.12" data-path="2.12-power-analysis.html"><a href="2.12-power-analysis.html"><i class="fa fa-check"></i><b>2.12</b> Power analysis</a>
-<ul>
+<li class="chapter" data-level="2.12" data-path="2.12-power-analysis.html"><a href="2.12-power-analysis.html"><i class="fa fa-check"></i><b>2.12</b> Power analysis</a><ul>
 <li class="chapter" data-level="2.12.1" data-path="2.12-power-analysis.html"><a href="2.12-power-analysis.html#example-a-prospective-power-analysis"><i class="fa fa-check"></i><b>2.12.1</b> Example: A prospective power analysis</a></li>
 </ul></li>
-<li class="chapter" data-level="2.13" data-path="2.13-exercises.html"><a href="2.13-exercises.html"><i class="fa fa-check"></i><b>2.13</b> Exercises</a>
-<ul>
+<li class="chapter" data-level="2.13" data-path="2.13-exercises.html"><a href="2.13-exercises.html"><i class="fa fa-check"></i><b>2.13</b> Exercises</a><ul>
 <li class="chapter" data-level="2.13.1" data-path="2.13-exercises.html"><a href="2.13-exercises.html#answers"><i class="fa fa-check"></i><b>2.13.1</b> Answers</a></li>
 </ul></li>
 </ul></li>
@@ -191,7 +185,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="regression-and-causation" class="section level2" number="2.5">
+<div id="regression-and-causation" class="section level2">
 <h2><span class="header-section-number">2.5</span> Regression and causation</h2>
 <p>A causal interpretation of regression means that that changing <span class="math inline">\(X\)</span> by one unit will change <span class="math inline">\(Y\)</span> by <span class="math inline">\(b\)</span> units. This is a much stronger interpretation than prediction because it requires stronger assumptions. In particular, regression parameters can only be interpreted causally when all variables that are correlated with <span class="math inline">\(Y\)</span> and <span class="math inline">\(X\)</span> are included as predictors in the model.</p>
 <p>When a variable is left out, this is called <em>omitted variable bias</em>. This situation is nicely explained by Gelman and Hill (cite: Gelman), and a modified version of their discussion is provided below. This discussion is a bit technical, but the take-home message is summarized in the following points</p>
@@ -201,7 +195,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>This is also an example of what is called “endogeneity” in regression (etymology: originating from within).</li>
 <li>In order to avoid omitted variable bias, we want to include more than one predictor in our regression models – i.e., multiple regression.</li>
 </ul>
-<div id="omitted-variable-bias" class="section level3" number="2.5.1">
+<div id="omitted-variable-bias" class="section level3">
 <h3><span class="header-section-number">2.5.1</span> Omitted variable bias*</h3>
 <p>We start by assuming a “true” regression model with two predictors. In the context of our example, this means that there is one other variable, in addition to SES, that is important for predicting Reading Achievement. Of course, there are many predictors of Reading Achievement (see Section <a href="2.1-Example-2.html#Example-2">2.1</a>), but we only need two to explain the problem of omitted variable bias.</p>
 <p>Let’s write the “true” model as:</p>
@@ -210,7 +204,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 \tag{2.1}
 \end{equation}\]</span></p>
 <p>where <span class="math inline">\(X_1\)</span> is SES and <span class="math inline">\(X_2\)</span> is any other variable that is correlated with both <span class="math inline">\(Y\)</span> and <span class="math inline">\(X_1\)</span> (e.g., number of books in the household).</p>
-<p>Next, imagine that instead of using the model in <a href="2.5-regression-and-causation.html#eq:2parm">(2.1)</a>, we analyse the data using the model with just SES. In our example, this would reflect a situation in which we don’t have data on the number of books in the house, so we have to make due with just SES, leading to the usual regression line (Section <a href="2.2-regression-line.html#regression-line">2.2</a>):</p>
+<p>Next, imagine that instead of using the model in <a href="2.5-regression-and-causation.html#eq:2parm">(2.1)</a>, we analyze the data using the model with just SES. In our example, this would reflect a situation in which we don’t have data on the number of books in the house, so we have to make due with just SES, leading to the usual regression line (Section <a href="2.2-regression-line.html#regression-line">2.2</a>):</p>
 <p><span class="math display" id="eq:1parm">\[ 
 \hat Y = a^* + b^*_1 X_1. 
 \tag{2.2}

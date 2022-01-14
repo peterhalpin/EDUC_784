@@ -1,25 +1,26 @@
-# Simple Regression {#Chapter-2}
+# Simple Regression {#chapter_2}
 
+```{r, echo = F}
+button <-  "position: relative; 
+            top: -25px; 
+            left: 85%;   
+            color: white;
+            font-weight: bold;
+            background: #4B9CD3;
+            border: 1px #3079ED solid;
+            box-shadow: inset 0 1px 0 #80B0FB"
+```
 
 The focus of this course is linear regression with multiple predictors (AKA *multiple regression*), but we start by reviewing regression with one predictor (AKA *simple regression*). 
 
-## An example from NELS {#Example-2}
+## An example from NELS {#example_2}
  
 
 ```{r, echo=FALSE, results='asis'}
-codefolder::bookdown(init = "hide", 
-                     style = "position: relative; top: -25px; left: 85%;   
-                     color: white;
-                     font-weight: bold;
-                     background: #4B9CD3;
-                     border: 1px #3079ED solid;
-                     box-shadow: inset 0 1px 0 #80B0FB")
+codefolder::bookdown(init = "hide", style = button)
 ```
 
-Figure \@ref(fig:fig1) shows the relationship between Grade 8 Reading Achievement 
-and Socioeconomic Status (SES) using a subsample of the 1988 National Educational Longitudinal Survey (NELS; see https://nces.ed.gov/surveys/nels88/). 
-
-
+Figure \@ref(fig:fig1) shows the relationship between Grade 8 Reading Achievement (percent correct on a reading test) and Socioeconomic Status (SES; a composite measure on a scale from 0-35). The data are a subsample of the 1988 National Educational Longitudinal Survey (NELS; see https://nces.ed.gov/surveys/nels88/). 
 
 ```{r fig1, fig.cap = 'Reading Achievement and SES (NELS88).', fig.align = 'center'}
 # Load and attach the NELS88 data
@@ -43,27 +44,24 @@ options(digits = 2)
 cor(achmat08, ses)
 ```
 
-This is a moderate, positive correlation between Reading Achievement and SES. The correlation means that eighth graders from more well-off families (higher SES) also tended to do better in reading (higher Reading Achievement). 
+This is a moderate, positive correlation between Reading Achievement and SES. This correlation means that eighth graders from more well-off families (higher SES) also tended to do better in reading (higher Reading Achievement). 
 
-This relationship has been widely documented and discussed in education research (e.g., https://www.apa.org/pi/ses/resources/publications/education). What do you think about this relationship?  
+This relationship has been widely documented and discussed in education research (e.g., https://www.apa.org/pi/ses/resources/publications/education). Please share your thoughts on this relationship in class. 
 
-In terms of Figure \@ref(fig:fig1), the magnitude (strength) of the correlation can be interpreted in terms of how close the points are to the line. If the correlation was exactly one, all of the points would be on the line. If the correlation was zero, the points would be scattered without any (linear) trend at all. See the review materials in Section \@ref(Review) for more info about correlation. 
+<!-- In terms of Figure \@ref(fig:fig1), the magnitude (strength) of the correlation can be interpreted in terms of how close the points are to the line. If the correlation was exactly one, all of the points would be on the line. If the correlation was zero, the points would be scattered without any (linear) trend at all. See the review materials in Section \@ref(Review) for more info about correlation. -->
 
 ## The regression line {#regression-line}
 
 ```{r, echo=FALSE, results='asis'}
-codefolder::bookdown(init = "hide", 
-                     style = "position: relative; top: -25px; left: 85%;   
-                     color: white;
-                     font-weight: bold;
-                     background: #4B9CD3;
-                     border: 1px #3079ED solid;
-                     box-shadow: inset 0 1px 0 #80B0FB")
+codefolder::bookdown(init = "hide", style = button)
 ```
 
 The line in the Figure \@ref(fig:fig1) can be represented mathematically as   
 
-\[ \hat Y = a + b X\]
+\[ 
+\hat Y = a + b X
+(\#eq:yhat)
+\]
 
 where 
 
@@ -75,7 +73,7 @@ where
 
 Note that $Y$ is used to represent the actual data whereas $\hat Y$ represents the points on the line. The difference $e = Y - \hat Y$ is called a *residual*. The residuals for a subset of the data points in Figure \@ref(fig:fig1) are shown in pink in Figure \@ref(fig:fig2) 
 
-```{r fig2, fig.cap = 'Residuals for a Subsample of Figure 1.', fig.align = 'center'}
+```{r fig2, fig.cap = 'Residuals for a Subsample of the Example.', fig.align = 'center'}
 # Get predicted values from regression model
 yhat <- mod$fitted.values
 
@@ -94,12 +92,26 @@ segments(x0 = ses[index], y0 = yhat[index] , x1 = ses[index], y1 = achmat08[inde
 points(x = ses[index], y = achmat08[index], col = "#4B9CD3", pch = 16)
 ```
 
+Notice that when we add the residuals to $\hat Y$ we get back the value of $Y$: 
+
+\begin{align} 
+Y & = \hat Y + e \\ & = a + bX + e 
+(\#eq:y)
+\end{align} 
+
+We can use either format, Equation \@ref(eq:yhat) or Equation \@ref(eq:y), to write out a regression model. 
+
+## OLS {#ols}
+
+```{r, echo=FALSE, results='asis'}
+codefolder::bookdown(init = "hide", style = button)
+```
+
 Intuitively, one approach to “fitting a line to the data” is to select the parameters of the line (its slope and intercept) to minimize the residuals. In ordinary least squares (OLS) regression, we minimize a related quantity, the sum of squared residuals: 
 
 \[
 \begin{align} 
 SS_{\text{res}} & = \sum_{i=1}^{N} e_i^2 \\ 
-& = \sum_{i=1}^{N} (Y_i - \hat Y_i)^2 \\ 
 & = \sum_{i=1}^{N} (Y_i - a - b X_i)^2 
 \end{align} 
 \]
@@ -109,168 +121,149 @@ where $i = 1 \dots N$ indexes the respondents in the sample. OLS regression is v
 Solving the  minimization problem (i.e., doing the calculus) gives the following equations for the regression parameters
 
 \[ 
-a = \bar Y - b \bar X \quad \quad b = \frac{\text{Cov}(X, Y)}{s^2_X} = r_{XY} \frac{s_X}{s_Y}
+a = \bar Y - b \bar X \quad \quad \quad \quad b = \frac{\text{Cov}(X, Y)}{s^2_X} = r_{XY} \frac{s_X}{s_Y}
 \]
 
-If you aren't familiar with the symbols in these equations, check out the review materials in Section \@ref(Review) for a refresher.  
+(If you aren't familiar with the symbols in these equations, check out the review materials in Section \@ref(Review) for a refresher.)  
+
+For the NELS example, the regression intercept and slope are, respectively: 
+
+```{r}
+coef(mod)
+```
+
+Can you provide an interpretation of these numbers in terms of the line in Figure \@ref(fig:fig1)? 
+
+### Correlation and regression
 
 Note that if $X$ and $Y$ are transformed to z-scores (i.e., to have mean of zero and variance of one), then 
 
 * $a = 0$
 * $b = \text{Cov}(X, Y) = r_{XY}$
 
-So, regression, correlation, and covariance are all very closely related in when we only consider two variables at a time. This is why we didn't make a big deal about simple regression in EDUC 710. But when we get to multiple regression (i.e., more than one $X$ variable), we will see that relationship between regression and correlation (and covariance) gets more complicated.   
+So, regression, correlation, and covariance are all very closely related in when we only consider two variables at a time. This is why we didn't make a big deal about simple regression in EDUC 710. But when we get to multiple regression (i.e., more than one $X$ variable), we will see that relationship between regression and correlation (and covariance) gets more complicated.  
 
-## Three uses of regression 
+## R-squared
+```{r, echo=FALSE, results='asis'}
+codefolder::bookdown(init = "hide", style = button)
+```
+In the previous section we saw that the predicted value of Educational Achievement increased by .43 units (about half a percentage point) for each unit of increase in SES. Another way to interpret this relationship is in terms of the proportion of variance in Reading Achievement that is associated with SES -- i.e., to what extent are individual differences in Reading Achievement explained in terms of students' SES? 
 
-Before moving onto more complicated regression models, let's consider why we might be interested in them first place. As discussed in the following sections, regression has three main uses:  
+This question is represented graphically in Figure \@ref(fig:rsquared). The horizontal line denotes the mean of Reading Achievement. The difference between the indicated student's Reading Achievement score and the mean can be divided into two parts. The black part shows how much closer we get to the student's score by considering $\hat Y$ instead of $\bar Y$. This represents the extent to which Reading Achievement is explained by its linear relationship with SES. The pink part is the regression residual, which was introduced in Section \@ref(regression-line). This is the variation in Reading Achievement that is "left over" after considering its linear relationship with SES. 
 
-* Prediction (focus on $\hat Y$) 
-* Causation (focus on $b$)
-* Explanation (focus on $R^2$, which is defined below)
 
-## Regression for prediction 
+```{r rsquared, fig.cap = 'The Idea Behind R-squared.', fig.align = 'center', echo = F}
+plot(x = ses[index], y = achmat08[index], ylab = "Reading Achievement (Grade 8)", xlab = "SES")
+abline(mod)
 
-```{r echo=FALSE, results='asis'}
-codefolder::bookdown(init = "hide", 
-                     style = "position: relative; top: -25px; left: 85%;   
-                     color: white;
-                     font-weight: bold;
-                     background: #4B9CD3;
-                     border: 1px #3079ED solid;
-                     box-shadow: inset 0 1px 0 #80B0FB")
+ybar <- mean(achmat08)
+abline(h = ybar, col = "gray")
+
+# Add pink lines for case 6
+segments(x0 = ses[index[22]], y0 = yhat[index[22]] , x1 = ses[index[22]], y1 = achmat08[index[22]], col = 6, lty = 2)
+
+# Add black lines 
+segments(x0 = ses[index[22]], y0 = yhat[index[22]] , x1 = ses[index[22]], y1 = ybar, col = 1, lty = 2)
+
+# Overwrite dots to make it look at bit better
+points(x = ses[index], y = achmat08[index], col = "#4B9CD3", pch = 16)
 ```
 
-Prediction (etymology: “to make known beforehand”) means that we want to use $X$ to make a guess about $Y$. This use of regression makes the most sense when we know the value of $X$ before we know the value of $Y$. 
 
-When we are interested in using values of $X$  to make predictions about (yet unobserved) values of $Y$, we use $\hat Y$ as our guess. This is why $\hat Y$ is called the "predicted value" of $Y$. 
+The R-squared statistic summarizes the variation in Reading Achievement associated with SES (i.e., the black part) relative to the total variation in Reading Achievement (i.e., black + pink) for all students in the sample. Aside from the regression parameters, it is the most widely used statistic in regression analysis, so we will be seeing it a lot. 
 
-When making predictions, we usually want some additional information about how good the predictions will be. In OLS regression, this information is provided by the prediction error variance (cite: Fox)
+Using all of the cases from the example (Figure \@ref(fig:fig1)), the R-squared statistic is: 
 
-\[ s^2_{\hat Y_i} = \frac{SS_{\text{res}}}{N - 2} \left( \frac{1}{N} + \frac{(X_i - \bar X)^2}{(N-1) s^2_X} \right). \] 
-
-The prediction errors for the data in Figure \@ref(fig:fig2) are depicted in Figure \@ref(fig:fig3) as a grey band around the regression line. 
-
-```{r, fig3, warning=F, message=F, fig.cap = 'Prediction Error for Example Data.', fig.align = 'center'}
-
-# Using a different plotting library that adds prediction error bands (need to double check computation)
-library(ggplot2)
-
-ggplot(NELS[index, ], aes(x = ses, y = achmat08)) + 
-               geom_point(color='#3B9CD3', size = 2) + 
-               geom_smooth(method = lm, color = "grey35") + 
-               ylab("Reading Achievement (Grade 8)") + 
-               xlab("SES") + 
-               theme_bw()
-      
+```{r}
+options(digits = 5)
+summary(mod)$r.squared
 ```
 
-Notice that the prediction error variance increases with $SS_{\text{res}}$ -- in other words, the larger the residuals (Figure \@ref(fig:fig2)), the worse the prediction error. As we will see in this Section (\@ref(Review)), one way to reduce $SS_{\text{res}}$ is to add more predictors into the model -- i.e., multiple regression.  
+The interpretation is that SES explained about 10% of the variance in Grade 8 Reading Achievement. 
 
+### Derivation*
 
-### More about Prediction
+To derive the R-squared statistic we work the numerator of the variance, which is called the total sum of squares.  
 
-Prediction was the original use of regression (see https://en.wikipedia.org/wiki/Regression_toward_the_mean#History). More recent methods developed in machine learning also focus mainly on prediction -- although the methods used in machine learning are often more complicated than OLS regression, and the research context is usually quite different, the basic problem is the same. Machine learning has led to the use of out of sample predictions, rather than prediction error, as the main criterion for judging the quality of predictions made from a model. Machine learning has also introduced some new techniques for choosing which potential predictors to include in a model (i.e., "variable selection"). We will touch on these topics later in the course, although our main focus is OLS regression.  
+\[SS_{\text{total}} = \sum_{i = 1}^N (Y - \bar Y)^2. \]
 
-## Regression and causation
+It can be re-written using the predicted values $\hat Y$:
 
-A causal interpretation of regression means that that changing $X$ by one unit will change $Y$ by $b$ units. This is a much stronger interpretation than prediction because it requires stronger assumptions. In particular, regression parameters can only be interpreted causally when all variables that are correlated with $Y$ and $X$ are included as predictors in the model. 
+\[SS_{\text{total}} = \sum_{i = 1}^N [(Y - \hat Y) + (\hat Y - \bar Y)]^2. \]
 
-When a variable is left out, this is called *omitted variable bias*. This situation is nicely explained by Gelman and Hill (cite: Gelman), and a modified version of their discussion is provided below. This discussion is a bit technical, but the take-home message is summarized in the following points
-
-* When a predictor variable that is correlated with $Y$ and $X$ is left out of a regression model, this is called omitted variable bias.
-* The overall idea is basically the same as saying "correlation does not imply causation" or the notion of spurious correlations.
-* This is also an example of what is called "endogeneity" in regression (etymology: originating from within).
-* In order to avoid omitted variable bias, we want to include more than one predictor in our regression models -- i.e., multiple regression.
-
-### Omitted variable bias* 
-
-We start by assuming a "true" regression model with two predictors. In the context of our example, this means that there is one other variable, in addition to SES, that is important for predicting Reading Achievement. Of course, there are many predictors of Reading Achievement (see Section \@ref(Example-2)), but we only need two to explain the problem of omitted variable bias. 
-
-Let's write the "true" model as: 
-
-\begin{equation} 
-\hat Y = a + b_1 X_1 + b_2 X_2 
-(\#eq:2parm)
-\end{equation}
-
-where $X_1$ is SES and $X_2$ is any other variable that is correlated with both $Y$ and $X_1$ (e.g., number of books in the household). 
-
-Next, imagine that instead of using the model in \@ref(eq:2parm), we analyse the data using the model with just SES. In our example, this would reflect a situation in which we don't have data on the number of books in the house, so we have to make due with just SES, leading to the usual regression line (Section \@ref(regression-line)):
-
-\[ 
-\hat Y = a^* + b^*_1 X_1. 
-(\#eq:1parm)
-\]
-
-The problem of omitted variable bias is that $b_1 \neq b^*_1$ -- i.e., the regression parameter in the true model is not the same as the regression parameter in our data-analytic model with only one predictor. This is perhaps surprising -- leaving out the number of books in the household gives us the wrong regression parameter for SES! 
-
-To see why, start by writing $X_2$ as a function of $X_1$. 
-
-\[
-X_2 = \alpha + \beta X_1 + \epsilon. 
-(\#eq:X2)
-\]
-
-(Side note: by adding the residual into the model for $X_2$, we ensure the equality holds for $X_2$ not just $\hat X_2$ -- more on this later.) 
-
-Then we use Equation \@ref(eq:X2) to substitute for $X_2$ in Equation \@ref(eq:2parm), 
+The right hand side can be reduced to two other sums of squares using the rules of summation algebra (see the review in Section \@ref(review)):
 
 \begin{align} 
-\hat Y & = a + b_1 X_1 + b_2 X_2 \\
-\hat Y & = a + b_1 X_1 + b_2 (\alpha + \beta X_1 + \epsilon) \\
-\hat Y & = \color{orange}{(a + \alpha + \epsilon)} + \color{green}{(b_1 + b_2\beta)} X_1. 
-(\#eq:3parm)
-\end{align}
+SS_{\text{total}} & = \sum_{i = 1}^N (Y - \hat Y)^2 + \sum_{i = 1}^N (\hat Y - \bar Y)^2 \\
+\end{align} 
 
-Notice that in the last line of Equation \@ref(eq:3parm), $Y$ is predicted using only $X_1$, so it is equivalent to Equation \@ref(eq:1parm). Based on this comparison, we can write
+The first part is just $SS_\text{res}$ from Section \@ref(ols). The second part is called the regression sum of squares and denoted $SS_\text{reg}$. Using this terminology we can re-write the above equation as
 
-* $a^* = \color{orange}{(a + \alpha + \epsilon)}$
-* $b^*_1 = \color{green}{(b_1 + b_2\beta)}$
+\[ SS_{\text{total}} = SS_\text{res} + SS_\text{reg} \] 
 
-This last equation for $b^*_1$ is what we are interested in. It shows that the regression parameter in our data analytic model using just SES, $b^*_1$, is not equal to the "true" regression parameter using both predictors, $b_1$. 
+The R-squared statistic is 
 
-This is what omitted variable means -- leaving out $X_2$ in Equation \@ref(eq:1parm) gives us the wrong regression parameter for $X_1$. This is one of the main motivations for including more than one predictor variable in a regression model -- i.e., to avoid omitted variable bias.
+\[R^2 = SS_{\text{reg}} / SS_{\text{total}}. \]
+
+As discussed above, this is interpreted as the proportion of variance in $Y$ that is explained by its linear relationship with $X$. 
+
+<!-- ### Additional details* 
+
+$R$ is the correlation between $Y$ and $\hat Y$. In simple regression, this is just equal to the regular correlation coefficient. 
+
+\[ R = \text{Cor}(Y, \hat Y) = \text{Cor}(Y, a + bX) = \text{Cor}(Y, X)\]
+
+(You can prove this result using the rules of summation algebra.) 
+
+Consequently, in simple regression $R^2 = r^2_{XY}$. When we add multiple predictors, $R$ is called the multiple correlation and plays a very important -->
 
 
-Notice that there two special situations in which omitted variable bias is not a problem: 
+## The population model   
 
-* when the two predictors are not linearly related -- i.e., $\beta = 0$, or
-* when the second predictor is not linearly related to $Y$ -- i.e., $b_2 = 0$.  
+In the NELS example, the population of interest is U.S. eighth graders in 1988. We want to be able to draw conclusions about that population based on the sample of eighth graders that participated in NELS. In order to do that, we make some statistical assumptions about the population, which are collectively referred to as the population model. We talk about how to check the plausibility of these assumptions in Chapter \@ref(chapter-x). 
 
-We will discuss the interpretation of these situations in class. 
+The regression population model has the following three assumptions, which are also depicted in the diagram below. Recall that the notation $Y \sim N(\mu, \sigma)$ means that a variable $Y$ has a normal distribution with mean $\mu$ and standard deviation $\sigma$.
+
+1. Normality: The distribution of $Y$ conditional on $X$ is normal for all values of $X$. 
+
+\[Y | X \sim  N(\mu_{Y | X} , \sigma_{Y | X}) \]
+
+2. Homoskedasticity: The conditional distributions have equal variances (also called homegeneity of variance).
+
+\[ \sigma_{Y| X} = \sigma \]
+
+3. Linearity: The means of the conditional distributions are a linear function of $X$.
+
+\[ \mu_{Y| Χ} = a + bX \]
+
+```{r, pop_model, echo = F, fig.cap = "The Regression Population Model.", fig.align = 'center'}
+knitr::include_graphics("images/population_model.png")
+```
+
+These three assumptions are summarized by writing $Y|X \sim N(a + bX, \sigma)$. Sometimes it will be easier to state the assumptions in terms of the population residuals, $\epsilon = Y - \mu_{Y|X}$, which subtract off the regression line: $\epsilon \sim N(0, \sigma)$. 
+
+An additional assumption is usually made about the data in the sample -- that they are a simple random sample from the population. We will see some ways of dealing with other types of samples later on the course (e.g., Chapter \@ref(chapter-x)). 
+
+## Inference for the slope
+Standard errors, t-tests, and confidence intervals. 
+
+R-output. 
+
+## Inference for the intercept
+Standard errors, t-tests, and confidence intervals. 
+
+R-output. 
+
+## Inference for R-squared
+
+## Power analysis
+
+## Exercises 
 
 
-## Regression for explanation
+### The `lm` function
 
-In the social sciences, many uses of regression fall somewhere between prediction and causation. We want to do more than just predict outcomes of interest, but we often don't have a basis for making strong assumptions required for causal interpretation of regression coefficients. This grey area between prediction and causation can be referred to as explanation. 
-
-In terms of our example, we might want to explain why eighth graders differ in there Reading Achievement in terms of a large number of potential predictors, such as 
-
-* Student factors
-  * attendence
-  * past academic performance in Reading
-  * past academic performance in other subjects (Question: why include this? Hint: see previous section)
-* School factors
-  * their ELA teacher
-  * the school they attend
-  * their peers (e.g., the school's catchment area) 
-* Home factors
-  * SES
-  * Number of books in the household
-  * Maternal education
-
-Even this long list leaves out potential omitted variables. But, by including more than one predictor, we can get "closer" to a causal interpretation through "statistical controls" (See Chapter 3). 
-
-When the goal of an analysis is explanation, it usual to focus on the proportion of variation in the outcome variable that is explained by the predictor(s)
-
-This proportion of variance is denoted $R^2$ ("R-squared") and is the first topic we address in our next lesson ...
-
-## End of first lesson
-
-## The `lm` function
-
-The function`lm`, short for "linear model", can estimate linear regressions using OLS and provide a lot of useful output. The main argument that the user provieds to the `lm` function is a formula. For the simple regression of Y on X, a formula has the syntax
+The function`lm`, short for "linear model", can estimate linear regressions using OLS and provide a lot of useful output. The main argument that the user provides to the `lm` function is a formula. For the simple regression of Y on X, a formula has the syntax
 
 `Y ~ X `
 
@@ -295,12 +288,12 @@ mod <- lm(achmat08 ~ ses)
 coef(mod)
 ```
 
-Let's do some quick calcuations to check that the `lm` output corresponds the formulas for the slope and intercept we used in the lesson: 
+Let's do some quick calculations to check that the `lm` output corresponds the formulas for the slope and intercept we used in the lesson: 
 
 $$ a = \bar Y - b \bar X \quad \text{and} \quad b = \frac{\text{Cov}(X, Y)}{s_X^2} $$
 
 ```{r}
-# Confirm that the slope from lm is just the covariance divided by the variance of X
+# Confirm that the slope from m is just the covariance divided by the variance of X
 cov_xy <- cov(achmat08, ses)
 s_x <- var(ses)
 b <- cov_xy / s_x
@@ -320,7 +313,7 @@ Let's also check our interpretation of the parameters. If the answers to these q
 
 * How much do the predicted values of `achmat08` increase for each unit of increase in `ses`? 
 
-## Predicted values and residuals
+### Predicted values and residuals
 
 The `lm` function also returns the residuals $e_i$ and the predicted values $\widehat{Y_i}$, which we can access using the `$` operator.These will be useful later on for computing R-squared. For now we will just plot the two values to show that the predicted values and the residuals are uncorrelated, which was discussed in class.
 
@@ -333,7 +326,7 @@ plot(yhat, res, col = "#4B9CD3")
 cor(yhat, res)
 ```
 
-## Variance explained
+### Variance explained
 
 Above we found out that the regression coefficient was 0.4-ish. Is that good? or average? or what? 
 
@@ -369,7 +362,7 @@ ppmc^2
 
 ```
 
-## Inference
+### Inference
 
 At this point we can say that SES explained about 10% of the variation in eighth grade students' math achievement, in our sample. However, we haven't yet talked aboutstatistical inference, or how we can make conclusions about a population based on a sample from that population. 
 
@@ -392,7 +385,7 @@ confint(mod)
 
 Be sure to remember the correct interpretation of confidence intervals: *there is a 95% chance that the interval includes the true parameter value* (not: there is a 95% chance that the parameter falls in the interval). For example, there is a 95% chance that the interval [.31, .54] includes the true regression coefficient for SES. 
 
-## Power analysis 
+### Power analysis 
 
 Power analyses should ideally be done prospectively -- i.e., before the data are collected. Since this class will work with secondary data analyses, most of our analyses will be retrospective. But don't let this mislead you about the importance of statistical power -- you should always do a power analysis before collecting data!! 
 
@@ -439,29 +432,7 @@ pwr.f2.test(u = 1, f2 = f2, sig.level = .05, power = .8)
 
 In this example we find that $v = 70.6$. Since $v = N - 2$, so we know that a sample size of $N = 72.6$ (rounded up to 73) is required to reject the null hypothesis that $R^2 = 0$, when the true popuation value is $R^2 = .1$, with a power of .8 and using a significance level of .05. 
 
-## Exercises
 
-Try the following (assume $\alpha = .05$ unless otherwise stated): 
+## Review material 
 
-  1. What sample size is required to detect an R-square of .25, with a power of .9? 
-
-  2. What is the smallest R-square that can be detected with the NELS data (N = 500), using $\beta = .2$
-
-  3. What is the power of the NELS data to reject the null hypothesis when R-square = .05?
-
-### Answers 
-
-Don't read these until you've tried the exercises!
-
-```{r, results = "hide"}
-# Q1
-pwr.f2.test(u = 1, f2 = .25/.75, power = .9, sig.level = .05)
-
-# Q2
-q2 <- pwr.f2.test(u = 1, v = 498, power = .8, sig.level = .05)
-q2$f2 / (1 + q2$f2)
-
-# Q3
-pwr.f2.test(u = 1, v = 498, f2 = .05/.95, sig.level = .05)
-```
 

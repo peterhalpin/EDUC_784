@@ -24,15 +24,15 @@
 <meta name="author" content="Peter Halpin" />
 
 
-<meta name="date" content="2022-01-11" />
+<meta name="date" content="2022-01-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="null" type="image/x-icon" />
-<link rel="prev" href="2.4-variance-explained.html"/>
-<link rel="next" href="2.6-power-analysis.html"/>
+<link rel="prev" href="2.4-the-population-model.html"/>
+<link rel="next" href="2.6-three-uses-of-regression.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -142,40 +142,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.2" data-path="1.2-how-to-use-this-book.html"><a href="1.2-how-to-use-this-book.html"><i class="fa fa-check"></i><b>1.2</b> How to use this book</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="2-Chapter-2.html"><a href="2-Chapter-2.html"><i class="fa fa-check"></i><b>2</b> Simple Regression</a><ul>
-<li class="chapter" data-level="2.1" data-path="2.1-three-uses-of-regression.html"><a href="2.1-three-uses-of-regression.html"><i class="fa fa-check"></i><b>2.1</b> Three uses of regression</a><ul>
-<li class="chapter" data-level="2.1.1" data-path="2.1-three-uses-of-regression.html"><a href="2.1-three-uses-of-regression.html#regression-for-prediction"><i class="fa fa-check"></i><b>2.1.1</b> Regression for prediction</a></li>
-</ul></li>
-<li class="chapter" data-level="2.2" data-path="2.2-the-lm-function.html"><a href="2.2-the-lm-function.html"><i class="fa fa-check"></i><b>2.2</b> The <code>lm</code> function</a></li>
-<li class="chapter" data-level="2.3" data-path="2.3-predicted-values-and-residuals.html"><a href="2.3-predicted-values-and-residuals.html"><i class="fa fa-check"></i><b>2.3</b> Predicted values and residuals</a></li>
-<li class="chapter" data-level="2.4" data-path="2.4-variance-explained.html"><a href="2.4-variance-explained.html"><i class="fa fa-check"></i><b>2.4</b> Variance explained</a></li>
+<li class="chapter" data-level="2.1" data-path="2.1-Example-2.html"><a href="2.1-Example-2.html"><i class="fa fa-check"></i><b>2.1</b> An example from NELS</a></li>
+<li class="chapter" data-level="2.2" data-path="2.2-regression_line.html"><a href="2.2-regression_line.html"><i class="fa fa-check"></i><b>2.2</b> The regression line</a></li>
+<li class="chapter" data-level="2.3" data-path="2.3-ols.html"><a href="2.3-ols.html"><i class="fa fa-check"></i><b>2.3</b> OLS</a></li>
+<li class="chapter" data-level="2.4" data-path="2.4-the-population-model.html"><a href="2.4-the-population-model.html"><i class="fa fa-check"></i><b>2.4</b> The population model</a></li>
 <li class="chapter" data-level="2.5" data-path="2.5-inference.html"><a href="2.5-inference.html"><i class="fa fa-check"></i><b>2.5</b> Inference</a></li>
-<li class="chapter" data-level="2.6" data-path="2.6-power-analysis.html"><a href="2.6-power-analysis.html"><i class="fa fa-check"></i><b>2.6</b> Power analysis</a><ul>
-<li class="chapter" data-level="2.6.1" data-path="2.6-power-analysis.html"><a href="2.6-power-analysis.html#example-a-prospective-power-analysis"><i class="fa fa-check"></i><b>2.6.1</b> Example: A prospective power analysis</a></li>
+<li class="chapter" data-level="2.6" data-path="2.6-three-uses-of-regression.html"><a href="2.6-three-uses-of-regression.html"><i class="fa fa-check"></i><b>2.6</b> Three uses of regression</a></li>
+<li class="chapter" data-level="2.7" data-path="2.7-regression-for-prediction.html"><a href="2.7-regression-for-prediction.html"><i class="fa fa-check"></i><b>2.7</b> Regression for prediction</a><ul>
+<li class="chapter" data-level="2.7.1" data-path="2.7-regression-for-prediction.html"><a href="2.7-regression-for-prediction.html#more-about-prediction"><i class="fa fa-check"></i><b>2.7.1</b> More about Prediction</a></li>
 </ul></li>
-<li class="chapter" data-level="2.7" data-path="2.7-exercises.html"><a href="2.7-exercises.html"><i class="fa fa-check"></i><b>2.7</b> Exercises</a><ul>
-<li class="chapter" data-level="2.7.1" data-path="2.7-exercises.html"><a href="2.7-exercises.html#answers"><i class="fa fa-check"></i><b>2.7.1</b> Answers</a></li>
+<li class="chapter" data-level="2.8" data-path="2.8-regression-and-causation.html"><a href="2.8-regression-and-causation.html"><i class="fa fa-check"></i><b>2.8</b> Regression and causation</a><ul>
+<li class="chapter" data-level="2.8.1" data-path="2.8-regression-and-causation.html"><a href="2.8-regression-and-causation.html#omitted-variable-bias"><i class="fa fa-check"></i><b>2.8.1</b> Omitted variable bias*</a></li>
 </ul></li>
+<li class="chapter" data-level="2.9" data-path="2.9-regression-for-explanation.html"><a href="2.9-regression-for-explanation.html"><i class="fa fa-check"></i><b>2.9</b> Regression for explanation</a></li>
+<li class="chapter" data-level="2.10" data-path="2.10-end-of-first-lesson.html"><a href="2.10-end-of-first-lesson.html"><i class="fa fa-check"></i><b>2.10</b> End of first lesson</a></li>
+<li class="chapter" data-level="2.11" data-path="2.11-the-lm-function.html"><a href="2.11-the-lm-function.html"><i class="fa fa-check"></i><b>2.11</b> The <code>lm</code> function</a></li>
+<li class="chapter" data-level="2.12" data-path="2.12-predicted-values-and-residuals.html"><a href="2.12-predicted-values-and-residuals.html"><i class="fa fa-check"></i><b>2.12</b> Predicted values and residuals</a></li>
+<li class="chapter" data-level="2.13" data-path="2.13-variance-explained.html"><a href="2.13-variance-explained.html"><i class="fa fa-check"></i><b>2.13</b> Variance explained</a></li>
+<li class="chapter" data-level="2.14" data-path="2.14-inference-1.html"><a href="2.14-inference-1.html"><i class="fa fa-check"></i><b>2.14</b> Inference</a></li>
+<li class="chapter" data-level="2.15" data-path="2.15-power-analysis.html"><a href="2.15-power-analysis.html"><i class="fa fa-check"></i><b>2.15</b> Power analysis</a><ul>
+<li class="chapter" data-level="2.15.1" data-path="2.15-power-analysis.html"><a href="2.15-power-analysis.html#example-a-prospective-power-analysis"><i class="fa fa-check"></i><b>2.15.1</b> Example: A prospective power analysis</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="3-parts.html"><a href="3-parts.html"><i class="fa fa-check"></i><b>3</b> Parts</a></li>
-<li class="chapter" data-level="4" data-path="4-footnotes-and-citations.html"><a href="4-footnotes-and-citations.html"><i class="fa fa-check"></i><b>4</b> Footnotes and citations</a><ul>
-<li class="chapter" data-level="4.1" data-path="4.1-footnotes.html"><a href="4.1-footnotes.html"><i class="fa fa-check"></i><b>4.1</b> Footnotes</a></li>
-<li class="chapter" data-level="4.2" data-path="4.2-citations.html"><a href="4.2-citations.html"><i class="fa fa-check"></i><b>4.2</b> Citations</a></li>
+<li class="chapter" data-level="2.16" data-path="2.16-exercises.html"><a href="2.16-exercises.html"><i class="fa fa-check"></i><b>2.16</b> Exercises</a><ul>
+<li class="chapter" data-level="2.16.1" data-path="2.16-exercises.html"><a href="2.16-exercises.html#answers"><i class="fa fa-check"></i><b>2.16.1</b> Answers</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="5-blocks.html"><a href="5-blocks.html"><i class="fa fa-check"></i><b>5</b> Blocks</a><ul>
-<li class="chapter" data-level="5.1" data-path="5.1-equations.html"><a href="5.1-equations.html"><i class="fa fa-check"></i><b>5.1</b> Equations</a></li>
-<li class="chapter" data-level="5.2" data-path="5.2-theorems-and-proofs.html"><a href="5.2-theorems-and-proofs.html"><i class="fa fa-check"></i><b>5.2</b> Theorems and proofs</a></li>
-<li class="chapter" data-level="5.3" data-path="5.3-callout-blocks.html"><a href="5.3-callout-blocks.html"><i class="fa fa-check"></i><b>5.3</b> Callout blocks</a></li>
-</ul></li>
-<li class="chapter" data-level="6" data-path="6-sharing-your-book.html"><a href="6-sharing-your-book.html"><i class="fa fa-check"></i><b>6</b> Sharing your book</a><ul>
-<li class="chapter" data-level="6.1" data-path="6.1-publishing.html"><a href="6.1-publishing.html"><i class="fa fa-check"></i><b>6.1</b> Publishing</a></li>
-<li class="chapter" data-level="6.2" data-path="6.2-pages.html"><a href="6.2-pages.html"><i class="fa fa-check"></i><b>6.2</b> 404 pages</a></li>
-<li class="chapter" data-level="6.3" data-path="6.3-metadata-for-sharing.html"><a href="6.3-metadata-for-sharing.html"><i class="fa fa-check"></i><b>6.3</b> Metadata for sharing</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
-<li class="chapter" data-level="7" data-path="7-cross.html"><a href="7-cross.html"><i class="fa fa-check"></i><b>7</b> Cross-references</a><ul>
-<li class="chapter" data-level="7.1" data-path="7.1-chapters-and-sub-chapters.html"><a href="7.1-chapters-and-sub-chapters.html"><i class="fa fa-check"></i><b>7.1</b> Chapters and sub-chapters</a></li>
-<li class="chapter" data-level="7.2" data-path="7.2-captioned-figures-and-tables.html"><a href="7.2-captioned-figures-and-tables.html"><i class="fa fa-check"></i><b>7.2</b> Captioned figures and tables</a></li>
-</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/peterhalpin/EDUC_784" target="blank">Published with bookdown</a></li>
 
@@ -198,44 +190,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="inference" class="section level2">
 <h2><span class="header-section-number">2.5</span> Inference</h2>
-<p>At this point we can say that SES explained about 10% of the variation in eighth grade students’ math achievement, in our sample. However, we haven’t yet talked aboutstatistical inference, or how we can make conclusions about a population based on a sample from that population.</p>
-<p>Let’s use the <code>summary</code> function to test the coefficients in our model.</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="2.5-inference.html#cb28-1"></a>mod &lt;-<span class="st"> </span><span class="kw">lm</span>(achmat08 <span class="op">~</span><span class="st"> </span>ses)</span>
-<span id="cb28-2"><a href="2.5-inference.html#cb28-2"></a><span class="kw">summary</span>(mod)</span></code></pre></div>
-<pre><code>## 
-## Call:
-## lm(formula = achmat08 ~ ses)
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -20.600  -6.552  -0.148   6.023  27.663 
-## 
-## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)  48.6780     1.1282   43.15  &lt; 2e-16 ***
-## ses           0.4293     0.0573    7.49  3.1e-13 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 8.9 on 498 degrees of freedom
-## Multiple R-squared:  0.101,  Adjusted R-squared:  0.0995 
-## F-statistic: 56.1 on 1 and 498 DF,  p-value: 3.13e-13</code></pre>
-<p>In the table, the t-test and p-values are for the null hypothesis that the corresponding coefficient is zero in the population. We can see that the intercept and slope are both significantly different from zero.</p>
-<p>The text below the table summarizes the output for R-square, including the F-test, it’s degrees of freedom, and the p-value. (We will talk about adjusted R-square later on.)</p>
-<p>We can use the <code>confint</code> function to obtain confidence intervals for the regression coefficients. Use <code>help</code> to find out more about the <code>confint</code> function.</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="2.5-inference.html#cb30-1"></a><span class="kw">confint</span>(mod)</span></code></pre></div>
-<pre><code>##             2.5 % 97.5 %
-## (Intercept) 46.46  50.89
-## ses          0.32   0.54</code></pre>
-<p>Be sure to remember the correct interpretation of confidence intervals: <em>there is a 95% chance that the interval includes the true parameter value</em> (not: there is a 95% chance that the parameter falls in the interval). For example, there is a 95% chance that the interval [.31, .54] includes the true regression coefficient for SES.</p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="2.4-variance-explained.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="2.6-power-analysis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="2.4-the-population-model.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="2.6-three-uses-of-regression.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
