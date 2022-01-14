@@ -13,9 +13,8 @@ button <-  "position: relative;
 
 The focus of this course is linear regression with multiple predictors (AKA *multiple regression*), but we start by reviewing regression with one predictor (AKA *simple regression*). 
 
-## An example from NELS {#example_2}
+## An example from NELS {#example-2}
  
-
 ```{r, echo=FALSE, results='asis'}
 codefolder::bookdown(init = "hide", style = button)
 ```
@@ -132,7 +131,7 @@ For the NELS example, the regression intercept and slope are, respectively:
 coef(mod)
 ```
 
-Can you provide an interpretation of these numbers in terms of the line in Figure \@ref(fig:fig1)? 
+**Please provide an interpretation of these numbers in terms of the line in Figure \@ref(fig:fig1), and be prepared to share your answers in class!** 
 
 ### Correlation and regression
 
@@ -170,7 +169,7 @@ points(x = ses[index], y = achmat08[index], col = "#4B9CD3", pch = 16)
 ```
 
 
-The R-squared statistic summarizes the variation in Reading Achievement associated with SES (i.e., the black part) relative to the total variation in Reading Achievement (i.e., black + pink) for all students in the sample. Aside from the regression parameters, it is the most widely used statistic in regression analysis, so we will be seeing it a lot. 
+The R-squared statistic summarizes the variation in Reading Achievement associated with SES (i.e., the black part) relative to the total variation in Reading Achievement (i.e., black + pink) for all students in the sample. Aside from the regression parameters, it is the most widely used statistic in regression analysis, so we will be seeing it a lot. Some authors call it the "coefficient of determination" instead of R-squared. 
 
 Using all of the cases from the example (Figure \@ref(fig:fig1)), the R-squared statistic is: 
 
@@ -179,7 +178,7 @@ options(digits = 5)
 summary(mod)$r.squared
 ```
 
-The interpretation is that SES explained about 10% of the variance in Grade 8 Reading Achievement. 
+**Please write down an interpretation of this number and be prepared to share you answer in class!** 
 
 ### Derivation*
 
@@ -218,7 +217,7 @@ $R$ is the correlation between $Y$ and $\hat Y$. In simple regression, this is j
 Consequently, in simple regression $R^2 = r^2_{XY}$. When we add multiple predictors, $R$ is called the multiple correlation and plays a very important -->
 
 
-## The population model   
+## The population model {#population-model}  
 
 In the NELS example, the population of interest is U.S. eighth graders in 1988. We want to be able to draw conclusions about that population based on the sample of eighth graders that participated in NELS. In order to do that, we make some statistical assumptions about the population, which are collectively referred to as the population model. We talk about how to check the plausibility of these assumptions in Chapter \@ref(chapter-x). 
 
@@ -240,26 +239,159 @@ The regression population model has the following three assumptions, which are a
 knitr::include_graphics("images/population_model.png")
 ```
 
-These three assumptions are summarized by writing $Y|X \sim N(a + bX, \sigma)$. Sometimes it will be easier to state the assumptions in terms of the population residuals, $\epsilon = Y - \mu_{Y|X}$, which subtract off the regression line: $\epsilon \sim N(0, \sigma)$. 
+These three assumptions are summarized by writing 
+
+\[ Y|X \sim N(a + bX, \sigma). \] 
+
+Sometimes it will be easier to state the assumptions in terms of the population residuals, $\epsilon = Y - \mu_{Y|X}$, which subtract off the regression line: $\epsilon \sim N(0, \sigma)$. 
 
 An additional assumption is usually made about the data in the sample -- that they are a simple random sample from the population. We will see some ways of dealing with other types of samples later on the course (e.g., Chapter \@ref(chapter-x)). 
 
-## Inference for the slope
-Standard errors, t-tests, and confidence intervals. 
+## Clarifying notation
 
-R-output. 
+At this point we have used the mathematical symbols for regression (e.g., $a$, $b$) in two different ways:
 
+* in Section \@ref(regression-line) they denoted sample statistics 
+* in Section  \@ref(population-model) they denoted population parameters
+
+The population versus sample notation for regression is a bit of a hot mess, but the following conventions are widely used.
+
+Concept                Sample statistic    Population parameter               
+-------               ------------------  ----------------------
+regression line         $\hat Y$          $\mu_{Y|X} \text{ or } E( Y\mid X)$ 
+slope                   $\hat b$          $b$                                 
+intercept               $\hat a$          $a$                                 
+residual                $e$               $\epsilon$                           
+variance explained      $\hat R^2$        $R^2$
+
+
+The "hats" always denote sample quantities, and the Greek letters always denote population quantities, but there is some lack of consistency. For example, why not use $\beta$ instead of $b$ for the population slope? Well, $\beta$ is conventionally used to denote standardized regression coefficients in the *sample*, so its already taken  (more on this in the Chapter \@ref(two-predictors) ). 
+
+One thing to note is that the hats are usually omitted from the statistics $\hat a$,  $\hat b$, and $\hat R^2$ if it is clear from context that we are talking about the sample rather than the population. This doesn't apply to $\hat Y$, because the hat is required to distinguish the predicted values from the data points. 
+
+Another thing to note is that while $\hat Y$ is often called the predicted value(s), $\mu_{Y|X}$ is not usually referred to this way. It is called the conditional mean function or the conditional expectation function. 
+
+Finally, recall that the symbol $E(\cdot)$ denotes the expected value of whatever statistic appears in the place of the dot. The expected value is a way of referring to the mean of the sampling distribution of the statistic (otherwise we would have to say things like "the mean of the mean", which would be horrible). So $E(Y\mid X)$ is the expected value of $Y$ for a given value of $X$. This is equal to the population conditional mean, $\mu_{Y|X}$, when the population model is true. So the two symbols are used interchangeably. 
+
+
+## Inference for the slope {#inference-for-slope}
+
+```{r, echo=FALSE, results='asis'}
+codefolder::bookdown(init = "hide", style = button)
+```
+
+When the population model is true, $\hat b$ is an unbiased estimate of $b$ (i.e., $E(\hat b) = b$). We also know the standard error of $\hat b$, which is equal to (cite)
+
+\[ s_{\hat b} = \frac{s_Y}{s_X} \sqrt{\frac{1-R^2}{N-2}} . \]
+
+Using these two results, we can compute t-tests and associated confidence intervals for the regression slope in the usual way. These are summarized below. See the review in Section \@ref(review) for background on these procedures.
+
+### t-tests
+
+The null hypothesis $H_0: \hat b = b_0$ tested against the alternative $H_A: \hat b \neq b_0$ using the test statistic: 
+
+\[ t = \frac{\hat b - b_0}{s_{\hat b}} \]
+
+which has a t-distribution on $N-2$ degrees of freedom when the null hypotesis is true. 
+
+The test assumes that the population model is correct (and the sample is SRS). The null hypothesis value is usually chosen to be $b_0 = 0$, in which case the test is interpreted in terms of whether the regression slope is "statistically significant". 
+
+### Confidence intervals
+
+For a given Type I Error rate $\alpha$, the corresponding $(1-\alpha) \times 100\%$ confidence interval is
+
+\[ b_0 = \hat b \pm t_{(1-\alpha/2)} \times s_{\hat b} \]
+
+where $t_{(1-\alpha/2)}$ denotes the $1 - \alpha/2$ quantile of the $t$-distribution with $N-2$ degrees of freedom. 
+
+For example, if $\alpha$ is chosen to be $.05$, the corresponding $95\%$ confidence interval uses $t_{(.025)}$, the 2.5-th percentile of the t-distribution. 
+
+### The NELS example 
+
+For the NELS example, the relevant information is shown in the second row of the table below (we cover the rest of the output in the next few sections):
+
+```{r}
+summary(mod)
+```
+
+The corresponding $95\%$ confidence interval is
+
+```{r}
+confint(mod)
+```
+
+**Please write down an interpretation of the t-test and confidence interval of the regression slope, and be prepared to share your answers in class!** 
+
+ 
 ## Inference for the intercept
-Standard errors, t-tests, and confidence intervals. 
 
-R-output. 
+The situation for the regression intercept is similar to that for the slope: the OLS estimate is unbiased and its standard error is (cite)
 
-## Inference for R-squared
+<!--- check this and get source -->
+\[ 
+s_{\hat a} = \sqrt{\frac{SS_{\text{res}}}{N-2} \left(\frac{1}{N} + \frac{\bar X^2}{(N-1)s^2_X}\right)}.
+\]
+
+The t-tests and confidence intervals the same as for the slope, with $a$ replacing $b$ in the notation of the previous slide. The t-distribution also has $N-2$ degrees of freedom for the intercept.  
+
+It is uncommon to test the regression intercept for statistical significance in simple regression. Recall that the intercept is the value of $\hat Y$ when $X = 0$. So, unless you have a hypothesis or research question about this particular value of $X$ (e.g., eighth graders with $SES = 0$) there isn't much rationale for testing the regression intercept.  
+
+When we get to multiple regression, we will see some examples of regression models where the intercept is meaningful, especially when we talk about categorical predictors in Chapter \@ref(categorical-predictors) and interactions in Chapter \@ref(interactions). But, for now, we can put it on the back burner. 
+
+**For sake of completeness, please take a look at the R output in the previous section and provide an interpretation of the t-test and confidence interval of the regression intercept, and prepared to share your answers in class!** 
+
+
+## Inference for R-squared {#inference-for-rsquared}
+
+Inference for R-squared is a quite a bit different than for the regression parameters. Firstly, R-squared is a ratio of two sums of squares. We know from our study of ANOVA last semester that ratios of sums of squares are tested using an F-test, rather than a t-test. The F-test for (the population) R-squared is summarized below. 
+
+### F-tests
+
+The null hypothesis $H_0: R^2 = 0$ can be tested against the alternative $H_A: R^2 \neq 0$ using the test statistic: 
+
+\[ F = (N-2) \frac{R^2}{1-R^2} \]
+
+which has a F-distribution on $1$ and $N – 2$ degrees of freedom when the null is true. The test assumes that the population model is true. Confidence intervals for R-square are generally not reported. 
+
+The R output from Section \@ref(inference-for-slope) is presented again below. **Please write down an interpretation of the F-test of R-squared and be  prepared to share your answers in class!**
+
+```{r}
+summary(mod)
+```
 
 ## Power analysis
 
+```{r, echo=FALSE, results='asis'}
+codefolder::bookdown(init = "hide", style = button)
+```
+
+Statistical power is the probability of rejecting the null hypothesis, when it is indeed false. Rejecting the null hypothesis when it is false is sometimes called a "true positive", meaning we have correctly inferred that a parameter of interested is not zero. Power analysis is useful for designing studies so that the statistical power / true positive rate is satisfactory (usually .8 or higher). In practice, this comes down to having a large enough sample size. 
+
+Power analysis in regression is very similar to power analysis for the test we studied last semester. There are four ingredients that go into a power analysis: 
+
+* The desired Type I Error rate, denoted $\alpha$.
+* The desired level of statistical power. 
+* The sample size, $N$.
+* The effect size, which for regression is Cohen's f-squared statistic (AKA the signal to noise ratio): 
+
+\[ f^2 = {\frac{R^2}{1-R^2}}. \]
+
+In principal, we can specify any three of these ingredients and then solve for the fourth. But, as mentioned, power analysis is most useful when we solve for $N$ while planning a study. When solving for $N$ "prospectively," the effect size $f$ should be based on reports of R-squared in past research. Power and $\alpha$ are usually chosen to be .8 and .05, respectively. 
+
+When doing secondary data analysis (as in this class) we can instead solve for the effect size, using the sample size of the data set as our third ingredient. In the NELS example we have $N=500$ observations. The output below reports the smallest effect size we can detect with a power of .8 and $alpha = .05$. This is sometimes called the "minimum detectable effect size" (MDES). Note that $u$ and $v$ denote the degrees of freedom in the numerator and denominator of the F-test of R-squared, respectively. 
+
+```{r}
+library(pwr)
+pwr.f2.test(u = 1, v = 498, sig.level = .05, power = .8)
+```
+
+**Please write down an interpretation of this power analysis, and be prepared to share your answers in class!**
+
+## End of readings for second class!
+
 ## Exercises 
 
+We will work through this section in class together. It is currently under construction. 
 
 ### The `lm` function
 
@@ -277,8 +409,8 @@ Let's take a closer look using the following two variables from the NELS data (s
 
 ```{r}
 # Load and attach the data -- see last week's exercises for details 
-load("NELS.RData")
-attach(NELS)
+#load("NELS.RData")
+#attach(NELS)
 plot(x = ses, y = achmat08, col = "#4B9CD3")
 
 # Regress math achievement on SES
@@ -435,4 +567,4 @@ In this example we find that $v = 70.6$. Since $v = N - 2$, so we know that a sa
 
 ## Review material 
 
-
+Under construction...
