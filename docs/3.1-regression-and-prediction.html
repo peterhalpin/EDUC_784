@@ -161,6 +161,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.9" data-path="2.9-inference-for-rsquared.html"><a href="2.9-inference-for-rsquared.html"><i class="fa fa-check"></i><b>2.9</b> Inference for R-squared</a><ul>
 <li class="chapter" data-level="2.9.1" data-path="2.9-inference-for-rsquared.html"><a href="2.9-inference-for-rsquared.html#f-tests"><i class="fa fa-check"></i><b>2.9.1</b> F-tests</a></li>
 </ul></li>
+<li class="chapter" data-level="2.10" data-path="2.10-power-analysis.html"><a href="2.10-power-analysis.html"><i class="fa fa-check"></i><b>2.10</b> Power analysis</a></li>
+<li class="chapter" data-level="2.11" data-path="2.11-end-of-readings-for-second-class.html"><a href="2.11-end-of-readings-for-second-class.html"><i class="fa fa-check"></i><b>2.11</b> End of readings for second class</a></li>
+<li class="chapter" data-level="2.12" data-path="2.12-exercises.html"><a href="2.12-exercises.html"><i class="fa fa-check"></i><b>2.12</b> Exercises</a><ul>
+<li class="chapter" data-level="2.12.1" data-path="2.12-exercises.html"><a href="2.12-exercises.html#the-lm-function"><i class="fa fa-check"></i><b>2.12.1</b> The <code>lm</code> function</a></li>
+<li class="chapter" data-level="2.12.2" data-path="2.12-exercises.html"><a href="2.12-exercises.html#predicted-values-and-residuals"><i class="fa fa-check"></i><b>2.12.2</b> Predicted values and residuals</a></li>
+<li class="chapter" data-level="2.12.3" data-path="2.12-exercises.html"><a href="2.12-exercises.html#variance-explained"><i class="fa fa-check"></i><b>2.12.3</b> Variance explained</a></li>
+<li class="chapter" data-level="2.12.4" data-path="2.12-exercises.html"><a href="2.12-exercises.html#inference"><i class="fa fa-check"></i><b>2.12.4</b> Inference</a></li>
+<li class="chapter" data-level="2.12.5" data-path="2.12-exercises.html"><a href="2.12-exercises.html#power-analysis-1"><i class="fa fa-check"></i><b>2.12.5</b> Power analysis</a></li>
+<li class="chapter" data-level="2.12.6" data-path="2.12-exercises.html"><a href="2.12-exercises.html#example-a-prospective-power-analysis"><i class="fa fa-check"></i><b>2.12.6</b> Example: A prospective power analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="2.13" data-path="2.13-review-material.html"><a href="2.13-review-material.html"><i class="fa fa-check"></i><b>2.13</b> Review material</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="3-chapter_3.html"><a href="3-chapter_3.html"><i class="fa fa-check"></i><b>3</b> Interpretations of regression</a><ul>
 <li class="chapter" data-level="3.1" data-path="3.1-regression-and-prediction.html"><a href="3.1-regression-and-prediction.html"><i class="fa fa-check"></i><b>3.1</b> Regression and prediction</a><ul>
@@ -224,21 +235,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     codefolder('pre.sourceCode');
   });
 </script>
+<pre><code>## The following objects are masked from NELS (pos = 4):
+## 
+##     absent12, achmat08, achmat10, achmat12, achrdg08, achrdg10,
+##     achrdg12, achsci08, achsci10, achsci12, achsls08, achsls10,
+##     achsls12, advmath8, alcbinge, algebra8, apoffer, approg, cigarett,
+##     computer, cuts12, edexpect, excurr12, expinc30, famsize, gender,
+##     homelang, hsprog, hwkin12, hwkout12, id, late12, marijuan, numinst,
+##     nursery, parmarl8, region, schattrt, schtyp8, ses, slfcnc08,
+##     slfcnc10, slfcnc12, tcherint, unitcalc, unitengl, unitmath, urban</code></pre>
 <!-- I think ggplot is doing something weird because the prediction error is way too small for the full sample -- but then again N is in the denominator of the variance. Dobule check by hand and also use a second examples to show that prediction error decreases when adding another predictor -->
 <p>Prediction (etymology: “to make known beforehand”) means that we want to use <span class="math inline">\(X\)</span> to make a guess about <span class="math inline">\(Y\)</span>. This use of regression makes the most sense when we know the value of <span class="math inline">\(X\)</span> before we know the value of <span class="math inline">\(Y\)</span>.</p>
 <p>When we are interested in using values of <span class="math inline">\(X\)</span> to make predictions about (yet unobserved) values of <span class="math inline">\(Y\)</span>, we use <span class="math inline">\(\hat Y\)</span> as our guess. This is why <span class="math inline">\(\hat Y\)</span> is called the “predicted value” of <span class="math inline">\(Y\)</span>.</p>
 <p>When making predictions, we usually want some additional information about how good the predictions will be. In OLS regression, this information is provided by the prediction error variance (cite: Fox)</p>
 <p><span class="math display">\[ s^2_{\hat Y_i} = \frac{SS_{\text{res}}}{N - 2} \left( \frac{1}{N} + \frac{(X_i - \bar X)^2}{(N-1) s^2_X} \right). \]</span></p>
 <p>The prediction errors for the data in Figure <a href="2.2-regression-line.html#fig:fig2">2.2</a> are depicted in Figure <a href="3.1-regression-and-prediction.html#fig:fig3">3.1</a> as a gray band around the regression line.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="3.1-regression-and-prediction.html#cb16-1"></a><span class="co"># Using a different plotting library that adds prediction error bands (need to double check computation)</span></span>
-<span id="cb16-2"><a href="3.1-regression-and-prediction.html#cb16-2"></a><span class="kw">library</span>(ggplot2)</span>
-<span id="cb16-3"><a href="3.1-regression-and-prediction.html#cb16-3"></a></span>
-<span id="cb16-4"><a href="3.1-regression-and-prediction.html#cb16-4"></a><span class="kw">ggplot</span>(NELS[index, ], <span class="kw">aes</span>(<span class="dt">x =</span> ses, <span class="dt">y =</span> achmat08)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb16-5"><a href="3.1-regression-and-prediction.html#cb16-5"></a><span class="st">               </span><span class="kw">geom_point</span>(<span class="dt">color=</span><span class="st">&#39;#3B9CD3&#39;</span>, <span class="dt">size =</span> <span class="dv">2</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb16-6"><a href="3.1-regression-and-prediction.html#cb16-6"></a><span class="st">               </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> lm, <span class="dt">color =</span> <span class="st">&quot;grey35&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb16-7"><a href="3.1-regression-and-prediction.html#cb16-7"></a><span class="st">               </span><span class="kw">ylab</span>(<span class="st">&quot;Reading Achievement (Grade 8)&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb16-8"><a href="3.1-regression-and-prediction.html#cb16-8"></a><span class="st">               </span><span class="kw">xlab</span>(<span class="st">&quot;SES&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb16-9"><a href="3.1-regression-and-prediction.html#cb16-9"></a><span class="st">               </span><span class="kw">theme_bw</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="3.1-regression-and-prediction.html#cb47-1"></a><span class="co"># Using a different plotting library that adds prediction error bands (need to double check computation)</span></span>
+<span id="cb47-2"><a href="3.1-regression-and-prediction.html#cb47-2"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb47-3"><a href="3.1-regression-and-prediction.html#cb47-3"></a></span>
+<span id="cb47-4"><a href="3.1-regression-and-prediction.html#cb47-4"></a><span class="kw">ggplot</span>(NELS[index, ], <span class="kw">aes</span>(<span class="dt">x =</span> ses, <span class="dt">y =</span> achmat08)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb47-5"><a href="3.1-regression-and-prediction.html#cb47-5"></a><span class="st">               </span><span class="kw">geom_point</span>(<span class="dt">color=</span><span class="st">&#39;#3B9CD3&#39;</span>, <span class="dt">size =</span> <span class="dv">2</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb47-6"><a href="3.1-regression-and-prediction.html#cb47-6"></a><span class="st">               </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> lm, <span class="dt">color =</span> <span class="st">&quot;grey35&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb47-7"><a href="3.1-regression-and-prediction.html#cb47-7"></a><span class="st">               </span><span class="kw">ylab</span>(<span class="st">&quot;Reading Achievement (Grade 8)&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb47-8"><a href="3.1-regression-and-prediction.html#cb47-8"></a><span class="st">               </span><span class="kw">xlab</span>(<span class="st">&quot;SES&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb47-9"><a href="3.1-regression-and-prediction.html#cb47-9"></a><span class="st">               </span><span class="kw">theme_bw</span>()</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig3"></span>
 <img src="_main_files/figure-html/fig3-1.png" alt="Prediction Error for Example Data." width="672" />
 <p class="caption">
