@@ -391,7 +391,7 @@ pwr.f2.test(u = 1, v = 498, sig.level = .05, power = .8)
 
 **Please write down an interpretation of this power analysis, and be prepared to share your answers in class!**
 
-## End of readings for second class!
+## End of readings for second class
 
 ## Exercises 
 
