@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>References | EDUC 784: Regression</title>
+  <title>2.5 The population model | EDUC 784: Regression</title>
   <meta name="description" content="Course notes for EDUC 784" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="References | EDUC 784: Regression" />
+  <meta property="og:title" content="2.5 The population model | EDUC 784: Regression" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="/images/image1.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="peterhalpin/EDUC_784" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="References | EDUC 784: Regression" />
+  <meta name="twitter:title" content="2.5 The population model | EDUC 784: Regression" />
   
   <meta name="twitter:description" content="Course notes for EDUC 784" />
   <meta name="twitter:image" content="/images/image1.png" />
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="null" type="image/x-icon" />
-<link rel="prev" href="4.1-semi-partial-correlation.html"/>
-
+<link rel="prev" href="2.4-r-squared.html"/>
+<link rel="next" href="2.6-clarifying-notation.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -206,17 +206,40 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="references" class="section level1 unnumbered">
-<h1>References</h1>
-
+<div id="population-model" class="section level2">
+<h2><span class="header-section-number">2.5</span> The population model</h2>
+<p>In the NELS example, the population of interest is U.S. eighth graders in 1988. We want to be able to draw conclusions about that population based on the sample of eighth graders that participated in NELS. In order to do that, we make some statistical assumptions about the population, which are collectively referred to as the population model. We talk about how to check the plausibility of these assumptions in Chapter <a href="#chapter-x"><strong>??</strong></a>.</p>
+<p>The regression population model has the following three assumptions, which are also depicted in the diagram below. Recall that the notation <span class="math inline">\(Y \sim N(\mu, \sigma)\)</span> means that a variable <span class="math inline">\(Y\)</span> has a normal distribution with mean <span class="math inline">\(\mu\)</span> and standard deviation <span class="math inline">\(\sigma\)</span>.</p>
+<ol style="list-style-type: decimal">
+<li>Normality: The distribution of <span class="math inline">\(Y\)</span> conditional on <span class="math inline">\(X\)</span> is normal for all values of <span class="math inline">\(X\)</span>.</li>
+</ol>
+<p><span class="math display">\[Y | X \sim  N(\mu_{Y | X} , \sigma_{Y | X}) \]</span></p>
+<ol start="2" style="list-style-type: decimal">
+<li>Homoskedasticity: The conditional distributions have equal variances (also called homegeneity of variance).</li>
+</ol>
+<p><span class="math display">\[ \sigma_{Y| X} = \sigma \]</span></p>
+<ol start="3" style="list-style-type: decimal">
+<li>Linearity: The means of the conditional distributions are a linear function of <span class="math inline">\(X\)</span>.</li>
+</ol>
+<p><span class="math display">\[ \mu_{Y| Χ} = a + bX \]</span></p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig-pop-model"></span>
+<img src="images/population_model.png" alt="The Regression Population Model." width="612" />
+<p class="caption">
+Figure 2.4: The Regression Population Model.
+</p>
+</div>
+<p>These three assumptions are summarized by writing</p>
+<p><span class="math display">\[ Y|X \sim N(a + bX, \sigma). \]</span></p>
+<p>Sometimes it will be easier to state the assumptions in terms of the population residuals, <span class="math inline">\(\epsilon = Y - \mu_{Y|X}\)</span>, which subtract off the regression line: <span class="math inline">\(\epsilon \sim N(0, \sigma)\)</span>.</p>
+<p>An additional assumption is usually made about the data in the sample – that they were obtained as a simple random sample from the population. We will see some ways of dealing with other types of samples later on the course (e.g., Chapter <a href="#chapter-x"><strong>??</strong></a>), but for now we can consider this a background assumption that applies to all of the procedures discussed in this course.</p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="4.1-semi-partial-correlation.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="2.4-r-squared.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="2.6-clarifying-notation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -237,7 +260,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/peterhalpin/EDUC_784/edit/master/07-references.Rmd",
+"link": "https://github.com/peterhalpin/EDUC_784/edit/master/02_simple_regression.Rmd",
 "text": "Suggest an edit"
 },
 "history": {

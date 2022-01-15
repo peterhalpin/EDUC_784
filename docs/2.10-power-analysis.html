@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>References | EDUC 784: Regression</title>
+  <title>2.10 Power analysis | EDUC 784: Regression</title>
   <meta name="description" content="Course notes for EDUC 784" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="References | EDUC 784: Regression" />
+  <meta property="og:title" content="2.10 Power analysis | EDUC 784: Regression" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="/images/image1.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="peterhalpin/EDUC_784" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="References | EDUC 784: Regression" />
+  <meta name="twitter:title" content="2.10 Power analysis | EDUC 784: Regression" />
   
   <meta name="twitter:description" content="Course notes for EDUC 784" />
   <meta name="twitter:image" content="/images/image1.png" />
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="null" type="image/x-icon" />
-<link rel="prev" href="4.1-semi-partial-correlation.html"/>
-
+<link rel="prev" href="2.9-inference-for-rsquared.html"/>
+<link rel="next" href="2.11-end-of-readings-for-second-class.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -206,17 +206,65 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="references" class="section level1 unnumbered">
-<h1>References</h1>
+<div id="power-analysis" class="section level2">
+<h2><span class="header-section-number">2.10</span> Power analysis</h2>
+<input onclick="codefolder(&#39;pre.sourceCode&#39;);" type="button" value="Hide Code" id="codefolder-button" style="position: relative; &#10;            top: -25px; &#10;            left: 85%;   &#10;            color: white;&#10;            font-weight: bold;&#10;            background: #4B9CD3;&#10;            border: 1px #3079ED solid;&#10;            box-shadow: inset 0 1px 0 #80B0FB"/>
+<script>
+  function codefolder(query) {
 
+    var x = document.querySelectorAll(query);
+    if (x.length === 0) return;
+
+    function toggle_vis(o) {
+      var d = o.style.display;
+      o.style.display = (d === 'block' || d === '') ? 'none':'block';
+    }
+
+    for (i = 0; i < x.length; i++) {
+      var y = x[i];
+      toggle_vis(y);
+    }
+
+    var elem = document.getElementById("codefolder-button");
+    if (elem.value === "Hide Code") elem.value = "Show Code";
+    else elem.value = "Hide Code";
+  }
+</script>
+<script>
+  window.addEventListener('load', function () {
+    codefolder('pre.sourceCode');
+  });
+</script>
+<p>Statistical power is the probability of rejecting the null hypothesis, when it is indeed false. Rejecting the null hypothesis when it is false is sometimes called a “true positive”, meaning we have correctly inferred that a parameter of interested is not zero. Power analysis is useful for designing studies so that the statistical power / true positive rate is satisfactory. In practice, this comes down to having a large enough sample size.</p>
+<p>Power analysis in regression is very similar to power analysis for the tests we studied last semester. There are four ingredients that go into a power analysis:</p>
+<ul>
+<li>The desired Type I Error rate, <span class="math inline">\(\alpha\)</span>.</li>
+<li>The desired level of statistical power.</li>
+<li>The sample size, <span class="math inline">\(N\)</span>.</li>
+<li>The effect size, which for regression is Cohen’s f-squared statistic (AKA the signal to noise ratio):</li>
+</ul>
+<p><span class="math display">\[ f^2 = {\frac{R^2}{1-R^2}}. \]</span></p>
+<p>In principal, we can plug-in values for any three of these ingredients and then solve for the fourth. But, as mentioned, power analysis is most useful when we solve for <span class="math inline">\(N\)</span> while planning a study. When solving for <span class="math inline">\(N\)</span> “prospectively,” the effect size <span class="math inline">\(f\)</span> should be based on reports of R-squared in past research. Power and <span class="math inline">\(\alpha\)</span> are usually chosen to be .8 and .05, respectively.</p>
+<p>When doing secondary data analysis (as in this class) there is not much point in solving for the sample since, since we already have the data. Instead, we can solve for the effect size. In the NELS example we have <span class="math inline">\(N=500\)</span> observations. The output below reports the smallest effect size we can detect with a power of .8 and <span class="math inline">\(alpha = .05\)</span>. This is sometimes called the “minimum detectable effect size” (MDES). Note that <span class="math inline">\(u = 1\)</span> and <span class="math inline">\(v = N- 2\)</span> denote the degrees of freedom in the numerator and denominator of the F-test of R-squared, respectively.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="2.10-power-analysis.html#cb16-1"></a><span class="kw">library</span>(pwr)</span>
+<span id="cb16-2"><a href="2.10-power-analysis.html#cb16-2"></a><span class="kw">pwr.f2.test</span>(<span class="dt">u =</span> <span class="dv">1</span>, <span class="dt">v =</span> <span class="dv">498</span>, <span class="dt">sig.level =</span> <span class="fl">.05</span>, <span class="dt">power =</span> <span class="fl">.8</span>)</span></code></pre></div>
+<pre><code>## 
+##      Multiple regression power calculation 
+## 
+##               u = 1
+##               v = 498
+##              f2 = 0.015754
+##       sig.level = 0.05
+##           power = 0.8</code></pre>
+<p><strong>Please write down an interpretation of this power analysis, and be prepared to share your answers in class!</strong></p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="4.1-semi-partial-correlation.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="2.9-inference-for-rsquared.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="2.11-end-of-readings-for-second-class.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -237,7 +285,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/peterhalpin/EDUC_784/edit/master/07-references.Rmd",
+"link": "https://github.com/peterhalpin/EDUC_784/edit/master/02_simple_regression.Rmd",
 "text": "Suggest an edit"
 },
 "history": {

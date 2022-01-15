@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>References | EDUC 784: Regression</title>
+  <title>2.6 Clarifying notation | EDUC 784: Regression</title>
   <meta name="description" content="Course notes for EDUC 784" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="References | EDUC 784: Regression" />
+  <meta property="og:title" content="2.6 Clarifying notation | EDUC 784: Regression" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="/images/image1.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="peterhalpin/EDUC_784" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="References | EDUC 784: Regression" />
+  <meta name="twitter:title" content="2.6 Clarifying notation | EDUC 784: Regression" />
   
   <meta name="twitter:description" content="Course notes for EDUC 784" />
   <meta name="twitter:image" content="/images/image1.png" />
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="null" type="image/x-icon" />
-<link rel="prev" href="4.1-semi-partial-correlation.html"/>
-
+<link rel="prev" href="2.5-population-model.html"/>
+<link rel="next" href="2.7-inference-for-slope.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -206,17 +206,62 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="references" class="section level1 unnumbered">
-<h1>References</h1>
-
+<div id="clarifying-notation" class="section level2">
+<h2><span class="header-section-number">2.6</span> Clarifying notation</h2>
+<p>At this point we have used the mathematical symbols for regression (e.g., <span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span>) in two different ways:</p>
+<ul>
+<li>In Section <a href="2.2-regression-line.html#regression-line">2.2</a> they denoted sample statistics.</li>
+<li>In Section <a href="2.5-population-model.html#population-model">2.5</a> they denoted population parameters.</li>
+</ul>
+<p>The population versus sample notation for regression is a bit of a hot mess, but the following conventions are widely used.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Concept</th>
+<th align="center">Sample statistic</th>
+<th align="center">Population parameter</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>regression line</td>
+<td align="center"><span class="math inline">\(\widehat Y\)</span></td>
+<td align="center"><span class="math inline">\(\mu_{Y|X}\)</span></td>
+</tr>
+<tr class="even">
+<td>slope</td>
+<td align="center"><span class="math inline">\(\widehat b\)</span></td>
+<td align="center"><span class="math inline">\(b\)</span></td>
+</tr>
+<tr class="odd">
+<td>intercept</td>
+<td align="center"><span class="math inline">\(\widehat a\)</span></td>
+<td align="center"><span class="math inline">\(a\)</span></td>
+</tr>
+<tr class="even">
+<td>residual</td>
+<td align="center"><span class="math inline">\(e\)</span></td>
+<td align="center"><span class="math inline">\(\epsilon\)</span></td>
+</tr>
+<tr class="odd">
+<td>variance explained</td>
+<td align="center"><span class="math inline">\(\widehat R^2\)</span></td>
+<td align="center"><span class="math inline">\(R^2\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>The “hats” always denote sample quantities, and the Greek letters always denote population quantities, but there is some lack of consistency. For example, why not use <span class="math inline">\(\beta\)</span> instead of <span class="math inline">\(b\)</span> for the population slope? Well, <span class="math inline">\(\beta\)</span> is conventionally used to denote standardized regression coefficients in the <em>sample</em>, so its already taken (more on this in the Chapter <a href="4-chapter-4.html#chapter-4">4</a> ).</p>
+<p>One thing to note is that the hats are usually omitted from the statistics <span class="math inline">\(\widehat a\)</span>, <span class="math inline">\(\widehat b\)</span>, and <span class="math inline">\(\widehat R^2\)</span> if it is clear from context that we are talking about the sample rather than the population. This doesn’t apply to <span class="math inline">\(\widehat Y\)</span>, because the hat is required to distinguish the predicted values from the data points.</p>
+<p>Another thing to note is that while <span class="math inline">\(\widehat Y\)</span> is often called the predicted value(s), <span class="math inline">\(\mu_{Y|X}\)</span> is not usually referred to this way. It is called the conditional mean function or the conditional expectation function.</p>
+<!-- Finally, recall that the symbol $E(\cdot)$ denotes the expected value of whatever statistic appears in the place of the dot. The expected value is a way of referring to the mean of the sampling distribution of the statistic (otherwise we would have to say things like "the mean of the mean", which would be horrible). So $E(Y\mid X)$ is the expected value of $Y$ for a given value of $X$. The $\mu_{Y|X}$ is the the population conditional mean, $\mu_{Y|X}$ is equal to $E(Y\mid X)$ when the population model is true (i.e., OLS regression is an unbiased estimator of the population conditional mean function). So, the two symbols are used interchangeably. (Omit this paragraph?) -->
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="4.1-semi-partial-correlation.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="2.5-population-model.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="2.7-inference-for-slope.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -237,7 +282,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/peterhalpin/EDUC_784/edit/master/07-references.Rmd",
+"link": "https://github.com/peterhalpin/EDUC_784/edit/master/02_simple_regression.Rmd",
 "text": "Suggest an edit"
 },
 "history": {

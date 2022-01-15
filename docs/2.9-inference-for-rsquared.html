@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>References | EDUC 784: Regression</title>
+  <title>2.9 Inference for R-squared | EDUC 784: Regression</title>
   <meta name="description" content="Course notes for EDUC 784" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="References | EDUC 784: Regression" />
+  <meta property="og:title" content="2.9 Inference for R-squared | EDUC 784: Regression" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="/images/image1.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="peterhalpin/EDUC_784" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="References | EDUC 784: Regression" />
+  <meta name="twitter:title" content="2.9 Inference for R-squared | EDUC 784: Regression" />
   
   <meta name="twitter:description" content="Course notes for EDUC 784" />
   <meta name="twitter:image" content="/images/image1.png" />
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="null" type="image/x-icon" />
-<link rel="prev" href="4.1-semi-partial-correlation.html"/>
-
+<link rel="prev" href="2.8-inference-for-the-intercept.html"/>
+<link rel="next" href="2.10-power-analysis.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -206,17 +206,70 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="references" class="section level1 unnumbered">
-<h1>References</h1>
+<div id="inference-for-rsquared" class="section level2">
+<h2><span class="header-section-number">2.9</span> Inference for R-squared</h2>
+<input onclick="codefolder(&#39;pre.sourceCode&#39;);" type="button" value="Hide Code" id="codefolder-button" style="position: relative; &#10;            top: -25px; &#10;            left: 85%;   &#10;            color: white;&#10;            font-weight: bold;&#10;            background: #4B9CD3;&#10;            border: 1px #3079ED solid;&#10;            box-shadow: inset 0 1px 0 #80B0FB"/>
+<script>
+  function codefolder(query) {
 
+    var x = document.querySelectorAll(query);
+    if (x.length === 0) return;
+
+    function toggle_vis(o) {
+      var d = o.style.display;
+      o.style.display = (d === 'block' || d === '') ? 'none':'block';
+    }
+
+    for (i = 0; i < x.length; i++) {
+      var y = x[i];
+      toggle_vis(y);
+    }
+
+    var elem = document.getElementById("codefolder-button");
+    if (elem.value === "Hide Code") elem.value = "Show Code";
+    else elem.value = "Hide Code";
+  }
+</script>
+<script>
+  window.addEventListener('load', function () {
+    codefolder('pre.sourceCode');
+  });
+</script>
+<p>Inference for R-squared is quite a bit different than for the regression parameters. R-squared is a ratio of two sums of squares. We know from our study of ANOVA last semester that ratios of sums of squares are tested using an F-test, rather than a t-test. The F-test for (the population) R-squared is summarized below.</p>
+<div id="f-tests" class="section level3">
+<h3><span class="header-section-number">2.9.1</span> F-tests</h3>
+<p>The null hypothesis <span class="math inline">\(H_0: R^2 = 0\)</span> can be tested against the alternative <span class="math inline">\(H_A: R^2 \neq 0\)</span> using the test statistic:</p>
+<p><span class="math display">\[ F = (N-2) \frac{\widehat R^2}{1-\widehat R^2} \]</span></p>
+<p>which has a F-distribution on <span class="math inline">\(1\)</span> and <span class="math inline">\(N – 2\)</span> degrees of freedom when the null is true. The test assumes that the population model is true. Confidence intervals for R-squared are generally not reported.</p>
+<p>The R output from Section <a href="2.7-inference-for-slope.html#inference-for-slope">2.7</a> is presented again below. <strong>Please write down an interpretation of the F-test of R-squared and be prepared to share your answers in class!</strong> Note that R uses the terminology “multiple R-squared” to refer to R-squared.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="2.9-inference-for-rsquared.html#cb14-1"></a><span class="kw">summary</span>(mod)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = achmat08 ~ ses)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -20.600  -6.552  -0.148   6.023  27.663 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  48.6780     1.1282   43.15  &lt; 2e-16 ***
+## ses           0.4293     0.0573    7.49  3.1e-13 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 8.86 on 498 degrees of freedom
+## Multiple R-squared:  0.101,  Adjusted R-squared:  0.0995 
+## F-statistic: 56.1 on 1 and 498 DF,  p-value: 3.13e-13</code></pre>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="4.1-semi-partial-correlation.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="2.8-inference-for-the-intercept.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="2.10-power-analysis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -237,7 +290,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/peterhalpin/EDUC_784/edit/master/07-references.Rmd",
+"link": "https://github.com/peterhalpin/EDUC_784/edit/master/02_simple_regression.Rmd",
 "text": "Suggest an edit"
 },
 "history": {

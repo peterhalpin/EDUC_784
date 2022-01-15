@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>References | EDUC 784: Regression</title>
+  <title>2.4 R-squared | EDUC 784: Regression</title>
   <meta name="description" content="Course notes for EDUC 784" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="References | EDUC 784: Regression" />
+  <meta property="og:title" content="2.4 R-squared | EDUC 784: Regression" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="/images/image1.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="peterhalpin/EDUC_784" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="References | EDUC 784: Regression" />
+  <meta name="twitter:title" content="2.4 R-squared | EDUC 784: Regression" />
   
   <meta name="twitter:description" content="Course notes for EDUC 784" />
   <meta name="twitter:image" content="/images/image1.png" />
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="null" type="image/x-icon" />
-<link rel="prev" href="4.1-semi-partial-correlation.html"/>
-
+<link rel="prev" href="2.3-ols.html"/>
+<link rel="next" href="2.5-population-model.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -206,17 +206,82 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="references" class="section level1 unnumbered">
-<h1>References</h1>
+<div id="r-squared" class="section level2">
+<h2><span class="header-section-number">2.4</span> R-squared</h2>
+<input onclick="codefolder(&#39;pre.sourceCode&#39;);" type="button" value="Hide Code" id="codefolder-button" style="position: relative; &#10;            top: -25px; &#10;            left: 85%;   &#10;            color: white;&#10;            font-weight: bold;&#10;            background: #4B9CD3;&#10;            border: 1px #3079ED solid;&#10;            box-shadow: inset 0 1px 0 #80B0FB"/>
+<script>
+  function codefolder(query) {
 
+    var x = document.querySelectorAll(query);
+    if (x.length === 0) return;
+
+    function toggle_vis(o) {
+      var d = o.style.display;
+      o.style.display = (d === 'block' || d === '') ? 'none':'block';
+    }
+
+    for (i = 0; i < x.length; i++) {
+      var y = x[i];
+      toggle_vis(y);
+    }
+
+    var elem = document.getElementById("codefolder-button");
+    if (elem.value === "Hide Code") elem.value = "Show Code";
+    else elem.value = "Hide Code";
+  }
+</script>
+<script>
+  window.addEventListener('load', function () {
+    codefolder('pre.sourceCode');
+  });
+</script>
+<p>In the previous section we saw that the predicted value of Educational Achievement increased by .43 units (about half a percentage point) for each unit of increase in SES. Another way to interpret this relationship is in terms of the proportion of variance in Reading Achievement that is associated with SES – i.e., to what extent are individual differences in Reading Achievement associated with, or explained by, individual differences in SES?</p>
+<p>This question is represented graphically in Figure <a href="2.4-r-squared.html#fig:rsquared">2.3</a>. The horizontal line denotes the mean of Reading Achievement. The difference between the indicated student’s Reading Achievement score and the mean can be divided into two parts. The black dashed line shows how much closer we get to the student’s score by considering <span class="math inline">\(\widehat Y\)</span> instead of <span class="math inline">\(\bar Y\)</span>. This represents the extent to which this student’s Reading Achievement score is explained by the linear relationship with SES. The pink part is the regression residual, which was introduced in Section <a href="2.2-regression-line.html#regression-line">2.2</a>. This is the variation in Reading Achievement that is “left over” after considering the linear relationship with SES.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:rsquared"></span>
+<img src="_main_files/figure-html/rsquared-1.png" alt="The Idea Behind R-squared." width="672" />
+<p class="caption">
+Figure 2.3: The Idea Behind R-squared.
+</p>
+</div>
+<p>The R-squared statistic summarizes the variation in Reading Achievement associated with SES (i.e., the black dashed line) relative to the total variation in Reading Achievement (i.e., black + pink) for all students in the sample. Aside from the regression parameters, R-squared is the most widely used statistic in regression analysis, so we will be seeing it a lot. Some authors call it the “coefficient of determination” instead of R-squared.</p>
+<p>Using all of the cases from the example (Figure <a href="2.1-an-example-from-nels.html#fig:fig1">2.1</a>), the R-squared statistic is:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="2.4-r-squared.html#cb8-1"></a><span class="kw">options</span>(<span class="dt">digits =</span> <span class="dv">5</span>)</span>
+<span id="cb8-2"><a href="2.4-r-squared.html#cb8-2"></a><span class="kw">summary</span>(mod)<span class="op">$</span>r.squared</span></code></pre></div>
+<pre><code>## [1] 0.10128</code></pre>
+<p><strong>Please write down an interpretation of this number and be prepared to share your answer in class!</strong></p>
+<div id="derivation" class="section level3">
+<h3><span class="header-section-number">2.4.1</span> Derivation*</h3>
+<p>To derive the R-squared statistic we work the numerator of the variance, which is called the total sum of squares.</p>
+<p><span class="math display">\[SS_{\text{total}} = \sum_{i = 1}^N (Y - \bar Y)^2. \]</span></p>
+<p>It can be re-written using the predicted values <span class="math inline">\(\widehat Y\)</span>:</p>
+<p><span class="math display">\[SS_{\text{total}} = \sum_{i = 1}^N [(Y - \widehat Y) + (\widehat Y - \bar Y)]^2. \]</span></p>
+<p>The right hand side can be reduced to two other sums of squares using the rules of summation algebra (see the review in Section <a href="#review"><strong>??</strong></a>):</p>
+<p><span class="math display">\[\begin{align} 
+SS_{\text{total}} &amp; = \sum_{i = 1}^N (Y - \widehat Y)^2 + \sum_{i = 1}^N (\widehat Y - \bar Y)^2 \\
+\end{align}\]</span></p>
+<p>The first part is just <span class="math inline">\(SS_\text{res}\)</span> from Section <a href="2.3-ols.html#ols">2.3</a>. The second part is called the regression sum of squares and denoted <span class="math inline">\(SS_\text{reg}\)</span>. Using this terminology we can re-write the above equation as</p>
+<p><span class="math display">\[ SS_{\text{total}} = SS_\text{res} + SS_\text{reg} \]</span></p>
+<p>The R-squared statistic is</p>
+<p><span class="math display">\[R^2 = SS_{\text{reg}} / SS_{\text{total}}. \]</span></p>
+<p>As discussed above, this is interpreted as the proportion of variance in <span class="math inline">\(Y\)</span> that is explained by its linear relationship with <span class="math inline">\(X\)</span>.</p>
+<!-- ### Additional details* 
+
+$R$ is the correlation between $Y$ and $\widehat Y$. In simple regression, this is just equal to the regular correlation coefficient. 
+
+\[ R = \text{Cor}(Y, \widehat Y) = \text{Cor}(Y, a + bX) = \text{Cor}(Y, X)\]
+
+(You can prove this result using the rules of summation algebra.) 
+
+Consequently, in simple regression $R^2 = r^2_{XY}$. When we add multiple predictors, $R$ is called the multiple correlation and plays a very important -->
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="4.1-semi-partial-correlation.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="2.3-ols.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="2.5-population-model.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -237,7 +302,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/peterhalpin/EDUC_784/edit/master/07-references.Rmd",
+"link": "https://github.com/peterhalpin/EDUC_784/edit/master/02_simple_regression.Rmd",
 "text": "Suggest an edit"
 },
 "history": {
