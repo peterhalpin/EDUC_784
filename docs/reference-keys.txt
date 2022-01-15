@@ -7,7 +7,7 @@ eq:3parm
 about-this-book
 why-this-book
 how-to-use-this-book
-chapter-2
+simple-regression
 example-2
 chapter_3
 regression-and-prediction

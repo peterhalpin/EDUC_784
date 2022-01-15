@@ -1,4 +1,4 @@
-# Simple Regression {#chapter-2}
+# Simple Regression
 
 ```{r, echo = F}
 button <-  "position: relative; 
