@@ -28,16 +28,6 @@ the-nels-example
 inference-for-the-intercept
 inference-for-rsquared
 f-tests
-power-analysis
-end-of-readings-for-second-class
-exercises
-the-lm-function
-predicted-values-and-residuals
-variance-explained
-inference
-power-analysis-1
-example-a-prospective-power-analysis
-review-material
 chapter_3
 regression-and-prediction
 more-about-prediction
