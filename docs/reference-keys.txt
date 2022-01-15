@@ -3,6 +3,7 @@ eq:yhat
 fig:fig2
 eq:y
 fig:rsquared
+fig:fig-pop-model
 fig:fig3
 eq:2parm
 eq:1parm
@@ -11,7 +12,7 @@ eq:3parm
 about-this-book
 why-this-book
 how-to-use-this-book
-chapter_2
+chapter-2
 example-2
 regression-line
 ols

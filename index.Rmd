@@ -27,7 +27,7 @@ button_css <-  "position: relative;
 ```
 
 
-This "ebook" provides the course notes for EDUC 784. It is currently under development, so any feedback is appreciated (e.g., during class,  via email, or the edit link in the header). This first chapter is just about how to use the book -- the course content starts in Chapter \@ref(chapter_2).   
+This "ebook" provides the course notes for EDUC 784. It is currently under development, so any feedback is appreciated (e.g., during class,  via email, or the edit link in the header). This first chapter is just about how to use the book -- the course content starts in Chapter \@ref(chapter-2).   
 
 ## Why this book? 
 

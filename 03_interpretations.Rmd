@@ -167,8 +167,6 @@ In terms of our example, we might want to explain why eighth graders differ in t
 
 Even this long list leaves out potential omitted variables. But, by including more than one predictor, we can get "closer" to a causal interpretation through "statistical controls" (See Chapter 3). 
 
-When the goal of an analysis is explanation, it usual to focus on the proportion of variation in the outcome variable that is explained by the predictor(s)
-
-This proportion of variance is denoted $R^2$ ("R-squared") and is the first topic we address in our next lesson ...
+When the goal of an analysis is explanation, it usual to focus on the proportion of variation in the outcome variable that is explained by the predictor(s), i.e., R-squared. 
 
 
