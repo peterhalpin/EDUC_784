@@ -45,7 +45,7 @@ cor(achmat08, ses)
 
 This is a moderate, positive correlation between Reading Achievement and SES. This correlation means that eighth graders from more well-off families (higher SES) also tended to do better in reading (higher Reading Achievement). 
 
-This relationship has been widely documented and discussed in education research (e.g., https://www.apa.org/pi/ses/resources/publications/education). Please share your thoughts on this relationship in class. 
+This relationship has been widely documented and discussed in education research (e.g., https://www.apa.org/pi/ses/resources/publications/education). **Please look over this web page and be prepared to share your thoughts about the relationship between SES and Achievement in class.** 
 
 
 ## The regression line {#regression-line}
@@ -65,7 +65,7 @@ where
 
 * $Y$ denotes Reading Achievement
 * $X$ denotes SES 
-* $\widehat Y$ represented the values of $Y$ on the line  
+* $\widehat Y$ represents the values of $Y$ on the line  
 * $a$ represents the regression intercept (the value of $\widehat Y$ when $X = 0$)
 * $b$ represents the regression slope (how much $\widehat Y$ increases for each unit of increase in $X$)
 
@@ -90,10 +90,10 @@ segments(x0 = ses[index], y0 = yhat[index] , x1 = ses[index], y1 = achmat08[inde
 points(x = ses[index], y = achmat08[index], col = "#4B9CD3", pch = 16)
 ```
 
-Notice that $Y = \widehat Y + e$ by definition. So, we can use either Equation \@ref(eq:yhat) or Equation \@ref(eq:y) to write out a regression model. 
+Notice that $Y = \widehat Y + e$ by definition. So, we can use either Equation \@ref(eq:yhat) or Equation \@ref(eq:y) to write out a regression model: 
 
 \begin{align} 
-Y = a + bX + e 
+Y = a + bX + e.  
 (\#eq:y)
 \end{align} 
 
@@ -130,7 +130,7 @@ For the NELS example, the regression intercept and slope are, respectively:
 coef(mod)
 ```
 
-**Please provide an interpretation of these numbers in terms of the line in Figure \@ref(fig:fig1), and be prepared to share your answers in class!** 
+**Please write down an interpretation of these numbers in terms of the line in Figure \@ref(fig:fig1), and be prepared to share your answers in class!** 
 
 ### Correlation and regression
 
@@ -139,7 +139,7 @@ Note that if $X$ and $Y$ are transformed to z-scores (i.e., to have mean of zero
 * $a = 0$
 * $b = \text{Cov}(X, Y) = r_{XY}$
 
-So, regression, correlation, and covariance are all very closely related in when we only consider two variables at a time. This is why we didn't make a big deal about simple regression in EDUC 710. But when we get to multiple regression (i.e., more than one $X$ variable), we will see that relationship between regression and correlation (and covariance) gets more complicated.  
+So, regression, correlation, and covariance are all very closely related when we consider only two variables at a time. This is why we didn't make a big deal about simple regression in EDUC 710. But when we get to multiple regression (i.e., more than one $X$ variable), we will see that relationship between regression and correlation (and covariance) gets more complicated.  
 
 ## R-squared
 ```{r, echo=FALSE, results='asis'}
@@ -147,7 +147,11 @@ codefolder::bookdown(init = "hide", style = button)
 ```
 In the previous section we saw that the predicted value of Educational Achievement increased by .43 units (about half a percentage point) for each unit of increase in SES. Another way to interpret this relationship is in terms of the proportion of variance in Reading Achievement that is associated with SES -- i.e., to what extent are individual differences in Reading Achievement associated with, or explained by, individual differences in SES? 
 
-This question is represented graphically in Figure \@ref(fig:rsquared). The horizontal line denotes the mean of Reading Achievement. The difference between the indicated student's Reading Achievement score and the mean can be divided into two parts. The black dashed line shows how much closer we get to the student's score by considering $\widehat Y$ instead of $\bar Y$. This represents the extent to which this student's Reading Achievement score is explained by the linear relationship with SES. The pink part is the regression residual, which was introduced in Section \@ref(regression-line). This is the variation in Reading Achievement that is "left over" after considering the linear relationship with SES. 
+This question is represented graphically in Figure \@ref(fig:rsquared). The horizontal line denotes the mean of Reading Achievement. The difference between the indicated student's Reading Achievement score and the mean can be divided into two parts. 
+
+* The black dashed line shows how much closer we get to the student's score by considering $\widehat Y$ instead of $\bar Y$. This represents the extent to which this student's Reading Achievement score is explained by the linear relationship with SES. 
+
+* The pink dashed line is the regression residual, which was introduced in Section \@ref(regression-line). This is the variation in Reading Achievement that is "left over" after considering the linear relationship with SES. 
 
 
 ```{r rsquared, fig.cap = 'The Idea Behind R-squared.', fig.align = 'center', echo = F}
@@ -368,7 +372,7 @@ summary(mod)
 codefolder::bookdown(init = "hide", style = button)
 ```
 
-Statistical power is the probability of rejecting the null hypothesis, when it is indeed false. Rejecting the null hypothesis when it is false is sometimes called a "true positive", meaning we have correctly inferred that a parameter of interested is not zero. Power analysis is useful for designing studies so that the statistical power / true positive rate is satisfactory. In practice, this comes down to having a large enough sample size. 
+Statistical power is the probability of rejecting the null hypothesis, when it is indeed false. Rejecting the null hypothesis when it is false is sometimes called a "true positive", meaning we have correctly inferred that a parameter of interest is not zero. Power analysis is useful for designing studies so that the statistical power / true positive rate is satisfactory. In practice, this comes down to having a large enough sample size. 
 
 Power analysis in regression is very similar to power analysis for the tests we studied last semester. There are four ingredients that go into a power analysis: 
 
@@ -379,9 +383,9 @@ Power analysis in regression is very similar to power analysis for the tests we 
 
 \[ f^2 = {\frac{R^2}{1-R^2}}. \]
 
-In principal, we can plug-in values for any three of these ingredients and then solve for the fourth. But, as mentioned, power analysis is most useful when we solve for $N$ while planning a study. When solving for $N$ "prospectively," the effect size $f$ should be based on reports of R-squared in past research. Power and $\alpha$ are usually chosen to be .8 and .05, respectively. 
+In principal, we can plug-in values for any three of these ingredients and then solve for the fourth. But, as mentioned, power analysis is most useful when we solve for $N$ while planning a study. When solving for $N$ "prospectively," the effect size $f^2$ should be based on reports of R-squared in past research. Power and $\alpha$ are usually chosen to be .8 and .05, respectively. 
 
-When doing secondary data analysis (as in this class) there is not much point in solving for the sample since, since we already have the data. Instead, we can solve for the effect size. In the NELS example we have $N=500$ observations. The output below reports the smallest effect size we can detect with a power of .8 and $alpha = .05$. This is sometimes called the "minimum detectable effect size" (MDES). Note that $u = 1$ and $v = N- 2$ denote the degrees of freedom in the numerator and denominator of the F-test of R-squared, respectively. 
+When doing secondary data analysis (as in this class) there is not much point in solving for the sample size, since we already have the data. Instead, we can solve for the effect size. In the NELS example we have $N=500$ observations. The output below reports the smallest effect size we can detect with a power of .8 and $\alpha = .05$. This is sometimes called the "minimum detectable effect size" (MDES). Note that $u = 1$ and $v = N- 2$ denote the degrees of freedom in the numerator and denominator of the F-test of R-squared, respectively. 
 
 ```{r}
 library(pwr)

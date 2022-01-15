@@ -28,8 +28,8 @@ Before moving onto more complicated regression models, let's consider why we mig
 
 ```{r echo=FALSE, results='asis'}
 codefolder::bookdown(init = "hide", style = button)
-load("NELS.RData")
-attach(NELS)
+#load("NELS.RData")
+#attach(NELS)
 ```
 
 <!-- I think ggplot is doing something weird because the prediction error is way too small for the full sample -- but then again N is in the denominator of the variance. Dobule check by hand and also use a second examples to show that prediction error decreases when adding another predictor -->
