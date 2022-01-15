@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>1.1 Why this book? | EDUC 784: Regression</title>
+  <title>2.1 Regression and prediction | EDUC 784: Regression</title>
   <meta name="description" content="Course notes for EDUC 784" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="1.1 Why this book? | EDUC 784: Regression" />
+  <meta property="og:title" content="2.1 Regression and prediction | EDUC 784: Regression" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="/images/image1.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="peterhalpin/EDUC_784" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="1.1 Why this book? | EDUC 784: Regression" />
+  <meta name="twitter:title" content="2.1 Regression and prediction | EDUC 784: Regression" />
   
   <meta name="twitter:description" content="Course notes for EDUC 784" />
   <meta name="twitter:image" content="/images/image1.png" />
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="null" type="image/x-icon" />
-<link rel="prev" href="index.html"/>
-<link rel="next" href="1.2-how-to-use-this-book.html"/>
+<link rel="prev" href="2-chapter_3.html"/>
+<link rel="next" href="2.2-regression-and-causation.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -174,26 +174,80 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="why-this-book" class="section level2">
-<h2><span class="header-section-number">1.1</span> Why this book?</h2>
-<p>There are a few goals of moving from “textbook + slides + exercises” to an ebook.</p>
-<ul>
-<li><p>To integrate course content (slides, readings, code, examples, and exercises) into one format, rather than having multiple files to sort through on Sakai.</p></li>
-<li><p>To address the perennial problem of choosing a textbook for this course – rather than having a required text, the goal is for this ebook to become the official course text. For supplementary texts, see the course syllabus.</p></li>
-<li><p>Most importantly, having a course text that is tightly aligned with the course content means that I can be more liberal in assigning readings as homework <em>before class</em>, so we can spend less time in lecture and more time discussing any questions you have about the readings, going through the examples in R together, and working on assignments.</p></li>
-<li><p>As a bonus, this book is another example of cool things you can do with R. It’s written in R (<a href="https://bookdown.org" class="uri">https://bookdown.org</a>) – that is crazy, right??</p></li>
-</ul>
-<!-- So, my goal for this semester to be in a situation where I assign chapter of this book each week as reading, and you do the readings before coming to class. I'll provide a short summary of the content of each chapter at the beginning of class, and I'll answer any questions you have about the readings. How long we spend summarizing the content will basically depend on how much discussion y'all want to have about it. Then, we will work through an R-based example together. Once we are done the example, there will be "open lab" time work on assignments or whatever you want to do. 
+<div id="regression-and-prediction" class="section level2">
+<h2><span class="header-section-number">2.1</span> Regression and prediction</h2>
+<input onclick="codefolder(&#39;pre.sourceCode&#39;);" type="button" value="Hide Code" id="codefolder-button" style="position: relative; &#10;            top: -25px; &#10;            left: 85%;   &#10;            color: white;&#10;            font-weight: bold;&#10;            background: #4B9CD3;&#10;            border: 1px #3079ED solid;&#10;            box-shadow: inset 0 1px 0 #80B0FB"/>
+<script>
+  function codefolder(query) {
 
-This book won't replace Sakai (e.g., I still need to post assignments and grades somewhere). But, instead of the Sakai Lessons linking to a bunch of files on Sakai, they will link to this book. -->
+    var x = document.querySelectorAll(query);
+    if (x.length === 0) return;
+
+    function toggle_vis(o) {
+      var d = o.style.display;
+      o.style.display = (d === 'block' || d === '') ? 'none':'block';
+    }
+
+    for (i = 0; i < x.length; i++) {
+      var y = x[i];
+      toggle_vis(y);
+    }
+
+    var elem = document.getElementById("codefolder-button");
+    if (elem.value === "Hide Code") elem.value = "Show Code";
+    else elem.value = "Hide Code";
+  }
+</script>
+<script>
+  window.addEventListener('load', function () {
+    codefolder('pre.sourceCode');
+  });
+</script>
+<!-- I think ggplot is doing something weird because the prediction error is way too small for the full sample -- but then again N is in the denominator of the variance. Dobule check by hand and also use a second examples to show that prediction error decreases when adding another predictor -->
+<p>Prediction (etymology: “to make known beforehand”) means that we want to use <span class="math inline">\(X\)</span> to make a guess about <span class="math inline">\(Y\)</span>. This use of regression makes the most sense when we know the value of <span class="math inline">\(X\)</span> before we know the value of <span class="math inline">\(Y\)</span>.</p>
+<p>When we are interested in using values of <span class="math inline">\(X\)</span> to make predictions about (yet unobserved) values of <span class="math inline">\(Y\)</span>, we use <span class="math inline">\(\hat Y\)</span> as our guess. This is why <span class="math inline">\(\hat Y\)</span> is called the “predicted value” of <span class="math inline">\(Y\)</span>.</p>
+<p>When making predictions, we usually want some additional information about how good the predictions will be. In OLS regression, this information is provided by the prediction error variance (cite: Fox)</p>
+<p><span class="math display">\[ s^2_{\hat Y_i} = \frac{SS_{\text{res}}}{N - 2} \left( \frac{1}{N} + \frac{(X_i - \bar X)^2}{(N-1) s^2_X} \right). \]</span></p>
+<p>The prediction errors for the data in Figure <a href="#fig:fig2"><strong>??</strong></a> are depicted in Figure <a href="2.1-regression-and-prediction.html#fig:fig3">2.1</a> as a gray band around the regression line.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="2.1-regression-and-prediction.html#cb2-1"></a><span class="co"># Using a different plotting library that adds prediction error bands (need to double check computation)</span></span>
+<span id="cb2-2"><a href="2.1-regression-and-prediction.html#cb2-2"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb2-3"><a href="2.1-regression-and-prediction.html#cb2-3"></a></span>
+<span id="cb2-4"><a href="2.1-regression-and-prediction.html#cb2-4"></a><span class="kw">ggplot</span>(NELS[index, ], <span class="kw">aes</span>(<span class="dt">x =</span> ses, <span class="dt">y =</span> achmat08)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb2-5"><a href="2.1-regression-and-prediction.html#cb2-5"></a><span class="st">               </span><span class="kw">geom_point</span>(<span class="dt">color=</span><span class="st">&#39;#3B9CD3&#39;</span>, <span class="dt">size =</span> <span class="dv">2</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb2-6"><a href="2.1-regression-and-prediction.html#cb2-6"></a><span class="st">               </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> lm, <span class="dt">color =</span> <span class="st">&quot;grey35&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb2-7"><a href="2.1-regression-and-prediction.html#cb2-7"></a><span class="st">               </span><span class="kw">ylab</span>(<span class="st">&quot;Reading Achievement (Grade 8)&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb2-8"><a href="2.1-regression-and-prediction.html#cb2-8"></a><span class="st">               </span><span class="kw">xlab</span>(<span class="st">&quot;SES&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb2-9"><a href="2.1-regression-and-prediction.html#cb2-9"></a><span class="st">               </span><span class="kw">theme_bw</span>()</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig3"></span>
+<img src="_main_files/figure-html/fig3-1.png" alt="Prediction Error for Example Data." width="672" />
+<p class="caption">
+Figure 2.1: Prediction Error for Example Data.
+</p>
+</div>
+<p>Notice that the prediction error variance increases with <span class="math inline">\(SS_{\text{res}}\)</span> – in other words, the larger the residuals (Figure <a href="#fig:fig2"><strong>??</strong></a>), the worse the prediction error. As we will see in this Section (<a href="#Review"><strong>??</strong></a>), one way to reduce <span class="math inline">\(SS_{\text{res}}\)</span> is to add more predictors into the model – i.e., multiple regression.</p>
+<div id="more-about-prediction" class="section level3">
+<h3><span class="header-section-number">2.1.1</span> More about Prediction</h3>
+<p>Prediction was the original use of regression (see <a href="https://en.wikipedia.org/wiki/Regression_toward_the_mean#History" class="uri">https://en.wikipedia.org/wiki/Regression_toward_the_mean#History</a>). More recent methods developed in machine learning also focus mainly on prediction – although the methods used in machine learning are often more complicated than OLS regression, and the research context is usually quite different, the basic problem is the same. Machine learning has led to the use of out of sample predictions, rather than prediction error, as the main criterion for judging the quality of predictions made from a model. Machine learning has also introduced some new techniques for choosing which potential predictors to include in a model (i.e., “variable selection”). We will touch on these topics later in the course, although our main focus is OLS regression.</p>
+<!--
+Regression towards the mean is a statistical property of predicted scores 
+
+This can most easily be seen in the case where Y and X are z-scores (i.e., both variables have M = 0 and SD =1)
+
+Recall that this implies that a = 0 and b = rXY, and consequently 
+
+Since |rXY | ≤ 1, the magnitude of the predicted scores must be less than or equal to that of the predictor
+
+In other words: predicted scores are always closer to the mean of Y (MY = 0), than the values of X are to their mean (MX = 0)
+-->
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="1.2-how-to-use-this-book.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="2-chapter_3.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="2.2-regression-and-causation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -214,7 +268,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/peterhalpin/EDUC_784/edit/master/index.Rmd",
+"link": "https://github.com/peterhalpin/EDUC_784/edit/master/03_interpretations.Rmd",
 "text": "Suggest an edit"
 },
 "history": {
