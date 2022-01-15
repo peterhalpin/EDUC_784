@@ -256,15 +256,6 @@ At this point we have used the mathematical symbols for regression (e.g., $a$, $
 
 The population versus sample notation for regression is a bit of a hot mess, but the following conventions are widely used.
 
-Concept                Sample statistic    Population parameter               
--------               ------------------  ----------------------
-regression line         $\widehat Y$          $\mu_{Y|X}$ 
-slope                   $\widehat b$          $b$                                 
-intercept               $\widehat a$          $a$                                 
-residual                $e$                   $\epsilon$                           
-variance explained      $\widehat R^2$        $R^2$
-
-
 The "hats" always denote sample quantities, and the Greek letters always denote population quantities, but there is some lack of consistency. For example, why not use $\beta$ instead of $b$ for the population slope? Well, $\beta$ is conventionally used to denote standardized regression coefficients in the *sample*, so its already taken  (more on this in the Chapter \@ref(chapter-4) ). 
 
 One thing to note is that the hats are usually omitted from the statistics $\widehat a$,  $\widehat b$, and $\widehat R^2$ if it is clear from context that we are talking about the sample rather than the population. This doesn't apply to $\widehat Y$, because the hat is required to distinguish the predicted values from the data points. 

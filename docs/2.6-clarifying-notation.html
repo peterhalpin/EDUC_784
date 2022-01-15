@@ -214,42 +214,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>In Section <a href="2.5-population-model.html#population-model">2.5</a> they denoted population parameters.</li>
 </ul>
 <p>The population versus sample notation for regression is a bit of a hot mess, but the following conventions are widely used.</p>
-<table>
-<thead>
-<tr class="header">
-<th>Concept</th>
-<th align="center">Sample statistic</th>
-<th align="center">Population parameter</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>regression line</td>
-<td align="center"><span class="math inline">\(\widehat Y\)</span></td>
-<td align="center"><span class="math inline">\(\mu_{Y|X}\)</span></td>
-</tr>
-<tr class="even">
-<td>slope</td>
-<td align="center"><span class="math inline">\(\widehat b\)</span></td>
-<td align="center"><span class="math inline">\(b\)</span></td>
-</tr>
-<tr class="odd">
-<td>intercept</td>
-<td align="center"><span class="math inline">\(\widehat a\)</span></td>
-<td align="center"><span class="math inline">\(a\)</span></td>
-</tr>
-<tr class="even">
-<td>residual</td>
-<td align="center"><span class="math inline">\(e\)</span></td>
-<td align="center"><span class="math inline">\(\epsilon\)</span></td>
-</tr>
-<tr class="odd">
-<td>variance explained</td>
-<td align="center"><span class="math inline">\(\widehat R^2\)</span></td>
-<td align="center"><span class="math inline">\(R^2\)</span></td>
-</tr>
-</tbody>
-</table>
 <p>The “hats” always denote sample quantities, and the Greek letters always denote population quantities, but there is some lack of consistency. For example, why not use <span class="math inline">\(\beta\)</span> instead of <span class="math inline">\(b\)</span> for the population slope? Well, <span class="math inline">\(\beta\)</span> is conventionally used to denote standardized regression coefficients in the <em>sample</em>, so its already taken (more on this in the Chapter <a href="4-chapter-4.html#chapter-4">4</a> ).</p>
 <p>One thing to note is that the hats are usually omitted from the statistics <span class="math inline">\(\widehat a\)</span>, <span class="math inline">\(\widehat b\)</span>, and <span class="math inline">\(\widehat R^2\)</span> if it is clear from context that we are talking about the sample rather than the population. This doesn’t apply to <span class="math inline">\(\widehat Y\)</span>, because the hat is required to distinguish the predicted values from the data points.</p>
 <p>Another thing to note is that while <span class="math inline">\(\widehat Y\)</span> is often called the predicted value(s), <span class="math inline">\(\mu_{Y|X}\)</span> is not usually referred to this way. It is called the conditional mean function or the conditional expectation function.</p>
