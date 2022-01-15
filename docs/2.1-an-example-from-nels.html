@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>3.1 Regression and prediction | EDUC 784: Regression</title>
+  <title>2.1 An example from NELS | EDUC 784: Regression</title>
   <meta name="description" content="Course notes for EDUC 784" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="3.1 Regression and prediction | EDUC 784: Regression" />
+  <meta property="og:title" content="2.1 An example from NELS | EDUC 784: Regression" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="/images/image1.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="peterhalpin/EDUC_784" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="3.1 Regression and prediction | EDUC 784: Regression" />
+  <meta name="twitter:title" content="2.1 An example from NELS | EDUC 784: Regression" />
   
   <meta name="twitter:description" content="Course notes for EDUC 784" />
   <meta name="twitter:image" content="/images/image1.png" />
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="null" type="image/x-icon" />
-<link rel="prev" href="3-chapter_3.html"/>
-<link rel="next" href="3.2-regression-and-causation.html"/>
+<link rel="prev" href="2-simple-regression.html"/>
+<link rel="next" href="3-chapter_3.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -177,8 +177,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="regression-and-prediction" class="section level2">
-<h2><span class="header-section-number">3.1</span> Regression and prediction</h2>
+<div id="an-example-from-nels" class="section level2">
+<h2><span class="header-section-number">2.1</span> An example from NELS</h2>
 <input onclick="codefolder(&#39;pre.sourceCode&#39;);" type="button" value="Hide Code" id="codefolder-button" style="position: relative; &#10;            top: -25px; &#10;            left: 85%;   &#10;            color: white;&#10;            font-weight: bold;&#10;            background: #4B9CD3;&#10;            border: 1px #3079ED solid;&#10;            box-shadow: inset 0 1px 0 #80B0FB"/>
 <script>
   function codefolder(query) {
@@ -206,60 +206,41 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     codefolder('pre.sourceCode');
   });
 </script>
-<pre><code>## The following objects are masked from NELS (pos = 3):
-## 
-##     absent12, achmat08, achmat10, achmat12, achrdg08, achrdg10,
-##     achrdg12, achsci08, achsci10, achsci12, achsls08, achsls10,
-##     achsls12, advmath8, alcbinge, algebra8, apoffer, approg, cigarett,
-##     computer, cuts12, edexpect, excurr12, expinc30, famsize, gender,
-##     homelang, hsprog, hwkin12, hwkout12, id, late12, marijuan, numinst,
-##     nursery, parmarl8, region, schattrt, schtyp8, ses, slfcnc08,
-##     slfcnc10, slfcnc12, tcherint, unitcalc, unitengl, unitmath, urban</code></pre>
-<!-- I think ggplot is doing something weird because the prediction error is way too small for the full sample -- but then again N is in the denominator of the variance. Dobule check by hand and also use a second examples to show that prediction error decreases when adding another predictor -->
-<p>Prediction (etymology: “to make known beforehand”) means that we want to use <span class="math inline">\(X\)</span> to make a guess about <span class="math inline">\(Y\)</span>. This use of regression makes the most sense when we know the value of <span class="math inline">\(X\)</span> before we know the value of <span class="math inline">\(Y\)</span>.</p>
-<p>When we are interested in using values of <span class="math inline">\(X\)</span> to make predictions about (yet unobserved) values of <span class="math inline">\(Y\)</span>, we use <span class="math inline">\(\hat Y\)</span> as our guess. This is why <span class="math inline">\(\hat Y\)</span> is called the “predicted value” of <span class="math inline">\(Y\)</span>.</p>
-<p>When making predictions, we usually want some additional information about how good the predictions will be. In OLS regression, this information is provided by the prediction error variance (cite: Fox)</p>
-<p><span class="math display">\[ s^2_{\hat Y_i} = \frac{SS_{\text{res}}}{N - 2} \left( \frac{1}{N} + \frac{(X_i - \bar X)^2}{(N-1) s^2_X} \right). \]</span></p>
-<p>The prediction errors for the data in Figure <a href="#fig:fig2"><strong>??</strong></a> are depicted in Figure <a href="3.1-regression-and-prediction.html#fig:fig3">3.1</a> as a gray band around the regression line.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="3.1-regression-and-prediction.html#cb6-1"></a><span class="co"># Using a different plotting library that adds prediction error bands (need to double check computation)</span></span>
-<span id="cb6-2"><a href="3.1-regression-and-prediction.html#cb6-2"></a><span class="kw">library</span>(ggplot2)</span>
-<span id="cb6-3"><a href="3.1-regression-and-prediction.html#cb6-3"></a></span>
-<span id="cb6-4"><a href="3.1-regression-and-prediction.html#cb6-4"></a><span class="kw">ggplot</span>(NELS[index, ], <span class="kw">aes</span>(<span class="dt">x =</span> ses, <span class="dt">y =</span> achmat08)) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb6-5"><a href="3.1-regression-and-prediction.html#cb6-5"></a><span class="st">               </span><span class="kw">geom_point</span>(<span class="dt">color=</span><span class="st">&#39;#3B9CD3&#39;</span>, <span class="dt">size =</span> <span class="dv">2</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb6-6"><a href="3.1-regression-and-prediction.html#cb6-6"></a><span class="st">               </span><span class="kw">geom_smooth</span>(<span class="dt">method =</span> lm, <span class="dt">color =</span> <span class="st">&quot;grey35&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb6-7"><a href="3.1-regression-and-prediction.html#cb6-7"></a><span class="st">               </span><span class="kw">ylab</span>(<span class="st">&quot;Reading Achievement (Grade 8)&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb6-8"><a href="3.1-regression-and-prediction.html#cb6-8"></a><span class="st">               </span><span class="kw">xlab</span>(<span class="st">&quot;SES&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb6-9"><a href="3.1-regression-and-prediction.html#cb6-9"></a><span class="st">               </span><span class="kw">theme_bw</span>()</span></code></pre></div>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig3"></span>
-<img src="_main_files/figure-html/fig3-1.png" alt="Prediction Error for Example Data." width="672" />
+<p>Figure <a href="2.1-an-example-from-nels.html#fig:fig1">2.1</a> shows the relationship between Grade 8 Reading Achievement (percent correct on a reading test) and Socioeconomic Status (SES; a composite measure on a scale from 0-35). The data are a subsample of the 1988 National Educational Longitudinal Survey (NELS; see <a href="https://nces.ed.gov/surveys/nels88/" class="uri">https://nces.ed.gov/surveys/nels88/</a>).</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="2.1-an-example-from-nels.html#cb2-1"></a><span class="co"># Load and attach the NELS88 data</span></span>
+<span id="cb2-2"><a href="2.1-an-example-from-nels.html#cb2-2"></a><span class="kw">load</span>(<span class="st">&quot;NELS.RData&quot;</span>)</span>
+<span id="cb2-3"><a href="2.1-an-example-from-nels.html#cb2-3"></a><span class="kw">attach</span>(NELS)</span>
+<span id="cb2-4"><a href="2.1-an-example-from-nels.html#cb2-4"></a></span>
+<span id="cb2-5"><a href="2.1-an-example-from-nels.html#cb2-5"></a><span class="co"># Scatter plot</span></span>
+<span id="cb2-6"><a href="2.1-an-example-from-nels.html#cb2-6"></a><span class="kw">plot</span>(<span class="dt">x =</span> ses, <span class="dt">y =</span> achmat08, <span class="dt">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Reading Achievement (Grade 8)&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;SES&quot;</span>)</span>
+<span id="cb2-7"><a href="2.1-an-example-from-nels.html#cb2-7"></a></span>
+<span id="cb2-8"><a href="2.1-an-example-from-nels.html#cb2-8"></a><span class="co"># Run the regression model</span></span>
+<span id="cb2-9"><a href="2.1-an-example-from-nels.html#cb2-9"></a>mod &lt;-<span class="st"> </span><span class="kw">lm</span>(achmat08 <span class="op">~</span><span class="st"> </span>ses)</span>
+<span id="cb2-10"><a href="2.1-an-example-from-nels.html#cb2-10"></a></span>
+<span id="cb2-11"><a href="2.1-an-example-from-nels.html#cb2-11"></a><span class="co"># Add the regression line to the plot</span></span>
+<span id="cb2-12"><a href="2.1-an-example-from-nels.html#cb2-12"></a><span class="kw">abline</span>(mod) </span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig1"></span>
+<img src="_main_files/figure-html/fig1-1.png" alt="Reading Achievement and SES (NELS88)." width="672" />
 <p class="caption">
-Figure 3.1: Prediction Error for Example Data.
+Figure 2.1: Reading Achievement and SES (NELS88).
 </p>
 </div>
-<p>Notice that the prediction error variance increases with <span class="math inline">\(SS_{\text{res}}\)</span> – in other words, the larger the residuals (Figure <a href="#fig:fig2"><strong>??</strong></a>), the worse the prediction error. As we will see in this Section (<a href="#Review"><strong>??</strong></a>), one way to reduce <span class="math inline">\(SS_{\text{res}}\)</span> is to add more predictors into the model – i.e., multiple regression.</p>
-<div id="more-about-prediction" class="section level3">
-<h3><span class="header-section-number">3.1.1</span> More about Prediction</h3>
-<p>Prediction was the original use of regression (see <a href="https://en.wikipedia.org/wiki/Regression_toward_the_mean#History" class="uri">https://en.wikipedia.org/wiki/Regression_toward_the_mean#History</a>). More recent methods developed in machine learning also focus mainly on prediction – although the methods used in machine learning are often more complicated than OLS regression, and the research context is usually quite different, the basic problem is the same. Machine learning has led to the use of out of sample predictions, rather than prediction error, as the main criterion for judging the quality of predictions made from a model. Machine learning has also introduced some new techniques for choosing which potential predictors to include in a model (i.e., “variable selection”). We will touch on these topics later in the course, although our main focus is OLS regression.</p>
-<!--
-Regression towards the mean is a statistical property of predicted scores 
+<p>The strength and direction of the linear relationship between the two variables is summarized by their correlation (specifically, the Pearson product moment correlation). In this sample, the correlation is</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="2.1-an-example-from-nels.html#cb3-1"></a><span class="kw">options</span>(<span class="dt">digits =</span> <span class="dv">2</span>)</span>
+<span id="cb3-2"><a href="2.1-an-example-from-nels.html#cb3-2"></a><span class="kw">cor</span>(achmat08, ses)</span></code></pre></div>
+<pre><code>## [1] 0.32</code></pre>
+<p>This is a moderate, positive correlation between Reading Achievement and SES. This correlation means that eighth graders from more well-off families (higher SES) also tended to do better in reading (higher Reading Achievement).</p>
+<p>This relationship has been widely documented and discussed in education research (e.g., <a href="https://www.apa.org/pi/ses/resources/publications/education" class="uri">https://www.apa.org/pi/ses/resources/publications/education</a>). Please share your thoughts on this relationship in class.</p>
 
-This can most easily be seen in the case where Y and X are z-scores (i.e., both variables have M = 0 and SD =1)
-
-Recall that this implies that a = 0 and b = rXY, and consequently 
-
-Since |rXY | ≤ 1, the magnitude of the predicted scores must be less than or equal to that of the predictor
-
-In other words: predicted scores are always closer to the mean of Y (MY = 0), than the values of X are to their mean (MX = 0)
--->
 </div>
-</div>
+<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-<a href="3-chapter_3.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="3.2-regression-and-causation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="2-simple-regression.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="3-chapter_3.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -280,7 +261,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/peterhalpin/EDUC_784/edit/master/03_interpretations.Rmd",
+"link": "https://github.com/peterhalpin/EDUC_784/edit/master/02_simple_regression.Rmd",
 "text": "Suggest an edit"
 },
 "history": {

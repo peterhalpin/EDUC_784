@@ -13,7 +13,7 @@ button <-  "position: relative;
 
 The focus of this course is linear regression with multiple predictors (AKA *multiple regression*), but we start by reviewing regression with one predictor (AKA *simple regression*). 
 
-## An example from NELS {#example-2}
+## An example from NELS
  
 ```{r, echo=FALSE, results='asis'}
 codefolder::bookdown(init = "hide", style = button)

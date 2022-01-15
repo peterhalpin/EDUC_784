@@ -8,7 +8,7 @@ about-this-book
 why-this-book
 how-to-use-this-book
 simple-regression
-example-2
+an-example-from-nels
 chapter_3
 regression-and-prediction
 more-about-prediction
