@@ -1,4 +1,4 @@
-# Interpretations of regression {#chapter_3}
+# Interpretations of regression {#chapter-3}
 
 ```{r, echo = F}
 button <-  "position: relative; 

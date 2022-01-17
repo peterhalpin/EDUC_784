@@ -12,7 +12,7 @@ eq:3parm
 about-this-book
 why-this-book
 how-to-use-this-book
-simple-regression
+chapter-2
 an-example-from-nels
 regression-line
 ols
@@ -37,8 +37,16 @@ variance-explained
 inference
 power-analysis-1
 example-a-prospective-power-analysis
-review-material
-chapter_3
+review
+summation-algebra
+sample-statistics
+bias-and-precision
+t-tests-1
+confidence-intervals-1
+f-tests-1
+apa-reporting
+working-in-r
+chapter-3
 regression-and-prediction
 more-about-prediction
 regression-and-causation
