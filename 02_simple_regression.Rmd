@@ -1,4 +1,4 @@
-# Simple Regression
+# Simple Regression {#chapter-2}
 
 ```{r, echo = F}
 button <-  "position: relative; 
@@ -122,7 +122,7 @@ Solving the  minimization problem (i.e., doing the calculus) gives the following
 a = \bar Y - b \bar X \quad \quad \quad \quad b = \frac{\text{Cov}(X, Y)}{s^2_X} = r_{XY} \frac{s_X}{s_Y}
 \]
 
-(If you aren't familiar with the symbols in these equations, check out the review materials in Section \@ref(Review) for a refresher.)  
+(If you aren't familiar with the symbols in these equations, check out the review materials in Section \@ref(review) for a refresher.)  
 
 For the NELS example, the regression intercept and slope are, respectively: 
 
@@ -162,10 +162,10 @@ ybar <- mean(achmat08)
 abline(h = ybar, col = "gray")
 
 # Add pink lines for case 6
-segments(x0 = ses[index[22]], y0 = yhat[index[22]] , x1 = ses[index[22]], y1 = achmat08[index[22]], col = 6, lty = 3, lwd = 2)
+segments(x0 = ses[index[22]], y0 = yhat[index[22]] , x1 = ses[index[22]], y1 = achmat08[index[22]], col = 6, lty = 3, lwd = 3)
 
 # Add black lines 
-segments(x0 = ses[index[22]], y0 = yhat[index[22]] , x1 = ses[index[22]], y1 = ybar, col = 1, lty = 3, lwd = 2)
+segments(x0 = ses[index[22]], y0 = yhat[index[22]] , x1 = ses[index[22]], y1 = ybar, col = 1, lty = 3, lwd = 3)
 
 # Overwrite dots to make it look at bit better
 points(x = ses[index], y = achmat08[index], col = "#4B9CD3", pch = 16)
@@ -187,16 +187,16 @@ summary(mod)$r.squared
 
 To derive the R-squared statistic we work the numerator of the variance, which is called the total sum of squares.  
 
-\[SS_{\text{total}} = \sum_{i = 1}^N (Y - \bar Y)^2. \]
+\[SS_{\text{total}} = \sum_{i = 1}^N (Y_i - \bar Y)^2. \]
 
 It can be re-written using the predicted values $\widehat Y$:
 
-\[SS_{\text{total}} = \sum_{i = 1}^N [(Y - \widehat Y) + (\widehat Y - \bar Y)]^2. \]
+\[SS_{\text{total}} = \sum_{i = 1}^N [(Y_i - \widehat Y_i) + (\widehat Y_i - \bar Y)]^2. \]
 
 The right hand side can be reduced to two other sums of squares using the rules of summation algebra (see the review in Section \@ref(review)):
 
 \begin{align} 
-SS_{\text{total}} & = \sum_{i = 1}^N (Y - \widehat Y)^2 + \sum_{i = 1}^N (\widehat Y - \bar Y)^2 \\
+SS_{\text{total}} & = \sum_{i = 1}^N (Y_i - \widehat Y_i)^2 + \sum_{i = 1}^N (\widehat Y_i - \bar Y)^2 \\
 \end{align} 
 
 The first part is just $SS_\text{res}$ from Section \@ref(ols). The second part is called the regression sum of squares and denoted $SS_\text{reg}$. Using this terminology we can re-write the above equation as
@@ -268,7 +268,7 @@ residual                $e$                   $\epsilon$
 variance explained      $\widehat R^2$        $R^2$
 
 
-The "hats" always denote sample quantities, and the Greek letters always denote population quantities, but there is some lack of consistency. For example, why not use $\beta$ instead of $b$ for the population slope? Well, $\beta$ is conventionally used to denote standardized regression coefficients in the *sample*, so its already taken  (more on this in the Chapter \@ref(chapter-4) ). 
+The "hats" always denote sample quantities, and the Greek letters (in this table) always denote population quantities, but there is some lack of consistency. For example, why not use $\beta$ instead of $b$ for the population slope? Well, $\beta$ is conventionally used to denote standardized regression coefficients in the *sample*, so its already taken  (more on this in the Chapter \@ref(chapter-4) ). 
 
 One thing to note is that the hats are usually omitted from the statistics $\widehat a$,  $\widehat b$, and $\widehat R^2$ if it is clear from context that we are talking about the sample rather than the population. This doesn't apply to $\widehat Y$, because the hat is required to distinguish the predicted values from the data points. 
 
@@ -283,7 +283,7 @@ Another thing to note is that while $\widehat Y$ is often called the predicted v
 codefolder::bookdown(init = "hide", style = button)
 ```
 
-When the population model is true, $\widehat b$ is an unbiased estimate of $b$. We also know the standard error of $\widehat b$, which is equal to (cite)
+When the population model is true, $\widehat b$ is an unbiased estimate of $b$. We also know the standard error of $\widehat b$, which is equal to (cite:fox)
 
 \[ s_{\widehat b} = \frac{s_Y}{s_X} \sqrt{\frac{1-R^2}{N-2}} . \]
 
@@ -327,7 +327,7 @@ confint(mod)
 
 ## Inference for the intercept
 
-The situation for the regression intercept is similar to that for the slope: the OLS estimate is unbiased and its standard error is (cite)
+The situation for the regression intercept is similar to that for the slope: the OLS estimate is unbiased and its standard error is (cite:fox)
 
 <!--- check this and get source -->
 \[ 
@@ -571,7 +571,51 @@ pwr.f2.test(u = 1, f2 = f2, sig.level = .05, power = .8)
 
 In this example we find that $v = 70.6$. Since $v = N - 2$, so we know that a sample size of $N = 72.6$ (rounded up to 73) is required to reject the null hypothesis that $R^2 = 0$, when the true popuation value is $R^2 = .1$, with a power of .8 and using a significance level of .05. 
 
+## Review {#review}
 
-## Review material 
+### Summation algebra
 
-Under construction...
+* Notation
+* 3 Rules
+
+### Sample statistics
+
+* Notation and formula's 
+* R code
+
+### Bias and precision
+
+* Sampling distributions
+* Expected values and bias
+* Standard errors and precision
+
+### t-tests
+
+* Conceptual formula
+* Null distribution
+* Setting alpha
+* Making a decision
+* Interpretation
+* R example
+
+### Confidence intervals 
+
+* Conceptual formula
+* Interpretation
+* Relation to hypothesis tests
+* R example
+
+### F-tests
+
+* Conceptual formula
+* Interpretation
+* R example
+
+### APA reporting
+
+### Working in R
+
+* Hmmm
+
+
+
