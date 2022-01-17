@@ -79,16 +79,17 @@ In other words: predicted scores are always closer to the mean of Y (MY = 0), th
 
 ## Regression and causation
 
-A causal interpretation of regression means that that changing $X$ by one unit will change $\mu_{Y|X}$ by $b$ units. Note that this is an assumption about the population model, specifically the conditional expectation function. 
-
-This is a much stronger interpretation than prediction because it requires stronger assumptions. In particular, regression parameters can only be interpreted causally when all variables that are correlated with $Y$ and $X$ are included as predictors in the model. 
+A causal interpretation of regression means that that changing $X$ by one unit will change $\mu_{Y|X}$ by $b$ units. In term of the NELS example, the question is whether changing eighth graders' SES will change their Reading Achievement. It is much more difficult to answer this question than to predict Reading Achievement based on SES. This is because regression parameters can only be interpreted causally when all variables that are correlated with $Y$ and $X$ are included as predictors in the model. 
 
 When a variable is left out, this is called *omitted variable bias*. This situation is nicely explained by Gelman and Hill (cite: Gelman), and a modified version of their discussion is provided below. This discussion is a bit technical, but the take-home message is summarized in the following points
 
 * When a predictor variable that is correlated with $Y$ and $X$ is left out of a regression model, this is called omitted variable bias.
+* The problem is not just that we have an incomplete picture of how the omitted variable is related to $Y$. It is much more serious than this.
+* Omitting variable bias means that the regression coefficients of the variables that *were not omitted* have the wrong value. 
 * The overall idea is basically the same as saying "correlation does not imply causation" or the notion of spurious correlations.
 * This is also an example of what is called "endogeneity" in regression (etymology: originating from within).
-* In order to avoid omitted variable bias, we want to include more than one predictor in our regression models -- i.e., multiple regression.
+* In order to mitigate omitted variable bias, we want to include more than one predictor in our regression models -- i.e., multiple regression
+
 
 ### Omitted variable bias* 
 
