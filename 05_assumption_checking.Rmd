@@ -1,0 +1,35 @@
+#  Assumption Checking {#chapter-5}
+
+```{r, echo = F}
+button <-  "position: relative; 
+            top: -25px; 
+            left: 85%;   
+            color: white;
+            font-weight: bold;
+            background: #4B9CD3;
+            border: 1px #3079ED solid;
+            box-shadow: inset 0 1px 0 #80B0FB"
+```
+
+Recall that the regression population model (Section \@ref(population-model) makes three assumptions about the conditional distributions $Y\mid X$ -- (i.e., the distribution of $Y$ for a fixed value of $X$): 
+
+* Normality (of the conditional distributions)
+* Homeskedasticity (the conditional distributiosn have equal variances)
+* Linearity (of the conditional mean function)
+
+This chapter explains how each of these three assumptions can be checked when doing data analysis with regression. These assumption checks are graphical and informal -- they don't constitute a rigorous test of the assumptions, but they are sufficient for checking whether or not the assumptions are problematic for when interpretting the output of a regression analysis. 
+
+
+## Normality
+
+*  pplot of residuals 
+
+## Homoskedasticity 
+
+* residuals vs fitted
+
+## Linearity 
+
+* also residuals vs fitted
+
+## Sensitivity analysis*  

@@ -194,7 +194,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="3.1" data-path="3.1-regression-and-prediction.html"><a href="3.1-regression-and-prediction.html"><i class="fa fa-check"></i><b>3.1</b> Regression and prediction</a>
 <ul>
-<li class="chapter" data-level="3.1.1" data-path="3.1-regression-and-prediction.html"><a href="3.1-regression-and-prediction.html#more-about-prediction"><i class="fa fa-check"></i><b>3.1.1</b> More about Prediction</a></li>
+<li class="chapter" data-level="3.1.1" data-path="3.1-regression-and-prediction.html"><a href="3.1-regression-and-prediction.html#more-about-prediction"><i class="fa fa-check"></i><b>3.1.1</b> More about prediction</a></li>
+<li class="chapter" data-level="3.1.2" data-path="3.1-regression-and-prediction.html"><a href="3.1-regression-and-prediction.html#regression-toward-the-mean"><i class="fa fa-check"></i><b>3.1.2</b> Regression toward the mean</a></li>
 </ul></li>
 <li class="chapter" data-level="3.2" data-path="3.2-regression-and-causation.html"><a href="3.2-regression-and-causation.html"><i class="fa fa-check"></i><b>3.2</b> Regression and causation</a>
 <ul>
@@ -204,7 +205,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4" data-path="4-chapter-4.html"><a href="4-chapter-4.html"><i class="fa fa-check"></i><b>4</b> Regression with two predictors</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="4.1-semi-partial-correlation.html"><a href="4.1-semi-partial-correlation.html"><i class="fa fa-check"></i><b>4.1</b> Semi partial correlation</a></li>
+<li class="chapter" data-level="4.1" data-path="4.1-an-example-from-ecls.html"><a href="4.1-an-example-from-ecls.html"><i class="fa fa-check"></i><b>4.1</b> An example from ECLS</a></li>
+<li class="chapter" data-level="4.2" data-path="4.2-ols-with-two-predictors.html"><a href="4.2-ols-with-two-predictors.html"><i class="fa fa-check"></i><b>4.2</b> OLS with two predictors</a></li>
+<li class="chapter" data-level="4.3" data-path="4.3-interpreting-the-coefficients.html"><a href="4.3-interpreting-the-coefficients.html"><i class="fa fa-check"></i><b>4.3</b> Interpreting the coefficients</a></li>
+<li class="chapter" data-level="4.4" data-path="4.4-standardized-coefficients.html"><a href="4.4-standardized-coefficients.html"><i class="fa fa-check"></i><b>4.4</b> Standardized coefficients</a></li>
+<li class="chapter" data-level="4.5" data-path="4.5-r-squared-again.html"><a href="4.5-r-squared-again.html"><i class="fa fa-check"></i><b>4.5</b> R-squared (again)</a></li>
+<li class="chapter" data-level="4.6" data-path="4.6-inference-1.html"><a href="4.6-inference-1.html"><i class="fa fa-check"></i><b>4.6</b> Inference</a>
+<ul>
+<li class="chapter" data-level="4.6.1" data-path="4.6-inference-1.html"><a href="4.6-inference-1.html#coefficients"><i class="fa fa-check"></i><b>4.6.1</b> Coefficients</a></li>
+<li class="chapter" data-level="4.6.2" data-path="4.6-inference-1.html"><a href="4.6-inference-1.html#r-squared-1"><i class="fa fa-check"></i><b>4.6.2</b> R-squared</a></li>
+</ul></li>
+<li class="chapter" data-level="4.7" data-path="4.7-exercises-1.html"><a href="4.7-exercises-1.html"><i class="fa fa-check"></i><b>4.7</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -229,7 +240,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="regression-and-causation" class="section level2" number="3.2">
 <h2><span class="header-section-number">3.2</span> Regression and causation</h2>
-<p>A causal interpretation of regression means that that changing <span class="math inline">\(X\)</span> by one unit will change <span class="math inline">\(\mu_{Y|X}\)</span> by <span class="math inline">\(b\)</span> units. Note that this is an assumption about the population model, specifically the conditional expectation function.</p>
+<p>[ Need to clean up notation ]
+A causal interpretation of regression means that that changing <span class="math inline">\(X\)</span> by one unit will change <span class="math inline">\(\mu_{Y|X}\)</span> by <span class="math inline">\(b\)</span> units. Note that this is an assumption about the population model, specifically the conditional expectation function.</p>
 <p>This is a much stronger interpretation than prediction because it requires stronger assumptions. In particular, regression parameters can only be interpreted causally when all variables that are correlated with <span class="math inline">\(Y\)</span> and <span class="math inline">\(X\)</span> are included as predictors in the model.</p>
 <p>When a variable is left out, this is called <em>omitted variable bias</em>. This situation is nicely explained by Gelman and Hill (cite: Gelman), and a modified version of their discussion is provided below. This discussion is a bit technical, but the take-home message is summarized in the following points</p>
 <ul>
@@ -258,7 +270,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 X_2 = \alpha + \beta X_1 + \epsilon. 
 \tag{3.3}
 \]</span></p>
-<p>(Side note: by adding the residual into the model for <span class="math inline">\(X_2\)</span>, we ensure the equality holds for <span class="math inline">\(X_2\)</span> not just <span class="math inline">\(\hat X_2\)</span> – more on this later.)</p>
 <p>Then we use Equation <a href="3.2-regression-and-causation.html#eq:X2">(3.3)</a> to substitute for <span class="math inline">\(X_2\)</span> in Equation <a href="3.2-regression-and-causation.html#eq:2parm">(3.1)</a>,</p>
 <p><span class="math display" id="eq:3parm">\[\begin{align} 
 \hat Y &amp; = a + b_1 X_1 + b_2 X_2 \\

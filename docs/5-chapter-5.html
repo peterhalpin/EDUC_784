@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 4 Regression with Two Predictors | EDUC 784: Regression</title>
+  <title>Chapter 5 Assumption Checking | EDUC 784: Regression</title>
   <meta name="description" content="Course notes for EDUC 784" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 4 Regression with Two Predictors | EDUC 784: Regression" />
+  <meta property="og:title" content="Chapter 5 Assumption Checking | EDUC 784: Regression" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="/images/image1.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="peterhalpin/EDUC_784" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 4 Regression with Two Predictors | EDUC 784: Regression" />
+  <meta name="twitter:title" content="Chapter 5 Assumption Checking | EDUC 784: Regression" />
   
   <meta name="twitter:description" content="Course notes for EDUC 784" />
   <meta name="twitter:image" content="/images/image1.png" />
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="null" type="image/x-icon" />
-<link rel="prev" href="3.3-explanation.html"/>
-<link rel="next" href="4.1-an-example-from-ecls.html"/>
+<link rel="prev" href="4.7-exercises-1.html"/>
+<link rel="next" href="5.1-normality.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.5.1/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -245,16 +245,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="chapter-4" class="section level1" number="4">
-<h1><span class="header-section-number">Chapter 4</span> Regression with Two Predictors</h1>
+<div id="chapter-5" class="section level1" number="5">
+<h1><span class="header-section-number">Chapter 5</span> Assumption Checking</h1>
+<p>Recall that the regression population model (Section <a href="2.5-population-model.html#population-model">2.5</a> makes three assumptions about the conditional distributions <span class="math inline">\(Y\mid X\)</span> – (i.e., the distribution of <span class="math inline">\(Y\)</span> for a fixed value of <span class="math inline">\(X\)</span>):</p>
+<ul>
+<li>Normality (of the conditional distributions)</li>
+<li>Homeskedasticity (the conditional distributiosn have equal variances)</li>
+<li>Linearity (of the conditional mean function)</li>
+</ul>
+<p>This chapter explains how each of these three assumptions can be checked when doing data analysis with regression. These assumption checks are graphical and informal – they don’t constitute a rigorous test of the assumptions, but they are sufficient for checking whether or not the assumptions are problematic for when interpretting the output of a regression analysis.</p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="3.3-explanation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="4.1-an-example-from-ecls.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="4.7-exercises-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="5.1-normality.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -275,7 +282,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/peterhalpin/EDUC_784/edit/master/04_two_predictors.Rmd",
+"link": "https://github.com/peterhalpin/EDUC_784/edit/master/05_assumption_checking.Rmd",
 "text": "Suggest an edit"
 },
 "history": {

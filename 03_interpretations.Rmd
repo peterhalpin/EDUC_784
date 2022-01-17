@@ -1,4 +1,4 @@
-# Interpretations of regression {#chapter-3}
+# Interpretations of Regression {#chapter-3}
 
 ```{r, echo = F}
 button <-  "position: relative; 
@@ -10,9 +10,9 @@ button <-  "position: relative;
             border: 1px #3079ED solid;
             box-shadow: inset 0 1px 0 #80B0FB"
 
-# Reload example
-#load("NELS.RData")
-#attach(NELS)
+# Reload example when knittig just this chapter
+load("NELS.RData")
+attach(NELS)
 set.seed(10)
 index <- sample.int(500, 30)
 ```
@@ -24,7 +24,9 @@ Before moving onto more complicated regression models, let's consider why we mig
 * Causation (focus on $b$)
 * Explanation (focus on $R^2$)
 
-## Regression and prediction 
+By understanding these uses, you will have a better idea of how regression is applicable to your own research. Each of these interpretations also provides a different perspective on the importance of using multiple predictor variables, rather than only a single predictor. 
+
+## Prediction 
 
 ```{r echo=FALSE, results='asis'}
 codefolder::bookdown(init = "hide", style = button)
@@ -42,7 +44,7 @@ When making predictions, we usually want some additional information about how g
 
 \[ s^2_{\hat Y_i} = \frac{SS_{\text{res}}}{N - 2} \left( \frac{1}{N} + \frac{(X_i - \bar X)^2}{(N-1) s^2_X} \right). \] 
 
-The prediction errors for the data in Figure \@ref(fig:fig2) are depicted in Figure \@ref(fig:fig3) as a gray band around the regression line. 
+The prediction errors for the data in Figure \@ref(fig:fig2) are represented in Figure \@ref(fig:fig3) as a gray band around the regression line. 
 
 ```{r, fig3, warning=F, message=F, fig.cap = 'Prediction Error for Example Data.', fig.align = 'center'}
 
@@ -58,27 +60,25 @@ ggplot(NELS[index, ], aes(x = ses, y = achmat08)) +
       
 ```
 
-Notice that the prediction error variance increases with $SS_{\text{res}}$ -- in other words, the larger the residuals (Figure \@ref(fig:fig2)), the worse the prediction error. As we will see in this Section (\@ref(Review)), one way to reduce $SS_{\text{res}}$ is to add more predictors into the model -- i.e., multiple regression.  
+Notice that the prediction error variance increases with $SS_{\text{res}}$ -- in other words, the larger the residuals (see Figure \@ref(fig:fig2)), the worse the prediction error. One way to reduce $SS_{\text{res}}$ is to add more predictors into the model -- i.e., multiple regression (elaborate). 
 
 
-### More about Prediction
+### More about prediction
 
 Prediction was the original use of regression (see https://en.wikipedia.org/wiki/Regression_toward_the_mean#History). More recent methods developed in machine learning also focus mainly on prediction -- although the methods used in machine learning are often more complicated than OLS regression, and the research context is usually quite different, the basic problem is the same. Machine learning has led to the use of out of sample predictions, rather than prediction error, as the main criterion for judging the quality of predictions made from a model. Machine learning has also introduced some new techniques for choosing which potential predictors to include in a model (i.e., "variable selection"). We will touch on these topics later in the course, although our main focus is OLS regression.  
 
-<!--
-Regression towards the mean is a statistical property of predicted scores 
+### Regression toward the mean
 
-This can most easily be seen in the case where Y and X are z-scores (i.e., both variables have M = 0 and SD =1)
+Regression got its name from a statistical property of predicted scores called "regression toward the mean." To explain this property, let's assume $Y$ and $X$ are z-scores (i.e., both variables have $M = 0$ and $SD = 1$). Recall that this implies that $a = 0$ and $b = r_{XY}$, so the regression equation reduces to
 
-Recall that this implies that a = 0 and b = rXY, and consequently 
+\[ \hat Y = r_{XY} X \]
 
-Since |rXY | ≤ 1, the magnitude of the predicted scores must be less than or equal to that of the predictor
+Since $|r_{XY} | ≤ 1$, the absolute value of the $\hat Y$ must be less than or equal to that of $X$. And, since both variables have $M = 0$, this implies that $\hat Y$ is closer to the mean of $Y$ than $X$ is to the mean of $X$. This is what is meant by regression toward the mean.  
 
-In other words: predicted scores are always closer to the mean of Y (MY = 0), than the values of X are to their mean (MX = 0)
--->
 
-## Regression and causation
+## Causation
 
+[ Need to clean up notation ]
 A causal interpretation of regression means that that changing $X$ by one unit will change $\mu_{Y|X}$ by $b$ units. Note that this is an assumption about the population model, specifically the conditional expectation function. 
 
 This is a much stronger interpretation than prediction because it requires stronger assumptions. In particular, regression parameters can only be interpreted causally when all variables that are correlated with $Y$ and $X$ are included as predictors in the model. 
@@ -119,8 +119,6 @@ X_2 = \alpha + \beta X_1 + \epsilon.
 (\#eq:X2)
 \]
 
-(Side note: by adding the residual into the model for $X_2$, we ensure the equality holds for $X_2$ not just $\hat X_2$ -- more on this later.) 
-
 Then we use Equation \@ref(eq:X2) to substitute for $X_2$ in Equation \@ref(eq:2parm), 
 
 \begin{align} 
@@ -148,13 +146,13 @@ Notice that there two special situations in which omitted variable bias is not a
 We will discuss the interpretation of these situations in class. 
 
 
-## Regression and explanation
+## Explanation
 
 In the social sciences, many uses of regression fall somewhere between prediction and causation. We want to do more than just predict outcomes of interest, but we often don't have a basis for making strong assumptions required for causal interpretation of regression coefficients. This gray area between prediction and causation can be referred to as explanation. 
 
 In terms of our example, we might want to explain why eighth graders differ in there Reading Achievement in terms of a large number of potential predictors, such as 
 
-* Student factors
+* Student factors 
   * attendance
   * past academic performance in Reading
   * past academic performance in other subjects (Question: why include this? Hint: see previous section)
@@ -167,8 +165,9 @@ In terms of our example, we might want to explain why eighth graders differ in t
   * Number of books in the household
   * Maternal education
 
-Even this long list leaves out potential omitted variables. But, by including more than one predictor, we can get "closer" to a causal interpretation through "statistical controls" (See Chapter 3). 
+When the goal of an analysis is explanation, it usual to focus on the proportion of variation in the outcome variable that is explained by the predictors, i.e., R-squared. Later in the course we will see how we can systematically study the variance explained by individual predictors, or blocks of > 1 predictor (e.g., student factors, School factors), when we have many predictors / blocks in the model. 
 
-When the goal of an analysis is explanation, it usual to focus on the proportion of variation in the outcome variable that is explained by the predictor(s), i.e., R-squared. 
+Note, that even a long list of predictors such as that above leaves out potential omitted variables. But, by including more than one predictor, we can get "closer" to a causal interpretation through a property of multiple regression called "statistical control." Understanding what is meant by statistical control is the topic of the next chapter
+
 
 

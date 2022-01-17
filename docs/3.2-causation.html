@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 4 Regression with Two Predictors | EDUC 784: Regression</title>
+  <title>3.2 Causation | EDUC 784: Regression</title>
   <meta name="description" content="Course notes for EDUC 784" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 4 Regression with Two Predictors | EDUC 784: Regression" />
+  <meta property="og:title" content="3.2 Causation | EDUC 784: Regression" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="/images/image1.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="peterhalpin/EDUC_784" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 4 Regression with Two Predictors | EDUC 784: Regression" />
+  <meta name="twitter:title" content="3.2 Causation | EDUC 784: Regression" />
   
   <meta name="twitter:description" content="Course notes for EDUC 784" />
   <meta name="twitter:image" content="/images/image1.png" />
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="null" type="image/x-icon" />
-<link rel="prev" href="3.3-explanation.html"/>
-<link rel="next" href="4.1-an-example-from-ecls.html"/>
+<link rel="prev" href="3.1-prediction.html"/>
+<link rel="next" href="3.3-explanation.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.5.1/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -245,16 +245,67 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="chapter-4" class="section level1" number="4">
-<h1><span class="header-section-number">Chapter 4</span> Regression with Two Predictors</h1>
+<div id="causation" class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> Causation</h2>
+<p>[ Need to clean up notation ]
+A causal interpretation of regression means that that changing <span class="math inline">\(X\)</span> by one unit will change <span class="math inline">\(\mu_{Y|X}\)</span> by <span class="math inline">\(b\)</span> units. Note that this is an assumption about the population model, specifically the conditional expectation function.</p>
+<p>This is a much stronger interpretation than prediction because it requires stronger assumptions. In particular, regression parameters can only be interpreted causally when all variables that are correlated with <span class="math inline">\(Y\)</span> and <span class="math inline">\(X\)</span> are included as predictors in the model.</p>
+<p>When a variable is left out, this is called <em>omitted variable bias</em>. This situation is nicely explained by Gelman and Hill (cite: Gelman), and a modified version of their discussion is provided below. This discussion is a bit technical, but the take-home message is summarized in the following points</p>
+<ul>
+<li>When a predictor variable that is correlated with <span class="math inline">\(Y\)</span> and <span class="math inline">\(X\)</span> is left out of a regression model, this is called omitted variable bias.</li>
+<li>The overall idea is basically the same as saying “correlation does not imply causation” or the notion of spurious correlations.</li>
+<li>This is also an example of what is called “endogeneity” in regression (etymology: originating from within).</li>
+<li>In order to avoid omitted variable bias, we want to include more than one predictor in our regression models – i.e., multiple regression.</li>
+</ul>
+<div id="omitted-variable-bias" class="section level3" number="3.2.1">
+<h3><span class="header-section-number">3.2.1</span> Omitted variable bias*</h3>
+<p>We start by assuming a “true” regression model with two predictors. In the context of our example, this means that there is one other variable, in addition to SES, that is important for predicting Reading Achievement. Of course, there are many predictors of Reading Achievement (see Section <a href="#Example-2"><strong>??</strong></a>), but we only need two to explain the problem of omitted variable bias.</p>
+<p>Let’s write the “true” model as:</p>
+<p><span class="math display" id="eq:2parm">\[\begin{equation} 
+\hat Y = a + b_1 X_1 + b_2 X_2 
+\tag{3.1}
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(X_1\)</span> is SES and <span class="math inline">\(X_2\)</span> is any other variable that is correlated with both <span class="math inline">\(Y\)</span> and <span class="math inline">\(X_1\)</span> (e.g., number of books in the household).</p>
+<p>Next, imagine that instead of using the model in <a href="3.2-causation.html#eq:2parm">(3.1)</a>, we analyze the data using the model with just SES. In our example, this would reflect a situation in which we don’t have data on the number of books in the house, so we have to make due with just SES, leading to the usual regression line (Section <a href="2.2-regression-line.html#regression-line">2.2</a>):</p>
+<p><span class="math display" id="eq:1parm">\[ 
+\hat Y = a^* + b^*_1 X_1. 
+\tag{3.2}
+\]</span></p>
+<p>The problem of omitted variable bias is that <span class="math inline">\(b_1 \neq b^*_1\)</span> – i.e., the regression parameter in the true model is not the same as the regression parameter in our data-analytic model with only one predictor. This is perhaps surprising – leaving out the number of books in the household gives us the wrong regression parameter for SES!</p>
+<p>To see why, start by writing <span class="math inline">\(X_2\)</span> as a function of <span class="math inline">\(X_1\)</span>.</p>
+<p><span class="math display" id="eq:X2">\[
+X_2 = \alpha + \beta X_1 + \epsilon. 
+\tag{3.3}
+\]</span></p>
+<p>Then we use Equation <a href="3.2-causation.html#eq:X2">(3.3)</a> to substitute for <span class="math inline">\(X_2\)</span> in Equation <a href="3.2-causation.html#eq:2parm">(3.1)</a>,</p>
+<p><span class="math display" id="eq:3parm">\[\begin{align} 
+\hat Y &amp; = a + b_1 X_1 + b_2 X_2 \\
+\hat Y &amp; = a + b_1 X_1 + b_2 (\alpha + \beta X_1 + \epsilon) \\
+\hat Y &amp; = \color{orange}{(a + \alpha + \epsilon)} + \color{green}{(b_1 + b_2\beta)} X_1. 
+\tag{3.4}
+\end{align}\]</span></p>
+<p>Notice that in the last line of Equation <a href="3.2-causation.html#eq:3parm">(3.4)</a>, <span class="math inline">\(Y\)</span> is predicted using only <span class="math inline">\(X_1\)</span>, so it is equivalent to Equation <a href="3.2-causation.html#eq:1parm">(3.2)</a>. Based on this comparison, we can write</p>
+<ul>
+<li><span class="math inline">\(a^* = \color{orange}{(a + \alpha + \epsilon)}\)</span></li>
+<li><span class="math inline">\(b^*_1 = \color{green}{(b_1 + b_2\beta)}\)</span></li>
+</ul>
+<p>This last equation for <span class="math inline">\(b^*_1\)</span> is what we are interested in. It shows that the regression parameter in our data analytic model using just SES, <span class="math inline">\(b^*_1\)</span>, is not equal to the “true” regression parameter using both predictors, <span class="math inline">\(b_1\)</span>.</p>
+<p>This is what omitted variable means – leaving out <span class="math inline">\(X_2\)</span> in Equation <a href="3.2-causation.html#eq:1parm">(3.2)</a> gives us the wrong regression parameter for <span class="math inline">\(X_1\)</span>. This is one of the main motivations for including more than one predictor variable in a regression model – i.e., to avoid omitted variable bias.</p>
+<p>Notice that there two special situations in which omitted variable bias is not a problem:</p>
+<ul>
+<li>when the two predictors are not linearly related – i.e., <span class="math inline">\(\beta = 0\)</span>, or</li>
+<li>when the second predictor is not linearly related to <span class="math inline">\(Y\)</span> – i.e., <span class="math inline">\(b_2 = 0\)</span>.</li>
+</ul>
+<p>We will discuss the interpretation of these situations in class.</p>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="3.3-explanation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="4.1-an-example-from-ecls.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="3.1-prediction.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="3.3-explanation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -275,7 +326,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/peterhalpin/EDUC_784/edit/master/04_two_predictors.Rmd",
+"link": "https://github.com/peterhalpin/EDUC_784/edit/master/03_interpretations.Rmd",
 "text": "Suggest an edit"
 },
 "history": {

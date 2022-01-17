@@ -194,7 +194,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="3.1" data-path="3.1-regression-and-prediction.html"><a href="3.1-regression-and-prediction.html"><i class="fa fa-check"></i><b>3.1</b> Regression and prediction</a>
 <ul>
-<li class="chapter" data-level="3.1.1" data-path="3.1-regression-and-prediction.html"><a href="3.1-regression-and-prediction.html#more-about-prediction"><i class="fa fa-check"></i><b>3.1.1</b> More about Prediction</a></li>
+<li class="chapter" data-level="3.1.1" data-path="3.1-regression-and-prediction.html"><a href="3.1-regression-and-prediction.html#more-about-prediction"><i class="fa fa-check"></i><b>3.1.1</b> More about prediction</a></li>
+<li class="chapter" data-level="3.1.2" data-path="3.1-regression-and-prediction.html"><a href="3.1-regression-and-prediction.html#regression-toward-the-mean"><i class="fa fa-check"></i><b>3.1.2</b> Regression toward the mean</a></li>
 </ul></li>
 <li class="chapter" data-level="3.2" data-path="3.2-regression-and-causation.html"><a href="3.2-regression-and-causation.html"><i class="fa fa-check"></i><b>3.2</b> Regression and causation</a>
 <ul>
@@ -204,7 +205,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4" data-path="4-chapter-4.html"><a href="4-chapter-4.html"><i class="fa fa-check"></i><b>4</b> Regression with two predictors</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="4.1-semi-partial-correlation.html"><a href="4.1-semi-partial-correlation.html"><i class="fa fa-check"></i><b>4.1</b> Semi partial correlation</a></li>
+<li class="chapter" data-level="4.1" data-path="4.1-an-example-from-ecls.html"><a href="4.1-an-example-from-ecls.html"><i class="fa fa-check"></i><b>4.1</b> An example from ECLS</a></li>
+<li class="chapter" data-level="4.2" data-path="4.2-ols-with-two-predictors.html"><a href="4.2-ols-with-two-predictors.html"><i class="fa fa-check"></i><b>4.2</b> OLS with two predictors</a></li>
+<li class="chapter" data-level="4.3" data-path="4.3-interpreting-the-coefficients.html"><a href="4.3-interpreting-the-coefficients.html"><i class="fa fa-check"></i><b>4.3</b> Interpreting the coefficients</a></li>
+<li class="chapter" data-level="4.4" data-path="4.4-standardized-coefficients.html"><a href="4.4-standardized-coefficients.html"><i class="fa fa-check"></i><b>4.4</b> Standardized coefficients</a></li>
+<li class="chapter" data-level="4.5" data-path="4.5-r-squared-again.html"><a href="4.5-r-squared-again.html"><i class="fa fa-check"></i><b>4.5</b> R-squared (again)</a></li>
+<li class="chapter" data-level="4.6" data-path="4.6-inference-1.html"><a href="4.6-inference-1.html"><i class="fa fa-check"></i><b>4.6</b> Inference</a>
+<ul>
+<li class="chapter" data-level="4.6.1" data-path="4.6-inference-1.html"><a href="4.6-inference-1.html#coefficients"><i class="fa fa-check"></i><b>4.6.1</b> Coefficients</a></li>
+<li class="chapter" data-level="4.6.2" data-path="4.6-inference-1.html"><a href="4.6-inference-1.html#r-squared-1"><i class="fa fa-check"></i><b>4.6.2</b> R-squared</a></li>
+</ul></li>
+<li class="chapter" data-level="4.7" data-path="4.7-exercises-1.html"><a href="4.7-exercises-1.html"><i class="fa fa-check"></i><b>4.7</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -251,8 +262,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Maternal education</li>
 </ul></li>
 </ul>
-<p>Even this long list leaves out potential omitted variables. But, by including more than one predictor, we can get “closer” to a causal interpretation through “statistical controls” (See Chapter 3).</p>
-<p>When the goal of an analysis is explanation, it usual to focus on the proportion of variation in the outcome variable that is explained by the predictor(s), i.e., R-squared.</p>
+<p>When the goal of an analysis is explanation, it usual to focus on the proportion of variation in the outcome variable that is explained by the predictors, i.e., R-squared. Later in the course we will see how we can systematically study the variance explained by individual predictors, or blocks of &gt; 1 predictor (e.g., student factors, School factors), when we have many predictors / blocks in the model.</p>
+<p>Note, that even a long list of predictors such as that above leaves out potential omitted variables. But, by including more than one predictor, we can get “closer” to a causal interpretation through a property of multiple regression called “statistical control.” Understanding what is meant by statistical control is the topic of the next chapter</p>
 
 </div>
 <!-- </div> -->

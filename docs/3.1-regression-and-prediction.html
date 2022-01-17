@@ -194,7 +194,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="3.1" data-path="3.1-regression-and-prediction.html"><a href="3.1-regression-and-prediction.html"><i class="fa fa-check"></i><b>3.1</b> Regression and prediction</a>
 <ul>
-<li class="chapter" data-level="3.1.1" data-path="3.1-regression-and-prediction.html"><a href="3.1-regression-and-prediction.html#more-about-prediction"><i class="fa fa-check"></i><b>3.1.1</b> More about Prediction</a></li>
+<li class="chapter" data-level="3.1.1" data-path="3.1-regression-and-prediction.html"><a href="3.1-regression-and-prediction.html#more-about-prediction"><i class="fa fa-check"></i><b>3.1.1</b> More about prediction</a></li>
+<li class="chapter" data-level="3.1.2" data-path="3.1-regression-and-prediction.html"><a href="3.1-regression-and-prediction.html#regression-toward-the-mean"><i class="fa fa-check"></i><b>3.1.2</b> Regression toward the mean</a></li>
 </ul></li>
 <li class="chapter" data-level="3.2" data-path="3.2-regression-and-causation.html"><a href="3.2-regression-and-causation.html"><i class="fa fa-check"></i><b>3.2</b> Regression and causation</a>
 <ul>
@@ -204,7 +205,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4" data-path="4-chapter-4.html"><a href="4-chapter-4.html"><i class="fa fa-check"></i><b>4</b> Regression with two predictors</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="4.1-semi-partial-correlation.html"><a href="4.1-semi-partial-correlation.html"><i class="fa fa-check"></i><b>4.1</b> Semi partial correlation</a></li>
+<li class="chapter" data-level="4.1" data-path="4.1-an-example-from-ecls.html"><a href="4.1-an-example-from-ecls.html"><i class="fa fa-check"></i><b>4.1</b> An example from ECLS</a></li>
+<li class="chapter" data-level="4.2" data-path="4.2-ols-with-two-predictors.html"><a href="4.2-ols-with-two-predictors.html"><i class="fa fa-check"></i><b>4.2</b> OLS with two predictors</a></li>
+<li class="chapter" data-level="4.3" data-path="4.3-interpreting-the-coefficients.html"><a href="4.3-interpreting-the-coefficients.html"><i class="fa fa-check"></i><b>4.3</b> Interpreting the coefficients</a></li>
+<li class="chapter" data-level="4.4" data-path="4.4-standardized-coefficients.html"><a href="4.4-standardized-coefficients.html"><i class="fa fa-check"></i><b>4.4</b> Standardized coefficients</a></li>
+<li class="chapter" data-level="4.5" data-path="4.5-r-squared-again.html"><a href="4.5-r-squared-again.html"><i class="fa fa-check"></i><b>4.5</b> R-squared (again)</a></li>
+<li class="chapter" data-level="4.6" data-path="4.6-inference-1.html"><a href="4.6-inference-1.html"><i class="fa fa-check"></i><b>4.6</b> Inference</a>
+<ul>
+<li class="chapter" data-level="4.6.1" data-path="4.6-inference-1.html"><a href="4.6-inference-1.html#coefficients"><i class="fa fa-check"></i><b>4.6.1</b> Coefficients</a></li>
+<li class="chapter" data-level="4.6.2" data-path="4.6-inference-1.html"><a href="4.6-inference-1.html#r-squared-1"><i class="fa fa-check"></i><b>4.6.2</b> R-squared</a></li>
+</ul></li>
+<li class="chapter" data-level="4.7" data-path="4.7-exercises-1.html"><a href="4.7-exercises-1.html"><i class="fa fa-check"></i><b>4.7</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -261,37 +272,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>When we are interested in using values of <span class="math inline">\(X\)</span> to make predictions about (yet unobserved) values of <span class="math inline">\(Y\)</span>, we use <span class="math inline">\(\hat Y\)</span> as our guess. This is why <span class="math inline">\(\hat Y\)</span> is called the “predicted value” of <span class="math inline">\(Y\)</span>.</p>
 <p>When making predictions, we usually want some additional information about how good the predictions will be. In OLS regression, this information is provided by the prediction error variance (cite: Fox)</p>
 <p><span class="math display">\[ s^2_{\hat Y_i} = \frac{SS_{\text{res}}}{N - 2} \left( \frac{1}{N} + \frac{(X_i - \bar X)^2}{(N-1) s^2_X} \right). \]</span></p>
-<p>The prediction errors for the data in Figure <a href="2.2-regression-line.html#fig:fig2">2.2</a> are depicted in Figure <a href="3.1-regression-and-prediction.html#fig:fig3">3.1</a> as a gray band around the regression line.</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="3.1-regression-and-prediction.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using a different plotting library that adds prediction error bands (need to double check computation)</span></span>
-<span id="cb46-2"><a href="3.1-regression-and-prediction.html#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb46-3"><a href="3.1-regression-and-prediction.html#cb46-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-4"><a href="3.1-regression-and-prediction.html#cb46-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(NELS[index, ], <span class="fu">aes</span>(<span class="at">x =</span> ses, <span class="at">y =</span> achmat08)) <span class="sc">+</span> </span>
-<span id="cb46-5"><a href="3.1-regression-and-prediction.html#cb46-5" aria-hidden="true" tabindex="-1"></a>               <span class="fu">geom_point</span>(<span class="at">color=</span><span class="st">&#39;#3B9CD3&#39;</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span> </span>
-<span id="cb46-6"><a href="3.1-regression-and-prediction.html#cb46-6" aria-hidden="true" tabindex="-1"></a>               <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm, <span class="at">color =</span> <span class="st">&quot;grey35&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb46-7"><a href="3.1-regression-and-prediction.html#cb46-7" aria-hidden="true" tabindex="-1"></a>               <span class="fu">ylab</span>(<span class="st">&quot;Reading Achievement (Grade 8)&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb46-8"><a href="3.1-regression-and-prediction.html#cb46-8" aria-hidden="true" tabindex="-1"></a>               <span class="fu">xlab</span>(<span class="st">&quot;SES&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb46-9"><a href="3.1-regression-and-prediction.html#cb46-9" aria-hidden="true" tabindex="-1"></a>               <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p>The prediction errors for the data in Figure <a href="#fig:fig2"><strong>??</strong></a> are represented in Figure <a href="3.1-regression-and-prediction.html#fig:fig3">3.1</a> as a gray band around the regression line.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="3.1-regression-and-prediction.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using a different plotting library that adds prediction error bands (need to double check computation)</span></span>
+<span id="cb1-2"><a href="3.1-regression-and-prediction.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-3"><a href="3.1-regression-and-prediction.html#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="3.1-regression-and-prediction.html#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(NELS[index, ], <span class="fu">aes</span>(<span class="at">x =</span> ses, <span class="at">y =</span> achmat08)) <span class="sc">+</span> </span>
+<span id="cb1-5"><a href="3.1-regression-and-prediction.html#cb1-5" aria-hidden="true" tabindex="-1"></a>               <span class="fu">geom_point</span>(<span class="at">color=</span><span class="st">&#39;#3B9CD3&#39;</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span> </span>
+<span id="cb1-6"><a href="3.1-regression-and-prediction.html#cb1-6" aria-hidden="true" tabindex="-1"></a>               <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm, <span class="at">color =</span> <span class="st">&quot;grey35&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb1-7"><a href="3.1-regression-and-prediction.html#cb1-7" aria-hidden="true" tabindex="-1"></a>               <span class="fu">ylab</span>(<span class="st">&quot;Reading Achievement (Grade 8)&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb1-8"><a href="3.1-regression-and-prediction.html#cb1-8" aria-hidden="true" tabindex="-1"></a>               <span class="fu">xlab</span>(<span class="st">&quot;SES&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb1-9"><a href="3.1-regression-and-prediction.html#cb1-9" aria-hidden="true" tabindex="-1"></a>               <span class="fu">theme_bw</span>()</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:fig3"></span>
 <img src="_main_files/figure-html/fig3-1.png" alt="Prediction Error for Example Data." width="672" />
 <p class="caption">
 Figure 3.1: Prediction Error for Example Data.
 </p>
 </div>
-<p>Notice that the prediction error variance increases with <span class="math inline">\(SS_{\text{res}}\)</span> – in other words, the larger the residuals (Figure <a href="2.2-regression-line.html#fig:fig2">2.2</a>), the worse the prediction error. As we will see in this Section (<a href="#Review"><strong>??</strong></a>), one way to reduce <span class="math inline">\(SS_{\text{res}}\)</span> is to add more predictors into the model – i.e., multiple regression.</p>
+<p>Notice that the prediction error variance increases with <span class="math inline">\(SS_{\text{res}}\)</span> – in other words, the larger the residuals (see Figure <a href="#fig:fig2"><strong>??</strong></a>), the worse the prediction error. One way to reduce <span class="math inline">\(SS_{\text{res}}\)</span> is to add more predictors into the model – i.e., multiple regression (elaborate).</p>
 <div id="more-about-prediction" class="section level3" number="3.1.1">
-<h3><span class="header-section-number">3.1.1</span> More about Prediction</h3>
+<h3><span class="header-section-number">3.1.1</span> More about prediction</h3>
 <p>Prediction was the original use of regression (see <a href="https://en.wikipedia.org/wiki/Regression_toward_the_mean#History" class="uri">https://en.wikipedia.org/wiki/Regression_toward_the_mean#History</a>). More recent methods developed in machine learning also focus mainly on prediction – although the methods used in machine learning are often more complicated than OLS regression, and the research context is usually quite different, the basic problem is the same. Machine learning has led to the use of out of sample predictions, rather than prediction error, as the main criterion for judging the quality of predictions made from a model. Machine learning has also introduced some new techniques for choosing which potential predictors to include in a model (i.e., “variable selection”). We will touch on these topics later in the course, although our main focus is OLS regression.</p>
-<!--
-Regression towards the mean is a statistical property of predicted scores 
-
-This can most easily be seen in the case where Y and X are z-scores (i.e., both variables have M = 0 and SD =1)
-
-Recall that this implies that a = 0 and b = rXY, and consequently 
-
-Since |rXY | ≤ 1, the magnitude of the predicted scores must be less than or equal to that of the predictor
-
-In other words: predicted scores are always closer to the mean of Y (MY = 0), than the values of X are to their mean (MX = 0)
--->
+</div>
+<div id="regression-toward-the-mean" class="section level3" number="3.1.2">
+<h3><span class="header-section-number">3.1.2</span> Regression toward the mean</h3>
+<p>Regression got its name from a statistical property of predicted scores called “regression toward the mean.” To explain this property, let’s assume <span class="math inline">\(Y\)</span> and <span class="math inline">\(X\)</span> are z-scores (i.e., both variables have <span class="math inline">\(M = 0\)</span> and <span class="math inline">\(SD = 1\)</span>). Recall that this implies that <span class="math inline">\(a = 0\)</span> and <span class="math inline">\(b = r_{XY}\)</span>, so the regression equation reduces to</p>
+<p><span class="math display">\[ \hat Y = r_{XY} X \]</span></p>
+<p>Since <span class="math inline">\(|r_{XY} | ≤ 1\)</span>, the absolute value of the <span class="math inline">\(\hat Y\)</span> must be less than or equal to that of <span class="math inline">\(X\)</span>. And, since both variables have <span class="math inline">\(M = 0\)</span>, this implies that <span class="math inline">\(\hat Y\)</span> is closer to the mean of <span class="math inline">\(Y\)</span> than <span class="math inline">\(X\)</span> is to the mean of <span class="math inline">\(X\)</span>. This is what is meant by regression toward the mean.</p>
 </div>
 </div>
             </section>

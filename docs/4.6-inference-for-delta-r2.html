@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 4 Regression with Two Predictors | EDUC 784: Regression</title>
+  <title>4.6 Inference for \(\Delta R^2\) | EDUC 784: Regression</title>
   <meta name="description" content="Course notes for EDUC 784" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 4 Regression with Two Predictors | EDUC 784: Regression" />
+  <meta property="og:title" content="4.6 Inference for \(\Delta R^2\) | EDUC 784: Regression" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="/images/image1.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="peterhalpin/EDUC_784" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 4 Regression with Two Predictors | EDUC 784: Regression" />
+  <meta name="twitter:title" content="4.6 Inference for \(\Delta R^2\) | EDUC 784: Regression" />
   
   <meta name="twitter:description" content="Course notes for EDUC 784" />
   <meta name="twitter:image" content="/images/image1.png" />
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="null" type="image/x-icon" />
-<link rel="prev" href="3.3-explanation.html"/>
-<link rel="next" href="4.1-an-example-from-ecls.html"/>
+<link rel="prev" href="4.5-r-squared-change-delta-r2.html"/>
+<link rel="next" href="references.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.5.1/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -55,70 +55,6 @@
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
-<style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-</style>
 
 
 <link rel="stylesheet" href="style.css" type="text/css" />
@@ -190,39 +126,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.13.8" data-path="2.13-review.html"><a href="2.13-review.html#working-in-r"><i class="fa fa-check"></i><b>2.13.8</b> Working in R</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="3-chapter-3.html"><a href="3-chapter-3.html"><i class="fa fa-check"></i><b>3</b> Interpretations of Regression</a>
+<li class="chapter" data-level="3" data-path="3-chapter-3.html"><a href="3-chapter-3.html"><i class="fa fa-check"></i><b>3</b> Interpretations of regression</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="3.1-prediction.html"><a href="3.1-prediction.html"><i class="fa fa-check"></i><b>3.1</b> Prediction</a>
+<li class="chapter" data-level="3.1" data-path="3.1-regression-and-prediction.html"><a href="3.1-regression-and-prediction.html"><i class="fa fa-check"></i><b>3.1</b> Regression and prediction</a>
 <ul>
-<li class="chapter" data-level="3.1.1" data-path="3.1-prediction.html"><a href="3.1-prediction.html#more-about-prediction"><i class="fa fa-check"></i><b>3.1.1</b> More about prediction</a></li>
-<li class="chapter" data-level="3.1.2" data-path="3.1-prediction.html"><a href="3.1-prediction.html#regression-toward-the-mean"><i class="fa fa-check"></i><b>3.1.2</b> Regression toward the mean</a></li>
+<li class="chapter" data-level="3.1.1" data-path="3.1-regression-and-prediction.html"><a href="3.1-regression-and-prediction.html#more-about-prediction"><i class="fa fa-check"></i><b>3.1.1</b> More about prediction</a></li>
+<li class="chapter" data-level="3.1.2" data-path="3.1-regression-and-prediction.html"><a href="3.1-regression-and-prediction.html#regression-toward-the-mean"><i class="fa fa-check"></i><b>3.1.2</b> Regression toward the mean</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="3.2-causation.html"><a href="3.2-causation.html"><i class="fa fa-check"></i><b>3.2</b> Causation</a>
+<li class="chapter" data-level="3.2" data-path="3.2-regression-and-causation.html"><a href="3.2-regression-and-causation.html"><i class="fa fa-check"></i><b>3.2</b> Regression and causation</a>
 <ul>
-<li class="chapter" data-level="3.2.1" data-path="3.2-causation.html"><a href="3.2-causation.html#omitted-variable-bias"><i class="fa fa-check"></i><b>3.2.1</b> Omitted variable bias*</a></li>
+<li class="chapter" data-level="3.2.1" data-path="3.2-regression-and-causation.html"><a href="3.2-regression-and-causation.html#omitted-variable-bias"><i class="fa fa-check"></i><b>3.2.1</b> Omitted variable bias*</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="3.3-explanation.html"><a href="3.3-explanation.html"><i class="fa fa-check"></i><b>3.3</b> Explanation</a></li>
+<li class="chapter" data-level="3.3" data-path="3.3-regression-and-explanation.html"><a href="3.3-regression-and-explanation.html"><i class="fa fa-check"></i><b>3.3</b> Regression and explanation</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="4-chapter-4.html"><a href="4-chapter-4.html"><i class="fa fa-check"></i><b>4</b> Regression with Two Predictors</a>
+<li class="chapter" data-level="4" data-path="4-chapter-4.html"><a href="4-chapter-4.html"><i class="fa fa-check"></i><b>4</b> Regression with two predictors</a>
 <ul>
 <li class="chapter" data-level="4.1" data-path="4.1-an-example-from-ecls.html"><a href="4.1-an-example-from-ecls.html"><i class="fa fa-check"></i><b>4.1</b> An example from ECLS</a></li>
 <li class="chapter" data-level="4.2" data-path="4.2-ols-with-two-predictors.html"><a href="4.2-ols-with-two-predictors.html"><i class="fa fa-check"></i><b>4.2</b> OLS with two predictors</a></li>
 <li class="chapter" data-level="4.3" data-path="4.3-interpreting-the-coefficients.html"><a href="4.3-interpreting-the-coefficients.html"><i class="fa fa-check"></i><b>4.3</b> Interpreting the coefficients</a></li>
 <li class="chapter" data-level="4.4" data-path="4.4-standardized-coefficients.html"><a href="4.4-standardized-coefficients.html"><i class="fa fa-check"></i><b>4.4</b> Standardized coefficients</a></li>
-<li class="chapter" data-level="4.5" data-path="4.5-r-squared-again.html"><a href="4.5-r-squared-again.html"><i class="fa fa-check"></i><b>4.5</b> R-squared (again)</a></li>
-<li class="chapter" data-level="4.6" data-path="4.6-inference-1.html"><a href="4.6-inference-1.html"><i class="fa fa-check"></i><b>4.6</b> Inference</a>
-<ul>
-<li class="chapter" data-level="4.6.1" data-path="4.6-inference-1.html"><a href="4.6-inference-1.html#coefficients"><i class="fa fa-check"></i><b>4.6.1</b> Coefficients</a></li>
-<li class="chapter" data-level="4.6.2" data-path="4.6-inference-1.html"><a href="4.6-inference-1.html#r-squared-1"><i class="fa fa-check"></i><b>4.6.2</b> R-squared</a></li>
-</ul></li>
-<li class="chapter" data-level="4.7" data-path="4.7-exercises-1.html"><a href="4.7-exercises-1.html"><i class="fa fa-check"></i><b>4.7</b> Exercises</a></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="5-chapter-5.html"><a href="5-chapter-5.html"><i class="fa fa-check"></i><b>5</b> Assumption Checking</a>
-<ul>
-<li class="chapter" data-level="5.1" data-path="5.1-normality.html"><a href="5.1-normality.html"><i class="fa fa-check"></i><b>5.1</b> Normality</a></li>
-<li class="chapter" data-level="5.2" data-path="5.2-homoskedasticity.html"><a href="5.2-homoskedasticity.html"><i class="fa fa-check"></i><b>5.2</b> Homoskedasticity</a></li>
-<li class="chapter" data-level="5.3" data-path="5.3-linearity.html"><a href="5.3-linearity.html"><i class="fa fa-check"></i><b>5.3</b> Linearity</a></li>
-<li class="chapter" data-level="5.4" data-path="5.4-sensitivity-analysis.html"><a href="5.4-sensitivity-analysis.html"><i class="fa fa-check"></i><b>5.4</b> Sensitivity analysis*</a></li>
+<li class="chapter" data-level="4.5" data-path="4.5-r-squared-change-delta-r2.html"><a href="4.5-r-squared-change-delta-r2.html"><i class="fa fa-check"></i><b>4.5</b> R-squared change (<span class="math inline">\(\Delta R^2\)</span>)</a></li>
+<li class="chapter" data-level="4.6" data-path="4.6-inference-for-delta-r2.html"><a href="4.6-inference-for-delta-r2.html"><i class="fa fa-check"></i><b>4.6</b> Inference for <span class="math inline">\(\Delta R^2\)</span></a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -245,16 +169,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="chapter-4" class="section level1" number="4">
-<h1><span class="header-section-number">Chapter 4</span> Regression with Two Predictors</h1>
+<div id="inference-for-delta-r2" class="section level2" number="4.6">
+<h2><span class="header-section-number">4.6</span> Inference for <span class="math inline">\(\Delta R^2\)</span></h2>
+
 </div>
+<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-<a href="3.3-explanation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="4.1-an-example-from-ecls.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="4.5-r-squared-change-delta-r2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
