@@ -19,6 +19,8 @@ The focus of this course is linear regression with multiple predictors (AKA *mul
 codefolder::bookdown(init = "hide", style = button)
 ```
 
+<!-- Oops! The example used math instead of reading! Also, replace this example with ECLS fro Chapter 4 --> 
+
 Figure \@ref(fig:fig1) shows the relationship between Grade 8 Reading Achievement (percent correct on a reading test) and Socioeconomic Status (SES; a composite measure on a scale from 0-35). The data are a subsample of the 1988 National Educational Longitudinal Survey (NELS; see https://nces.ed.gov/surveys/nels88/). 
 
 ```{r fig1, fig.cap = 'Reading Achievement and SES (NELS88).', fig.align = 'center'}
