@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>2.3 OLS | EDUC 784: Regression</title>
+  <title>2.12 Review | EDUC 784: Regression</title>
   <meta name="description" content="Course notes for EDUC 784" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="2.3 OLS | EDUC 784: Regression" />
+  <meta property="og:title" content="2.12 Review | EDUC 784: Regression" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="/images/image1.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="peterhalpin/EDUC_784" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="2.3 OLS | EDUC 784: Regression" />
+  <meta name="twitter:title" content="2.12 Review | EDUC 784: Regression" />
   
   <meta name="twitter:description" content="Course notes for EDUC 784" />
   <meta name="twitter:image" content="/images/image1.png" />
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="null" type="image/x-icon" />
-<link rel="prev" href="2.2-regression-line.html"/>
-<link rel="next" href="2.4-r-squared.html"/>
+<link rel="prev" href="2.11-exercises.html"/>
+<link rel="next" href="3-chapter-3.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.5.1/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -259,74 +259,77 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="ols" class="section level2" number="2.3">
-<h2><span class="header-section-number">2.3</span> OLS</h2>
-<input onclick="codefolder(&#39;pre.sourceCode&#39;);" type="button" value="Hide Code" id="codefolder-button" style="position: relative; &#10;            top: -25px; &#10;            left: 85%;   &#10;            color: white;&#10;            font-weight: bold;&#10;            background: #4B9CD3;&#10;            border: 1px #3079ED solid;&#10;            box-shadow: inset 0 1px 0 #80B0FB"/>
-<script>
-  function codefolder(query) {
-
-    var x = document.querySelectorAll(query);
-    if (x.length === 0) return;
-
-    function toggle_vis(o) {
-      var d = o.style.display;
-      o.style.display = (d === 'block' || d === '') ? 'none':'block';
-    }
-
-    for (i = 0; i < x.length; i++) {
-      var y = x[i];
-      toggle_vis(y);
-    }
-
-    var elem = document.getElementById("codefolder-button");
-    if (elem.value === "Hide Code") elem.value = "Show Code";
-    else elem.value = "Hide Code";
-  }
-</script>
-<script>
-  window.addEventListener('load', function () {
-    codefolder('pre.sourceCode');
-  });
-</script>
-<p>Intuitively, one approach to “fitting a line to the data” is to select the parameters of the line (its slope and intercept) to minimize the residuals. In ordinary least squares (OLS) regression, we minimize a related quantity, the sum of squared residuals:</p>
-<p><span class="math display">\[
-\begin{align} 
-SS_{\text{res}} &amp; = \sum_{i=1}^{N} e_i^2 \\ 
-&amp; = \sum_{i=1}^{N} (Y_i - a - b X_i)^2 
-\end{align} 
-\]</span></p>
-<p>where <span class="math inline">\(i = 1 \dots N\)</span> indexes the respondents in the sample. OLS regression is very widely used and is the main focus of this course, although we will visit some other approaches (notably logistic regression) in the second half of the course.</p>
-<p>Solving the minimization problem (i.e., doing the calculus) gives the following equations for the regression parameters</p>
-<p><span class="math display">\[ 
-a = \bar Y - b \bar X \quad \quad \quad \quad b = \frac{\text{Cov}(X, Y)}{s^2_X} = r_{XY} \frac{s_X}{s_Y}
-\]</span></p>
-<p>(If you aren’t familiar with the symbols in these equations, check out the review materials in Section <a href="2.12-review.html#review">2.12</a> for a refresher.)</p>
-<p>For the NELS example, the regression intercept and slope are, respectively:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="2.3-ols.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(mod)</span></code></pre></div>
-<pre><code>## (Intercept)         ses 
-##       48.68        0.43</code></pre>
-<p><strong>Please write down an interpretation of these numbers in terms of the line in Figure <a href="2.1-an-example-from-nels.html#fig:fig1">2.1</a>, and be prepared to share your answers in class!</strong></p>
-<div id="correlation-and-regression" class="section level3" number="2.3.1">
-<h3><span class="header-section-number">2.3.1</span> Correlation and regression</h3>
-<p>Note that if <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are transformed to z-scores (i.e., to have mean of zero and variance of one), then</p>
+<div id="review" class="section level2" number="2.12">
+<h2><span class="header-section-number">2.12</span> Review</h2>
+<div id="summation-algebra" class="section level3" number="2.12.1">
+<h3><span class="header-section-number">2.12.1</span> Summation algebra</h3>
 <ul>
-<li><span class="math inline">\(a = 0\)</span></li>
-<li><span class="math inline">\(b = \text{Cov}(X, Y) = r_{XY}\)</span></li>
+<li>Notation</li>
+<li>3 Rules</li>
 </ul>
-<p>So, regression, correlation, and covariance are all very closely related when we consider only two variables at a time. This is why we didn’t make a big deal about simple regression in EDUC 710. But when we get to multiple regression (i.e., more than one <span class="math inline">\(X\)</span> variable), we will see that relationship between regression and correlation (and covariance) gets more complicated.</p>
-<!-- ## Residuals 
-- show that Cor(\hatY e) = 0  and explain why that is important
-- talk about standard error of estimate and how its used
--->
+</div>
+<div id="sample-statistics" class="section level3" number="2.12.2">
+<h3><span class="header-section-number">2.12.2</span> Sample statistics</h3>
+<ul>
+<li>Notation and formula’s</li>
+<li>R code</li>
+</ul>
+</div>
+<div id="bias-and-precision" class="section level3" number="2.12.3">
+<h3><span class="header-section-number">2.12.3</span> Bias and precision</h3>
+<ul>
+<li>Sampling distributions</li>
+<li>Expected values and bias</li>
+<li>Standard errors and precision</li>
+</ul>
+</div>
+<div id="t-tests-1" class="section level3" number="2.12.4">
+<h3><span class="header-section-number">2.12.4</span> t-tests</h3>
+<ul>
+<li>Conceptual formula</li>
+<li>Null distribution</li>
+<li>Setting alpha</li>
+<li>Making a decision</li>
+<li>Interpretation</li>
+<li>R example</li>
+</ul>
+</div>
+<div id="confidence-intervals-1" class="section level3" number="2.12.5">
+<h3><span class="header-section-number">2.12.5</span> Confidence intervals</h3>
+<ul>
+<li>Conceptual formula</li>
+<li>Interpretation</li>
+<li>Relation to hypothesis tests</li>
+<li>R example</li>
+</ul>
+</div>
+<div id="f-tests-1" class="section level3" number="2.12.6">
+<h3><span class="header-section-number">2.12.6</span> F-tests</h3>
+<ul>
+<li>Conceptual formula</li>
+<li>Interpretation</li>
+<li>R example</li>
+</ul>
+</div>
+<div id="apa-reporting" class="section level3" number="2.12.7">
+<h3><span class="header-section-number">2.12.7</span> APA reporting</h3>
+</div>
+<div id="working-in-r" class="section level3" number="2.12.8">
+<h3><span class="header-section-number">2.12.8</span> Working in R</h3>
+<ul>
+<li>Hmmm</li>
+</ul>
+
 </div>
 </div>
+<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-<a href="2.2-regression-line.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="2.4-r-squared.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="2.11-exercises.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="3-chapter-3.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

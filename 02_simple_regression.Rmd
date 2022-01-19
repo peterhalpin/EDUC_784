@@ -143,6 +143,11 @@ Note that if $X$ and $Y$ are transformed to z-scores (i.e., to have mean of zero
 
 So, regression, correlation, and covariance are all very closely related when we consider only two variables at a time. This is why we didn't make a big deal about simple regression in EDUC 710. But when we get to multiple regression (i.e., more than one $X$ variable), we will see that relationship between regression and correlation (and covariance) gets more complicated.  
 
+<!-- ## Residuals 
+- show that Cor(\hatY e) = 0  and explain why that is important
+- talk about standard error of estimate and how its used
+-->
+
 ## R-squared
 ```{r, echo=FALSE, results='asis'}
 codefolder::bookdown(init = "hide", style = button)
@@ -289,7 +294,7 @@ When the population model is true, $\widehat b$ is an unbiased estimate of $b$. 
 
 \[ s_{\widehat b} = \frac{s_Y}{s_X} \sqrt{\frac{1-R^2}{N-2}} . \]
 
-Using these two results, we can compute t-tests and confidence intervals for the regression slope in the usual way. These are summarized below. See the review in Section \@ref(review) for background information on bias, precision, t-tests, and confidence intervals.
+Using these two results, we can compute t-tests and confidence intervals for the regression slope in the usual way. These are summarized below. See the review in Section \@ref(review) for background information on bias, standard errors, t-tests, and confidence intervals.
 
 ### t-tests
 
@@ -396,40 +401,47 @@ pwr.f2.test(u = 1, v = 498, sig.level = .05, power = .8)
 
 **Please write down an interpretation of this power analysis, and be prepared to share your answers in class!**
 
-## End of readings for second class
-
 ## Exercises 
 
-We will work through this section in class together. It is currently under construction. 
+These exercises collect all of the R input used in this chapter in one step-by-step analysis, explain how the R input works, and provides some some additional exercises to work on. We will go through this material in class together. 
 
 ### The `lm` function
 
-The function`lm`, short for "linear model", can estimate linear regressions using OLS and provide a lot of useful output. The main argument that the user provides to the `lm` function is a formula. For the simple regression of Y on X, a formula has the syntax
+The function`lm`, short for "linear model", is used to estimate linear regressions using OLS. It also provides a lot of useful output. 
+
+The main argument that the user provides to the `lm` function is a formula. For the simple regression of Y on X, a formula has the syntax:
 
 `Y ~ X `
 
-Here `Y` denotes the outcome variable, the tilde `~` roughly means "equals", and `X` is the predictor variable. We will see more complicated formulas as we go through the course. For more information on R's formula syntax, see `help(formula)`. 
+Here `Y` denotes the outcome variable and `X` is the predictor variable. The tilde `~` just means "equals", but the equals sign `=` is already used to assign values in R, so `~` is used in its place when writing a formula.  We will see more complicated formulas as we go through the course. For more information on R's formula syntax, see `help(formula)`. 
 
-Let's take a closer look using the following two variables from the NELS data (see Sakai resource folder for more information on the data).
+Let's take a closer look using the following two variables from the NELS data, which is available on Sakai site for the course. 
   
   * `achmat08`: eighth grade math achievement (percent correct on a math test)
   
   * `ses`: a composite measure of socio-economic status, on a scale from 0-35 
 
 ```{r}
-# Load and attach the data -- see last week's exercises for details 
-#load("NELS.RData")
-#attach(NELS)
+# Load the data. Note that you can click on the .RData file and RStudio will load it
+# load("NELS.RData") #Un-comment this line to run
+
+# Attach the data: will dicuss this in class
+# attach(NELS) #Un-comment this line to run!
+
+# Scatter plot of math achievment against SES
 plot(x = ses, y = achmat08, col = "#4B9CD3")
 
-# Regress math achievement on SES
+# Regress math achievement on SES; save output as "mod"
 mod <- lm(achmat08 ~ ses)
 
 # Print out the regression coefficients
 coef(mod)
+
+# add the regression line to the plot
+abline(mod)
 ```
 
-Let's do some quick calculations to check that the `lm` output corresponds the formulas for the slope and intercept we used in the lesson: 
+Let's do some quick calculations to check that the `lm` output corresponds the formulas for the slope and intercept in Section \@ref(ols): 
 
 $$ a = \bar Y - b \bar X \quad \text{and} \quad b = \frac{\text{Cov}(X, Y)}{s_X^2} $$
 
@@ -448,38 +460,37 @@ a <- ybar - b * xbar
 a
 ```
 
-Let's also check our interpretation of the parameters. If the answers to these questions are not clear, please make sure to ask in class or on the Sakai forum. 
+Let's also check our interpretation of the parameters. If the answers to these questions are not clear, please make sure to ask in class! 
 
-* What is the value of `achmat08` when `ses` is equal to zero? 
+* What is the predicted value of `achmat08` when `ses` is equal to zero? 
 
 * How much do the predicted values of `achmat08` increase for each unit of increase in `ses`? 
 
 ### Predicted values and residuals
 
-The `lm` function also returns the residuals $e_i$ and the predicted values $\widehat{Y_i}$, which we can access using the `$` operator.These will be useful later on for computing R-squared. For now we will just plot the two values to show that the predicted values and the residuals are uncorrelated, which was discussed in class.
+The `lm` function also returns the residuals $e_i$ and the predicted values $\widehat{Y_i}$, which we can access using the `$` operator. These are useful for various reasons, especially model diagnostics which we discuss later in the course. For now, lets take a look at the residual vs fitted plot. 
 
 ```{r}
 yhat <- mod$fitted.values
 res <- mod$resid
 
-# In OLS, the predicted values and the residuals are  uncorrelated:  
 plot(yhat, res, col = "#4B9CD3")
 cor(yhat, res)
 ```
 
+Note that the predicted values are uncorrelated with the residuals -- this is always the case in OLS. 
+
 ### Variance explained
 
-Above we found out that the regression coefficient was 0.4-ish. Is that good? or average? or what? 
+Above we found out that the regression coefficient was 0.4-ish. Another way to describe the relationships is by considering the amount of variation in $Y$ that is associated with (or explained by) its relationship with $X$. Recall that one way to do this is via the variance decomposition
 
-One way to answer that question is by considering the amount of variation in $Y$ that is associated with (or explained by) its relationship with $X$. Recall from our lesson that one way to do this is via the variance decomposition
-
-$$ SS_{total} = SS_{res} + SS_{reg}$$
+$$ SS_{\text{total}} = SS_{\text{res}} + SS_{\text{reg}}$$
 
 from which we can compute the proportion of variation in Y that is associated with the regression model 
 
-$$R^2 = \frac{SS_{reg}}{SS_{total}}$$
+$$R^2 = \frac{SS_{\text{reg}}}{SS_{\text{total}}}$$
 
-Let's compute $R^2$ for our example. 
+Let's compute $R^2$ "by hand" for our example. 
 
 ```{r}
 # Compute the sums of squares
@@ -487,8 +498,7 @@ ybar <- mean(achmat08)
 ss_total <- sum((achmat08 - ybar)^2)
 ss_reg <- sum((yhat - ybar)^2)
 ss_res <-  sum((achmat08 - yhat)^2)
-```
-```{r}
+
 # Check that SS_total = SS_reg + SS_res
 ss_total
 ss_reg + ss_res
@@ -496,16 +506,16 @@ ss_reg + ss_res
 # Compute R-squared
 ss_reg/ss_total
 
-# Check that R-square is really equal to the square of the PPMC
-# Note -- this is only true for simple regression
-ppmc <- cor(achmat08, ses)
-ppmc^2
+# Check that this is the same as the regression output: 
+summary(mod)$r.squared
 
+# Check that R-squared is really equal to the square of the PPMC
+cor(achmat08, ses)^2
 ```
 
 ### Inference
 
-At this point we can say that SES explained about 10% of the variation in eighth grade students' math achievement, in our sample. However, we haven't yet talked aboutstatistical inference, or how we can make conclusions about a population based on a sample from that population. 
+At this point we can say that SES explained about 10% of the variation in eighth grade students' math achievement, in our sample. However, we haven't yet talked about statistical inference, or how we can make conclusions about a population based on a sample from that population. 
 
 Let's use the `summary` function to test the coefficients in our model.
 
@@ -514,9 +524,9 @@ mod <- lm(achmat08 ~ ses)
 summary(mod)
 ```
 
-In the table, the t-test and p-values are for the null hypothesis that the corresponding coefficient is zero in the population. We can see that the intercept and slope are both significantly different from zero. 
+In the table, the t-test and p-values are for the null hypothesis that the corresponding coefficient is zero in the population. We can see that the intercept and slope are both significantly different from zero at the .05 level, however, the test of the slope is not very meaningful. 
 
-The text below the table summarizes the output for R-square, including the F-test, it's degrees of freedom, and the p-value. (We will talk about adjusted R-square later on.) 
+The text below the table summarizes the output for R-squared, including its F-test, it's degrees of freedom, and the p-value. (We will talk about adjusted R-square in Chapter 4) 
 
 We can use the `confint` function to obtain confidence intervals for the regression coefficients. Use `help` to find out more about the `confint` function.
 
@@ -530,11 +540,10 @@ Be sure to remember the correct interpretation of confidence intervals: *there i
 
 Power analyses should ideally be done prospectively -- i.e., before the data are collected. Since this class will work with secondary data analyses, most of our analyses will be retrospective. But don't let this mislead you about the importance of statistical power -- you should always do a power analysis before collecting data!! 
 
-To do a power analsyes in R, we can install and load the `pwr` package. If you haven't installed an R package before it's pretty straight forward -- but just ask course staff or a fellow student if you run into any issues. 
+To do a power analsyes in R, we can install and load the `pwr` package. If you haven't installed an R package before it's pretty straight forward -- but just ask the instructor or a fellow student if you run into any issues. 
 
 ```{r, eval = F}
 # Install the package 
-# Note you may have to select a mirror -- I suggest using Kansas (KS) 
 install.packages("pwr")
 ```
 ```{r}
@@ -559,9 +568,9 @@ In addition to the effect size, we need to know the degrees of freedom for the F
 
 In simple regression, `u = 1` and `v = N - 2`. 
 
-### Example:  A prospective power analysis
 
-How many observations would be required to detect an effet size of R-square = .1, using $\alpha = .05$ and power = .8? To find the answer, enter the provided information into the `pwr.f2.test` function, and the function will solve for the "missing piece" -- in this case $v = N - 2$.
+
+As an example of (prospective) power analysis, let's find out many observations would be required to detect an effet size of R-square = .1, using $\alpha = .05$ and power = .8? To find the answer, enter the provided information into the `pwr.f2.test` function, and the function will solve for the "missing piece" -- in this case $v = N - 2$.
 
 
 ```{r}
@@ -571,7 +580,30 @@ f2 <- R2/(1-R2)
 pwr.f2.test(u = 1, f2 = f2, sig.level = .05, power = .8)
 ```
 
-In this example we find that $v = 70.6$. Since $v = N - 2$, so we know that a sample size of $N = 72.6$ (rounded up to 73) is required to reject the null hypothesis that $R^2 = 0$, when the true popuation value is $R^2 = .1$, with a power of .8 and using a significance level of .05. 
+In this example we find that $v = 70.6$. Since $v = N - 2$, so we know that a sample size of $N = 72.6$ (rounded up to 73) is required to reject the null hypothesis that $R^2 = 0$, when the true population value is $R^2 = .1$, with a power of .8 and using a significance level of .05. 
+
+### Additional exercises
+
+If time permits, we will address these additional exercises in class. If you want more practice with R, please take a look at the review materials (on Sakai as of week 2; will be updated in the following section of the book as time permits). 
+
+These exercises replace `achmat08` with
+
+* `achrdg08`: eighth grade reading achievement (percent correct on a reading test)
+
+Please answer the following questions using R. 
+
+* Plot `achrdg08` against `ses`. Is there any evidence of nonlinearity in the relationship? 
+
+* What is the correlation between `achrdg08` and `ses`? How does it compare to the correlation with Math and SES? 
+
+* How much variation in Reading is explained by SES? Is this more or less than for Math? Is the proportion of variance explained significant at the .05 level? 
+
+* How much do predicted Reading scores increase for a one unit of increase in SES? Is this a statistically significant at the .05 level?
+
+* What are your overall conclusions about the relationship between Academic Achievement and SES in the NELS data? 
+
+
+If you want more practice with R please take a look at the Review materials (on Sakai as of week 2; will be updated in the following section of the book as time permits). 
 
 ## Review {#review}
 
