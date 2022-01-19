@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 5 Assumption Checking | EDUC 784: Regression</title>
+  <title>4.7 (Multiple) R-squared | EDUC 784: Regression</title>
   <meta name="description" content="Course notes for EDUC 784" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 5 Assumption Checking | EDUC 784: Regression" />
+  <meta property="og:title" content="4.7 (Multiple) R-squared | EDUC 784: Regression" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="/images/image1.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="peterhalpin/EDUC_784" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 5 Assumption Checking | EDUC 784: Regression" />
+  <meta name="twitter:title" content="4.7 (Multiple) R-squared | EDUC 784: Regression" />
   
   <meta name="twitter:description" content="Course notes for EDUC 784" />
   <meta name="twitter:image" content="/images/image1.png" />
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="null" type="image/x-icon" />
-<link rel="prev" href="4.10-exercises-1.html"/>
-<link rel="next" href="5.1-normality.html"/>
+<link rel="prev" href="4.6-standardized-coefficients.html"/>
+<link rel="next" href="4.8-inference-for-slopes-4.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -243,23 +243,100 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="chapter-5" class="section level1">
-<h1><span class="header-section-number">Chapter 5</span> Assumption Checking</h1>
-<p>Recall that the regression population model (Section <a href="2.5-population-model.html#population-model">2.5</a> makes three assumptions about the conditional distributions <span class="math inline">\(Y\mid X\)</span> – (i.e., the distribution of <span class="math inline">\(Y\)</span> for a fixed value of <span class="math inline">\(X\)</span>):</p>
+<div id="multiple-r-squared" class="section level2">
+<h2><span class="header-section-number">4.7</span> (Multiple) R-squared</h2>
+<p>R-squared in multiple regression has the same general formula and interpretation as in simple regression:</p>
+<p><span class="math display">\[ R^2 = \frac{SS_{\text{reg}}} {SS_{\text{total}}}. \]</span></p>
+<p>As shown in the previous sections, the R-squared for the ECLS example is equal to .273. <strong>Please write down your interpretation of this value and be prepared to share your answer in class.</strong></p>
+<p>As discussed below, we can also say a bit more about R-squared in multiple regression.</p>
+<div id="the-multiple-correlation" class="section level3">
+<h3><span class="header-section-number">4.7.1</span> The multiple correlation</h3>
+<p><span class="math inline">\(R\)</span>, the square-root of <span class="math inline">\(R^2\)</span>, is called the <em>multiple correlation</em> because</p>
+<p><span class="math display">\[R = \text{Cor}(Y, \widehat Y). \]</span></p>
+<p>It is the correlation between the observed <span class="math inline">\(Y\)</span> values and the predicted <span class="math inline">\(\widehat Y\)</span> values. In simple regression, the multiple correlation is just the same the regular correlation coefficient <span class="math inline">\(r_{XY}\)</span>. But in multiple regression, it is the correlation between the observed <span class="math inline">\(Y\)</span> values and a linear combination of the <span class="math inline">\(X\)</span> values (i.e., <span class="math inline">\(\widehat Y\)</span>), so it gets a special name.</p>
+</div>
+<div id="relation-with-simple-regression" class="section level3">
+<h3><span class="header-section-number">4.7.2</span> Relation with simple regression</h3>
+<p>Like the regression coefficients in Equation <a href="4.4-ols-4.html#eq:2pred">(4.2)</a>, the equation for R-squared can also be written in terms of the correlations among the three variables:</p>
+<p><span class="math display">\[ R^2 = \frac{r^2_{Y1} + r^2_{Y2} - 2 r_{12}r_{Y1}r_{Y2}}{1 - r^2_{12}} \]</span></p>
+<p>If the correlation between the predictors is zero, then we have the simplified formula</p>
+<p><span class="math display">\[ R^2 = r^2_{Y1} + r^2_{Y2}. \]</span></p>
+<p>When the predictors are correlated, either positively or negatively, it can be show that</p>
+<p><span class="math display">\[ R^2 &lt; r^2_{Y1} + r^2_{Y2}. \]</span></p>
+<p>This explains the relationship among the R-squared values in Table <a href="4.3-multiple-vs-simple-regression.html#tab:compare">4.1</a>. The sum of the R-squared values in the simple models is only equal to the R-squared value in the two-predictor when the predictors are not correlated. Otherwise, it the sum is larger than the multiple R-squareds.</p>
+<!-- 
+The conceptual relationships between R-squared and the regression coefficients can be represented in terms of the following Venn diagram. 
+
+<div class="figure" style="text-align: center">
+<img src="images/venn_diagram.png" alt="Shared Variance Among $Y$, $X_1$, and $X_2$." width="272" />
+<p class="caption">(\#fig:venn-diagram)Shared Variance Among $Y$, $X_1$, and $X_2$.</p>
+</div>
+
+The circles represent the variance of each variable and the overlap between circles represents their shared variance. Letting the subscripts $Y.12$, mean that the outcome variable $Y$ is regressed on the predictor variables $X_1$ and $X_2$ (and simiarly for $Y.1$ and $Y.2$), we can use the Venn diagram to write: 
+
+\begin{align}
+R^2_{Y.12} & = \frac{A + B + C}{A + B + C + D} \\ \\
+R^2_{Y.1} & = \frac{A + B}{A + B + C + D} \\ \\
+R^2_{Y.2} & = \frac{B + C}{A + B + C + D} \\ \\
+\end{align}
+
+These equations imply 
+
+\[ R^2_{Y.1} + R^2_{Y.2} = \frac{A + 2B + C}{A + B + C + D} \geq R^2_{Y.12} \] 
+
+This explains the relationship among the R-squared values in Table \@ref(tab:compare). The reason that the sum of the R-squared values in the simple models is greater than the R-squared value in the two-predictor model is because the sum double counts the shared variation among the predictors (area B in the diagram). 
+
+### Relation with $\beta$-weights
+
+The squared standardized coefficients in Section \@ref(standardized-coefficients) are closely related to a quantity called the squared semi-partial correlation: 
+
+\[ r^2_{Y1 \mid 2} = \beta_1^2 * (1 - r^2_{12}) \]
+
+In this notation, the subscript $Y1 \mid 2$ denotes the correlation between $Y$ and $X_1$ after removing the (linear) association between $X_1$ and $X_2$. Similarly for $Y2 \mid 1$. 
+
+The squared semi-partial correspond to the areas in the Venn diagrams as follows
+
+\begin{align}
+r^2_{Y1 \mid 2} & = \frac{A}{A + B + C + D} \\ \\
+r^2_{Y2 \mid 1} & = \frac{B}{A + B + C + D} 
+\end{align}
+
+Using this relationship, we can see that squared semi partials (and hence the \beta-weights) 
+\end{align} \]
+
+-->
+</div>
+<div id="adjusted-r-squared" class="section level3">
+<h3><span class="header-section-number">4.7.3</span> Adjusted R-squared</h3>
+<p>The sample R-squared is an upwardly biased estimate of the population R-squared.
+The cause of the bias for the case of simple regression when <span class="math inline">\(\rho = 0\)</span> is illustrated in the figure below (<span class="math inline">\(\rho\)</span> is the population correlation).</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:adjusted"></span>
+<img src="images/adjusted_rsquared.png" alt="Sampling Distribution of $r$ and $r^2$ when $
+ho = 0$." width="581" />
+<p class="caption">
+Figure 4.2: Sampling Distribution of <span class="math inline">\(r\)</span> and <span class="math inline">\(r^2\)</span> when $
+ho = 0$.
+</p>
+</div>
+<p>For the “un-squared” correlation, <span class="math inline">\(r\)</span>, the sample distribution is centered at the true value <span class="math inline">\(\rho = 0\)</span>, so it is an unbiased estimate of <span class="math inline">\(\rho\)</span>.</p>
+<p>But for the squared correlation, <span class="math inline">\(r^2\)</span>, the mean of the sampling distribution is slightly above zero because all of the random deviations from the population value are in the same direction (because they have been squared). So it is an upwardly biased (i.e., too large) estimate of <span class="math inline">\(\rho^2 = 0\)</span>.</p>
+<p>The adjusted R-squared corrects this bias. The formula is:</p>
+<p><span class="math display">\[ \tilde R^2 = 1 - (1 - R^2) \frac{N-1}{N - J - 1} \]</span></p>
+<p>where <span class="math inline">\(J\)</span> is the number of predictors in the model. It can be seen that the adjustment is larger when</p>
 <ul>
-<li>Normality (of the conditional distributions)</li>
-<li>Homeskedasticity (the conditional distributiosn have equal variances)</li>
-<li>Linearity (of the conditional mean function)</li>
+<li>The number of predictors <span class="math inline">\(J\)</span> is large relative to the sample size <span class="math inline">\(N\)</span>.</li>
+<li>R-squared is closer to zero.</li>
 </ul>
-<p>This chapter explains how each of these three assumptions can be checked when doing data analysis with regression. These assumption checks are graphical and informal – they don’t constitute a rigorous test of the assumptions, but they are sufficient for checking whether or not the assumptions are problematic for when interpretting the output of a regression analysis.</p>
+<p>So, roughly speaking, the adjustment will be more severe when there are a lot of predictors in the model, but the predictors don’t explain a lot of variation in the outcome. In general, adjusted R-squared should be reported whenever it would lead to different substantive conclusions than the un-adjusted value.</p>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="4.10-exercises-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="5.1-normality.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="4.6-standardized-coefficients.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="4.8-inference-for-slopes-4.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -280,7 +357,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/peterhalpin/EDUC_784/edit/master/05_assumption_checking.Rmd",
+"link": "https://github.com/peterhalpin/EDUC_784/edit/master/04_two_predictors.Rmd",
 "text": "Suggest an edit"
 },
 "history": {

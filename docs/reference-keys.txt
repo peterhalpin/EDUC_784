@@ -13,6 +13,8 @@ fig:pairs
 eq:yhat-4
 tab:compare
 eq:2pred
+fig:adjusted
+eq:se-4
 about-this-book
 why-this-book
 how-to-use-this-book
@@ -68,10 +70,13 @@ holding-the-other-predictor-constant
 controlling-for-the-other-predictor
 the-ecls-example
 standardized-coefficients
-r-squared-again
-inference-4
-coefficients
-r-squared-1
+multiple-r-squared
+the-multiple-correlation
+relation-with-simple-regression
+adjusted-r-squared
+inference-for-slopes-4
+comments-on-precision
+inference-for-r-squared
 exercises-1
 chapter-5
 normality
