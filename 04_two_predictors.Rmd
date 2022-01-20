@@ -77,7 +77,7 @@ The correlations reported in Section \@ref(ecls-4) address how the three variabl
 
 As a first step towards answering these questions, the next section contrasts multiple regression with simple regression. 
 
-## Multiple vs simple regression
+## Multiple vs simple regression {#comparison-4}
 
 ```{r, echo=FALSE, results='asis'}
 codefolder::bookdown(init = "hide", style = button)
@@ -225,7 +225,7 @@ summary(mod1)
 There are other interpretation of the regression coefficients, and if time permits we will address them in class (e.g., the correlations among residuals from different models). Also, we can see in the equation for $\widehat Y$ above that the interpretation of the regression intercept is basically the same as for simple regression: it is the value of $\widehat Y$ when $X_1 = 0$ and $X_2 = 0$ (i.e., still not very interesting). 
 -->
 
-## Standardized coefficients {#standardized-coefficients}
+## Standardized coefficients {#beta-4}
 
 ```{r, echo=FALSE, results='asis'}
 codefolder::bookdown(init = "hide", style = button)
@@ -252,7 +252,7 @@ summary(z_mod)
 
 There are a number of potential pitfalls of using Beta coefficients to "ease" the comparison of regression coefficients. In the context of our example, we might wonder whether the overall cost of raising a child's Approaches to Learning by 1 SD is comparable to the overall cost of raising their family's SES by 1 SD. In general, putting variables on the same scale is only a superficial way of making comparisons among their regression coefficients. 
 
-## (Multiple) R-squared
+## (Multiple) R-squared {#rsquared-4}
 R-squared in multiple regression has the same general formula and interpretation as in simple regression: 
 
 \[ R^2 = \frac{SS_{\text{reg}}} {SS_{\text{total}}}. \]
@@ -387,7 +387,7 @@ We can use Equation \@ref(eq:se-4) to understand the factors that influence the 
 
 So, large sample sizes and small residual variance ($1 - R^2$) lead to high precision in multiple regression. On the other hand, including many highly correlated predictors in the model leads to less precision. In particular, the situation where $R^2_j$ approaches the value of $1$ is called *multicollinearity* (or just *collinearity* with 2 predictors). We will talk about multicollinearity in more detail in Chapter \@ref(chapter-6). 
 
-## Inference for R-squared
+## Inference for R-squared{#inference-for-rsquared-4}
 
 The R-squared statistic in multiple regression tells us how much variation in the outcome is explained by all of the predictors together. If the predictors do not explain any variation, then the population R-squared is equal to zero. 
 
@@ -400,6 +400,54 @@ The null hypothesis $H_0 : R^2 = 0$ can be tested using the statistic
 which has an F-distribution on $J$ and $N - J -1$ degrees of freedom when the null hypothesis is true. 
 
 **Using the R output reported in the previous section, please write down your conclusion about the statistical significance of the R-squared statistic in the ECLS example.** 
+
+## Workbook
+
+This section collects the questions asked in this chapter. We will discuss these questions in class. If you haven't written down / thought about the answers to these questions  before class, the lesson will not be very useful for you! So, please attempt to engage with each question by writing down one or more answers, asking clarifying questions, posing follow up questions, etc. 
+
+Section \@ref(ecls-4)
+
+* If you have questions about the interpretation of a correlation matrix (below) or pairwise plots (see Section \@ref(ecls-4)), please write them down now and share them class.
+
+```{r}
+cor(example_data)
+```
+
+Section \@ref(comparison-4)
+
+* The two simple regression models (`Math ~ SES` and `Math ~ ATL`) leave out one of the correlations from Section \@ref(ecls-4) -- which one? Bonus: Explain why this constitutes a case of omitted variable bias.
+
+Section \@ref(interpretation-4)
+
+* Below, the R output from the ECLS example is reported. Please provide a written explanation of the regression coefficients for SES and ATL, using the interpretations from Section\@ref(comparison) and / or any other interpretations you want to talk about. If you have questions about how to interpret the coefficients, also note them now. And, please be prepared to share your thoughts in class!
+
+```{r}
+summary(mod1)
+```
+
+Section \@ref(beta-4)
+
+* Please write down an interpretation of the of beta coefficients in the above output. Your interpretation should include reference to the fact that the variables have been standardized. Please be prepared to share your interpretation / questions in class!
+
+```{r}
+summary(z_mod)
+```
+
+Section \@ref(rsquared-4)
+
+* The R-squared for the ECLS example is equal to .273. Please write down your interpretation of this value and be prepared to share your answer in class.
+
+
+Section \@ref(inference-for-slopes-4)
+
+* Look at the R output for the ECLS example above again (either one). Please write down your conclusions about the statistical significance of the predictors and be prepared to share your answer in class.
+
+Section \@ref(inference-for-rsquared-4)
+
+* Look at the R output for the ECLS example above again (either one). Please write down your conclusion about the statistical significance of the R-squared statistic in the ECLS example.
+
+
+
 
 ## Exercises
 

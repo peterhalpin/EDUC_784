@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>4.8 Inference for the slopes | EDUC 784: Regression</title>
+  <title>4.11 Exercises | EDUC 784: Regression</title>
   <meta name="description" content="Course notes for EDUC 784" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="4.8 Inference for the slopes | EDUC 784: Regression" />
+  <meta property="og:title" content="4.11 Exercises | EDUC 784: Regression" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="/images/image1.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="peterhalpin/EDUC_784" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="4.8 Inference for the slopes | EDUC 784: Regression" />
+  <meta name="twitter:title" content="4.11 Exercises | EDUC 784: Regression" />
   
   <meta name="twitter:description" content="Course notes for EDUC 784" />
   <meta name="twitter:image" content="/images/image1.png" />
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="null" type="image/x-icon" />
-<link rel="prev" href="4.7-rsquared-4.html"/>
-<link rel="next" href="4.9-inference-for-rsquared-4.html"/>
+<link rel="prev" href="4.10-workbook.html"/>
+<link rel="next" href="5-chapter-5.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.5.1/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -260,89 +260,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="inference-for-slopes-4" class="section level2" number="4.8">
-<h2><span class="header-section-number">4.8</span> Inference for the slopes</h2>
-<input onclick="codefolder(&#39;pre.sourceCode&#39;);" type="button" value="Hide Code" id="codefolder-button" style="position: relative; &#10;            top: -25px; &#10;            left: 85%;   &#10;            color: white;&#10;            font-weight: bold;&#10;            background: #4B9CD3;&#10;            border: 1px #3079ED solid;&#10;            box-shadow: inset 0 1px 0 #80B0FB"/>
-<script>
-  function codefolder(query) {
-
-    var x = document.querySelectorAll(query);
-    if (x.length === 0) return;
-
-    function toggle_vis(o) {
-      var d = o.style.display;
-      o.style.display = (d === 'block' || d === '') ? 'none':'block';
-    }
-
-    for (i = 0; i < x.length; i++) {
-      var y = x[i];
-      toggle_vis(y);
-    }
-
-    var elem = document.getElementById("codefolder-button");
-    if (elem.value === "Hide Code") elem.value = "Show Code";
-    else elem.value = "Hide Code";
-  }
-</script>
-<script>
-  window.addEventListener('load', function () {
-    codefolder('pre.sourceCode');
-  });
-</script>
-<p>There isn’t really any thing new that about inference with multiple regression, except the formula for the standard errors:</p>
-<p><span class="math display" id="eq:se-4">\[ 
-s_{\widehat b_j} = \frac{s_y}{s_x} \sqrt{\frac{1 - R^2}{N - J - 1}} \times \sqrt{\frac{1}{1 - R_j^2}} 
-\tag{4.3}
-\]</span></p>
-<p>In this formula, <span class="math inline">\(J\)</span> denotes the number of predictors and <span class="math inline">\(R^2_j\)</span> is the R-squared that results from regressing predictor <span class="math inline">\(j\)</span> on the other <span class="math inline">\(J-1\)</span> predictors (without the <span class="math inline">\(Y\)</span> variable).</p>
-<p>Notice that the first part of the standard error (before the “<span class="math inline">\(\times\)</span>”) is the same as simple regression (see Section <a href="2.7-inference-for-slope.html#inference-for-slope">2.7</a>). The last part, which includes <span class="math inline">\(R^2_j\)</span>, is unique to multiple regression.</p>
-<p>The standard errors can be used to construct t-tests and confidence intervals using the same approach as simple regression (see Section <a href="2.7-inference-for-slope.html#inference-for-slope">2.7</a>). The degrees of freedom for the t-distribution are <span class="math inline">\(N - J -1.\)</span></p>
-<p>The R output for the ECLS example is presented (again) below. <strong>Please write down your conclusions about the statistical significance of the predictors and be prepared to share your answer in class.</strong></p>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="4.8-inference-for-slopes-4.html#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod1)</span></code></pre></div>
-<pre><code>## 
-## Call:
-## lm(formula = Math ~ SES + ATL, data = example_data)
-## 
-## Residuals:
-##    Min     1Q Median     3Q    Max 
-## -14.10  -4.03  -1.07   3.29  29.54 
-## 
-## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)  -6.0502     2.9003   -2.09    0.038 *  
-## SES           0.3512     0.0563    6.24  1.9e-09 ***
-## ATL           3.5212     0.6739    5.23  3.7e-07 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 6.2 on 247 degrees of freedom
-## Multiple R-squared:  0.273,  Adjusted R-squared:  0.267 
-## F-statistic: 46.3 on 2 and 247 DF,  p-value: &lt;2e-16</code></pre>
-<div id="comments-on-precision" class="section level3" number="4.8.1">
-<h3><span class="header-section-number">4.8.1</span> Comments on precision</h3>
-<p>We can use Equation <a href="4.8-inference-for-slopes-4.html#eq:se-4">(4.3)</a> to understand the factors that influence the size of the standard errors. Recall that standard errors describe the sample-to-sample variability of a statistic. If there is a lot sample-to-sample variability, the statistic is said to be imprecise.</p>
+<div id="exercises-1" class="section level2" number="4.11">
+<h2><span class="header-section-number">4.11</span> Exercises</h2>
+<p>This section will not be ready until the Week 3 lesson, and we will go through the exercises together in class.</p>
 <ul>
-<li>The standard errors <em>decrease</em> with
-<ul>
-<li>The sample size, <span class="math inline">\(N\)</span></li>
-<li>The proportion of variance in the outcome explained by the predictors, <span class="math inline">\(R^2\)</span></li>
-</ul></li>
-<li>The standard errors <em>increase</em> with
-<ul>
-<li>The number of predictors, <span class="math inline">\(J\)</span></li>
-<li>The proportion of variance in the predictor that is explained by the other predictors, <span class="math inline">\(R^2_j\)</span></li>
-</ul></li>
+<li><p>How much does ATL improve the prediction / explanation of Math Achievement, after considering SES?</p></li>
+<li><p>How well do ATL and SES jointly predict / explain Math Achievement?</p></li>
 </ul>
-<p>So, large sample sizes and small residual variance (<span class="math inline">\(1 - R^2\)</span>) lead to high precision in multiple regression. On the other hand, including many highly correlated predictors in the model leads to less precision. In particular, the situation where <span class="math inline">\(R^2_j\)</span> approaches the value of <span class="math inline">\(1\)</span> is called <em>multicollinearity</em> (or just <em>collinearity</em> with 2 predictors). We will talk about multicollinearity in more detail in Chapter <a href="#chapter-6"><strong>??</strong></a>.</p>
+
 </div>
-</div>
+<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-<a href="4.7-rsquared-4.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="4.9-inference-for-rsquared-4.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="4.10-workbook.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="5-chapter-5.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
