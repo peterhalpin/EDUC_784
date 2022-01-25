@@ -39,10 +39,6 @@ The main thing to know about the different approaches to contrast coding is that
 
 Along the way we will see that regression includes as special cases the t-tests of means and one-way ANOVA procedure we discussed last semester. In the next chapter we will address how to combine categorical and continuous predictors in the same model. 
 
-## Summary 
-
-
-
 ## Focus on interpretation 
 
 ```{r, echo=FALSE, results='asis'}

@@ -216,15 +216,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.5.1" data-path="4.5-interpretation-4.html"><a href="4.5-interpretation-4.html#holding-the-other-predictor-constant"><i class="fa fa-check"></i><b>4.5.1</b> “Holding the other predictor constant”</a></li>
 <li class="chapter" data-level="4.5.2" data-path="4.5-interpretation-4.html"><a href="4.5-interpretation-4.html#controlling-for-the-other-predictor"><i class="fa fa-check"></i><b>4.5.2</b> “Controlling for the other predictor”</a></li>
 <li class="chapter" data-level="4.5.3" data-path="4.5-interpretation-4.html"><a href="4.5-interpretation-4.html#the-ecls-example"><i class="fa fa-check"></i><b>4.5.3</b> The ECLS example</a></li>
-<li class="chapter" data-level="4.5.4" data-path="4.5-interpretation-4.html"><a href="4.5-interpretation-4.html#other-interpretations"><i class="fa fa-check"></i><b>4.5.4</b> Other interpretations</a></li>
 </ul></li>
 <li class="chapter" data-level="4.6" data-path="4.6-beta-4.html"><a href="4.6-beta-4.html"><i class="fa fa-check"></i><b>4.6</b> Standardized coefficients</a></li>
 <li class="chapter" data-level="4.7" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html"><i class="fa fa-check"></i><b>4.7</b> (Multiple) R-squared</a>
 <ul>
 <li class="chapter" data-level="4.7.1" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html#the-multiple-correlation"><i class="fa fa-check"></i><b>4.7.1</b> The multiple correlation</a></li>
 <li class="chapter" data-level="4.7.2" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html#relation-with-simple-regression"><i class="fa fa-check"></i><b>4.7.2</b> Relation with simple regression</a></li>
-<li class="chapter" data-level="4.7.3" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html#relation-with-beta-weights"><i class="fa fa-check"></i><b>4.7.3</b> Relation with <span class="math inline">\(\beta\)</span>-weights</a></li>
-<li class="chapter" data-level="4.7.4" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html#adjusted-r-squared"><i class="fa fa-check"></i><b>4.7.4</b> Adjusted R-squared</a></li>
+<li class="chapter" data-level="4.7.3" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html#adjusted-r-squared"><i class="fa fa-check"></i><b>4.7.3</b> Adjusted R-squared</a></li>
 </ul></li>
 <li class="chapter" data-level="4.8" data-path="4.8-inference-for-slopes-4.html"><a href="4.8-inference-for-slopes-4.html"><i class="fa fa-check"></i><b>4.8</b> Inference for the slopes</a>
 <ul>
@@ -258,7 +256,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.5.4" data-path="5.5-deviation-coding.html"><a href="5.5-deviation-coding.html#extra1-5"><i class="fa fa-check"></i><b>5.5.4</b> Extra: Deviation coding with unequal sample sizes*</a></li>
 <li class="chapter" data-level="5.5.5" data-path="5.5-deviation-coding.html"><a href="5.5-deviation-coding.html#extra2-5"><i class="fa fa-check"></i><b>5.5.5</b> Extra: Deviation coding all groups included*</a></li>
 </ul></li>
-<li class="chapter" data-level="5.6" data-path="5.6-summary-3.html"><a href="5.6-summary-3.html"><i class="fa fa-check"></i><b>5.6</b> Summary</a></li>
+<li class="chapter" data-level="5.6" data-path="5.6-workbook-1.html"><a href="5.6-workbook-1.html"><i class="fa fa-check"></i><b>5.6</b> Workbook</a></li>
+<li class="chapter" data-level="5.7" data-path="5.7-exercises-2.html"><a href="5.7-exercises-2.html"><i class="fa fa-check"></i><b>5.7</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -312,20 +311,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </script>
 <p>Now that we know how regression with a binary predictor works, let’s consider how to extend this approach to categorical predictors with <span class="math inline">\(C ≥ 2\)</span> categories. There are many ways to do this, and the general topic is variously called “contrast coding,” “effect coding,” or “dummy coding.”</p>
 <p>The basic idea is to represent the <span class="math inline">\(C\)</span> categories of a predictor in terms of <span class="math inline">\(C – 1\)</span> dummy variables. Binary coding of a dichotomous predictor was one example of this: We represented a categorical variable with <span class="math inline">\(C = 2\)</span> categories using <span class="math inline">\(C – 1 = 1\)</span> binary predictor.</p>
-<p>The most common approach to contrast coding is called <em>reference-group</em> coding or (in R) <em>treatment-group</em> coding</p>
-<p>It is called reference group coding because:</p>
+<p>The most common approach to contrast coding is called <em>reference group</em> coding or (in R) <em>treatment contrasts</em>. It is called reference group coding because:</p>
 <ul>
 <li>The researcher chooses a reference group</li>
 <li>The intercept is interpreted as the mean of the reference group</li>
 <li>The <span class="math inline">\(C – 1\)</span> regression coefficients are interpreted as the mean differences between every other group and the reference group</li>
 </ul>
-<p>Reference group coding is a generalization of binary coding. In the binary gender example,</p>
+<p>note that reference group coding is a generalization of binary coding. In the binary gender example,</p>
 <ul>
 <li>Females were the reference group</li>
 <li>The intercept was equal to the mean Reading Achievement for females</li>
-<li>The regression coefficient was equal to the mean difference between males to females.</li>
+<li>The regression coefficient was equal to the mean difference between males and females.</li>
 </ul>
-<p>The next sections consider how to generalize this approach.</p>
+<p>The rest of this section consider how to generalize this approach to great than 2 groups</p>
 <div id="a-hypothetical-example" class="section level3" number="5.4.1">
 <h3><span class="header-section-number">5.4.1</span> A hypothetical example</h3>
 <p>Figure <a href="5.4-reference-group-coding.html#fig:martital-status1">5.2</a> presents a toy data example. The data show the Age and marital status (Mstatus) of 16 hypothetical individuals. Marital status is encoded as</p>
@@ -334,7 +332,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Married</li>
 <li>Divorced</li>
 </ul>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="5.4-reference-group-coding.html#cb12-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;images/marital_status1.png&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="5.4-reference-group-coding.html#cb80-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;images/marital_status1.png&quot;</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:martital-status1"></span>
 <img src="images/marital_status1.png" alt="Toy Martital Status Example." width="348" />
 <p class="caption">
@@ -371,12 +369,12 @@ b_0 &amp; = \widehat Y (Single) \\
 b_1 &amp; = \widehat Y (Married) - b_0 = \widehat Y (Married) - \widehat Y (Single) \\ 
 b_2 &amp; = \widehat Y (Divorced) - b_0 = \widehat Y (Divorced) - \widehat Y (Single)
 \end{align}\]</span></p>
-<p><strong>Using the above equations, please write down an interpretation of the regression parameters for the hypothetical example</strong>.</p>
+<p><strong>Using the above equations, please write down an interpretation of the regression parameters for the hypothetical example. (Note: this question is not asking for a numerical answer, it is asking for you to put the above equations into words.)</strong></p>
 </div>
 <div id="categories" class="section level3" number="5.4.3">
 <h3><span class="header-section-number">5.4.3</span> <span class="math inline">\(&gt; 3\)</span> categories</h3>
 <p>Figure <a href="5.4-reference-group-coding.html#fig:martital-status1">5.2</a> extends the toy data example by adding another category (“widowed”) for Mstatus.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="5.4-reference-group-coding.html#cb13-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;images/marital_status2.png&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="5.4-reference-group-coding.html#cb81-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;images/marital_status2.png&quot;</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:martital-status2"></span>
 <img src="images/marital_status2.png" alt="Toy Martital Status Example, Part 2." width="419" />
 <p class="caption">
@@ -386,7 +384,7 @@ Figure 5.3: Toy Martital Status Example, Part 2.
 <p><strong>Please work through the following questions and be prepared to share your answers in class</strong></p>
 <ul>
 <li><strong>How should <span class="math inline">\(X_3\)</span> be coded so that “single” is the reference group?</strong></li>
-<li><strong>Using the two step approach illustrated above, write out the interpretation of the model parameters in the following regression equation:</strong></li>
+<li><strong>Using the two-step approach illustrated above, write out the interpretation of the model parameters in the following regression equation:</strong></li>
 </ul>
 <p><span class="math display">\[ \widehat Y = b_0 + b_1 X_1 + b_2 X_2 + b_3 X_3  \]</span></p>
 <ul>

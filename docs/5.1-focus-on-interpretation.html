@@ -216,15 +216,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.5.1" data-path="4.5-interpretation-4.html"><a href="4.5-interpretation-4.html#holding-the-other-predictor-constant"><i class="fa fa-check"></i><b>4.5.1</b> “Holding the other predictor constant”</a></li>
 <li class="chapter" data-level="4.5.2" data-path="4.5-interpretation-4.html"><a href="4.5-interpretation-4.html#controlling-for-the-other-predictor"><i class="fa fa-check"></i><b>4.5.2</b> “Controlling for the other predictor”</a></li>
 <li class="chapter" data-level="4.5.3" data-path="4.5-interpretation-4.html"><a href="4.5-interpretation-4.html#the-ecls-example"><i class="fa fa-check"></i><b>4.5.3</b> The ECLS example</a></li>
-<li class="chapter" data-level="4.5.4" data-path="4.5-interpretation-4.html"><a href="4.5-interpretation-4.html#other-interpretations"><i class="fa fa-check"></i><b>4.5.4</b> Other interpretations</a></li>
 </ul></li>
 <li class="chapter" data-level="4.6" data-path="4.6-beta-4.html"><a href="4.6-beta-4.html"><i class="fa fa-check"></i><b>4.6</b> Standardized coefficients</a></li>
 <li class="chapter" data-level="4.7" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html"><i class="fa fa-check"></i><b>4.7</b> (Multiple) R-squared</a>
 <ul>
 <li class="chapter" data-level="4.7.1" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html#the-multiple-correlation"><i class="fa fa-check"></i><b>4.7.1</b> The multiple correlation</a></li>
 <li class="chapter" data-level="4.7.2" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html#relation-with-simple-regression"><i class="fa fa-check"></i><b>4.7.2</b> Relation with simple regression</a></li>
-<li class="chapter" data-level="4.7.3" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html#relation-with-beta-weights"><i class="fa fa-check"></i><b>4.7.3</b> Relation with <span class="math inline">\(\beta\)</span>-weights</a></li>
-<li class="chapter" data-level="4.7.4" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html#adjusted-r-squared"><i class="fa fa-check"></i><b>4.7.4</b> Adjusted R-squared</a></li>
+<li class="chapter" data-level="4.7.3" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html#adjusted-r-squared"><i class="fa fa-check"></i><b>4.7.3</b> Adjusted R-squared</a></li>
 </ul></li>
 <li class="chapter" data-level="4.8" data-path="4.8-inference-for-slopes-4.html"><a href="4.8-inference-for-slopes-4.html"><i class="fa fa-check"></i><b>4.8</b> Inference for the slopes</a>
 <ul>
@@ -258,7 +256,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.5.4" data-path="5.5-deviation-coding.html"><a href="5.5-deviation-coding.html#extra1-5"><i class="fa fa-check"></i><b>5.5.4</b> Extra: Deviation coding with unequal sample sizes*</a></li>
 <li class="chapter" data-level="5.5.5" data-path="5.5-deviation-coding.html"><a href="5.5-deviation-coding.html#extra2-5"><i class="fa fa-check"></i><b>5.5.5</b> Extra: Deviation coding all groups included*</a></li>
 </ul></li>
-<li class="chapter" data-level="5.6" data-path="5.6-summary-3.html"><a href="5.6-summary-3.html"><i class="fa fa-check"></i><b>5.6</b> Summary</a></li>
+<li class="chapter" data-level="5.6" data-path="5.6-workbook-1.html"><a href="5.6-workbook-1.html"><i class="fa fa-check"></i><b>5.6</b> Workbook</a></li>
+<li class="chapter" data-level="5.7" data-path="5.7-exercises-2.html"><a href="5.7-exercises-2.html"><i class="fa fa-check"></i><b>5.7</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -314,58 +313,69 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>For example, the two models below uses the same data and the same variables (Math Achievement regressed on Urbanicity), but their regression coefficients have different values – Why? Because Urbanicity used different contrast coding.</p>
 <p>The <code>lm</code> output doesn’t tell us what kind of coding was used for our categorical variables – we need to know what is going on “under the hood” so that we can interpret the output correctly.</p>
 <p>Notice that nothing has changed with respect to the computation of standard errors, R-squared, t-tests, F-tests, or p-values – all of this is the same as the previous chapters. The difference between these two models is just how the categorical predictor is interpreted.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="5.1-focus-on-interpretation.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;NELS.RData&quot;</span>)</span>
-<span id="cb1-2"><a href="5.1-focus-on-interpretation.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(NELS)</span>
-<span id="cb1-3"><a href="5.1-focus-on-interpretation.html#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="5.1-focus-on-interpretation.html#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># run model with default contrast (treatment / dummy coding)</span></span>
-<span id="cb1-5"><a href="5.1-focus-on-interpretation.html#cb1-5" aria-hidden="true" tabindex="-1"></a>egA <span class="ot">&lt;-</span> <span class="fu">lm</span>(achrdg08 <span class="sc">~</span> urban)</span>
-<span id="cb1-6"><a href="5.1-focus-on-interpretation.html#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="5.1-focus-on-interpretation.html#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># change to sum / deviation contrasts and run again</span></span>
-<span id="cb1-8"><a href="5.1-focus-on-interpretation.html#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(urban) <span class="ot">&lt;-</span> <span class="fu">contr.sum</span>(<span class="at">n =</span> <span class="dv">3</span>)</span>
-<span id="cb1-9"><a href="5.1-focus-on-interpretation.html#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(<span class="fu">contrasts</span>(urban)) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Rural&quot;</span>, <span class="st">&quot;Suburban&quot;</span>)</span>
-<span id="cb1-10"><a href="5.1-focus-on-interpretation.html#cb1-10" aria-hidden="true" tabindex="-1"></a>egB <span class="ot">&lt;-</span> <span class="fu">lm</span>(achrdg08 <span class="sc">~</span> urban)</span>
-<span id="cb1-11"><a href="5.1-focus-on-interpretation.html#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-12"><a href="5.1-focus-on-interpretation.html#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># print</span></span>
-<span id="cb1-13"><a href="5.1-focus-on-interpretation.html#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(egA)</span></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="5.1-focus-on-interpretation.html#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;NELS.RData&quot;</span>)</span>
+<span id="cb66-2"><a href="5.1-focus-on-interpretation.html#cb66-2" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(NELS)</span></code></pre></div>
+<pre><code>## The following object is masked from ecls:
+## 
+##     gender</code></pre>
+<pre><code>## The following objects are masked from NELS (pos = 6):
+## 
+##     absent12, achmat08, achmat10, achmat12, achrdg08, achrdg10,
+##     achrdg12, achsci08, achsci10, achsci12, achsls08, achsls10,
+##     achsls12, advmath8, alcbinge, algebra8, apoffer, approg, cigarett,
+##     computer, cuts12, edexpect, excurr12, expinc30, famsize, gender,
+##     homelang, hsprog, hwkin12, hwkout12, id, late12, marijuan, numinst,
+##     nursery, parmarl8, region, schattrt, schtyp8, ses, slfcnc08,
+##     slfcnc10, slfcnc12, tcherint, unitcalc, unitengl, unitmath, urban</code></pre>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="5.1-focus-on-interpretation.html#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="co"># run model with default contrast (treatment / dummy coding)</span></span>
+<span id="cb69-2"><a href="5.1-focus-on-interpretation.html#cb69-2" aria-hidden="true" tabindex="-1"></a>egA <span class="ot">&lt;-</span> <span class="fu">lm</span>(achrdg08 <span class="sc">~</span> urban)</span>
+<span id="cb69-3"><a href="5.1-focus-on-interpretation.html#cb69-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-4"><a href="5.1-focus-on-interpretation.html#cb69-4" aria-hidden="true" tabindex="-1"></a><span class="co"># change to sum / deviation contrasts and run again</span></span>
+<span id="cb69-5"><a href="5.1-focus-on-interpretation.html#cb69-5" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(urban) <span class="ot">&lt;-</span> <span class="fu">contr.sum</span>(<span class="at">n =</span> <span class="dv">3</span>)</span>
+<span id="cb69-6"><a href="5.1-focus-on-interpretation.html#cb69-6" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(<span class="fu">contrasts</span>(urban)) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Rural&quot;</span>, <span class="st">&quot;Suburban&quot;</span>)</span>
+<span id="cb69-7"><a href="5.1-focus-on-interpretation.html#cb69-7" aria-hidden="true" tabindex="-1"></a>egB <span class="ot">&lt;-</span> <span class="fu">lm</span>(achrdg08 <span class="sc">~</span> urban)</span>
+<span id="cb69-8"><a href="5.1-focus-on-interpretation.html#cb69-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-9"><a href="5.1-focus-on-interpretation.html#cb69-9" aria-hidden="true" tabindex="-1"></a><span class="co"># print</span></span>
+<span id="cb69-10"><a href="5.1-focus-on-interpretation.html#cb69-10" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(egA)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = achrdg08 ~ urban)
 ## 
 ## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -22.3002  -6.1620   0.2098   6.7948  15.5573 
+##    Min     1Q Median     3Q    Max 
+## -22.30  -6.16   0.21   6.79  15.56 
 ## 
 ## Coefficients:
 ##               Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)    54.9927     0.6885  79.876  &lt; 2e-16 ***
-## urbanSuburban   0.6675     0.9117   0.732  0.46439    
-## urbanUrban      3.1275     1.0480   2.984  0.00298 ** 
+## (Intercept)     54.993      0.688   79.88   &lt;2e-16 ***
+## urbanSuburban    0.668      0.912    0.73    0.464    
+## urbanUrban       3.128      1.048    2.98    0.003 ** 
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 8.763 on 497 degrees of freedom
-## Multiple R-squared:  0.01904,    Adjusted R-squared:  0.0151 
-## F-statistic: 4.824 on 2 and 497 DF,  p-value: 0.008411</code></pre>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="5.1-focus-on-interpretation.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(egB)</span></code></pre></div>
+## Residual standard error: 8.8 on 497 degrees of freedom
+## Multiple R-squared:  0.019,  Adjusted R-squared:  0.0151 
+## F-statistic: 4.82 on 2 and 497 DF,  p-value: 0.00841</code></pre>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="5.1-focus-on-interpretation.html#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(egB)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = achrdg08 ~ urban)
 ## 
 ## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -22.3002  -6.1620   0.2098   6.7948  15.5573 
+##    Min     1Q Median     3Q    Max 
+## -22.30  -6.16   0.21   6.79  15.56 
 ## 
 ## Coefficients:
 ##               Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)    56.2577     0.4021 139.897   &lt;2e-16 ***
-## urbanRural     -1.2650     0.5654  -2.237   0.0257 *  
-## urbanSuburban  -0.5975     0.5299  -1.128   0.2600    
+## (Intercept)     56.258      0.402  139.90   &lt;2e-16 ***
+## urbanRural      -1.265      0.565   -2.24    0.026 *  
+## urbanSuburban   -0.597      0.530   -1.13    0.260    
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 8.763 on 497 degrees of freedom
-## Multiple R-squared:  0.01904,    Adjusted R-squared:  0.0151 
-## F-statistic: 4.824 on 2 and 497 DF,  p-value: 0.008411</code></pre>
+## Residual standard error: 8.8 on 497 degrees of freedom
+## Multiple R-squared:  0.019,  Adjusted R-squared:  0.0151 
+## F-statistic: 4.82 on 2 and 497 DF,  p-value: 0.00841</code></pre>
 </div>
             </section>
 

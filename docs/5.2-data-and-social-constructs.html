@@ -216,15 +216,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.5.1" data-path="4.5-interpretation-4.html"><a href="4.5-interpretation-4.html#holding-the-other-predictor-constant"><i class="fa fa-check"></i><b>4.5.1</b> “Holding the other predictor constant”</a></li>
 <li class="chapter" data-level="4.5.2" data-path="4.5-interpretation-4.html"><a href="4.5-interpretation-4.html#controlling-for-the-other-predictor"><i class="fa fa-check"></i><b>4.5.2</b> “Controlling for the other predictor”</a></li>
 <li class="chapter" data-level="4.5.3" data-path="4.5-interpretation-4.html"><a href="4.5-interpretation-4.html#the-ecls-example"><i class="fa fa-check"></i><b>4.5.3</b> The ECLS example</a></li>
-<li class="chapter" data-level="4.5.4" data-path="4.5-interpretation-4.html"><a href="4.5-interpretation-4.html#other-interpretations"><i class="fa fa-check"></i><b>4.5.4</b> Other interpretations</a></li>
 </ul></li>
 <li class="chapter" data-level="4.6" data-path="4.6-beta-4.html"><a href="4.6-beta-4.html"><i class="fa fa-check"></i><b>4.6</b> Standardized coefficients</a></li>
 <li class="chapter" data-level="4.7" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html"><i class="fa fa-check"></i><b>4.7</b> (Multiple) R-squared</a>
 <ul>
 <li class="chapter" data-level="4.7.1" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html#the-multiple-correlation"><i class="fa fa-check"></i><b>4.7.1</b> The multiple correlation</a></li>
 <li class="chapter" data-level="4.7.2" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html#relation-with-simple-regression"><i class="fa fa-check"></i><b>4.7.2</b> Relation with simple regression</a></li>
-<li class="chapter" data-level="4.7.3" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html#relation-with-beta-weights"><i class="fa fa-check"></i><b>4.7.3</b> Relation with <span class="math inline">\(\beta\)</span>-weights</a></li>
-<li class="chapter" data-level="4.7.4" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html#adjusted-r-squared"><i class="fa fa-check"></i><b>4.7.4</b> Adjusted R-squared</a></li>
+<li class="chapter" data-level="4.7.3" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html#adjusted-r-squared"><i class="fa fa-check"></i><b>4.7.3</b> Adjusted R-squared</a></li>
 </ul></li>
 <li class="chapter" data-level="4.8" data-path="4.8-inference-for-slopes-4.html"><a href="4.8-inference-for-slopes-4.html"><i class="fa fa-check"></i><b>4.8</b> Inference for the slopes</a>
 <ul>
@@ -258,7 +256,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.5.4" data-path="5.5-deviation-coding.html"><a href="5.5-deviation-coding.html#extra1-5"><i class="fa fa-check"></i><b>5.5.4</b> Extra: Deviation coding with unequal sample sizes*</a></li>
 <li class="chapter" data-level="5.5.5" data-path="5.5-deviation-coding.html"><a href="5.5-deviation-coding.html#extra2-5"><i class="fa fa-check"></i><b>5.5.5</b> Extra: Deviation coding all groups included*</a></li>
 </ul></li>
-<li class="chapter" data-level="5.6" data-path="5.6-summary-3.html"><a href="5.6-summary-3.html"><i class="fa fa-check"></i><b>5.6</b> Summary</a></li>
+<li class="chapter" data-level="5.6" data-path="5.6-workbook-1.html"><a href="5.6-workbook-1.html"><i class="fa fa-check"></i><b>5.6</b> Workbook</a></li>
+<li class="chapter" data-level="5.7" data-path="5.7-exercises-2.html"><a href="5.7-exercises-2.html"><i class="fa fa-check"></i><b>5.7</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -285,8 +284,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">5.2</span> Data and social constructs</h2>
 <p>Before getting into the math, let’s consider some conceptual points.</p>
 <p>First, some terminology. <em>Binary</em> means the a variable can take on only two values: 1 and 0. If a variable takes on two values but these are represented with other numbers (e.g., 1 and 2) or with non-numeric values (“male,” “female”), it is called <em>dichotomous</em> rather than binary. Otherwise stated, a binary variable is a dichotomous variable whose values are 1 and 0.</p>
-<p>Note that encoding a variable as dichotomous does not imply that the underlying social construct is dichotomous. For example, we can encode educational attainment as a dichotomous variable (e.g., graduated high school or not). This does not imply that educational attainment has only two values in real life, or even that educational attainment is best conceptualized in terms of years of education. Nonetheless, for many outcomes of interest it can be meaningful to consider whether individuals have completed high school (e.g., <a href="https://www.ssa.gov/policy/docs/research-summaries/education-earnings.html" class="uri">https://www.ssa.gov/policy/docs/research-summaries/education-earnings.html</a>)</p>
-<p>In general, the way that a variable is encoded in a dataset is not a statement about reality – it reflects a choice made by researchers about how to represent reality. In particular, we are often we are faced with less-than-ideal encodings of so-called demographic variables in quantitative data. For example, both NELS and ECLS conceptualize gender as dichotomous and use a limited set of categories for race. These representations are not well aligned with critical literature on gender and racial identity.</p>
+<p>Note that encoding a variable as dichotomous does not imply that the underlying social construct is dichotomous. For example, we can encode educational attainment as a dichotomous variable indicating whether a person has graduated high school or not. This does not imply that educational attainment has only two values in real life, or even that educational attainment is best conceptualized in terms of years of formal education. Nonetheless, for many outcomes of interest it can be meaningful to consider whether individuals have completed high school (e.g., <a href="https://www.ssa.gov/policy/docs/research-summaries/education-earnings.html" class="uri">https://www.ssa.gov/policy/docs/research-summaries/education-earnings.html</a>)</p>
+<p>In general, the way that a variable is encoded in a dataset is not a statement about reality – it reflects a choice made by researchers about how to represent reality. In particular, we are often we are faced with less-than-ideal encodings of so-called demographic variables in quantitative data. For example, both NELS and ECLS conceptualize gender as dichotomous and use a limited set of categories for race. These representations are not well aligned with current literature on gender and racial identity.</p>
 <p>Nonetheless, I would argue that these categorical variables have utility, <em>especially</em> in the study of social inequality. Here is an example of why I think gender qua “male/female” is a flawed but important consideration in global education: <a href="https://www.unicef.org/education/girls-education" class="uri">https://www.unicef.org/education/girls-education</a>.</p>
 <p><strong>Please take a moment to write down your thoughts on the tensions that arise when conceptualizing a social constructs such as gender or race as categorical, and I will invite you to share you thoughts in class.</strong></p>
 </div>
