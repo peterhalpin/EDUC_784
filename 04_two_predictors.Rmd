@@ -427,7 +427,7 @@ summary(mod1)
 
 Section \@ref(beta-4)
 
-* Please write down an interpretation of the of beta coefficients in the above output. Your interpretation should include reference to the fact that the variables have been standardized. Please be prepared to share your interpretation / questions in class!
+* Please write down an interpretation of the of beta coefficients in the above below. Your interpretation should include reference to the fact that the variables have been standardized. Please be prepared to share your interpretation / questions in class!
 
 ```{r}
 summary(z_mod)
@@ -447,12 +447,148 @@ Section \@ref(inference-for-rsquared-4)
 * Look at the R output for the ECLS example above again (either one). Please write down your conclusion about the statistical significance of the R-squared statistic in the ECLS example.
 
 
-
-
 ## Exercises
 
-This section will not be ready until the Week 3 lesson, and we will go through the exercises together in class. 
 
-* How much does ATL improve the prediction / explanation of Math Achievement, after considering SES? 
+These notes provide an overview of regression with two variables in R. 
 
-* How well do ATL and SES jointly predict / explain Math Achievement? 
+### The ECLS250 data  
+
+Let's start by getting our example data loaded into R. We will be using a subset of $N = 250$ cases from the Early Childhood Longitudinal Survey 1998-1998 (ECLS-K). Here is a description of the data from the official NCES codebook (page 1-1 of  https://nces.ed.gov/ecls/data/ECLSK_K8_Manual_part1.pdf): 
+
+*The ECLS-K focuses on children’s early school experiences beginning with kindergarten and ending with eighth grade. It is a multisource, multimethod study that includes interviews with parents, the collection of data from principals and teachers, and student records abstracts, as well as direct child assessments. In the eighth-grade data collection, a student paper-and-pencil questionnaire was added. The ECLS-K was developed under the sponsorship of the U.S. Department of Education, Institute of Education Sciences, National Center for Education Statistics (NCES). Westat conducted this study with assistance provided by Educational Testing Service (ETS) in Princeton, New Jersey.*
+
+*The ECLS-K followed a nationally representative cohort of children from kindergarten into middle school. The base-year data were collected in the fall and spring of the 1998–99 school year when the sampled children were in kindergarten. A total of 21,260 kindergartners throughout the nation participated*.
+
+The subset of the ECLS-K data used in this class was obtained from the link below. The codebook for these data is available in our Resources folder. Note that we will be  using only a small subset of the full ECLS2577 data for this example
+
+<http://routledgetextbooks.com/textbooks/_author/ware-9780415996006/data.php>
+
+Let's load ECLS-K data into R. Make sure to download the file `ECLS250.RData` from this week's resources folder and save the file in your working directory -- check out the R exercises from our first lesson for a refresher of how to do this. 
+
+```{r}
+detach(ecls) # removed previously attached ecls data
+load("ECLS250.RData") # load new example
+attach(ecls) # attach 
+
+# knitr and kable are just used to print nicely -- you can just use head(ecls[, 1:5]) 
+knitr::kable(head(ecls[, 1:5]))
+```
+
+The naming conventions for these data are bit challenging. 
+
+* Variable names begin with `c`, `p`, or `t` depending on whether the respondent was the child, parent, or teacher. Variables that start with `wk` were created by the ECLS using other data sources available in during the kindergarten year of the study. 
+
+* The time points (1-4 denoting fall and spring of K and Gr 1) appear as the second character.
+
+* The rest of the name describes the variable.
+
+The variables we will use for this illustration are:
+
+  * `c1rmscal`: Child's score on a math assessment, in first semester of Kindergarten . The scores can be interpreted as  number of correct responses out of a total of approximately 80 math exam questions.  
+  
+  * `wksesl`: An SES composite of household factors (e.g., parental education, household income) ranging from 30-72. 
+  
+  * `t1learn`: Approaches to Learning Scale (ATLS), teacher reported in first semester of kindergarten. This scale measures behaviors that affect the ease with which children can benefit from the learning environment. It includes six items that rate the child’s attentiveness, task persistence, eagerness to learn, learning independence, flexibility, and organization. The items have 4 response categories (1-4), coded so that higher values represent more positive responses, and the scale is an unweighted average the six items. 
+  
+To get started lets produce the simple regression of Math with SES. This is another look at the relationship between Academic Achievement and SES that we discussed in Chapter \@ref(chapter-2). If you do not feel comfortable running this analysis or interpreting the output, take another look at Section \@ref(exercises-2). 
+
+```{r}
+plot(x = wksesl, y = c1rmscal, col = "#4B9CD3")
+mod <- lm(c1rmscal ~ wksesl)
+abline(mod)
+summary(mod)
+cor(wksesl, c1rmscal)
+```
+
+### Multiple regression with `lm`
+
+Let's tale a look at "zero-order" relationship among the three variables. This type of descriptive, two-way analysis is a good way to get familiar with your data before getting into multiple regression analysis. We can see that the variables are all moderately correlated and their relationships appear reasonably linear.
+
+
+```{r}
+# Use cbind to create a data.frame with just the 3 variables we want to examine
+data <- cbind(c1rmscal, wksesl, t1learn)
+
+# Correlations
+cor(data)
+
+# Scatterplots
+pairs(data, col = "#4B9CD3") 
+```
+
+ 
+In terms of input, multiple regression with `lm` is just as simple as for a single predictor. The only difference is the model formula. To include more predictors in a formula, just include them on the right hand side, separated by at `+` sign. 
+
+* e.g, `Y ~ Χ1 + Χ2` 
+
+For our example, let's consider the regression of math achievement on SES and Approaches to Learning. We'll save our result as `mod1` which is short for "model one".
+
+```{r}
+mod1 <- lm(c1rmscal ~ wksesl + t1learn)
+summary(mod1)
+```
+
+We can see from the output that regression coefficient for `t1learn` is about 3.5. This means that, as the predictor increases by a single unit, children's predicted math scores increase by 3.5 points (out of 80), after controlling for the SES. You should be able to provide a similar interpretation of the regression coefficient for `wksesl`. Together, both predictors accounted for about 27% of the variation in students' math scores. In education, this would be considered a pretty good coefficient of determination.  
+
+We will talk about the statistical tests later on. For now let's consider the relationship with simple regression. 
+
+### Relations between simple and multiple regression
+
+First let's consider how the two simple regression compare to the multiple regression with two variables. Here is the relevant output:  
+
+```{r}
+# Compare the multiple regression output to the simple regressions
+mod2a <- lm(c1rmscal ~ wksesl)
+summary(mod2a)
+
+mod2b <- lm(c1rmscal ~ t1learn)
+summary(mod2b)
+```
+
+The important things to note here are 
+
+  * The regression coefficients from the simple models ($b_{ses} = 4.38$ and $b_{t1learn} = 4.73$) are larger than the regression coefficients from the two-predictor model. Can you explain why? (Hint: see Section \@ref(interpretation-4).) 
+  
+  * The R-squared terms in the two simple models (.194 + .158 = .352) add up to more than the R-squared in the two-predictor model (.274). Again, take a moment to think about why before reading on. (Hint: see Section \@ref(rsquared-4).) 
+
+### Inference with 2 predictors
+
+Let's move on now to consider the statistical tests and confidence intervals provided with the `lm` summary output. 
+
+For regression with more than one predictor, both the t-tests and F-tests have a very similar construction and interpretation as with simple regression. The main differences are (see Sections \@ref(inference-for-slopes-4) and \@ref(inference-for-rsquared-4)):
+
+* The degrees of freedom for both tests now involve $J$, the number of predictors. 
+
+* The standard error of the b-weight is more complicated, because it involves the inter-correlation among the predictors. 
+
+We can see that for `mod1` that both b-weights are significant at the .05 level, and so is the R-square. As mentioned previously, it is not usual to interpret or report results on the regression intercept unless you have a special reason to do so (e.g., see Chapter \@ref(chapter-5)). 
+
+```{r}
+# Revisting the output of mod1
+summary(mod1)
+```
+
+### APA reporting of results
+
+In terms of writing out the results, there are many formatting styles used in social sciences. As one example, the convention for APA style is to write the coefficient, followed by the test statistic (with its degrees of freedom) and then the p-value. It is also conventional to use 2 decimal places, unless more decimal places are needed to address rounding error.  
+
+Here is how we might write out the results of our regression using APA format:
+
+  * The regression of Math Achievement on SES was positive and statistically significant at the .05 level ($b = 3.53, t(247) = 6.27, p < .001$).
+
+  * The regression of Math Achievement on Approaches to Learning was also positive and statistically significant at the .05 level ($b = 3.50, t(247) = 5.20, p < .001$).
+
+  * Together both predictors accounted for about 27\% of the variation in Math Achievement ($R^2$ = .274, adjusted $R^2$ = .268), which was also statistically significant at the .05 level ($F(2, 247) = 45.54, p < .001$). 
+  
+Instead of, or in addition to, the statistical tests, we could include the confidence intervals for the regression coefficients. It is not usual to report confidence intervals on R-squared. 
+
+```{r}
+confint(mod1)
+```
+
+* The 95% confidence interval on the regression coefficient of Math achievement on SES was $[2.42 , 4.64]$. For Approaches to Learning, the 95% confidence interval was $[2.18, 4.83]$.
+  
+When we have a regression model with many predictors, or are comparing among different models, it is more usual to put all the relevant statistics in a table rather than writing them out one by one. We will see how to do that later on in the course.
+
+For more info on APA format, see the APA publications manual (https://www.apastyle.org/manual). 

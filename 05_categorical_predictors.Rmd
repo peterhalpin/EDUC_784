@@ -55,7 +55,7 @@ Notice that nothing has changed with respect to the computation of standard erro
 
 ```{r}
 load("NELS.RData")
-#attach(NELS)
+attach(NELS)
 
 # run model with default contrast (treatment / dummy coding)
 egA <- lm(achrdg08 ~ urban)
