@@ -54,6 +54,7 @@ Notice that nothing has changed with respect to the computation of standard erro
 
 
 ```{r}
+detach(ecls)
 load("NELS.RData")
 attach(NELS)
 

@@ -467,7 +467,7 @@ The subset of the ECLS-K data used in this class was obtained from the link belo
 Let's load ECLS-K data into R. Make sure to download the file `ECLS250.RData` from this week's resources folder and save the file in your working directory -- check out the R exercises from our first lesson for a refresher of how to do this. 
 
 ```{r}
-detach(ecls) # removed previously attached ecls data
+detach(ecls); detach(NELS)  # remove previously attached data
 load("ECLS250.RData") # load new example
 attach(ecls) # attach 
 

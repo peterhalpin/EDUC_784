@@ -401,7 +401,7 @@ pwr.f2.test(u = 1, v = 498, sig.level = .05, power = .8)
 
 **Please write down an interpretation of this power analysis, and be prepared to share your answers in class!**
 
-## Exercises 
+## Exercises {#exercises-2}
   
 These exercises collect all of the R input used in this chapter in one step-by-step analysis, explain how the R input works, and provides some some additional exercises to work on. We will go through this material in class together. 
 
