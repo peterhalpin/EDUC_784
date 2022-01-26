@@ -40,16 +40,25 @@ pairs(example_data , col = "#4B9CD3")
 ```
 
 
-
 The format of Figure \@ref(fig:pairs) is the same as that of the correlation matrix among the variables: 
 ```{r}
 options(digits = 2)
 cor(example_data)
 ```
 
-Again, notice that the entries below the diagonal are mirrored by the entries above the diagonal. **If you have questions about how these plots and correlations are presented, please write them down now and share them class.**
+Again, notice that the entries below the diagonal are mirrored by the entries above the diagonal. We can see that all three variables are positively correlated. SES and ATL have similar correlations with Math Achievement (.44 and .40, respectively), and are also moderately correlated with each other (.29). 
 
-We can see that all three variables are positively correlated. SES and ATL have similar correlations with Math Achievement (.44 and .40, respectively), and are also moderately correlated with each other (.29). What do you think about these relationships in the context of the current debate about funding universal pre-K in the United States? 
+<!-- 
+
+\[ \begin{matrix} 1 & r_{Y1} & r_{Y2}  \\
+                  r_{Y1} & 1 & r_{12}  \\
+                  r_{Y2} & r_{21} & 1  \\
+   \end{matrix} 
+\]
+
+**If you have questions about how these plots and correlations are presented, please write them down now and share them class.**
+-->
+
 
 ## The two-predictor model
 
