@@ -22,6 +22,7 @@ eq:binary3-5
 eq:binary4-5
 fig:martital-status1
 fig:martital-status2
+eq:unweighted-mean
 fig:idela1
 fig:idela2
 about-this-book
