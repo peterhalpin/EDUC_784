@@ -54,7 +54,7 @@ Notice that nothing has changed with respect to the computation of standard erro
 
 
 ```{r}
-detach(ecls)
+#detach(ecls)
 load("NELS.RData")
 attach(NELS)
 
@@ -132,7 +132,6 @@ Note that we will use the equivalence between the predicted values for each cate
 
 For the example data, regression coefficients are: 
 
-
 ```{r} 
 # convert "Female / Male" coding to binary
 gender <- NELS$gender
@@ -178,7 +177,7 @@ When doing regression with a binary predictor:
 * Testing $H_0: b_1 = 0$ is equivalent to testing the mean difference $H_0: \mu_1 – \mu_0 = 0$
   * i.e., regression with a binary variable is the same as a t-test of means for independent groups
 
-## Reference group coding
+## Reference group coding {#reference-group-coding-5}
 
 ```{r, echo=FALSE, results='asis'}
 codefolder::bookdown(init = "hide", style = button)
@@ -226,6 +225,7 @@ These 3 categories are represented by two binary variables, denoted $X_1$ and $X
 The binary variables are often called *dummies* or *indicators*. For example, $X_1$ is a dummy or indicator for married respondents. 
 
 In reference group coding, the group that does not have a dummy variable is the reference group. It is also the group that is coded zero on all of the included dummies. 
+
 
 **What is the is reference group for this example? Please write down your answer and be prepared to share it in class.**
 
@@ -282,7 +282,7 @@ In reference group coding with a single categorical variable:
 
 * The regression coefficients of the dummy variables are interpreted as the difference between the mean of the indicated group and the mean of the reference group.
 
-## Deviation coding
+## Deviation coding {#deviation-coding-5}
 
 ```{r, echo=FALSE, results='asis'}
 codefolder::bookdown(init = "hide", style = button)
@@ -430,6 +430,80 @@ in the `lm` function. The `-1` removes the intercept from the model. Again, keep
 
 
 ## Workbook
+
+This section collects the questions asked in this chapter. We will discuss these questions in class. If you haven't written down / thought about the answers to these questions  before class, the lesson will not be very useful for you! So, please attempt to engage with each question by writing down one or more answers, asking clarifying questions, posing follow up questions, etc. 
+
+Section \@ref(data-and-social-constructs)
+
+* Please take a moment to write down your thoughts on the tensions that arise when conceptualizing social constructs such as gender or race as categorical, and I will invite you to share you thoughts in class.
+
+Section \@ref(binary-predictors-5)
+
+* Please take a moment and write down how these two numbers in the R output related to the Figure. In particular, what is $\bar Y_0$ equal to, what is $\bar Y_1$ equal to, and what is their difference equal to?
+
+
+```{r} 
+# regression coefficients from Reading Achievement on Binary Gender
+coef(mod_binary)
+```
+
+```{r, fig.cap = 'Reading Achievement on Binary Gender.', fig.align = 'center'}
+knitr::include_graphics("images/reading_on_gender.png")
+```
+
+* If you have any questions about the relation between these two sets of output (below), please note them now and be prepared ask them in class.
+
+ 
+```{r}
+summary(mod_binary)
+```
+
+```{r}
+t.test(achrdg08~binary_gender, var.equal = T)
+```
+
+Section \@ref(reference-group-coding-5)
+
+* What is the is reference group in the example below? Please write down your answer and be prepared to share it in class.
+
+```{r fig.cap = 'Toy Martital Status Example.', fig.align = 'center'}
+knitr::include_graphics("images/marital_status1.png")
+```
+
+* Using the equations below, please write down an interpretation of the regression parameters for the hypothetical example. (Note: this question is not asking for a numerical answer, it is just asking you to put the above equations into words.)**
+
+\begin{align}
+b_0 & = \widehat Y (Single) \\ 
+b_1 & = \widehat Y (Married) - b_0 = \widehat Y (Married) - \widehat Y (Single) \\ 
+b_2 & = \widehat Y (Divorced) - b_0 = \widehat Y (Divorced) - \widehat Y (Single)
+\end{align}
+
+
+* Using the example below: 
+  * How should $X_3$ be coded so that "single" is the reference group? 
+  * Using the two-step approach illustrated above, write out the interpretation of the model parameters in the following regression equation:
+\[ \widehat Y = b_0 + b_1 X_1 + b_2 X_2 + b_3 X_3  \]
+  * Bonus: What would happen if we included dummies for all 4 categories of Mstatus in the model?
+
+```{r fig.cap = 'Toy Martital Status Example, Part 2.', fig.align = 'center'}
+knitr::include_graphics("images/marital_status2.png")
+```
+
+Section \@ref(deviation-coding-5)
+
+* Using the equations (below), please write down an interpretation of the regression parameters for the hypothetical example. In particular, what do you think about using the unweighted mean of countries' predicted IDELA scores as the comparison point? Is this meaningful? Would another approach be better?
+
+\begin{align}
+b_1 &= \widehat Y (Ethiopia) - b_0 \\
+b_2 &= \widehat Y (Vietnam) - b_0 \\ \\
+b_0 & = \widehat Y (Bolivia) + b_1 + b_2 \\  
+& = \widehat Y (Bolivia) + \widehat Y (Ethiopia) - b_0 + \widehat Y (Vietnam) - b_0 \\
+\implies & \\ 
+3b_0 & = \widehat Y (Bolivia) + \widehat Y (Ethiopia) + \widehat Y (Vietnam) \\
+
+\implies & \\ 
+b_0 & = \frac{\widehat Y (Bolivia) + \widehat Y (Ethiopia) + \widehat Y (Vietnam)}{3}
+\end{align}
 
 ## Exercises
 

@@ -25,6 +25,9 @@ fig:martital-status2
 eq:unweighted-mean
 fig:idela1
 fig:idela2
+fig:unnamed-chunk-60
+fig:unnamed-chunk-63
+fig:unnamed-chunk-64
 about-this-book
 why-this-book
 how-to-use-this-book
@@ -99,12 +102,12 @@ data-and-social-constructs
 binary-predictors-5
 relation-with-t-tests
 summary
-reference-group-coding
+reference-group-coding-5
 a-hypothetical-example
 interpreting-the-regression-parameters
 categories
 summary-1
-deviation-coding
+deviation-coding-5
 a-hypothetical-example-1
 interpreting-the-regression-parameters-1
 summary-2
