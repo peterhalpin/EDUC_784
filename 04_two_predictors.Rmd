@@ -458,7 +458,6 @@ Section \@ref(inference-for-rsquared-4)
 
 ## Exercises
 
-
 These notes provide an overview of regression with two variables in R. 
 
 ### The ECLS250 data  
