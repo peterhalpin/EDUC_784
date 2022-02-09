@@ -154,7 +154,7 @@ In a regression model with one continuous and one binary predictor (and no inter
 * The difference between the simple trends is often called a "gap", and the gap is also equal to the regression coefficient of the binary variable. 
 * It is important to note that the predicted group means for the binary variable are no longer equal to the "raw" group means computed directly from the data, because the predicted group means now control for the intercorrelation among the predictors. The predicted group means are called marginal means to emphasize this distinction. 
 
-## Binary + continuous + interaction 
+## Binary + continuous + interaction {#binary-continuous-interaction-6}
 
 ```{r, echo=FALSE, results='asis'}
 codefolder::bookdown(init = "hide", style = button)
@@ -293,6 +293,7 @@ genderXreading_dev <- (as.numeric(gender) - 1) * reading_dev
 
 mod5 <- lm(achmat12 ~ reading_dev + gender + genderXreading_dev)
 coef(mod5)
+detach(NELS)
 ```
 
 The regression coefficient for Gender is now pretty close to what it was in the original model without the interaction, but the interpretation is different. Notice that the intercept in the multiple regression model above has now also changed in value. However, the centering did not affect the regression coefficient for Reading or the interaction. 
@@ -311,7 +312,7 @@ different intercepts *and different slopes*.
 * When interpreting an interaction, the research chooses which pair of variables will be the "focal relationship" and which variable will be the moderator.  
 * Centering the continuous predictor can be helpful for ensuring that the regression coefficient on the binary variable remains interpretable in the presense of an interaction. 
 
-## Inference for interactions
+## Inference for interactions {#inference-for-interactions-6}
 
 ```{r, echo=FALSE, results='asis'}
 codefolder::bookdown(init = "hide", style = button)
@@ -359,7 +360,7 @@ Then we having the following marginal effects that can be computed:
 library(emmeans)
 
 # Fit the model using R's formula syntax for interaction '*'
-mod6 <- lm(achmat12 ~ gender*achrdg12, data= NELS)
+mod6 <- lm(achmat12 ~ gender*achrdg12, data = NELS)
 
 # Use the emmeans function to get the gender means on math, broken down by reading
 gap <- emmeans(mod6, specs = "gender", by = "achrdg12", cov.reduce = quantile)
@@ -370,7 +371,7 @@ contrast(gap, method = "pairwise")
  
 The output shows the gender gap in Math Achievement for 5 values of Reading Achievement. The values of Reading Achievement are the 5 quartiles. **Please examine the statistical significance of the gender gap in Math Achievement at the 5 quantiles of Reading Achievement and make a conclusion whether the gap "dissapeared" for students with higher levels of Reading Achievement. Please be prepared to share your answer in class!**
 
-We can also examine the statistical signifiance of the simple trends using this type of approach. But, since those trends aren't very meaningful in the context of this example, we will save this for the Exercises in Section \@ref(exercises-6). Note the computations going on "under the hood" for testing marginal means and simple trends are actually pretty complicated. You can read more details here: https://cran.r-project.org/web/packages/emmeans/vignettes/basics.html 
+We can also examine the statistical significance of the simple trends using this type of approach. But, since those trends aren't very meaningful in the context of this example, we will save this for the Exercises in Section \@ref(exercises-6). Note the computations going on "under the hood" for testing marginal means and simple trends are actually pretty complicated. You can read more details here: https://cran.r-project.org/web/packages/emmeans/vignettes/basics.html 
 
 ### A note on plotting
  
@@ -390,4 +391,90 @@ visreg(mod6, xvar = "achrdg12", by = "gender", overlay = TRUE)
 
 ## Workbook 
 
+```{r, echo=FALSE, results='asis'}
+codefolder::bookdown(init = "hide", style = button)
+```
+
+This section collects the questions asked in this chapter. We will discuss these questions in class. If you haven't written down / thought about the answers to these questions  before class, the lesson will not be very useful for you! So, please engage with each question by writing down one or more answers, asking clarifying questions, posing follow up questions, etc. 
+
+
+**Section \@ref(example-6)**
+
+```{r example-1, fig.cap = 'Math Achievement, Reading Achievement, and Gender.', fig.align = 'center'}
+#attach(NELS)
+# Plot reading and math for females
+plot(achrdg12[females], achmat12[females], xlab = "Reading", ylab = "Math")
+abline(mod1, lwd = 2)
+
+# Add points and line for males
+points(achrdg12[males], achmat12[males], col = "#4B9CD3", pch = 2)
+abline(mod2, col = "#4B9CD3", lwd = 2)
+
+# Add a legend
+legend(x = "topleft", legend = levels(gender), pch = c(1, 2), col = c(1, "#4B9CD3"))
+detach(NELS)
+```
+
+Take a minute to think about what this plot is telling us about the relationships among Math Achievement, Reading Achievement, and Gender.
+
+* Is the gender gap in math constant?** 
+* Is the relationship between math and reading the same for males and females?
+* Can you provide a summary of the plot in terms of what it says about the gender gap in Math Achievement?
+
+
+**Section \@ref(binary-continuous-6)**
+
+* No interaction model: The regression coefficients for the example data are shown below. Please use these numbers to provide an interpretation of the simple trends and the gender gap in Math Achievement for the NELS example. (Don't worry about statistical significance, just focus on the meaning of the coefficients.) 
+
+```{r}
+coef(mod3)
+```
+
+**Section \@ref(binary-continuous-interaction-6)**
+
+* Interaction model: The regression coefficients for the example data are shown below. Please use these numbers to provide an interpretation of the interaction between Gender and Reading. (Don't worry about statistical significance, just focus on the meaning of the coefficients.) 
+
+```{r}
+coef(mod4)
+```
+
+* Interaction model with centered continuous predictor: Please write down your interpretation of the intercept and the regression coefficient for Gender in the regression output below. 
+
+```{r}
+attach(NELS)
+# compute the deviation scores for reading
+reading_dev <- achrdg12 - mean(achrdg12, na.rm = T) 
+
+# Run the interaction model as above
+genderXreading_dev <- (as.numeric(gender) - 1) * reading_dev
+
+mod5 <- lm(achmat12 ~ reading_dev + gender + genderXreading_dev)
+coef(mod5)
+detach(NELS)
+```
+
+**Section \@ref(inference-for-interactions-6)**
+
+* The output shows the gender gap in Math Achievement for 5 values of Reading Achievement. The values of Reading Achievement are the 5 quartiles. Please examine the statistical significance of the gender gap in Math Achievement at the 5 quantiles of Reading Achievement and make a conclusion whether the gap "dissapeared" for students with higher levels of Reading Achievement.
+
+```{r}
+# Install the package if you haven't already done so
+# install.packages("emmeans")
+
+# Load the package into memory
+library(emmeans)
+
+# Fit the model using R's formula syntax for interaction '*'
+mod6 <- lm(achmat12 ~ gender*achrdg12, data= NELS)
+
+# Use the emmeans function to get the gender means on math, broken down by reading
+gap <- emmeans(mod6, specs = "gender", by = "achrdg12", cov.reduce = quantile)
+
+# Test whether the differences are significant
+contrast(gap, method = "pairwise")
+```
+ 
+
+
 ## Exercises {#exercises-6}
+The exercises will be added before class and we will work through them together during class time. 

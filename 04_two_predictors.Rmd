@@ -1,5 +1,10 @@
 #  Regression with Two Predictors {#chapter-4}
 
+
+<!-- add content on interpretation of subscripts in correlation matrix
+add venn diagram relating b-weights and R-squared
+-->
+
 ```{r, echo = F}
 rm(list = ls())
 button <-  "position: relative; 
@@ -49,15 +54,41 @@ cor(example_data)
 Again, notice that the entries below the diagonal are mirrored by the entries above the diagonal. We can see that all three variables are positively correlated. SES and ATL have similar correlations with Math Achievement (.44 and .40, respectively), and are also moderately correlated with each other (.29). 
 
 <!-- 
-
-\[ \begin{matrix} 1 & r_{Y1} & r_{Y2}  \\
-                  r_{Y1} & 1 & r_{12}  \\
-                  r_{Y2} & r_{21} & 1  \\
-   \end{matrix} 
+Martix notation examples
+\[
+\begin{array}{c}
+\text{var 1} \\ \text{var 2} \\ \text{var 3} 
+\end{array}
+\quad
+\left[ 
+\begin{array}{ccc}
+ 1       & r_{12}  & r_{13}  \\
+ r_{21}  & 1       & r_{23}  \\
+ r_{31}  & r_{32}  & 1
+\end{array}
+ \right]
 \]
 
+\[
+
+
+\]
+
+\[
+\begin{array}{c}
+\text{var } X \\ \text{var } Y \\ \text{var } Z
+\end{array}
+\quad
+\left[ 
+\begin{array}{ccc}
+ 1       & r_{??}  & r_{??}  \\
+ r_{??}  & 1       & r_{??}  \\
+ r_{??}  & r_{??}  & 1
+\end{array}
+ \right]
+\]
+--> 
 **If you have questions about how these plots and correlations are presented, please write them down now and share them class.**
--->
 
 
 ## The two-predictor model

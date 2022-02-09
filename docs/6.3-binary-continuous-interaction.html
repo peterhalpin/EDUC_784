@@ -24,7 +24,7 @@
 <meta name="author" content="Peter Halpin" />
 
 
-<meta name="date" content="2022-02-08" />
+<meta name="date" content="2022-02-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -264,7 +264,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.5.5" data-path="5.5-deviation-coding-5.html"><a href="5.5-deviation-coding-5.html#extra2-5"><i class="fa fa-check"></i><b>5.5.5</b> Extra: Deviation coding all groups included*</a></li>
 </ul></li>
 <li class="chapter" data-level="5.6" data-path="5.6-workbook-1.html"><a href="5.6-workbook-1.html"><i class="fa fa-check"></i><b>5.6</b> Workbook</a></li>
-<li class="chapter" data-level="5.7" data-path="5.7-exercises-1.html"><a href="5.7-exercises-1.html"><i class="fa fa-check"></i><b>5.7</b> Exercises</a></li>
+<li class="chapter" data-level="5.7" data-path="5.7-exercises-1.html"><a href="5.7-exercises-1.html"><i class="fa fa-check"></i><b>5.7</b> Exercises</a>
+<ul>
+<li class="chapter" data-level="5.7.1" data-path="5.7-exercises-1.html"><a href="5.7-exercises-1.html#a-single-binary-predictor"><i class="fa fa-check"></i><b>5.7.1</b> A single binary predictor</a></li>
+<li class="chapter" data-level="5.7.2" data-path="5.7-exercises-1.html"><a href="5.7-exercises-1.html#recoding-a-factor-to-numeric"><i class="fa fa-check"></i><b>5.7.2</b> Recoding a factor to numeric</a></li>
+<li class="chapter" data-level="5.7.3" data-path="5.7-exercises-1.html"><a href="5.7-exercises-1.html#binary-predictors-and-independent-samples-t-tests"><i class="fa fa-check"></i><b>5.7.3</b> Binary predictors and independent samples t-tests</a></li>
+<li class="chapter" data-level="5.7.4" data-path="5.7-exercises-1.html"><a href="5.7-exercises-1.html#reference-group-coding"><i class="fa fa-check"></i><b>5.7.4</b> Reference-group coding</a></li>
+<li class="chapter" data-level="5.7.5" data-path="5.7-exercises-1.html"><a href="5.7-exercises-1.html#more-about-factors"><i class="fa fa-check"></i><b>5.7.5</b> More about factors</a></li>
+<li class="chapter" data-level="5.7.6" data-path="5.7-exercises-1.html"><a href="5.7-exercises-1.html#back-to-reference-group-coding"><i class="fa fa-check"></i><b>5.7.6</b> Back to reference-group coding</a></li>
+<li class="chapter" data-level="5.7.7" data-path="5.7-exercises-1.html"><a href="5.7-exercises-1.html#changing-the-reference-group"><i class="fa fa-check"></i><b>5.7.7</b> Changing the reference group</a></li>
+<li class="chapter" data-level="5.7.8" data-path="5.7-exercises-1.html"><a href="5.7-exercises-1.html#deviation-coding"><i class="fa fa-check"></i><b>5.7.8</b> Deviation coding</a></li>
+<li class="chapter" data-level="5.7.9" data-path="5.7-exercises-1.html"><a href="5.7-exercises-1.html#extra-relation-to-anova"><i class="fa fa-check"></i><b>5.7.9</b> Extra: Relation to ANOVA</a></li>
+<li class="chapter" data-level="5.7.10" data-path="5.7-exercises-1.html"><a href="5.7-exercises-1.html#extra-group-mean-coding"><i class="fa fa-check"></i><b>5.7.10</b> Extra: Group-mean coding</a></li>
+<li class="chapter" data-level="5.7.11" data-path="5.7-exercises-1.html"><a href="5.7-exercises-1.html#extra-weighted-versus-unweighted-deviation-coding"><i class="fa fa-check"></i><b>5.7.11</b> Extra: Weighted versus unweighted deviation coding</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="6-chapter-6.html"><a href="6-chapter-6.html"><i class="fa fa-check"></i><b>6</b> Interactions</a>
 <ul>
@@ -345,37 +358,46 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 \tag{6.2}
 \]</span></p>
 <p>For the NELS example, this regression model is depicted in Figure <a href="6.3-binary-continuous-interaction.html#fig:math-reading-3">6.3</a>. Note the the simple trends are no longer parallel and the regression lines agree exactly with what we had in Section <a href="6.1-example-6.html#example-6">6.1</a>. So, as promised, we have now arrived at a single multiple regression model that captures the relationships among Math Achievement, Reading Achievement, and Gender.</p>
-<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="6.3-binary-continuous-interaction.html#cb128-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(NELS)</span></code></pre></div>
-<pre><code>## The following objects are masked _by_ .GlobalEnv:
+<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="6.3-binary-continuous-interaction.html#cb189-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(NELS)</span></code></pre></div>
+<pre><code>## The following object is masked _by_ .GlobalEnv:
 ## 
-##     gender, urban</code></pre>
-<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="6.3-binary-continuous-interaction.html#cb130-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Interaction via hard coding</span></span>
-<span id="cb130-2"><a href="6.3-binary-continuous-interaction.html#cb130-2" aria-hidden="true" tabindex="-1"></a>genderXachrdg12 <span class="ot">&lt;-</span> (<span class="fu">as.numeric</span>(gender) <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> achrdg12</span>
-<span id="cb130-3"><a href="6.3-binary-continuous-interaction.html#cb130-3" aria-hidden="true" tabindex="-1"></a>mod4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(achmat12 <span class="sc">~</span> achrdg12 <span class="sc">+</span> gender <span class="sc">+</span> genderXachrdg12)</span>
-<span id="cb130-4"><a href="6.3-binary-continuous-interaction.html#cb130-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb130-5"><a href="6.3-binary-continuous-interaction.html#cb130-5" aria-hidden="true" tabindex="-1"></a>a_females <span class="ot">&lt;-</span> <span class="fu">coef</span>(mod4)[<span class="dv">1</span>]</span>
-<span id="cb130-6"><a href="6.3-binary-continuous-interaction.html#cb130-6" aria-hidden="true" tabindex="-1"></a>b_females <span class="ot">&lt;-</span> <span class="fu">coef</span>(mod4)[<span class="dv">2</span>]</span>
-<span id="cb130-7"><a href="6.3-binary-continuous-interaction.html#cb130-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb130-8"><a href="6.3-binary-continuous-interaction.html#cb130-8" aria-hidden="true" tabindex="-1"></a>a_males <span class="ot">&lt;-</span> a_females <span class="sc">+</span> <span class="fu">coef</span>(mod4)[<span class="dv">3</span>]</span>
-<span id="cb130-9"><a href="6.3-binary-continuous-interaction.html#cb130-9" aria-hidden="true" tabindex="-1"></a>b_males <span class="ot">&lt;-</span> b_females <span class="sc">+</span> <span class="fu">coef</span>(mod4)[<span class="dv">4</span>]</span>
-<span id="cb130-10"><a href="6.3-binary-continuous-interaction.html#cb130-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb130-11"><a href="6.3-binary-continuous-interaction.html#cb130-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot reading and math for females</span></span>
-<span id="cb130-12"><a href="6.3-binary-continuous-interaction.html#cb130-12" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(achrdg12[females], achmat12[females], <span class="at">xlab =</span> <span class="st">&quot;reading&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;math&quot;</span>)</span>
-<span id="cb130-13"><a href="6.3-binary-continuous-interaction.html#cb130-13" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(a_females, b_females, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
-<span id="cb130-14"><a href="6.3-binary-continuous-interaction.html#cb130-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb130-15"><a href="6.3-binary-continuous-interaction.html#cb130-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Add points and line for males</span></span>
-<span id="cb130-16"><a href="6.3-binary-continuous-interaction.html#cb130-16" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(achrdg12[males], achmat12[males], <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>, <span class="at">pch =</span> <span class="dv">2</span>)</span>
-<span id="cb130-17"><a href="6.3-binary-continuous-interaction.html#cb130-17" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(a_males, b_males, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
-<span id="cb130-18"><a href="6.3-binary-continuous-interaction.html#cb130-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb130-19"><a href="6.3-binary-continuous-interaction.html#cb130-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a legend</span></span>
-<span id="cb130-20"><a href="6.3-binary-continuous-interaction.html#cb130-20" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="at">x =</span> <span class="st">&quot;topleft&quot;</span>, <span class="at">legend =</span> <span class="fu">levels</span>(gender), <span class="at">pch =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="at">col =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="st">&quot;#4B9CD3&quot;</span>))</span></code></pre></div>
+##     urban</code></pre>
+<pre><code>## The following objects are masked from NELS (pos = 3):
+## 
+##     absent12, achmat08, achmat10, achmat12, achrdg08, achrdg10,
+##     achrdg12, achsci08, achsci10, achsci12, achsls08, achsls10,
+##     achsls12, advmath8, alcbinge, algebra8, apoffer, approg, cigarett,
+##     computer, cuts12, edexpect, excurr12, expinc30, famsize, gender,
+##     homelang, hsprog, hwkin12, hwkout12, id, late12, marijuan, numinst,
+##     nursery, parmarl8, region, schattrt, schtyp8, ses, slfcnc08,
+##     slfcnc10, slfcnc12, tcherint, unitcalc, unitengl, unitmath, urban</code></pre>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="6.3-binary-continuous-interaction.html#cb192-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Interaction via hard coding</span></span>
+<span id="cb192-2"><a href="6.3-binary-continuous-interaction.html#cb192-2" aria-hidden="true" tabindex="-1"></a>genderXachrdg12 <span class="ot">&lt;-</span> (<span class="fu">as.numeric</span>(gender) <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> achrdg12</span>
+<span id="cb192-3"><a href="6.3-binary-continuous-interaction.html#cb192-3" aria-hidden="true" tabindex="-1"></a>mod4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(achmat12 <span class="sc">~</span> achrdg12 <span class="sc">+</span> gender <span class="sc">+</span> genderXachrdg12)</span>
+<span id="cb192-4"><a href="6.3-binary-continuous-interaction.html#cb192-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb192-5"><a href="6.3-binary-continuous-interaction.html#cb192-5" aria-hidden="true" tabindex="-1"></a>a_females <span class="ot">&lt;-</span> <span class="fu">coef</span>(mod4)[<span class="dv">1</span>]</span>
+<span id="cb192-6"><a href="6.3-binary-continuous-interaction.html#cb192-6" aria-hidden="true" tabindex="-1"></a>b_females <span class="ot">&lt;-</span> <span class="fu">coef</span>(mod4)[<span class="dv">2</span>]</span>
+<span id="cb192-7"><a href="6.3-binary-continuous-interaction.html#cb192-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb192-8"><a href="6.3-binary-continuous-interaction.html#cb192-8" aria-hidden="true" tabindex="-1"></a>a_males <span class="ot">&lt;-</span> a_females <span class="sc">+</span> <span class="fu">coef</span>(mod4)[<span class="dv">3</span>]</span>
+<span id="cb192-9"><a href="6.3-binary-continuous-interaction.html#cb192-9" aria-hidden="true" tabindex="-1"></a>b_males <span class="ot">&lt;-</span> b_females <span class="sc">+</span> <span class="fu">coef</span>(mod4)[<span class="dv">4</span>]</span>
+<span id="cb192-10"><a href="6.3-binary-continuous-interaction.html#cb192-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb192-11"><a href="6.3-binary-continuous-interaction.html#cb192-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot reading and math for females</span></span>
+<span id="cb192-12"><a href="6.3-binary-continuous-interaction.html#cb192-12" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(achrdg12[females], achmat12[females], <span class="at">xlab =</span> <span class="st">&quot;reading&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;math&quot;</span>)</span>
+<span id="cb192-13"><a href="6.3-binary-continuous-interaction.html#cb192-13" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(a_females, b_females, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb192-14"><a href="6.3-binary-continuous-interaction.html#cb192-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb192-15"><a href="6.3-binary-continuous-interaction.html#cb192-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Add points and line for males</span></span>
+<span id="cb192-16"><a href="6.3-binary-continuous-interaction.html#cb192-16" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(achrdg12[males], achmat12[males], <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>, <span class="at">pch =</span> <span class="dv">2</span>)</span>
+<span id="cb192-17"><a href="6.3-binary-continuous-interaction.html#cb192-17" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(a_males, b_males, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb192-18"><a href="6.3-binary-continuous-interaction.html#cb192-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb192-19"><a href="6.3-binary-continuous-interaction.html#cb192-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a legend</span></span>
+<span id="cb192-20"><a href="6.3-binary-continuous-interaction.html#cb192-20" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="at">x =</span> <span class="st">&quot;topleft&quot;</span>, <span class="at">legend =</span> <span class="fu">levels</span>(gender), <span class="at">pch =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="at">col =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="st">&quot;#4B9CD3&quot;</span>))</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:math-reading-3"></span>
 <img src="_main_files/figure-html/math-reading-3-1.png" alt="Math Achievement, Reading Achievement, and Gender (No Interaction)." width="672" />
 <p class="caption">
 Figure 6.3: Math Achievement, Reading Achievement, and Gender (No Interaction).
 </p>
 </div>
-<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="6.3-binary-continuous-interaction.html#cb131-1" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(NELS)</span></code></pre></div>
+<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="6.3-binary-continuous-interaction.html#cb193-1" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(NELS)</span></code></pre></div>
 <p>To see what the model says about the data, let’s work through the model equations using our two-step procedure. As usual, we first plug in values for the categorical predictor, then we use the resulting equations solve for quantities of interest (the simple trends and the gender gap).</p>
 <p><span class="math display">\[\begin{align}
 \widehat Y (Female) &amp; = b_0 + b_1X_1 + b_2 (0) + b_3(X_1 \times 0) \\ &amp; = b_0 + b_1X_1  \\\\
@@ -411,19 +433,19 @@ Figure 6.3: Math Achievement, Reading Achievement, and Gender (No Interaction).
 <div id="back-to-the-example" class="section level3" number="6.3.2">
 <h3><span class="header-section-number">6.3.2</span> Back to the example</h3>
 <p>The regression coefficients for the example data are shown below. <strong>Please use these numbers to provide an interpretation of the interaction between Gender and Reading.</strong> (Don’t worry about statistical significance, just focus on the meaning of the coefficients.)</p>
-<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="6.3-binary-continuous-interaction.html#cb132-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(mod4)</span></code></pre></div>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="6.3-binary-continuous-interaction.html#cb194-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(mod4)</span></code></pre></div>
 <pre><code>##     (Intercept)        achrdg12      genderMale genderXachrdg12 
-##           14.80            0.73           13.39           -0.18</code></pre>
+##        14.80310         0.72824        13.39328        -0.17794</code></pre>
 <p>Some potential answers are hidden below, but don’t peak until you have tried it for yourself!</p>
-<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="6.3-binary-continuous-interaction.html#cb134-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Gender gap</span></span>
-<span id="cb134-2"><a href="6.3-binary-continuous-interaction.html#cb134-2" aria-hidden="true" tabindex="-1"></a><span class="co"># General: The gender gap in Math is smaller for students who are also strong in Reading</span></span>
-<span id="cb134-3"><a href="6.3-binary-continuous-interaction.html#cb134-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Specific: The gender gap in Math Achievement decreases by .18 percentage points for each percentage point increase Reading Achievement</span></span>
-<span id="cb134-4"><a href="6.3-binary-continuous-interaction.html#cb134-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb134-5"><a href="6.3-binary-continuous-interaction.html#cb134-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Simple slopes</span></span>
-<span id="cb134-6"><a href="6.3-binary-continuous-interaction.html#cb134-6" aria-hidden="true" tabindex="-1"></a><span class="co"># General: The relationship between Math and Reading is stronger (i.e. has a larger slope) for Females than for Males</span></span>
-<span id="cb134-7"><a href="6.3-binary-continuous-interaction.html#cb134-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Specific:</span></span>
-<span id="cb134-8"><a href="6.3-binary-continuous-interaction.html#cb134-8" aria-hidden="true" tabindex="-1"></a><span class="co">#  For Females, Math scores are predicted to increase by .72 percentage points for each percentage point increase in Reading Achievement</span></span>
-<span id="cb134-9"><a href="6.3-binary-continuous-interaction.html#cb134-9" aria-hidden="true" tabindex="-1"></a><span class="co">#  For Males, Math scores are predicted to increase by .55 percentage points for each percentage point increase in Reading Achievement</span></span></code></pre></div>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="6.3-binary-continuous-interaction.html#cb196-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Gender gap</span></span>
+<span id="cb196-2"><a href="6.3-binary-continuous-interaction.html#cb196-2" aria-hidden="true" tabindex="-1"></a><span class="co"># General: The gender gap in Math is smaller for students who are also strong in Reading</span></span>
+<span id="cb196-3"><a href="6.3-binary-continuous-interaction.html#cb196-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Specific: The gender gap in Math Achievement decreases by .18 percentage points for each percentage point increase Reading Achievement</span></span>
+<span id="cb196-4"><a href="6.3-binary-continuous-interaction.html#cb196-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-5"><a href="6.3-binary-continuous-interaction.html#cb196-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Simple slopes</span></span>
+<span id="cb196-6"><a href="6.3-binary-continuous-interaction.html#cb196-6" aria-hidden="true" tabindex="-1"></a><span class="co"># General: The relationship between Math and Reading is stronger (i.e. has a larger slope) for Females than for Males</span></span>
+<span id="cb196-7"><a href="6.3-binary-continuous-interaction.html#cb196-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Specific:</span></span>
+<span id="cb196-8"><a href="6.3-binary-continuous-interaction.html#cb196-8" aria-hidden="true" tabindex="-1"></a><span class="co">#  For Females, Math scores are predicted to increase by .72 percentage points for each percentage point increase in Reading Achievement</span></span>
+<span id="cb196-9"><a href="6.3-binary-continuous-interaction.html#cb196-9" aria-hidden="true" tabindex="-1"></a><span class="co">#  For Males, Math scores are predicted to increase by .55 percentage points for each percentage point increase in Reading Achievement</span></span></code></pre></div>
 </div>
 <div id="centering-the-continuous-predictor" class="section level3" number="6.3.3">
 <h3><span class="header-section-number">6.3.3</span> Centering the continuous predictor</h3>
@@ -439,20 +461,29 @@ Figure 6.3: Math Achievement, Reading Achievement, and Gender (No Interaction).
 <p><span class="math display">\[ \widehat Y (Male) - \widehat Y (Female) = b_2 + b_3 D_1 \]</span></p>
 <p>Since <span class="math inline">\(D_1 = 0\)</span> when <span class="math inline">\(X_1 = \bar X_1\)</span>, the regression coefficient on gender (<span class="math inline">\(b_2\)</span>) is now interpretable as the gender gap in Math Achievement, for students with average Reading Achievement. This is a much more interpretable number than the coefficient in the original interaction model!</p>
 <p>In the example, this approach yields the following model parameters:</p>
-<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="6.3-binary-continuous-interaction.html#cb135-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(NELS)</span></code></pre></div>
-<pre><code>## The following objects are masked _by_ .GlobalEnv:
+<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="6.3-binary-continuous-interaction.html#cb197-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(NELS)</span></code></pre></div>
+<pre><code>## The following object is masked _by_ .GlobalEnv:
 ## 
-##     gender, urban</code></pre>
-<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="6.3-binary-continuous-interaction.html#cb137-1" aria-hidden="true" tabindex="-1"></a><span class="co"># compute the deviation scores for reading</span></span>
-<span id="cb137-2"><a href="6.3-binary-continuous-interaction.html#cb137-2" aria-hidden="true" tabindex="-1"></a>reading_dev <span class="ot">&lt;-</span> achrdg12 <span class="sc">-</span> <span class="fu">mean</span>(achrdg12, <span class="at">na.rm =</span> T) </span>
-<span id="cb137-3"><a href="6.3-binary-continuous-interaction.html#cb137-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb137-4"><a href="6.3-binary-continuous-interaction.html#cb137-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the interaction model as above</span></span>
-<span id="cb137-5"><a href="6.3-binary-continuous-interaction.html#cb137-5" aria-hidden="true" tabindex="-1"></a>genderXreading_dev <span class="ot">&lt;-</span> (<span class="fu">as.numeric</span>(gender) <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> reading_dev</span>
-<span id="cb137-6"><a href="6.3-binary-continuous-interaction.html#cb137-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb137-7"><a href="6.3-binary-continuous-interaction.html#cb137-7" aria-hidden="true" tabindex="-1"></a>mod5 <span class="ot">&lt;-</span> <span class="fu">lm</span>(achmat12 <span class="sc">~</span> reading_dev <span class="sc">+</span> gender <span class="sc">+</span> genderXreading_dev)</span>
-<span id="cb137-8"><a href="6.3-binary-continuous-interaction.html#cb137-8" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(mod5)</span></code></pre></div>
+##     urban</code></pre>
+<pre><code>## The following objects are masked from NELS (pos = 3):
+## 
+##     absent12, achmat08, achmat10, achmat12, achrdg08, achrdg10,
+##     achrdg12, achsci08, achsci10, achsci12, achsls08, achsls10,
+##     achsls12, advmath8, alcbinge, algebra8, apoffer, approg, cigarett,
+##     computer, cuts12, edexpect, excurr12, expinc30, famsize, gender,
+##     homelang, hsprog, hwkin12, hwkout12, id, late12, marijuan, numinst,
+##     nursery, parmarl8, region, schattrt, schtyp8, ses, slfcnc08,
+##     slfcnc10, slfcnc12, tcherint, unitcalc, unitengl, unitmath, urban</code></pre>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="6.3-binary-continuous-interaction.html#cb200-1" aria-hidden="true" tabindex="-1"></a><span class="co"># compute the deviation scores for reading</span></span>
+<span id="cb200-2"><a href="6.3-binary-continuous-interaction.html#cb200-2" aria-hidden="true" tabindex="-1"></a>reading_dev <span class="ot">&lt;-</span> achrdg12 <span class="sc">-</span> <span class="fu">mean</span>(achrdg12, <span class="at">na.rm =</span> T) </span>
+<span id="cb200-3"><a href="6.3-binary-continuous-interaction.html#cb200-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb200-4"><a href="6.3-binary-continuous-interaction.html#cb200-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the interaction model as above</span></span>
+<span id="cb200-5"><a href="6.3-binary-continuous-interaction.html#cb200-5" aria-hidden="true" tabindex="-1"></a>genderXreading_dev <span class="ot">&lt;-</span> (<span class="fu">as.numeric</span>(gender) <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> reading_dev</span>
+<span id="cb200-6"><a href="6.3-binary-continuous-interaction.html#cb200-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb200-7"><a href="6.3-binary-continuous-interaction.html#cb200-7" aria-hidden="true" tabindex="-1"></a>mod5 <span class="ot">&lt;-</span> <span class="fu">lm</span>(achmat12 <span class="sc">~</span> reading_dev <span class="sc">+</span> gender <span class="sc">+</span> genderXreading_dev)</span>
+<span id="cb200-8"><a href="6.3-binary-continuous-interaction.html#cb200-8" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(mod5)</span></code></pre></div>
 <pre><code>##        (Intercept)        reading_dev         genderMale genderXreading_dev 
-##              55.29               0.73               3.50              -0.18</code></pre>
+##           55.29439            0.72824            3.49930           -0.17794</code></pre>
 <p>The regression coefficient for Gender is now pretty close to what it was in the original model without the interaction, but the interpretation is different. Notice that the intercept in the multiple regression model above has now also changed in value. However, the centering did not affect the regression coefficient for Reading or the interaction.</p>
 <p><strong>Please write down your interpretation of the intercept and the regression coefficient for Gender in the above regression output, and be prepared to share your answer in class</strong>.</p>
 </div>
