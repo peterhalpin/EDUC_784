@@ -2,7 +2,7 @@
 
 ```{r, echo = F}
 # Clean up check
-# detach(NELS)
+detach(NELS)
 rm(list = ls())
 
 
@@ -17,7 +17,7 @@ button <-  "position: relative;
 ```
 
 
-An interaction happens when the relationship between two variables depends on a third variable. In the context of regression, we are usually interested in the situation where the relationship between the outcome $Y$ and a predictor $X_1$ depends on the value of another predictor $X_2$. This situation is also referred to as *moderation* or sometimes as *effect heterogeneity*. 
+In statistics, the term *interaction* means that the relationship between two variables depends on a third variable. In the context of regression, we are usually interested in the situation where the relationship between the outcome $Y$ and a predictor $X_1$ depends on the value of another predictor $X_2$. This situation is also referred to as *moderation* or sometimes as *effect heterogeneity*.<!-- two way, main effects, etc". -->
 
 Interactions are a "big picture" idea with a lot conceptual power, especially when describing topics related to social inequality or "gaps". Some examples of interactions are:  
 
@@ -80,7 +80,7 @@ codefolder::bookdown(init = "hide", style = button)
 ```
 As a first step, let's consider what happens when we include both Gender and Reading Achievement as predictors of Math Achievement in our usual multiple regression equation: 
 
-\[\hat Y = b_0 + b_1X_1 + b_2 X_2 
+\[\widehat Y = b_0 + b_1X_1 + b_2 X_2 
 (\#eq:yhat-6a)
 \]
 
@@ -88,7 +88,7 @@ where
 
 * $Y$ is Math Achievement in grade 12
 * $X_1$ is Reading Achievement in grade 12
-* $X_2$ is Gender (binary, with female = 0 and male = 1)
+* $X_2$ is Gender (binary, with Female = 0 and Male = 1)
 
 Note that this model does **not** include an interaction between the two predictors -- we are first going to consider what is "missing" from the usual regression model, and then use this to motivate inclusion of another predictor that represents the interaction. To get an initial sense of what is missing, the model in Equation \@ref(eq:yhat-6a) is plotted Figure \@ref(fig:math-reading-2) -- can you spot the difference with Figure \@ref(fig:math-reading-1)? 
 
@@ -338,7 +338,7 @@ Note that marginal effects are only of interest when the interaction is signific
 
 ### Marginal effects
 
-There are a three main types of marginal effects. To explain these three approaches, first let's write the gender gap in Math Achievement using a slightly more compact notation. 
+There are three main types of marginal effects. To explain these three approaches, first let's write the gender gap in Math Achievement using a slightly more compact notation. 
 
 \[ \widehat Y (Male) - \widehat Y (Female) = b_2 + b_3 X_1 = \Delta(X_1) \] 
 
@@ -356,7 +356,7 @@ Then we having the following marginal effects that can be computed:
 
  \[ MERV =  \{\Delta(X^*_1), \Delta(X^\dagger_1), \dots \} \] 
  
- MEM and AVE are equivalent for linear regression models (but we will visit the distinction again when we get to logistic regression).  We already have used this approach when we centered the continuous predictor in order to interpret the regression coefficient on Gender -- this coefficicient was the MEM / AVE.  
+ MEM and AVE are equivalent for linear regression models (but we will visit the distinction again when we get to logistic regression).  We already have used this approach when we centered the continuous predictor in order to interpret the regression coefficient on Gender -- this coefficient was the MEM / AVE.  
  
  In this section we focus on MERV, which is the more widely used approach. One usual choice for the "interesting values" is the quartiles of $X_1$, which is reported below. Another popular choice is the mean of $X_1$ plus or minus 1 SD. 
 
@@ -379,7 +379,7 @@ contrast(gap, method = "pairwise")
  
 The output shows the gender gap in Math Achievement for 5 values of Reading Achievement. The values of Reading Achievement are its 5 quartiles. **Please examine the statistical significance of the gender gap in Math Achievement at the 5 quartiles of Reading Achievement and make a conclusion whether the gap "dissapeared" for students with higher levels of Reading Achievement. Please be prepared to share your answer in class!**
 
-Note that the computations going on "under the hood" for testing marginal means and simple trends are actually pretty complicated. You can read more details here: https://cran.r-project.org/web/packages/emmeans/vignettes/basics.html 
+Note that the computations going on "under the hood" for testing marginal means are pretty complicated. You can read more details here: https://cran.r-project.org/web/packages/emmeans/vignettes/basics.html 
 
 
 ### Simple trends
@@ -427,27 +427,29 @@ When making inferences about an interaction:
 
 * When the focal predictor is continuous, it can be interesting to "follow up" a significant interaction by taking a closer look at the statistical significance of the simple trends / simple slopes. 
 
-## Two continuous predictors
+## Two continuous predictors {#two-continuous-predictors-6}
 
 ```{r, echo=FALSE, results='asis'}
 codefolder::bookdown(init = "hide", style = button)
 ```
 
-The regression equation and overall interpretation for a model with an interaction between two continuous predictors is the same as the previous sections – e.g., the relationship between Y and X1 changes as a function of X2
+In this section we address the situation in there is an interaction between two continuous predictors. The regression equation and overall interpretation is the same as the previous sections – e.g., the relationship between Y and X1 changes as a function of X2. 
 
 However, there are also some special details that crop up when considering an interaction between two continuous predictors. In this section we will address: 
 
-* The importance of centering the two predictors. When there are two continuous predictors, centering helps interpret the coefficients on the predictors (just like in Section \@ref(binary-continuous-interaction-6)), but is additionally important to reduce the correlation between then interaction and the predictors. 
+* The importance of centering the two predictors. When there are two continuous predictors, centering helps interpret the coefficients on the predictors (just like in Section \@ref(binary-continuous-interaction-6)), and can additionally be helpful for reducing the correlation between the predictors and the interaction.  
 
-* How to break down the interaction using simple trends. Because the focal predictor is necessarily continuous, the focus is on simple trends rather than marginal means.
+* How to follow-up a significant interaction using simple trends. Because the predictors are continuous, the focus is on simple trends rather than marginal means.
 
-First, we introduce an example. 
+First, we introduce an new example. 
 
 ### Another NELS example
 
-For our example, let's replace Gender with SES in our previous analysis. Apologies that this new example is mainly for convenience and doesn't represent a great research question about, e.g., why the relationships between Math and Reading might change as a function of SES. The example data and overall approach with SES as the moderator are illustrated below (note that the values 9, 19, and 28 are 10th, 50th, and 90th percentiles SES, respectively). 
+To illustrate an interaction between two continuous predictors, let's replace Gender with SES in our previous analysis. Apologies that this new example is mainly for convenience and doesn't represent a great research question about, e.g., why the relationships between Math and Reading might change as a function of SES. 
 
-```{r readingXses, fig.cap = 'Illustration of the Example Data', fig.align = 'center'}
+The example data and overall approach with SES as the moderator are illustrated below (note that the values 9, 19, and 28 are 10th, 50th, and 90th percentiles SES, respectively). 
+
+```{r readingXses, fig.cap = 'Math (achmat), Reading (achrdg), and SES', fig.align = 'center'}
 #Interaction without centering 
 mod7 <- lm(achmat12 ~ achrdg12*ses, data = NELS)
 
@@ -457,7 +459,25 @@ visreg(mod7, xvar = "achrdg12", by = "ses", overlay = TRUE, band = F)
 
 ### Centering the predictors
 
-The left hand panel in Figure \@ref(fig:centering) shows that SES and its interaction with reading are highly correlated. This is because both (a) SES and Reading are themselves positively correlated, and (b)  both SES and Reading take on strictly positive values. Whenever these two conditions hold, the interaction term will be positively correlated with both predictors (the figure just shows the correlation with SES, but you can show that the same situation holds for Reading). 
+Centering the predictors facilitates the interpretation of their regression coefficients in the presences of an interaction, just as it did Section \@ref(binary-continuous-interaction-6). In particular, the coefficients $b_1$ and $b_2$ in the regression model
+
+\[ \widehat Y = b_0 + b_1X_1 + b_2X_2 + b_3 (X_1 \times X_2) \]
+
+can be interpreted in terms of the following simple trends: 
+
+\begin{align} 
+\widehat Y(X_2 =0) & = b_0 + b_1X_1 \\
+\widehat Y(X_1 =0)&  = b_0 + b_2X_2. 
+(\#eq:simple)
+\end{align}
+
+For example, $b_1$ is the relationship between $Y$ and $X_1$, when $X_2$ is equal to zero. 
+
+In general, setting a variable to the value of zero may not be meaningful. But, when setting a *centered* variable (i.e., a deviation score) to zero, this is equivalent to setting the original variable to its mean. So, if the variables in Equation \@ref(eq:simple) were centered, we could say that $b_1$ is the relationship between $Y$ and $X_1$, when $X_2$ is equal to its mean. Again, this is just the same trick as Section \@ref(binary-continuous-interaction-6), but this time both predictors are continuous and both are centered. 
+
+There is another reason for centering continuous predictors when there is an interaction in the model, and this has to do with reducing the correlation among the predictors and their interaction. In general, the interaction term will be positively correlated with both predictors if (a) the predictors themselves are positively correlated and (b) the predictors take on strictly positive (or strictly negative) values. Highly correlated predictors lead to redundant information the model, so we generally want to avoid this situation (this is technically called *multicollinearity* and we discuss it in more detail in a later Chapter). Centering can "break" the correlation between the preditors and the interaction, thereby making the predictors less redundant with their interaction. 
+
+To see how this works, let's take a look at Figure \@ref(fig:centering). The left hand panel shows that SES and its interaction with reading are highly correlated. This is because (a) SES and Reading are themselves positively correlated, and (b)  both SES and Reading take on strictly positive values. As mentioned, the interaction term will be positively correlated with both predictors whenever these two conditions hold. (The figure just shows the correlation with SES, but the same situation holds for Reading.) 
 
 ```{r centering, fig.cap = 'Correlation Between SES and SES X Reading, With and Without Centering', fig.align = 'center'}
 attach(NELS)
@@ -479,32 +499,15 @@ plot(ses_dev, achrdg12_dev*ses_dev, col = "#4B9CD3", main = title, xlab = "SES C
 detach(NELS)
 ```
 
+We can see in the right hand panel of Figure \@ref(fig:centering) how centering the two predictors "breaks" the linear relationship between SES and its interaction with Reading. After centering, the relationship between the SES and its interaction is now highly non-linear, and the correlation is approximately zero. Again, the same is true for the relationship between Reading and the interaction, but the figure only shows the situation for SES. 
 
-We can see in the right hand panel of how centering the two predictors "breaks" the linear relationship between a SES and its interaction with Reading. After centering, the relationship between the SES and its interaction is now highly non-linear. Again, the same is true for the relationship between Reading and the interaction, but the figure only shows the situation for SES. 
+The upshot of all this is that the predictors will be less redundant with the interaction term -- i.e., centering reduces multicollinearity between the "main effects" of the predictors and their interaction. 
 
-What does all this mean for regressing Math on Reading, SES, and their interaction? First, two highly correlated variables provide redundant information, so we generally don't want to have highly correlated predictors in our models (this situation is called *multicollinearity* and we discuss it in more detail in a later Chapter). 
+The two sets of output below show the regression of Math on Reading, SES, and their interaction. The first ouptut does not center the predictors, but the second output does (the `_dev` notation denotes the centered predictors).  
 
-Second, centering the predictors facilitates the interpretation of their regression coefficients in the presences of an interaction, just as it did Section \@ref(binary-continuous-interaction-6). In particular, the coefficients $b_1$ and $b_2$ in the regression model
+We can see that  SES is significant predictor in the centered model but not in the "un-centered" model. This has to do with changing the interpretation of the coefficient (it now represents the relationship between Math and SES for students with average Reading), and also reflects the fact that SES is no longer so highly correlated with the interaction term after centering. 
 
-\[ \widehat Y = b_0 + b_1X_1 + b_2X_2 + b_3 (X_1 \times X_2) \]
-
-can be interpreted in terms of the following simple trends: 
-
-\begin{align} 
-\widehat Y(X_2 =0) & = b_0 + b_1X_1 \\
-\widehat Y(X_1 =0)&  = b_0 + b_2X_2. 
-(\#eq:simple)
-\end{align}
-
-For example, $b_1$ is the relationship between $Y$ and $X_1$, when $X_2$ is equal to zero. 
-
-In general, setting a variable to the value of zero may not be meaningful. But, when setting a *centered* variable (i.e., a deviation score) to zero, this is equivalent to setting the original variable to its mean. So, if the variables are centered, then we can say that $b_1$ is the relationship between $Y$ and $X_1$, for students with average levels of $X_2$. Again, this is just the same trick as Section \@ref(binary-continuous-interaction-6), but this time both predictors are continuous and both are centered. 
-
-The two sets of output below show the models with and without centering for our example. The second set out of output, with the `_dev` notation, denotes the centered predictors. 
-
-We can see that, while both models account for the same overall amount of variation in Math, SES is significant in the centered model but not in the un-centered model. This has to do with changing the interpretation of the coefficient (it now represents the relationship between Math and SES for students with average Reading) and because it is no longer so highly correlated with the interaction term. 
-
-Note that the interaction term does not change value. This is discussed in the extra material at the end of this section. 
+Note that coefficient on interaction, the R-squared, and their associated tests do not change value. This is discussed in more detail in the extra material at the end of this section, but it is sufficient to note that centering only affects the interpretation of the main effects (and the intercept, of course). 
 
 ```{r}
 attach(NELS)
@@ -513,7 +516,7 @@ mod7 <- lm(achmat12 ~ achrdg12*ses)
 summary(mod7)
 ```
 
-```{r, centering3, fig.cap = 'Model Output With Centered Predictors', fig.align = 'center'}
+```{r}
 # With centering
 mod8 <- lm(achmat12 ~ achrdg12_dev*ses_dev)
 summary(mod8)
@@ -524,29 +527,44 @@ detach(NELS)
 
 ### Simple trends
 
-Centering helps us interpret the "main effects" of the individual predictors, but we haven't yet discussed how to interpret the interaction term when both predictors are continuous. In the case with a binary predictor, we had two different regression lines and the difference in there slopes was the interaction term. What do we get when both predictors are continuous? 
+Centering helps us interpret the "main effects" of the individual predictors, but we haven't yet discussed how to interpret the interaction term when both predictors are continuous. In the case with a binary predictor, we had two different regression lines. So what do we get when both predictors are continuous? 
 
-The usual way to answer this question is an extension of the MERV approach discussed in Section \@ref(inference-for-interactions-6). The basic idea is to present the relationship between the two focal variables, for a selection of values of the moderator. The basic idea is shown in Figure \@ref(readingXses) above, where SES is the moderator. The choice of values is up to the researcher, but usual values are 
+The usual way to answer this question is an extension of the MERV approach to marginal effects, discussed in Section \@ref(inference-for-interactions-6). The basic idea is to present the relationship between the two focal variables, for a selection of values of the moderator. The is shown in Figure \@ref(readingXses) above. As with MERV, the choice of values of the moderator is up to the researcher, but usual choices are 
 
-* The quartiles of the moderator or subset therefo
-* M $\pm$ SD of the moderator
-* A selection of deciles (`visreg` uses the first, fifth, and ninth)
+* The quartiles of the moderator (i.e., the five number summary) or subset thereof
+* M $\pm$ 1 SD of the moderator
+* A selection of percentiles (`visreg` uses the 10th, 50th, and 90th)
 
-These are all doing very similar things, so just make a choice that you think works best for your analysis. 
+These are all doing very similar things, so the choosing among them isn't very important. 
 
-
-Although the interaction between Reading and SES was not significant in our example model (What does this mean??), let's break down the interaction with  with SES as the moderator just to see how this approach works. The example below uses the quartiles of SES. The first part of the output shows the simple slopes for the three values of SES shown in Figure \@ref(readingXses) (i.e., the first, fifth, and ninth deciles), and the second part of the output tests the differences between each pairwise combination. 
+Although the interaction between Reading and SES was not significant in our example model, let's break down the interaction with SES as the moderator just to see how this approach works. The first part output below shows the simple slopes for the three values of SES shown in Figure \@ref(fig:readingXses) (i.e., the 10th, 50th, and 90th deciles). We can see that the simple slopes are all different from zero (and the non-significant interaction tells us that they are not different from one-another). 
 
 ```{r}
 # Break down interaction with SES as moderator
 simple_slopes <-emtrends(mod7, var = "achrdg12", specs = "ses", at = list(ses = c(9, 19, 28)))
 test(simple_slopes)
-contrast(simple_slopes, method = "pairwise")
 ```
 
 ### Summary
 
+When regressing an outcome on two continuous predictors and their interaction, the overall interpretation of the model is same as discussed in Section \@ref(binary+continuous+interaction-6), but: 
+
+* It is useful to center both predictors, both to facilitate the interpretation of the regression coefficients on the predictors (the "main effects"), and to reduce the correlation between the predictors and their interaction (i.e., reduce multicollinearity). 
+
+* When following up a significant interaction, the usual approach is to report the simple trends between the focal variables for a selection of values of the moderator (e.g., a selection of percentiles). The example illustrated how to do this even though the interaction was not significant, but you shouldn't follow up a non-significant interaction. 
+
 ### Extra: How centering works* 
+
+It might seem that centering both predictors to improve the chances of getting significant main effects is a dubious practice. However, using the centered or the un-centered variables doesn’t really make a difference in term of what predictors are in the model are. The follow algebra show why, using $D = X - \bar X$ for the centered variables: 
+
+\begin{align} 
+\widehat Y & = b_0 + b_1D_1 + b_1D_2 + b_3 (D_1 \times D_2) \\ 
+& = b_0^* + (b_1 - b_3 \bar X_1) X_1 + (b_2 - b_3 \bar X_2) X_2 +  b_3 (X_1 \times X_2) \\ 
+\text{where} & \\ \\ 
+b_0^* & = a - b_1\bar X_1 - b_2\bar X_2 - b_3\bar X_1\bar X_2. 
+\end{align}
+
+The second line of the equation shows that we are not changing what we regress $Y$ on -- i.e., the predictors are still $X_1$ and $X_2$. We are re-packaging the intercept and main effects, which is exactly the purpose of this approach. But, centering does not change the regression coefficient for the interaction -- it is still interpreted with respect to the un-centered variables.  
 
 ## Two binary predictors (DD)
 
@@ -563,6 +581,8 @@ This section collects the questions asked in this chapter. We will discuss these
 
 ```{r example-1, fig.cap = 'Math Achievement, Reading Achievement, and Gender.', fig.align = 'center'}
 attach(NELS)
+mod1 <- lm(achmat12[females] ~ achrdg12[females])
+mod2 <- lm(achmat12[males] ~ achrdg12[males])
 
 # Plot reading and math for females
 plot(achrdg12[females], achmat12[females], xlab = "Reading", ylab = "Math")
@@ -589,6 +609,7 @@ Take a minute to think about what this plot is telling us about the relationship
 * No interaction model: The regression coefficients for the example data are shown below. Please use these numbers to provide an interpretation of the simple trends and the gender gap in Math Achievement for the NELS example. (Don't worry about statistical significance, just focus on the meaning of the coefficients.) 
 
 ```{r}
+mod3 <- lm(achmat12 ~ achrdg12 + gender, data = NELS)
 coef(mod3)
 ```
 
@@ -597,7 +618,11 @@ coef(mod3)
 * Interaction model: The regression coefficients for the example data are shown below. Please use these numbers to provide an interpretation of the interaction between Gender and Reading. (Don't worry about statistical significance, just focus on the meaning of the coefficients.) 
 
 ```{r}
+attach(NELS)
+genderXachrdg12 <- (as.numeric(gender) - 1) * achrdg12
+mod4 <- lm(achmat12 ~ achrdg12 + gender + genderXachrdg12)
 coef(mod4)
+detach(NELS)
 ```
 
 * Interaction model with centered continuous predictor: Please write down your interpretation of the intercept and the regression coefficient for Gender in the regression output below. 
@@ -617,7 +642,7 @@ detach(NELS)
 
 **Section \@ref(inference-for-interactions-6)**
 
-* The output shows the gender gap in Math Achievement for 5 values of Reading Achievement. The values of Reading Achievement are the 5 quartiles. Please examine the statistical significance of the gender gap in Math Achievement at the 5 quantiles of Reading Achievement and make a conclusion whether the gap "dissapeared" for students with higher levels of Reading Achievement.
+* The output shows the gender gap in Math Achievement for 5 values of Reading Achievement. The values of Reading Achievement are the 5 quartiles. Please examine the statistical significance of the gender gap in Math Achievement at the 5 quartiles of Reading Achievement and make a conclusion whether the gap "dissapeared" for students with higher levels of Reading Achievement.
 
 ```{r}
 # Install the package if you haven't already done so
@@ -637,6 +662,195 @@ contrast(gap, method = "pairwise")
 ```
  
 
+**Section \@ref(two-continuous-predictors-6)**
+
+
+* To check your understanding of centering with two continuous predictors, please provide an interpretation of all four regression coefficients in the centered model (below). Your interpretations should make reference to the situation where one or both predictors are equal to zero (see Equation \@ref(eq:simple)) and should also mentioned the interpretation of the value of zero for the centered variables.
+ 
+```{r}
+attach(NELS)
+mod8 <- lm(achmat12 ~ achrdg12_dev*ses_dev)
+summary(mod8)
+detach(NELS)
+```
 
 ## Exercises {#exercises-6}
-The exercises will be added before class and we will work through them together during class time. 
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+rm(list = ls())
+```
+
+These exercises provide an overview of how to add interactions using the `lm` function, how to center continuous predictors, and how to follow-up significant interactions with the `emmeans` package. 
+
+### Binary + continuous + interaction
+
+There are multiple ways of implementing interactions in R. 
+
+  * We can "hard code" new variables into our data (e.g., the product of a binary gender variable and reading)
+  
+  * We can use R's formula notation for single term interactions (`:`)
+  
+  * We can use R's formula notation for factorial interactions (`*`)
+  
+The following three models illustrate how to use these three approaches, and show that they all producing the same output. In general, the `*` syntax is the easiest to use, so we will stick with that one going forward. The variables used in the example are from the NELS data: 
+
+* `achmat12` is Mat Achievement (percent correct on a mat test) in grade 12. 
+* `achrdg12` is Reading Achievement (percent correct on a reading test) in grade 12. 
+* `gender` is dichotomous encoding of gender with values `Male` and `Female` (it is not a binary variable, but a factor, as discussed in Section \@ref(exercies-5)). 
+
+```{r}
+load("NELS.RData")
+attach(NELS)
+# Interaction via hard coding
+genderXreading <- (as.numeric(gender) - 1) * achrdg12
+mod1 <- lm(achmat12 ~ achrdg12 + gender + genderXreading)
+summary(mod1)
+
+# Interaction via `:` operator
+mod2 <- lm(achmat12 ~ achrdg12 + gender + achrdg12:gender)
+summary(mod2)
+
+# Interaction via `*` operator
+mod3 <- lm(achmat12 ~ achrdg12*gender)
+summary(mod3)
+```
+
+Before moving on, check your interpretation of the coefficients in the models. In particular, what does the regression coefficient on the interaction term mean?
+
+### Centering continuous predictors
+
+As noted in Section \@ref(binary-continuous-interaction-6), the regression coefficient on Gender is not very interpretable when the interaction in the model, because it now corresponds to the gender gap when `achrdg12 = 0`. We can fix this issue by re-scaling `achrdg12` so that zero has a meaningful value. One easy and widely used approach is to center `achrdg12` at its mean, or, stated otherwise, to work with the deviation scores `achrdg12` instead of the "raw" score. Let's see what happens
+
+```{r}
+# Re-run the model with reading centered at its mean
+achrdg12_dev <- achrdg12 - mean(achrdg12)
+mod4 <- lm(achmat12 ~ achrdg12_dev*gender)
+summary(mod4)
+```
+  
+Note that the intercept and the regression coefficient on gender have changed values compared to `mod3`. What is the interpretation of these coefficients in the new model?
+
+Next, let's plot our model with the interaction term.  One advantage of having everything in a single model is that we can level-up our plotting! The following code uses the `visreg` package.  Note that the error bands in the plot are produced using the standard errors from `emmeans`, which is discussed in the following section. We 
+
+```{r}
+# Install the package if you haven't already done so
+# install.packages("visreg")
+
+# Load the package into memory
+library(visreg)
+
+visreg(mod3, xvar = "achrdg12", by = "gender", overlay = TRUE)
+```
+
+If you want to know more about how visreg works, type `help(visreg)`. 
+
+### Breaking down a significant interaction
+
+If an interaction is significant, then we usually want to report a bit more information about how the focal relationship changes as a function of the moderators. There are two main ways to do this: 
+
+* Marginal effects (aka marginal means, least squares means, adjusted means): This approach is used when the focal predictor is categorical and we want to compare means across the categories, as a function of the moderator. 
+
+* Simple trends (aka simple slopes): This approach is used when the focal predictor is continuous and we want to examine the slopes of the simple trends as a function of the moderator. 
+
+Usually, the researcher will chose one or the other approach, whichever is best suited to address the research questions of interest. Our example was motivated by consideration of the gender gap in STEM (i.e., the relationship between a STEM and a categorical predictor), so the marginal effects approach is better suited. We will also illustrate simple trends, just to show how that approach works. 
+
+### Marginal effects
+
+Let's break the interaction by asking how the relationship between Math and Gender (i.e., the gender achievement gap in Math) changes as a function of Reading. This can be done using `emmeans` package, and the main function in that pacakge  is also called `emmeans`.
+
+The three main arguments for the `emmeans` function: 
+
+  * `object` -- the output of `lm`. This is the first argument
+  * `specs` -- which factors(s) in the model we want the means of
+  * `by` -- which other predictors break the means down by
+  
+We can use `emmeans` to compute the marginal effect at the mean (MEM) as follows: 
+
+```{r}
+# Install the package if you haven't already done so
+  # install.packages("emmeans")
+
+# Load the package into memory
+library(emmeans)
+
+# Use the emmeans function to get the gender means on math, broken down by reading
+gap <- emmeans(mod3, specs = "gender", by = "achrdg12")
+summary(gap)
+
+# Test whether the difference is significant
+contrast(gap, method = "pairwise")
+```
+
+In the above output, we only get one Gender difference in Math, and that is computed for the value of `achrdg12 = 55.60188`, which is the mean values of Reading. As noted, this is called the marginal effect at the mean (MEM).   
+
+It is often more helpful to report Gender difference for multiple different values of `achrdg12`, which is called MERV (marginal effects at representative values). While there are many ways to do chose the values, one convenient approach approach is to use the quartiles of `achrdg12`. This is accomplished using the `cov.reduce` argument of `emmeans` as follows.   
+
+```{r}
+# Use the the covarate reduce option of emmeans with the quantile function
+gap_quartiles <- emmeans(mod3, specs = "gender", by = "achrdg12", cov.reduce = quantile)
+summary(gap_quartiles)
+
+# Test whether the gender difference in math achievement is significant at each quartile of reading achievement
+contrast(gap_quartiles, method = "pairwise")
+```
+
+At this point, you should be able to summarize your conclusions about the gender gap in Math and how it depends on Reading.  
+
+### Simple trends
+
+Next we will show how to use  `emtrends` to test the conditional or "simple" slopes of Math on Reading, given Gender. As mentioned, this approach is not very well suited to the example, but we are going through it here just to illustrate how to do this type of analysis. 
+
+The three main arguments for `emtrends` are
+
+  * `object` -- the output of `lm`. This is the first argument
+  * `var` -- which continuous predictor in the model we want the slopes of
+  * `specs` -- which factor predictor(s)  in the model to break the trend down by
+
+Let's see how it works.
+
+```{r}
+# Use the emtrends function to get the regression coefficients on reading, broken down by gender
+simple_slopes <- emtrends(mod3, var = "achrdg12", specs = "gender")
+summary(simple_slopes)
+test(simple_slopes)
+```
+
+The foregoing analysis tells us how the relationship between reading and math changes as a function of gender, and, in particular, whether the simple slopes are significant for males and females. 
+
+### Two continuous predictors
+
+Interactions with continuous predictors are basically the same as for continuous and categorical. One main issue is that we should always center the predictors, not only to facilitate interpretation of the regression coefficients, but also to reduce the correlation between the main effects and the interaction. 
+
+For an example, let's replace gender with SES from our previous analysis. Apologies that this new example is mainly for convenience and doesn't represent a great research question about, e.g., about why the relationships between math and reading might change as a function of SES!
+
+Here we will focus on how centering affects the results of a regression with interactions among continuous predictors.
+
+```{r}
+# Without centering
+mod5 <- lm(achmat12 ~ achrdg12*ses)
+summary(mod1)
+
+# With centering
+achrdg12_dev <- achrdg12 - mean(achrdg12)
+ses_dev <- ses - mean(ses)
+mod6 <- lm(achmat12 ~ achrdg12_dev*ses_dev)
+summary(mod2)
+```
+
+We can see that, while both models account for the same overall variation in math, SES is significant in the centered model. This has to do both with changing the interpretation of the coefficient (it now represents the relationship between math and reading for students with average reading) and because it is no longer so highly redundant with the interaction term. 
+
+Although the interaction with SES was not significant in either model, let's break down the interaction with `emtrends` just to see how it works. This time we will use the `at` option rather than the 'cov.reduce` option to break down the interaction.  
+
+```{r}
+# Break down interaction with SES as moderator
+simple_slopes <-emtrends(mod5, var = "achrdg12", specs = "ses", at = list(ses = c(9, 19, 28)))
+summary(simple_slopes)
+```
+Finally let's summarize our (non significant) interaction with a nice plot.  Note that `visreg`  breaks the interaction down at the 10th, 50th, and 90th percentile of the `by` variable. You can overwrite the defaults using the `breaks` argument (see `help(visreg)`). 
+
+```{r}
+# Note that band = F removes the confidence intervals
+visreg(mod5, xvar = "achrdg12", by = "ses", overlay = TRUE, band = F)
+```
+

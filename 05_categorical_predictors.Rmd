@@ -518,15 +518,12 @@ b_0 & = \widehat Y (Bolivia) + b_1 + b_2 \\
 b_0 & = \frac{\widehat Y (Bolivia) + \widehat Y (Ethiopia) + \widehat Y (Vietnam)}{3}
 \end{align}
 
+
 ## Exercises
 
-
-```{r setup, include=FALSE}
+```{r, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-#library("kableExtra")
-fig.width = 4
 rm(list = ls())
-options(digits = 5)
 ```
 
 These exercises provide an overview of contrast coding with categorical predictors in R. Two preliminary topics are also discussed: linear regression with a binary predictor, and the `factor` data class in R.  

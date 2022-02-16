@@ -24,7 +24,7 @@
 <meta name="author" content="Peter Halpin" />
 
 
-<meta name="date" content="2022-02-15" />
+<meta name="date" content="2022-02-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,8 @@
   <link rel="shortcut icon" href="null" type="image/x-icon" />
 <link rel="prev" href="5.1-focus-on-interpretation.html"/>
 <link rel="next" href="5.3-binary-predictors-5.html"/>
-<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.5.1/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -50,24 +51,23 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -87,7 +87,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -137,32 +137,39 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Course notes for EDUC 784</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About This Book</a><ul>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About This Book</a>
+<ul>
 <li class="chapter" data-level="1.1" data-path="1.1-why-this-book.html"><a href="1.1-why-this-book.html"><i class="fa fa-check"></i><b>1.1</b> Why this book?</a></li>
 <li class="chapter" data-level="1.2" data-path="1.2-how-to-use-this-book.html"><a href="1.2-how-to-use-this-book.html"><i class="fa fa-check"></i><b>1.2</b> How to use this book</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="2-chapter-2.html"><a href="2-chapter-2.html"><i class="fa fa-check"></i><b>2</b> Simple Regression</a><ul>
+<li class="chapter" data-level="2" data-path="2-chapter-2.html"><a href="2-chapter-2.html"><i class="fa fa-check"></i><b>2</b> Simple Regression</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="2.1-an-example-from-nels.html"><a href="2.1-an-example-from-nels.html"><i class="fa fa-check"></i><b>2.1</b> An example from NELS</a></li>
 <li class="chapter" data-level="2.2" data-path="2.2-regression-line.html"><a href="2.2-regression-line.html"><i class="fa fa-check"></i><b>2.2</b> The regression line</a></li>
-<li class="chapter" data-level="2.3" data-path="2.3-ols.html"><a href="2.3-ols.html"><i class="fa fa-check"></i><b>2.3</b> OLS</a><ul>
+<li class="chapter" data-level="2.3" data-path="2.3-ols.html"><a href="2.3-ols.html"><i class="fa fa-check"></i><b>2.3</b> OLS</a>
+<ul>
 <li class="chapter" data-level="2.3.1" data-path="2.3-ols.html"><a href="2.3-ols.html#correlation-and-regression"><i class="fa fa-check"></i><b>2.3.1</b> Correlation and regression</a></li>
 </ul></li>
-<li class="chapter" data-level="2.4" data-path="2.4-r-squared.html"><a href="2.4-r-squared.html"><i class="fa fa-check"></i><b>2.4</b> R-squared</a><ul>
+<li class="chapter" data-level="2.4" data-path="2.4-r-squared.html"><a href="2.4-r-squared.html"><i class="fa fa-check"></i><b>2.4</b> R-squared</a>
+<ul>
 <li class="chapter" data-level="2.4.1" data-path="2.4-r-squared.html"><a href="2.4-r-squared.html#derivation"><i class="fa fa-check"></i><b>2.4.1</b> Derivation*</a></li>
 </ul></li>
 <li class="chapter" data-level="2.5" data-path="2.5-population-model.html"><a href="2.5-population-model.html"><i class="fa fa-check"></i><b>2.5</b> The population model</a></li>
 <li class="chapter" data-level="2.6" data-path="2.6-clarifying-notation.html"><a href="2.6-clarifying-notation.html"><i class="fa fa-check"></i><b>2.6</b> Clarifying notation</a></li>
-<li class="chapter" data-level="2.7" data-path="2.7-inference-for-slope.html"><a href="2.7-inference-for-slope.html"><i class="fa fa-check"></i><b>2.7</b> Inference for the slope</a><ul>
+<li class="chapter" data-level="2.7" data-path="2.7-inference-for-slope.html"><a href="2.7-inference-for-slope.html"><i class="fa fa-check"></i><b>2.7</b> Inference for the slope</a>
+<ul>
 <li class="chapter" data-level="2.7.1" data-path="2.7-inference-for-slope.html"><a href="2.7-inference-for-slope.html#t-tests"><i class="fa fa-check"></i><b>2.7.1</b> t-tests</a></li>
 <li class="chapter" data-level="2.7.2" data-path="2.7-inference-for-slope.html"><a href="2.7-inference-for-slope.html#confidence-intervals"><i class="fa fa-check"></i><b>2.7.2</b> Confidence intervals</a></li>
 <li class="chapter" data-level="2.7.3" data-path="2.7-inference-for-slope.html"><a href="2.7-inference-for-slope.html#the-nels-example"><i class="fa fa-check"></i><b>2.7.3</b> The NELS example</a></li>
 </ul></li>
 <li class="chapter" data-level="2.8" data-path="2.8-inference-for-the-intercept.html"><a href="2.8-inference-for-the-intercept.html"><i class="fa fa-check"></i><b>2.8</b> Inference for the intercept</a></li>
-<li class="chapter" data-level="2.9" data-path="2.9-inference-for-rsquared.html"><a href="2.9-inference-for-rsquared.html"><i class="fa fa-check"></i><b>2.9</b> Inference for R-squared</a><ul>
+<li class="chapter" data-level="2.9" data-path="2.9-inference-for-rsquared.html"><a href="2.9-inference-for-rsquared.html"><i class="fa fa-check"></i><b>2.9</b> Inference for R-squared</a>
+<ul>
 <li class="chapter" data-level="2.9.1" data-path="2.9-inference-for-rsquared.html"><a href="2.9-inference-for-rsquared.html#f-tests"><i class="fa fa-check"></i><b>2.9.1</b> F-tests</a></li>
 </ul></li>
 <li class="chapter" data-level="2.10" data-path="2.10-power-analysis.html"><a href="2.10-power-analysis.html"><i class="fa fa-check"></i><b>2.10</b> Power analysis</a></li>
-<li class="chapter" data-level="2.11" data-path="2.11-exercises-2.html"><a href="2.11-exercises-2.html"><i class="fa fa-check"></i><b>2.11</b> Exercises</a><ul>
+<li class="chapter" data-level="2.11" data-path="2.11-exercises-2.html"><a href="2.11-exercises-2.html"><i class="fa fa-check"></i><b>2.11</b> Exercises</a>
+<ul>
 <li class="chapter" data-level="2.11.1" data-path="2.11-exercises-2.html"><a href="2.11-exercises-2.html#the-lm-function"><i class="fa fa-check"></i><b>2.11.1</b> The <code>lm</code> function</a></li>
 <li class="chapter" data-level="2.11.2" data-path="2.11-exercises-2.html"><a href="2.11-exercises-2.html#predicted-values-and-residuals"><i class="fa fa-check"></i><b>2.11.2</b> Predicted values and residuals</a></li>
 <li class="chapter" data-level="2.11.3" data-path="2.11-exercises-2.html"><a href="2.11-exercises-2.html#variance-explained"><i class="fa fa-check"></i><b>2.11.3</b> Variance explained</a></li>
@@ -170,7 +177,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.11.5" data-path="2.11-exercises-2.html"><a href="2.11-exercises-2.html#power-analysis-1"><i class="fa fa-check"></i><b>2.11.5</b> Power analysis</a></li>
 <li class="chapter" data-level="2.11.6" data-path="2.11-exercises-2.html"><a href="2.11-exercises-2.html#additional-exercises"><i class="fa fa-check"></i><b>2.11.6</b> Additional exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="2.12" data-path="2.12-review.html"><a href="2.12-review.html"><i class="fa fa-check"></i><b>2.12</b> Review</a><ul>
+<li class="chapter" data-level="2.12" data-path="2.12-review.html"><a href="2.12-review.html"><i class="fa fa-check"></i><b>2.12</b> Review</a>
+<ul>
 <li class="chapter" data-level="2.12.1" data-path="2.12-review.html"><a href="2.12-review.html#summation-algebra"><i class="fa fa-check"></i><b>2.12.1</b> Summation algebra</a></li>
 <li class="chapter" data-level="2.12.2" data-path="2.12-review.html"><a href="2.12-review.html#sample-statistics"><i class="fa fa-check"></i><b>2.12.2</b> Sample statistics</a></li>
 <li class="chapter" data-level="2.12.3" data-path="2.12-review.html"><a href="2.12-review.html#bias-and-precision"><i class="fa fa-check"></i><b>2.12.3</b> Bias and precision</a></li>
@@ -181,40 +189,49 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.12.8" data-path="2.12-review.html"><a href="2.12-review.html#working-in-r"><i class="fa fa-check"></i><b>2.12.8</b> Working in R</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="3-chapter-3.html"><a href="3-chapter-3.html"><i class="fa fa-check"></i><b>3</b> Interpretations of Regression</a><ul>
-<li class="chapter" data-level="3.1" data-path="3.1-prediction.html"><a href="3.1-prediction.html"><i class="fa fa-check"></i><b>3.1</b> Prediction</a><ul>
+<li class="chapter" data-level="3" data-path="3-chapter-3.html"><a href="3-chapter-3.html"><i class="fa fa-check"></i><b>3</b> Interpretations of Regression</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="3.1-prediction.html"><a href="3.1-prediction.html"><i class="fa fa-check"></i><b>3.1</b> Prediction</a>
+<ul>
 <li class="chapter" data-level="3.1.1" data-path="3.1-prediction.html"><a href="3.1-prediction.html#more-about-prediction"><i class="fa fa-check"></i><b>3.1.1</b> More about prediction</a></li>
 <li class="chapter" data-level="3.1.2" data-path="3.1-prediction.html"><a href="3.1-prediction.html#regression-toward-the-mean"><i class="fa fa-check"></i><b>3.1.2</b> Regression toward the mean</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="3.2-causation.html"><a href="3.2-causation.html"><i class="fa fa-check"></i><b>3.2</b> Causation</a><ul>
+<li class="chapter" data-level="3.2" data-path="3.2-causation.html"><a href="3.2-causation.html"><i class="fa fa-check"></i><b>3.2</b> Causation</a>
+<ul>
 <li class="chapter" data-level="3.2.1" data-path="3.2-causation.html"><a href="3.2-causation.html#omitted-variable-bias"><i class="fa fa-check"></i><b>3.2.1</b> Omitted variable bias*</a></li>
 </ul></li>
 <li class="chapter" data-level="3.3" data-path="3.3-explanation.html"><a href="3.3-explanation.html"><i class="fa fa-check"></i><b>3.3</b> Explanation</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="4-chapter-4.html"><a href="4-chapter-4.html"><i class="fa fa-check"></i><b>4</b> Regression with Two Predictors</a><ul>
+<li class="chapter" data-level="4" data-path="4-chapter-4.html"><a href="4-chapter-4.html"><i class="fa fa-check"></i><b>4</b> Regression with Two Predictors</a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="4.1-ecls-4.html"><a href="4.1-ecls-4.html"><i class="fa fa-check"></i><b>4.1</b> An example from ECLS</a></li>
 <li class="chapter" data-level="4.2" data-path="4.2-the-two-predictor-model.html"><a href="4.2-the-two-predictor-model.html"><i class="fa fa-check"></i><b>4.2</b> The two-predictor model</a></li>
-<li class="chapter" data-level="4.3" data-path="4.3-comparison-4.html"><a href="4.3-comparison-4.html"><i class="fa fa-check"></i><b>4.3</b> Multiple vs simple regression</a><ul>
+<li class="chapter" data-level="4.3" data-path="4.3-comparison-4.html"><a href="4.3-comparison-4.html"><i class="fa fa-check"></i><b>4.3</b> Multiple vs simple regression</a>
+<ul>
 <li class="chapter" data-level="4.3.1" data-path="4.3-comparison-4.html"><a href="4.3-comparison-4.html#what-is-the-missing-ingredient"><i class="fa fa-check"></i><b>4.3.1</b> What is the missing ingredient?</a></li>
 </ul></li>
 <li class="chapter" data-level="4.4" data-path="4.4-ols-4.html"><a href="4.4-ols-4.html"><i class="fa fa-check"></i><b>4.4</b> OLS with two predictors</a></li>
-<li class="chapter" data-level="4.5" data-path="4.5-interpretation-4.html"><a href="4.5-interpretation-4.html"><i class="fa fa-check"></i><b>4.5</b> Interpreting the coefficients</a><ul>
+<li class="chapter" data-level="4.5" data-path="4.5-interpretation-4.html"><a href="4.5-interpretation-4.html"><i class="fa fa-check"></i><b>4.5</b> Interpreting the coefficients</a>
+<ul>
 <li class="chapter" data-level="4.5.1" data-path="4.5-interpretation-4.html"><a href="4.5-interpretation-4.html#holding-the-other-predictor-constant"><i class="fa fa-check"></i><b>4.5.1</b> “Holding the other predictor constant”</a></li>
 <li class="chapter" data-level="4.5.2" data-path="4.5-interpretation-4.html"><a href="4.5-interpretation-4.html#controlling-for-the-other-predictor"><i class="fa fa-check"></i><b>4.5.2</b> “Controlling for the other predictor”</a></li>
 <li class="chapter" data-level="4.5.3" data-path="4.5-interpretation-4.html"><a href="4.5-interpretation-4.html#the-ecls-example"><i class="fa fa-check"></i><b>4.5.3</b> The ECLS example</a></li>
 </ul></li>
 <li class="chapter" data-level="4.6" data-path="4.6-beta-4.html"><a href="4.6-beta-4.html"><i class="fa fa-check"></i><b>4.6</b> Standardized coefficients</a></li>
-<li class="chapter" data-level="4.7" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html"><i class="fa fa-check"></i><b>4.7</b> (Multiple) R-squared</a><ul>
+<li class="chapter" data-level="4.7" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html"><i class="fa fa-check"></i><b>4.7</b> (Multiple) R-squared</a>
+<ul>
 <li class="chapter" data-level="4.7.1" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html#the-multiple-correlation"><i class="fa fa-check"></i><b>4.7.1</b> The multiple correlation</a></li>
 <li class="chapter" data-level="4.7.2" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html#relation-with-simple-regression"><i class="fa fa-check"></i><b>4.7.2</b> Relation with simple regression</a></li>
 <li class="chapter" data-level="4.7.3" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html#adjusted-r-squared"><i class="fa fa-check"></i><b>4.7.3</b> Adjusted R-squared</a></li>
 </ul></li>
-<li class="chapter" data-level="4.8" data-path="4.8-inference-for-slopes-4.html"><a href="4.8-inference-for-slopes-4.html"><i class="fa fa-check"></i><b>4.8</b> Inference for the slopes</a><ul>
+<li class="chapter" data-level="4.8" data-path="4.8-inference-for-slopes-4.html"><a href="4.8-inference-for-slopes-4.html"><i class="fa fa-check"></i><b>4.8</b> Inference for the slopes</a>
+<ul>
 <li class="chapter" data-level="4.8.1" data-path="4.8-inference-for-slopes-4.html"><a href="4.8-inference-for-slopes-4.html#comments-on-precision"><i class="fa fa-check"></i><b>4.8.1</b> Comments on precision</a></li>
 </ul></li>
 <li class="chapter" data-level="4.9" data-path="4.9-inference-for-rsquared-4.html"><a href="4.9-inference-for-rsquared-4.html"><i class="fa fa-check"></i><b>4.9</b> Inference for R-squared</a></li>
 <li class="chapter" data-level="4.10" data-path="4.10-workbook.html"><a href="4.10-workbook.html"><i class="fa fa-check"></i><b>4.10</b> Workbook</a></li>
-<li class="chapter" data-level="4.11" data-path="4.11-exercises.html"><a href="4.11-exercises.html"><i class="fa fa-check"></i><b>4.11</b> Exercises</a><ul>
+<li class="chapter" data-level="4.11" data-path="4.11-exercises.html"><a href="4.11-exercises.html"><i class="fa fa-check"></i><b>4.11</b> Exercises</a>
+<ul>
 <li class="chapter" data-level="4.11.1" data-path="4.11-exercises.html"><a href="4.11-exercises.html#the-ecls250-data"><i class="fa fa-check"></i><b>4.11.1</b> The ECLS250 data</a></li>
 <li class="chapter" data-level="4.11.2" data-path="4.11-exercises.html"><a href="4.11-exercises.html#multiple-regression-with-lm"><i class="fa fa-check"></i><b>4.11.2</b> Multiple regression with <code>lm</code></a></li>
 <li class="chapter" data-level="4.11.3" data-path="4.11-exercises.html"><a href="4.11-exercises.html#relations-between-simple-and-multiple-regression"><i class="fa fa-check"></i><b>4.11.3</b> Relations between simple and multiple regression</a></li>
@@ -222,20 +239,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.11.5" data-path="4.11-exercises.html"><a href="4.11-exercises.html#apa-reporting-of-results"><i class="fa fa-check"></i><b>4.11.5</b> APA reporting of results</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="5-chapter-5.html"><a href="5-chapter-5.html"><i class="fa fa-check"></i><b>5</b> Categorical Predictors</a><ul>
+<li class="chapter" data-level="5" data-path="5-chapter-5.html"><a href="5-chapter-5.html"><i class="fa fa-check"></i><b>5</b> Categorical Predictors</a>
+<ul>
 <li class="chapter" data-level="5.1" data-path="5.1-focus-on-interpretation.html"><a href="5.1-focus-on-interpretation.html"><i class="fa fa-check"></i><b>5.1</b> Focus on interpretation</a></li>
 <li class="chapter" data-level="5.2" data-path="5.2-data-and-social-constructs.html"><a href="5.2-data-and-social-constructs.html"><i class="fa fa-check"></i><b>5.2</b> Data and social constructs</a></li>
-<li class="chapter" data-level="5.3" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html"><i class="fa fa-check"></i><b>5.3</b> Binary predictors</a><ul>
+<li class="chapter" data-level="5.3" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html"><i class="fa fa-check"></i><b>5.3</b> Binary predictors</a>
+<ul>
 <li class="chapter" data-level="5.3.1" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html#relation-with-t-tests"><i class="fa fa-check"></i><b>5.3.1</b> Relation with t-tests</a></li>
 <li class="chapter" data-level="5.3.2" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html#summary"><i class="fa fa-check"></i><b>5.3.2</b> Summary</a></li>
 </ul></li>
-<li class="chapter" data-level="5.4" data-path="5.4-reference-group-coding-5.html"><a href="5.4-reference-group-coding-5.html"><i class="fa fa-check"></i><b>5.4</b> Reference-group coding</a><ul>
+<li class="chapter" data-level="5.4" data-path="5.4-reference-group-coding-5.html"><a href="5.4-reference-group-coding-5.html"><i class="fa fa-check"></i><b>5.4</b> Reference-group coding</a>
+<ul>
 <li class="chapter" data-level="5.4.1" data-path="5.4-reference-group-coding-5.html"><a href="5.4-reference-group-coding-5.html#a-hypothetical-example"><i class="fa fa-check"></i><b>5.4.1</b> A hypothetical example</a></li>
 <li class="chapter" data-level="5.4.2" data-path="5.4-reference-group-coding-5.html"><a href="5.4-reference-group-coding-5.html#interpreting-the-regression-parameters"><i class="fa fa-check"></i><b>5.4.2</b> Interpreting the regression parameters</a></li>
 <li class="chapter" data-level="5.4.3" data-path="5.4-reference-group-coding-5.html"><a href="5.4-reference-group-coding-5.html#categories"><i class="fa fa-check"></i><b>5.4.3</b> <span class="math inline">\(&gt; 3\)</span> categories</a></li>
 <li class="chapter" data-level="5.4.4" data-path="5.4-reference-group-coding-5.html"><a href="5.4-reference-group-coding-5.html#summary-1"><i class="fa fa-check"></i><b>5.4.4</b> Summary</a></li>
 </ul></li>
-<li class="chapter" data-level="5.5" data-path="5.5-deviation-coding-5.html"><a href="5.5-deviation-coding-5.html"><i class="fa fa-check"></i><b>5.5</b> Deviation coding</a><ul>
+<li class="chapter" data-level="5.5" data-path="5.5-deviation-coding-5.html"><a href="5.5-deviation-coding-5.html"><i class="fa fa-check"></i><b>5.5</b> Deviation coding</a>
+<ul>
 <li class="chapter" data-level="5.5.1" data-path="5.5-deviation-coding-5.html"><a href="5.5-deviation-coding-5.html#a-hypothetical-example-1"><i class="fa fa-check"></i><b>5.5.1</b> A hypothetical example</a></li>
 <li class="chapter" data-level="5.5.2" data-path="5.5-deviation-coding-5.html"><a href="5.5-deviation-coding-5.html#interpreting-the-regression-parameters-1"><i class="fa fa-check"></i><b>5.5.2</b> Interpreting the regression parameters</a></li>
 <li class="chapter" data-level="5.5.3" data-path="5.5-deviation-coding-5.html"><a href="5.5-deviation-coding-5.html#summary-2"><i class="fa fa-check"></i><b>5.5.3</b> Summary</a></li>
@@ -243,7 +264,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.5.5" data-path="5.5-deviation-coding-5.html"><a href="5.5-deviation-coding-5.html#extra2-5"><i class="fa fa-check"></i><b>5.5.5</b> Extra: Deviation coding all groups included*</a></li>
 </ul></li>
 <li class="chapter" data-level="5.6" data-path="5.6-workbook-1.html"><a href="5.6-workbook-1.html"><i class="fa fa-check"></i><b>5.6</b> Workbook</a></li>
-<li class="chapter" data-level="5.7" data-path="5.7-exercises-1.html"><a href="5.7-exercises-1.html"><i class="fa fa-check"></i><b>5.7</b> Exercises</a><ul>
+<li class="chapter" data-level="5.7" data-path="5.7-exercises-1.html"><a href="5.7-exercises-1.html"><i class="fa fa-check"></i><b>5.7</b> Exercises</a>
+<ul>
 <li class="chapter" data-level="5.7.1" data-path="5.7-exercises-1.html"><a href="5.7-exercises-1.html#a-single-binary-predictor"><i class="fa fa-check"></i><b>5.7.1</b> A single binary predictor</a></li>
 <li class="chapter" data-level="5.7.2" data-path="5.7-exercises-1.html"><a href="5.7-exercises-1.html#recoding-a-factor-to-numeric"><i class="fa fa-check"></i><b>5.7.2</b> Recoding a factor to numeric</a></li>
 <li class="chapter" data-level="5.7.3" data-path="5.7-exercises-1.html"><a href="5.7-exercises-1.html#binary-predictors-and-independent-samples-t-tests"><i class="fa fa-check"></i><b>5.7.3</b> Binary predictors and independent samples t-tests</a></li>
@@ -257,34 +279,47 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.7.11" data-path="5.7-exercises-1.html"><a href="5.7-exercises-1.html#extra-weighted-versus-unweighted-deviation-coding"><i class="fa fa-check"></i><b>5.7.11</b> Extra: Weighted versus unweighted deviation coding</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="6-chapter-6.html"><a href="6-chapter-6.html"><i class="fa fa-check"></i><b>6</b> Interactions</a><ul>
+<li class="chapter" data-level="6" data-path="6-chapter-6.html"><a href="6-chapter-6.html"><i class="fa fa-check"></i><b>6</b> Interactions</a>
+<ul>
 <li class="chapter" data-level="6.1" data-path="6.1-example-6.html"><a href="6.1-example-6.html"><i class="fa fa-check"></i><b>6.1</b> An example from NELS</a></li>
-<li class="chapter" data-level="6.2" data-path="6.2-binary-continuous-6.html"><a href="6.2-binary-continuous-6.html"><i class="fa fa-check"></i><b>6.2</b> Binary + continuous</a><ul>
+<li class="chapter" data-level="6.2" data-path="6.2-binary-continuous-6.html"><a href="6.2-binary-continuous-6.html"><i class="fa fa-check"></i><b>6.2</b> Binary + continuous</a>
+<ul>
 <li class="chapter" data-level="6.2.1" data-path="6.2-binary-continuous-6.html"><a href="6.2-binary-continuous-6.html#marginal-means"><i class="fa fa-check"></i><b>6.2.1</b> Marginal means</a></li>
 <li class="chapter" data-level="6.2.2" data-path="6.2-binary-continuous-6.html"><a href="6.2-binary-continuous-6.html#summary-3"><i class="fa fa-check"></i><b>6.2.2</b> Summary</a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="6.3-binary-continuous-interaction-6.html"><a href="6.3-binary-continuous-interaction-6.html"><i class="fa fa-check"></i><b>6.3</b> Binary + continuous + interaction</a><ul>
+<li class="chapter" data-level="6.3" data-path="6.3-binary-continuous-interaction-6.html"><a href="6.3-binary-continuous-interaction-6.html"><i class="fa fa-check"></i><b>6.3</b> Binary + continuous + interaction</a>
+<ul>
 <li class="chapter" data-level="6.3.1" data-path="6.3-binary-continuous-interaction-6.html"><a href="6.3-binary-continuous-interaction-6.html#choosing-the-moderator"><i class="fa fa-check"></i><b>6.3.1</b> Choosing the moderator</a></li>
 <li class="chapter" data-level="6.3.2" data-path="6.3-binary-continuous-interaction-6.html"><a href="6.3-binary-continuous-interaction-6.html#back-to-the-example"><i class="fa fa-check"></i><b>6.3.2</b> Back to the example</a></li>
 <li class="chapter" data-level="6.3.3" data-path="6.3-binary-continuous-interaction-6.html"><a href="6.3-binary-continuous-interaction-6.html#centering-the-continuous-predictor"><i class="fa fa-check"></i><b>6.3.3</b> Centering the continuous predictor</a></li>
 <li class="chapter" data-level="6.3.4" data-path="6.3-binary-continuous-interaction-6.html"><a href="6.3-binary-continuous-interaction-6.html#summary-4"><i class="fa fa-check"></i><b>6.3.4</b> Summary</a></li>
 </ul></li>
-<li class="chapter" data-level="6.4" data-path="6.4-inference-for-interactions-6.html"><a href="6.4-inference-for-interactions-6.html"><i class="fa fa-check"></i><b>6.4</b> Inference for interactions</a><ul>
+<li class="chapter" data-level="6.4" data-path="6.4-inference-for-interactions-6.html"><a href="6.4-inference-for-interactions-6.html"><i class="fa fa-check"></i><b>6.4</b> Inference for interactions</a>
+<ul>
 <li class="chapter" data-level="6.4.1" data-path="6.4-inference-for-interactions-6.html"><a href="6.4-inference-for-interactions-6.html#marginal-effects"><i class="fa fa-check"></i><b>6.4.1</b> Marginal effects</a></li>
 <li class="chapter" data-level="6.4.2" data-path="6.4-inference-for-interactions-6.html"><a href="6.4-inference-for-interactions-6.html#simple-trends"><i class="fa fa-check"></i><b>6.4.2</b> Simple trends</a></li>
 <li class="chapter" data-level="6.4.3" data-path="6.4-inference-for-interactions-6.html"><a href="6.4-inference-for-interactions-6.html#a-note-on-plotting"><i class="fa fa-check"></i><b>6.4.3</b> A note on plotting</a></li>
 <li class="chapter" data-level="6.4.4" data-path="6.4-inference-for-interactions-6.html"><a href="6.4-inference-for-interactions-6.html#summary-5"><i class="fa fa-check"></i><b>6.4.4</b> Summary</a></li>
 </ul></li>
-<li class="chapter" data-level="6.5" data-path="6.5-two-continuous-predictors.html"><a href="6.5-two-continuous-predictors.html"><i class="fa fa-check"></i><b>6.5</b> Two continuous predictors</a><ul>
-<li class="chapter" data-level="6.5.1" data-path="6.5-two-continuous-predictors.html"><a href="6.5-two-continuous-predictors.html#another-nels-example"><i class="fa fa-check"></i><b>6.5.1</b> Another NELS example</a></li>
-<li class="chapter" data-level="6.5.2" data-path="6.5-two-continuous-predictors.html"><a href="6.5-two-continuous-predictors.html#centering-the-predictors"><i class="fa fa-check"></i><b>6.5.2</b> Centering the predictors</a></li>
-<li class="chapter" data-level="6.5.3" data-path="6.5-two-continuous-predictors.html"><a href="6.5-two-continuous-predictors.html#simple-trends-1"><i class="fa fa-check"></i><b>6.5.3</b> Simple trends</a></li>
-<li class="chapter" data-level="6.5.4" data-path="6.5-two-continuous-predictors.html"><a href="6.5-two-continuous-predictors.html#summary-6"><i class="fa fa-check"></i><b>6.5.4</b> Summary</a></li>
-<li class="chapter" data-level="6.5.5" data-path="6.5-two-continuous-predictors.html"><a href="6.5-two-continuous-predictors.html#extra-how-centering-works"><i class="fa fa-check"></i><b>6.5.5</b> Extra: How centering works*</a></li>
+<li class="chapter" data-level="6.5" data-path="6.5-two-continuous-predictors-6.html"><a href="6.5-two-continuous-predictors-6.html"><i class="fa fa-check"></i><b>6.5</b> Two continuous predictors</a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="6.5-two-continuous-predictors-6.html"><a href="6.5-two-continuous-predictors-6.html#another-nels-example"><i class="fa fa-check"></i><b>6.5.1</b> Another NELS example</a></li>
+<li class="chapter" data-level="6.5.2" data-path="6.5-two-continuous-predictors-6.html"><a href="6.5-two-continuous-predictors-6.html#centering-the-predictors"><i class="fa fa-check"></i><b>6.5.2</b> Centering the predictors</a></li>
+<li class="chapter" data-level="6.5.3" data-path="6.5-two-continuous-predictors-6.html"><a href="6.5-two-continuous-predictors-6.html#simple-trends-1"><i class="fa fa-check"></i><b>6.5.3</b> Simple trends</a></li>
+<li class="chapter" data-level="6.5.4" data-path="6.5-two-continuous-predictors-6.html"><a href="6.5-two-continuous-predictors-6.html#summary-6"><i class="fa fa-check"></i><b>6.5.4</b> Summary</a></li>
+<li class="chapter" data-level="6.5.5" data-path="6.5-two-continuous-predictors-6.html"><a href="6.5-two-continuous-predictors-6.html#extra-how-centering-works"><i class="fa fa-check"></i><b>6.5.5</b> Extra: How centering works*</a></li>
 </ul></li>
 <li class="chapter" data-level="6.6" data-path="6.6-two-binary-predictors-dd.html"><a href="6.6-two-binary-predictors-dd.html"><i class="fa fa-check"></i><b>6.6</b> Two binary predictors (DD)</a></li>
 <li class="chapter" data-level="6.7" data-path="6.7-workbook-2.html"><a href="6.7-workbook-2.html"><i class="fa fa-check"></i><b>6.7</b> Workbook</a></li>
-<li class="chapter" data-level="6.8" data-path="6.8-exercises-6.html"><a href="6.8-exercises-6.html"><i class="fa fa-check"></i><b>6.8</b> Exercises</a></li>
+<li class="chapter" data-level="6.8" data-path="6.8-exercises-6.html"><a href="6.8-exercises-6.html"><i class="fa fa-check"></i><b>6.8</b> Exercises</a>
+<ul>
+<li class="chapter" data-level="6.8.1" data-path="6.8-exercises-6.html"><a href="6.8-exercises-6.html#binary-continuous-interaction"><i class="fa fa-check"></i><b>6.8.1</b> Binary + continuous + interaction</a></li>
+<li class="chapter" data-level="6.8.2" data-path="6.8-exercises-6.html"><a href="6.8-exercises-6.html#centering-continuous-predictors"><i class="fa fa-check"></i><b>6.8.2</b> Centering continuous predictors</a></li>
+<li class="chapter" data-level="6.8.3" data-path="6.8-exercises-6.html"><a href="6.8-exercises-6.html#breaking-down-a-significant-interaction"><i class="fa fa-check"></i><b>6.8.3</b> Breaking down a significant interaction</a></li>
+<li class="chapter" data-level="6.8.4" data-path="6.8-exercises-6.html"><a href="6.8-exercises-6.html#marginal-effects-1"><i class="fa fa-check"></i><b>6.8.4</b> Marginal effects</a></li>
+<li class="chapter" data-level="6.8.5" data-path="6.8-exercises-6.html"><a href="6.8-exercises-6.html#simple-trends-2"><i class="fa fa-check"></i><b>6.8.5</b> Simple trends</a></li>
+<li class="chapter" data-level="6.8.6" data-path="6.8-exercises-6.html"><a href="6.8-exercises-6.html#two-continuous-predictors"><i class="fa fa-check"></i><b>6.8.6</b> Two continuous predictors</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -307,10 +342,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="data-and-social-constructs" class="section level2">
+<div id="data-and-social-constructs" class="section level2" number="5.2">
 <h2><span class="header-section-number">5.2</span> Data and social constructs</h2>
 <p>Before getting into the math, let’s consider some conceptual points.</p>
-<p>First, some terminology. <em>Binary</em> means the a variable can take on only two values: 1 and 0. If a variable takes on two values but these are represented with other numbers (e.g., 1 and 2) or with non-numeric values (“male”, “female”), it is called <em>dichotomous</em> rather than binary. Otherwise stated, a binary variable is a dichotomous variable whose values are 1 and 0. The term <em>categorical</em> is used to describe variables with two or more categories.</p>
+<p>First, some terminology. <em>Binary</em> means the a variable can take on only two values: 1 and 0. If a variable takes on two values but these are represented with other numbers (e.g., 1 and 2) or with non-numeric values (“male,” “female”), it is called <em>dichotomous</em> rather than binary. Otherwise stated, a binary variable is a dichotomous variable whose values are 1 and 0. The term <em>categorical</em> is used to describe variables with two or more categories.</p>
 <p>Note that encoding a variable as dichotomous does not imply that the underlying social construct is dichotomous. For example, we can encode educational attainment as a dichotomous variable indicating whether a person has graduated high school or not. This does not imply that educational attainment has only two values in real life, or even that educational attainment is best conceptualized in terms of years of formal education. Nonetheless, for many outcomes of interest it can be meaningful to consider whether individuals have completed high school (e.g., <a href="https://www.ssa.gov/policy/docs/research-summaries/education-earnings.html" class="uri">https://www.ssa.gov/policy/docs/research-summaries/education-earnings.html</a>)</p>
 <p>In general, the way that a variable is encoded in a dataset is not a statement about reality – it reflects a choice made by researchers about how to represent reality. In particular, we are often faced with less-than-ideal encodings of so-called demographic variables in quantitative data. For example, both NELS and ECLS conceptualize gender as dichotomous and use a limited set of categories for race. These representations are not well aligned with current literature on gender and racial identity.</p>
 <p>Nonetheless, I would argue that these categorical variables have utility, <em>especially</em> in the study of social inequality. Here is an example of why I think gender qua “male/female” is a flawed but important consideration in global education: <a href="https://www.unicef.org/education/girls-education" class="uri">https://www.unicef.org/education/girls-education</a>.</p>

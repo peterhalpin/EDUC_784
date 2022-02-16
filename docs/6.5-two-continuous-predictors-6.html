@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 2 Simple Regression | EDUC 784: Regression</title>
+  <title>6.5 Two continuous predictors | EDUC 784: Regression</title>
   <meta name="description" content="Course notes for EDUC 784" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 2 Simple Regression | EDUC 784: Regression" />
+  <meta property="og:title" content="6.5 Two continuous predictors | EDUC 784: Regression" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="/images/image1.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="peterhalpin/EDUC_784" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 2 Simple Regression | EDUC 784: Regression" />
+  <meta name="twitter:title" content="6.5 Two continuous predictors | EDUC 784: Regression" />
   
   <meta name="twitter:description" content="Course notes for EDUC 784" />
   <meta name="twitter:image" content="/images/image1.png" />
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="null" type="image/x-icon" />
-<link rel="prev" href="1.2-how-to-use-this-book.html"/>
-<link rel="next" href="2.1-an-example-from-nels.html"/>
+<link rel="prev" href="6.4-inference-for-interactions-6.html"/>
+<link rel="next" href="6.6-two-binary-predictors-dd.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.5.1/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -342,17 +342,196 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="chapter-2" class="section level1" number="2">
-<h1><span class="header-section-number">Chapter 2</span> Simple Regression</h1>
-<p>The focus of this course is linear regression with multiple predictors (AKA <em>multiple regression</em>), but we start by reviewing regression with one predictor (AKA <em>simple regression</em>).</p>
+<div id="two-continuous-predictors-6" class="section level2" number="6.5">
+<h2><span class="header-section-number">6.5</span> Two continuous predictors</h2>
+<input onclick="codefolder(&#39;pre.sourceCode&#39;);" type="button" value="Hide Code" id="codefolder-button" style="position: relative; &#10;            top: -25px; &#10;            left: 85%;   &#10;            color: white;&#10;            font-weight: bold;&#10;            background: #4B9CD3;&#10;            border: 1px #3079ED solid;&#10;            box-shadow: inset 0 1px 0 #80B0FB"/>
+<script>
+  function codefolder(query) {
+
+    var x = document.querySelectorAll(query);
+    if (x.length === 0) return;
+
+    function toggle_vis(o) {
+      var d = o.style.display;
+      o.style.display = (d === 'block' || d === '') ? 'none':'block';
+    }
+
+    for (i = 0; i < x.length; i++) {
+      var y = x[i];
+      toggle_vis(y);
+    }
+
+    var elem = document.getElementById("codefolder-button");
+    if (elem.value === "Hide Code") elem.value = "Show Code";
+    else elem.value = "Hide Code";
+  }
+</script>
+<script>
+  window.addEventListener('load', function () {
+    codefolder('pre.sourceCode');
+  });
+</script>
+<p>In this section we address the situation in there is an interaction between two continuous predictors. The regression equation and overall interpretation is the same as the previous sections – e.g., the relationship between Y and X1 changes as a function of X2.</p>
+<p>However, there are also some special details that crop up when considering an interaction between two continuous predictors. In this section we will address:</p>
+<ul>
+<li><p>The importance of centering the two predictors. When there are two continuous predictors, centering helps interpret the coefficients on the predictors (just like in Section <a href="6.3-binary-continuous-interaction-6.html#binary-continuous-interaction-6">6.3</a>), and can additionally be helpful for reducing the correlation between the predictors and the interaction.</p></li>
+<li><p>How to follow-up a significant interaction using simple trends. Because the predictors are continuous, the focus is on simple trends rather than marginal means.</p></li>
+</ul>
+<p>First, we introduce an new example.</p>
+<div id="another-nels-example" class="section level3" number="6.5.1">
+<h3><span class="header-section-number">6.5.1</span> Another NELS example</h3>
+<p>To illustrate an interaction between two continuous predictors, let’s replace Gender with SES in our previous analysis. Apologies that this new example is mainly for convenience and doesn’t represent a great research question about, e.g., why the relationships between Math and Reading might change as a function of SES.</p>
+<p>The example data and overall approach with SES as the moderator are illustrated below (note that the values 9, 19, and 28 are 10th, 50th, and 90th percentiles SES, respectively).</p>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="6.5-two-continuous-predictors-6.html#cb198-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Interaction without centering </span></span>
+<span id="cb198-2"><a href="6.5-two-continuous-predictors-6.html#cb198-2" aria-hidden="true" tabindex="-1"></a>mod7 <span class="ot">&lt;-</span> <span class="fu">lm</span>(achmat12 <span class="sc">~</span> achrdg12<span class="sc">*</span>ses, <span class="at">data =</span> NELS)</span>
+<span id="cb198-3"><a href="6.5-two-continuous-predictors-6.html#cb198-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb198-4"><a href="6.5-two-continuous-predictors-6.html#cb198-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Note that band = F removes the confidence intervals</span></span>
+<span id="cb198-5"><a href="6.5-two-continuous-predictors-6.html#cb198-5" aria-hidden="true" tabindex="-1"></a><span class="fu">visreg</span>(mod7, <span class="at">xvar =</span> <span class="st">&quot;achrdg12&quot;</span>, <span class="at">by =</span> <span class="st">&quot;ses&quot;</span>, <span class="at">overlay =</span> <span class="cn">TRUE</span>, <span class="at">band =</span> F)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:readingXses"></span>
+<img src="_main_files/figure-html/readingXses-1.png" alt="Math (achmat), Reading (achrdg), and SES" width="672" />
+<p class="caption">
+Figure 6.5: Math (achmat), Reading (achrdg), and SES
+</p>
+</div>
+</div>
+<div id="centering-the-predictors" class="section level3" number="6.5.2">
+<h3><span class="header-section-number">6.5.2</span> Centering the predictors</h3>
+<p>Centering the predictors facilitates the interpretation of their regression coefficients in the presences of an interaction, just as it did Section <a href="6.3-binary-continuous-interaction-6.html#binary-continuous-interaction-6">6.3</a>. In particular, the coefficients <span class="math inline">\(b_1\)</span> and <span class="math inline">\(b_2\)</span> in the regression model</p>
+<p><span class="math display">\[ \widehat Y = b_0 + b_1X_1 + b_2X_2 + b_3 (X_1 \times X_2) \]</span></p>
+<p>can be interpreted in terms of the following simple trends:</p>
+<p><span class="math display" id="eq:simple">\[\begin{align} 
+\widehat Y(X_2 =0) &amp; = b_0 + b_1X_1 \\
+\widehat Y(X_1 =0)&amp;  = b_0 + b_2X_2. 
+\tag{6.3}
+\end{align}\]</span></p>
+<p>For example, <span class="math inline">\(b_1\)</span> is the relationship between <span class="math inline">\(Y\)</span> and <span class="math inline">\(X_1\)</span>, when <span class="math inline">\(X_2\)</span> is equal to zero.</p>
+<p>In general, setting a variable to the value of zero may not be meaningful. But, when setting a <em>centered</em> variable (i.e., a deviation score) to zero, this is equivalent to setting the original variable to its mean. So, if the variables in Equation <a href="6.5-two-continuous-predictors-6.html#eq:simple">(6.3)</a> were centered, we could say that <span class="math inline">\(b_1\)</span> is the relationship between <span class="math inline">\(Y\)</span> and <span class="math inline">\(X_1\)</span>, when <span class="math inline">\(X_2\)</span> is equal to its mean. Again, this is just the same trick as Section <a href="6.3-binary-continuous-interaction-6.html#binary-continuous-interaction-6">6.3</a>, but this time both predictors are continuous and both are centered.</p>
+<p>There is another reason for centering continuous predictors when there is an interaction in the model, and this has to do with reducing the correlation among the predictors and their interaction. In general, the interaction term will be positively correlated with both predictors if (a) the predictors themselves are positively correlated and (b) the predictors take on strictly positive (or strictly negative) values. Highly correlated predictors lead to redundant information the model, so we generally want to avoid this situation (this is technically called <em>multicollinearity</em> and we discuss it in more detail in a later Chapter). Centering can “break” the correlation between the preditors and the interaction, thereby making the predictors less redundant with their interaction.</p>
+<p>To see how this works, let’s take a look at Figure <a href="6.5-two-continuous-predictors-6.html#fig:centering">6.6</a>. The left hand panel shows that SES and its interaction with reading are highly correlated. This is because (a) SES and Reading are themselves positively correlated, and (b) both SES and Reading take on strictly positive values. As mentioned, the interaction term will be positively correlated with both predictors whenever these two conditions hold. (The figure just shows the correlation with SES, but the same situation holds for Reading.)</p>
+<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="6.5-two-continuous-predictors-6.html#cb199-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(NELS)</span>
+<span id="cb199-2"><a href="6.5-two-continuous-predictors-6.html#cb199-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Correlation without centering</span></span>
+<span id="cb199-3"><a href="6.5-two-continuous-predictors-6.html#cb199-3" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="fu">cor</span>(ses, achrdg12<span class="sc">*</span>ses)</span>
+<span id="cb199-4"><a href="6.5-two-continuous-predictors-6.html#cb199-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb199-5"><a href="6.5-two-continuous-predictors-6.html#cb199-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot</span></span>
+<span id="cb199-6"><a href="6.5-two-continuous-predictors-6.html#cb199-6" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb199-7"><a href="6.5-two-continuous-predictors-6.html#cb199-7" aria-hidden="true" tabindex="-1"></a>title <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;correlation = &quot;</span>, <span class="fu">round</span>(r, <span class="dv">3</span>))</span>
+<span id="cb199-8"><a href="6.5-two-continuous-predictors-6.html#cb199-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ses, achrdg12<span class="sc">*</span>ses, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>, <span class="at">main =</span> title, <span class="at">xlab =</span> <span class="st">&quot;SES&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;SES X Reading&quot;</span>)</span>
+<span id="cb199-9"><a href="6.5-two-continuous-predictors-6.html#cb199-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb199-10"><a href="6.5-two-continuous-predictors-6.html#cb199-10" aria-hidden="true" tabindex="-1"></a>achrdg12_dev <span class="ot">&lt;-</span> achrdg12 <span class="sc">-</span> <span class="fu">mean</span>(achrdg12)</span>
+<span id="cb199-11"><a href="6.5-two-continuous-predictors-6.html#cb199-11" aria-hidden="true" tabindex="-1"></a>ses_dev <span class="ot">&lt;-</span> ses <span class="sc">-</span> <span class="fu">mean</span>(ses)</span>
+<span id="cb199-12"><a href="6.5-two-continuous-predictors-6.html#cb199-12" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="fu">cor</span>(ses_dev, achrdg12_dev<span class="sc">*</span>ses_dev)</span>
+<span id="cb199-13"><a href="6.5-two-continuous-predictors-6.html#cb199-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb199-14"><a href="6.5-two-continuous-predictors-6.html#cb199-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot</span></span>
+<span id="cb199-15"><a href="6.5-two-continuous-predictors-6.html#cb199-15" aria-hidden="true" tabindex="-1"></a>title <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;correlation = &quot;</span>, <span class="fu">round</span>(r, <span class="dv">3</span>))</span>
+<span id="cb199-16"><a href="6.5-two-continuous-predictors-6.html#cb199-16" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ses_dev, achrdg12_dev<span class="sc">*</span>ses_dev, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>, <span class="at">main =</span> title, <span class="at">xlab =</span> <span class="st">&quot;SES Centered&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;SES Centered X Reading Centered&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:centering"></span>
+<img src="_main_files/figure-html/centering-1.png" alt="Correlation Between SES and SES X Reading, With and Without Centering" width="672" />
+<p class="caption">
+Figure 6.6: Correlation Between SES and SES X Reading, With and Without Centering
+</p>
+</div>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="6.5-two-continuous-predictors-6.html#cb200-1" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(NELS)</span></code></pre></div>
+<p>We can see in the right hand panel of Figure <a href="6.5-two-continuous-predictors-6.html#fig:centering">6.6</a> how centering the two predictors “breaks” the linear relationship between SES and its interaction with Reading. After centering, the relationship between the SES and its interaction is now highly non-linear, and the correlation is approximately zero. Again, the same is true for the relationship between Reading and the interaction, but the figure only shows the situation for SES.</p>
+<p>The upshot of all this is that the predictors will be less redundant with the interaction term – i.e., centering reduces multicollinearity between the “main effects” of the predictors and their interaction.</p>
+<p>The two sets of output below show the regression of Math on Reading, SES, and their interaction. The first ouptut does not center the predictors, but the second output does (the <code>_dev</code> notation denotes the centered predictors).</p>
+<p>We can see that SES is significant predictor in the centered model but not in the “un-centered” model. This has to do with changing the interpretation of the coefficient (it now represents the relationship between Math and SES for students with average Reading), and also reflects the fact that SES is no longer so highly correlated with the interaction term after centering.</p>
+<p>Note that coefficient on interaction, the R-squared, and their associated tests do not change value. This is discussed in more detail in the extra material at the end of this section, but it is sufficient to note that centering only affects the interpretation of the main effects (and the intercept, of course).</p>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="6.5-two-continuous-predictors-6.html#cb201-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(NELS)</span>
+<span id="cb201-2"><a href="6.5-two-continuous-predictors-6.html#cb201-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Without centering</span></span>
+<span id="cb201-3"><a href="6.5-two-continuous-predictors-6.html#cb201-3" aria-hidden="true" tabindex="-1"></a>mod7 <span class="ot">&lt;-</span> <span class="fu">lm</span>(achmat12 <span class="sc">~</span> achrdg12<span class="sc">*</span>ses)</span>
+<span id="cb201-4"><a href="6.5-two-continuous-predictors-6.html#cb201-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod7)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = achmat12 ~ achrdg12 * ses)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -17.134  -3.894   0.728   4.130  15.015 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  25.84920    5.38980    4.80  2.1e-06 ***
+## achrdg12      0.51160    0.09943    5.15  3.9e-07 ***
+## ses          -0.10011    0.29121   -0.34     0.73    
+## achrdg12:ses  0.00427    0.00520    0.82     0.41    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 6.03 on 496 degrees of freedom
+## Multiple R-squared:  0.418,  Adjusted R-squared:  0.415 
+## F-statistic:  119 on 3 and 496 DF,  p-value: &lt;2e-16</code></pre>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="6.5-two-continuous-predictors-6.html#cb203-1" aria-hidden="true" tabindex="-1"></a><span class="co"># With centering</span></span>
+<span id="cb203-2"><a href="6.5-two-continuous-predictors-6.html#cb203-2" aria-hidden="true" tabindex="-1"></a>mod8 <span class="ot">&lt;-</span> <span class="fu">lm</span>(achmat12 <span class="sc">~</span> achrdg12_dev<span class="sc">*</span>ses_dev)</span>
+<span id="cb203-3"><a href="6.5-two-continuous-predictors-6.html#cb203-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod8)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = achmat12 ~ achrdg12_dev * ses_dev)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -17.134  -3.894   0.728   4.130  15.015 
+## 
+## Coefficients:
+##                      Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)          56.82622    0.28691  198.07   &lt;2e-16 ***
+## achrdg12_dev          0.59031    0.03610   16.35   &lt;2e-16 ***
+## ses_dev               0.13730    0.04149    3.31    0.001 ** 
+## achrdg12_dev:ses_dev  0.00427    0.00520    0.82    0.412    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 6.03 on 496 degrees of freedom
+## Multiple R-squared:  0.418,  Adjusted R-squared:  0.415 
+## F-statistic:  119 on 3 and 496 DF,  p-value: &lt;2e-16</code></pre>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="6.5-two-continuous-predictors-6.html#cb205-1" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(NELS)</span></code></pre></div>
+<p><strong>To check your understanding of the output above, please provide an interpretation of all four regression coefficients in the centered model. Your interpretations should make reference to the situation where one or both predictors are equal to zero (see Equation <a href="6.5-two-continuous-predictors-6.html#eq:simple">(6.3)</a> above) and should also mentioned the interpretation of the value of zero for the centered variables</strong></p>
+</div>
+<div id="simple-trends-1" class="section level3" number="6.5.3">
+<h3><span class="header-section-number">6.5.3</span> Simple trends</h3>
+<p>Centering helps us interpret the “main effects” of the individual predictors, but we haven’t yet discussed how to interpret the interaction term when both predictors are continuous. In the case with a binary predictor, we had two different regression lines. So what do we get when both predictors are continuous?</p>
+<p>The usual way to answer this question is an extension of the MERV approach to marginal effects, discussed in Section <a href="6.4-inference-for-interactions-6.html#inference-for-interactions-6">6.4</a>. The basic idea is to present the relationship between the two focal variables, for a selection of values of the moderator. The is shown in Figure <a href="#readingXses"><strong>??</strong></a> above. As with MERV, the choice of values of the moderator is up to the researcher, but usual choices are</p>
+<ul>
+<li>The quartiles of the moderator (i.e., the five number summary) or subset thereof</li>
+<li>M <span class="math inline">\(\pm\)</span> 1 SD of the moderator</li>
+<li>A selection of percentiles (<code>visreg</code> uses the 10th, 50th, and 90th)</li>
+</ul>
+<p>These are all doing very similar things, so the choosing among them isn’t very important.</p>
+<p>Although the interaction between Reading and SES was not significant in our example model, let’s break down the interaction with SES as the moderator just to see how this approach works. The first part output below shows the simple slopes for the three values of SES shown in Figure <a href="6.5-two-continuous-predictors-6.html#fig:readingXses">6.5</a> (i.e., the 10th, 50th, and 90th deciles). We can see that the simple slopes are all different from zero (and the non-significant interaction tells us that they are not different from one-another).</p>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="6.5-two-continuous-predictors-6.html#cb206-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Break down interaction with SES as moderator</span></span>
+<span id="cb206-2"><a href="6.5-two-continuous-predictors-6.html#cb206-2" aria-hidden="true" tabindex="-1"></a>simple_slopes <span class="ot">&lt;-</span><span class="fu">emtrends</span>(mod7, <span class="at">var =</span> <span class="st">&quot;achrdg12&quot;</span>, <span class="at">specs =</span> <span class="st">&quot;ses&quot;</span>, <span class="at">at =</span> <span class="fu">list</span>(<span class="at">ses =</span> <span class="fu">c</span>(<span class="dv">9</span>, <span class="dv">19</span>, <span class="dv">28</span>)))</span>
+<span id="cb206-3"><a href="6.5-two-continuous-predictors-6.html#cb206-3" aria-hidden="true" tabindex="-1"></a><span class="fu">test</span>(simple_slopes)</span></code></pre></div>
+<pre><code>##  ses achrdg12.trend     SE  df t.ratio p.value
+##    9          0.550 0.0583 496  9.429  &lt;.0001 
+##   19          0.593 0.0365 496 16.251  &lt;.0001 
+##   28          0.631 0.0639 496  9.878  &lt;.0001</code></pre>
+</div>
+<div id="summary-6" class="section level3" number="6.5.4">
+<h3><span class="header-section-number">6.5.4</span> Summary</h3>
+<p>When regressing an outcome on two continuous predictors and their interaction, the overall interpretation of the model is same as discussed in Section @ref(binary+continuous+interaction-6), but:</p>
+<ul>
+<li><p>It is useful to center both predictors, both to facilitate the interpretation of the regression coefficients on the predictors (the “main effects”), and to reduce the correlation between the predictors and their interaction (i.e., reduce multicollinearity).</p></li>
+<li><p>When following up a significant interaction, the usual approach is to report the simple trends between the focal variables for a selection of values of the moderator (e.g., a selection of percentiles). The example illustrated how to do this even though the interaction was not significant, but you shouldn’t follow up a non-significant interaction.</p></li>
+</ul>
+</div>
+<div id="extra-how-centering-works" class="section level3" number="6.5.5">
+<h3><span class="header-section-number">6.5.5</span> Extra: How centering works*</h3>
+<p>It might seem that centering both predictors to improve the chances of getting significant main effects is a dubious practice. However, using the centered or the un-centered variables doesn’t really make a difference in term of what predictors are in the model are. The follow algebra show why, using <span class="math inline">\(D = X - \bar X\)</span> for the centered variables:</p>
+<p><span class="math display">\[\begin{align} 
+\widehat Y &amp; = b_0 + b_1D_1 + b_1D_2 + b_3 (D_1 \times D_2) \\ 
+&amp; = b_0^* + (b_1 - b_3 \bar X_1) X_1 + (b_2 - b_3 \bar X_2) X_2 +  b_3 (X_1 \times X_2) \\ 
+\text{where} &amp; \\ \\ 
+b_0^* &amp; = a - b_1\bar X_1 - b_2\bar X_2 - b_3\bar X_1\bar X_2. 
+\end{align}\]</span></p>
+<p>The second line of the equation shows that we are not changing what we regress <span class="math inline">\(Y\)</span> on – i.e., the predictors are still <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span>. We are re-packaging the intercept and main effects, which is exactly the purpose of this approach. But, centering does not change the regression coefficient for the interaction – it is still interpreted with respect to the un-centered variables.</p>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="1.2-how-to-use-this-book.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="2.1-an-example-from-nels.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="6.4-inference-for-interactions-6.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="6.6-two-binary-predictors-dd.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -373,7 +552,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/peterhalpin/EDUC_784/edit/master/02_simple_regression.Rmd",
+"link": "https://github.com/peterhalpin/EDUC_784/edit/master/06_interactions.Rmd",
 "text": "Suggest an edit"
 },
 "history": {
