@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>5.1 Focus on interpretation | EDUC 784: Regression</title>
+  <title>6.8 Exercises | EDUC 784: Regression</title>
   <meta name="description" content="Course notes for EDUC 784" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="5.1 Focus on interpretation | EDUC 784: Regression" />
+  <meta property="og:title" content="6.8 Exercises | EDUC 784: Regression" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="/images/image1.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="peterhalpin/EDUC_784" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="5.1 Focus on interpretation | EDUC 784: Regression" />
+  <meta name="twitter:title" content="6.8 Exercises | EDUC 784: Regression" />
   
   <meta name="twitter:description" content="Course notes for EDUC 784" />
   <meta name="twitter:image" content="/images/image1.png" />
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="null" type="image/x-icon" />
-<link rel="prev" href="5-chapter-5.html"/>
-<link rel="next" href="5.2-data-and-social-constructs.html"/>
+<link rel="prev" href="6.7-workbook-2.html"/>
+<link rel="next" href="references.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -307,101 +307,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="focus-on-interpretation" class="section level2">
-<h2><span class="header-section-number">5.1</span> Focus on interpretation</h2>
-<input onclick="codefolder(&#39;pre.sourceCode&#39;);" type="button" value="Hide Code" id="codefolder-button" style="position: relative; &#10;            top: -25px; &#10;            left: 85%;   &#10;            color: white;&#10;            font-weight: bold;&#10;            background: #4B9CD3;&#10;            border: 1px #3079ED solid;&#10;            box-shadow: inset 0 1px 0 #80B0FB"/>
-<script>
-  function codefolder(query) {
+<div id="exercises-6" class="section level2">
+<h2><span class="header-section-number">6.8</span> Exercises</h2>
+<p>The exercises will be added before class and we will work through them together during class time.</p>
 
-    var x = document.querySelectorAll(query);
-    if (x.length === 0) return;
-
-    function toggle_vis(o) {
-      var d = o.style.display;
-      o.style.display = (d === 'block' || d === '') ? 'none':'block';
-    }
-
-    for (i = 0; i < x.length; i++) {
-      var y = x[i];
-      toggle_vis(y);
-    }
-
-    var elem = document.getElementById("codefolder-button");
-    if (elem.value === "Hide Code") elem.value = "Show Code";
-    else elem.value = "Hide Code";
-  }
-</script>
-<script>
-  window.addEventListener('load', function () {
-    codefolder('pre.sourceCode');
-  });
-</script>
-<p>Categorical predictors are challenging to understand, because, depending on the contrast coding used, the model results can appear quite different.</p>
-<p>For example, the two models below uses the same data and the same variables (Math Achievement regressed on Urbanicity), but their regression coefficients have different values – Why? Because Urbanicity used different contrast coding.</p>
-<p>The <code>lm</code> output doesn’t tell us what kind of coding was used for our categorical variables – we need to know what is going on “under the hood” so that we can interpret the output correctly.</p>
-<p>Notice that nothing has changed with respect to the computation of standard errors, R-squared, t-tests, F-tests, or p-values – all of this is the same as the previous chapters. The difference between these two models is just how the categorical predictor is interpreted.</p>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="5.1-focus-on-interpretation.html#cb85-1"></a><span class="kw">detach</span>(ecls)</span>
-<span id="cb85-2"><a href="5.1-focus-on-interpretation.html#cb85-2"></a><span class="kw">load</span>(<span class="st">&quot;NELS.RData&quot;</span>)</span>
-<span id="cb85-3"><a href="5.1-focus-on-interpretation.html#cb85-3"></a><span class="kw">attach</span>(NELS)</span>
-<span id="cb85-4"><a href="5.1-focus-on-interpretation.html#cb85-4"></a></span>
-<span id="cb85-5"><a href="5.1-focus-on-interpretation.html#cb85-5"></a><span class="co"># run model with default contrast (treatment / dummy coding)</span></span>
-<span id="cb85-6"><a href="5.1-focus-on-interpretation.html#cb85-6"></a>egA &lt;-<span class="st"> </span><span class="kw">lm</span>(achrdg08 <span class="op">~</span><span class="st"> </span>urban)</span>
-<span id="cb85-7"><a href="5.1-focus-on-interpretation.html#cb85-7"></a></span>
-<span id="cb85-8"><a href="5.1-focus-on-interpretation.html#cb85-8"></a><span class="co"># change to sum / deviation contrasts and run again</span></span>
-<span id="cb85-9"><a href="5.1-focus-on-interpretation.html#cb85-9"></a><span class="kw">contrasts</span>(urban) &lt;-<span class="st"> </span><span class="kw">contr.sum</span>(<span class="dt">n =</span> <span class="dv">3</span>)</span>
-<span id="cb85-10"><a href="5.1-focus-on-interpretation.html#cb85-10"></a><span class="kw">colnames</span>(<span class="kw">contrasts</span>(urban)) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Rural&quot;</span>, <span class="st">&quot;Suburban&quot;</span>)</span>
-<span id="cb85-11"><a href="5.1-focus-on-interpretation.html#cb85-11"></a>egB &lt;-<span class="st"> </span><span class="kw">lm</span>(achrdg08 <span class="op">~</span><span class="st"> </span>urban)</span>
-<span id="cb85-12"><a href="5.1-focus-on-interpretation.html#cb85-12"></a></span>
-<span id="cb85-13"><a href="5.1-focus-on-interpretation.html#cb85-13"></a><span class="co"># print</span></span>
-<span id="cb85-14"><a href="5.1-focus-on-interpretation.html#cb85-14"></a><span class="kw">summary</span>(egA)</span></code></pre></div>
-<pre><code>## 
-## Call:
-## lm(formula = achrdg08 ~ urban)
-## 
-## Residuals:
-##    Min     1Q Median     3Q    Max 
-## -22.30  -6.16   0.21   6.79  15.56 
-## 
-## Coefficients:
-##               Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)     54.993      0.688   79.88   &lt;2e-16 ***
-## urbanSuburban    0.668      0.912    0.73    0.464    
-## urbanUrban       3.128      1.048    2.98    0.003 ** 
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 8.76 on 497 degrees of freedom
-## Multiple R-squared:  0.019,  Adjusted R-squared:  0.0151 
-## F-statistic: 4.82 on 2 and 497 DF,  p-value: 0.00841</code></pre>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="5.1-focus-on-interpretation.html#cb87-1"></a><span class="kw">summary</span>(egB)</span></code></pre></div>
-<pre><code>## 
-## Call:
-## lm(formula = achrdg08 ~ urban)
-## 
-## Residuals:
-##    Min     1Q Median     3Q    Max 
-## -22.30  -6.16   0.21   6.79  15.56 
-## 
-## Coefficients:
-##               Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)     56.258      0.402  139.90   &lt;2e-16 ***
-## urbanRural      -1.265      0.565   -2.24    0.026 *  
-## urbanSuburban   -0.597      0.530   -1.13    0.260    
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 8.76 on 497 degrees of freedom
-## Multiple R-squared:  0.019,  Adjusted R-squared:  0.0151 
-## F-statistic: 4.82 on 2 and 497 DF,  p-value: 0.00841</code></pre>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="5.1-focus-on-interpretation.html#cb89-1"></a><span class="kw">detach</span>(NELS)</span></code></pre></div>
 </div>
+<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-<a href="5-chapter-5.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="5.2-data-and-social-constructs.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="6.7-workbook-2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -422,7 +340,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/peterhalpin/EDUC_784/edit/master/05_categorical_predictors.Rmd",
+"link": "https://github.com/peterhalpin/EDUC_784/edit/master/06_interactions.Rmd",
 "text": "Suggest an edit"
 },
 "history": {

@@ -33,6 +33,10 @@ eq:yhat-6a
 fig:math-reading-2
 eq:yhat-6b
 fig:math-reading-3
+fig:visreg
+fig:readingXses
+fig:centering
+eq:simple
 fig:example-1
 about-this-book
 why-this-book
@@ -144,6 +148,15 @@ centering-the-continuous-predictor
 summary-4
 inference-for-interactions-6
 marginal-effects
+simple-trends
 a-note-on-plotting
+summary-5
+two-continuous-predictors
+another-nels-example
+centering-the-predictors
+simple-trends-1
+summary-6
+extra-how-centering-works
+two-binary-predictors-dd
 workbook-2
 exercises-6
