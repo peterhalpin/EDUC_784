@@ -37,6 +37,9 @@ fig:visreg
 fig:readingXses
 eq:simple
 fig:centering
+fig:prek-by-ses
+eq:prek-ses1
+eq:prek-ses2
 fig:example-1
 about-this-book
 why-this-book
@@ -157,7 +160,12 @@ centering-the-predictors
 simple-trends-1
 summary-6
 extra-how-centering-works
-two-binary-predictors-dd
+two-categorical-predictors-6
+an-example-from-ecls
+the-no-interaction-model
+adding-the-interactions
+back-to-the-example-1
+the-anova-approach
 workbook-2
 exercises-6
 binary-continuous-interaction

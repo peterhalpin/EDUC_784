@@ -1,10 +1,14 @@
 # Interactions {#chapter-6}
 
+<!-- NOTES
+Intro: Clarify that the focus is two way interactions, main effects, what is not  
+6.4: Change "inference for interactions" to "following up interactions", move material on moderation to 6.4?  
+--> 
+
 ```{r, echo = F}
 # Clean up check
-detach(NELS)
+ detach(NELS)
 rm(list = ls())
-
 
 button <-  "position: relative; 
             top: -25px; 
@@ -499,15 +503,11 @@ plot(ses_dev, achrdg12_dev*ses_dev, col = "#4B9CD3", main = title, xlab = "SES C
 detach(NELS)
 ```
 
-We can see in the right hand panel of Figure \@ref(fig:centering) how centering the two predictors "breaks" the linear relationship between SES and its interaction with Reading. After centering, the relationship between the SES and its interaction is now highly non-linear, and the correlation is approximately zero. Again, the same is true for the relationship between Reading and the interaction, but the figure only shows the situation for SES. 
-
-The upshot of all this is that the predictors will be less redundant with the interaction term -- i.e., centering reduces multicollinearity between the "main effects" of the predictors and their interaction. 
+We can see in the right hand panel of Figure \@ref(fig:centering) how centering the two predictors "breaks" the linear relationship between SES and its interaction with Reading. After centering, the relationship between the SES and its interaction is now highly non-linear, and the correlation is approximately zero. Again, the same is true for the relationship between Reading and the interaction, but the figure only shows the situation for SES. The upshot of all this is that the predictors will be less redundant with the interaction term -- i.e., centering reduces multicollinearity between the "main effects" of the predictors and their interaction. 
 
 The two sets of output below show the regression of Math on Reading, SES, and their interaction. The first ouptut does not center the predictors, but the second output does (the `_dev` notation denotes the centered predictors).  
 
-We can see that  SES is significant predictor in the centered model but not in the "un-centered" model. This has to do with changing the interpretation of the coefficient (it now represents the relationship between Math and SES for students with average Reading), and also reflects the fact that SES is no longer so highly correlated with the interaction term after centering. 
-
-Note that coefficient on interaction, the R-squared, and their associated tests do not change value. This is discussed in more detail in the extra material at the end of this section, but it is sufficient to note that centering only affects the interpretation of the main effects (and the intercept, of course). 
+We can see that  SES is a significant predictor in the centered model but not in the "un-centered" model. This has to do with changing the interpretation of the coefficient (it now represents the relationship between Math and SES for students with average Reading), and also reflects the fact that SES is no longer so highly correlated with the interaction term after centering. 
 
 ```{r}
 attach(NELS)
@@ -524,6 +524,8 @@ detach(NELS)
 ```
 
 **To check your understanding of the output above, please provide an interpretation of all four regression coefficients in the centered model. Your interpretations should make reference to the situation where one or both predictors are equal to zero (see Equation \@ref(eq:simple) above) and should also mentioned the interpretation of the value of zero for the centered variables**
+
+Note that coefficient on interaction, the R-squared, and their associated tests do not change value. This is discussed in more detail in the extra material at the end of this section, but it is sufficient to note that centering only affects the interpretation of the main effects (and the intercept, of course). 
 
 ### Simple trends
 
@@ -547,7 +549,7 @@ test(simple_slopes)
 
 ### Summary
 
-When regressing an outcome on two continuous predictors and their interaction, the overall interpretation of the model is same as discussed in Section \@ref(binary+continuous+interaction-6), but: 
+When regressing an outcome on two continuous predictors and their interaction, the overall interpretation of the model is same as discussed in Section \@ref(binary-continuous-interaction-6), but: 
 
 * It is useful to center both predictors, both to facilitate the interpretation of the regression coefficients on the predictors (the "main effects"), and to reduce the correlation between the predictors and their interaction (i.e., reduce multicollinearity). 
 
@@ -566,7 +568,177 @@ b_0^* & = a - b_1\bar X_1 - b_2\bar X_2 - b_3\bar X_1\bar X_2.
 
 The second line of the equation shows that we are not changing what we regress $Y$ on -- i.e., the predictors are still $X_1$ and $X_2$. We are re-packaging the intercept and main effects, which is exactly the purpose of this approach. But, centering does not change the regression coefficient for the interaction -- it is still interpreted with respect to the un-centered variables.  
 
-## Two binary predictors (DD)
+## Two categorical predictors {#two-categorical-predictors-6}
+
+```{r, echo=FALSE, results='asis'}
+codefolder::bookdown(init = "hide", style = button)
+```
+
+This section addresses interactions between two categorical predictors. Up until now, we have looked at interactions only for categorical predictors that are dichotomous. In this section we address an example in which one of the categorical predictors has more than two levels. This requires combining what we learned about contrast coding (Chapter \@ref(chapter-5)) with what we have learned about interactions. One nice aspect of interactions among categorical predictors is that we usually don't need to use procedures like marginal effects to follow up significant interactions, so long as we make good use of contrast coding. 
+
+In experimental (as opposed to observational) settings, interactions among categorical predictors fall under the much larger topic of ANOVA and experimental design. The analysis we look at in this section is a two-way between-subjects ANOVA, meaning that there are two categorical predictors considered, as well as their interaction, and both predictors are cross-sectional. ANOVA is a big topic and is not the focus of this course. However, we will discuss how to summarize the results of our analysis in an ANOVA table, and consider how this differs from the standard regression approach.  
+
+### An example from ECLS
+
+For this topic we will switch over to the ECLS data and examine how SES and Pre-K attendance interact to predict Math Achievement at the beginning of Kindergarten. The variables we will examine are
+
+* Math Achievement at the beginning of K (`c1rmscal`). This is the number of correct questions on a test with approximately 70 items. 
+* Whether the child attended Pre-K (`p1center`). This is a binary variable that indicates pre-K attendance. 
+* SES, coded as quintiles (`wksesq5`). We will denote this variable as SES, but keep in mind it is quintiles in this example (e.g., SES = 1 are the respondents with SES between the minimum and the first quintile). 
+
+Coding SES as quintiles allows us to consider it as a categorical predictor with 5 levels. This is convenient for our illustration of interactions between categorical predictors. It is also a widely-used practice in policy research, because SES often has non-linear relationships with outcome variables of interest, and these relationships can be more easily captured by treating SES as a categorical variable. 
+
+In this analysis, our focus will be whether the "effect" of Pre-K on Math Achievement depends on (i.e., is moderated by) the child's SES. The research question is relevant to the discussion we previously had concerning the paper shared by Andrea (http://dx.doi.org/10.1037/dev0001301). Also note that I will use the term "effect" in this section to simplify language, but we know that Pre-K attendance was not randomly assigned in ECLS, so please keep in mind that this terminology is not strictly correct. 
+
+The relationship among the three variables is summarized in the `visreg` plot below. We can see that the effect of Pre-K on Math Achievement appears to differ as a function of SES -- i.e., there is an interaction between Pre-K and SES. Our goal in this section is to produce an analysis corresponding to the Figure. As in Section \@ref(binary-continuous-6), we will start with a model that does not include the interaction as a first step. **Before moving on, please take a moment to write down how Figure \@ref(fig:prek-by-ses) would be different if there was no interaction between Pre-K and SES**. 
+
+```{r, prek-by-ses, fig.cap = 'Math Achievement, Pre-K Attendence, and SES', fig.align = 'center'}
+load("ECLS2577.Rdata")
+ecls$prek <- factor(2 - ecls$p1center)
+ecls$wksesq5 <- factor(ecls$wksesq5)
+mod <- lm(c1rmscal ~ prek*wksesq5, data = ecls)
+visreg::visreg(mod, xvar = "wksesq5", by = "prek", 
+               partial = F, rug = F, overlay = T, 
+               strip.names = T, xlab = "SES", 
+               ylab = "Math Achievement in K")
+```
+
+### The "no-interaction" model 
+
+In order to represent a model with multiple categorical predictors, it is helpful to change our notation from the usual $Y$ and $X$ to something like the following:
+
+\begin{align}
+\widehat Y = b_0 + b_1 PREK + b_2SES_2 + b_3SES_3 + b_4 SES_4 + b_5 SES_5. 
+(\#eq:prek-ses1)
+\end{align}
+
+In in this notation, the predictor variables are indicators (binary dummies) that use the variable names rather than $X_1$, $X_2$, etc. The variable $PREK$ is just the indicator for Pre-K attendance, as defined above. The variable $SES_j$ is an indicator for the j-th quintile of SES. Note that both variables use reference-group coding, as discussed in Chapter \@ref(chapter-5). 
+
+We can interpret the coefficients in this model in using the same two-step procedure described in Chapter \@ref(chapter-5). Since there are many terms in the model, things are going to start getting messy quickly, so brace yourself for some long equations (but simple math!). 
+
+The main points about the interpretation of this model are as follows. 
+
+* The intercept is the predicted value of Math Achievement for students in the first SES quintile who did not attend Pre-K. This corresponds to the blue line in the first column of Figure \@ref(fig:prek-by-ses). 
+
+\begin{align}
+\widehat Y(PREK = 0, SES = 1) & = b_0 + b_1 (0) + b_2(0)+ b_3(0) + b_4 (0) + b_5 (0) \\  
+& = b_0
+\end{align}
+
+* The effect of Pre-K attendance for students in the first SES quintile is equal to $b_1$. This corresponds to the difference between the red and blue lines in the first column of Figure \@ref(fig:prek-by-ses). 
+
+\begin{align}
+\widehat Y(PREK = 1, SES = 1) & = b_0 + b_1 (1) + b_2(0)+ b_3(0) + b_4 (0) + b_5 (0) \\  
+& = b_0 + b_1 \\
+\implies & 
+\end{align}
+
+\begin{align}
+\widehat Y(PREK = 1, SES = 1) - \widehat Y(PREK = 0, SES = 1) & = b_1
+\end{align}
+
+* Because the model in Equation \@ref(eq:prek-ses1) does not include an interaction, we know that it implies the effect of pre-K is constant over levels of SES. Below we consider SES = 2, but the same approach works for the other levels of SES.
+
+\begin{align}
+\widehat Y(PREK = 0, SES = 2) & = b_0 + b_1 (0) + b_2(1 )+ b_3(0) + b_4 (0) + b_5 (0)\\  
+& = b_0 + b_2 \\ \\ 
+\widehat Y(PREK = 1, SES = 2)& = b_0 + b_1 (1) + b_2(1)+ b_3(0) + b_4 (0) + b_5 (0)\\  
+& = b_0 + b_1 + b_2 \\ \\ 
+\implies & 
+\end{align}
+
+\begin{align}
+\widehat Y(PREK = 1, SES = 2) - \widehat Y(PREK = 0, SES = 2) = b_1  
+\end{align}
+
+This equation says that the difference between the red and blue lines in the second column of Figure \@ref(fig:prek-by-ses) is the same as the difference in the first column -- i.e., they both equal $b_1$. Similar calculations show that Equation \@ref(eq:prek-ses1) implies that the effect of Pre-K is constant over all levels of SES. Hence, we need to change the model (i.e., add an interaction)
+
+Before moving on, note that similar calculations can be used to show that (a) the "effect" of being in any SES quintile, as compared to the first quintile, is just the regression coefficient on the indicator variable for that quintile, and (b) this effect is constant over levels of Pre-K attendance. 
+
+### Adding the interaction(s)
+
+We have just seen that Equation \@ref(eq:prek-ses1) implies that the effect of Pre-K is constant over levels SES, and vise versa. In order to address our research question about whether the relationship between Pre-K attendance and Math Achievement depends on children's SES, we will need to add something to the model -- an interaction (surprise!). 
+
+We know that interactions are just products (multiplication) of predictor variables. But, since SES is represented as 4 dummies, this means we need 4 products in order to represent the interaction of Pre-K with SES. The resulting model can be written: 
+
+\begin{align}
+\widehat Y  = & b_0 + b_1 PREK + b_2SES_2 + b_3SES_3 + b_4 SES_4 + b_5 SES_5 + \\ 
+&  b_6 (PREK \times SES_2) + b_7(PREK \times SES_3) + \\
+& b_8 (PREK \times SES_4) + b_9 (PREK \times SES_5) 
+(\#eq:prek-ses2)
+\end{align}
+
+As you can see, our model is getting pretty full! Even though we are only considering two distinct "conceptual" variables, we have 9 coefficients in our regression model. 
+
+Again, there are a few main things to notice: 
+
+* The interpretation of the intercept has not changed. It still corresponds to the blue line in the first column of Figure \@ref(fig:prek-by-ses). 
+
+* The regression coefficient on $PREK$ is still the "effect" of Pre-K for students in the first SES quintile. It corresponds to the difference betwee the red and blue line in the first column of Figure \@ref(fig:prek-by-ses). This is because all the $SES_j$ variables are equal to zero for students in the first SES quintile, and so all of the interaction terms in Equation \@ref(eq:prek-ses2) are equal to zero for this case. 
+
+* The effect of Pre-K is no longer constant over levels of SES. Again we will focus on SES = 2, but the same approach works for the other levels of SES.
+
+\begin{align}
+\widehat Y(PREK = 0, SES = 2) & = b_0 + b_1 (0) + b_2(1 )+ b_3(0) + b_4 (0) + b_5 (0) + \\
+&  b_6 (0 \times 1) + b_7(0 \times 0) + b_8 (0 \times 0) + b_9 (0\times 0) \\  
+& = b_0 + b_2 \\ \\ 
+\widehat Y(PREK = 1, SES = 2) & = b_0 + b_1 (1) + b_2(1)+ b_3(0) + b_4 (0) + b_5 (0) + \\
+&  b_6 (1 \times 1) + b_7(1 \times 0) + b_8 (1 \times 0) + b_9 (1\times 0) \\  
+& = b_0 + b_1 + b_2 + b_6 \\ \\ 
+\implies & 
+\end{align}
+
+\begin{align}
+\widehat Y(PREK = 1, SES = 2) - \widehat Y(PREK = 0, SES = 2) = b_1 + b_6
+\end{align}
+
+The last line shows that the "effect" of Pre-K for students in the second SES quintile is $b_1 + b_6$. This is not the same as for the effect for students in the first quintile, which was just $b_1$. In other words, the difference between the red and blue lines in the first column of Figure \@ref(fig:prek-by-ses) (i.e., $b_1$) is not equal to the difference in the second column (i.e., $b_1 + b_6$). Consequently, our new model with the interaction better reflects the example data. 
+
+The same approach shows that the effect of Pre-K at each level of SES results in a similar equation:
+
+\begin{align}
+\widehat Y(PREK = 1, SES = 3) - \widehat Y(PREK = 0, SES = 3) & = b_1 + b_7 \\ 
+\widehat Y(PREK = 1, SES = 4) - \widehat Y(PREK = 0, SES = 4) & = b_1 + b_8 \\ 
+\widehat Y(PREK = 1, SES = 5) - \widehat Y(PREK = 0, SES = 5) & = b_1 + b_9 \\ 
+\end{align}
+
+This pattern makes it clear that, to isolate effect of each interaction (i.e., $b_6$ through $b_9$), we need to subtract off $b_1$ -- i.e., we need to subtract off the effect of Pre-K for students in the first SES quintile. In this sense, the interpretation of $b_1$ is quite similar the interpretation of the intercept in regular reference-group coding (see Section \@ref(reference-group-coding)). It is the "reference effect" or baseline to which the interaction terms are compared. 
+
+For example
+
+* The interaction between Pre-K and the second SES quintile is the additional effect pre-K has on Math Achievement for students in the second SES quintile, *as compared to the effect in the first SES quintile.* 
+
+* The interaction between Pre-K and the third SES quintile is the additional effect pre-K has on Math Achievement for students in the 3rd SES quintile, *as compared to the effect in the first SES quintile.* 
+
+* etc etc. 
+
+Mathematically, the interaction terms are represented as "differences-in-differences". For example, 
+
+\begin{align} 
+b_6 & = [\widehat Y(PREK = 1, SES = 2) - \widehat Y(PREK = 0, SES = 2)] -  b_1 \\ 
+    & = [\widehat Y(PREK = 1, SES = 2) - \widehat Y(PREK = 0, SES = 2)] \\
+    & - [\widehat Y(PREK = 1, SES = 1) - \widehat Y(PREK = 0, SES = 1)]
+\end{align}
+
+This looks quite complicated but it is just an extension of reference-group coding. This equation is saying that the "reference effect" or "baseline" for interpreting the interaction ($b_6$) is the effect of Pre-K in the first SES quintile (i.e., $b_1$). As noted above, all of the interaction terms have the same reference effect. 
+
+### Back to the example
+
+That last section was a lot to take in, so let's put some numbers on the page to check our understanding. The output below shows the summary for a model that regresses Math Achievement on Pre-K, SES, and their interaction. **Please write down an interpretation of magnitude, direction, and statistical significance of each regression coefficient in this output (including the intercept), and be prepared to share your answers in class.** Remember that `wksesq5` is the variable code for the SES quintiles -- the digit that follows the variable code indicates the level of variable. It may be helpful to refer to Figure \@ref(fig:prek-by-ses) in your interpretations. 
+
+```{r}
+mod <- lm(c1rmscal ~ prek*wksesq5, data = ecls)
+summary(mod)
+```
+
+### The ANOVA approach 
+The output in the previous section is detailed enough that it is not usually required to follow-up a significant interactions among categorical predictors using marginal effects. However, the summary output omits some information we might be interested in. For example, what is the overall effect of Pre-K (i.e., is there a significant difference in Math Achievement for students who attended Pre-K or not, regardless of their level of SES)? Similarly, what is the overall effect of SES, regardless of Pre-K attendance. We can answer these questions by asking how much variance was explained by each predictor, rather than only examining the effect of the individual dummy variable. This is the ANOVA approach we discussed last semester, but now applied to two categorical predictors. `
+
+The ANOVA table for our example is below. Note that it leads to slightly different conclusions than the regression output above. We will discuss the discrepancies between the ANOVA and regression output in class, so please **write down your interpretation of the ANOVA table below and be prepared to share you thoughts in class.**
+
+```{r}
+anova(mod)
+```
 
 ## Workbook 
 
@@ -664,7 +836,6 @@ contrast(gap, method = "pairwise")
 
 **Section \@ref(two-continuous-predictors-6)**
 
-
 * To check your understanding of centering with two continuous predictors, please provide an interpretation of all four regression coefficients in the centered model (below). Your interpretations should make reference to the situation where one or both predictors are equal to zero (see Equation \@ref(eq:simple)) and should also mentioned the interpretation of the value of zero for the centered variables.
  
 ```{r}
@@ -672,6 +843,21 @@ attach(NELS)
 mod8 <- lm(achmat12 ~ achrdg12_dev*ses_dev)
 summary(mod8)
 detach(NELS)
+```
+
+**Section \@ref(two-categorical-predictors-6)**
+
+ * Please write down an interpretation of magnitude, direction, and statistical significance of each regression coefficient in this output (including the intercept), and be prepared to share your answers in class. Remember that `wksesq5` is the variable code for the SES quintiles -- the digit that follows the variable code indicates the level of variable. 
+  
+```{r}
+mod <- lm(c1rmscal ~ prek*wksesq5, data = ecls)
+summary(mod)
+```
+
+* Write down your interpretation of the ANOVA table below and be prepared to share you thoughts in class.
+
+```{r}
+anova(mod)
 ```
 
 ## Exercises {#exercises-6}
