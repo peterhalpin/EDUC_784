@@ -847,10 +847,23 @@ detach(NELS)
 
 **Section \@ref(two-categorical-predictors-6)**
 
+* Please take a moment to write down how the Figure below would be different if there was no interaction between Pre-K and SES. 
+
+```{r}
+load("ECLS2577.Rdata")
+ecls$prek <- factor(2 - ecls$p1center)
+ecls$wksesq5 <- factor(ecls$wksesq5)
+mod <- lm(c1rmscal ~ prek*wksesq5, data = ecls)
+visreg::visreg(mod, xvar = "wksesq5", by = "prek", 
+               partial = F, rug = F, overlay = T, 
+               strip.names = T, xlab = "SES", 
+               ylab = "Math Achievement in K")
+```
+
+
  * Please write down an interpretation of magnitude, direction, and statistical significance of each regression coefficient in this output (including the intercept), and be prepared to share your answers in class. Remember that `wksesq5` is the variable code for the SES quintiles -- the digit that follows the variable code indicates the level of variable. 
   
 ```{r}
-mod <- lm(c1rmscal ~ prek*wksesq5, data = ecls)
 summary(mod)
 ```
 
@@ -1040,3 +1053,35 @@ Finally let's summarize our (non significant) interaction with a nice plot.  Not
 visreg(mod5, xvar = "achrdg12", by = "ses", overlay = TRUE, band = F)
 ```
 
+### Two categorical predictors
+
+For this topic we will switch over to the ECLS data and examine how SES and Pre-K attendance interact to predict Math Achievement at the beginning of Kindergarten. The variables we will examine are
+
+* Math Achievement at the beginning of K (`c1rmscal`). This is the number of correct questions on a test with approximately 70 items. 
+* Whether the child attended Pre-K (`p1center`). This is a binary variable that indicates pre-K attendance. 
+* SES, coded as quintiles (`wksesq5`). We will denote this variable as SES, but keep in mind it is quintiles in this example (e.g., SES = 1 are the respondents with SES between the minimum and the first quintile). 
+
+The regression model is as follows. Note that both variables need to be converted to factors in R, so that R will treat them as categorical variables. Also recall that in R the default contrast coding for categorical predictors is reference-group coding. 
+
+```{r}
+load("ECLS2577.Rdata")
+ecls$prek <- factor(2 - ecls$p1center)
+ecls$wksesq5 <- factor(ecls$wksesq5)
+mod <- lm(c1rmscal ~ prek*wksesq5, data = ecls)
+summary(mod)
+```
+
+To facilitate interpretation of the ouput, you can refer to the plot below. Each regression coefficient in the output corresponds to a feature of this plot. 
+
+```{r}
+visreg::visreg(mod, xvar = "wksesq5", by = "prek", 
+               partial = F, rug = F, overlay = T, 
+               strip.names = T, xlab = "SES", 
+               ylab = "Math Achievement in K")
+```
+
+In order to summarize the model as an ANOVA table, we can use the following code. Note that the ANOVA output tests the variance explained (i.e., R-squared) of the original variables, and does not include dummy variables. 
+
+```{r}
+anova(mod)
+```

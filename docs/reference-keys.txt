@@ -174,3 +174,4 @@ breaking-down-a-significant-interaction
 marginal-effects-1
 simple-trends-2
 two-continuous-predictors
+two-categorical-predictors
