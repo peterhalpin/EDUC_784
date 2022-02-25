@@ -374,7 +374,7 @@ The R output from Section \@ref(inference-for-slope) is presented again below. *
 summary(mod)
 ```
 
-## Power analysis
+## Power analysis {#power-2}
 
 ```{r, echo=FALSE, results='asis'}
 codefolder::bookdown(init = "hide", style = button)
