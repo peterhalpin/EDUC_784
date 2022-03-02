@@ -1,0 +1,289 @@
+# Assumptions and diagnostics {#chapter-8}
+
+```{r, echo = F}
+# Clean up check
+rm(list = ls())
+#detach(NELS)
+
+button <-  "position: relative; 
+            top: -25px; 
+            left: 85%;   
+            color: white;
+            font-weight: bold;
+            background: #4B9CD3;
+            border: 1px #3079ED solid;
+            box-shadow: inset 0 1px 0 #80B0FB"
+```
+
+
+
+In Section \@ref(population-model-2) we introduced the population model for simple linear regression. But how do we know whether this model applies to our data? This is the question we address in this chapter. In particular, we discuss data analyses that can be used to better understand whether the population assumptions are consistent with our data. This is referred to *assumption checking*. 
+
+Why do we care about assumption checking? Well, if the population assumptions of linear regression are not met, any of the following can happen: 
+
+* Regression coefficients and R-squared could be biased
+* Standard errors could be too small (or too large)
+* t- and F-tests could be too small (or too large)
+* p-values could be too small (or too large)
+* Confidence intervals could be too small (or too large)
+
+Basically, all of the numbers we get in the regression output from R could be wrong. 
+
+The philosophy of assumption checking is not to verify the assumptions or prove beyond doubt that they are true -- i.e., we are not *testing* assumptions, we are just checking them. Checking means we want to know if there are any problems with a regression model that might affect our conclusions (e.g., which predictors are significant). So, for example, we don’t really care if the residuals are normally distributed – we just care if there are any violations of this assumption that might be affecting the results our analysis. If there is no evidence that an assumption is problematic, we proceed with the main analysis as intended. We address ways to deal with "violations" of model assumptions in Chapter 9. 
+
+Assumption checking generally involves plotting the residuals from a regression model and trying to infer what the plots tell us about the population model. 
+The focus of this chapter is to introduce you to the main plots and how to interpret them. Sometimes assumption checking can feel a bit like reading tea leaves, because interpreting plots can be pretty subjective. Honing your interpretation of will happen gradually with experience. 
+
+*Regression diagnostics* are a related topic that we also address in this chapter. These are  procedures for detecting outliers in regression modeling. Unlike assumption checking, which focuses on the model *per se*, diagnostics focus on whether individual data points are having an undue influence on the model (e.g., the predicted values or the parameter estimates). 
+
+Outlier detection can be useful for identifying influential data points, but it is almost never the the case that data points should be omitted because they are outliers. Unless you can find something specifically wrong with a data point (e.g., a data entry error) you should not omit data. A better way to deal with outliers is by using statistical procedures that are specifically designed to deal with them, called *robust statistics*. Robust regression is an advanced topic that we won't get to in this course, but check out this resource if you are interested and feel free to ask questions in class: https://cran.r-project.org/web/views/Robust.html. 
+
+### Recap of population model {#recap-8} 
+
+Before moving, let's recap the population model for linear regression. This was introduced for simple linear regression in Section \@ref(population-model-2). To restate the assumptions for multiple linear regression we will use the vector notation 
+
+\[\mathbf X = [X_1, X_2, \dots, X_K]\]
+
+to represent the predictor variables. 
+
+1. Normality: The distribution of $Y$ conditional on $\mathbf X$ is normal for all values of $\mathbf X$. 
+
+\[Y | \mathbf X \sim  N(\mu_{Y | \mathbf X} , \sigma_{Y | \mathbf X}) \]
+
+2. Homoskedasticity: The conditional distributions have equal variances (also called homegeneity of variance).
+
+\[ \sigma_{Y| \mathbf X} = \sigma \]
+
+3. Linearity: The means of the conditional distributions are a linear function of $X$.
+
+\[ \mu_{Y| \mathbf X} = b_0 + \sum_{k = 1}^K b_k X_k\]
+
+These three assumptions can be summarized in term of the model residuals $\epsilon = Y - \mu_{Y|\mathbf X}$, which subtract off the regression line and therefore have mean of zero, but otherwise have the same distribution as $Y$: 
+
+\[ \epsilon \sim N(0, \sigma). \] 
+
+These assumptions about the residuals are presented graphically in Figure \@ref(fig:pop-model-8). It is instructive to compare this with Figure \@ref(fig:pop-model-2). In particular, note that the "X" axis is replaced by $\widehat Y$, which is an approach used for plotting residuals later in this chapter. 
+
+```{r, pop-model-e, echo = F, fig.cap = "The Multiple Regression Population Model.", fig.align = 'center'}
+knitr::include_graphics("images/pop_model_e.png")
+```
+
+## Linearity
+
+```{r, echo=FALSE, results='asis'}
+codefolder::bookdown(init = "hide", style = button)
+```
+
+This assumption is about whether the regression function is “really” a line or if it could be better represented as some other relationship. A classic example is shown below. The example is from Anscombe's quartet, which we address in more detail in Section \@ref(diagnostics-8)
+
+```{r linearity1, fig.width = 8, fig.cap = "Anscombe's second dataset", fig.align = 'center'}
+# non linearity in Anscombe's second example
+attach(anscombe)
+mod <- lm(y2 ~ x2)
+
+# Take a look at the raw data
+par(mfrow = c(1, 2))
+plot(x2, y2, col = "#4B9CD3", xlab = "X", ylab = "Y")
+abline(mod)
+
+# Compare to the residual vs fitted plot
+plot(mod, which = 1)
+detach(anscombe)
+```
+
+The left hand panel of Figure \@ref(fig:linearity1) shows the scatter plot of the example data. It is pretty obvious that the relationship between $Y$ and $X$ is not linear (that is the point of the example). 
+
+The right hand panel shows the residuals versus the predicted ("fitted") values from the regression of $Y$ on $X$. This is the sample analogue of the population model in Figure \@ref(fig:pop-model-8). It is important to note the following about this plot:
+
+* The key idea is that deviations from the regression line in the left hand panel ($Y$ vs $X$) correspond to deviations from the horizontal line (i.e., Residuals = 0) in the right hand panel ($e$ vs $\widehat Y$). 
+
+* The non-linear trend is still apparent in the right hand panel, but now the nonlinearity is with reference to Residuals = 0. Recall that the residuals should all be centered around this line if the population model is true (see Figure \@ref(fig:pop-model-e)). 
+
+* The red line in the right hand panel is a locally weighted smoothed ("lowess") regression line -- it follows whatever trend is in the residuals without assuming the trend is linear. 
+
+* The overall interpretation is as follows: 
+  * if the red line follows the horizontal line (Residuals = 0), we conclude that the the assumption of linearity is not problematic for the data. 
+  * If the red line deviates systematically from the horizontal line, this is evidence that the assumption of lineary is not met. 
+  
+In this Figure \@ref(fig:linearity1), the assumption is pretty clearly not met. In fact, its so obvious that it doesn't require looking at the residual versus fitted plot at all. So, why do we use the residual versus plot  The answer is, when we have $K > 1$ predictors, the raw data are not so easy to interpret. In general, the assumption is much more easily checked using the residual versys fitted plot, even if the patterns are a bit harder to interpret. 
+
+This situation is illustrated with reference to Figure \@ref(fig:linearity2). Note that in this example the regression model has 2 predictors. We could produce a 3-D plot in which $\widehat Y$ is represented by a plane, but the $Y$ versus $X$ plot  does not extend beyond 2 predictors. On the other hand, the residual versus fitted plot can be used with any number of predictors. 
+
+```{r linearity2, fig.width = 8, fig.cap = "An example from ECLS.", fig.align = 'center'}
+# Example: regression c1rmscal on ses_orig and t1learn
+load("ECLS250.RData")
+mod2 <- lm(c1rmscal ~ ses_orig + t1learn, data = ecls)
+plot(mod2, which = 1)
+```
+
+**Please write down whether you think the linearity assumption is problematic for this second example, and be sure to explain why with reference to Figure \@ref(fig:linearity2).**
+
+Before moving on, let's take a look at a few more examples in Figure \@ref(fig:linearity3). In each of these examples, **please write down whether you think the linearity assumption is problematic and  explain why with reference to the plots.**. Hint: be careful not to over-interpret the lowess line in the tails of the plots, where only a few data points can have a big impact on the local trend. Focus your interpretation on the bulk of the data, and whether it shows a systemic trend away from the horizontal line at 0. 
+
+```{r linearity3, fig.height = 10, fig.cap = "More examples.", fig.align = 'center'}
+# Example: regression c1rmscal on ses_orig and t1learn
+set.seed(101)
+par(mfrow = c(2, 2))
+for(i in 1:4) {
+  x <- rnorm(200)
+  e <- rnorm(200)
+  y <- x + e 
+  plot(lm(y ~ x), which = 1)
+}  
+```
+
+
+
+### Summary 
+
+To check the assumption of linearity, we can use a residual vs predicted (fitted)
+plot. 
+
+ * If the plot does not show a systematic trend other than a horizontal line at Residuals = 0, then there is no evidence against the assumption.
+
+* If the residuals do show a trend away from 0, then we should worry about the assumption.
+
+* Don't over interpret the tails of the lowess (red) lines in the R plots. 
+
+* If the assumption is violated: consider adding quadratic or other non-linear terms to the model (Chapter 9), or nonlinear transformations of the $Y$ variable (Chapter 10). 
+
+## Homoskedasticity 
+
+```{r, echo=FALSE, results='asis'}
+codefolder::bookdown(init = "hide", style = button)
+```
+
+This assumption means that the variance of the residuals should not change as a function of the predicted values. Because we are again concerned with residuals and predicted values, we can re-use the same plot we used to check linearity. However, we are no longer interested in whether the lowess trend (red line) systematically deviates from zero – we are interested in whether the range of the residuals changes over the predicted values. 
+
+Figure \@ref(fig:homo1) illustrates two data sets in which the assumption of linearity is met, but the right hand panel shows evidence of heteroskedasticity. This is apparent by observing the range of the residuals over values of $\widehat Y$. 
+
+```{r homo1, fig.width = 8, fig.cap = "Illustration of homo- and heteroskedasicity.", fig.align = 'center'}
+# homoskedastic example
+set.seed(1)
+x <- sort(rnorm(250))
+e <- rnorm(250)
+y <- x + e
+mod3 <- lm(y~x)
+par(mfrow = c(1, 2))
+plot(mod3, which = 1)
+
+# Heteroskedastic example
+y2 <- y
+y2[x > 0] <- x[x > 0] + 3* e[x > 0]
+y2[x < -1] <- x[x < -1] + .3* e[x < -1]
+mod4 <- lm(y2~x)
+plot(mod4, which = 1)
+```
+
+To make it clearer what aspect of these plots is relevant for evaluating the assumption of homoskedasticity, the same figures are replicated below, but this time with blue lines represented my own "eye-balling" of the range of the residuals. In the left plot, the two lines are parallel, meaning the range is constant. In the right plot, the two lines form a cone, meaning the the range of the residuals increases for larger values of $\widehat Y$. 
+
+Note that I didn't draw any lines in the tail ends of the plots -- this is because there are fewer observations in the tails, so it is harder to make a judgment about the range of values. To avoid "reading the tea leaves" I focus on the range of values of $\widehat Y$ for which there are sufficient observations to judge the range of the residuals. 
+
+To repeat, *the blue lines are just there for your reference*, to highlight the relevant information in the plot. You wouldn't generally include these lines in the plot. 
+
+```{r homo2, fig.width = 8, fig.cap = "Illustration of Homo- and Heteroskedasicity, with Reference Lines", fig.align = 'center'}
+# homoskedastic example with ref lines
+par(mfrow = c(1, 2))
+plot(mod3, which = 1)
+segments(x0 = -1.5, y0 = 2, x1 = 1.5, y1 = 2, col = "#4B9CD3", lty = 2, lwd = 3)
+segments(x0 = -1.5, y0 = -2, x1 = 1.5, y1 = -2, col = "#4B9CD3", lty = 2, lwd = 3)
+
+# Heteroskedastic example
+plot(mod4, which = 1)
+segments(x0 = -1.5, y0 = 1, x1 = 1.5, y1 = 8, col = "#4B9CD3", lty = 2, lwd = 3)
+segments(x0 = -1.5, y0 = -1, x1 = 1.5, y1 = -8, col = "#4B9CD3", lty = 2, lwd = 3)
+```
+
+Let's take another look at the plots in Figure \@ref(fig:linearity3). **Please write down whether you think the homoskedasticity assumption is problematic and  explain why with reference to the plots**.  
+
+
+### Summary 
+To check the assumption of homoskedasticity, we can use a residual versus fitted plot (again). 
+
+* If the range of values on the vertical axis appears approximately constant over the horizontal axis, then there is no evidence against the assumption
+
+* If the range does show a pattern (e.g., cone, bowtie, ellipse), then we should worry about this assumption. 
+
+* If the assumption is violated, it will affect the standard errors as well as the resulting t-test and confidence intervals. There are heteroskedasticity robust standard errors that can address this issue (Chapter 9). 
+
+## Normality
+
+```{r, echo=FALSE, results='asis'}
+codefolder::bookdown(init = "hide", style = button)
+```
+
+
+There are many ways to check this normality of a set of data, but a widely applicable technique is a qq plot (short for quantile-quantile plot). A qq plot compares the quantiles (e.g., percentiles) of two different distributions.
+
+For our assumption, we want to compare the quantiles of our standardized residuals to the quantiles of a standard normal distribution. Standardizing means the residuals should have variance equal to one, and, combined with the other population assumptions of linear regression, this implies that the residuals should have a standard normal distribution (see Section \@ref(recap-8)).
+
+Since qq plots might not be something you have seen before, we'll take a look at a few examples. Each figure below pairs a histogram and qq plot. In the qq plot, data points should fall on the diagonal line if the data are normally distributed. Focus on how the pattern in the histogram shows up as in deviations from the diagonal line the qq plot. We will discuss the interpretation of these patterns together in class. *Please write down any questions you have about the interpretation of the qq plots and we can address them together in class.**
+
+Also, it should be emphasized that the line in the normal qqplot is *not a regression line!* It is just the diagonal line $Y = X$, and the bulk of the data points should fall on that line if the data were drawn from a normal distribution. 
+
+
+```{r}
+# Comparing histograms and q-q plots
+distributions <- read.csv("distributions.csv")
+names(distributions)[2] <- "normal"
+attach(distributions)
+dist_names <- names(distributions)
+
+# Normal 
+par(mfrow = c(1, 2))
+hist(normal, col = "#4B9CD3")
+qqnorm(normal, col = "#4B9CD3")
+qqline(normal)
+
+# Negative skew
+par(mfrow = c(1, 2))
+hist(neg_skew, col = "#4B9CD3")
+qqnorm(neg_skew, col = "#4B9CD3")
+qqline(neg_skew)
+
+# Positive skew
+par(mfrow = c(1, 2))
+hist(pos_skew, col = "#4B9CD3")
+qqnorm(pos_skew, col = "#4B9CD3")
+qqline(pos_skew)
+
+# Leptokurtic
+par(mfrow = c(1, 2))
+hist(lepto, col = "#4B9CD3")
+qqnorm(lepto, col = "#4B9CD3")
+qqline(lepto)
+
+# Platykurtic
+par(mfrow = c(1, 2))
+hist(platy, col = "#4B9CD3")
+qqnorm(platy, col = "#4B9CD3")
+qqline(platy)
+```
+
+Finally, a more realistic example using the default plotting from the `lm` function. 
+
+```{r normality, fig.width = 8, fig.cap = "An example from ECLS.", fig.align = 'center'}
+# Example: regression c1rmscal on ses_orig and t1learn
+plot(mod2, which = 2)
+```
+
+### Summary 
+
+To check the assumption of normality, we can use a qq plot of the standardized residuals against the standard normal distribution. 
+
+* If the points from the qq plot follows the line Y = X, then there is no evidence against the assumption
+
+* If the residuals do show a trend off of the diagonal line, then we should worry about the assumption
+
+* If the assumption is violated, the central limit theorem implies that significance tests used in OLS regression will be robust to violations of normality when sample sizes are large.  
+  * Practically this means N / K > 30 (but other guidelines are used too)
+  * For some specific types of violations, notably positive skew, it is also common to transform the Y variable (Chapter 10)
+  
+
+## Diagnostics {#diagnostics-8}
+
+
+## Workbook
+
+## Exercises 
+

@@ -14,11 +14,12 @@ button <-  "position: relative;
             border: 1px #3079ED solid;
             box-shadow: inset 0 1px 0 #80B0FB"
 ```
-Up until this point we have considered models with only a handful predictors. This chapter addresses how to scale-up to 'real life' applications in which we may have many predictors. 
 
-There are two basic approaches to model building with many predictors. A *simulataneous* model is one large model that includes all predictors of interest. When there are many predictors, this is sometimes referred to the "kitchen sink" approach -- just put everything in the model (including the kitchen sink). Conceptually, this approach has the advantage that it mitigates  omitted variable bias and therefore helps justify the causal interpretation of regression coefficients. However, in practice it can lead to computational problems, especially when a larger number of highly correlated predictors are included in the model. We discuss this situation in Section \@ref(too-many-predictors-7)
+Up until this point we have considered models with only a handful of predictors. This chapter addresses how to scale-up to 'real life' applications in which we may have many predictors. 
 
-*Hierarchical* model building is an alternative approach in which predictors are added into a model sequentially. A hierarchical approach is most appropriate when the predictors can be partitioned into conceptual "blocks", and the blocks are added into the model one at a time. A block is just a conceptual grouping of one or more predictors, and we will see some examples in Section \@ref(hierarchical-models-7) and \@ref(worked-example-7).
+There are two basic approaches to model building with many predictors. A *simulataneous* model is a single regression model that includes all predictors of interest. When there are many predictors, this is sometimes referred to the "kitchen sink" approach -- just put everything in the model (including the kitchen sink). Conceptually, this approach has the advantage that it mitigates  omitted variable bias and therefore helps justify the causal interpretation of regression coefficients. However, in practice it can lead to computational problems, especially when highly correlated predictors are included in the model. We discuss this situation in Section \@ref(too-many-predictors-7)
+
+*Hierarchical* model building is an alternative approach in which predictors are added into a model sequentially. A hierarchical approach is most appropriate when the predictors can be partitioned into conceptual "blocks", and the blocks are added into the model one at a time. A block is just a conceptual grouping of one or more predictors, and we will some examples as well as in Sections \@ref(hierarchical-models-7) and \@ref(worked-example-7))
 The rationale for adding the blocks of predictors sequentially is to isolate the proportion of variance in the outcome (i.e., R-squared) attributable to each block.  
 
 Let's illustrate the difference between these two approaches with a hypothetical example. In the example, we seek to explain Reading Achievement using predictors that can be conceptually grouped into student and curriculum factors. 
@@ -148,8 +149,6 @@ Figure \@ref(fig:nested3) maps Cohen's strategy onto our diagram for nested mode
 knitr::include_graphics("images/nested3.png")
 ```
 
-
-
 ## $\Delta R^2$ {#delta-rsquared-7}
 
 We have already seen how to compute $\Delta R^2$ -- by subtracting the R-squared value of a nested model from that of a nesting model. This is a very widely used way of comparing nested regression models. 
@@ -175,7 +174,7 @@ To illustrate hierarchical modeling, let's use the ECLS data to address whether 
 This example is intended to be a realistic illustration of how to use the techniques we have covered up to this point, and also shows how to report results in a regression table. But there are some caveats that should be mentioned before starting: 
 
 * We used some tricks from later chapters to deal with non-linearity, and 
-* keep in the mind the subset of ECLS data we are using are not a representative sample. 
+* keep in the mind the subset of ECLS data we are using is not a representative sample. 
 
 ### Statement of research questions
 
@@ -208,7 +207,7 @@ Preliminary examination of the model residuals indicated violation of the assump
 
 The following table reports the results of the hierarchical model. The table was produced using the `stargazer` package in R, and is representative of the usual format for reporting regression output from hierarchical regression models. The rows are the variables and the columns are the series of nested models. The values reported for each variable are  the regression coefficients, with the standard errors in parenthesis. **Please take a  moment to look over the table and write down any questions you have about its interpretation** 
 
-```{r, fig.width=10}
+```{r}
 load("ECLS2577.RData")
 attach(ecls)
 
@@ -366,7 +365,7 @@ knitr::include_graphics("images/stargazer.png")
 
 * Please write down your a conclusions about which blocks had statistically significant values of $\Delta R^2$.
 
- ```{r}
+```{r}
 # Tests of R-square change
 knitr::kable(anova(mod1, mod2, mod3, mod4))
 ```
@@ -378,7 +377,7 @@ The exercises reproduce the worked example in Section \@ref(worked-example-7). F
  
 First we set up the variables
 
-```{r, fig.width=10}
+```{r}
 rm(list = ls()) # clean up environment
 load("ECLS2577.RData")
 attach(ecls)

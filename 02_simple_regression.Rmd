@@ -228,7 +228,7 @@ $R$ is the correlation between $Y$ and $\widehat Y$. In simple regression, this 
 Consequently, in simple regression $R^2 = r^2_{XY}$. When we add multiple predictors, $R$ is called the multiple correlation and plays a very important -->
 
 
-## The population model {#population-model}  
+## The population model {#population-model-2}  
 
 In the NELS example, the population of interest is U.S. eighth graders in 1988. We want to be able to draw conclusions about that population based on the sample of eighth graders that participated in NELS. In order to do that, we make some statistical assumptions about the population, which are collectively referred to as the population model. We talk about how to check the plausibility of these assumptions in Chapter \@ref(chapter-x). 
 
@@ -246,7 +246,7 @@ The regression population model has the following three assumptions, which are a
 
 \[ \mu_{Y| Χ} = a + bX \]
 
-```{r, fig-pop-model, echo = F, fig.cap = "The Regression Population Model.", fig.align = 'center'}
+```{r, pop-model, echo = F, fig.cap = "The Regression Population Model.", fig.align = 'center'}
 knitr::include_graphics("images/population_model.png")
 ```
 
