@@ -1,4 +1,4 @@
-#    Assumption checking {#chapter-8}
+# Assumption checking {#chapter-8}
 
 ```{r, echo = F}
 # Clean up check
