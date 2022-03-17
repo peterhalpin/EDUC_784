@@ -363,7 +363,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.5.2" data-path="9.5-interpretation-9.html"><a href="9.5-interpretation-9.html#a-hypothetical-example-2"><i class="fa fa-check"></i><b>9.5.2</b> A hypothetical example</a></li>
 <li class="chapter" data-level="9.5.3" data-path="9.5-interpretation-9.html"><a href="9.5-interpretation-9.html#exact-9"><i class="fa fa-check"></i><b>9.5.3</b> Exact interpretation</a></li>
 <li class="chapter" data-level="9.5.4" data-path="9.5-interpretation-9.html"><a href="9.5-interpretation-9.html#summary-10"><i class="fa fa-check"></i><b>9.5.4</b> Summary</a></li>
-<li class="chapter" data-level="9.5.5" data-path="9.5-interpretation-9.html"><a href="9.5-interpretation-9.html#derivation-of-equation-refeqexpb"><i class="fa fa-check"></i><b>9.5.5</b> Derivation of Equation @ref(eq:expb)*</a></li>
+<li class="chapter" data-level="9.5.5" data-path="9.5-interpretation-9.html"><a href="9.5-interpretation-9.html#derivation-9"><i class="fa fa-check"></i><b>9.5.5</b> Derivation of Equation @ref(eq:expb)</a></li>
 </ul></li>
 <li class="chapter" data-level="9.6" data-path="9.6-worked-example-9.html"><a href="9.6-worked-example-9.html"><i class="fa fa-check"></i><b>9.6</b> Worked example</a><ul>
 <li class="chapter" data-level="9.6.1" data-path="9.6-worked-example-9.html"><a href="9.6-worked-example-9.html#log-linear-regression-of-wages-on-education"><i class="fa fa-check"></i><b>9.6.1</b> Log-linear regression of Wages on Education</a></li>
@@ -397,7 +397,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="chapter-9" class="section level1">
 <h1><span class="header-section-number">Chapter 9</span> Log-linear regression</h1>
-<p>In the previous chapter we considered how to check whether the population assumptions of linear regression are problematic for a given data set. In this chapter we discuss one way to deal with assumption violations – by “transforming” the <span class="math inline">\(Y\)</span> variable. In general, a transformation is just a function we apply to variable to change it into another variable that we would rather work with. We have already seen one example of a transformation: the z-transformation or z-scores.</p>
+<p>In the previous chapter we considered how to check whether the population assumptions of linear regression are problematic for a given data set. In this chapter we discuss one way to deal with assumption violations – by “transforming” the <span class="math inline">\(Y\)</span> variable. In general, a transformation is just a function we apply to a variable to change it into another variable that we would rather work with. We have already seen some examples of transformations: the z-transformation (z-scores) and percentiles.</p>
 <p>In this chapter we will focus on the use and interpretation of the log-transform, <span class="math inline">\(\log(Y)\)</span>, which results in the log-linear regression model. This serves to illustrate the overall approach of transforming the <span class="math inline">\(Y\)</span> variable to address assumption violations, and also leads into a later topic – logistic regression – which also involves logarithms.</p>
 <p>Whenever we transform a <span class="math inline">\(Y\)</span> variable in a regression model, it always has three types of consequences. It affects:</p>
 <ul>
@@ -405,7 +405,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>The (non-)linearity of its relationship with predictor variables.</li>
 <li>The interpretation of the coefficients the model.</li>
 </ul>
-<p>The big theme of this chapter is that we have to consider all three of things when transforming the <span class="math inline">\(Y\)</span> variable, so fixing assumption violations using this approach is not always as straightforward as we might hope. In particular, we might find that addressing one problem (e.g., non-normality) can create other problems (e.g., nonlinearity).</p>
+<p>The big theme of this chapter is that we have to consider all three of these when transforming the <span class="math inline">\(Y\)</span> variable.So, fixing assumption violations using this approach is not always as straightforward as we might hope. In particular, we might find that addressing one problem (e.g., non-normality) can create other problems (e.g., nonlinearity).</p>
 <p>Another approach for dealing with assumption violations is to transform one or more of the <span class="math inline">\(X\)</span> variables instead of (or in addition to) the <span class="math inline">\(Y\)</span> variable. These approaches are discussed in the next chapter.</p>
 <!-- polynomial regression, which means raising $X$-variables to an exponent (e.g., $X^2$ and $X^3$), and 
 * piecewise or segmented regression, which involves using different regression lines over different ranges of a predictor. 

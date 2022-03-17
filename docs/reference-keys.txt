@@ -258,7 +258,7 @@ approximate-9
 a-hypothetical-example-2
 exact-9
 summary-10
-derivation-of-equation-refeqexpb
+derivation-9
 worked-example-9
 log-linear-regression-of-wages-on-education
 workbook-5

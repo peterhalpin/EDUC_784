@@ -363,7 +363,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.5.2" data-path="9.5-interpretation-9.html"><a href="9.5-interpretation-9.html#a-hypothetical-example-2"><i class="fa fa-check"></i><b>9.5.2</b> A hypothetical example</a></li>
 <li class="chapter" data-level="9.5.3" data-path="9.5-interpretation-9.html"><a href="9.5-interpretation-9.html#exact-9"><i class="fa fa-check"></i><b>9.5.3</b> Exact interpretation</a></li>
 <li class="chapter" data-level="9.5.4" data-path="9.5-interpretation-9.html"><a href="9.5-interpretation-9.html#summary-10"><i class="fa fa-check"></i><b>9.5.4</b> Summary</a></li>
-<li class="chapter" data-level="9.5.5" data-path="9.5-interpretation-9.html"><a href="9.5-interpretation-9.html#derivation-of-equation-refeqexpb"><i class="fa fa-check"></i><b>9.5.5</b> Derivation of Equation @ref(eq:expb)*</a></li>
+<li class="chapter" data-level="9.5.5" data-path="9.5-interpretation-9.html"><a href="9.5-interpretation-9.html#derivation-9"><i class="fa fa-check"></i><b>9.5.5</b> Derivation of Equation @ref(eq:expb)</a></li>
 </ul></li>
 <li class="chapter" data-level="9.6" data-path="9.6-worked-example-9.html"><a href="9.6-worked-example-9.html"><i class="fa fa-check"></i><b>9.6</b> Worked example</a><ul>
 <li class="chapter" data-level="9.6.1" data-path="9.6-worked-example-9.html"><a href="9.6-worked-example-9.html#log-linear-regression-of-wages-on-education"><i class="fa fa-check"></i><b>9.6.1</b> Log-linear regression of Wages on Education</a></li>
@@ -424,7 +424,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     codefolder('pre.sourceCode');
   });
 </script>
-<p>Before we get into transforming our variables, let’s review the requisite math – logs and exponents. We will use the lowercase symbols <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> for generic mathematical variables in this section – these symbols do not correspond to the use of the uppercase symbols <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> in regression notation. So, e.g., <span class="math inline">\(x\)</span> is not a predictor, its just a generic variable.</p>
+<p>Before we get into transforming our variables, let’s review the requisite math – logs and exponents. This section uses the lowercase symbols <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> for generic mathematical variables. These symbols do not correspond to the uppercase symbols <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> in regression notation. So, e.g., <span class="math inline">\(x\)</span> is not a predictor, its just a generic variable.</p>
 <p>The function <span class="math inline">\(\log_{10}(x)\)</span> returns the power to which we need to raise 10 to get the value <span class="math inline">\(x\)</span>. It answers the question: <span class="math inline">\(10^? = x\)</span>.</p>
 <p>Some examples:</p>
 <ul>
@@ -433,7 +433,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><span class="math inline">\(\log_{10}(1000) = 3\)</span>, because <span class="math inline">\(10^3 = 1000\)</span></li>
 <li>…</li>
 </ul>
-<p>Treated as a function of <span class="math inline">\(x\)</span>, we can see that <span class="math inline">\(\log(x)\)</span> grows much more slowly than <span class="math inline">\(x\)</span>. The three values computed above are marked by dashed lines in Figure <a href="9.1-math-review-9.html#fig:logx">9.1</a>. What this is telling us that “big differences” on <span class="math inline">\(x\)</span> translate into “small differences” on <span class="math inline">\(\log(x)\)</span>. For every order of magnitude that <span class="math inline">\(x\)</span> increases (e.g., from 10 to 100, or from 100 to 1000), its log only increases by one unit.</p>
+<p>In Figure <a href="9.1-math-review-9.html#fig:logx">9.1</a> we can see that <span class="math inline">\(\log(x)\)</span> grows much more slowly than <span class="math inline">\(x\)</span>. The three values computed above are marked by dashed lines . What this is telling us that “big differences” on <span class="math inline">\(x\)</span> translate into “small differences” on <span class="math inline">\(\log(x)\)</span>. For every order of magnitude that <span class="math inline">\(x\)</span> increases (e.g., from 10 to 100, or from 100 to 1000), its log only increases by one unit.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:logx"></span>
 <img src="images/logx.png" alt="Log base 10" width="648" />
 <p class="caption">
@@ -450,7 +450,7 @@ Figure 9.2: Log transform and positive skew
 <p>Now that we have seen the basic interpretation and utility of logs, there are a few details to add.</p>
 <div id="natural-logarithm" class="section level3">
 <h3><span class="header-section-number">9.1.1</span> Natural logarithm</h3>
-<p>The symbol <span class="math inline">\(\log_{10}\)</span> is read “log base 10”. In statistics, we almost never use log base 10. Instead we use log base <span class="math inline">\(e\)</span> where <span class="math inline">\(e = 2.7182...\)</span> is called Euler’s numbers. Think of <span class="math inline">\(e\)</span> as a relative of <span class="math inline">\(\pi\)</span> (the ratio of circle’s circumference to its diameter). It is an irrational number (i.e., cannot be represented as a ratio) and shows up all over the place. We will see later on that using <span class="math inline">\(\log_e\)</span> makes the interpretation of log-linear regression much simpler. Note that in this context, <span class="math inline">\(e\)</span> is not the residual from a regression model. The interpretation should be clear from context, but just ask a question in class if you are unsure.</p>
+<p>The symbol <span class="math inline">\(\log_{10}\)</span> is read “log base 10”. In statistics, we almost never use log base 10. Instead we use log base <span class="math inline">\(e\)</span> where <span class="math inline">\(e = 2.7182...\)</span> is called Euler’s number. Think of <span class="math inline">\(e\)</span> as a relative of <span class="math inline">\(\pi\)</span> (the ratio of circle’s circumference to its diameter). It is an irrational number (i.e., cannot be represented as a ratio) and shows up all over the place. We will see later on that using <span class="math inline">\(\log_e\)</span> makes the interpretation of log-linear regression simpler. Note that in this context, <span class="math inline">\(e\)</span> is not the residual from a regression model – the interpretation should be clear from context, but just ask a question in class if you are unsure.</p>
 <p>Regardless of which base we use, logs have the same overall compression effect, as shown in Figure <a href="9.1-math-review-9.html#fig:loge">9.3</a>. For example, <span class="math inline">\(\log_{10}(1000) = 3\)</span> and <span class="math inline">\(\log_{e}(1000) \approx 7\)</span> – both numbers are much smaller than <span class="math inline">\(1000\)</span>! The same is true when applied to real data – in fact, the left hand panel in Figure <a href="9.1-math-review-9.html#fig:logdata">9.2</a> was computed using <span class="math inline">\(\log_e\)</span>.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:loge"></span>
 <img src="images/loge.png" alt="Log base 10 vs log base e" width="750" />
@@ -458,18 +458,18 @@ Figure 9.2: Log transform and positive skew
 Figure 9.3: Log base 10 vs log base e
 </p>
 </div>
-<p>Log base <span class="math inline">\(e\)</span>, or <span class="math inline">\(\log_e\)</span>, is called the “natural logarithm” and often denoted <span class="math inline">\(\ln\)</span>. But <span class="math inline">\(\ln\)</span> can be hard to read so we will just stick with <span class="math inline">\(\log\)</span> and omit the base symbol when we mean <span class="math inline">\(\log_e\)</span>. This is consistent with what R’s <code>log</code> function does – its default base is <span class="math inline">\(e\)</span>.</p>
+<p>Log base <span class="math inline">\(e\)</span>, or <span class="math inline">\(\log_e\)</span>, is called the natural logarithm and often denoted “<span class="math inline">\(\ln\)</span>”. But <span class="math inline">\(\ln\)</span> can be hard to read so we will just stick with <span class="math inline">\(\log\)</span> and omit the base symbol when we mean <span class="math inline">\(\log_e\)</span>. This is consistent with what R’s <code>log</code> function does – its default base is <span class="math inline">\(e\)</span>.</p>
 </div>
 <div id="log-and-exp" class="section level3">
 <h3><span class="header-section-number">9.1.2</span> log and exp</h3>
-<p>Logarithms have the property that they can always be undone – they are invertible. For example, if we start with the number <span class="math inline">\(x= 100\)</span>, we can take the log (base <span class="math inline">\(e\)</span>) of that number as above</p>
+<p>Logarithms have the property that they can always be undone. For example, if we start with the number <span class="math inline">\(x= 100\)</span>, we can take the log (base <span class="math inline">\(e\)</span>) of that number as above</p>
 <p><span class="math display">\[\log(100) =  4.60517 \]</span></p>
 <p>Remember that by definition, this just tells us that <span class="math inline">\(4.60517\)</span> is the power to which we have to raise <span class="math inline">\(e\)</span> in order get <span class="math inline">\(100\)</span>, i.e.,</p>
 <p><span class="math display">\[e^{4.60517} = 100 \]</span></p>
 <p>Putting these two equations together, we can see that</p>
 <p><span class="math display">\[ e^{\log(100)} = 100. \]</span></p>
-<p>So, taking the log of <span class="math inline">\(100\)</span> gives us <span class="math inline">\(4.60517\)</span>, and taking the exponent of <span class="math inline">\(4.60517\)</span> gets us back to the original input, <span class="math inline">\(100\)</span>. In general, <span class="math inline">\(e^{\log(x)} = x\)</span>. So, exponentiation (i.e., raising something to a power) undoes the logarithm. This undoing is called inversion.</p>
-<p>From a statistical perspective, the important part about logs and exponents is that we can always use one to “undo” the effects of the other. So, if we log transform our <span class="math inline">\(Y\)</span> variable in a regression analysis to make the data more compatible with the model assumptions, we can always undo the log transform afterwards by taking exponents. We will see this trick a lot in what follows – apply a transform to the data, run the model, then undo the transform to interpret the results.</p>
+<p>So, taking the log of <span class="math inline">\(100\)</span> gives us <span class="math inline">\(4.60517\)</span>, and taking the exponent of <span class="math inline">\(4.60517\)</span> gets us back to the original input, <span class="math inline">\(100\)</span>. In general, <span class="math inline">\(e^{\log(x)} = x\)</span>. So, exponentiation (i.e., raising something to a power) undoes the logarithm. This undoing is called “inversion” in mathematic.</p>
+<p>From a statistical perspective, the important thing about logs and exponents is that we can always use one to undo the effects of the other. So, if we log transform our <span class="math inline">\(Y\)</span> variable in a regression analysis to make the data more compatible with the model assumptions, we can always undo the log transform afterwards by taking exponents. We will see this trick a lot in what follows – apply a transform to the data, run the model, then undo the transform to interpret the results.</p>
 <p>A final note about notation. The mathematical symbol <span class="math inline">\(\exp(y)\)</span> is used instead of <span class="math inline">\(e^y\)</span> to avoid having to write complicated expressions in the superscript. The idea is that the left hand side of the following equation is easier to read than the right hand side</p>
 <p><span class="math display">\[ \exp(17 - choclate + banna ) = e^{17 - choclate + banna} \]</span></p>
 </div>
@@ -485,7 +485,7 @@ Figure 9.3: Log base 10 vs log base e
 </div>
 <div id="rules-for-log-and-exp" class="section level3">
 <h3><span class="header-section-number">9.1.4</span> Rules for log and exp*</h3>
-<p>There are some rules for working with logs and exponents that we will use to derive some results on log-linear regression (and logistic regression, when we get there). You don’t need to know these but you might find them useful if you like to follow derivations.</p>
+<p>There are some rules for working with logs and exponents that we will use later on to derive some results about the interpretation of log-linear regression. You don’t need to know these but you might find them useful if you like to follow derivations.</p>
 <ul>
 <li><p>Addition with logs":
 <span class="math display">\[ \log(m) + \log(n) = \log(mn) \]</span></p></li>

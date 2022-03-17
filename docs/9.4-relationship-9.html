@@ -363,7 +363,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.5.2" data-path="9.5-interpretation-9.html"><a href="9.5-interpretation-9.html#a-hypothetical-example-2"><i class="fa fa-check"></i><b>9.5.2</b> A hypothetical example</a></li>
 <li class="chapter" data-level="9.5.3" data-path="9.5-interpretation-9.html"><a href="9.5-interpretation-9.html#exact-9"><i class="fa fa-check"></i><b>9.5.3</b> Exact interpretation</a></li>
 <li class="chapter" data-level="9.5.4" data-path="9.5-interpretation-9.html"><a href="9.5-interpretation-9.html#summary-10"><i class="fa fa-check"></i><b>9.5.4</b> Summary</a></li>
-<li class="chapter" data-level="9.5.5" data-path="9.5-interpretation-9.html"><a href="9.5-interpretation-9.html#derivation-of-equation-refeqexpb"><i class="fa fa-check"></i><b>9.5.5</b> Derivation of Equation @ref(eq:expb)*</a></li>
+<li class="chapter" data-level="9.5.5" data-path="9.5-interpretation-9.html"><a href="9.5-interpretation-9.html#derivation-9"><i class="fa fa-check"></i><b>9.5.5</b> Derivation of Equation @ref(eq:expb)</a></li>
 </ul></li>
 <li class="chapter" data-level="9.6" data-path="9.6-worked-example-9.html"><a href="9.6-worked-example-9.html"><i class="fa fa-check"></i><b>9.6</b> Worked example</a><ul>
 <li class="chapter" data-level="9.6.1" data-path="9.6-worked-example-9.html"><a href="9.6-worked-example-9.html#log-linear-regression-of-wages-on-education"><i class="fa fa-check"></i><b>9.6.1</b> Log-linear regression of Wages on Education</a></li>
@@ -430,9 +430,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>then</p>
 <p><span class="math display">\[\begin{align} 
 \log(Y) &amp; = \log(a + bX + \epsilon) \\
- &amp; \neq a + bX + \epsilon \\
+ &amp; \neq a + bX + \epsilon. \\
 \end{align}\]</span></p>
-<p>What this means in practice is that addressing positive skew using a log transform can actually create more problems than it solves. Figure <a href="9.4-relationship-9.html#fig:nonlinear1">9.13</a> illustrates this situation. In the top row, we see the residual versus fitted plot for the regression of Math Achievement (<code>c1rmscal</code>) on SES (<code>wksesl</code>) in the ECLS data, which resulted in a clear violation of normality (positive skew). In the bottom row, we see same output after log transforming Math Achievement – it fixed the issue with normality, but also made the nonlinearity more apparent.</p>
+<p>What this means in practice is that addressing positive skew using a log transform can sometimes create more problems than it solves. Figure <a href="9.4-relationship-9.html#fig:nonlinear1">9.13</a> illustrates this situation. In the top row, we see the residual versus fitted plot and qqplot of residuals for the regression of Math Achievement (<code>c1rmscal</code>) on SES (<code>wksesl</code>). The linear regression resulted in a clear violation of normality (positive skew). In the bottom row, we see same output after log transforming Math Achievement – it fixed the issue with normality, but also made the nonlinearity more apparent.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:nonlinear1"></span>
 <img src="_main_files/figure-html/nonlinear1-1.png" alt="Nonlinear vs non-normality when log transforming Y" width="672" />
 <p class="caption">
@@ -440,8 +440,8 @@ Figure 9.13: Nonlinear vs non-normality when log transforming Y
 </p>
 </div>
 <p>The take home message is that when we transform <span class="math inline">\(Y\)</span> (or <span class="math inline">\(X\)</span>) we necessarily affect the relationship between the variables, as well as their individual distributions. It is often the case that when we try to “fix” the normality of the <span class="math inline">\(Y\)</span> variable, we can inadvertently make its relationship to <span class="math inline">\(X\)</span> more non-linear.</p>
-<p>Note that the opposite can also happen – a log transform can make a non-linear (exponential) relationship more linear. The exact result is of the transformation depends on the relationships in the data.</p>
-<p>As we discuss in the Sections <a href="#polynomial-9"><strong>??</strong></a> and <a href="#piecewise-9"><strong>??</strong></a>, we can address non-linearity of regression by transforming the <span class="math inline">\(X\)</span> variable(s). But we should be sure that the problem we are trying to solve (normality) isn’t worse than the the problem we end up with (non-linearity).</p>
+<p>Note that the opposite can also happen – a log transform can make a non-linear (exponential) relationship more linear. The exact result of the transformation depends on the relationships in the original data.</p>
+<p>As we discuss in the next chapter, we can address non-linearity of regression by transforming the <span class="math inline">\(X\)</span> variable(s). But we should be sure that the problem we are trying to solve (normality) isn’t worse than the the problem we end up with (non-linearity).</p>
 <p><strong>What do you think about the example given in Figure <a href="9.4-relationship-9.html#fig:nonlinear1">9.13</a>? Is addressing the normality assumption “worth it”? Why or why not?</strong></p>
 </div>
             </section>

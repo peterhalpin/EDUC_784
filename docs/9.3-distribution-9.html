@@ -363,7 +363,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.5.2" data-path="9.5-interpretation-9.html"><a href="9.5-interpretation-9.html#a-hypothetical-example-2"><i class="fa fa-check"></i><b>9.5.2</b> A hypothetical example</a></li>
 <li class="chapter" data-level="9.5.3" data-path="9.5-interpretation-9.html"><a href="9.5-interpretation-9.html#exact-9"><i class="fa fa-check"></i><b>9.5.3</b> Exact interpretation</a></li>
 <li class="chapter" data-level="9.5.4" data-path="9.5-interpretation-9.html"><a href="9.5-interpretation-9.html#summary-10"><i class="fa fa-check"></i><b>9.5.4</b> Summary</a></li>
-<li class="chapter" data-level="9.5.5" data-path="9.5-interpretation-9.html"><a href="9.5-interpretation-9.html#derivation-of-equation-refeqexpb"><i class="fa fa-check"></i><b>9.5.5</b> Derivation of Equation @ref(eq:expb)*</a></li>
+<li class="chapter" data-level="9.5.5" data-path="9.5-interpretation-9.html"><a href="9.5-interpretation-9.html#derivation-9"><i class="fa fa-check"></i><b>9.5.5</b> Derivation of Equation @ref(eq:expb)</a></li>
 </ul></li>
 <li class="chapter" data-level="9.6" data-path="9.6-worked-example-9.html"><a href="9.6-worked-example-9.html"><i class="fa fa-check"></i><b>9.6</b> Worked example</a><ul>
 <li class="chapter" data-level="9.6.1" data-path="9.6-worked-example-9.html"><a href="9.6-worked-example-9.html#log-linear-regression-of-wages-on-education"><i class="fa fa-check"></i><b>9.6.1</b> Log-linear regression of Wages on Education</a></li>
@@ -452,10 +452,10 @@ Figure 9.7: Example 3: Log transforming hourly wages
 Figure 9.8: Logs for small values of X
 </p>
 </div>
-<p>We can see that <span class="math inline">\(\log(1) = 0\)</span>, which is true regardless of the base (i.e., <span class="math inline">\(b^0 = 1\)</span> for all choices of the <span class="math inline">\(b\)</span>). But for values of <span class="math inline">\(x &lt; 0\)</span>, <span class="math inline">\(\log(x)\)</span> goes to negative infinity. This is because of how negative exponents are defined</p>
+<p>We can see that <span class="math inline">\(\log(1) = 0\)</span>, which is true regardless of the base (i.e., <span class="math inline">\(b^0 = 1\)</span> for all choices of the <span class="math inline">\(b\)</span>). But for values of <span class="math inline">\(x &lt; 0\)</span>, <span class="math inline">\(\log(x)\)</span> goes to negative infinity. This is because of how negative exponents are defined:</p>
 <p><span class="math display">\[ b^{-x} = \frac{1}{b^x}. \]</span></p>
-<p>The upshot of all this is that, if your variable takes on values in the range <span class="math inline">\([0, 1]\)</span>, the log transform is going to change those values into large negative numbers. This can result in negative skew, rather fixing your positive skew.</p>
-<p>We can see this in Figure <a href="9.3-distribution-9.html#fig:skew4">9.9</a> below. The top row of the Figure shows the same variable as Example 1 above (ECLS Math Achievement), and the bottom shows the variable transformed to a proportion. In the left hand panels we can see that the distribution of the proportions is qualitatively the same the as the distribution of the original variable. However, the log transform behaves much differently for these two cases. Why? Because logs are “weird” on the range <span class="math inline">\([0, 1]\)</span>.</p>
+<p>The upshot is that, if your variable takes on values in the range <span class="math inline">\((0, 1)\)</span>, the log transform is going to change those values into large negative numbers. This can result in negative skew, rather fixing your positive skew.</p>
+<p>We can see this in Figure <a href="9.3-distribution-9.html#fig:skew4">9.9</a> below. The top row of the Figure shows the same variable as Example 1 above (ECLS Math Achievement), and the bottom shows the variable transformed to a proportion. In the left hand panels we can see that the distribution of the proportions is qualitatively the same the as the distribution of the original variable. However, the log transform behaves much differently for these two cases. Why? Because logs are “weird” on the range <span class="math inline">\((0, 1)\)</span>.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:skew4"></span>
 <img src="_main_files/figure-html/skew4-1.png" alt="Comparing Log transforms of ECLS math total score versus proportion correct" width="672" />
 <p class="caption">
@@ -477,15 +477,17 @@ Figure 9.10: Dealing with negative values of x in log transforms
 </p>
 </div>
 <p>The take home message: If we have negative values of <span class="math inline">\(x\)</span>, before we apply the log transform we need to:</p>
-<p>*Step 1. “Add” the minimum value of <span class="math inline">\(x\)</span> to prevent undefined values of log</p>
-<p>*Step 2. Add 1 to make sure no values are less than 1</p>
+<ul>
+<li>Step 1. “Add” the minimum value of <span class="math inline">\(x\)</span> to prevent undefined values of log</li>
+<li>Step 2. Add 1 to make sure no values are less than 1</li>
+</ul>
 <p>Like the “add 1” rule, you can use this procedure all the time, not just when <span class="math inline">\(x\)</span> takes on negative values.</p>
 <p><strong>Can you think of a log transformation that would work to address data that were negatively skewed, rather than positively skewed? Hint: the trick is similar to the one in this section</strong></p>
 </div>
 <div id="skew-versus-censoring" class="section level3">
 <h3><span class="header-section-number">9.3.3</span> Skew versus censoring</h3>
 <p>It is important to distinguish between skew and floor (or ceiling) effects. Floor and ceiling effects are collectively known as “censoring”. While transforming you data can help with skew, it isn’t going to do anything about censoring, so it is important to be able to tell the difference.</p>
-<p>Censoring can look like extreme skew, but is importantly different from skew because a large proportion of the observations have exactly the same value. An example is shown in Figure <a href="9.3-distribution-9.html#fig:floor">9.11</a> below. Note that the log transformation does do not anything about the censored data. In general, if you transform a “heap” of values, then the same heap shows up in the transformed data.</p>
+<p>Censoring can look like extreme skew, but is importantly different from skew because a large proportion of the observations have exactly the same value. An example is shown in Figure <a href="9.3-distribution-9.html#fig:floor">9.11</a> below, which shows a floor effect in which a large proportion of the cases have a values of 0 (“are censored at zero”). Note that the log transformation does do not anything about the censored data. In general, if you transform a “heap” of values, then the same heap shows up in the transformed data.</p>
 <p>To deal with censored data, we need to consider alternatives to linear regression (e.g., tobit regression). We won’t cover regression for censored data in this course. For our purposes, the moral is: don’t mistake censoring for skew, because they don’t have the same solution.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:floor"></span>
 <img src="images/floor_effect.png" alt="A floor effect is not the same as positive skew" width="759" />
@@ -496,9 +498,9 @@ Figure 9.11: A floor effect is not the same as positive skew
 </div>
 <div id="final-comments-on-dealing-with-skew" class="section level3">
 <h3><span class="header-section-number">9.3.4</span> Final comments on dealing with skew</h3>
-<p>Recall that the assumptions of linear regression are about the residuals, not about the <span class="math inline">\(Y\)</span> variable itself (see Section <a href="8.1-recap-8.html#recap-8">8.1</a>. So, a skewed outcome variable is not necessarily a problem. In particular, it is entirely possible that <span class="math inline">\(Y\)</span> is positively skewed but its residuals are not, especially if one of the <span class="math inline">\(X\)</span> variables has a similar distribution to <span class="math inline">\(Y\)</span>. So, don’t worry about non-normality of <span class="math inline">\(Y\)</span>, its non-normality of the residuals that matters.</p>
+<p>Recall that the assumptions of linear regression are about the residuals, not about the <span class="math inline">\(Y\)</span> variable itself (see Section <a href="8.1-recap-8.html#recap-8">8.1</a>). So, a skewed outcome variable is not necessarily a problem. In particular, it is entirely possible that <span class="math inline">\(Y\)</span> is positively skewed but its residuals are not, especially if one of the <span class="math inline">\(X\)</span> variables has a similar distribution to <span class="math inline">\(Y\)</span>. So, don’t worry about non-normality of <span class="math inline">\(Y\)</span>, its non-normality of the residuals that matters.</p>
 <p>Second, even if the residuals are non-normal, this still doesn’t matter very much with very large samples. The central limit theorem assures us that, as the sample size gets larger, the sampling distribution of the regression coefficients converges to a normal distribution, regardless of the distribution of the residuals. This is illustrated in Figure <a href="9.3-distribution-9.html#fig:clt">9.12</a> below.</p>
-<p>The left panel shows the qq-plot of the residuals when Math Achievement (<code>c1rmscal</code>) is regressed on SES (<code>wksesl</code>) using the ECLS dataset. The right panel shows the bootstrapped sampling distribution of the regression coefficient, with samples of size <span class="math inline">\(N = 100\)</span>. It is apparent that the skewness of the <span class="math inline">\(Y\)</span> variable does not affect the normality of the sampling distribution of the b-weight when the sample size is <span class="math inline">\(100\)</span>. This is why we can often ignore skew in <span class="math inline">\(Y\)</span> with “large” samples (<span class="math inline">\(N = 100\)</span> in this case)</p>
+<p>The left panel shows the qq-plot of the residuals when Math Achievement (<code>c1rmscal</code>) is regressed on SES (<code>wksesl</code>) using the ECLS dataset. The right panel shows the bootstrapped sampling distribution of the regression coefficient, with samples of size <span class="math inline">\(N = 100\)</span>. It is apparent that the skewness of the <span class="math inline">\(Y\)</span> variable does not affect the normality of the sampling distribution of the b-weight when the sample size is <span class="math inline">\(100\)</span>. This is why we can often ignore skew in <span class="math inline">\(Y\)</span> with “large” samples (<span class="math inline">\(N = 100\)</span> in this case.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:clt"></span>
 <img src="images/clt.png" alt="The sampling distribution of a regression coefficient when residuals have positive skew" width="521" />
 <p class="caption">
@@ -510,7 +512,7 @@ Figure 9.12: The sampling distribution of a regression coefficient when residual
 <li>The problem may not really need to be fixed:
 <ul>
 <li>Check the residuals!</li>
-<li>If you have sufficient sample size, mild to moderate violations of normality are not really an issue</li>
+<li>If you have sufficient sample size, mild to moderate violations of normality are not really an issue.</li>
 </ul></li>
 <li>The log transformation has other important implications for you model …</li>
 </ol>

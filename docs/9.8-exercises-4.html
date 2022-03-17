@@ -360,7 +360,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.5.2" data-path="9.5-interpretation-9.html"><a href="9.5-interpretation-9.html#a-hypothetical-example"><i class="fa fa-check"></i><b>9.5.2</b> A hypothetical example</a></li>
 <li class="chapter" data-level="9.5.3" data-path="9.5-interpretation-9.html"><a href="9.5-interpretation-9.html#exact-9"><i class="fa fa-check"></i><b>9.5.3</b> Exact interpretation</a></li>
 <li class="chapter" data-level="9.5.4" data-path="9.5-interpretation-9.html"><a href="9.5-interpretation-9.html#summary-7"><i class="fa fa-check"></i><b>9.5.4</b> Summary</a></li>
-<li class="chapter" data-level="9.5.5" data-path="9.5-interpretation-9.html"><a href="9.5-interpretation-9.html#derivation-of-equation-refeqexpb"><i class="fa fa-check"></i><b>9.5.5</b> Derivation of Equation @ref(eq:expb)*</a></li>
+<li class="chapter" data-level="9.5.5" data-path="9.5-interpretation-9.html"><a href="9.5-interpretation-9.html#derivation-9"><i class="fa fa-check"></i><b>9.5.5</b> Derivation of Equation @ref(eq:expb)</a></li>
 </ul></li>
 <li class="chapter" data-level="9.6" data-path="9.6-worked-example-9.html"><a href="9.6-worked-example-9.html"><i class="fa fa-check"></i><b>9.6</b> Worked example</a><ul>
 <li class="chapter" data-level="9.6.1" data-path="9.6-worked-example-9.html"><a href="9.6-worked-example-9.html#log-linear-regression-of-wages-on-education"><i class="fa fa-check"></i><b>9.6.1</b> Log-linear regression of Wages on Education</a></li>
@@ -512,8 +512,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb19-9"><a href="9.8-exercises-4.html#cb19-9"></a><span class="kw">plot</span>(mod2, <span class="dv">1</span>, <span class="dt">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span>
 <span id="cb19-10"><a href="9.8-exercises-4.html#cb19-10"></a><span class="kw">plot</span>(mod2, <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="9.8-exercises-4.html#cb20-1"></a><span class="kw">detach</span>(wages)</span></code></pre></div>
 <p>Before moving on to address non-linearity, make sure you have a good understanding of the output below</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="9.8-exercises-4.html#cb20-1"></a><span class="kw">summary</span>(mod2)</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="9.8-exercises-4.html#cb21-1"></a><span class="kw">summary</span>(mod2)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = log_wage ~ educ)
@@ -532,10 +533,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Residual standard error: 0.4245118 on 198 degrees of freedom
 ## Multiple R-squared:  0.2104478,  Adjusted R-squared:  0.2064602 
 ## F-statistic: 52.77506 on 1 and 198 DF,  p-value: 8.402169e-12</code></pre>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="9.8-exercises-4.html#cb22-1"></a>conf.b &lt;-<span class="st"> </span><span class="kw">cbind</span>(<span class="kw">coef</span>(mod2), <span class="kw">confint</span>(mod2))</span>
-<span id="cb22-2"><a href="9.8-exercises-4.html#cb22-2"></a>exp.b &lt;-<span class="st"> </span><span class="kw">exp</span>(conf.b) <span class="op">-</span><span class="st"> </span><span class="dv">1</span></span>
-<span id="cb22-3"><a href="9.8-exercises-4.html#cb22-3"></a><span class="kw">colnames</span>(exp.b)[<span class="dv">1</span>] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;exp - 1&quot;</span>)</span>
-<span id="cb22-4"><a href="9.8-exercises-4.html#cb22-4"></a>exp.b</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="9.8-exercises-4.html#cb23-1"></a>conf.b &lt;-<span class="st"> </span><span class="kw">cbind</span>(<span class="kw">coef</span>(mod2), <span class="kw">confint</span>(mod2))</span>
+<span id="cb23-2"><a href="9.8-exercises-4.html#cb23-2"></a>exp.b &lt;-<span class="st"> </span><span class="kw">exp</span>(conf.b) <span class="op">-</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb23-3"><a href="9.8-exercises-4.html#cb23-3"></a><span class="kw">colnames</span>(exp.b)[<span class="dv">1</span>] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;exp - 1&quot;</span>)</span>
+<span id="cb23-4"><a href="9.8-exercises-4.html#cb23-4"></a>exp.b</span></code></pre></div>
 <pre><code>##                   exp - 1         2.5 %        97.5 %
 ## (Intercept) 2.28290936372 1.46608511804 3.37028463110
 ## educ        0.07767033825 0.05600868713 0.09977632959</code></pre>
