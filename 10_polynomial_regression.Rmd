@@ -1,0 +1,218 @@
+# Polynomial regression, etc {#chapter-10}
+
+<!-- this should be called nonlinearity (and heteroskedasticity) and come before log-linear modeling --> 
+
+```{r, echo = F}
+# Clean up check
+rm(list = ls())
+#detach(NELS)
+
+button <-  "position: relative; 
+            top: -25px; 
+            left: 85%;   
+            color: white;
+            font-weight: bold;
+            background: #4B9CD3;
+            border: 1px #3079ED solid;
+            box-shadow: inset 0 1px 0 #80B0FB"
+```
+
+This chapter collects some other useful techniques for addressing assumption violations in linear regression.  
+
+One approach involves transforming the $X$-variable(s), which can be done instead of (or in addition to) transforming the $Y$ variable. This approach is used to address violations of the assumption of linearity, and this chapter will cover two widely-used techniques 
+
+* Polynomial regression, which means raising $X$-variables to a power (e.g., $X^2$ and $X^3$), and 
+* Piecewise or segmented regression, which involves using different regression lines over different ranges of a predictor. 
+Both polynomial and piecewise regression are very useful in practice and lead to advanced topics like splines and semi-parametric regression. They also turn out to be special cases of interactions, so we have already covered a lot of the technical details in Chapter \@ref(chapter-6) -- phew! 
+
+We also consider how to deal with heteroskedasticity. The short version is that heteroskedasticity affects the standard errors of regression coefficients, and, consequently, the t- and p-values. There are lots of different ways to make standard errors robust to heteroskedasticity, and we will focus on one widely used procedure called heteroskedasticity-corrected (HC) standard errors. 
+
+## Polynomial regression {#polynomial-6}
+
+```{r, echo=FALSE, results='asis'}
+codefolder::bookdown(init = "hide", style = button)
+```
+
+Polynomial regression means that we regress $Y$ on a polynomial function of $X$
+
+\[ \widehat Y = b_0 + b_1 X_1 + b_2 X^2 + b_3 X^3 + ....\]
+
+Your first thought might be, "doesn’t this contradict the assumption that regression is linear?" The answer here is a bit subtle. The polynomial model is still linear in the coefficients -- we don’t raise the regression coefficients to a power, or multiply coefficients together, etc. This is the technical sense in which polynomial regression is still just linear regression, despite its name. 
+
+Polynomial regression does use nonlinear functions of a predictor(s), but the model is agnostic to what you do with your data! The situation here is a lot like when we worked with interactions in Chapter \@ref(chapter-6). In order to model interactions, we computed the product of two predictors and entered the product into the model as a third predictor. Well, $X^2$ is the product of a predictor with itself, so, in this sense, the quadratic term in a polynomial regression is just a special case of an interaction between two variables. 
+
+Although we did not cover interactions among more than two variables in this course, they are computed in the same way -- e.g., a "three-way" interaction is just the product of 3 predictors. Similarly, $X^3$ is just the three-fold product of a variable with itself. In general, interactions and polynomial regression are related in the same way as multiplication and exponentiation. 
+
+Although polynomial regression is formally similar to interactions, it is used for a different purpose. Interactions address how the relationship between two variables changes as a function of a third. Their inclusion in a model is  usually motivated by a specific research question that is formulated before doing the data analysis (see Chapter \@ref(chapter-6)). 
+
+By contrast, polynomial regression is used to address a non-linear relationship between $Y$ and $X$, and is usually motivated by a preliminary examination of data that indicates the presence of such a relationship (e.g., a scatter plot of $Y$ versus $X$; a residual versus fitted plot). While it is possible to formulate research questions about polynomial terms in a regression model, this is not necessarily or even usually the case when polynomial regression is used. 
+
+### Recap of polynomials
+
+In general, a polynomial of degree $n$ (i.e., highest power of $n$) produces a curve that can have up to $n-1$ bends (minima and maxima). Some examples are illustrated in Figure \@ref(fig:poly) below.
+
+* The (orange) linear function of $X$ is a polynomial of degree 1 and has zero bends.
+* The (green) quadratic function of $X$ is a polynomial of degree 2 and has 1 bend (a minimum at $X = 0$; this is also called a parabola).
+* etc.
+
+```{r, poly, echo = F, fig.cap = "Polynomial functions of X", fig.align = 'center'}
+knitr::include_graphics("images/poly.png", dpi = 150)
+```
+
+As we can see, this is a very flexible approach to addressing a non-linear relationship between a predictor and an outcome. In fact, it can be too flexible!
+
+### Polynomials and curve fitting
+
+Figure \@ref(fig:overfit) shows three different regression models fitted to the same bivariate data. 
+
+* In the left panel, a standard linear regression model is used, and we can see that the model clearly does not capture the nonlinear (quadratic) trend in the data. 
+
+* The middle panel uses a quadratic model (i.e., includes $X^2$ as a predictor, as well as $X$), and fits the data quite well. 
+
+* The right panel uses a 16-degree polynomial to fit the data. We can see that is has a higher R-squared than the quadratic model. But there is also something fishy about this one, don't you agree? 
+
+**Before moving on please take a moment to write down you intuitions about what is going in the right-hand panel of Figure \@ref(fig:overfit) and whether this model really is better than the one in the middle panel. I will ask you to share your thoughts in class.**
+
+```{r, overfit, echo = F, fig.cap = "polynomial regression examples", fig.align = 'center', fig.width = 12}
+# Generate data
+set.seed(1)
+X <- sort(runif(20, -2, 2))
+e <- rnorm(20, 0, .5)
+Y <- 2 + X - X^2 + e
+
+# Three regression models
+mod1 <- lm(Y ~ X)
+mod2 <- lm(Y ~ poly(X, 2))
+mod3 <- lm(Y ~ poly(X, 16))
+
+# Plots
+par(mfrow = c(1, 3)) 
+
+title1 <- paste0("R-squared = ", round(summary(mod1)$r.square, 3))
+plot(X, Y, col = "#4B9CD3", pch = 10, lwd = 5, main = title1)
+points(X, fitted(mod1), col = 1, type = "l", lwd = 2)
+
+title2 <- paste0("R-squared = ", round(summary(mod2)$r.square, 3))
+plot(X, Y, col = "#4B9CD3", pch = 10, lwd = 5, main = title2)
+points(X, fitted(mod2), col = 2, type = "l", lwd = 2)
+
+title3 <- paste0("R-squared = ", round(summary(mod3)$r.square, 3))
+plot(X, Y, col = "#4B9CD3", pch = 10, lwd = 5, main = title3)
+points(X, fitted(mod3), col = 3, type = "l", lwd = 2)
+```
+
+
+**Before moving on please take a moment to write down you intuitions about what is going in the right-hand panel of Figure \@ref(fig:overfit) and whether this model really is better than the one in the middle panel.** 
+
+To help answer this question you might find it helpful to consider the plots below. In these plots a second sample was drawn from the same population model, and the predicted values from the three models above were used to compute the regression lines. Note that the regression parameters were not estimated again using the second data set. The model parameters from the first data set were used again in the second data set. 
+
+```{r, overfit2, echo = F, fig.cap = "Polynomial regression examples (with new data)", fig.align = 'center', fig.width = 12}
+# Generate data
+set.seed(4)
+e <- rnorm(20, 0, .5)
+Y1 <- 2 + X - X^2 + e
+
+# Three R-squared values
+R.squared1 <- 1 - sum((Y1 - fitted(mod1))^2) / var(Y1) / 19
+R.squared2 <- 1 - sum((Y1 - fitted(mod2))^2) / var(Y1) / 19
+R.squared3 <- 1 - sum((Y1 - fitted(mod3))^2) / var(Y1) / 19
+# Plots
+
+par(mfrow = c(1, 3)) 
+title1 <- paste0("R-squared = ", round(R.squared1, 3))
+plot(X, Y1, col = "#4B9CD3", pch = 10, lwd = 5, main = title1)
+points(X, fitted(mod1), col = 1, type = "l", lwd = 2)
+
+title2 <- paste0("R-squared = ", round(R.squared2, 3))
+plot(X, Y1, col = "#4B9CD3", pch = 10, lwd = 5, main = title2)
+points(X, fitted(mod2), col = 2, type = "l", lwd = 2)
+
+title3 <- paste0("R-squared = ", round(R.squared3, 3))
+plot(X, Y1, col = "#4B9CD3", pch = 10, lwd = 5, main = title3)
+points(X, fitted(mod3), col = 3, type = "l", lwd = 2)
+```
+### Interpreting the model
+
+As mentioned, polynomial terms are often added into a model as a way to address nonlinearity. Often the polynomial terms themselves are not of much substantive interest, and are just added to "patch up" the model after assumption checking. We saw an example of this in Section \@ref(worked-example-7). In this example, a quadratic terms was entered into a model in the same block as the linear term for the same predictor. The R-squared was interpreted for the entire block, but the interpretation of the regression coefficient for the quadratic term was not addressed. This is a pretty common way of using polynomial regression -- the polynomial terms are included so that the model assumptions (linearity) are met, but they are not necessarily interpreted beyond this.  
+
+However, we can interpret the polynomial terms if we want to. This section addresses the interpretation of a quadratic term, but a similar approach applies to higher order terms. 
+
+One classic example of a substantively interesting quadratic relationship is the Yerkses-Dodson law relating physiological arousal (i.e., stress) to task performance, represented in Figure \@ref(fig:YD). One way to interpret the law is in terms of the overall shape of the relationship. As stress goes up, so does performance -- but only up to a point, after which more stress leads to a deterioration in performance. 
+
+This exemplifies the basic interpretation of quadratic relationship: 
+
+* A positive regression coefficient on $X^2$ corresponds to an U-shaped curve.
+* A negative regression coefficient on $X^2$ corresponds to an inverted-U-shaped curve. 
+
+```{r, YD, echo = F, fig.cap = "Yerkes-Dodson Law (Source: Wikipedia)", fig.align = 'center'}
+knitr::include_graphics("images/YerkesDodson.png", dpi = 75)
+```
+
+Beyond the overall quality of the relationship, we might also want to know what level of stress corresponds to the optimal level of performance -- i.e., where the maximum of the curve is. The exemplifies the more complicated interpretation of a quadratic relationship, and it requires some calculus work out (see Section \@ref(deriviation-10), which is optional). The main result is that for the quadratic regression model
+
+\[ \widehat Y = b_0 +b_1X + b_2X^2, \]
+
+the maximum (or minumum) value of $X$ that corresponds to the maximum of the quadratic curve is
+
+\[ X = \frac{-b_1}{2 b_2} \]
+
+In the Yerkes-Dodson law, when the $X$ variable is centered, the regression coefficient for the linear term is not statistically significant. 
+
+**Based on this  discussion, please use both the "basic" and "more complicated" interpretation of a quadratic relationship to describe Yerkes-Dodson Law.** 
+
+### Model building
+
+ A typical model building process for polynomial regression might proceed as follows. 
+
+* Enter linear terms into the model first and then examine a residual versus plot. 
+
+* If there is evidence of non-linearity, follow up by looking at the relationship between the outcome variable and individual predictors to sort out which relationship(s) are potentially causing the non-linearity. 
+
+* Add a quadratic term for a predictor of interest and examine whether there is a statistically significant increase in R-squared (See Section \@ref()). If not, the quadratic term is not improving the model fit, so remove it from the model and try again. If so, re-check the residual versus fitted plot to see whether the linearity assumption is still problematic. 
+
+* Keep adding polynomial terms one at a time, removing any non-significant terms, until the model assumptions looks reasonable.
+
+This overall approach is illustrated in the next section. However, there are a couple of important detail to keep in mind. 
+
+
+* Just like with interactions, higher-order polynomial terms are often highly correlated with lower-order terms (e.g., $X$ and $X^2$ will be highly correlated if $X$ takes on strictly positive values). Recall that if two predictors are highly correlated, this can affect their regression coefficients (see Section \@ref(ols-4)) as well as their standard errors (see Section \@ref(too-many-predictors-7)). There are few things that can be done about this. 
+
+    * Interpret $\Delta R^2$ values rather than the individual regression coefficients. This is the easiest thing to do. 
+    * Center the predictors before computing higher order terms. This is the same approach we discusses for interactions  (Section \@ref(binary-continuous-interaction-6))
+    * Use "orthogonal polynomials" which ensure the different polynomial terms are uncorrelated. This is the default approach in `R`, but it definitely leans towards curve-fitting than substantive interpretations of model parameters.
+
+
+* All lower-order terms should be included in the model in order for the higher-order terms to have a clear interpretation. As we just discussed, higher-order terms can be correlated with lower order terms. Thus, they will reflect their specific degree of curvature (e.g., quadratic) only if all lower-order (e.g., linear) terms are partialled out. Otherwise the variance attributed to the higher-order terms will be confounded with the variance attributable to the omitted lower-order terms. 
+    * TL;DR We can't conclude that the there is a quadratic relationship between two variables unless we have controlled for their linear relationship. 
+    
+* Finally, a warning. Good use of polynomial regression requires walking the line between curve fitting and parsimony (see Figure \@ref(fig:overfit)). Sometimes, adding a polynomail term can provide a really elegant and inutitive interpretation of the relationship between two varisbles. But if you find you are adding more than a couple of polynomial terms into a model and still have unresolved issues with nonlinearity, it is probably best to consider another approach (such as piece-wise regression, see Section \@ref(piecewise-10)) 
+
+## A worked example
+
+## Piecewise regression {#piecewise-10}
+
+## Heteroskedasticity 
+
+## Workbook
+
+## Exercises
+
+
+
+
+The basic version: 
+
+* A positive regression coefficient on $X^2$ corresponds to an U-shaped curve
+* A negative regression coefficient on $X^2$ corresponds to an inverted-U-shaped curve 
+
+
+The more complicated version (requires calculus): finding the roots of the polynomial in terms of the model parameters 
+
+
+
+
+
+Solving the last equation for zero shows that the ”bend” occurs at: 
+
+
+

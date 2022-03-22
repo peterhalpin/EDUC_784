@@ -3,7 +3,7 @@
 ```{r, echo = F}
 # Clean up check
 rm(list = ls())
-#detach(NELS)
+detach(NELS)
 detach(ecls)
 
 button <-  "position: relative; 
@@ -26,7 +26,7 @@ Whenever we transform a $Y$ variable in a regression model, it always has three 
 * The (non-)linearity of its relationship with predictor variables.
 * The interpretation of the coefficients the model.  
 
-The big theme of this chapter is that we have to consider all three of these when transforming the $Y$ variable.So, fixing assumption violations using this approach is not always as straightforward as we might hope. In particular, we might find that addressing one problem (e.g., non-normality) can create other  problems (e.g., nonlinearity). 
+The big theme of this chapter is that we have to consider all three of these when transforming the $Y$ variable. So, addressing assumption violations using this approach is not always as straightforward as we might hope. In particular, we might find that addressing one problem (e.g., non-normality) can create other  problems (e.g., nonlinearity). 
 
 Another approach for dealing with assumption violations is to transform one or more of the $X$ variables instead of (or in addition to) the $Y$ variable. These approaches are discussed in the next chapter. 
 
@@ -54,7 +54,7 @@ Some examples:
 * $\log_{10}(1000) = 3$, because $10^3 = 1000$
 * ...
 
-In Figure \@ref(fig:logx) we can see that $\log(x)$ grows much more slowly than $x$. The three values computed above are marked by dashed lines . What this is telling us that "big differences" on $x$ translate into "small differences" on $\log(x)$. For every order of magnitude that $x$ increases (e.g., from 10 to 100, or from 100 to 1000), its log only increases by one unit.  
+In Figure \@ref(fig:logx) we can see that $\log(x)$ grows much more slowly than $x$. The three values computed above are marked by dashed lines. This is telling us that "big differences" on $x$ translate into "small differences" on $\log(x)$. For every order of magnitude that $x$ increases (e.g., from 10 to 100, or from 100 to 1000), its log only increases by one unit.  
 
 ```{r, logx, echo = F, fig.cap = "Log base 10", fig.align = 'center'}
 knitr::include_graphics("images/logx.png", dpi = 150)
@@ -76,7 +76,7 @@ Now that we have seen the basic interpretation and utility of logs, there are a 
 ### Natural logarithm
 The symbol $\log_{10}$ is read "log base 10". In statistics, we almost never use log base 10. Instead we use log base $e$ where $e = 2.7182...$ is called Euler's number. Think of $e$ as a relative of $\pi$ (the ratio of circle's circumference to its diameter). It is an irrational number (i.e., cannot be represented as a ratio) and shows up all over the place. We will see later on that using $\log_e$ makes the interpretation of log-linear regression simpler. Note that in this context, $e$ is not the residual from a regression model -- the interpretation should be clear from context, but just ask a question in class if you are unsure. 
 
-Regardless of which base we use, logs have the same overall compression effect, as shown in Figure \@ref(fig:loge). For example, $\log_{10}(1000) = 3$ and $\log_{e}(1000) \approx 7$ -- both numbers are much smaller than $1000$! The same is true when applied to real data -- in fact, the left hand panel in Figure \@ref(fig:logdata) was computed using $\log_e$. 
+Regardless of which base we use, logs have the same overall compression effect, as shown in Figure \@ref(fig:loge). For example, $\log_{10}(1000) = 3$ and $\log_{e}(1000) \approx 7$ -- both numbers are much smaller than $1000$! The same is true when applied to real data -- in fact, the right hand panel in Figure \@ref(fig:logdata) was computed using $\log_e$. 
 
 ```{r, loge, echo = F, fig.cap = "Log base 10 vs log base e", fig.align = 'center'}
 knitr::include_graphics("images/loge.png", dpi = 150)
@@ -98,7 +98,7 @@ Putting these two equations together, we can see that
 
 \[ e^{\log(100)} = 100. \]
 
-So, taking the log of $100$ gives us $4.60517$, and taking the exponent of $4.60517$ gets us back to the original input, $100$. In general, $e^{\log(x)} = x$. So, exponentiation (i.e., raising something to a power) undoes the logarithm. This undoing is called "inversion" in mathematic.   
+So, taking the log of $100$ gives us $4.60517$, and taking the exponent of $4.60517$ gets us back to the original input, $100$. In general, $e^{\log(x)} = x$. So, exponentiation (i.e., raising something to a power) undoes the logarithm. This undoing is called "inversion" in mathematics.   
 
 From a statistical perspective, the important thing about logs and exponents is that we can always use one to undo the effects of the other. So, if we log transform our $Y$ variable in a regression analysis to make the data more compatible with the model assumptions, we can always undo the log transform afterwards by taking exponents. We will see this trick a lot in what follows -- apply a transform to the data, run the model, then undo the transform to interpret the results. 
 
@@ -566,13 +566,23 @@ exp.b
 **Please write down your interpretation of the transformed regression coefficient for educ in the output above.**
 
 ## Workbook
+```{r, echo=FALSE, results='asis'}
+codefolder::bookdown(init = "hide", style = button)
+```
+
 
 This section collects the questions asked in this chapter. We will discuss these questions in class. If you haven't written down / thought about the answers to these questions  before class, the lesson will not be very useful for you! So, please engage with each question by writing down one or more answers, asking clarifying questions, posing follow up questions, etc. 
 
 
-```{r, echo=FALSE, results='asis'}
-codefolder::bookdown(init = "hide", style = button)
-```
+**Section \@ref(nathe-review-9)**
+
+I'll ask some questions like the following to start class off. Please write down your answers and be prepared to share them in class. 
+
+* $\log_2(8) = ?$
+* $\exp(2.7182) = ?$
+* What is larger, $\log(10)$ or $\exp(10)$? 
+* $\log(\exp(x)) = ?$ 
+
 
 **Section \@ref(distribution-9)**
 
