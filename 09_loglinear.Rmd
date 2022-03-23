@@ -3,7 +3,7 @@
 ```{r, echo = F}
 # Clean up check
 rm(list = ls())
-detach(NELS)
+#detach(NELS)
 detach(ecls)
 
 button <-  "position: relative; 
@@ -371,7 +371,6 @@ Some numerical examples:
 * if $b = 0$, then $Y$ is expected to be the same when $X$ increases by 1 unit (i.e., no relationship)
 * if $b = -.55$, then $Y$ is expected to be 55% as large (45% smaller) when $X$ increases by 1 unit
 
-
 ### A hypothetical example
 
 To get a better idea of how to interpret log-linear regression, let's use a hypothetical example in which we contrast it with linear regression. We will use the followin variables:
@@ -485,14 +484,13 @@ Then take the ratio of $\widehat Y^*$ to $\widehat Y$:
 
 \[ \frac{\widehat Y^*}{\widehat Y} = \exp(b) \]
 
-
 ## Worked example {#worked-example-9} 
 
 ```{r, echo=FALSE, results='asis'}
 codefolder::bookdown(init = "hide", style = button)
 ```
 
-This section works through log-linear regression using the `Wages.Rdata` example data set (source: Weinberg & Abramowitz (2017) Statistics using Stata: An integrative approach. Cambridge University Press). The dataset was collected from 200 individuals in 1985 and contains the following variables.   
+This section works through log-linear regression using the `Wages.Rdata` example data set (source: Weinberg & Abramowitz (2017) Statistics using Stata: An integrative approach. Cambridge University Press). The dataset was collected from 400 individuals in 1985 and contains the following variables.   
 
 ```{r}
 # Load the data and take a look
