@@ -4,7 +4,7 @@
 # Clean up check
 rm(list = ls())
 #detach(NELS)
-detach(ecls)
+#detach(ecls)
 
 button <-  "position: relative; 
             top: -25px; 
@@ -572,7 +572,7 @@ codefolder::bookdown(init = "hide", style = button)
 This section collects the questions asked in this chapter. We will discuss these questions in class. If you haven't written down / thought about the answers to these questions  before class, the lesson will not be very useful for you! So, please engage with each question by writing down one or more answers, asking clarifying questions, posing follow up questions, etc. 
 
 
-**Section \@ref(nathe-review-9)**
+**Section \@ref(math-review-9)**
 
 I'll ask some questions like the following to start class off. Please write down your answers and be prepared to share them in class. 
 

@@ -308,7 +308,6 @@ with(subset(wages, educ <= 12), lines(educ, fitted))
 detach(wages)
 ```
 
-
 ### The piecewise model
 
 We have reasoned that the relationship between wages and education might change as a function whether or not people have a post-secondary education. We also noted that this sounds a lot like an interaction (because it is!), which is the basic approach we can use to create piecewise models. 
@@ -339,7 +338,7 @@ Below is the summary output for the piecewise model, as well as the diagnostic p
   
 You can also use the  `emtrends` functions to test the simple slopes (Section \@ref(inference-for-interactions-6)). Note that the intercept and main effect of the binary variable `educ12` are not of much interest in this application. 
 
-**Please take a moment to write down your interpretation of the model, both its diagnostics and the model parameters, and be prepared to share your answers in class.**
+**Please take a moment to write down your interpretation of the results, both the diagnostics and the parameter estimates, and be prepared to share your answers in class.**
 
 ```{r}
 
@@ -352,8 +351,208 @@ plot(mod4, 2, col = "#4B9CD3")
 
 ## Heteroskedasticity 
 
+This short section will be added before class on March 31 and the content will be covered during class time
+
 ## Workbook
+
+```{r, echo=FALSE, results='asis'}
+codefolder::bookdown(init = "hide", style = button)
+```
+
+This section collects the questions asked in this chapter. We will discuss these questions in class. If you haven't written down / thought about the answers to these questions  before class, the lesson will not be very useful for you! So, please engage with each question by writing down one or more answers, asking clarifying questions, posing follow up questions, etc. 
+
+**Section \@ref(polynomial-10)**
+
+* Please take a moment to write down your intuitions about what is going in the right-hand panel of the figure below and whether this model really is better than the one in the middle panel. I will ask you to share your thoughts in class.**
+
+```{r, echo = F, fig.cap = "Polynomial Regression Examples", fig.align = 'center', fig.width = 12}
+# Generate data
+set.seed(1)
+X <- sort(runif(20, -2, 2))
+e <- rnorm(20, 0, .5)
+Y <- 2 + X - X^2 + e
+
+# Three regression models
+mod1 <- lm(Y ~ X)
+mod2 <- lm(Y ~ poly(X, 2))
+mod3 <- lm(Y ~ poly(X, 16))
+
+# Plots
+par(mfrow = c(1, 3)) 
+
+title1 <- paste0("R-squared = ", round(summary(mod1)$r.square, 3))
+plot(X, Y, col = "#4B9CD3", pch = 10, lwd = 5, main = title1)
+points(X, fitted(mod1), col = 1, type = "l", lwd = 2)
+
+title2 <- paste0("R-squared = ", round(summary(mod2)$r.square, 3))
+plot(X, Y, col = "#4B9CD3", pch = 10, lwd = 5, main = title2)
+points(X, fitted(mod2), col = 2, type = "l", lwd = 2)
+
+title3 <- paste0("R-squared = ", round(summary(mod3)$r.square, 3))
+plot(X, Y, col = "#4B9CD3", pch = 10, lwd = 5, main = title3)
+points(X, fitted(mod3), col = 3, type = "l", lwd = 2)
+```
+
+* Please use both the "basic" and "more complicated" interpretation of a quadratic relationship to describe the Yerkes-Dodson Law.
+
+```{r, echo = F, fig.cap = "Yerkes-Dodson Law (Source: Wikipedia)", fig.align = 'center'}
+knitr::include_graphics("images/YerkesDodson.png", dpi = 75)
+```
+
+**Section \@ref(worked-example-10)**
+
+* What is your interpretation of the log-linear model with the quadratic term for education included (below)? Does this address the non-linear relationship observed in the log-linear model? What would you do next?
+
+```{r}
+attach(wages)
+log_wage <- log(wage + 1)
+mod2 <- lm(log_wage ~ poly(educ, 2))
+par(mfrow = c(1,2))
+plot(educ, log_wage, col = "#4B9CD3")
+
+# To plot the trend we need to we first need to order the data and the predicted values ... 
+sort_educ <- educ[order(educ)]
+sort_fitted<- fitted(mod2)[order(educ)]
+points(sort_educ, sort_fitted, type = "l")
+
+plot(mod2, 1, col = "#4B9CD3")
+summary(mod2)
+detach(wages)
+```
+
+**Section \@ref(piecewise-10)**
+
+* Please take a moment to work out the interpretation of $b_1$ and $b_3$ in the model below, using the same approach as Section \@ref(binary-continuous-interaction-6). (The interpretation of $b_0$ and $b_2$ is not very interesting but you can work them out too if you like.)
+
+\[ \text{educ12} = \left\{ \begin{matrix}  
+                     1 & \text{if educ } > 12\\ 
+                    0 & \text{if educ } \leq 12 
+                \end{matrix} \right.
+\]
+
+\[ \widehat Y = b_0 + b_1\text{educ} + b_2\text{educ12} + b_3 (\text{educ} \times \text{educ12}) \]
+
+
+* The diagnostics plots and parameter estimates for the piecewise model are presented below. Please provide an overall interpretation of the results and be prepared to share your answers in class. 
+
+```{r}
+
+summary(mod4)
+emmeans::emtrends(mod4, specs = "educ12", var = "educ")
+par(mfrow = c(1, 2))
+plot(mod4, 1, col = "#4B9CD3")
+plot(mod4, 2, col = "#4B9CD3")
+```
 
 ## Exercises
 
+This section collects the code from Section \@ref(worked-example-10) and Section \@ref(piecewise-10) and your can refer to those sections for more details on interpretation. 
 
+You'll see that some of the plots below require a lot of fiddling about, especially for the piecewise regression model. We will cover some tricks and shortcuts for producing these types plots during the open lab sessions for Assignment 4. So don't worry too much about the complicated-looking coded for the plots at this point! 
+
+Let's start with the "Vanella" log-linear model for the wages examples 
+
+```{r}
+# Load the data and take a look
+load("Wages.RData")
+attach(wages)
+
+# Create log transform of wage
+log_wage <- log(wage + 1)
+
+# Regress it on educ
+mod1 <- lm(log_wage ~ educ)
+
+# Check out model fit
+par(mfrow = c(1,2))
+plot(educ, log_wage, col = "#4B9CD3")
+abline(mod1)
+plot(mod1, 1, col = "#4B9CD3")
+```
+
+Because there is one prominent bend in our residual vs fitted plot of the log-linear model (at $\hat Y \approx 2.1$), let's see if adding a quadratic term to the model can improve the model fit. 
+
+The `poly` function in `R` makes it  easy to do polynomial regression, without having to hard-code new variables like `educ^2` into our dataset. This function automatically uses orthogonal (uncorrelated) polynomials, so we don't have to worry about centering, either. The basic interpretation of the model coefficients in an orthogonal polynomial regression is the same as discussed in Section \@ref(polynomial-10), but the "more complicated" interpretation of the model parameters is not straightforward. To find out more, use `help(poly)`.
+
+The diagnostic plots for the log-linear model with a quadratic term included for education is shown below, along with the model summary. In the output, `poly(educ, 2)n` is the $n$-th degree term in the polynomial. 
+
+```{r}
+# Regress log_wage on a quadratic function of eduction 
+mod2 <- lm(log_wage ~ poly(educ, 2))
+
+# Model output
+summary(mod2)
+
+# Diagnostic plots
+par(mfrow = c(1,2))
+
+# scatter plot with trend
+plot(educ, log_wage, col = "#4B9CD3")
+# order the data and the predicted values ... 
+sort_educ <- educ[order(educ)]
+sort_fitted <- fitted(mod2)[order(educ)]
+points(sort_educ, sort_fitted, type = "l")
+
+# residual versus fitted
+plot(mod2, 1, col = "#4B9CD3")
+```
+
+Using the same approach for the cubic model: 
+
+
+```{r}
+mod3 <- lm(log_wage ~ poly(educ, 3))
+summary(mod3)
+
+# Same plots as above, reusing variable names here
+par(mfrow = c(1,2))
+plot(educ, log_wage, col = "#4B9CD3")
+sort_fitted <- fitted(mod3)[order(educ)]
+points(sort_educ, sort_fitted, type = "l")
+plot(mod3, 1, col = "#4B9CD3")
+```
+
+And finally, the piecewise model from Section \@ref(piecewise-10)
+
+
+```{r, fig.cap = "The wages example", fig.align = 'center'}
+# Create a dummy variable indicating if education is at least 12 years or more
+educ12 <- (educ > 12)*1
+
+# Interact the dummy with educ
+mod4 <- lm(log(wage + 1) ~ educ*educ12) 
+
+# The model output
+summary(mod4)
+
+# The simple trends
+emmeans::emtrends(mod4, specs = "educ12", var = "educ")
+
+# The diagnostic plots
+par(mfrow = c(1, 2))
+plot(mod4, 1, col = "#4B9CD3")
+plot(mod4, 2, col = "#4B9CD3")
+
+
+# Building the piecewise regression plot -- yeeesh
+
+# Add fitted values to dataset
+wages$fitted <- fitted(mod4)
+
+# Sort data on educ
+wages <- wages[order(educ), ]
+
+# Plot
+par(mfrow = c(1, 1))
+plot(educ, log(wage + 1), col = "#4B9CD3")
+
+# Change color for the points with educ ≤ 12
+with(subset(wages, educ <= 12), points(educ, log(wage + 1)))
+
+# Plot the predicted values for educ > 12
+with(subset(wages, educ > 12), lines(educ, fitted, col = "#4B9CD3"))
+
+# Plot the predicted values for educ ≤ 12
+with(subset(wages, educ <= 12), lines(educ, fitted))
+detach(wages)
+```
