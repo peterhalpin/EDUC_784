@@ -292,3 +292,13 @@ relation-with-beta-weights
 some-math
 interpreting-the-model
 fig:unnamed-chunk-16
+fig:unnamed-chunk-10
+fig:unnamed-chunk-11
+fig:unnamed-chunk-17-1
+fig:unnamed-chunk-17-2
+fig:piecewise3
+fig:unnamed-chunk-9
+fig:unnamed-chunk-16-1
+fig:unnamed-chunk-16-2
+eq:se-10
+fig:unnamed-chunk-17

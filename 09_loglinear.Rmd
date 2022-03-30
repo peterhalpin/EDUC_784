@@ -325,7 +325,6 @@ As we discuss in the next chapter, we can address non-linearity of regression by
 codefolder::bookdown(init = "hide", style = button)
 ```
 
-
 The final point about the log-linear model is how it affects the interpretation of the model parameters. For example, in linear regression we know what a $b$-unit increase in $Y$ means -- but how to we interpret a $b$-unit increase in $\log(Y)$? This is definitely the most important point about the log transformation, which is why we saved it for last. 
 
 In general, one of the main shortcomings of "transforming your data" is that it can lead to uninformative or unclear interpretations of model parameters. If the results don't make sense, its not much of a consolation to know that the assumptions looked OK! 

@@ -19,7 +19,7 @@ button <-  "position: relative;
 
 This chapter collects some other useful techniques for addressing assumption violations in linear regression.  
 
-One approach involves transforming the $X$-variable(s), which can be done instead of (or in addition to) transforming the $Y$ variable. This approach is used to address violations of the assumption of linearity, and this chapter will cover two widely-used techniques 
+One approach involves transforming the $X$-variable(s), which can be done in addition to (or instead of) transforming the $Y$ variable. This approach is used to address violations of the assumption of linearity, and this chapter will cover two widely-used techniques 
 
 * Polynomial regression, which means raising $X$-variables to a power (e.g., $X^2$ and $X^3$), and 
 * Piecewise or segmented regression, which involves using different regression lines over different ranges of a predictor. 
@@ -158,13 +158,13 @@ the value of $X$ that corresponds to the maximum (or minumum) of the quadratic c
 
 \[ X = \frac{-b_1}{2 b_2} \]
 
-Here is hint for the following question: In the Yerkes-Dodson law, when the $X$ variable is centered, the regression coefficient for the linear term is not statistically significant. 
+Here is a hint for the following question: In the Yerkes-Dodson law, when the $X$ variable is centered, the regression coefficient for the linear term is not statistically significant. 
 
 **Based on this  discussion, please use both the "basic" and "more complicated" interpretation of a quadratic relationship to describe the Yerkes-Dodson Law.** 
 
 ### Model building
 
-Up to this point we have discussed the interpretation of polynomials. Now we consider how to build polynomial regression models in practice. A typical model building process for polynomial regression might proceed as follows. 
+Up to this point we have discussed the interpretation of polynomials. Now we consider how to build polynomial regression models in practice. A typical model-building process for polynomial regression might proceed as follows. 
 
 1. Enter the linear terms into the model and then examine a residual versus fitted plot. 
 
@@ -310,9 +310,7 @@ detach(wages)
 
 ### The piecewise model
 
-We have reasoned that the relationship between wages and education might change as a function whether or not people have a post-secondary education. We also noted that this sounds a lot like an interaction (because it is!), which is the basic approach we can use to create piecewise models. 
-
-Note that there are more complex approaches that will search for breakpoints, or can be used to smoothly connect polynomial regressions rather than linear regressions, etc. We won't cover these more complex approaches here, but check out the following resource if you are interested and feel free to ask questions in class: https://rpubs.com/MarkusLoew/12164
+We have reasoned that the relationship between wages and education might change as depending on whether people have a post-secondary education. We also noted that this sounds a lot like an interaction (because it is!), which is the basic approach we can use to create piecewise models. 
 
 In order to run our basic piecewise regression, we need to create a dummy coded version of education that indicates whether the participant had more than 12 years education: 
 
@@ -328,6 +326,9 @@ The we just create an interaction model for `educ` and the dummy-coded indicator
 
 **Please take a moment to work out the interpretation of $b_1$ and $b_3$ in the model above, using the same approach as Section \@ref(binary-continuous-interaction-6). (The interpretation of $b_0$ and $b_2$ is not very interesting but you can work them out too if you like.)**
 
+Note that there are more complex approaches that will search for breakpoints, or can be used to smoothly connect polynomial regressions rather than linear regressions, etc. We won't cover these more complex approaches here, but check out the following resource if you are interested and feel free to ask questions in class: https://rpubs.com/MarkusLoew/12164
+
+
 ### Back to the example
 
 Below is the summary output for the piecewise model, as well as the diagnostic plots. You should be able to come up with a viable interpretation of the model output, based on 
@@ -340,7 +341,7 @@ You can also use the  `emtrends` functions to test the simple slopes (Section \@
 
 **Please take a moment to write down your interpretation of the results, both the diagnostics and the parameter estimates, and be prepared to share your answers in class.**
 
-```{r}
+```{r, piecewise3, echo = F, fig.cap = "The Wages Example", fig.align = 'center'}
 
 summary(mod4)
 emmeans::emtrends(mod4, specs = "educ12", var = "educ")
@@ -351,7 +352,37 @@ plot(mod4, 2, col = "#4B9CD3")
 
 ## Heteroskedasticity 
 
-This short section will be added before class on March 31 and the content will be covered during class time
+Heteroskedasticity in linear regression, and corrections thereof, is a pretty big topic in the methodological literature (see Cite:fox).  In this section we are just going to discuss one widely used solution, and how to implement it in `R`. 
+
+In terms of our example, we can see in the residual versus fitted plot in Figure \@ref(fig:piecewise3) that the residuals are less spread out for lower ranges of the fitted values (i.e., for $<12$ years of educ). As mentioned previously, heteroskedasticity will affect the standard errors of the regression coefficients, and consequently the t-tests, p-values, and confidence intervals. What this means is that the p-values for the regression coefficients will be wrong (usually too small) if the data are heteroskedastic but we mistakenly assume they are homoskedastic. Note that heteroskedasticity won't affect the estimated values of the coefficients (i.e., the $\widehat{b}$'s, and also doesn't affect R-squared or its F-test. 
+
+
+"Heteroskedasticity-corrected" (HC) standard errors do not assume the data homoskedastic. Technically, they can be used regardless of whether the homoskedasticity assumption is met. But, when the data are homoskedastic, the "regular" OLS standard errors are more efficient (i.e., precise). So, we usually don't want to make the correction unless there is evidence of heteroskedasticity in the data. HC standard errors are also sometimes called heteroskedasticity-consistent, heteroskedastcicity-robust, or just robust.  
+
+There are many different version of HC standard errors, but they are all equivalent with "large" samples. The simplest version is (see cite:Wooldridge)
+
+\[ \text{HCSE}_{\hat{b}_j} = \sqrt{\frac{\sum_{i=1}^N (X_{ij} - \widehat{X}_{ij})^2 (Y_i-\widehat{Y}_i)^2} {\sum_{i=1}^N (X_{ij} - \bar X_j)^2 (1 - R^2_j)}}
+(\#eq:se-10)
+\] 
+
+In this equation, $\widehat{X}_{ij}$ is the predicted value that results from regressing $X_j$ on the remaining $J-1$ predictors. Comparing this equation to Equation  \@ref(eq:se-4), the main difference is that the $(1 - R^2)$ term for the $Y$ variable is now replaced with a crossproduct of residuals for the $X_j$ and $Y$ variables. The equation is not very intuitive to look at, but the general idea is that it can be derived without assuming homoskedasticity. 
+
+The procedure for using HC standard errors in R has two steps. First, we estimate the HC standard errors. Then, we use the HC standard errors to compute the correct t-tests and p-values (or confidence intervals).  The following example shows how to implement HC standard errors in R, using the piecewise regression from Section \@ref(piecewise-10). wages example
+The code is shown by default, because the main thing about this example is to see how it works in R -- you already know how to interpret SEs, t-tests, p-values, etc. Your will need two packages installed -- `car` and `lmtest` -- for this example to work. 
+
+```{r}
+# Make sure the required pacakges are installed
+# install.packages("car")
+# install.packages("lmtest")
+
+# Step 1. Use "hccm" to get the HC SEs for our piecewise model 
+hcse <- car::hccm(mod4)
+
+## Step 2. Use "coeftest" to compute t-tests with the HC SEs
+lmtest::coeftest(mod4, hcse)
+```
+
+This example is a bit unusual in the sense that the HC standard errors were actually a bit smaller than the regular OLS standard errors (see the output in Section \@ref(piecewise-4)) -- more often the opposite is true. Nonetheless, you should have no problems interpreting the output above.  
 
 ## Workbook
 
@@ -512,7 +543,7 @@ points(sort_educ, sort_fitted, type = "l")
 plot(mod3, 1, col = "#4B9CD3")
 ```
 
-And finally, the piecewise model from Section \@ref(piecewise-10)
+Moving on, let's consider the piecewise model from Section \@ref(piecewise-10)
 
 
 ```{r, fig.cap = "The wages example", fig.align = 'center'}
@@ -532,8 +563,21 @@ emmeans::emtrends(mod4, specs = "educ12", var = "educ")
 par(mfrow = c(1, 2))
 plot(mod4, 1, col = "#4B9CD3")
 plot(mod4, 2, col = "#4B9CD3")
+```
 
+We can still see some evidence of heteroskedasticity in the residual versus fitted plot, so the last step is to use heteroskedasticity-corrected standard errors to ensure we are making the right conclusions about statistical significance
 
+```{r}
+# Step 1. Use "hccm" to get the HC SEs for our piecewise model 
+hcse <- car::hccm(mod4)
+
+## Step 2. Use "coeftest" to compute t-tests with the HC SEs
+lmtest::coeftest(mod4, hcse)
+```
+
+The next bit is optional. It shows how to produce the piecewise regression plot, which takes quite a bit of messing about with R...Let me know if you find an easier way to do this (in base R). 
+
+```{r}
 # Building the piecewise regression plot -- yeeesh
 
 # Add fitted values to dataset
