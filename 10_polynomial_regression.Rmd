@@ -350,7 +350,7 @@ plot(mod4, 1, col = "#4B9CD3")
 plot(mod4, 2, col = "#4B9CD3")
 ```
 
-## Heteroskedasticity 
+## Heteroskedasticity {#heteroskedasticity-10}
 
 Heteroskedasticity in linear regression, and corrections thereof, is a pretty big topic in the methodological literature (see Cite:fox).  In this section we are just going to discuss one widely used solution, and how to implement it in `R`. 
 
@@ -367,22 +367,23 @@ There are many different version of HC standard errors, but they are all equival
 
 In this equation, $\widehat{X}_{ij}$ is the predicted value that results from regressing $X_j$ on the remaining $J-1$ predictors. Comparing this equation to Equation  \@ref(eq:se-4), the main difference is that the $(1 - R^2)$ term for the $Y$ variable is now replaced with a crossproduct of residuals for the $X_j$ and $Y$ variables. The equation is not very intuitive to look at, but the general idea is that it can be derived without assuming homoskedasticity. 
 
-The procedure for using HC standard errors in R has two steps. First, we estimate the HC standard errors. Then, we use the HC standard errors to compute the correct t-tests and p-values (or confidence intervals).  The following example shows how to implement HC standard errors in R, using the piecewise regression from Section \@ref(piecewise-10). wages example
+The procedure for using HC standard errors in R has two steps. First, we estimate the HC standard errors. Then, we use the HC standard errors to compute the correct t-tests and p-values (or confidence intervals).  The following example shows how to implement HC standard errors in R, using the piecewise regression from Section \@ref(piecewise-10) wages example.
+
 The code is shown by default, because the main thing about this example is to see how it works in R -- you already know how to interpret SEs, t-tests, p-values, etc. Your will need two packages installed -- `car` and `lmtest` -- for this example to work. 
 
 ```{r}
-# Make sure the required pacakges are installed
+## Make sure the required pacakges are installed
 # install.packages("car")
 # install.packages("lmtest")
 
 # Step 1. Use "hccm" to get the HC SEs for our piecewise model 
 hcse <- car::hccm(mod4)
 
-## Step 2. Use "coeftest" to compute t-tests with the HC SEs
+# Step 2. Use "coeftest" to compute t-tests with the HC SEs
 lmtest::coeftest(mod4, hcse)
 ```
 
-This example is a bit unusual in the sense that the HC standard errors were actually a bit smaller than the regular OLS standard errors (see the output in Section \@ref(piecewise-4)) -- more often the opposite is true. Nonetheless, you should have no problems interpreting the output above.  
+This example is a bit unusual because the HC standard errors were actually a bit smaller than the regular OLS standard errors (see the output in Section \@ref(piecewise-10)) -- more often the opposite is true. Nonetheless, you should have no problems interpreting the output above.  
 
 ## Workbook
 
@@ -568,10 +569,14 @@ plot(mod4, 2, col = "#4B9CD3")
 We can still see some evidence of heteroskedasticity in the residual versus fitted plot, so the last step is to use heteroskedasticity-corrected standard errors to ensure we are making the right conclusions about statistical significance
 
 ```{r}
+## Make sure the required pacakges are installed
+# install.packages("car")
+# install.packages("lmtest")
+
 # Step 1. Use "hccm" to get the HC SEs for our piecewise model 
 hcse <- car::hccm(mod4)
 
-## Step 2. Use "coeftest" to compute t-tests with the HC SEs
+# Step 2. Use "coeftest" to compute t-tests with the HC SEs
 lmtest::coeftest(mod4, hcse)
 ```
 

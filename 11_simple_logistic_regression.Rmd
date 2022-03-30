@@ -1,0 +1,24 @@
+# Simple Logistic Regression {#chapter-11}
+
+```{r, echo = F}
+# Clean up check
+rm(list = ls())
+#detach(NELS)
+
+button <-  "position: relative; 
+            top: -25px; 
+            left: 85%;   
+            color: white;
+            font-weight: bold;
+            background: #4B9CD3;
+            border: 1px #3079ED solid;
+            box-shadow: inset 0 1px 0 #80B0FB"
+```
+
+The last topic we address in this course logistic regression. Like the previous two chapters, logistic regression is an extension of multiple linear regression to situations that the model does not directly apply. This time, the extension is to binary *outcome* variables. This same approach extends to categorical outcome variables, and extensions will be noted where they are relevant. 
+
+The move to binary outcome variables is a big one. Everything we have done up until now has focused on OLS regression, using the same basic principles we discussed in Chapters \@ref(chapter-2) and \@ref(chapter-4). However, logistic regression takes us into the wider framework of *generalized linear models* (GLMs), which are estimated using maximum likelihood (ML) rather than OLS. Thus we will need to start at the "ground floor" to build up our knowledge of logistic regression, which then provides a stepping stone to (GLMs), which can additionally handle other types of outcomes (count  and other non-negative data, binary, ordered categorical). 
+
+Although we will focus on logistic regression, it should be noted that researchers who have a strong preference for OLS methods often approach binary data using the "linear probability model" which is essentially just OLS with the binary outcome. This approach violates all of the assumptions of linear regression, yet surprising can provide     
+
+Because we are starting at the ground up, this chapter will 

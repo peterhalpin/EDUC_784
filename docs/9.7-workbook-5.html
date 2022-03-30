@@ -24,7 +24,7 @@
 <meta name="author" content="Peter Halpin" />
 
 
-<meta name="date" content="2022-03-23" />
+<meta name="date" content="2022-03-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -216,15 +216,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.5.1" data-path="4.5-interpretation-4.html"><a href="4.5-interpretation-4.html#holding-the-other-predictor-constant"><i class="fa fa-check"></i><b>4.5.1</b> “Holding the other predictor constant”</a></li>
 <li class="chapter" data-level="4.5.2" data-path="4.5-interpretation-4.html"><a href="4.5-interpretation-4.html#controlling-for-the-other-predictor"><i class="fa fa-check"></i><b>4.5.2</b> “Controlling for the other predictor”</a></li>
 <li class="chapter" data-level="4.5.3" data-path="4.5-interpretation-4.html"><a href="4.5-interpretation-4.html#the-ecls-example"><i class="fa fa-check"></i><b>4.5.3</b> The ECLS example</a></li>
-<li class="chapter" data-level="4.5.4" data-path="4.5-interpretation-4.html"><a href="4.5-interpretation-4.html#other-interpretations"><i class="fa fa-check"></i><b>4.5.4</b> Other interpretations</a></li>
 </ul></li>
 <li class="chapter" data-level="4.6" data-path="4.6-beta-4.html"><a href="4.6-beta-4.html"><i class="fa fa-check"></i><b>4.6</b> Standardized coefficients</a></li>
 <li class="chapter" data-level="4.7" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html"><i class="fa fa-check"></i><b>4.7</b> (Multiple) R-squared</a>
 <ul>
 <li class="chapter" data-level="4.7.1" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html#the-multiple-correlation"><i class="fa fa-check"></i><b>4.7.1</b> The multiple correlation</a></li>
 <li class="chapter" data-level="4.7.2" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html#relation-with-simple-regression"><i class="fa fa-check"></i><b>4.7.2</b> Relation with simple regression</a></li>
-<li class="chapter" data-level="4.7.3" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html#relation-with-beta-weights"><i class="fa fa-check"></i><b>4.7.3</b> Relation with <span class="math inline">\(\beta\)</span>-weights</a></li>
-<li class="chapter" data-level="4.7.4" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html#adjusted-r-squared"><i class="fa fa-check"></i><b>4.7.4</b> Adjusted R-squared</a></li>
+<li class="chapter" data-level="4.7.3" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html#adjusted-r-squared"><i class="fa fa-check"></i><b>4.7.3</b> Adjusted R-squared</a></li>
 </ul></li>
 <li class="chapter" data-level="4.8" data-path="4.8-inference-for-slopes-4.html"><a href="4.8-inference-for-slopes-4.html"><i class="fa fa-check"></i><b>4.8</b> Inference for the slopes</a>
 <ul>
@@ -248,8 +246,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.3" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html"><i class="fa fa-check"></i><b>5.3</b> Binary predictors</a>
 <ul>
 <li class="chapter" data-level="5.3.1" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html#relation-with-t-tests"><i class="fa fa-check"></i><b>5.3.1</b> Relation with t-tests</a></li>
-<li class="chapter" data-level="5.3.2" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html#some-math"><i class="fa fa-check"></i><b>5.3.2</b> Some math*</a></li>
-<li class="chapter" data-level="5.3.3" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html#summary"><i class="fa fa-check"></i><b>5.3.3</b> Summary</a></li>
+<li class="chapter" data-level="5.3.2" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html#summary"><i class="fa fa-check"></i><b>5.3.2</b> Summary</a></li>
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="5.4-reference-group-coding-5.html"><a href="5.4-reference-group-coding-5.html"><i class="fa fa-check"></i><b>5.4</b> Reference-group coding</a>
 <ul>
@@ -508,8 +505,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>What do you think about the example given in the Figure below. Is addressing the normality assumption “worth it?” Why or why not?</li>
 </ul>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-16"></span>
-<img src="_main_files/figure-html/unnamed-chunk-16-1.png" alt="Nonlinear vs non-normality when log transforming Y" width="672" />
+<pre><code>## The following objects are masked from ecls (pos = 4):
+## 
+##     c1fmotor, c1gmotor, c1rgscal, c1rgtsco, c1rmscal, c1rmtsco,
+##     c1rrscal, c1rrtsco, c2rgscal, c2rgtsco, c2rmscal, c2rmtsco,
+##     c2rrscal, c2rrtsco, c3rgscal, c3rgtsco, c3rmscal, c3rmtsco,
+##     c3rrscal, c3rrtsco, c4rgscal, c4rgtsco, c4rmscal, c4rmtsco,
+##     c4rrscal, c4rrtsco, caseid, gender, p1build, p1center, p1chlboo,
+##     p1chores, p1chsesa, p1contro, p1count, p1disabl, p1expect,
+##     p1firkdg, p1games, p1helpar, p1hfamil, p1hrsprk, p1htotal, p1learn,
+##     p1letter, p1nature, p1pencil, p1readbo, p1singso, p1social,
+##     p1sport, p1still, p1tellst, p1verbal, p2bktog, p2burglr, p2drug,
+##     p2garbag, p2librar, p2safepl, p2vacant, p2violen, plshare, race,
+##     s2kpupri, t1contro, t1extern, t1intern, t1interp, t1learn, wkdaded,
+##     wklangst, wkmomed, wksesl, wksesq5</code></pre>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-182"></span>
+<img src="_main_files/figure-html/unnamed-chunk-182-1.png" alt="Nonlinear vs non-normality when log transforming Y" width="672" />
 <p class="caption">
 Figure 9.15: Nonlinear vs non-normality when log transforming Y
 </p>
@@ -529,41 +540,41 @@ Figure 9.15: Nonlinear vs non-normality when log transforming Y
 <ul>
 <li>Please take a moment to write down your interpretation of the regression coefficient for <code>educ</code> in the summary output below.</li>
 </ul>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="9.7-workbook-5.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(wages)</span>
-<span id="cb11-2"><a href="9.7-workbook-5.html#cb11-2" aria-hidden="true" tabindex="-1"></a>log_wage <span class="ot">&lt;-</span> <span class="fu">log</span>(wage <span class="sc">+</span> <span class="dv">1</span>)</span>
-<span id="cb11-3"><a href="9.7-workbook-5.html#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-4"><a href="9.7-workbook-5.html#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Regress it on educ</span></span>
-<span id="cb11-5"><a href="9.7-workbook-5.html#cb11-5" aria-hidden="true" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(log_wage <span class="sc">~</span> educ)</span>
-<span id="cb11-6"><a href="9.7-workbook-5.html#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod2)</span></code></pre></div>
+<div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb337-1"><a href="9.7-workbook-5.html#cb337-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(wages)</span>
+<span id="cb337-2"><a href="9.7-workbook-5.html#cb337-2" aria-hidden="true" tabindex="-1"></a>log_wage <span class="ot">&lt;-</span> <span class="fu">log</span>(wage <span class="sc">+</span> <span class="dv">1</span>)</span>
+<span id="cb337-3"><a href="9.7-workbook-5.html#cb337-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb337-4"><a href="9.7-workbook-5.html#cb337-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Regress it on educ</span></span>
+<span id="cb337-5"><a href="9.7-workbook-5.html#cb337-5" aria-hidden="true" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(log_wage <span class="sc">~</span> educ)</span>
+<span id="cb337-6"><a href="9.7-workbook-5.html#cb337-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod2)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = log_wage ~ educ)
 ## 
 ## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -1.07475 -0.35961  0.02614  0.31244  1.18163 
+##     Min      1Q  Median      3Q     Max 
+## -1.0747 -0.3596  0.0261  0.3124  1.1816 
 ## 
 ## Coefficients:
 ##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept) 1.188730   0.102328   11.62   &lt;2e-16 ***
-## educ        0.074802   0.007263   10.30   &lt;2e-16 ***
+## (Intercept)  1.18873    0.10233    11.6   &lt;2e-16 ***
+## educ         0.07480    0.00726    10.3   &lt;2e-16 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 0.4234 on 398 degrees of freedom
-## Multiple R-squared:  0.2104, Adjusted R-squared:  0.2085 
-## F-statistic: 106.1 on 1 and 398 DF,  p-value: &lt; 2.2e-16</code></pre>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="9.7-workbook-5.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(wages)</span></code></pre></div>
+## Residual standard error: 0.423 on 398 degrees of freedom
+## Multiple R-squared:  0.21,   Adjusted R-squared:  0.208 
+## F-statistic:  106 on 1 and 398 DF,  p-value: &lt;2e-16</code></pre>
+<div class="sourceCode" id="cb339"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb339-1"><a href="9.7-workbook-5.html#cb339-1" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(wages)</span></code></pre></div>
 <ul>
 <li>Please write down your interpretation of the transformed regression coefficient for educ in the output below</li>
 </ul>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="9.7-workbook-5.html#cb14-1" aria-hidden="true" tabindex="-1"></a>conf.b <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="fu">coef</span>(mod2), <span class="fu">confint</span>(mod2))</span>
-<span id="cb14-2"><a href="9.7-workbook-5.html#cb14-2" aria-hidden="true" tabindex="-1"></a>exp.b <span class="ot">&lt;-</span> <span class="fu">exp</span>(conf.b) <span class="sc">-</span> <span class="dv">1</span></span>
-<span id="cb14-3"><a href="9.7-workbook-5.html#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(exp.b)[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;exp - 1&quot;</span>)</span>
-<span id="cb14-4"><a href="9.7-workbook-5.html#cb14-4" aria-hidden="true" tabindex="-1"></a>exp.b</span></code></pre></div>
-<pre><code>##                exp - 1    2.5 %     97.5 %
-## (Intercept) 2.28290936 1.684672 3.01445400
-## educ        0.07767034 0.062393 0.09316737</code></pre>
+<div class="sourceCode" id="cb340"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb340-1"><a href="9.7-workbook-5.html#cb340-1" aria-hidden="true" tabindex="-1"></a>conf.b <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="fu">coef</span>(mod2), <span class="fu">confint</span>(mod2))</span>
+<span id="cb340-2"><a href="9.7-workbook-5.html#cb340-2" aria-hidden="true" tabindex="-1"></a>exp.b <span class="ot">&lt;-</span> <span class="fu">exp</span>(conf.b) <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb340-3"><a href="9.7-workbook-5.html#cb340-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(exp.b)[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;exp - 1&quot;</span>)</span>
+<span id="cb340-4"><a href="9.7-workbook-5.html#cb340-4" aria-hidden="true" tabindex="-1"></a>exp.b</span></code></pre></div>
+<pre><code>##             exp - 1   2.5 %  97.5 %
+## (Intercept) 2.28291 1.68467 3.01445
+## educ        0.07767 0.06239 0.09317</code></pre>
 </div>
             </section>
 

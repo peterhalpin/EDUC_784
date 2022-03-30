@@ -24,7 +24,7 @@
 <meta name="author" content="Peter Halpin" />
 
 
-<meta name="date" content="2022-03-23" />
+<meta name="date" content="2022-03-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -216,15 +216,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.5.1" data-path="4.5-interpretation-4.html"><a href="4.5-interpretation-4.html#holding-the-other-predictor-constant"><i class="fa fa-check"></i><b>4.5.1</b> “Holding the other predictor constant”</a></li>
 <li class="chapter" data-level="4.5.2" data-path="4.5-interpretation-4.html"><a href="4.5-interpretation-4.html#controlling-for-the-other-predictor"><i class="fa fa-check"></i><b>4.5.2</b> “Controlling for the other predictor”</a></li>
 <li class="chapter" data-level="4.5.3" data-path="4.5-interpretation-4.html"><a href="4.5-interpretation-4.html#the-ecls-example"><i class="fa fa-check"></i><b>4.5.3</b> The ECLS example</a></li>
-<li class="chapter" data-level="4.5.4" data-path="4.5-interpretation-4.html"><a href="4.5-interpretation-4.html#other-interpretations"><i class="fa fa-check"></i><b>4.5.4</b> Other interpretations</a></li>
 </ul></li>
 <li class="chapter" data-level="4.6" data-path="4.6-beta-4.html"><a href="4.6-beta-4.html"><i class="fa fa-check"></i><b>4.6</b> Standardized coefficients</a></li>
 <li class="chapter" data-level="4.7" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html"><i class="fa fa-check"></i><b>4.7</b> (Multiple) R-squared</a>
 <ul>
 <li class="chapter" data-level="4.7.1" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html#the-multiple-correlation"><i class="fa fa-check"></i><b>4.7.1</b> The multiple correlation</a></li>
 <li class="chapter" data-level="4.7.2" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html#relation-with-simple-regression"><i class="fa fa-check"></i><b>4.7.2</b> Relation with simple regression</a></li>
-<li class="chapter" data-level="4.7.3" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html#relation-with-beta-weights"><i class="fa fa-check"></i><b>4.7.3</b> Relation with <span class="math inline">\(\beta\)</span>-weights</a></li>
-<li class="chapter" data-level="4.7.4" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html#adjusted-r-squared"><i class="fa fa-check"></i><b>4.7.4</b> Adjusted R-squared</a></li>
+<li class="chapter" data-level="4.7.3" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html#adjusted-r-squared"><i class="fa fa-check"></i><b>4.7.3</b> Adjusted R-squared</a></li>
 </ul></li>
 <li class="chapter" data-level="4.8" data-path="4.8-inference-for-slopes-4.html"><a href="4.8-inference-for-slopes-4.html"><i class="fa fa-check"></i><b>4.8</b> Inference for the slopes</a>
 <ul>
@@ -248,8 +246,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.3" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html"><i class="fa fa-check"></i><b>5.3</b> Binary predictors</a>
 <ul>
 <li class="chapter" data-level="5.3.1" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html#relation-with-t-tests"><i class="fa fa-check"></i><b>5.3.1</b> Relation with t-tests</a></li>
-<li class="chapter" data-level="5.3.2" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html#some-math"><i class="fa fa-check"></i><b>5.3.2</b> Some math*</a></li>
-<li class="chapter" data-level="5.3.3" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html#summary"><i class="fa fa-check"></i><b>5.3.3</b> Summary</a></li>
+<li class="chapter" data-level="5.3.2" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html#summary"><i class="fa fa-check"></i><b>5.3.2</b> Summary</a></li>
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="5.4-reference-group-coding-5.html"><a href="5.4-reference-group-coding-5.html"><i class="fa fa-check"></i><b>5.4</b> Reference-group coding</a>
 <ul>
@@ -492,6 +489,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   });
 </script>
 <p>Below are some examples of the log transform applied to positively skewed data. We can see a range of results, from “wow, that definitely worked” in the first example to, “better but still not great” in the second two examples. These are realistic reflections of how a log transform works to address skew. We will discuss the data used for the third example in more detail in the following subsections, but for now it is sufficient to note that the plots for the third example show the hourly wages of a sample 200 individuals from 1985.</p>
+<pre><code>## The following objects are masked from ecls (pos = 4):
+## 
+##     c1fmotor, c1gmotor, c1rgscal, c1rgtsco, c1rmscal, c1rmtsco,
+##     c1rrscal, c1rrtsco, c2rgscal, c2rgtsco, c2rmscal, c2rmtsco,
+##     c2rrscal, c2rrtsco, c3rgscal, c3rgtsco, c3rmscal, c3rmtsco,
+##     c3rrscal, c3rrtsco, c4rgscal, c4rgtsco, c4rmscal, c4rmtsco,
+##     c4rrscal, c4rrtsco, caseid, gender, p1build, p1center, p1chlboo,
+##     p1chores, p1chsesa, p1contro, p1count, p1disabl, p1expect,
+##     p1firkdg, p1games, p1helpar, p1hfamil, p1hrsprk, p1htotal, p1learn,
+##     p1letter, p1nature, p1pencil, p1readbo, p1singso, p1social,
+##     p1sport, p1still, p1tellst, p1verbal, p2bktog, p2burglr, p2drug,
+##     p2garbag, p2librar, p2safepl, p2vacant, p2violen, plshare, race,
+##     s2kpupri, t1contro, t1extern, t1intern, t1interp, t1learn, wkdaded,
+##     wklangst, wkmomed, wksesl, wksesq5</code></pre>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:skew1"></span>
 <img src="_main_files/figure-html/skew1-1.png" alt="Example 1: Log transforming ECLS math" width="672" />
 <p class="caption">
@@ -523,6 +534,20 @@ Figure 9.8: Logs for small values of X
 <p><span class="math display">\[ b^{-x} = \frac{1}{b^x}. \]</span></p>
 <p>The upshot is that, if your variable takes on values in the range <span class="math inline">\((0, 1)\)</span>, the log transform is going to change those values into large negative numbers. This can result in negative skew, rather fixing your positive skew.</p>
 <p>We can see this in Figure <a href="9.3-distribution-9.html#fig:skew4">9.9</a> below. The top row of the Figure shows the same variable as Example 1 above (ECLS Math Achievement), and the bottom shows the variable transformed to a proportion. In the left hand panels we can see that the distribution of the proportions is qualitatively the same the as the distribution of the original variable. However, the log transform behaves much differently for these two cases. Why? Because logs are “weird” on the range <span class="math inline">\((0, 1)\)</span>.</p>
+<pre><code>## The following objects are masked from ecls (pos = 4):
+## 
+##     c1fmotor, c1gmotor, c1rgscal, c1rgtsco, c1rmscal, c1rmtsco,
+##     c1rrscal, c1rrtsco, c2rgscal, c2rgtsco, c2rmscal, c2rmtsco,
+##     c2rrscal, c2rrtsco, c3rgscal, c3rgtsco, c3rmscal, c3rmtsco,
+##     c3rrscal, c3rrtsco, c4rgscal, c4rgtsco, c4rmscal, c4rmtsco,
+##     c4rrscal, c4rrtsco, caseid, gender, p1build, p1center, p1chlboo,
+##     p1chores, p1chsesa, p1contro, p1count, p1disabl, p1expect,
+##     p1firkdg, p1games, p1helpar, p1hfamil, p1hrsprk, p1htotal, p1learn,
+##     p1letter, p1nature, p1pencil, p1readbo, p1singso, p1social,
+##     p1sport, p1still, p1tellst, p1verbal, p2bktog, p2burglr, p2drug,
+##     p2garbag, p2librar, p2safepl, p2vacant, p2violen, plshare, race,
+##     s2kpupri, t1contro, t1extern, t1intern, t1interp, t1learn, wkdaded,
+##     wklangst, wkmomed, wksesl, wksesq5</code></pre>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:skew4"></span>
 <img src="_main_files/figure-html/skew4-1.png" alt="Comparing Log transforms of ECLS math total score versus proportion correct" width="672" />
 <p class="caption">
