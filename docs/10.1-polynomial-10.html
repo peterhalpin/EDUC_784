@@ -24,7 +24,7 @@
 <meta name="author" content="Peter Halpin" />
 
 
-<meta name="date" content="2022-03-30" />
+<meta name="date" content="2022-04-01" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -441,6 +441,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.5" data-path="10.5-workbook-6.html"><a href="10.5-workbook-6.html"><i class="fa fa-check"></i><b>10.5</b> Workbook</a></li>
 <li class="chapter" data-level="10.6" data-path="10.6-exercises-7.html"><a href="10.6-exercises-7.html"><i class="fa fa-check"></i><b>10.6</b> Exercises</a></li>
 </ul></li>
+<li class="chapter" data-level="11" data-path="11-chapter-11.html"><a href="11-chapter-11.html"><i class="fa fa-check"></i><b>11</b> Logistic Regression</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/peterhalpin/EDUC_784" target="blank">Published with bookdown</a></li>
@@ -492,7 +493,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   });
 </script>
 <p>Polynomial regression means that we regress <span class="math inline">\(Y\)</span> on a polynomial function of <span class="math inline">\(X\)</span>:</p>
-<p><span class="math display">\[ \widehat Y = b_0 + b_1 X_1 + b_2 X^2 + b_3 X^3 + ....\]</span></p>
+<p><span class="math display">\[ \widehat Y = b_0 + b_1 X + b_2 X^2 + b_3 X^3 + ....\]</span></p>
 <p>Your first thought might be, “doesn’t this contradict the assumption that regression is linear?” The answer here is a bit subtle.</p>
 <p>As with regular linear regression, the polynomial model is linear in the coefficients – we don’t raise the regression coefficients to a power (e.g., <span class="math inline">\(b_1^2\)</span>), or multiply coefficients together (e.g, <span class="math inline">\(b_1 \times b_2\)</span>). This is the technical sense in which polynomial regression is still just linear regression, despite its name.</p>
 <p>Polynomial regression does use nonlinear functions of the predictor(s), but the model is agnostic to what you do with your data. The situation here is a lot like when we worked with interactions in Chapter <a href="6-chapter-6.html#chapter-6">6</a>. In order to model interactions, we computed the product of two predictors and entered the product into the model as a third predictor. Well, <span class="math inline">\(X^2\)</span> is the product of a predictor with itself, so, in this sense, the quadratic term in a polynomial regression is just a special case of an interaction between two variables.</p>

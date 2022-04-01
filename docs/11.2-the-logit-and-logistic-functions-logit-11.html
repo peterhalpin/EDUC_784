@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 10 Polynomial regression, etc | EDUC 784: Regression</title>
+  <title>11.2 The logit and logistic functions {logit-11} | EDUC 784: Regression</title>
   <meta name="description" content="Course notes for EDUC 784" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 10 Polynomial regression, etc | EDUC 784: Regression" />
+  <meta property="og:title" content="11.2 The logit and logistic functions {logit-11} | EDUC 784: Regression" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="/images/image1.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="peterhalpin/EDUC_784" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 10 Polynomial regression, etc | EDUC 784: Regression" />
+  <meta name="twitter:title" content="11.2 The logit and logistic functions {logit-11} | EDUC 784: Regression" />
   
   <meta name="twitter:description" content="Course notes for EDUC 784" />
   <meta name="twitter:image" content="/images/image1.png" />
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="null" type="image/x-icon" />
-<link rel="prev" href="9.8-exercises-5.html"/>
-<link rel="next" href="10.1-polynomial-10.html"/>
+<link rel="prev" href="11.1-the-chd-example-chd-example-11.html"/>
+<link rel="next" href="references.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.5.1/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -441,7 +441,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.5" data-path="10.5-workbook-6.html"><a href="10.5-workbook-6.html"><i class="fa fa-check"></i><b>10.5</b> Workbook</a></li>
 <li class="chapter" data-level="10.6" data-path="10.6-exercises-7.html"><a href="10.6-exercises-7.html"><i class="fa fa-check"></i><b>10.6</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="11-chapter-11.html"><a href="11-chapter-11.html"><i class="fa fa-check"></i><b>11</b> Logistic Regression</a></li>
+<li class="chapter" data-level="11" data-path="11-chapter-11.html"><a href="11-chapter-11.html"><i class="fa fa-check"></i><b>11</b> Logistic Regression</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="11.1-the-chd-example-chd-example-11.html"><a href="11.1-the-chd-example-chd-example-11.html"><i class="fa fa-check"></i><b>11.1</b> The CHD example {chd-example-11}</a></li>
+<li class="chapter" data-level="11.2" data-path="11.2-the-logit-and-logistic-functions-logit-11.html"><a href="11.2-the-logit-and-logistic-functions-logit-11.html"><i class="fa fa-check"></i><b>11.2</b> The logit and logistic functions {logit-11}</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/peterhalpin/EDUC_784" target="blank">Published with bookdown</a></li>
@@ -463,25 +467,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="chapter-10" class="section level1" number="10">
-<h1><span class="header-section-number">Chapter 10</span> Polynomial regression, etc</h1>
-<!-- this should be called nonlinearity (and heteroskedasticity) and come before log-linear modeling -->
-<p>This chapter collects some other useful techniques for addressing assumption violations in linear regression.</p>
-<p>One approach involves transforming the <span class="math inline">\(X\)</span>-variable(s), which can be done in addition to (or instead of) transforming the <span class="math inline">\(Y\)</span> variable. This approach is used to address violations of the assumption of linearity, and this chapter will cover two widely-used techniques</p>
-<ul>
-<li>Polynomial regression, which means raising <span class="math inline">\(X\)</span>-variables to a power (e.g., <span class="math inline">\(X^2\)</span> and <span class="math inline">\(X^3\)</span>), and</li>
-<li>Piecewise or segmented regression, which involves using different regression lines over different ranges of a predictor.</li>
-</ul>
-<p>Both polynomial and piecewise regression are very useful in practice and lead to advanced topics like splines and semi-parametric regression. They also turn out to be special cases of interactions, so we have already covered a lot of the technical details in Chapter <a href="6-chapter-6.html#chapter-6">6</a> – phew!</p>
-<p>We also consider how to deal with heteroskedasticity. The short version is that heteroskedasticity affects the standard errors of regression coefficients, and, consequently, the t-values, p-values, and confidence intervals. There are lots of ways to make standard errors robust to heteroskedasticity, and we will focus on one widely used procedure called heteroskedasticity-corrected (HC) standard errors.</p>
+<div id="the-logit-and-logistic-functions-logit-11" class="section level2" number="11.2">
+<h2><span class="header-section-number">11.2</span> The logit and logistic functions {logit-11}</h2>
+
 </div>
+<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-<a href="9.8-exercises-5.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="10.1-polynomial-10.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="11.1-the-chd-example-chd-example-11.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -502,7 +499,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/peterhalpin/EDUC_784/edit/master/10_polynomial_regression.Rmd",
+"link": "https://github.com/peterhalpin/EDUC_784/edit/master/11_simple_logistic_regression.Rmd",
 "text": "Suggest an edit"
 },
 "history": {

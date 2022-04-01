@@ -5,7 +5,7 @@
 ```{r, echo = F}
 # Clean up check
 rm(list = ls())
-#detach(NELS)
+
 
 button <-  "position: relative; 
             top: -25px; 
@@ -36,7 +36,7 @@ codefolder::bookdown(init = "hide", style = button)
 
 Polynomial regression means that we regress $Y$ on a polynomial function of $X$:
 
-\[ \widehat Y = b_0 + b_1 X_1 + b_2 X^2 + b_3 X^3 + ....\]
+\[ \widehat Y = b_0 + b_1 X + b_2 X^2 + b_3 X^3 + ....\]
 
 Your first thought might be, "doesn’t this contradict the assumption that regression is linear?" The answer here is a bit subtle. 
 

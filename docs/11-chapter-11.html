@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 10 Polynomial regression, etc | EDUC 784: Regression</title>
+  <title>Chapter 11 Logistic Regression | EDUC 784: Regression</title>
   <meta name="description" content="Course notes for EDUC 784" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 10 Polynomial regression, etc | EDUC 784: Regression" />
+  <meta property="og:title" content="Chapter 11 Logistic Regression | EDUC 784: Regression" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="/images/image1.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="peterhalpin/EDUC_784" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 10 Polynomial regression, etc | EDUC 784: Regression" />
+  <meta name="twitter:title" content="Chapter 11 Logistic Regression | EDUC 784: Regression" />
   
   <meta name="twitter:description" content="Course notes for EDUC 784" />
   <meta name="twitter:image" content="/images/image1.png" />
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="null" type="image/x-icon" />
-<link rel="prev" href="9.8-exercises-5.html"/>
-<link rel="next" href="10.1-polynomial-10.html"/>
+<link rel="prev" href="10.6-exercises-7.html"/>
+<link rel="next" href="11.1-chd-example-11.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.5.1/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -441,7 +441,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.5" data-path="10.5-workbook-6.html"><a href="10.5-workbook-6.html"><i class="fa fa-check"></i><b>10.5</b> Workbook</a></li>
 <li class="chapter" data-level="10.6" data-path="10.6-exercises-7.html"><a href="10.6-exercises-7.html"><i class="fa fa-check"></i><b>10.6</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="11-chapter-11.html"><a href="11-chapter-11.html"><i class="fa fa-check"></i><b>11</b> Logistic Regression</a></li>
+<li class="chapter" data-level="11" data-path="11-chapter-11.html"><a href="11-chapter-11.html"><i class="fa fa-check"></i><b>11</b> Logistic Regression</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="11.1-chd-example-11.html"><a href="11.1-chd-example-11.html"><i class="fa fa-check"></i><b>11.1</b> The CHD example</a></li>
+<li class="chapter" data-level="11.2" data-path="11.2-logit-11.html"><a href="11.2-logit-11.html"><i class="fa fa-check"></i><b>11.2</b> Logit &amp; logistic functions</a>
+<ul>
+<li class="chapter" data-level="11.2.1" data-path="11.2-logit-11.html"><a href="11.2-logit-11.html#from-binary-to-probability"><i class="fa fa-check"></i><b>11.2.1</b> From binary to probability</a></li>
+<li class="chapter" data-level="11.2.2" data-path="11.2-logit-11.html"><a href="11.2-logit-11.html#from-probability-to-logistic"><i class="fa fa-check"></i><b>11.2.2</b> From probability to logistic</a></li>
+<li class="chapter" data-level="11.2.3" data-path="11.2-logit-11.html"><a href="11.2-logit-11.html#logistic-to-log-odds-logit"><i class="fa fa-check"></i><b>11.2.3</b> Logistic to log odds (logit)</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/peterhalpin/EDUC_784" target="blank">Published with bookdown</a></li>
@@ -463,25 +472,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="chapter-10" class="section level1" number="10">
-<h1><span class="header-section-number">Chapter 10</span> Polynomial regression, etc</h1>
-<!-- this should be called nonlinearity (and heteroskedasticity) and come before log-linear modeling -->
-<p>This chapter collects some other useful techniques for addressing assumption violations in linear regression.</p>
-<p>One approach involves transforming the <span class="math inline">\(X\)</span>-variable(s), which can be done in addition to (or instead of) transforming the <span class="math inline">\(Y\)</span> variable. This approach is used to address violations of the assumption of linearity, and this chapter will cover two widely-used techniques</p>
+<div id="chapter-11" class="section level1" number="11">
+<h1><span class="header-section-number">Chapter 11</span> Logistic Regression</h1>
+<p>The last topic we address in this course logistic regression. Like the previous two chapters, logistic regression is an extension of multiple linear regression to situations in which the “standard” model does not directly apply. This time, the extension is to binary <em>outcome</em> variables.</p>
+<p>There are many situations in which the outcome of interest can be thought of as a binary or “yes / no” or “true / false” outcome:</p>
 <ul>
-<li>Polynomial regression, which means raising <span class="math inline">\(X\)</span>-variables to a power (e.g., <span class="math inline">\(X^2\)</span> and <span class="math inline">\(X^3\)</span>), and</li>
-<li>Piecewise or segmented regression, which involves using different regression lines over different ranges of a predictor.</li>
+<li>Death (the original logistic outcome; <a href="https://doi.org/10.2307%2F2280041">Berkson, 1944</a>)</li>
+<li>Onset of disease or condition</li>
+<li>Employment status</li>
+<li>College enrollment</li>
+<li>Passing a course or completing a credential</li>
+<li>Provide a correct response to a test question</li>
+<li>Whether a picture contains an image of cat</li>
+<li>…</li>
 </ul>
-<p>Both polynomial and piecewise regression are very useful in practice and lead to advanced topics like splines and semi-parametric regression. They also turn out to be special cases of interactions, so we have already covered a lot of the technical details in Chapter <a href="6-chapter-6.html#chapter-6">6</a> – phew!</p>
-<p>We also consider how to deal with heteroskedasticity. The short version is that heteroskedasticity affects the standard errors of regression coefficients, and, consequently, the t-values, p-values, and confidence intervals. There are lots of ways to make standard errors robust to heteroskedasticity, and we will focus on one widely used procedure called heteroskedasticity-corrected (HC) standard errors.</p>
+<p>And, as with linear regression, we often we want to relate binary outcomes to a set of predictors, such as medical history, family background, personal characteristics, etc. That is what logistic regression does.</p>
+<p>The move to binary outcome variables is a big one. Everything we have done up until now has focused on OLS regression, using the same basic principles we discussed in Chapters <a href="2-chapter-2.html#chapter-2">2</a> and <a href="4-chapter-4.html#chapter-4">4</a>. However, logistic regression takes us into the wider framework of <em>generalized linear models</em> (GLMs), which are estimated using maximum likelihood (ML) rather than OLS. Thus we will need to start at the “ground floor” to build up our knowledge of logistic regression, which then provides a stepping stone to GLMs, which can additionally handle other types of outcomes (count and other non-negative data, ordered categorical).</p>
+<p>Although we will focus on logistic regression, it should be noted that researchers who have a strong preference for OLS methods (AKA economists) often approach binary data using the “linear probability model” which is just OLS with the binary outcome. This approach violates all of the assumptions of linear regression, can lead to predicted probabilities outside of the range [0,1], produces incorrect standard errors for model parameters, and is, in a word, wrong. Yet, despite all this, it works pretty well in some situations and has the benefit of being much easier to interpret than logistic regression. We will point out the situations in which the linear probability model is “close enough” in Section <a href="11.2-logit-11.html#logit-11">11.2</a>.</p>
+<p>Since we are starting with a new modeling approach, let’s kick things of with a new example.</p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="9.8-exercises-5.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="10.1-polynomial-10.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="10.6-exercises-7.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="11.1-chd-example-11.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -502,7 +518,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/peterhalpin/EDUC_784/edit/master/10_polynomial_regression.Rmd",
+"link": "https://github.com/peterhalpin/EDUC_784/edit/master/11_simple_logistic_regression.Rmd",
 "text": "Suggest an edit"
 },
 "history": {

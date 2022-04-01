@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 10 Polynomial regression, etc | EDUC 784: Regression</title>
+  <title>11.3 The logistic function | EDUC 784: Regression</title>
   <meta name="description" content="Course notes for EDUC 784" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 10 Polynomial regression, etc | EDUC 784: Regression" />
+  <meta property="og:title" content="11.3 The logistic function | EDUC 784: Regression" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="/images/image1.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="peterhalpin/EDUC_784" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 10 Polynomial regression, etc | EDUC 784: Regression" />
+  <meta name="twitter:title" content="11.3 The logistic function | EDUC 784: Regression" />
   
   <meta name="twitter:description" content="Course notes for EDUC 784" />
   <meta name="twitter:image" content="/images/image1.png" />
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="null" type="image/x-icon" />
-<link rel="prev" href="9.8-exercises-5.html"/>
-<link rel="next" href="10.1-polynomial-10.html"/>
+<link rel="prev" href="11.2-logit-11.html"/>
+<link rel="next" href="references.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.5.1/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -441,7 +441,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.5" data-path="10.5-workbook-6.html"><a href="10.5-workbook-6.html"><i class="fa fa-check"></i><b>10.5</b> Workbook</a></li>
 <li class="chapter" data-level="10.6" data-path="10.6-exercises-7.html"><a href="10.6-exercises-7.html"><i class="fa fa-check"></i><b>10.6</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="11-chapter-11.html"><a href="11-chapter-11.html"><i class="fa fa-check"></i><b>11</b> Logistic Regression</a></li>
+<li class="chapter" data-level="11" data-path="11-chapter-11.html"><a href="11-chapter-11.html"><i class="fa fa-check"></i><b>11</b> Logistic Regression</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="11.1-chd-example-11.html"><a href="11.1-chd-example-11.html"><i class="fa fa-check"></i><b>11.1</b> The CHD example</a></li>
+<li class="chapter" data-level="11.2" data-path="11.2-logit-11.html"><a href="11.2-logit-11.html"><i class="fa fa-check"></i><b>11.2</b> Logit &amp; logistic functions</a>
+<ul>
+<li class="chapter" data-level="11.2.1" data-path="11.2-logit-11.html"><a href="11.2-logit-11.html#from-binary-to-probability"><i class="fa fa-check"></i><b>11.2.1</b> From binary to probability</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="11.3-the-logistic-function.html"><a href="11.3-the-logistic-function.html"><i class="fa fa-check"></i><b>11.3</b> The logistic function</a>
+<ul>
+<li class="chapter" data-level="11.3.1" data-path="11.3-the-logistic-function.html"><a href="11.3-the-logistic-function.html#logistic-odds-and-log-odds"><i class="fa fa-check"></i><b>11.3.1</b> Logistic, odds, and log-odds</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/peterhalpin/EDUC_784" target="blank">Published with bookdown</a></li>
@@ -463,25 +474,70 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="chapter-10" class="section level1" number="10">
-<h1><span class="header-section-number">Chapter 10</span> Polynomial regression, etc</h1>
-<!-- this should be called nonlinearity (and heteroskedasticity) and come before log-linear modeling -->
-<p>This chapter collects some other useful techniques for addressing assumption violations in linear regression.</p>
-<p>One approach involves transforming the <span class="math inline">\(X\)</span>-variable(s), which can be done in addition to (or instead of) transforming the <span class="math inline">\(Y\)</span> variable. This approach is used to address violations of the assumption of linearity, and this chapter will cover two widely-used techniques</p>
-<ul>
-<li>Polynomial regression, which means raising <span class="math inline">\(X\)</span>-variables to a power (e.g., <span class="math inline">\(X^2\)</span> and <span class="math inline">\(X^3\)</span>), and</li>
-<li>Piecewise or segmented regression, which involves using different regression lines over different ranges of a predictor.</li>
-</ul>
-<p>Both polynomial and piecewise regression are very useful in practice and lead to advanced topics like splines and semi-parametric regression. They also turn out to be special cases of interactions, so we have already covered a lot of the technical details in Chapter <a href="6-chapter-6.html#chapter-6">6</a> – phew!</p>
-<p>We also consider how to deal with heteroskedasticity. The short version is that heteroskedasticity affects the standard errors of regression coefficients, and, consequently, the t-values, p-values, and confidence intervals. There are lots of ways to make standard errors robust to heteroskedasticity, and we will focus on one widely used procedure called heteroskedasticity-corrected (HC) standard errors.</p>
+<div id="the-logistic-function" class="section level2" number="11.3">
+<h2><span class="header-section-number">11.3</span> The logistic function</h2>
+<p>On thing to note about our CHD data is that the proportion of cases with CHD increases with age. This relationship is shown visually in Figure <a href="11.3-the-logistic-function.html#fig:chd2">11.4</a> below.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="11.3-the-logistic-function.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(chd.data)</span>
+<span id="cb4-2"><a href="11.3-the-logistic-function.html#cb4-2" aria-hidden="true" tabindex="-1"></a>prop <span class="ot">&lt;-</span> <span class="fu">tapply</span>(chd, catage, mean)</span>
+<span id="cb4-3"><a href="11.3-the-logistic-function.html#cb4-3" aria-hidden="true" tabindex="-1"></a>years <span class="ot">&lt;-</span> <span class="fu">unique</span>(catage)<span class="sc">*</span><span class="dv">10</span></span>
+<span id="cb4-4"><a href="11.3-the-logistic-function.html#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(years, prop, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;p(CHD =1)&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;Age categories&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:chd2"></span>
+<img src="_main_files/figure-html/chd2-1.png" alt="Proportion of cases with CHD as a function of age" width="672" />
+<p class="caption">
+Figure 11.4: Proportion of cases with CHD as a function of age
+</p>
 </div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="11.3-the-logistic-function.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(chd.data)</span></code></pre></div>
+<p>Looking at the plot, we might suspect that the relationship between the rate of CHD and age is non-linear. In particular, we know that probability cannot take on values outside of the range (0, 1), so the relationship is going to have to “flatten out” in the tails. So, even if you are a baby, your probability of having CHD cannot be less than 0. And even if you are 101, the probability can’t be great than 1.</p>
+<p>Based on this reasoning we know that the relationship between age and the rate of CHD should take on a sort of “S”-shaped curve, which is hinted at in the plot but is not very strong. This S-shaped curve is called a sigmoid. Some additional examples are shown in Figure <a href="11.3-the-logistic-function.html#fig:sigmoids">11.5</a>.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="11.3-the-logistic-function.html#cb6-1" aria-hidden="true" tabindex="-1"></a>logistic <span class="ot">&lt;-</span> <span class="cf">function</span>(x, a, b){<span class="fu">exp</span>(a<span class="sc">*</span>x <span class="sc">+</span> b) <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> <span class="fu">exp</span>(a<span class="sc">*</span>x <span class="sc">+</span> b))}</span>
+<span id="cb6-2"><a href="11.3-the-logistic-function.html#cb6-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="dv">5</span>, <span class="at">by =</span> .<span class="dv">1</span>)</span>
+<span id="cb6-3"><a href="11.3-the-logistic-function.html#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, <span class="fu">logistic</span>(x, <span class="dv">1</span>, <span class="dv">0</span>), <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="dv">2</span>, <span class="at">ylab =</span> <span class="st">&quot;logistic&quot;</span>)</span>
+<span id="cb6-4"><a href="11.3-the-logistic-function.html#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(x, <span class="fu">logistic</span>(x, .<span class="dv">75</span>, <span class="sc">-</span><span class="fl">1.5</span>), <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="dv">3</span>, <span class="at">ylab =</span> <span class="st">&quot;logistic&quot;</span>)</span>
+<span id="cb6-5"><a href="11.3-the-logistic-function.html#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(x, <span class="fu">logistic</span>(x, <span class="fl">1.5</span>,<span class="sc">-</span> <span class="dv">1</span>), <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="dv">4</span>, <span class="at">ylab =</span> <span class="st">&quot;logistic&quot;</span>)</span>
+<span id="cb6-6"><a href="11.3-the-logistic-function.html#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(x, <span class="fu">logistic</span>(x, <span class="dv">3</span>, <span class="dv">2</span>), <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="dv">5</span>, <span class="at">ylab =</span> <span class="st">&quot;logistic&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:sigmoids"></span>
+<img src="_main_files/figure-html/sigmoids-1.png" alt="Examples of sigmoids" width="672" />
+<p class="caption">
+Figure 11.5: Examples of sigmoids
+</p>
+</div>
+<p>The function used to create these sigmoids is called the logistic function. We can see in Figure <a href="11.3-the-logistic-function.html#fig:chd3">11.6</a> that the logistic also provides a nice model for the probability of CHD in our example data.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="11.3-the-logistic-function.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb7-2"><a href="11.3-the-logistic-function.html#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(years, prop, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;p(CHD =1)&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;Age categories&quot;</span>)</span>
+<span id="cb7-3"><a href="11.3-the-logistic-function.html#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="dv">20</span><span class="sc">:</span><span class="dv">70</span>, <span class="fu">logistic</span>(<span class="dv">20</span><span class="sc">:</span><span class="dv">70</span>, .<span class="dv">12</span>, <span class="sc">-</span><span class="fl">5.2</span>), <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;logistic&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;Age in years&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:chd3"></span>
+<img src="_main_files/figure-html/chd3-1.png" alt="Proportion of cases with CHD, data versus logistic" width="672" />
+<p class="caption">
+Figure 11.6: Proportion of cases with CHD, data versus logistic
+</p>
+</div>
+<p>One important thing to notice here is that the plot on the left required changing age into a categorical variable and computing the proportion of cases with CHD in each category. However, the logistic plot on the left does not require categorizing age. So, one advantage of using the logistic function is that we can model the probability of CHD as a function of age “directly,” without having to categorize our predictor variables.</p>
+<p>The take home message of this section is that (a) we can represent a binary variable in terms of a proportion (or percentage / rate / mean / probability), and (b) good way to model the logistic function is a flexible way to to model proportion. Next lets talk about the math of the logistic function in a bit more detail.</p>
+<div id="logistic-odds-and-log-odds" class="section level3" number="11.3.1">
+<h3><span class="header-section-number">11.3.1</span> Logistic, odds, and log-odds</h3>
+<p>The formula for the logistic function (i.e., the function that produced the curves in Figures <a href="#fig:sigmoid"><strong>??</strong></a>) is</p>
+<p><span class="math display" id="eq:logistic">\[ p = \frac{\exp(x)}{1 + \exp(x)}. 
+\tag{11.2}
+\]</span></p>
+<p>This function maps the variable <span class="math inline">\(x\)</span> onto the interval <span class="math inline">\((0, 1)\)</span>. In Figure <a href="11.3-the-logistic-function.html#fig:chd3">11.6</a>) we saw that the logistic function can provide a nice model for probabilities. However, because of this, the logistic function is also non linear function of <span class="math inline">\(x\)</span> i.e., it is sigmoidal or S-shaped. But, the especially nice thing about the logistic function is that we can easily transform it into a linear function of <span class="math inline">\(x\)</span>. And, we know how to deal with linear functions – that is what this whole course has been about!</p>
+<p>So let’s see how to get from our S-shaped logistic function to a linear function of <span class="math inline">\(x\)</span>. First, a little algebra with Equation <a href="11.3-the-logistic-function.html#eq:logistic">(11.2)</a> shows that:</p>
+<p><span class="math display" id="eq:odds">\[  \frac{p}{1- p} = \exp(x) 
+\tag{11.1}
+\]</span></p>
+<p>The ratio <span class="math inline">\(p / (1 - p)\)</span> is called the odds. We are going to spend a lot of time talking about odds.</p>
+<p>Equation <a href="11.3-the-logistic-function.html#eq:logistic">(11.2)</a> is telling us that the logistic model implies that the odds are an exponential function of <span class="math inline">\(x\)</span>. So, all we need to do</p>
+
+</div>
+</div>
+<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-<a href="9.8-exercises-5.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="10.1-polynomial-10.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="11.2-logit-11.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -502,7 +558,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/peterhalpin/EDUC_784/edit/master/10_polynomial_regression.Rmd",
+"link": "https://github.com/peterhalpin/EDUC_784/edit/master/11_simple_logistic_regression.Rmd",
 "text": "Suggest an edit"
 },
 "history": {
