@@ -41,7 +41,7 @@ In terms of statistical modeling, the move to binary outcome variables is a pret
 
 Although we will focus on logistic regression, it should be noted that researchers who have a strong preference for OLS methods (AKA economists) often approach binary data using the "linear probability model," which is just OLS with the binary outcome. This approach violates all of the assumptions of linear regression, can lead to predicted probabilities outside of the range [0,1], produces incorrect standard errors for model parameters, and is, in a word, wrong. Yet, despite all this, it works pretty well in some situations and has the benefit of being much easier to interpret than logistic regression. We will point out the situations in which the linear probability model is "close enough" in Section \@ref(logit-11). 
 
-Since we are starting with a new modeling approach, let's kick things of with a new example. 
+Since we are starting with a new modeling approach, let's kick things off with a new example. 
 
 ## The CHD example {#chd-example-11}
 
@@ -49,14 +49,14 @@ Since we are starting with a new modeling approach, let's kick things of with a 
 codefolder::bookdown(init = "hide", style = button)
 ```
 
-As a working example, we will use data contained in the file `CHD.RData` to explore the relationship between age in years ("age") and evidence (absence or presence) of coronary heart disease ("chd").  The dataset contain 100 cases. Respondents' ages range from 20 to 69, while evidence of CHD is coded 0 when it is absent and 1 when it is present. A sample of 20 cases is shown  below. (Source: Applied Logistic Regression by David W. Hosmer and Stanley Lemeshow, 1989, John Wiley and Sons.) 
+As a working example, we will use data contained in the file `CHD.RData` to explore the relationship between age in years ("age") and evidence (absence or presence) of coronary heart disease ("chd").  The data set contains 100 cases. Respondents' ages range from 20 to 69, while evidence of CHD is coded 0 when it is absent and 1 when it is present. A sample of 20 cases is shown  below. (Source: Applied Logistic Regression by David W. Hosmer and Stanley Lemeshow, 1989, John Wiley and Sons.) 
 
 ```{r}
 load("CHD.RData")
 knitr::kable(list(chd.data[sample(1:100, 10),2:3], chd.data[sample(1:100, 10),2:3]), row.names = F, caption = "The CHD example")
 ```
 
-If we regress chd on age using linear regression (i.e., the linear probabilty model), our diagnostic plots look like this: 
+If we regress CHD on age using linear regression (i.e., the linear probability model), our diagnostic plots and output look like this: 
 
 ```{r, lpm, echo = F, fig.cap = "Linear probability model with CHD example", fig.align = 'center', fig.width = 12}
 mod1 <- lm(chd ~ age, data = chd.data)
@@ -74,38 +74,35 @@ summary(mod1)
 codefolder::bookdown(init = "hide", style = button)
 ```
 
-The general game plan for dealing with a binary outcome is to transform it into a different variable that is easier to work with, run the analysis, and then "reverse-transform" the model coefficients so that they are intepretable in terms of the original binary variable. This strategy should sound familiar from Chapter \@ref(chapter-9) -- it's the same overall approach we used for log-linear regression. Also in common with Chapter \@ref(chapter-9), we are going to be use logs and exponents as the main workhorse for this approach (that is where the "log" in logistic comes from).
+The general game plan for dealing with a binary outcome is to transform it into a different variable that is easier to work with, run the analysis, and then "reverse-transform" the model coefficients so that they are intepretable in terms of the original binary variable. This strategy should sound familiar from Chapter \@ref(chapter-9) -- it's the same overall approach we used for log-linear regression. Also in common with Chapter \@ref(chapter-9), we are going to use logs and exponents as the main workhorse for this approach (that is where the "log" in logistic comes from).
 
-However, the overall strategy for transforming the $Y$ variable in logistic regression is a wee bit more complicated than the log-linear model. So, it is helpful to start wit an overall "roadmap".  
+However, the overall strategy for transforming the $Y$ variable in logistic regression is a bit more complicated than the log-linear model. So, it is helpful to start wit an overall "roadmap".  
 
-* Step 1 (from binary to probability). First, we are going to work with probabilities rather than original binary variable. In terms of our example, we are going to shift focus from whether or not a person has CHD to the *probability* of a person having CHD. 
+* Step 1 (from binary to probability). First, we are going to work with probabilities rather than the original binary variable. In terms of our example, we are going to shift focus from whether or not a person has CHD to the *probability* of a person having CHD. 
 
-* Step 2 (from probability to logistic). The logistic function is widely used model for probabilities. In terms of our example, we are going to use the logistic function to relate the probability of a person having CHD to their age. 
+* Step 2 (from probability to logistic). The logistic function is widely-used model for probabilities. In terms of our example, we are going to use the logistic function to relate the probability of a person having CHD to their age. 
 
-* Step 3 (from logistic to logit). The logistic function has a nice interpretation, but it is not a linear function of age. So, we are going to transform it into something that is linear in age, which will let us "port over" a lot of what we have learned so far about linear models. Actually, the reason we choose the logistic function as a model of probability is because this transform is relatively straightforward and can be "undone" afterwards when interpreting the model coefficients, just like with log-linear regression. The transformation two steps:
+* Step 3 (from logistic to logit). The logistic function has a nice interpretation, but it is not a linear function of age. So, we are going to transform it into something that is linear in age, which will let us "port over" a lot of what we have learned about linear models. Actually, the reason we choose the logistic function as a model of probability is because this transform is relatively straightforward and can be "undone" afterwards when interpreting the model coefficients, just like with log-linear regression. The transformation two steps:
 
-    * Step3A (probability to odds). First we transform the probability of having CHD into the *odds* of having CHD. If $p$ denotes probability then odds are just $p / (1-p)$. We will spend a while talking about how to interpret odds. 
+    * Step3A (probability to odds). First we transform the probability of having CHD into the *odds* of having CHD. If $p$ denotes probability then odds are just $p / (1-p)$. We will spend a while talking about how to interpret odds below. 
     
     * Step 3B (odds to logit). Then we take the log of the odds, which is called the *logit*. The logit turns out to be a linear function of age, so we can model the relationship between age and the logit of CHD in a way that is very similar to regular linear regression. 
     
-So that's the overall approach to dealing with a binary variable in logistic regression. Clear as mud, right? Don't worry, we will walk through each step in the following subsections. 
-
-To be honest, this section is really a bit of a slog. But it will pay off! Once we get through this section, we are more or less back to linear regression.  If you find yourself getting lost in the details, it can be helpful to refer back to this overall strategy. In short, the overall game plan is: 
+So, that's the overall approach to dealing with a binary variable in logistic regression. Clear as mud, right? Don't worry, we will walk through each step in the following subsections. If you find yourself getting lost in the details, it can be helpful to refer back to this overall strategy. In short, the overall game plan is: 
 
 \[ \text{binary outcome} \rightarrow \text{probability} \rightarrow \text{logistic} \rightarrow \text{logit (log odds) }  \]
   
-Then, once we are the logit, we can start doing linear regression again! 
-
+Then, once we are the logit, we can start doing logistic regression.
 
 ### From binary to probability
 
-The following table presents the example data in terms of the proportion of with CHD, broken down by age groups. The first column shows the age groups, the second shows the number of cases with CHD, the third shows the number of cases without CHD, and the last column shows the proportion of cases with CHD. 
+The following table presents the example data in terms of the proportion of cases with CHD, broken down by age groups. The first column shows the age groups, the second shows the number of cases without CHD, the third shows the number of cases with CHD, and the last column shows the proportion of cases with CHD. 
 
 ```{r, props, echo = T, fig.cap = "From a binary variable to proportions", fig.align = 'center'}
 knitr::include_graphics("images/props.png")
 ```
 
-Recall that the proportion of cases with a certain characteristic is computed as the number of cases with the characteristic over the total number of cases. In terms of the table above: 
+Recall that a proportion is computed as the number of cases of interest over the total number of cases. In terms of the table above: 
 
 \[ p(CHD = 1) = \frac{ N_1}{N_0 + N_1 } 
 (#eq:prob)\]
@@ -120,7 +117,7 @@ The number $p(CHD = 1)$ can be interpreted in many ways, which leads to a lot of
 * Since a proportion is just the mean of binary variable, it is the *mean* CHD in our sample.
 * And finally, since proportions are one interpretation of probability, it is the *probability* of CHD in our sample. 
 
-You might hear all of these terms (i.e., proportion, percentage, rate, mean, probability) used in connection with logistic regression. But, they are all basically all just different ways of referring the rightmost column of Figure \@ref(fig:props). I will try to make a point of using all of these terms so you get used to interpreting them in this context :)  
+You might hear all of these terms (i.e., proportion, percentage, rate, mean, probability) used in connection with logistic regression. But, they are all just different ways of referring the rightmost column of Figure \@ref(fig:props). I will try to make a point of using all of these terms so you get used to interpreting them in this context :)  
 
 Another concept that will be useful for interpreting our data is *odds*. Odds are closely related to, but not the same as, probability. The figure below adds the odds of having CHD to Figure \@ref(fig:props). 
 
@@ -136,11 +133,11 @@ As shown in the table, the odds are also a function of the two sample sizes, $N_
 
 Let's take a moment to compare the interpretation of probability versus odds. 
 
-* The first row of the table tells us that the probability of having CHD in your 20's is "1 in 10". Loosley, this means that for every 10 people in their 20s, one of them will have CHD. 
+* The first row of the table tells us that the probability of having CHD in your 20's is "1 in 10". Loosely, this means that for every 10 people in their 20s, one of them will have CHD. 
 
 * By contrast, the odds of having CHD in your twenties is "1 to 9". Roughly, this means that for every person in their twenties with CHD, there are nine without CHD. 
 
-Clearly, probabilities and odds are just two different ways of packaging the same information. The following equations shows the relations between odds and probability (you can derive these from Equations \@ref(eq:prob) and \@ref(eq:odds))
+Clearly, probabilities and odds are just two different ways of packaging the same information. The following equations shows the relation between odds and probability (you can derive these from Equations \@ref(eq:prob) and \@ref(eq:odds))
 
 \begin{align}
 p(CHD = 1) & = \frac{\text{odds}(CHD = 1)}{1 + \text{odds}(CHD = 1)} \\ \\
@@ -149,7 +146,7 @@ p(CHD = 1) & = \frac{\text{odds}(CHD = 1)}{1 + \text{odds}(CHD = 1)} \\ \\
 \end{align}
 
 
-We will see these relations again shortly. But, before moving, let's get some more practice interpreting odds and probabilities using the data in Figure \@ref(fig:odds). **Please write down your answers to the following questions and be prepared to share them in class. For each question provide both a verbal interpretation of the numerical answer (e.g, odds of 2 to 1 means that for every two people with a trait, there is one without.) **
+We will see these relations again shortly. But, before moving on, let's get some more practice interpreting odds and probabilities using the data in Figure \@ref(fig:odds). **Please write down your answers to the following questions and be prepared to share them in class. For each question provide a verbal interpretation of the numerical answer (e.g, odds of 2 to 1 means that for every two people with a trait, there is one without.) **
 
 * What is the probability of a person in their 40s having CHD? 
 * What are the odds of a person in their 40s having CHD? 
@@ -158,10 +155,9 @@ We will see these relations again shortly. But, before moving, let's get some mo
 * What is probability of having CHD in your 40s, compared to your 30s? (e.g., is 3 times higher? 4 times higher?)
 * What are the odds of having CHD in your 40s, compared to your 30s? 
 
-
 ### From probability to logistic 
 
-On thing you may have noted about our CHD data is that the proportion of cases with CHD increases with age. This relationship is shown visually in Figure \@ref(fig:chd2) below.
+On thing you may have noted about the CHD data is that the proportion of cases with CHD increases with age. This relationship is shown visually in Figure \@ref(fig:chd2).
 
 ```{r, chd2, echo = T, fig.cap = "Proportion of cases with CHD as a function of age", fig.align = 'center'}
 attach(chd.data)
@@ -183,18 +179,18 @@ points(x, logistic(x, 1.5,- 1), type = "l", lwd = 2, col = 4, ylab = "logistic")
 points(x, logistic(x, 3, 2), type = "l", lwd = 2, col = 5, ylab = "logistic")
 ```
 
-The mathematical equation used to create these S-shaped curves is called the logistic function, the namesake of logistic regression. Returning to our example, we can see in Figure \@ref(fig:chd3) that the logistic function provides a reasonable approximation for the relationship between the probability of CHD and age. 
+The mathematical equation used to create these S-shaped curves is called the logistic function, the namesake of logistic regression. Returning to our example, we can see in Figure \@ref(fig:chd3) that the logistic function provides a reasonable approximation for the relationship between the rate of CHD and age. 
 
 ```{r, chd3, echo = T, fig.cap = "Proportion of cases with CHD, data versus logistic", fig.align = 'center'}
 par(mfrow = c(1, 2))
 plot(years, prop, type = "l", lwd = 2, col = "#4B9CD3", ylab = "p(CHD =1)", xlab = "Age categories")
 plot(20:60, logistic(20:60, .12, -5.2), col = "#4B9CD3", ylab = "logistic", xlab = "Age in years")
 ```
-One important thing to notice about Figure \@ref(fig:chd3) is that the plot on the left required re-coding age into a categorical variable and computing the proportion of cases with CHD in each age category (see Figure \@ref(fig:props)). However, the logistic plot on the right did not require categorizing age. So, one advantage of using the logistic function is that we can model the probability of CHD as a function of age "directly", without having to categorize our predictor variables. And, just like with linear regression, we can easily extend the logistic approach to account for multiple predictor variables, which becomes very unwieldy with the categorical re-coding approach. 
+One important thing to notice about Figure \@ref(fig:chd3) is that the plot on the left required re-coding age into a categorical variable and computing the proportion of cases with CHD in each age category (see Figure \@ref(fig:props)). However, the logistic plot on the right did not require categorizing age. So, one advantage of using the logistic function is that we can model the probability of CHD as a function of age "directly", without having to categorize our predictor variables. And, just like with linear regression, we can easily extend this approach to multiple predictor variables.
 
 The take home message of this section is that the logistic function is a nice way to to model how a proportion depends on a continuous variable like age. Next, we'll talk about the math of the logistic function in a bit more detail. 
 
-Before moving on, notice that the logistic function is roughly linear for probabilities in the range $[.2, .8]$ (see Figure \@ref(fig:sigmoids)). As mentioned in the introduction of this chapter, this is the situation in which using linear regression with a binary outcome works "well enough". So, if you run a linear regression on your binary outcome, and none of the fitted / predicted values are outside the range $[.2, .8]$, you are in a situation where you might prefer to just use linear regression (despite it being technically wrong). 
+Before moving on, notice that the logistic function is roughly linear for probabilities in the range $[.2, .8]$ (see Figure \@ref(fig:sigmoids)). As mentioned in the introduction of this chapter, this is the situation in which using linear regression with a binary outcome works "well enough". So, if you run a linear regression on your binary outcome, and none of the fitted / predicted values are outside the range $[.2, .8]$, you are in a situation where you might prefer to use linear regression (despite it being technically wrong). 
 
 
 ### Logistic to log odds (logit) 
@@ -208,9 +204,9 @@ The formula for the logistic function (i.e., the function that produced the curv
 
 This function maps the variable $x$ onto the interval $(0, 1)$. In Figure \@ref(fig:chd3) we saw that the logistic function can provide a nice model for probabilities. And, because of this, the logistic function is also non-linear function of $x$ (i.e., it is sigmoidal or S-shaped). 
 
-However, a nice thing about the logistic function is that we can easily transform it into a linear function of $x$. Since we already know how to deal with linear functions (that is what this whole course has been about!), transforming the logistic into a linear function of $x$ will let us port over a lot of what we know about linear regression to situations in which the outcome variable is binary. In fact, this was part of the motivation for choosing the logistic in the first place, rather than some other S-shaped curve.
+However, a nice thing about the logistic function is that we can easily transform it into a linear function of $x$. Since we already know how to deal with linear functions (that is what this whole course has been about!), transforming the logistic into a linear function of $x$ will let us port over a lot of what we know about linear regression to situations in which the outcome variable is binary. In fact, this was part of the motivation for choosing the logistic function in the first place, rather than some other S-shaped curve.
 
-So, let's see how to get from our S-shaped logistic function of $x$ to a linear function of $x$. A little algebra with \@ref(eq:logistic) shows we can re-express the logistic function in terms of the odds: 
+So, let's see how to get from our S-shaped logistic function of $x$ to a linear function of $x$. A little algebra with \@ref(eq:logistic) shows that we can re-express the logistic function in terms of the odds: 
 
 \[ \frac{p}{1- p} = \exp(x).
 (#eq:exp-odds)
@@ -218,7 +214,7 @@ So, let's see how to get from our S-shaped logistic function of $x$ to a linear 
 
 Note that Equations \@ref(eq:logistic) and \@ref(eq:exp-odds) directly parallel the two expressions in Equation \@ref(eq:p2o). The only difference is that, in the logistic model, the odds are represented as an exponential function of the variable $x$, which is what Equation \@ref(eq:exp-odds) is telling us. 
 
-In order to turn Equation \@ref(eq:exp-odds) into a linear function of x, all we need to do is get rid of the exponent. Do you remember how?? That's right, just take the log (see Section \@ref(math-review-9)): 
+In order to turn Equation \@ref(eq:exp-odds) into a linear function of $x$, all we need to do is get rid of the exponent. Do you remember how?? That's right, just take the log (see Section \@ref(math-review-9)): 
 
 \[  \log\left(\frac{p}{1- p}\right) = x
 (#eq:logit)
@@ -236,15 +232,17 @@ knitr::include_graphics("images/logit.png")
 
 * The left-hand panel shows the logistic function, which is our "intuitive-but-nonlinear" model for probabilities. In terms of our example, this panel is saying that the probability of having CHD is a logistic or S-shaped function of age. 
 
-* The middle panel shows that the odds are an exponential function of $x$. In terms of our example, this means that the odds of having CHD are an exponential function of age. This is the main assumption of the logistic model, and we will revisit this assumption again in section \@ref(assumption-checking-11). 
+* The middle panel shows that the odds are an exponential function of $x$. In terms of our example, this means that the odds of having CHD are an exponential function of age. This is the main assumption of the logistic model, and we will revisit this assumption again below. 
+
+<!-- in section \@ref(assumption-checking-11). -->
 
 * Finally, the right-hand panel shows the "not-really-intuitive-but-definitely-linear" model for the logit. In terms of our example, the logit of having CHD is a linear function of age. 
 
-The logit is going to be our workhorse for logistic regression. In Section \@ref(simple-11), we will replace the variable $x$ with a simple regression model $a + bX$ to get simple logistic regression. In Section \@ref(multiple-11) we will extend simple logistic regression to multiple logistic regression, just like how we did for multiple linear regression. 
+The logit is going to be our workhorse for logistic regression. In Section \@ref(simple-11), we will replace the variable $x$ with a simple regression model $a + bX$ to get simple logistic regression. In Section \@ref(multiple-11) we will extend simple logistic regression to multiple logistic regression, just like we did for multiple linear regression. 
 
-Although the logit is the workhorse, we generally don't want to work with the logit when it comes time to interpret the results. The situation here is a lot like log-linear regression (see Chapter \@ref(chapter-9)). In log-linear regression, we treated $\log(Y)$ as a linear function of our predictor variable(s). However, we didn't want to interpret the model in terms of $\log(Y)$, because, well, who thinks in log units? Instead we wanted an interpretation in terms of the original outcome, $Y$. One of the reasons the log-linear model is widely used is because it provides a nice interpretation in terms of proportional change in $Y$. 
+Although the logit is the workhorse, we generally don't want to work with the logit when it comes time to interpret the results. The situation here is a lot like log-linear regression (see Chapter \@ref(chapter-9)). In log-linear regression, we treated $\log(Y)$ as a linear function of our predictor variable(s). However, we didn't want to interpret the model in terms of $\log(Y)$, because, well, who thinks in log units? Instead we wanted an interpretation in terms of the original outcome, $Y$.
 
-Now, you might have already noted that the relationship between the logit (i.e., $\log(\text{odds})$) and $\text{odds}$ in logistic regression is the same as the relationship between $\log(Y)$ and $Y$ in log-linear regression. The parellel between the two model is as follows: 
+Now, you might have already noted that the relationship between the logit (i.e., $\log(\text{odds})$) and $\text{odds}$ in logistic regression is the same as the relationship between $\log(Y)$ and $Y$ in log-linear regression. The parallel between the two model is as follows: 
 
 * In the log-linear model we interpreted a $b$ unit increase in $\log(Y)$ in terms of an $\exp(b) - 1$ times increase in $Y$ (see Section \@ref(interpretation-9)). 
 
@@ -252,7 +250,7 @@ Now, you might have already noted that the relationship between the logit (i.e.,
 
 So, while we use the logit function for modeling, we typically use the odds for interpretation, with the overall situation being directly parallel to log-linear modeling.
 
-Recently, some authors have argued that people don't really know how to interpret odds properly. These authors suggest that we interpret the logistic model in terms of probabilities, rather than odds. We will discuss how to do this as well.  
+Recently, some authors have argued that people don't really know how to interpret odds properly. These authors suggest that we interpret the logistic model in terms of probabilities, rather than odds. We will discuss how to do this as well.
 
 ### Pop quiz 
 
@@ -273,7 +271,7 @@ knitr::include_graphics("images/logit-table.png")
 
 At this point we have covered the overall logic of how we can model a binary outcome variable like CHD in terms of the logistic function. The overall situation is very similar to, but a bit more complicated than, log-linear regression. The main take aways are
 
-* We use the logit (log-odds) for statistical analysis, because it results in a linear function, and we already know how to deal with linear functions -- that is what everything we have done up until now has been about. 
+* We use the logit (log-odds) for statistical analysis, because it results in a linear function, and we already know how to deal with linear functions. 
 
 * We use the odds for interpretation, because the logistic model leads to proportional change in the odds, in the same way that the log-linear model leads to proportional change in $Y$. 
 
@@ -290,7 +288,7 @@ In this section we move onto logistic regression proper. For the CHD example, th
 
 \[ \text{logit}(CHD) = a + b (\text{age}). \]
 
-We are going to skip a few steps and go right into the interpretation of the R output. Once we know how to interpret the output, we will loop back to discuss technical details in the following sections. 
+We are going to skip a few steps and go right into the interpretation of the R output. Once we know how to interpret the output, we will loop back to discuss technicals details of estimation and inference in the following sections. 
 
 The summary R output for the example is below. The focus for now is just the interpretation of the values under the "Estimate" heading. 
 
@@ -299,7 +297,7 @@ mod2 <- glm(chd ~ age, family = binomial, data = chd.data)
 summary(mod2)
 ```
 
-Plugging the estimates into our logit model, we have the resulting equation
+Plugging the estimates into our logit model, we have the following equation
 
 \[ \text{logit}(CHD) = -5.03  + .11 (\text{age}). \]
 
@@ -314,44 +312,44 @@ While this interpretation is perfectly correct, most applied audiences are not g
 (#eq:OR)
 \]
 
-where $\text{odds}(X)$ are odds of the binary outcome associated with a given value of the predictor $X$. Equation \@ref(eq:OR) is called the *odds ratio* (abbreviated OR) associated with a one-unit increase in $X$. If you compare Equation \@ref(eq:OR) to Equation \@ref(eq:expb), you can see we are using the same trick we used for the (exact) interpretation of log-linear regression. The derivation is also essentially the same (see Section \@ref(OR-derivation-11)). 
+where $\text{odds}(X)$ are the odds of the outcome associated with a given value of the predictor $X$. Equation \@ref(eq:OR) is called the *odds ratio* (abbreviated OR) associated with a one-unit increase in $X$. If you compare Equation \@ref(eq:OR) to Equation \@ref(eq:expb), you can see we are using the same trick we used for the (exact) interpretation of log-linear regression. The derivation is also essentially the same (see Section \@ref(OR-derivation-11)). 
 
 For the CHD example, the OR is
 
 \[ \exp(b) = \exp(.11) = 1.116278 \] 
 
-Just like the log-linear model, we report the results of our analysis in terms of proportion (or percent) change in the odds of CHD associated with each additional year of age: 
+Just like the log-linear model, we report the results of our analysis in terms of proportional (or percentage) change in the odds of CHD associated with each additional year of age: 
 
 * $(\exp(.11) - 1) \times 100 = 11.67$, so a persons' odds of CHD increase 11.67% for each additional year of age. 
 
-In many logistic regression application, the OR is reported instead of (or as well as) the regression coefficients from the logit model. We will discuss how to compute confidence intervals for the OR in Section \@ref(estimation-11). 
+In many logistic regression applications, the OR is reported instead of the regression coefficients from the logit model. <! -- We will discuss how to compute confidence intervals for the OR in Section \@ref(inference-11). -->
 
 Before moving, **please practice your interpretation of the OR in simple logistic regression using the following examples**
 
-* If $b=0$ what is the OR equal to? What is the percent change in the OR for a one unit increase in $X$? 
-* If $b=.25$ what is the OR equal to? What is the percent change in the OR for a one unit increase in $X$? 
-* If $b=-.025$ what is the OR equal to? What is the percent change in the OR for a 10 unit increase in $X$? 
+* If $b=0$ what is the OR equal to? What is the percent change in the odds for a one unit increase in $X$? 
+* If $b=.25$ what is the OR equal to? What is the percent change in the odds for a one unit increase in $X$? 
+* If $b=-.025$ what is the OR equal to? What is the percent change in the odds for a 10 unit increase in $X$? 
 * If the odds increase 100% for a one unit increase in $X$, what $b$ equal to? 
 
 ### Other interpretations: Predicted probabilities
-Another way to interpret the logistic model is in terms of the predicted probabilities. An easy way to obtain a plot of the probabilities in R is to use the `visreg` function
+Another way to interpret the logistic model is in terms of the predicted probabilities, which are plotted below for the example data. 
 
 ```{r, pred-prob, echo = T, fig.cap = "Predicted probabilities", fig.align = 'center'}
 visreg::visreg(mod2, xvar = "age", scale = "response")
 ```
 
-We can read off the probability of CHD for any given age. We might also want to report the probability of CHD for two or more chosen ages, which is an example of the MERV approach to marginal effects:  
+using this plot, we can read off the probability of CHD for any given age. We might also want to report the probability of CHD for two or more chosen ages, which is an example of the MERV approach to marginal effects (see Section  \@ref(inference-for-interactions-6)):  
 
 ```{r}
 library(emmeans)
 emmeans(mod2, specs = "age", at = list(age = c(20, 40)), type = "response")
 ```
 
-The ratio of two probabilities is often called the *risk ratio*. So, we could also that the risk ratio of CHD for someone who is 40 as compared to someone who is 20 is .2947 / .0435 = 6.77. Otherwise stated, the risk of having CHD when you are 40 years old is almost 7 times higher than it is for someone who is 20. 
+The ratio of two probabilities is often called the *risk ratio*. So, we could also say that the risk ratio of CHD for someone who is 40 as compared to someone who is 20 is .2947 / .0435 = 6.77. Otherwise stated, the risk of having CHD when you are 40 years old is almost 7 times higher than it is for someone who is 20. 
 
 ### Other interpretations: Equal odds
 
-Another interpretation of the logistic regression is to report the value of $X$ at which the $\text{odds}$ of the outcome are equal to 1 (equivalently, the probability of the outcome is equal to .5). This idea is illustrated in Figure \@ref(fig:equal-odds). 
+Another interpretation of logistic regression is to report the value of $X$ at which the $\text{odds}$ of the outcome are equal to 1 (equivalently, the probability of the outcome is equal to .5). This idea is illustrated in Figure \@ref(fig:equal-odds). 
 
 ```{r, equal-odds, echo = T, fig.cap = "The Equal Odds Interpretation", fig.align = 'center'}
 x <- data.frame(age = 20:70)
@@ -361,31 +359,33 @@ segments(x0 = 15, y0 = .5, x1 = 48, y1 = .5, lty = 2, lwd = 2)
 segments(x0 = 48, y0 = 0, x1 = 48, y1 = .5, lty = 3, lwd = 2)
 ```
 
-First we find the probability of .5 on the $Y$ axis and then follow the horizontal dashed line to the logistic curve. Then we follow the vertical dashed line down to the value of $age$. This gives use the age at which the probability of CHD is "50-50", or the odds of having CHD versus not having CHD are equal. Based on the plot we can say that, after your 48th birthday, your chances of having CHD are above 50%. 
+First we find the probability of .5 on the $Y$ axis and then follow the horizontal dashed line to the logistic curve. Then we follow the vertical dashed line down to the value of $X$. This gives use the age at which the probability of CHD is "50-50". Based on the plot we can say that, after your 48th birthday, your chances of having CHD are above 50%. 
 
 The math behind this interpretation is below. Since
 
 \[ \log(.5/.5) = \log(1) = 0 \]
 
-We know can solve 
+we can solve 
 
 \[ a + b(\text{age}) = 0 \]
 
-to find that age at which someone has equal odds of CHD. Doing the algebra shows that
+to find the age at which someone has equal odds of CHD. Doing the algebra shows that
 
-\[ \text{age} = - a/b \]
+\[ \text{age} = - a/b. \]
 
 For the example data
 
-\[ \text{age} = - (-5.30) / .11 = 48.18 \]
+\[ \text{age} = - (-5.30) / .11 = 48.18, \]
 
-which confirms the conclusion we made looking at the plot. In general, another way of interpreting regression coefficients in simple logistic regression is to compute $-a / b$, which gives the value of $X$ at which $p(Y = 1) = .5$. 
+which confirms the conclusion we made looking at the plot. 
+
+In summary, another way of interpreting regression coefficients in simple logistic regression is to compute $-a / b$, which gives the value of $X$ at which $p(Y = 1) = .5$. 
 
 ### Other interpretations: Rate of change
 
-Another interpretation is in terms of the slope of the straight line (tangent) through the point $p(CHD) = .5$. This slope of this line describes the approximate rate of change in the probability of CHD for people who are "close to" equal odds.  
+Another interpretation is in terms of the slope of the straight line (tangent) through the point $p(CHD) = .5$. This slope of this line describes the approximate rate of change in the probability of CHD for people who are "close to" the age of equal odds.  
 
-It turns out that the slope of the tangent line is equal to $b/4$. The derivation requires calculus and is omitted, but the line is shown in Figure \@ref(fig:tangent) for our example. 
+It turns out that the slope of the tangent line is equal to $b/4$. The derivation requires calculus and is omitted, but the line for our example is shown in Figure \@ref(fig:tangent). 
 
 ```{r, tangent, echo = T, fig.cap = "The Rate of Change Interpretation", fig.align = 'center'}
 x <- data.frame(age = 20:70)
@@ -394,7 +394,7 @@ plot(x$age, prob, xlab = "age", ylab = "p(CHD)", type = "l", col = "#4B9CD3")
 abline(a = -.815, b = .11/4, lty = 2, lwd = 2)
 ```
 
-For the example data $b / 4 = .11 / 4 = .0275$. So, for every additional year, the predicted probability of CHD increases by .0275 or 2.75%. However, this interpretation only applies to people who "around" the age of equal odds  (48 years old in this example). Looking at the plot, we can see that the approximation is pretty good for people between the ages of 40 and 60. (Note: This is also the age range over which the linear probability model would provide a reasonable approximation). 
+For the example data $b / 4 = .11 / 4 = .0275$. So, for every additional year, the predicted probability of CHD increases by .0275. However, this interpretation only applies to people who "around" the age of equal odds  (48 years old in this example). Looking at the plot, we can see that the approximation is pretty good for people between the ages of 40 and 60. (Note: This is also the age range over which the linear probability model would provide a reasonable approximation). 
 
 ### Summary 
 
@@ -409,17 +409,17 @@ has the following interpretations.
     * The slope ($b$) is how much the predicted log-odds of CHD changes for one unit (year) of increase in age.
 
 * In terms of the odds: 
-    * The exponent of the regression parameter, $\exp(b)$, is odds ratio for one unit of increase in age.
+    * The exponent of the regression parameter, $\exp(b)$, is odds ratio associated with a one unit of increase in age.
     * $(\exp(b) - 1) \times 100$ is the percentage change in the odds of CHD for a one unit increase in age. 
 
 * In terms of predicted probabilities
     * The logistic plot provides a visual summary of how the probability of CHD changes as a function of age. 
     * Predicted probabilities can be reported for specific values of age (MERVs). 
-    * Risk ratios can be computed comparing the predicted probabilities at different ages. 
+    * Risk ratios can be computed to compare the predicted probabilities at different ages. 
     * $–a / b$ corresponds the age at which the probability of having CHD is "50-50"
     * $b / 4$ is the approximate rate of increase (slope) of the probability of having CHD for people close to the "50-50" point.  
 
-**Please write down the numerical values all of the above summaries for the CHD example, except the predicted probability plot. You can select any values of age to reported the predicted probabilities and risk ratios, and you can "eye ball" the probabilities using Figure \@ref(fig:pred-prob).**  
+**Please write down the numerical values of each of the above summaries for the CHD example (except the predicted probability plot). You can select any values of age to report the predicted probabilities and risk ratios, and you can "eye ball" the probabilities using Figure \@ref(fig:pred-prob).**  
 
 ## Estimation {#estimation-11} 
 
@@ -427,33 +427,37 @@ has the following interpretations.
 codefolder::bookdown(init = "hide", style = button)
 ```
 
-The previous section discussed the interpretation of the simple logistic regression model. In this section we discuss how to get the numbers in the “Estimate” column of the summary table. 
+The previous section discussed the interpretation of the simple logistic regression model. In this section we discuss how to get the numbers in the “Estimate” column of the R summary table. 
 
-In logistic regression, we use maximum likelihood (ML) rather than OLS to estimate the model parameters. The resulting estimates are called the maximum likelihood estimates (MLEs). By understanding ML estimation, we will also be able to address 
+The sort version: In logistic regression, we use maximum likelihood (ML) rather than OLS to estimate the model parameters. The resulting estimates are called the maximum likelihood estimates (MLEs). 
 
-* Testing model parameters for significance, confidence intervals, etc (Section \@ref(inference-11)) 
-* The assumptions of logistic regression, and how to check them (Section \@ref(assumption-checking-11)) 
+By understanding ML estimation, we will also be able to address 
+
+* Testing model parameters for significance, confidence intervals, etc <!-- (Section \@ref(inference-11)) --> 
+* The assumptions of logistic regression, and how to check them < !-- (Section \@ref(assumption-checking-11)) -->
+
+### ML vs OLS
 
 Let's first contrast ML with OLS. In linear regression, OLS regression leads to "closed form" expressions for the regression coefficients (e.g., Section \@ref(ols). This means we can write down an explicit algebraic equation for the regression coefficients, e.g., 
 
 \[ b = \text{cov}(Y, X) / s^2_X \] 
 
-As we discussed in the introduction, these estimates aren't usually very good when the outcome is binary. So, instead we use ML. 
+As we discussed in the introduction, these estimates usually aren't very good when the outcome is binary. So, instead we use ML. 
 
-The first thing to know about ML with logistic regression is that it does not lead to closed form expression for the regression coefficients. In other words, using algebra we can never write down the other side of the equation $b = ?$. Instead, we define the regression parameters *algorithmically* -- whatever values results from maximizing the likelihood is the value we choose for $b$. We discussed the difference between algebraic and algorithmic definitions when we compared the mean and median last semester. For now, the take home message is
+The first thing to know about ML with logistic regression is that it does not lead to closed form expression for the regression coefficients. In other words, using algebra we can never write down the other side of the equation $b = ?$. Instead, we define the regression parameters *algorithmically* -- whatever value results from maximizing the likelihood is the value we choose for $b$. We discussed the difference between algebraic and algorithmic definitions when we compared the mean and median last semester. For now, the take home message is
 
 * In OLS, we didn’t really have to know much about least squares per se, because we could just work with the formulas for the regression coefficients.  
 * In ML, we really do need to know about likelihood, because we don’t get any other formulas for the coefficients.
 
 ### The likelihood 
 
-The likelihood is a function that tells us the probability of sample being drawn from a population. For our example data, we have a sample $N = 100$ in which there are 43 people with CHD and 57 people without CHD. The likelihood tell us the probability of this sample being drawn from the population. In particular, when the variable of interest is binary, it is called the *binomial* likelihood. 
+The likelihood is a function that tells us the probability of sample being drawn from a population. For our example data, we have $N = 100$ cases in which there are 43 people with CHD and 57 people without CHD. The likelihood tell us the probability of this sample being drawn from the population. In particular, when the variable of interest is binary, it is called the *binomial* likelihood. 
 
 The building block of the binomial likelihood is the probability of a person having CHD. For person $i$, we use the shorthand notation
 
 \[ p_i = p(CHD_i = 1) \] 
 
-to denote the probability of having CHD. You might be thinking -- don’t we already know if person $i$ has CHD or not? Isn't that is what our data tell us!
+to denote the probability of having CHD. You might be thinking -- don’t we already know if person $i$ has CHD or not? Isn't that is what our data tell us!?
 
 That is true, but recall that we are imaging that person $i$ is sampled from a population, and in that population there are people who are exactly like person $i$ with respect to the predictors we have collected (e.g., of exactly the same age). Some proportion of those people will have CHD, and that is the probability we are interested in -- e.g., the probability of a person of age 48 having CHD in the population.
 
@@ -477,9 +481,9 @@ For a sample of $N$ **independent** persons (i.e., a simple random sample), the 
 (#eq:L)
 \] 
 
-The symbol $\Pi$ is shorthand for multiplication, just like $\Sigma$ is used for addition. If we plug into Equation \@ref(eq:L) using CHD = 1 for 43 people and CHD = 0 for 57 people, this will give us the likelihood for example data set. 
+The symbol $\Pi$ is shorthand for multiplication, just like $\Sigma$ is used for addition. If we plug into Equation \@ref(eq:L) using $CHD = 1$ for 43 people and $CHD = 0$ for 57 people, this will give us the likelihood for example data set. 
 
-Of course, the trick is that we need to know $p_i$. This is where the logistic regression model comes it -- it provides a probability of CHD for each person in our sample. In maximum likelihood estimation, we select the coefficients of the logistic regression model so that the likelihood in Equation \@ref(eq:L) is maximized. This is called the principal of maximimum likelihood. It says "chose the model parameters that make the observed data most likely". 
+Of course, the trick is that we need to know $p_i$. This is where the logistic regression model comes in -- it provides a probability of CHD for each person in our sample. In maximum likelihood estimation, we select the coefficients of the logistic regression model so that the likelihood in Equation \@ref(eq:L) is maximized. This is called the principal of maximum likelihood -- it says "chose the model parameters that make the observed data most likely."
 
 Maximizing the likelihood is complicated stuff, but that is what `R` is for. One complication that we should be aware of is that the likelihood can cause "underflow" issues in computing, because we are multiplying together lots of numbers less than 1, which can lead to very, very small values -- too small for a computer represent. To address this issue, we usually work with the log-likelihood, rather than the likelihood: 
 
@@ -499,7 +503,7 @@ Lets take a look at our summary output for the example data again:
 summary(mod2)
 ```
 
-This question has addressed the question: how do we get the numbers under the "Estimate" column. The answer is maximum likelihood (ML)! In short: 
+This section has addressed the question: how do we get the numbers under the "Estimate" column? The answer is maximum likelihood (ML). In short: 
 
 * The likelihood function tells us the probability of sampling a given set of cases from a population – sometimes it is referred to as "the probability of the data". 
    * When the variable of interest is binary, it is called the binomial likelihood. 
@@ -508,9 +512,9 @@ This question has addressed the question: how do we get the numbers under the "E
     * This is sometimes called the principal of maximum likelihood. 
     * The resulting values are called the maximum likelihood estimates (MLEs). 
 
-* Practically, ML is accomplished using a computer algorithm -- we can't write down algebraic expressions for the MLEs, we only have the algorithmic definition (FYI: the algorithm R uses is a version of Newton-Raephson called Fisher Scoring). 
+* In logistic regression, ML is accomplished using a computer algorithm -- we can't write down algebraic expressions for the MLEs, we only have the algorithmic definition (FYI: the algorithm R uses is a version of Newton-Raephson called Fisher Scoring). 
 
-The next section address where the rest of the numbers in the R output come from. Before moving on, please write down an answer to the following question: **In a few sentences, describe how the model parameters in logistic regression are estimated and how this compares to OLS regression**. 
+To check your knowledge before moving on: **In a few sentences, describe how the model parameters in logistic regression are estimated and how this compares to OLS regression**. 
 
 <!-- 
 ## Inference {inference-11}

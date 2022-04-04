@@ -24,7 +24,7 @@
 <meta name="author" content="Peter Halpin" />
 
 
-<meta name="date" content="2022-04-02" />
+<meta name="date" content="2022-04-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -459,8 +459,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="11.4" data-path="11.4-estimation-11.html"><a href="11.4-estimation-11.html"><i class="fa fa-check"></i><b>11.4</b> Estimation</a>
 <ul>
-<li class="chapter" data-level="11.4.1" data-path="11.4-estimation-11.html"><a href="11.4-estimation-11.html#the-likelihood"><i class="fa fa-check"></i><b>11.4.1</b> The likelihood</a></li>
-<li class="chapter" data-level="11.4.2" data-path="11.4-estimation-11.html"><a href="11.4-estimation-11.html#summary-13"><i class="fa fa-check"></i><b>11.4.2</b> Summary</a></li>
+<li class="chapter" data-level="11.4.1" data-path="11.4-estimation-11.html"><a href="11.4-estimation-11.html#ml-vs-ols"><i class="fa fa-check"></i><b>11.4.1</b> ML vs OLS</a></li>
+<li class="chapter" data-level="11.4.2" data-path="11.4-estimation-11.html"><a href="11.4-estimation-11.html#the-likelihood"><i class="fa fa-check"></i><b>11.4.2</b> The likelihood</a></li>
+<li class="chapter" data-level="11.4.3" data-path="11.4-estimation-11.html"><a href="11.4-estimation-11.html#summary-13"><i class="fa fa-check"></i><b>11.4.3</b> Summary</a></li>
 </ul></li>
 <li class="chapter" data-level="11.5" data-path="11.5-workbook-7.html"><a href="11.5-workbook-7.html"><i class="fa fa-check"></i><b>11.5</b> Workbook</a></li>
 </ul></li>
@@ -516,7 +517,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </script>
 <p>In this section we move onto logistic regression proper. For the CHD example, the model we are interested in is</p>
 <p><span class="math display">\[ \text{logit}(CHD) = a + b (\text{age}). \]</span></p>
-<p>We are going to skip a few steps and go right into the interpretation of the R output. Once we know how to interpret the output, we will loop back to discuss technical details in the following sections.</p>
+<p>We are going to skip a few steps and go right into the interpretation of the R output. Once we know how to interpret the output, we will loop back to discuss technicals details of estimation and inference in the following sections.</p>
 <p>The summary R output for the example is below. The focus for now is just the interpretation of the values under the “Estimate” heading.</p>
 <div class="sourceCode" id="cb394"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb394-1"><a href="11.3-simple-11.html#cb394-1" aria-hidden="true" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">glm</span>(chd <span class="sc">~</span> age, <span class="at">family =</span> binomial, <span class="at">data =</span> chd.data)</span>
 <span id="cb394-2"><a href="11.3-simple-11.html#cb394-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod2)</span></code></pre></div>
@@ -542,7 +543,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## AIC: 111.4
 ## 
 ## Number of Fisher Scoring iterations: 4</code></pre>
-<p>Plugging the estimates into our logit model, we have the resulting equation</p>
+<p>Plugging the estimates into our logit model, we have the following equation</p>
 <p><span class="math display">\[ \text{logit}(CHD) = -5.03  + .11 (\text{age}). \]</span></p>
 <p>The “literal” interpretation of this equation is:</p>
 <ul>
@@ -553,24 +554,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><span class="math display" id="eq:OR">\[ \frac{\text{odds} (X+1)}{\text{odds}(X)} = \exp(b)
 \tag{11.7}
 \]</span></p>
-<p>where <span class="math inline">\(\text{odds}(X)\)</span> are odds of the binary outcome associated with a given value of the predictor <span class="math inline">\(X\)</span>. Equation <a href="11.3-simple-11.html#eq:OR">(11.7)</a> is called the <em>odds ratio</em> (abbreviated OR) associated with a one-unit increase in <span class="math inline">\(X\)</span>. If you compare Equation <a href="11.3-simple-11.html#eq:OR">(11.7)</a> to Equation <a href="9.5-interpretation-9.html#eq:expb">(9.2)</a>, you can see we are using the same trick we used for the (exact) interpretation of log-linear regression. The derivation is also essentially the same (see Section <a href="#OR-derivation-11"><strong>??</strong></a>).</p>
+<p>where <span class="math inline">\(\text{odds}(X)\)</span> are the odds of the outcome associated with a given value of the predictor <span class="math inline">\(X\)</span>. Equation <a href="11.3-simple-11.html#eq:OR">(11.7)</a> is called the <em>odds ratio</em> (abbreviated OR) associated with a one-unit increase in <span class="math inline">\(X\)</span>. If you compare Equation <a href="11.3-simple-11.html#eq:OR">(11.7)</a> to Equation <a href="9.5-interpretation-9.html#eq:expb">(9.2)</a>, you can see we are using the same trick we used for the (exact) interpretation of log-linear regression. The derivation is also essentially the same (see Section <a href="#OR-derivation-11"><strong>??</strong></a>).</p>
 <p>For the CHD example, the OR is</p>
 <p><span class="math display">\[ \exp(b) = \exp(.11) = 1.116278 \]</span></p>
-<p>Just like the log-linear model, we report the results of our analysis in terms of proportion (or percent) change in the odds of CHD associated with each additional year of age:</p>
+<p>Just like the log-linear model, we report the results of our analysis in terms of proportional (or percentage) change in the odds of CHD associated with each additional year of age:</p>
 <ul>
 <li><span class="math inline">\((\exp(.11) - 1) \times 100 = 11.67\)</span>, so a persons’ odds of CHD increase 11.67% for each additional year of age.</li>
 </ul>
-<p>In many logistic regression application, the OR is reported instead of (or as well as) the regression coefficients from the logit model. We will discuss how to compute confidence intervals for the OR in Section <a href="11.4-estimation-11.html#estimation-11">11.4</a>.</p>
+<p>In many logistic regression applications, the OR is reported instead of the regression coefficients from the logit model. &lt;! – We will discuss how to compute confidence intervals for the OR in Section <a href="#inference-11"><strong>??</strong></a>. –&gt;</p>
 <p>Before moving, <strong>please practice your interpretation of the OR in simple logistic regression using the following examples</strong></p>
 <ul>
-<li>If <span class="math inline">\(b=0\)</span> what is the OR equal to? What is the percent change in the OR for a one unit increase in <span class="math inline">\(X\)</span>?</li>
-<li>If <span class="math inline">\(b=.25\)</span> what is the OR equal to? What is the percent change in the OR for a one unit increase in <span class="math inline">\(X\)</span>?</li>
-<li>If <span class="math inline">\(b=-.025\)</span> what is the OR equal to? What is the percent change in the OR for a 10 unit increase in <span class="math inline">\(X\)</span>?</li>
+<li>If <span class="math inline">\(b=0\)</span> what is the OR equal to? What is the percent change in the odds for a one unit increase in <span class="math inline">\(X\)</span>?</li>
+<li>If <span class="math inline">\(b=.25\)</span> what is the OR equal to? What is the percent change in the odds for a one unit increase in <span class="math inline">\(X\)</span>?</li>
+<li>If <span class="math inline">\(b=-.025\)</span> what is the OR equal to? What is the percent change in the odds for a 10 unit increase in <span class="math inline">\(X\)</span>?</li>
 <li>If the odds increase 100% for a one unit increase in <span class="math inline">\(X\)</span>, what <span class="math inline">\(b\)</span> equal to?</li>
 </ul>
 <div id="other-interpretations-predicted-probabilities" class="section level3" number="11.3.1">
 <h3><span class="header-section-number">11.3.1</span> Other interpretations: Predicted probabilities</h3>
-<p>Another way to interpret the logistic model is in terms of the predicted probabilities. An easy way to obtain a plot of the probabilities in R is to use the <code>visreg</code> function</p>
+<p>Another way to interpret the logistic model is in terms of the predicted probabilities, which are plotted below for the example data.</p>
 <div class="sourceCode" id="cb396"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb396-1"><a href="11.3-simple-11.html#cb396-1" aria-hidden="true" tabindex="-1"></a>visreg<span class="sc">::</span><span class="fu">visreg</span>(mod2, <span class="at">xvar =</span> <span class="st">&quot;age&quot;</span>, <span class="at">scale =</span> <span class="st">&quot;response&quot;</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:pred-prob"></span>
 <img src="_main_files/figure-html/pred-prob-1.png" alt="Predicted probabilities" width="672" />
@@ -578,7 +579,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 Figure 11.9: Predicted probabilities
 </p>
 </div>
-<p>We can read off the probability of CHD for any given age. We might also want to report the probability of CHD for two or more chosen ages, which is an example of the MERV approach to marginal effects:</p>
+<p>using this plot, we can read off the probability of CHD for any given age. We might also want to report the probability of CHD for two or more chosen ages, which is an example of the MERV approach to marginal effects (see Section <a href="6.4-inference-for-interactions-6.html#inference-for-interactions-6">6.4</a>):</p>
 <div class="sourceCode" id="cb397"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb397-1"><a href="11.3-simple-11.html#cb397-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span>
 <span id="cb397-2"><a href="11.3-simple-11.html#cb397-2" aria-hidden="true" tabindex="-1"></a><span class="fu">emmeans</span>(mod2, <span class="at">specs =</span> <span class="st">&quot;age&quot;</span>, <span class="at">at =</span> <span class="fu">list</span>(<span class="at">age =</span> <span class="fu">c</span>(<span class="dv">20</span>, <span class="dv">40</span>)), <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)</span></code></pre></div>
 <pre><code>##  age   prob     SE  df asymp.LCL asymp.UCL
@@ -587,11 +588,11 @@ Figure 11.9: Predicted probabilities
 ## 
 ## Confidence level used: 0.95 
 ## Intervals are back-transformed from the logit scale</code></pre>
-<p>The ratio of two probabilities is often called the <em>risk ratio</em>. So, we could also that the risk ratio of CHD for someone who is 40 as compared to someone who is 20 is .2947 / .0435 = 6.77. Otherwise stated, the risk of having CHD when you are 40 years old is almost 7 times higher than it is for someone who is 20.</p>
+<p>The ratio of two probabilities is often called the <em>risk ratio</em>. So, we could also say that the risk ratio of CHD for someone who is 40 as compared to someone who is 20 is .2947 / .0435 = 6.77. Otherwise stated, the risk of having CHD when you are 40 years old is almost 7 times higher than it is for someone who is 20.</p>
 </div>
 <div id="other-interpretations-equal-odds" class="section level3" number="11.3.2">
 <h3><span class="header-section-number">11.3.2</span> Other interpretations: Equal odds</h3>
-<p>Another interpretation of the logistic regression is to report the value of <span class="math inline">\(X\)</span> at which the <span class="math inline">\(\text{odds}\)</span> of the outcome are equal to 1 (equivalently, the probability of the outcome is equal to .5). This idea is illustrated in Figure <a href="11.3-simple-11.html#fig:equal-odds">11.10</a>.</p>
+<p>Another interpretation of logistic regression is to report the value of <span class="math inline">\(X\)</span> at which the <span class="math inline">\(\text{odds}\)</span> of the outcome are equal to 1 (equivalently, the probability of the outcome is equal to .5). This idea is illustrated in Figure <a href="11.3-simple-11.html#fig:equal-odds">11.10</a>.</p>
 <div class="sourceCode" id="cb399"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb399-1"><a href="11.3-simple-11.html#cb399-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">age =</span> <span class="dv">20</span><span class="sc">:</span><span class="dv">70</span>)</span>
 <span id="cb399-2"><a href="11.3-simple-11.html#cb399-2" aria-hidden="true" tabindex="-1"></a>prob <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod2, <span class="at">newdata =</span> x, <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)</span>
 <span id="cb399-3"><a href="11.3-simple-11.html#cb399-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x<span class="sc">$</span>age, prob, <span class="at">xlab =</span> <span class="st">&quot;age&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;p(CHD)&quot;</span>, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span>
@@ -603,21 +604,22 @@ Figure 11.9: Predicted probabilities
 Figure 11.10: The Equal Odds Interpretation
 </p>
 </div>
-<p>First we find the probability of .5 on the <span class="math inline">\(Y\)</span> axis and then follow the horizontal dashed line to the logistic curve. Then we follow the vertical dashed line down to the value of <span class="math inline">\(age\)</span>. This gives use the age at which the probability of CHD is “50-50,” or the odds of having CHD versus not having CHD are equal. Based on the plot we can say that, after your 48th birthday, your chances of having CHD are above 50%.</p>
+<p>First we find the probability of .5 on the <span class="math inline">\(Y\)</span> axis and then follow the horizontal dashed line to the logistic curve. Then we follow the vertical dashed line down to the value of <span class="math inline">\(X\)</span>. This gives use the age at which the probability of CHD is “50-50.” Based on the plot we can say that, after your 48th birthday, your chances of having CHD are above 50%.</p>
 <p>The math behind this interpretation is below. Since</p>
 <p><span class="math display">\[ \log(.5/.5) = \log(1) = 0 \]</span></p>
-<p>We know can solve</p>
+<p>we can solve</p>
 <p><span class="math display">\[ a + b(\text{age}) = 0 \]</span></p>
-<p>to find that age at which someone has equal odds of CHD. Doing the algebra shows that</p>
-<p><span class="math display">\[ \text{age} = - a/b \]</span></p>
+<p>to find the age at which someone has equal odds of CHD. Doing the algebra shows that</p>
+<p><span class="math display">\[ \text{age} = - a/b. \]</span></p>
 <p>For the example data</p>
-<p><span class="math display">\[ \text{age} = - (-5.30) / .11 = 48.18 \]</span></p>
-<p>which confirms the conclusion we made looking at the plot. In general, another way of interpreting regression coefficients in simple logistic regression is to compute <span class="math inline">\(-a / b\)</span>, which gives the value of <span class="math inline">\(X\)</span> at which <span class="math inline">\(p(Y = 1) = .5\)</span>.</p>
+<p><span class="math display">\[ \text{age} = - (-5.30) / .11 = 48.18, \]</span></p>
+<p>which confirms the conclusion we made looking at the plot.</p>
+<p>In summary, another way of interpreting regression coefficients in simple logistic regression is to compute <span class="math inline">\(-a / b\)</span>, which gives the value of <span class="math inline">\(X\)</span> at which <span class="math inline">\(p(Y = 1) = .5\)</span>.</p>
 </div>
 <div id="other-interpretations-rate-of-change" class="section level3" number="11.3.3">
 <h3><span class="header-section-number">11.3.3</span> Other interpretations: Rate of change</h3>
-<p>Another interpretation is in terms of the slope of the straight line (tangent) through the point <span class="math inline">\(p(CHD) = .5\)</span>. This slope of this line describes the approximate rate of change in the probability of CHD for people who are “close to” equal odds.</p>
-<p>It turns out that the slope of the tangent line is equal to <span class="math inline">\(b/4\)</span>. The derivation requires calculus and is omitted, but the line is shown in Figure <a href="11.3-simple-11.html#fig:tangent">11.11</a> for our example.</p>
+<p>Another interpretation is in terms of the slope of the straight line (tangent) through the point <span class="math inline">\(p(CHD) = .5\)</span>. This slope of this line describes the approximate rate of change in the probability of CHD for people who are “close to” the age of equal odds.</p>
+<p>It turns out that the slope of the tangent line is equal to <span class="math inline">\(b/4\)</span>. The derivation requires calculus and is omitted, but the line for our example is shown in Figure <a href="11.3-simple-11.html#fig:tangent">11.11</a>.</p>
 <div class="sourceCode" id="cb400"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb400-1"><a href="11.3-simple-11.html#cb400-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">age =</span> <span class="dv">20</span><span class="sc">:</span><span class="dv">70</span>)</span>
 <span id="cb400-2"><a href="11.3-simple-11.html#cb400-2" aria-hidden="true" tabindex="-1"></a>prob <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod2, <span class="at">newdata =</span> x, <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)</span>
 <span id="cb400-3"><a href="11.3-simple-11.html#cb400-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x<span class="sc">$</span>age, prob, <span class="at">xlab =</span> <span class="st">&quot;age&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;p(CHD)&quot;</span>, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span>
@@ -628,7 +630,7 @@ Figure 11.10: The Equal Odds Interpretation
 Figure 11.11: The Rate of Change Interpretation
 </p>
 </div>
-<p>For the example data <span class="math inline">\(b / 4 = .11 / 4 = .0275\)</span>. So, for every additional year, the predicted probability of CHD increases by .0275 or 2.75%. However, this interpretation only applies to people who “around” the age of equal odds (48 years old in this example). Looking at the plot, we can see that the approximation is pretty good for people between the ages of 40 and 60. (Note: This is also the age range over which the linear probability model would provide a reasonable approximation).</p>
+<p>For the example data <span class="math inline">\(b / 4 = .11 / 4 = .0275\)</span>. So, for every additional year, the predicted probability of CHD increases by .0275. However, this interpretation only applies to people who “around” the age of equal odds (48 years old in this example). Looking at the plot, we can see that the approximation is pretty good for people between the ages of 40 and 60. (Note: This is also the age range over which the linear probability model would provide a reasonable approximation).</p>
 </div>
 <div id="summary-12" class="section level3" number="11.3.4">
 <h3><span class="header-section-number">11.3.4</span> Summary</h3>
@@ -643,19 +645,19 @@ Figure 11.11: The Rate of Change Interpretation
 </ul></li>
 <li>In terms of the odds:
 <ul>
-<li>The exponent of the regression parameter, <span class="math inline">\(\exp(b)\)</span>, is odds ratio for one unit of increase in age.</li>
+<li>The exponent of the regression parameter, <span class="math inline">\(\exp(b)\)</span>, is odds ratio associated with a one unit of increase in age.</li>
 <li><span class="math inline">\((\exp(b) - 1) \times 100\)</span> is the percentage change in the odds of CHD for a one unit increase in age.</li>
 </ul></li>
 <li>In terms of predicted probabilities
 <ul>
 <li>The logistic plot provides a visual summary of how the probability of CHD changes as a function of age.</li>
 <li>Predicted probabilities can be reported for specific values of age (MERVs).</li>
-<li>Risk ratios can be computed comparing the predicted probabilities at different ages.</li>
+<li>Risk ratios can be computed to compare the predicted probabilities at different ages.</li>
 <li><span class="math inline">\(–a / b\)</span> corresponds the age at which the probability of having CHD is “50-50”</li>
 <li><span class="math inline">\(b / 4\)</span> is the approximate rate of increase (slope) of the probability of having CHD for people close to the “50-50” point.</li>
 </ul></li>
 </ul>
-<p><strong>Please write down the numerical values all of the above summaries for the CHD example, except the predicted probability plot. You can select any values of age to reported the predicted probabilities and risk ratios, and you can “eye ball” the probabilities using Figure <a href="11.3-simple-11.html#fig:pred-prob">11.9</a>.</strong></p>
+<p><strong>Please write down the numerical values of each of the above summaries for the CHD example (except the predicted probability plot). You can select any values of age to report the predicted probabilities and risk ratios, and you can “eye ball” the probabilities using Figure <a href="11.3-simple-11.html#fig:pred-prob">11.9</a>.</strong></p>
 </div>
 </div>
             </section>

@@ -24,7 +24,7 @@
 <meta name="author" content="Peter Halpin" />
 
 
-<meta name="date" content="2022-04-02" />
+<meta name="date" content="2022-04-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -459,8 +459,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="11.4" data-path="11.4-estimation-11.html"><a href="11.4-estimation-11.html"><i class="fa fa-check"></i><b>11.4</b> Estimation</a>
 <ul>
-<li class="chapter" data-level="11.4.1" data-path="11.4-estimation-11.html"><a href="11.4-estimation-11.html#the-likelihood"><i class="fa fa-check"></i><b>11.4.1</b> The likelihood</a></li>
-<li class="chapter" data-level="11.4.2" data-path="11.4-estimation-11.html"><a href="11.4-estimation-11.html#summary-13"><i class="fa fa-check"></i><b>11.4.2</b> Summary</a></li>
+<li class="chapter" data-level="11.4.1" data-path="11.4-estimation-11.html"><a href="11.4-estimation-11.html#ml-vs-ols"><i class="fa fa-check"></i><b>11.4.1</b> ML vs OLS</a></li>
+<li class="chapter" data-level="11.4.2" data-path="11.4-estimation-11.html"><a href="11.4-estimation-11.html#the-likelihood"><i class="fa fa-check"></i><b>11.4.2</b> The likelihood</a></li>
+<li class="chapter" data-level="11.4.3" data-path="11.4-estimation-11.html"><a href="11.4-estimation-11.html#summary-13"><i class="fa fa-check"></i><b>11.4.3</b> Summary</a></li>
 </ul></li>
 <li class="chapter" data-level="11.5" data-path="11.5-workbook-7.html"><a href="11.5-workbook-7.html"><i class="fa fa-check"></i><b>11.5</b> Workbook</a></li>
 </ul></li>
@@ -508,7 +509,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>We will see this basic approach again in this chapter. In fact, its kind of a general-purpose hack for quantitative research – when you are faced with a problem you don’t know how to deal with, turn it into something you do know how to deal with. Certainly this is not the most creative approach, but it has the advantage of letting us “port over” many of the tools we have developed in one context (regression with a continuous outcome) into a new context (regression with a binary outcome).</p>
 <p>In terms of statistical modeling, the move to binary outcome variables is a pretty big deal. Everything we have done up until now has focused on OLS regression, using the same basic principles we discussed in Chapters <a href="2-chapter-2.html#chapter-2">2</a> and <a href="4-chapter-4.html#chapter-4">4</a>. However, logistic regression takes us into the wider framework of <em>generalized linear models</em> (GLMs), which are estimated using maximum likelihood (ML) rather than OLS. Thus we will need to start at the “ground floor” to build up our knowledge of logistic regression, which then provides a stepping stone to GLMs, which can additionally handle other types of outcome variables (e.g., count data, ordered categorical data).</p>
 <p>Although we will focus on logistic regression, it should be noted that researchers who have a strong preference for OLS methods (AKA economists) often approach binary data using the “linear probability model,” which is just OLS with the binary outcome. This approach violates all of the assumptions of linear regression, can lead to predicted probabilities outside of the range [0,1], produces incorrect standard errors for model parameters, and is, in a word, wrong. Yet, despite all this, it works pretty well in some situations and has the benefit of being much easier to interpret than logistic regression. We will point out the situations in which the linear probability model is “close enough” in Section <a href="11.2-logit-11.html#logit-11">11.2</a>.</p>
-<p>Since we are starting with a new modeling approach, let’s kick things of with a new example.</p>
+<p>Since we are starting with a new modeling approach, let’s kick things off with a new example.</p>
 </div>
             </section>
 

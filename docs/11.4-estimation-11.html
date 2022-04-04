@@ -24,7 +24,7 @@
 <meta name="author" content="Peter Halpin" />
 
 
-<meta name="date" content="2022-04-02" />
+<meta name="date" content="2022-04-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -459,8 +459,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="11.4" data-path="11.4-estimation-11.html"><a href="11.4-estimation-11.html"><i class="fa fa-check"></i><b>11.4</b> Estimation</a>
 <ul>
-<li class="chapter" data-level="11.4.1" data-path="11.4-estimation-11.html"><a href="11.4-estimation-11.html#the-likelihood"><i class="fa fa-check"></i><b>11.4.1</b> The likelihood</a></li>
-<li class="chapter" data-level="11.4.2" data-path="11.4-estimation-11.html"><a href="11.4-estimation-11.html#summary-13"><i class="fa fa-check"></i><b>11.4.2</b> Summary</a></li>
+<li class="chapter" data-level="11.4.1" data-path="11.4-estimation-11.html"><a href="11.4-estimation-11.html#ml-vs-ols"><i class="fa fa-check"></i><b>11.4.1</b> ML vs OLS</a></li>
+<li class="chapter" data-level="11.4.2" data-path="11.4-estimation-11.html"><a href="11.4-estimation-11.html#the-likelihood"><i class="fa fa-check"></i><b>11.4.2</b> The likelihood</a></li>
+<li class="chapter" data-level="11.4.3" data-path="11.4-estimation-11.html"><a href="11.4-estimation-11.html#summary-13"><i class="fa fa-check"></i><b>11.4.3</b> Summary</a></li>
 </ul></li>
 <li class="chapter" data-level="11.5" data-path="11.5-workbook-7.html"><a href="11.5-workbook-7.html"><i class="fa fa-check"></i><b>11.5</b> Workbook</a></li>
 </ul></li>
@@ -514,27 +515,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     codefolder('pre.sourceCode');
   });
 </script>
-<p>The previous section discussed the interpretation of the simple logistic regression model. In this section we discuss how to get the numbers in the “Estimate” column of the summary table.</p>
-<p>In logistic regression, we use maximum likelihood (ML) rather than OLS to estimate the model parameters. The resulting estimates are called the maximum likelihood estimates (MLEs). By understanding ML estimation, we will also be able to address</p>
+<p>The previous section discussed the interpretation of the simple logistic regression model. In this section we discuss how to get the numbers in the “Estimate” column of the R summary table.</p>
+<p>The sort version: In logistic regression, we use maximum likelihood (ML) rather than OLS to estimate the model parameters. The resulting estimates are called the maximum likelihood estimates (MLEs).</p>
+<p>By understanding ML estimation, we will also be able to address</p>
 <ul>
-<li>Testing model parameters for significance, confidence intervals, etc (Section <a href="#inference-11"><strong>??</strong></a>)</li>
-<li>The assumptions of logistic regression, and how to check them (Section <a href="#assumption-checking-11"><strong>??</strong></a>)</li>
+<li>Testing model parameters for significance, confidence intervals, etc <!-- (Section \@ref(inference-11)) --></li>
+<li>The assumptions of logistic regression, and how to check them &lt; !– (Section <a href="#assumption-checking-11"><strong>??</strong></a>) –&gt;</li>
 </ul>
+<div id="ml-vs-ols" class="section level3" number="11.4.1">
+<h3><span class="header-section-number">11.4.1</span> ML vs OLS</h3>
 <p>Let’s first contrast ML with OLS. In linear regression, OLS regression leads to “closed form” expressions for the regression coefficients (e.g., Section <a href="2.3-ols.html#ols">2.3</a>. This means we can write down an explicit algebraic equation for the regression coefficients, e.g.,</p>
 <p><span class="math display">\[ b = \text{cov}(Y, X) / s^2_X \]</span></p>
-<p>As we discussed in the introduction, these estimates aren’t usually very good when the outcome is binary. So, instead we use ML.</p>
-<p>The first thing to know about ML with logistic regression is that it does not lead to closed form expression for the regression coefficients. In other words, using algebra we can never write down the other side of the equation <span class="math inline">\(b = ?\)</span>. Instead, we define the regression parameters <em>algorithmically</em> – whatever values results from maximizing the likelihood is the value we choose for <span class="math inline">\(b\)</span>. We discussed the difference between algebraic and algorithmic definitions when we compared the mean and median last semester. For now, the take home message is</p>
+<p>As we discussed in the introduction, these estimates usually aren’t very good when the outcome is binary. So, instead we use ML.</p>
+<p>The first thing to know about ML with logistic regression is that it does not lead to closed form expression for the regression coefficients. In other words, using algebra we can never write down the other side of the equation <span class="math inline">\(b = ?\)</span>. Instead, we define the regression parameters <em>algorithmically</em> – whatever value results from maximizing the likelihood is the value we choose for <span class="math inline">\(b\)</span>. We discussed the difference between algebraic and algorithmic definitions when we compared the mean and median last semester. For now, the take home message is</p>
 <ul>
 <li>In OLS, we didn’t really have to know much about least squares per se, because we could just work with the formulas for the regression coefficients.<br />
 </li>
 <li>In ML, we really do need to know about likelihood, because we don’t get any other formulas for the coefficients.</li>
 </ul>
-<div id="the-likelihood" class="section level3" number="11.4.1">
-<h3><span class="header-section-number">11.4.1</span> The likelihood</h3>
-<p>The likelihood is a function that tells us the probability of sample being drawn from a population. For our example data, we have a sample <span class="math inline">\(N = 100\)</span> in which there are 43 people with CHD and 57 people without CHD. The likelihood tell us the probability of this sample being drawn from the population. In particular, when the variable of interest is binary, it is called the <em>binomial</em> likelihood.</p>
+</div>
+<div id="the-likelihood" class="section level3" number="11.4.2">
+<h3><span class="header-section-number">11.4.2</span> The likelihood</h3>
+<p>The likelihood is a function that tells us the probability of sample being drawn from a population. For our example data, we have <span class="math inline">\(N = 100\)</span> cases in which there are 43 people with CHD and 57 people without CHD. The likelihood tell us the probability of this sample being drawn from the population. In particular, when the variable of interest is binary, it is called the <em>binomial</em> likelihood.</p>
 <p>The building block of the binomial likelihood is the probability of a person having CHD. For person <span class="math inline">\(i\)</span>, we use the shorthand notation</p>
 <p><span class="math display">\[ p_i = p(CHD_i = 1) \]</span></p>
-<p>to denote the probability of having CHD. You might be thinking – don’t we already know if person <span class="math inline">\(i\)</span> has CHD or not? Isn’t that is what our data tell us!</p>
+<p>to denote the probability of having CHD. You might be thinking – don’t we already know if person <span class="math inline">\(i\)</span> has CHD or not? Isn’t that is what our data tell us!?</p>
 <p>That is true, but recall that we are imaging that person <span class="math inline">\(i\)</span> is sampled from a population, and in that population there are people who are exactly like person <span class="math inline">\(i\)</span> with respect to the predictors we have collected (e.g., of exactly the same age). Some proportion of those people will have CHD, and that is the probability we are interested in – e.g., the probability of a person of age 48 having CHD in the population.</p>
 <p>The likelihood of CHD for person <span class="math inline">\(i\)</span> is</p>
 <p><span class="math display" id="eq:Li">\[ L_i = p_i \times CHD_i + (1 - p_i) \times (1 - CHD_i) 
@@ -555,8 +560,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><span class="math display" id="eq:L">\[ L = \Pi_{i = 1}^N L_i = L_1 \times  L_2 \times \cdots \times L_N
 \tag{11.9}
 \]</span></p>
-<p>The symbol <span class="math inline">\(\Pi\)</span> is shorthand for multiplication, just like <span class="math inline">\(\Sigma\)</span> is used for addition. If we plug into Equation <a href="11.4-estimation-11.html#eq:L">(11.9)</a> using CHD = 1 for 43 people and CHD = 0 for 57 people, this will give us the likelihood for example data set.</p>
-<p>Of course, the trick is that we need to know <span class="math inline">\(p_i\)</span>. This is where the logistic regression model comes it – it provides a probability of CHD for each person in our sample. In maximum likelihood estimation, we select the coefficients of the logistic regression model so that the likelihood in Equation <a href="11.4-estimation-11.html#eq:L">(11.9)</a> is maximized. This is called the principal of maximimum likelihood. It says “chose the model parameters that make the observed data most likely.”</p>
+<p>The symbol <span class="math inline">\(\Pi\)</span> is shorthand for multiplication, just like <span class="math inline">\(\Sigma\)</span> is used for addition. If we plug into Equation <a href="11.4-estimation-11.html#eq:L">(11.9)</a> using <span class="math inline">\(CHD = 1\)</span> for 43 people and <span class="math inline">\(CHD = 0\)</span> for 57 people, this will give us the likelihood for example data set.</p>
+<p>Of course, the trick is that we need to know <span class="math inline">\(p_i\)</span>. This is where the logistic regression model comes in – it provides a probability of CHD for each person in our sample. In maximum likelihood estimation, we select the coefficients of the logistic regression model so that the likelihood in Equation <a href="11.4-estimation-11.html#eq:L">(11.9)</a> is maximized. This is called the principal of maximum likelihood – it says “chose the model parameters that make the observed data most likely.”</p>
 <p>Maximizing the likelihood is complicated stuff, but that is what <code>R</code> is for. One complication that we should be aware of is that the likelihood can cause “underflow” issues in computing, because we are multiplying together lots of numbers less than 1, which can lead to very, very small values – too small for a computer represent. To address this issue, we usually work with the log-likelihood, rather than the likelihood:</p>
 <p><span class="math display" id="eq:ell">\[ \ell = \log(L) = \log \prod_{i = 1}^N L_i = \sum_{i = 1}^N \log(L_i) 
 \tag{11.10}
@@ -564,8 +569,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The last equality uses the “addition with logs” rule from Section <a href="9.1-math-review-9.html#math-review-9">9.1</a>. For our purposes here, we just need to know that taking the log of the likelihood changes a very small number (the likelihood) into a large negative number (the log-likelihood), which prevents your computer from breaking when doing computations.</p>
 <p>The log-likelihood <span class="math inline">\(ell\)</span> shows up a lot in what follows. In particular, when the log-likelihood is evaluated at the MLEs, <span class="math inline">\(-2 \times \ell\)</span> is called the <em>deviance.</em></p>
 </div>
-<div id="summary-13" class="section level3" number="11.4.2">
-<h3><span class="header-section-number">11.4.2</span> Summary</h3>
+<div id="summary-13" class="section level3" number="11.4.3">
+<h3><span class="header-section-number">11.4.3</span> Summary</h3>
 <p>Lets take a look at our summary output for the example data again:</p>
 <div class="sourceCode" id="cb401"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb401-1"><a href="11.4-estimation-11.html#cb401-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod2)</span></code></pre></div>
 <pre><code>## 
@@ -590,7 +595,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## AIC: 111.4
 ## 
 ## Number of Fisher Scoring iterations: 4</code></pre>
-<p>This question has addressed the question: how do we get the numbers under the “Estimate” column. The answer is maximum likelihood (ML)! In short:</p>
+<p>This section has addressed the question: how do we get the numbers under the “Estimate” column? The answer is maximum likelihood (ML). In short:</p>
 <ul>
 <li>The likelihood function tells us the probability of sampling a given set of cases from a population – sometimes it is referred to as “the probability of the data.”
 <ul>
@@ -601,9 +606,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>This is sometimes called the principal of maximum likelihood.</li>
 <li>The resulting values are called the maximum likelihood estimates (MLEs).</li>
 </ul></li>
-<li>Practically, ML is accomplished using a computer algorithm – we can’t write down algebraic expressions for the MLEs, we only have the algorithmic definition (FYI: the algorithm R uses is a version of Newton-Raephson called Fisher Scoring).</li>
+<li>In logistic regression, ML is accomplished using a computer algorithm – we can’t write down algebraic expressions for the MLEs, we only have the algorithmic definition (FYI: the algorithm R uses is a version of Newton-Raephson called Fisher Scoring).</li>
 </ul>
-<p>The next section address where the rest of the numbers in the R output come from. Before moving on, please write down an answer to the following question: <strong>In a few sentences, describe how the model parameters in logistic regression are estimated and how this compares to OLS regression</strong>.</p>
+<p>To check your knowledge before moving on: <strong>In a few sentences, describe how the model parameters in logistic regression are estimated and how this compares to OLS regression</strong>.</p>
 <!-- 
 ## Inference {inference-11}
 

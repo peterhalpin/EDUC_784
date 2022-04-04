@@ -24,7 +24,7 @@
 <meta name="author" content="Peter Halpin" />
 
 
-<meta name="date" content="2022-04-02" />
+<meta name="date" content="2022-04-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -459,8 +459,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="11.4" data-path="11.4-estimation-11.html"><a href="11.4-estimation-11.html"><i class="fa fa-check"></i><b>11.4</b> Estimation</a>
 <ul>
-<li class="chapter" data-level="11.4.1" data-path="11.4-estimation-11.html"><a href="11.4-estimation-11.html#the-likelihood"><i class="fa fa-check"></i><b>11.4.1</b> The likelihood</a></li>
-<li class="chapter" data-level="11.4.2" data-path="11.4-estimation-11.html"><a href="11.4-estimation-11.html#summary-13"><i class="fa fa-check"></i><b>11.4.2</b> Summary</a></li>
+<li class="chapter" data-level="11.4.1" data-path="11.4-estimation-11.html"><a href="11.4-estimation-11.html#ml-vs-ols"><i class="fa fa-check"></i><b>11.4.1</b> ML vs OLS</a></li>
+<li class="chapter" data-level="11.4.2" data-path="11.4-estimation-11.html"><a href="11.4-estimation-11.html#the-likelihood"><i class="fa fa-check"></i><b>11.4.2</b> The likelihood</a></li>
+<li class="chapter" data-level="11.4.3" data-path="11.4-estimation-11.html"><a href="11.4-estimation-11.html#summary-13"><i class="fa fa-check"></i><b>11.4.3</b> Summary</a></li>
 </ul></li>
 <li class="chapter" data-level="11.5" data-path="11.5-workbook-7.html"><a href="11.5-workbook-7.html"><i class="fa fa-check"></i><b>11.5</b> Workbook</a></li>
 </ul></li>
@@ -514,7 +515,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     codefolder('pre.sourceCode');
   });
 </script>
-<p>As a working example, we will use data contained in the file <code>CHD.RData</code> to explore the relationship between age in years (“age”) and evidence (absence or presence) of coronary heart disease (“chd”). The dataset contain 100 cases. Respondents’ ages range from 20 to 69, while evidence of CHD is coded 0 when it is absent and 1 when it is present. A sample of 20 cases is shown below. (Source: Applied Logistic Regression by David W. Hosmer and Stanley Lemeshow, 1989, John Wiley and Sons.)</p>
+<p>As a working example, we will use data contained in the file <code>CHD.RData</code> to explore the relationship between age in years (“age”) and evidence (absence or presence) of coronary heart disease (“chd”). The data set contains 100 cases. Respondents’ ages range from 20 to 69, while evidence of CHD is coded 0 when it is absent and 1 when it is present. A sample of 20 cases is shown below. (Source: Applied Logistic Regression by David W. Hosmer and Stanley Lemeshow, 1989, John Wiley and Sons.)</p>
 <div class="sourceCode" id="cb385"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb385-1"><a href="11.1-chd-example-11.html#cb385-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;CHD.RData&quot;</span>)</span>
 <span id="cb385-2"><a href="11.1-chd-example-11.html#cb385-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">list</span>(chd.data[<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, <span class="dv">10</span>),<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>], chd.data[<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, <span class="dv">10</span>),<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>]), <span class="at">row.names =</span> F, <span class="at">caption =</span> <span class="st">&quot;The CHD example&quot;</span>)</span></code></pre></div>
 <table class="kable_wrapper">
@@ -630,7 +631,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tr>
 </tbody>
 </table>
-<p>If we regress chd on age using linear regression (i.e., the linear probabilty model), our diagnostic plots look like this:</p>
+<p>If we regress CHD on age using linear regression (i.e., the linear probability model), our diagnostic plots and output look like this:</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:lpm"></span>
 <img src="_main_files/figure-html/lpm-1.png" alt="Linear probability model with CHD example" width="1152" />
 <p class="caption">
