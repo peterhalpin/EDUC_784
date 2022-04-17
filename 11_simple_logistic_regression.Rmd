@@ -516,25 +516,224 @@ This section has addressed the question: how do we get the numbers under the "Es
 
 To check your knowledge before moving on: **In a few sentences, describe how the model parameters in logistic regression are estimated and how this compares to OLS regression**. 
 
-<!-- 
-## Inference {inference-11}
 
-## (Pseudo) R-squared: {#r-squared-11}
+## Inference {#inference-11}
 
 ```{r, echo=FALSE, results='asis'}
 codefolder::bookdown(init = "hide", style = button)
 ```
 
-In linear regression we can use $R^2$ to summarize the relationship between predictors and the outcome, and $\Delta R^2$ to compare models with different predictors. What is the analogous approach for logistic regression? 
+There are three main types of inference for logistic regression: 
+
+* *Wald test of regression coefficients*. The Wald test is a z-test that can be used with large samples ($N > 100$). This is what is reported in R's `summary` output for logistic regression. 
+
+* *Confidence intervals for odds ratios*. Odds ratios can be tested using confidence intervals. If the confidence interval includes the value 1, then the odds ratio is not statistically significant at the chosen level of alpha / confidence. 
+
+* *Likelihood ratio test of nested models*. The likelihood ratio test plays the same role as the F-test of $\Delta R^2$ in OLS regression. It allows you to compare nested models. We will talk about the analogue statistic for $\Delta R^2$ in the next section. 
+In general, the Wald test should only be used when you have a large sample size. The Wald test is just like a z-test, and so it requires an estimate of the standard error of the coefficient being tests. In logistic regression, the standard errors can be too large in small samples, especially if the coefficient is large in value. So, when you have fewer than 100 cases, it is good practice to use (likelihood-based) confidence intervals on the odds ratio, or the likelihood-ratio test for nested models.  
+
+The rest this section briefly illustrates each of these three methods with our example data. 
+
+### Wald test
+
+MLEs have the property that they obey the central limit theorem. This means that the sampling distribution of an MLE becomes more and more like a normal distribution as the sample size gets large. We say that the MLEs are “approximately” or “asymptotically” normal. 
+
+So, if we divide the MLE by its standard error, we get an approximate z-test of statistical significance. This test is called a Wald test, and it is what R reports in the summary table below. You should have no problem interpreting these tests at this point in the course. 
+
+```{r}
+summary(mod1)
+```
+
+In summary: The hypotheses pair $H_0: b = b_0$ versus $H_A: b \neq b_0$ can be tested using the statistic 
+
+\[ z = (\hat b - b_0) / s_{\hat b}, \]
+
+which has a standard normal distribution when the null is true. This tests assumes: 
+
+* $\hat b$ is the MLE (requires that model is correct -- more on this in Section \@ref(assumption-checking-11))
+
+* The sample size is "approximately" infinite -- $N > 100$ is a practical lower limit. 
+
+The same test applies to the intercept, or any other MLE. 
+
+### Odds ratio (OR)
+
+Recall that the OR was introduced as a more intuitive way of interpreting logistic regression. But how do we make inferences about this more interpretable quantity? The answer is to use confidence intervals. The reason we use confidence intervals instead of tests of significance is because the $b = 0$ corresponds to 
+
+\[ OR = \exp(b) = \exp(0) = 1. \] 
+
+So, if the regression coefficient is zero (i.e., no relationship), this means the OR is one. In terms of percent change, $OR = 1$ means 0% percent change: 
+
+\[ (OR - 1) \times 100  = (1 - 1) \times 100 = 0. \]
+
+We can get confidence intervals on the OR using the following two steps:
+
+* Compute the confidence intervals for the regression coefficient $b$, say 
+
+\[ [b_{\text{lower}} ,b_{\text{upper}}]. \]
+
+* Then exponentiate the confidence intervals to get a confidence interval on the OR.
+
+\[ [\exp(b_{\text{lower}}) ,\exp(b_{\text{upper}})]. \]
+
+Below is the result of this procedure for our example.
+
+```{r}
+ci.b <- confint(mod2)
+ci.table <- cbind(coefs = coef(mod1), ci.b)
+exp(ci.table)
+```
+
+**Please write down your interpretation of the OR and its confidence interval for the example**
+
+Note that the confidence intervals produced by $R$ use the (profile) likelihood rather than the Wald test. So, the problems we discussed with the Wald test don't apply to these confidence intervals. (You can get Waldian confidence intervals form the `confint` function, but this is not the default.)
+
+### Likelihood ratio test
+
+The likelihood ratio tests is analogous to the F-test of R-squared change in OLS regression. If you test a model without any predictors versus a model with one predictor, it can be used to replace the Wald test in simple logistic regression. The LR test is also asymptotic, but it does not require estimating the problematic quantity of the Wald test – i.e., the standard error --  so it is often preferred when the sample size is smaller (< 100).
+
+
+Like the F-test of R-squared change, the likelihood ratio tests can also be used to compare any two nested models. So, it used quite a lot, not just to replace the Wald test in simple logistic regression. 
+
+ The tests works as follows:
+
+* Assume that model 1 with $K_1$ predictors is nested within model 2 with $K_2$ predictors (i.e., model 1 has fewer predictors than model 2).
+
+* If it is true that the additional predictors in model 2 all have regression coefficients equal to zero in the population, then it is also true that the models have equal likelihoods, so the ratio of the likeihoods  is 1.   
+
+\[H_0: \frac{L_1}{L_2} = 1\]
+
+* When $H_0$ is true, the statistic
+
+\[ -2 \log \frac{\hat L_1}{\hat L_2} = 2 (\hat \ell_2 - \hat \ell_1) \] 
+
+has a chi-square distribution with degrees of freedom equal to $K_2 - K_1$. Note that the "hats" denote the likelihood (or log-likelihood) evaluated at the MLEs. 
+
+The chi-square distribution is a lot like the F-distribution. In fact, the F-static is a ratio of two chi-square statistics. Some examples are shown below ($k$ denotes the degrees of freedom). 
+
+![Chi-square distributions (Source: https://en.wikipedia.org/wiki/Chi-squared_distribution)]( https://upload.wikimedia.org/wikipedia/commons/3/35/Chi-square_pdf.svg)
+
+
+To conduct an LR test of the model with age as a predictor against a model without this predictor (i.e., the model with only the intercept), we can use the `lrtest` function of the `lmtest` package: 
+
+```{r}
+# The model with no predictors
+mod0 <- glm(chd ~ 1, family = "binomial", data = chd.data)
+
+# The LR test (enter the smaller model first)
+lmtest::lrtest(mod0, mod2)
+```
+**Please write down your interpretation of the LR test for the example give above.**
+
+
+## (Pseudo) R-squared {#r-squared-11}
+
+```{r, echo=FALSE, results='asis'}
+codefolder::bookdown(init = "hide", style = button)
+```
+
+As we have just discussed, the likelihood ratio test in logistic regression is analogous to the F-test of R-squared change in linear regression. But what is the statistic analogous to R-squared?  
+
+There are actually a number of statistics, called *pseudo R-squareds*, that have been developed to address this question. 
+The pseudo R-squareds are not proportions of variance, but they try to come close, each with their own shortcomings and limitations. 
+
+There is no clear “victor” in the battle of pseudo R-squareds, so we will just present one exemplar that is straight forward to compute and interpret
+
+### McFadden's Pseudo R-squared
+
+McFadden’s Pseudo R-squared captures the idea of how much the likelihood improves when adding more predictors into the model. For model 1 nested within model 2, it is computed as:
+
+\[ R^2 = 1 - \frac{\hat \ell_2}{\hat \ell_1} \]
+
+Note that if the model 2 does not "add anything" to model 1, then the two models have the same likelihood (see Section \@ref(inference-11)). Thus 
+
+\[ \frac{\hat \ell_2}{\hat \ell_1} = 1 \] 
+
+which implies $R^2 = 0.$
+
+On the other hand, if model 2 provides perfect predictions for all cases, (i.e., $L_i = 1$ for each $i$), then 
+
+\[ \hat \ell_2 = \sum_i \log L_{2i} = \sum_i \log 1 = 0. \]
+
+Thus 
+ 
+\[ R^2 = 1 - \frac{\hat \ell_2}{\hat \ell_1} = 1 - 0/1 = 1. \] 
+
+In summary, McFadden's Rsquared is equal to zero if model 2 does not add anything to model 1, and is equal to 1 if model 2 provides perfect prediction of each case (but model 1 does not). This is close to, but not quite the same as, the interpretation of $\Delta R^2$ in linear regression. 
+
+Because the McFadden's  R-squared is not about proportion  of variance, we can't interpret it the same way as OLS R-squared. Instead, it is usually interpreted in terms of model *fit*. Here "fit" means how much the model's predictions improve, with zero meaning "not at all" and one meaning "perfect prediction". 
+
+The following output shows McFadden's R-squared for the example data. **Please write down an interpretation of the R-square value** and we will discuss you interpretations in class. You can use the "show code" button to see an example interpretation. 
+
+McFadden's R-squared: 
+```{r}
+# Using the deviance of the models
+1 - mod2$deviance/mod0$deviance
+```
+
+Interpretation (try it by yourself first!):
+
+```{r}
+# Interpretation: Relative a model with no predictors, 
+# the inclusion of age improved model fit by about 21.4% 
+# of that expected by a model with perfect predictions. 
+
+# More elliptically: the inclusion of age improved model 
+# fit by about 21.4\%
+```
 
 
 ## Assumption checking {#assumption-checking-11}
 
-```{r, echo=FALSE, results='asis'}
-codefolder::bookdown(init = "hide", style = button)
+As we saw when deriving the likelihood, there are basically two assumptions when estimating logistic regression by maximum likelihood.
+
+1. The different respondents (person, units) are independent 
+
+2. We have the right model for each individual’s probability of CHD, $p_i$
+
+Assumption 1 is ensured by random sampling and is not an population assumption -- we referred to it as a background assumption last semester. If your data didn't use random sampling, you'll need to use a different modeling approach (e.g, multilevel modeling, see EDUC 935). 
+
+Assumption 2 can be checked with the Hosmer-Lemeshow (HL) test. Intuitively, the HL test compares the empirical probabilities to the model-implied ones. In other words, we want to compare the two curves depicted below: 
+
+```{r, HLtest, echo = F, fig.cap = "The idea behind the HL test", fig.align = 'center'}
+knitr::include_graphics("images/HL_test.png")
 ```
 
-What are the assumptions of logistic regression and how do we check them? 
+The null hypothesis of the HL test is that these two curves are equivalent representations of the data. If we reject the null, we claim that the model does not fit the data. If we retain the null, we conclude the model does fit the data. 
+
+The HL test for the data is reported below. The R-code is shown by default to provide details about how the test is computed.
+
+The function uses 3 arguments:
+
+* `obs` is the binary variable to compute the proportions from.
+* `exp` is the fitted values (predicted probabilities) from the logistic regression.
+* `g` is the number of groups / bins to use. For this example, 5 is a good number. 
+
+```{r}
+## Note: Install package "generalhoslem" if you haven't do so already
+# install.packages("generalhoslem")
+attach(chd.data)
+HLtest <- generalhoslem::logitgof(obs = chd, exp = fitted(mod2), g = 5)
+HLtest
+detach(chd.data)
+```
+
+**Please write down your interpretation of the HL test and be prepared to share you answer in class.**
+
+### More details on the HL test
+The HL statistic is computed using the observed and expected (model-implied) counts in each of the 5 groups. Computational details are given below. 
+
+```{r}
+# Observed and expected counts
+cbind(HLtest$observed, HLtest$expected)
+```
+
+The test statistic is the built up using the differences between the observed and expected values:
+
+$$HL = \sum_{g = 1}^5 \left(\frac{(\text{y0}_g - \text{yhat0}_g)^2}{\text{yhat0}_g} + \frac{(\text{y1}_g - \text{yhat1}_g)^2}{\text{yhat1}_g}\right)$$
+
+Hosmer and Lemeshow showed that this statistic has a chi-square distribution on $df = N_\text{groups} - 2$ when the null hypothesis is true (i.e., when the model fits the data). 
+
 
 ## Multiple logistic regression {#multiple-11}
 
@@ -542,10 +741,8 @@ What are the assumptions of logistic regression and how do we check them?
 codefolder::bookdown(init = "hide", style = button)
 ```
 
-### Interpretation of the model
+We will go through a worked example of multiple logistic regression in class together, focusing on the interpretation of the model coefficients and models with interactions. 
 
-### Interactions 
---> 
 
 ## Workbook
 
@@ -615,3 +812,53 @@ visreg::visreg(mod2, xvar = "age", scale = "response")
 **Section \@ref(estimation-11)**
 
 * In a sentence or two, describe how the model parameters in logistic regression are estimated and how this compares to OLS regression
+
+**Section \@ref(inference-11)**
+
+* Please write down your interpretation of the OR and its confidence interval for the example below
+
+```{r}
+ci.b <- confint(mod2)
+ci.table <- cbind(coefs = coef(mod1), ci.b)
+exp(ci.table)
+```
+
+
+* Please write down your interpretation of the LR test given below
+
+```{r}
+# The model with no predictors
+mod0 <- glm(chd ~ 1, family = "binomial", data = chd.data)
+
+# The LR test (enter the smaller model first)
+lmtest::lrtest(mod0, mod2)
+```
+
+**Section \@ref(r-squared-11)**
+
+* Please write down an interpretation of McFadden's R-squared  for the example and we will discuss you interpretations in class. 
+
+McFadden's R-squared: 
+
+```{r}
+# Using the deviance of the models
+1 - mod2$deviance/mod0$deviance
+```
+
+
+**Section \@ref(assumption-checking-11)**
+
+* Please write down your interpretation of the HL test and be prepared to share you answer in class
+
+```{r}
+## Note: Install package "generalhoslem" if you haven't do so already
+# install.packages("generalhoslem")
+attach(chd.data)
+HLtest <- generalhoslem::logitgof(obs = chd, exp = fitted(mod2), g = 5)
+HLtest
+detach(chd.data)
+```
+
+## Exercises
+
+This section will be added before class, and we will work through the exercises together during class time. 

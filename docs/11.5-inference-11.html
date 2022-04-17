@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>EDUC 784: Regression</title>
+  <title>11.5 Inference | EDUC 784: Regression</title>
   <meta name="description" content="Course notes for EDUC 784" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="EDUC 784: Regression" />
+  <meta property="og:title" content="11.5 Inference | EDUC 784: Regression" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="/images/image1.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="peterhalpin/EDUC_784" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="EDUC 784: Regression" />
+  <meta name="twitter:title" content="11.5 Inference | EDUC 784: Regression" />
   
   <meta name="twitter:description" content="Course notes for EDUC 784" />
   <meta name="twitter:image" content="/images/image1.png" />
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="null" type="image/x-icon" />
-
-<link rel="next" href="1.1-why-this-book.html"/>
+<link rel="prev" href="11.4-estimation-11.html"/>
+<link rel="next" href="11.6-r-squared-11.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -447,22 +447,146 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">EDUC 784: Regression</h1>
-<p class="author"><em>Peter Halpin</em></p>
-<p class="date"><em>2022-04-17</em></p>
+<div id="inference-11" class="section level2">
+<h2><span class="header-section-number">11.5</span> Inference</h2>
+<input onclick="codefolder(&#39;pre.sourceCode&#39;);" type="button" value="Hide Code" id="codefolder-button" style="position: relative; &#10;            top: -25px; &#10;            left: 85%;   &#10;            color: white;&#10;            font-weight: bold;&#10;            background: #4B9CD3;&#10;            border: 1px #3079ED solid;&#10;            box-shadow: inset 0 1px 0 #80B0FB"/>
+<script>
+  function codefolder(query) {
+
+    var x = document.querySelectorAll(query);
+    if (x.length === 0) return;
+
+    function toggle_vis(o) {
+      var d = o.style.display;
+      o.style.display = (d === 'block' || d === '') ? 'none':'block';
+    }
+
+    for (i = 0; i < x.length; i++) {
+      var y = x[i];
+      toggle_vis(y);
+    }
+
+    var elem = document.getElementById("codefolder-button");
+    if (elem.value === "Hide Code") elem.value = "Show Code";
+    else elem.value = "Hide Code";
+  }
+</script>
+<script>
+  window.addEventListener('load', function () {
+    codefolder('pre.sourceCode');
+  });
+</script>
+<p>There are three main types of inference for logistic regression:</p>
+<ul>
+<li><p><em>Wald test of regression coefficients</em>. The Wald test is a z-test that can be used with large samples (<span class="math inline">\(N &gt; 100\)</span>). This is what is reported in R’s <code>summary</code> output for logistic regression.</p></li>
+<li><p><em>Confidence intervals for odds ratios</em>. Odds ratios can be tested using confidence intervals. If the confidence interval includes the value 1, then the odds ratio is not statistically significant at the chosen level of alpha / confidence.</p></li>
+<li><p><em>Likelihood ratio test of nested models</em>. The likelihood ratio test plays the same role as the F-test of <span class="math inline">\(\Delta R^2\)</span> in OLS regression. It allows you to compare nested models. We will talk about the analogue statistic for <span class="math inline">\(\Delta R^2\)</span> in the next section.
+In general, the Wald test should only be used when you have a large sample size. The Wald test is just like a z-test, and so it requires an estimate of the standard error of the coefficient being tests. In logistic regression, the standard errors can be too large in small samples, especially if the coefficient is large in value. So, when you have fewer than 100 cases, it is good practice to use (likelihood-based) confidence intervals on the odds ratio, or the likelihood-ratio test for nested models.</p></li>
+</ul>
+<p>The rest this section briefly illustrates each of these three methods with our example data.</p>
+<div id="wald-test" class="section level3">
+<h3><span class="header-section-number">11.5.1</span> Wald test</h3>
+<p>MLEs have the property that they obey the central limit theorem. This means that the sampling distribution of an MLE becomes more and more like a normal distribution as the sample size gets large. We say that the MLEs are “approximately” or “asymptotically” normal.</p>
+<p>So, if we divide the MLE by its standard error, we get an approximate z-test of statistical significance. This test is called a Wald test, and it is what R reports in the summary table below. You should have no problem interpreting these tests at this point in the course.</p>
+<div class="sourceCode" id="cb405"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb405-1"><a href="11.5-inference-11.html#cb405-1"></a><span class="kw">summary</span>(mod1)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = chd ~ age, data = chd.data)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -0.8579 -0.3399 -0.0727  0.3166  0.9927 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) -0.53796    0.16881   -3.19   0.0019 ** 
+## age          0.02181    0.00368    5.93  4.6e-08 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.429 on 98 degrees of freedom
+## Multiple R-squared:  0.264,  Adjusted R-squared:  0.256 
+## F-statistic: 35.2 on 1 and 98 DF,  p-value: 4.57e-08</code></pre>
+<p>In summary: The hypotheses pair <span class="math inline">\(H_0: b = b_0\)</span> versus <span class="math inline">\(H_A: b \neq b_0\)</span> can be tested using the statistic</p>
+<p><span class="math display">\[ z = (\hat b - b_0) / s_{\hat b}, \]</span></p>
+<p>which has a standard normal distribution when the null is true. This tests assumes:</p>
+<ul>
+<li><p><span class="math inline">\(\hat b\)</span> is the MLE (requires that model is correct – more on this in Section <a href="11.7-assumption-checking-11.html#assumption-checking-11">11.7</a>)</p></li>
+<li><p>The sample size is “approximately” infinite – <span class="math inline">\(N &gt; 100\)</span> is a practical lower limit.</p></li>
+</ul>
+<p>The same test applies to the intercept, or any other MLE.</p>
 </div>
-<div id="about-this-book" class="section level1">
-<h1><span class="header-section-number">Chapter 1</span> About This Book</h1>
-<p>This “ebook” provides the course notes for EDUC 784. It is currently under development, so any feedback is appreciated (e.g., during class, via email, or the edit link in the header). This first chapter is just about how to use the book – the course content starts in Chapter <a href="2-chapter-2.html#chapter-2">2</a>.</p>
+<div id="odds-ratio-or" class="section level3">
+<h3><span class="header-section-number">11.5.2</span> Odds ratio (OR)</h3>
+<p>Recall that the OR was introduced as a more intuitive way of interpreting logistic regression. But how do we make inferences about this more interpretable quantity? The answer is to use confidence intervals. The reason we use confidence intervals instead of tests of significance is because the <span class="math inline">\(b = 0\)</span> corresponds to</p>
+<p><span class="math display">\[ OR = \exp(b) = \exp(0) = 1. \]</span></p>
+<p>So, if the regression coefficient is zero (i.e., no relationship), this means the OR is one. In terms of percent change, <span class="math inline">\(OR = 1\)</span> means 0% percent change:</p>
+<p><span class="math display">\[ (OR - 1) \times 100  = (1 - 1) \times 100 = 0. \]</span></p>
+<p>We can get confidence intervals on the OR using the following two steps:</p>
+<ul>
+<li>Compute the confidence intervals for the regression coefficient <span class="math inline">\(b\)</span>, say</li>
+</ul>
+<p><span class="math display">\[ [b_{\text{lower}} ,b_{\text{upper}}]. \]</span></p>
+<ul>
+<li>Then exponentiate the confidence intervals to get a confidence interval on the OR.</li>
+</ul>
+<p><span class="math display">\[ [\exp(b_{\text{lower}}) ,\exp(b_{\text{upper}})]. \]</span></p>
+<p>Below is the result of this procedure for our example.</p>
+<div class="sourceCode" id="cb407"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb407-1"><a href="11.5-inference-11.html#cb407-1"></a>ci.b &lt;-<span class="st"> </span><span class="kw">confint</span>(mod2)</span></code></pre></div>
+<pre><code>## Waiting for profiling to be done...</code></pre>
+<div class="sourceCode" id="cb409"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb409-1"><a href="11.5-inference-11.html#cb409-1"></a>ci.table &lt;-<span class="st"> </span><span class="kw">cbind</span>(<span class="dt">coefs =</span> <span class="kw">coef</span>(mod1), ci.b)</span>
+<span id="cb409-2"><a href="11.5-inference-11.html#cb409-2"></a><span class="kw">exp</span>(ci.table)</span></code></pre></div>
+<pre><code>##              coefs     2.5 %  97.5 %
+## (Intercept) 0.5839 0.0004413 0.03892
+## age         1.0221 1.0692223 1.17587</code></pre>
+<p><strong>Please write down your interpretation of the OR and its confidence interval for the example</strong></p>
+<p>Note that the confidence intervals produced by <span class="math inline">\(R\)</span> use the (profile) likelihood rather than the Wald test. So, the problems we discussed with the Wald test don’t apply to these confidence intervals. (You can get Waldian confidence intervals form the <code>confint</code> function, but this is not the default.)</p>
+</div>
+<div id="likelihood-ratio-test" class="section level3">
+<h3><span class="header-section-number">11.5.3</span> Likelihood ratio test</h3>
+<p>The likelihood ratio tests is analogous to the F-test of R-squared change in OLS regression. If you test a model without any predictors versus a model with one predictor, it can be used to replace the Wald test in simple logistic regression. The LR test is also asymptotic, but it does not require estimating the problematic quantity of the Wald test – i.e., the standard error – so it is often preferred when the sample size is smaller (&lt; 100).</p>
+<p>Like the F-test of R-squared change, the likelihood ratio tests can also be used to compare any two nested models. So, it used quite a lot, not just to replace the Wald test in simple logistic regression.</p>
+<p>The tests works as follows:</p>
+<ul>
+<li><p>Assume that model 1 with <span class="math inline">\(K_1\)</span> predictors is nested within model 2 with <span class="math inline">\(K_2\)</span> predictors (i.e., model 1 has fewer predictors than model 2).</p></li>
+<li><p>If it is true that the additional predictors in model 2 all have regression coefficients equal to zero in the population, then it is also true that the models have equal likelihoods, so the ratio of the likeihoods is 1.</p></li>
+</ul>
+<p><span class="math display">\[H_0: \frac{L_1}{L_2} = 1\]</span></p>
+<ul>
+<li>When <span class="math inline">\(H_0\)</span> is true, the statistic</li>
+</ul>
+<p><span class="math display">\[ -2 \log \frac{\hat L_1}{\hat L_2} = 2 (\hat \ell_2 - \hat \ell_1) \]</span></p>
+<p>has a chi-square distribution with degrees of freedom equal to <span class="math inline">\(K_2 - K_1\)</span>. Note that the “hats” denote the likelihood (or log-likelihood) evaluated at the MLEs.</p>
+<p>The chi-square distribution is a lot like the F-distribution. In fact, the F-static is a ratio of two chi-square statistics. Some examples are shown below (<span class="math inline">\(k\)</span> denotes the degrees of freedom).</p>
+<div class="figure">
+<img src="https://upload.wikimedia.org/wikipedia/commons/3/35/Chi-square_pdf.svg" alt="" />
+<p class="caption">Chi-square distributions (Source: <a href="https://en.wikipedia.org/wiki/Chi-squared_distribution" class="uri">https://en.wikipedia.org/wiki/Chi-squared_distribution</a>)</p>
+</div>
+<p>To conduct an LR test of the model with age as a predictor against a model without this predictor (i.e., the model with only the intercept), we can use the <code>lrtest</code> function of the <code>lmtest</code> package:</p>
+<div class="sourceCode" id="cb411"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb411-1"><a href="11.5-inference-11.html#cb411-1"></a><span class="co"># The model with no predictors</span></span>
+<span id="cb411-2"><a href="11.5-inference-11.html#cb411-2"></a>mod0 &lt;-<span class="st"> </span><span class="kw">glm</span>(chd <span class="op">~</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>, <span class="dt">data =</span> chd.data)</span>
+<span id="cb411-3"><a href="11.5-inference-11.html#cb411-3"></a></span>
+<span id="cb411-4"><a href="11.5-inference-11.html#cb411-4"></a><span class="co"># The LR test (enter the smaller model first)</span></span>
+<span id="cb411-5"><a href="11.5-inference-11.html#cb411-5"></a>lmtest<span class="op">::</span><span class="kw">lrtest</span>(mod0, mod2)</span></code></pre></div>
+<pre><code>## Likelihood ratio test
+## 
+## Model 1: chd ~ 1
+## Model 2: chd ~ age
+##   #Df LogLik Df Chisq Pr(&gt;Chisq)    
+## 1   1  -68.3                        
+## 2   2  -53.7  1  29.3    6.2e-08 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p><strong>Please write down your interpretation of the LR test for the example give above.</strong></p>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="1.1-why-this-book.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="11.4-estimation-11.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="11.6-r-squared-11.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -483,7 +607,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/peterhalpin/EDUC_784/edit/master/index.Rmd",
+"link": "https://github.com/peterhalpin/EDUC_784/edit/master/11_simple_logistic_regression.Rmd",
 "text": "Suggest an edit"
 },
 "history": {

@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>EDUC 784: Regression</title>
+  <title>11.9 Workbook | EDUC 784: Regression</title>
   <meta name="description" content="Course notes for EDUC 784" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="EDUC 784: Regression" />
+  <meta property="og:title" content="11.9 Workbook | EDUC 784: Regression" />
   <meta property="og:type" content="book" />
   
   <meta property="og:image" content="/images/image1.png" />
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="peterhalpin/EDUC_784" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="EDUC 784: Regression" />
+  <meta name="twitter:title" content="11.9 Workbook | EDUC 784: Regression" />
   
   <meta name="twitter:description" content="Course notes for EDUC 784" />
   <meta name="twitter:image" content="/images/image1.png" />
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="null" type="image/x-icon" />
-
-<link rel="next" href="1.1-why-this-book.html"/>
+<link rel="prev" href="11.8-multiple-11.html"/>
+<link rel="next" href="11.10-exercises-8.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -447,22 +447,180 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">EDUC 784: Regression</h1>
-<p class="author"><em>Peter Halpin</em></p>
-<p class="date"><em>2022-04-17</em></p>
+<div id="workbook-7" class="section level2">
+<h2><span class="header-section-number">11.9</span> Workbook</h2>
+<input onclick="codefolder(&#39;pre.sourceCode&#39;);" type="button" value="Hide Code" id="codefolder-button" style="position: relative; &#10;            top: -25px; &#10;            left: 85%;   &#10;            color: white;&#10;            font-weight: bold;&#10;            background: #4B9CD3;&#10;            border: 1px #3079ED solid;&#10;            box-shadow: inset 0 1px 0 #80B0FB"/>
+<script>
+  function codefolder(query) {
+
+    var x = document.querySelectorAll(query);
+    if (x.length === 0) return;
+
+    function toggle_vis(o) {
+      var d = o.style.display;
+      o.style.display = (d === 'block' || d === '') ? 'none':'block';
+    }
+
+    for (i = 0; i < x.length; i++) {
+      var y = x[i];
+      toggle_vis(y);
+    }
+
+    var elem = document.getElementById("codefolder-button");
+    if (elem.value === "Hide Code") elem.value = "Show Code";
+    else elem.value = "Hide Code";
+  }
+</script>
+<script>
+  window.addEventListener('load', function () {
+    codefolder('pre.sourceCode');
+  });
+</script>
+<p>This section collects the questions asked in this chapter. We will discuss these questions in class. If you haven’t written down / thought about the answers to these questions before class, the lesson will not be very useful for you! So, please engage with each question by writing down one or more answers, asking clarifying questions, posing follow up questions, etc.</p>
+<p><strong>Section <a href="11.1-chd-example-11.html#chd-example-11">11.1</a></strong></p>
+<ul>
+<li>Please take a moment to write down you conclusions about whether the assumptions of linear regression are met for these data, and any other details you may notice about the linear probability model.</li>
+</ul>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-229"></span>
+<img src="_main_files/figure-html/unnamed-chunk-229-1.png" alt="Linear probability model with CHD example" width="1152" />
+<p class="caption">
+Figure 11.13: Linear probability model with CHD example
+</p>
 </div>
-<div id="about-this-book" class="section level1">
-<h1><span class="header-section-number">Chapter 1</span> About This Book</h1>
-<p>This “ebook” provides the course notes for EDUC 784. It is currently under development, so any feedback is appreciated (e.g., during class, via email, or the edit link in the header). This first chapter is just about how to use the book – the course content starts in Chapter <a href="2-chapter-2.html#chapter-2">2</a>.</p>
+<pre><code>## 
+## Call:
+## lm(formula = chd ~ age, data = chd.data)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -0.8579 -0.3399 -0.0727  0.3166  0.9927 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) -0.53796    0.16881   -3.19   0.0019 ** 
+## age          0.02181    0.00368    5.93  4.6e-08 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.429 on 98 degrees of freedom
+## Multiple R-squared:  0.264,  Adjusted R-squared:  0.256 
+## F-statistic: 35.2 on 1 and 98 DF,  p-value: 4.57e-08</code></pre>
+<p><strong>Section <a href="11.2-logit-11.html#logit-11">11.2</a></strong></p>
+<ul>
+<li><p>Please write down your answers to the following questions and be prepared to share them in class. For each question provide both a verbal interpretation of the numerical answer (e.g, odds of 2 to 1 means that for every two people with a trait, there is one without.)</p>
+<ul>
+<li>What is the probability of a person in their 40s having CHD?</li>
+<li>What are the odds of a person in their 40s having CHD?</li>
+<li>What is the probability of someone in their 50s <strong>not</strong> having CHD?</li>
+<li>What are the odds of someone in their 50s <strong>not</strong> having CHD?</li>
+<li>What is probability of having CHD in your 40s, compared to your 30s? (e.g., is 3 times higher? 4 times higher?)</li>
+<li>What are the odds of having CHD in your 40s, compared to your 30s?</li>
+</ul></li>
+<li><p>I will asks some questions along the following lines in class (use the following table).</p>
+<ul>
+<li>If logit &lt; 0 then probability &lt; ? and odds &lt; ?</li>
+<li>What is larger: probability of .9 or odds of 9 to 1?<br />
+</li>
+<li>If the logit = 1.098 corresponds to probability = .75, what probability does logit = -1.098 correspond to?</li>
+</ul></li>
+</ul>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-230"></span>
+<img src="images/logit-table.png" alt="Logistic, odds, and logit" width="455" />
+<p class="caption">
+Figure 11.14: Logistic, odds, and logit
+</p>
+</div>
+<p><strong>Section <a href="11.3-simple-11.html#simple-11">11.3</a></strong></p>
+<ul>
+<li><p>Please write down the numerical values all of the following summaries of the simple logistic regression model, using the CHD example. You can select any values of age to report the predicted probabilities and risk ratios, and you can “eye ball” the probabilities using the figure</p></li>
+<li><p>In terms of the logit:</p>
+<ul>
+<li>The intercept (<span class="math inline">\(a\)</span>) is the predicted value of the log-odds of CHD when age = 0.</li>
+<li>The slope (<span class="math inline">\(b\)</span>) is how much the predicted log-odds of CHD changes for one unit (year) of increase in age.</li>
+</ul></li>
+<li><p>In terms of the odds:</p>
+<ul>
+<li>The exponent of the regression parameter, <span class="math inline">\(\exp(b)\)</span>, is odds ratio for one unit of increase in age.</li>
+<li><span class="math inline">\((\exp(b) - 1) \times 100\)</span> is the percentage change in the odds of CHD for a one unit increase in age.</li>
+</ul></li>
+<li><p>In terms of predicted probabilities</p>
+<ul>
+<li>Predicted probabilities can be reported for specific values of age (MERVs).</li>
+<li>Risk ratios can be computed comparing the predicted probabilities at different ages.</li>
+<li><span class="math inline">\(–a / b\)</span> corresponds the age at which the probability of having CHD is “50-50”</li>
+<li><span class="math inline">\(b / 4\)</span> is the approximate rate of increase (slope) of the probability of having CHD for people close to the “50-50” point.</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb422"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb422-1"><a href="11.9-workbook-7.html#cb422-1"></a>visreg<span class="op">::</span><span class="kw">visreg</span>(mod2, <span class="dt">xvar =</span> <span class="st">&quot;age&quot;</span>, <span class="dt">scale =</span> <span class="st">&quot;response&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-231"></span>
+<img src="_main_files/figure-html/unnamed-chunk-231-1.png" alt="Predicted probabilities" width="672" />
+<p class="caption">
+Figure 11.15: Predicted probabilities
+</p>
+</div>
+<p><strong>Section <a href="11.4-estimation-11.html#estimation-11">11.4</a></strong></p>
+<ul>
+<li>In a sentence or two, describe how the model parameters in logistic regression are estimated and how this compares to OLS regression</li>
+</ul>
+<p><strong>Section <a href="11.5-inference-11.html#inference-11">11.5</a></strong></p>
+<ul>
+<li>Please write down your interpretation of the OR and its confidence interval for the example below</li>
+</ul>
+<div class="sourceCode" id="cb423"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb423-1"><a href="11.9-workbook-7.html#cb423-1"></a>ci.b &lt;-<span class="st"> </span><span class="kw">confint</span>(mod2)</span></code></pre></div>
+<pre><code>## Waiting for profiling to be done...</code></pre>
+<div class="sourceCode" id="cb425"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb425-1"><a href="11.9-workbook-7.html#cb425-1"></a>ci.table &lt;-<span class="st"> </span><span class="kw">cbind</span>(<span class="dt">coefs =</span> <span class="kw">coef</span>(mod1), ci.b)</span>
+<span id="cb425-2"><a href="11.9-workbook-7.html#cb425-2"></a><span class="kw">exp</span>(ci.table)</span></code></pre></div>
+<pre><code>##              coefs     2.5 %  97.5 %
+## (Intercept) 0.5839 0.0004413 0.03892
+## age         1.0221 1.0692223 1.17587</code></pre>
+<ul>
+<li>Please write down your interpretation of the LR test given below</li>
+</ul>
+<div class="sourceCode" id="cb427"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb427-1"><a href="11.9-workbook-7.html#cb427-1"></a><span class="co"># The model with no predictors</span></span>
+<span id="cb427-2"><a href="11.9-workbook-7.html#cb427-2"></a>mod0 &lt;-<span class="st"> </span><span class="kw">glm</span>(chd <span class="op">~</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>, <span class="dt">data =</span> chd.data)</span>
+<span id="cb427-3"><a href="11.9-workbook-7.html#cb427-3"></a></span>
+<span id="cb427-4"><a href="11.9-workbook-7.html#cb427-4"></a><span class="co"># The LR test (enter the smaller model first)</span></span>
+<span id="cb427-5"><a href="11.9-workbook-7.html#cb427-5"></a>lmtest<span class="op">::</span><span class="kw">lrtest</span>(mod0, mod2)</span></code></pre></div>
+<pre><code>## Likelihood ratio test
+## 
+## Model 1: chd ~ 1
+## Model 2: chd ~ age
+##   #Df LogLik Df Chisq Pr(&gt;Chisq)    
+## 1   1  -68.3                        
+## 2   2  -53.7  1  29.3    6.2e-08 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p><strong>Section <a href="11.6-r-squared-11.html#r-squared-11">11.6</a></strong></p>
+<ul>
+<li>Please write down an interpretation of McFadden’s R-squared for the example and we will discuss you interpretations in class.</li>
+</ul>
+<p>McFadden’s R-squared:</p>
+<div class="sourceCode" id="cb429"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb429-1"><a href="11.9-workbook-7.html#cb429-1"></a><span class="co"># Using the deviance of the models</span></span>
+<span id="cb429-2"><a href="11.9-workbook-7.html#cb429-2"></a><span class="dv">1</span> <span class="op">-</span><span class="st"> </span>mod2<span class="op">$</span>deviance<span class="op">/</span>mod0<span class="op">$</span>deviance</span></code></pre></div>
+<pre><code>## [1] 0.2145</code></pre>
+<p><strong>Section <a href="11.7-assumption-checking-11.html#assumption-checking-11">11.7</a></strong></p>
+<ul>
+<li>Please write down your interpretation of the HL test and be prepared to share you answer in class</li>
+</ul>
+<div class="sourceCode" id="cb431"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb431-1"><a href="11.9-workbook-7.html#cb431-1"></a><span class="co">## Note: Install package &quot;generalhoslem&quot; if you haven&#39;t do so already</span></span>
+<span id="cb431-2"><a href="11.9-workbook-7.html#cb431-2"></a><span class="co"># install.packages(&quot;generalhoslem&quot;)</span></span>
+<span id="cb431-3"><a href="11.9-workbook-7.html#cb431-3"></a><span class="kw">attach</span>(chd.data)</span>
+<span id="cb431-4"><a href="11.9-workbook-7.html#cb431-4"></a>HLtest &lt;-<span class="st"> </span>generalhoslem<span class="op">::</span><span class="kw">logitgof</span>(<span class="dt">obs =</span> chd, <span class="dt">exp =</span> <span class="kw">fitted</span>(mod2), <span class="dt">g =</span> <span class="dv">5</span>)</span>
+<span id="cb431-5"><a href="11.9-workbook-7.html#cb431-5"></a>HLtest</span></code></pre></div>
+<pre><code>## 
+##  Hosmer and Lemeshow test (binary model)
+## 
+## data:  chd, fitted(mod2)
+## X-squared = 0.047, df = 3, p-value = 1</code></pre>
+<div class="sourceCode" id="cb433"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb433-1"><a href="11.9-workbook-7.html#cb433-1"></a><span class="kw">detach</span>(chd.data)</span></code></pre></div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="1.1-why-this-book.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="11.8-multiple-11.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="11.10-exercises-8.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -483,7 +641,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/peterhalpin/EDUC_784/edit/master/index.Rmd",
+"link": "https://github.com/peterhalpin/EDUC_784/edit/master/11_simple_logistic_regression.Rmd",
 "text": "Suggest an edit"
 },
 "history": {
