@@ -24,11 +24,7 @@
 <meta name="author" content="Peter Halpin" />
 
 
-<<<<<<< HEAD
 <meta name="date" content="2023-01-11" />
-=======
-<meta name="date" content="2022-04-20" />
->>>>>>> 8da3784cfbfcf4d4afffa6ec0adb98c9ba4b7f45
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -192,7 +188,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.13.5" data-path="2.13-review.html"><a href="2.13-review.html#confidence-intervals-1"><i class="fa fa-check"></i><b>2.13.5</b> Confidence intervals</a></li>
 <li class="chapter" data-level="2.13.6" data-path="2.13-review.html"><a href="2.13-review.html#f-tests-1"><i class="fa fa-check"></i><b>2.13.6</b> F-tests</a></li>
 <li class="chapter" data-level="2.13.7" data-path="2.13-review.html"><a href="2.13-review.html#apa-reporting"><i class="fa fa-check"></i><b>2.13.7</b> APA reporting</a></li>
-<li class="chapter" data-level="2.13.8" data-path="2.13-review.html"><a href="2.13-review.html#working-in-r"><i class="fa fa-check"></i><b>2.13.8</b> Working in R</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="3-chapter-3.html"><a href="3-chapter-3.html"><i class="fa fa-check"></i><b>3</b> Interpretations of Regression</a>
@@ -547,8 +542,10 @@ But first example is the only one that would be suitable for analysis by using t
 <span id="cb317-4"><a href="8.6-diagnostics-8.html#cb317-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb317-5"><a href="8.6-diagnostics-8.html#cb317-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Take a look at the leverage values for each data point</span></span>
 <span id="cb317-6"><a href="8.6-diagnostics-8.html#cb317-6" aria-hidden="true" tabindex="-1"></a>leverage3</span></code></pre></div>
-<pre><code>##       1       2       3       4       5       6       7       8       9      10      11 
-## 0.10000 0.10000 0.23636 0.09091 0.12727 0.31818 0.17273 0.31818 0.17273 0.12727 0.23636</code></pre>
+<pre><code>##       1       2       3       4       5       6       7       8       9      10 
+## 0.10000 0.10000 0.23636 0.09091 0.12727 0.31818 0.17273 0.31818 0.17273 0.12727 
+##      11 
+## 0.23636</code></pre>
 <div class="sourceCode" id="cb319"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb319-1"><a href="8.6-diagnostics-8.html#cb319-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the leverage values in the scatter plot using the function &quot;text&quot;</span></span>
 <span id="cb319-2"><a href="8.6-diagnostics-8.html#cb319-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
 <span id="cb319-3"><a href="8.6-diagnostics-8.html#cb319-3" aria-hidden="true" tabindex="-1"></a></span>

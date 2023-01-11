@@ -24,11 +24,7 @@
 <meta name="author" content="Peter Halpin" />
 
 
-<<<<<<< HEAD
 <meta name="date" content="2023-01-11" />
-=======
-<meta name="date" content="2022-04-20" />
->>>>>>> 8da3784cfbfcf4d4afffa6ec0adb98c9ba4b7f45
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -192,7 +188,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.13.5" data-path="2.13-review.html"><a href="2.13-review.html#confidence-intervals-1"><i class="fa fa-check"></i><b>2.13.5</b> Confidence intervals</a></li>
 <li class="chapter" data-level="2.13.6" data-path="2.13-review.html"><a href="2.13-review.html#f-tests-1"><i class="fa fa-check"></i><b>2.13.6</b> F-tests</a></li>
 <li class="chapter" data-level="2.13.7" data-path="2.13-review.html"><a href="2.13-review.html#apa-reporting"><i class="fa fa-check"></i><b>2.13.7</b> APA reporting</a></li>
-<li class="chapter" data-level="2.13.8" data-path="2.13-review.html"><a href="2.13-review.html#working-in-r"><i class="fa fa-check"></i><b>2.13.8</b> Working in R</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="3-chapter-3.html"><a href="3-chapter-3.html"><i class="fa fa-check"></i><b>3</b> Interpretations of Regression</a>
@@ -577,8 +572,10 @@ it has to do with the relation between predictor <span class="math inline">\(k\)
 ##       6.290       1.206       2.950       3.377       1.054</code></pre>
 <p>Model 4</p>
 <div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="7.4-too-many-predictors-7.html#cb287-1" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">vif</span>(mod4)</span></code></pre></div>
-<pre><code>##             z_wksesl          z_wksesl_sq            z_wkmomed            z_wkdaded             p1center    z_wksesl:p1center 
-##               28.158                6.447               12.800               13.816                1.812               28.320 
+<pre><code>##             z_wksesl          z_wksesl_sq            z_wkmomed 
+##               28.158                6.447               12.800 
+##            z_wkdaded             p1center    z_wksesl:p1center 
+##               13.816                1.812               28.320 
 ## z_wksesl_sq:p1center   z_wkmomed:p1center   z_wkdaded:p1center 
 ##                7.562               12.517               14.012</code></pre>
 <p>It is apparent that including the interaction terms led to a high degree of multicollinearity for some regression coefficients in the model. Based on this information, as well as the non-singificant <span class="math inline">\(\Delta R^2\)</span> for the interaction block, it would be advisable to focus our interpretation on Model 3 rather than Model 4.</p>

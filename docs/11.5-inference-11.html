@@ -24,11 +24,7 @@
 <meta name="author" content="Peter Halpin" />
 
 
-<<<<<<< HEAD
 <meta name="date" content="2023-01-11" />
-=======
-<meta name="date" content="2022-04-20" />
->>>>>>> 8da3784cfbfcf4d4afffa6ec0adb98c9ba4b7f45
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -192,7 +188,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.13.5" data-path="2.13-review.html"><a href="2.13-review.html#confidence-intervals-1"><i class="fa fa-check"></i><b>2.13.5</b> Confidence intervals</a></li>
 <li class="chapter" data-level="2.13.6" data-path="2.13-review.html"><a href="2.13-review.html#f-tests-1"><i class="fa fa-check"></i><b>2.13.6</b> F-tests</a></li>
 <li class="chapter" data-level="2.13.7" data-path="2.13-review.html"><a href="2.13-review.html#apa-reporting"><i class="fa fa-check"></i><b>2.13.7</b> APA reporting</a></li>
-<li class="chapter" data-level="2.13.8" data-path="2.13-review.html"><a href="2.13-review.html#working-in-r"><i class="fa fa-check"></i><b>2.13.8</b> Working in R</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="3-chapter-3.html"><a href="3-chapter-3.html"><i class="fa fa-check"></i><b>3</b> Interpretations of Regression</a>
@@ -552,11 +547,7 @@ In general, the Wald test should only be used when you have a large sample size.
 <h3><span class="header-section-number">11.5.1</span> Wald test</h3>
 <p>MLEs have the property that they obey the central limit theorem. This means that the sampling distribution of an MLE becomes more and more like a normal distribution as the sample size gets large. We say that the MLEs are “approximately” or “asymptotically” normal.</p>
 <p>So, if we divide the MLE by its standard error, we get an approximate z-test of statistical significance. This test is called a Wald test, and it is what R reports in the summary table below. You should have no problem interpreting these tests at this point in the course.</p>
-<<<<<<< HEAD
-<div class="sourceCode" id="cb416"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb416-1"><a href="11.5-inference-11.html#cb416-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod1)</span></code></pre></div>
-=======
-<div class="sourceCode" id="cb405"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb405-1"><a href="11.5-inference-11.html#cb405-1"></a><span class="kw">summary</span>(mod2)</span></code></pre></div>
->>>>>>> 8da3784cfbfcf4d4afffa6ec0adb98c9ba4b7f45
+<div class="sourceCode" id="cb416"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb416-1"><a href="11.5-inference-11.html#cb416-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod2)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = chd ~ age, family = binomial, data = chd.data)
@@ -606,19 +597,11 @@ In general, the Wald test should only be used when you have a large sample size.
 <p>Below is the result of this procedure for our example.</p>
 <div class="sourceCode" id="cb418"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb418-1"><a href="11.5-inference-11.html#cb418-1" aria-hidden="true" tabindex="-1"></a>ci.b <span class="ot">&lt;-</span> <span class="fu">confint</span>(mod2)</span></code></pre></div>
 <pre><code>## Waiting for profiling to be done...</code></pre>
-<<<<<<< HEAD
-<div class="sourceCode" id="cb420"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb420-1"><a href="11.5-inference-11.html#cb420-1" aria-hidden="true" tabindex="-1"></a>ci.table <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="at">coefs =</span> <span class="fu">coef</span>(mod1), ci.b)</span>
+<div class="sourceCode" id="cb420"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb420-1"><a href="11.5-inference-11.html#cb420-1" aria-hidden="true" tabindex="-1"></a>ci.table <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="at">coefs =</span> <span class="fu">coef</span>(mod2), ci.b)</span>
 <span id="cb420-2"><a href="11.5-inference-11.html#cb420-2" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(ci.table)</span></code></pre></div>
-<pre><code>##              coefs     2.5 %  97.5 %
-## (Intercept) 0.5839 0.0004413 0.03892
-## age         1.0221 1.0692223 1.17587</code></pre>
-=======
-<div class="sourceCode" id="cb409"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb409-1"><a href="11.5-inference-11.html#cb409-1"></a>ci.table &lt;-<span class="st"> </span><span class="kw">cbind</span>(<span class="dt">coefs =</span> <span class="kw">coef</span>(mod2), ci.b)</span>
-<span id="cb409-2"><a href="11.5-inference-11.html#cb409-2"></a><span class="kw">exp</span>(ci.table)</span></code></pre></div>
 <pre><code>##                coefs     2.5 %  97.5 %
 ## (Intercept) 0.004945 0.0004413 0.03892
 ## age         1.117307 1.0692223 1.17587</code></pre>
->>>>>>> 8da3784cfbfcf4d4afffa6ec0adb98c9ba4b7f45
 <p><strong>Please write down your interpretation of the OR and its confidence interval for the example</strong></p>
 <p>Note that the confidence intervals produced by <span class="math inline">\(R\)</span> use the (profile) likelihood rather than the Wald test. So, the problems we discussed with the Wald test don’t apply to these confidence intervals. (You can get Waldian confidence intervals form the <code>confint</code> function, but this is not the default.)</p>
 </div>

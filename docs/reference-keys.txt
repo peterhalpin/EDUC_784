@@ -149,7 +149,6 @@ t-tests-1
 confidence-intervals-1
 f-tests-1
 apa-reporting
-working-in-r
 chapter-3
 prediction
 more-about-prediction
@@ -349,7 +348,3 @@ multiple-11
 predicted-probabilities
 interactions
 workbook-8
-other-interpretations
-relation-with-beta-weights
-some-math
-fig:unnamed-chunk-17

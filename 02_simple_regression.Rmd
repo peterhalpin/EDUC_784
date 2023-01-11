@@ -680,7 +680,6 @@ In addition to the effect size, we need to know the degrees of freedom for the F
 In simple regression, `u = 1` and `v = N - 2`. 
 
 
-
 As an example of (prospective) power analysis, let's find out many observations would be required to detect an effet size of R-square = .1, using $\alpha = .05$ and power = .8. To find the answer, enter the provided information into the `pwr.f2.test` function, and the function will solve for the "missing piece" -- in this case $v = N - 2$.
 
 
@@ -714,6 +713,8 @@ Please answer the following questions using R.
 * What are your overall conclusions about the relationship between Academic Achievement and SES in the NELS data? 
 
 ## Review {#review}
+
+In progress, check back soon! 
 
 ### Summation algebra
 
@@ -755,9 +756,6 @@ Please answer the following questions using R.
 
 ### APA reporting
 
-### Working in R
-
-* Hmmm
 
 
 
