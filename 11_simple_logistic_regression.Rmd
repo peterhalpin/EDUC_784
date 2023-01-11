@@ -735,14 +735,95 @@ $$HL = \sum_{g = 1}^5 \left(\frac{(\text{y0}_g - \text{yhat0}_g)^2}{\text{yhat0}
 Hosmer and Lemeshow showed that this statistic has a chi-square distribution on $df = N_\text{groups} - 2$ when the null hypothesis is true (i.e., when the model fits the data). 
 
 
-## Multiple logistic regression {#multiple-11}
+## Exercise: Multiple logistic regression {#multiple-11}
 
 ```{r, echo=FALSE, results='asis'}
-codefolder::bookdown(init = "hide", style = button)
+codefolder::bookdown(init = "show", style = button)
 ```
 
-We will go through a worked example of multiple logistic regression in class together, focusing on the interpretation of the model coefficients and models with interactions. 
+This section works through multiple logistic regression with interactions using the Coronary Heart Disease (`chd`; 1 = yes, 0 = no), and indicator for whether a person has ever (or currently) smokes (`smokes`: 1 = yes, 0 = no) and age in years (`age`). The R code is shown by default for these exercises. 
 
+```{r}
+# Load the data, take a look
+load("CHD.RData")
+attach(chd.data)
+summary(cbind(chd, age, smokes))
+```
+
+Let's start by regressing CHD on smokes and age, and refreshing our interpretations of the parameter estimates and tests. The regression coefficients are interpreted analogously to multiple regression (e.g., as holding constant, controlling for, incremental to, the other predictors). 
+
+```{r}
+# Regress CHD on smokes and age
+mod <- glm(chd ~ age + smokes, family = binomial)
+summary(mod)
+```
+
+For illustrative purposes, let’s double check that smoking predicts CHD over and above age using the LR test. Recall that this test is analogous to the F-test of R-squared change in OLS regression
+
+```{r}
+# LR test coefficient on age, and age + smokes 
+mod1 <- glm(chd ~ age, family = binomial)
+mod2 <- glm(chd ~ age + smokes, family = binomial)
+lmtest::lrtest(mod1, mod2)
+```
+
+Both the Wald test and LR test lead to the same interpretation for smoking (this shouldn't be surprising).
+
+How should we compute R-squared? Two different approaches are shown below. Both of these are defensible, but note the difference in interpretation, as we are changing the "baseline model". 
+
+```{r}
+# Compare against model 1
+(R_21 <- 1 - mod2$deviance/mod1$deviance)
+
+# Compare against model with only the intercept
+mod0 <- glm(chd ~ 1, family = binomial)
+(R_20 <- 1 - mod2$deviance/mod0$deviance)
+```
+
+Recall that it is common to report the output using odds ratios rather than logits. Make sure to check your interpretation of the ORs. 
+
+```{r}
+exp(cbind(OR = coef(mod2), confint(mod2)))
+```
+
+### Predicted probabilities
+
+We can plot the regression lines for smokers and non-smokers using the same techniques as for linear regression.
+
+```{r}
+# Plots of the regression lines in logit scale
+visreg::visreg(mod2, "age", "smokes", scale = "linear", overlay = T)
+
+# Plots of the regression lines in probability scale
+visreg::visreg(mod2, "age", "smokes", scale = "response", overlay = T)
+```
+
+We can also test for differences between smokers and non-smokers at specific ages, just like we did for the OLS regression. Below is an example of using `emmeans` to test the difference between smokers and non-smokers, +/- 1SD on age.
+
+```{r}
+# Step 1. Make a function to compute +/- SD on age
+sd_function <- function(x) { c(mean(x) - sd(x), mean(x) + sd(x)) }
+
+# Step 2. Compute and test the values on the probability scale
+library(emmeans)
+gap_prob <- emmeans(mod2, specs = "smokes", by = "age", cov.reduce = sd_function, type = "response")
+summary(gap_prob)
+```
+
+### Interactions
+
+Let's consider the interaction between age (centered) and smoking. This interaction addresses whether the relationship between age and CHD changes as a function of smoking status. 
+
+
+```{r}
+# Interacting smoking with age (centered)
+age_centered <- age - mean(age)
+mod4 <- glm(chd ~ age_centered*smokes, family = binomial)
+exp(cbind(OR = coef(mod4), confint(mod4)))
+visreg::visreg(mod4, "age_centered", "smokes", scale = "response", overlay = T)
+```
+
+We will talk about the interpretation of the output in class. 
 
 ## Workbook
 
@@ -853,12 +934,7 @@ McFadden's R-squared:
 ```{r}
 ## Note: Install package "generalhoslem" if you haven't do so already
 # install.packages("generalhoslem")
-attach(chd.data)
 HLtest <- generalhoslem::logitgof(obs = chd, exp = fitted(mod2), g = 5)
 HLtest
 detach(chd.data)
 ```
-
-## Exercises
-
-This section will be added before class, and we will work through the exercises together during class time. 

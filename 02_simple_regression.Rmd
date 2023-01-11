@@ -14,7 +14,7 @@ options(digits = 4)
 
 The focus of this course is linear regression with multiple predictors (AKA *multiple regression*), but we start by reviewing regression with one predictor (AKA *simple regression*). 
 
-## An example from NELS
+## An example from NELS {#example-2}
  
 ```{r, echo=FALSE, results='asis'}
 codefolder::bookdown(init = "hide", style = button)
@@ -51,7 +51,7 @@ This is a moderate, positive correlation between Reading Achievement and SES. Th
 This relationship has been widely documented and discussed in education research (e.g., https://www.apa.org/pi/ses/resources/publications/education). **Please look over this web page and be prepared to share your thoughts about the relationship between SES and Achievement in class.** 
 
 
-## The regression line {#regression-line}
+## The regression line {#regression-line-2}
 
 ```{r, echo=FALSE, results='asis'}
 codefolder::bookdown(init = "hide", style = button)
@@ -68,11 +68,10 @@ where
 
 * $Y$ denotes Reading Achievement
 * $X$ denotes SES 
-* $\widehat Y$ represents the values of $Y$ on the line  
 * $a$ represents the regression intercept (the value of $\widehat Y$ when $X = 0$)
 * $b$ represents the regression slope (how much $\widehat Y$ increases for each unit of increase in $X$)
 
-Note that $Y$ represents the values of Reading Achievement in the data, whereas $\widehat Y$ represents the values on the regression line. The difference $e = Y - \widehat Y$ is called a *residual*. The residuals for a subset of the data points in Figure \@ref(fig:fig1) are shown in pink in Figure \@ref(fig:fig2) 
+Note that $Y$ represents the values of Reading Achievement in the data, whereas $\widehat Y$ represents the values computed from the regression equation (i.e., the values on the regression line). The difference $e = Y - \widehat Y$ is called a *residual*. The residuals for a subset of the data points in Figure \@ref(fig:fig1) are shown in pink in Figure \@ref(fig:fig2) 
 
 ```{r fig2, fig.cap = 'Residuals for a Subsample of the Example.', fig.align = 'center'}
 # Get predicted values from regression model
@@ -93,7 +92,7 @@ segments(x0 = ses[index], y0 = yhat[index] , x1 = ses[index], y1 = achmat08[inde
 points(x = ses[index], y = achmat08[index], col = "#4B9CD3", pch = 16)
 ```
 
-Notice that $Y = \widehat Y + e$ by definition. So, we can use either Equation \@ref(eq:yhat) or Equation \@ref(eq:y) to write out a regression model: 
+Notice that $Y = \widehat Y + e$ by definition. So, we can use either Equation \@ref(eq:yhat) or the equation below to write out a regression model: 
 
 \begin{align} 
 Y = a + bX + e.  
@@ -102,7 +101,18 @@ Y = a + bX + e.
 
 Both equations say the same thing, but Equation \@ref(eq:y) lets us talk about the values of $Y$ in the data, not just the predicted values. 
 
-## OLS {#ols}
+Another way to write out the model is using the variable names (or abbreviations) in place of the more generic "X, Y" notation. For example, 
+
+\begin{align} 
+\widehat {READ} = a + b(SES). 
+(\#eq:read)
+\end{align} 
+
+This notation is more informative about the specific variables in the example. But it is also more clunky and doesn't lend itself to other mathematical expressions. For example, $r_{XY}$ is much clearer than $r_{SES, READ}$ -- in general, we want most of the text on the "baseline", not the subscripts or superscripts.
+
+You should be familiar with all 3 ways of presenting regression equations and you are free to use whatever approach you like best in your own writing.  
+
+## OLS {#ols-2}
 
 ```{r, echo=FALSE, results='asis'}
 codefolder::bookdown(init = "hide", style = button)
@@ -117,9 +127,9 @@ SS_{\text{res}} & = \sum_{i=1}^{N} e_i^2 \\
 \end{align} 
 \]
 
-where $i = 1 \dots N$ indexes the respondents in the sample. OLS regression is very widely used and is the main focus of this course, although we will visit some other approaches (notably logistic regression) in the second half of the course. 
+where $i = 1 \dots N$ indexes the respondents in the sample. OLS regression is very widely used and is the main focus of this course, although we will visit some other approaches in the second half of the course. 
 
-Solving the  minimization problem (i.e., doing the calculus) gives the following equations for the regression parameters
+Solving the  minimization problem (setting derivatives to zero) gives the following equations for the regression parameters: 
 
 \[ 
 a = \bar Y - b \bar X \quad \quad \quad \quad b = \frac{\text{Cov}(X, Y)}{s^2_X} = r_{XY} \frac{s_X}{s_Y}
@@ -142,24 +152,26 @@ Note that if $X$ and $Y$ are transformed to z-scores (i.e., to have mean of zero
 * $a = 0$
 * $b = \text{Cov}(X, Y) = r_{XY}$
 
-So, regression, correlation, and covariance are all very closely related when we consider only two variables at a time. This is why we didn't make a big deal about simple regression in EDUC 710. But when we get to multiple regression (i.e., more than one $X$ variable), we will see that relationship between regression and correlation (and covariance) gets more complicated.  
+(You can check these results by plugging the value 0 for the means and the value 1 for the variance in the equations above.) 
+
+So, regression, correlation, and covariance are all very closely related when we consider only two variables at a time. This is why we didn't make a big deal about simple regression in EDUC 710 -- its basically just the same thing as correlation. But, when we get to multiple regression (i.e., more than one $X$ variable), we will see that relationship between regression and correlation (and covariance) gets more complicated.  
 
 <!-- ## Residuals 
 - show that Cor(\hatY e) = 0  and explain why that is important
 - talk about standard error of estimate and how its used
 -->
 
-## R-squared
+## R-squared {#rsquared-2}
 ```{r, echo=FALSE, results='asis'}
 codefolder::bookdown(init = "hide", style = button)
 ```
-In the previous section we saw that the predicted value of Educational Achievement increased by .43 units (about half a percentage point) for each unit of increase in SES. Another way to interpret this relationship is in terms of the proportion of variance in Reading Achievement that is associated with SES -- i.e., to what extent are individual differences in Reading Achievement associated with, or explained by, individual differences in SES? 
+In the previous section we saw that the predicted value of Reading Achievement increased by .43 units (about half a percentage point) for each unit of increase in SES. Another way to interpret this relationship is in terms of the proportion of variance in Reading Achievement that is associated with SES -- i.e., to what extent are individual differences in Reading Achievement associated with, or explained by, individual differences in SES? 
 
 This question is represented graphically in Figure \@ref(fig:rsquared). The horizontal line denotes the mean of Reading Achievement. The difference between the indicated student's Reading Achievement score and the mean can be divided into two parts. 
 
-* The black dashed line shows how much closer we get to the student's score by considering $\widehat Y$ instead of $\bar Y$. This represents the extent to which this student's Reading Achievement score is explained by the linear relationship with SES. 
+* The black dashed line shows how much closer we get to the student's Reading Achievement score ($Y$) by considering the predicted values ($\widehat Y$) instead of the overall mean ($\bar Y$). This represents the extent to which this student's Reading Achievement is explained by the linear relationship with SES. 
 
-* The pink dashed line is the regression residual, which was introduced in Section \@ref(regression-line). This is the variation in Reading Achievement that is "left over" after considering the linear relationship with SES. 
+* The pink dashed line is the regression residual, which was introduced in Section \@ref(regression-line-2). This is the variation in Reading Achievement that is "left over" after considering the linear relationship with SES. 
 
 
 ```{r rsquared, fig.cap = 'The Idea Behind R-squared.', fig.align = 'center', echo = F}
@@ -179,8 +191,7 @@ segments(x0 = ses[index[22]], y0 = yhat[index[22]] , x1 = ses[index[22]], y1 = y
 points(x = ses[index], y = achmat08[index], col = "#4B9CD3", pch = 16)
 ```
 
-
-The R-squared statistic summarizes the variation in Reading Achievement associated with SES (i.e., the black dashed line) relative to the total variation in Reading Achievement (i.e., black + pink) for all students in the sample. Aside from the regression parameters, R-squared is the most widely used statistic in regression analysis, so we will be seeing it a lot. Some authors call it the "coefficient of determination" instead of R-squared. 
+The R-squared statistic averages the variation in Reading Achievement associated with SES (i.e., the black dashed line) relative to the total variation in Reading Achievement (i.e., black + pink) for all students in the sample. R-squared is the a widely used statistic in regression analysis, so we will be seeing it a lot. Some authors call it the "coefficient of determination" instead of R-squared. 
 
 Using all of the cases from the example (Figure \@ref(fig:fig1)), the R-squared statistic is: 
 
@@ -189,7 +200,7 @@ options(digits = 5)
 summary(mod)$r.squared
 ```
 
-**Please write down an interpretation of this number and be prepared to share your answer in class!** 
+**Please write down an interpretation of this number and be prepared to share your answer in class.** 
 
 ### Derivation*
 
@@ -230,11 +241,11 @@ Consequently, in simple regression $R^2 = r^2_{XY}$. When we add multiple predic
 
 ## The population model {#population-model-2}  
 
-In the NELS example, the population of interest is U.S. eighth graders in 1988. We want to be able to draw conclusions about that population based on the sample of eighth graders that participated in NELS. In order to do that, we make some statistical assumptions about the population, which are collectively referred to as the population model. We talk about how to check the plausibility of these assumptions in Chapter \@ref(chapter-x). 
+In the NELS example, the population of interest is U.S. eighth graders in 1988. We want to be able to draw conclusions about that population based on the sample of eighth graders that participated in NELS. In order to do that, we make some statistical assumptions about the population, which are collectively referred to as the population model. We talk about how to check the plausibility of these assumptions in Chapter \@ref(chapter-8). 
 
 The regression population model has the following three assumptions, which are also depicted in the diagram below. Recall that the notation $Y \sim N(\mu, \sigma)$ means that a variable $Y$ has a normal distribution with mean $\mu$ and standard deviation $\sigma$.
 
-1. Normality: The distribution of $Y$ conditional on $X$ is normal for all values of $X$. 
+1. Normality: The values of $Y$ conditional on $X$, denoted $Y|X$, are normally distributed (the figure shows these distributions for three values of $X$):  
 
 \[Y | X \sim  N(\mu_{Y | X} , \sigma_{Y | X}) \]
 
@@ -254,16 +265,16 @@ These three assumptions are summarized by writing
 
 \[ Y|X \sim N(a + bX, \sigma). \] 
 
-Sometimes it will be easier to state the assumptions in terms of the population residuals, $\epsilon = Y - \mu_{Y|X}$, which subtract off the regression line: $\epsilon \sim N(0, \sigma)$. 
+Sometimes it will be easier to state the assumptions in terms of the population residuals, $\epsilon = Y - \mu_{Y|X}$, which subtracts off the regression line: $\epsilon \sim N(0, \sigma)$. 
 
-An additional assumption is usually made about the data in the sample -- that they were obtained as a simple random sample from the population. We will see some ways of dealing with other types of samples later on the course (e.g., Chapter \@ref(chapter-x)), but for now we can consider this a background assumption that applies to all of the procedures discussed in this course.  
+An additional assumption is usually made about the data in the sample -- that they were obtained as a simple random sample from the population. We will see some ways of dealing with other types of samples later on the course, but for now we can consider this a background assumption that applies to all of the procedures discussed in this course.  
 
-## Clarifying notation
+## Clarifying notation {#notation-2}
 
 At this point we have used the mathematical symbols for regression (e.g., $a$, $b$) in two different ways:
 
-* In Section \@ref(regression-line) they denoted sample statistics.
-* In Section  \@ref(population-model) they denoted population parameters.
+* In Section \@ref(regression-line-2) they denoted sample statistics.
+* In Section  \@ref(population-model-2) they denoted population parameters.
 
 The population versus sample notation for regression is a bit of a hot mess, but the following conventions are widely used.
 
@@ -280,12 +291,14 @@ The "hats" always denote sample quantities, and the Greek letters (in this table
 
 One thing to note is that the hats are usually omitted from the statistics $\widehat a$,  $\widehat b$, and $\widehat R^2$ if it is clear from context that we are talking about the sample rather than the population. This doesn't apply to $\widehat Y$, because the hat is required to distinguish the predicted values from the data points. 
 
-Another thing to note is that while $\widehat Y$ is often called the predicted value(s), $\mu_{Y|X}$ is not usually referred to this way. It is called the conditional mean function or the conditional expectation function. 
+Another thing to note is that while $\widehat Y$ are often called the predicted values, $\mu_{Y|X}$ is not usually referred to this way. It is called the conditional mean function or the conditional expectation function. We will introduce some other notations for $\widehat Y$ and $\mu_{Y|X}$ later in the course. 
+
+**Please be prepared for a pop quiz on notation during class!**
 
 <!-- Finally, recall that the symbol $E(\cdot)$ denotes the expected value of whatever statistic appears in the place of the dot. The expected value is a way of referring to the mean of the sampling distribution of the statistic (otherwise we would have to say things like "the mean of the mean", which would be horrible). So $E(Y\mid X)$ is the expected value of $Y$ for a given value of $X$. The $\mu_{Y|X}$ is the the population conditional mean, $\mu_{Y|X}$ is equal to $E(Y\mid X)$ when the population model is true (i.e., OLS regression is an unbiased estimator of the population conditional mean function). So, the two symbols are used interchangeably. (Omit this paragraph?) -->
 
 
-## Inference for the slope {#inference-for-slope}
+## Inference for the slope {#inference-for-slope-2}
 
 ```{r, echo=FALSE, results='asis'}
 codefolder::bookdown(init = "hide", style = button)
@@ -315,7 +328,7 @@ For a given Type I Error rate, $\alpha$, the corresponding $(1-\alpha) \times 10
 
 where $t_{(1-\alpha/2)}$ denotes the $1 - \alpha/2$ quantile of the $t$-distribution with $N-2$ degrees of freedom. 
 
-For example, if $\alpha$ is chosen to be $.05$, the corresponding $95\%$ confidence interval uses $t_{(.025)}$, the 2.5-th percentile of the t-distribution. 
+For example, if $\alpha$ is chosen to be $.05$, the corresponding $95\%$ confidence interval uses $t_{(.025)}$, or the 2.5-th percentile of the t-distribution. 
 
 ### The NELS example 
 
@@ -342,22 +355,19 @@ The situation for the regression intercept is similar to that for the slope: the
 s_{\widehat a} = \sqrt{\frac{SS_{\text{res}}}{N-2} \left(\frac{1}{N} + \frac{\bar X^2}{(N-1)s^2_X}\right)}.
 \]
 
-The t-tests and confidence intervals are constructed in the way same as for the slope, with $a$ replacing $b$ in the notation of the previous slide. The t-distribution also has $N-2$ degrees of freedom for the intercept.  
+The t-tests and confidence intervals are constructed in the way same as for the slope, just by $a$ replacing $b$ in the notation of the previous slide. The t-distribution also has $N-2$ degrees of freedom for the intercept.  
 
-It is not usually the case that the regression intercept is of interest in simple regression. Recall that the intercept is the value of $\widehat Y$ when $X = 0$. So, unless you have a hypothesis or research question about this particular value of $X$ (e.g., eighth graders with $SES = 0$), there isn't a good rationale for testing the regression intercept.  
+It is not usually the case that the regression intercept is of interest in simple regression. Recall that the intercept is the value of $\widehat Y$ when $X = 0$. So, unless you have a hypothesis or research question about this particular value of $X$ (e.g., eighth graders with $SES = 0$), you won't be interested in this test (even though R always provides it). 
 
-When we get to multiple regression, we will see some examples of regression models where the intercept is meaningful, especially when we talk about categorical predictors in Chapter \@ref(categorical-predictors) and interactions in Chapter \@ref(interactions). But, for now, we can put it on the back burner. 
+When we get to multiple regression, we will see some examples of regression models where the intercept is meaningful, especially when we talk about categorical predictors in Chapter \@ref(chapter-5) and interactions in Chapter \@ref(chapter-6). But, for now, we can put it on the back burner. 
 
-**For sake of completeness, please take another look at the R output in the previous section and provide an interpretation of the t-test and confidence interval of the regression intercept, and be prepared to share your answers in class!** 
-
-
-## Inference for R-squared {#inference-for-rsquared}
+## Inference for R-squared {#inference-for-rsquared-2}
 
 ```{r, echo=FALSE, results='asis'}
 codefolder::bookdown(init = "hide", style = button)
 ```
 
-Inference for R-squared is quite a bit different than for the regression parameters.  R-squared is a ratio of two sums of squares. We know from our study of ANOVA last semester that ratios of sums of squares are tested using an F-test, rather than a t-test. The F-test for (the population) R-squared is summarized below. 
+Inference for R-squared is quite a bit different than for the regression parameters. As we saw in section \@ref(rsquared-2), R-squared is a ratio of two sums of squares. We know from our study of ANOVA last semester that ratios of sums of squares are tested using an F-test, rather than a t-test. The F-test for (the population) R-squared is summarized below. 
 
 ### F-tests
 
@@ -367,7 +377,7 @@ The null hypothesis $H_0: R^2 = 0$ can be tested against the alternative $H_A: R
 
 which has a F-distribution on $1$ and $N – 2$ degrees of freedom when the null is true. The test assumes that the population model is true. Confidence intervals for R-squared are generally not reported. 
 
-The R output from Section \@ref(inference-for-slope) is presented again below. **Please write down an interpretation of the F-test of R-squared and be prepared to share your answers in class!** Note that R uses the terminology "multiple R-squared" to refer to R-squared. 
+The R output from Section \@ref(inference-for-slope) is presented again below. **Please write down an interpretation of the F-test of R-squared and be prepared to share your answers in class!** Note that the output uses the terminology "multiple R-squared" to refer to R-squared. 
 
 
 ```{r}
@@ -393,18 +403,113 @@ Power analysis in regression is very similar to power analysis for the tests we 
 
 In principal, we can plug-in values for any three of these ingredients and then solve for the fourth. But, as mentioned, power analysis is most useful when we solve for $N$ while planning a study. When solving for $N$ "prospectively," the effect size $f^2$ should be based on reports of R-squared in past research. Power and $\alpha$ are usually chosen to be .8 and .05, respectively. 
 
-When doing secondary data analysis (as in this class) there is not much point in solving for the sample size, since we already have the data. Instead, we can solve for the effect size. In the NELS example we have $N=500$ observations. The output below reports the smallest effect size we can detect with a power of .8 and $\alpha = .05$. This is sometimes called the "minimum detectable effect size" (MDES). Note that $u = 1$ and $v = N- 2$ denote the degrees of freedom in the numerator and denominator of the F-test of R-squared, respectively. 
+When doing secondary data analysis (as in this class) there is not much point in solving for the sample size, since we already have the data. Instead, we can solve for the effect size. In the NELS example we have $N=500$ observations. The output below reports the smallest effect size we can detect with a power of .8 and $\alpha = .05$. This is sometimes called the "minimum detectable effect size" (MDES). Note that the output $u $ and $v$ denote the degrees of freedom in the numerator and denominator of the F-test of R-squared, respectively. 
 
 ```{r}
 library(pwr)
 pwr.f2.test(u = 1, v = 498, sig.level = .05, power = .8)
 ```
 
-**Please write down an interpretation of this power analysis, and be prepared to share your answers in class!**
+**What is the MDES for the NELS example? Please be prepared to share your answer in class.**
+
+## Workbook {#workbook-2}
+
+```{r, echo=FALSE, results='asis'}
+codefolder::bookdown(init = "hide", style = button)
+```
+
+This section collects the questions asked in this chapter. We will discuss these questions in class. If you haven't written down / thought about the answers to these questions before class, the lesson will not be very useful for you! So, please engage with each question by writing down one or more answers, asking clarifying questions, posing follow up questions, etc. 
+
+**Section \@ref(example-2)**
+
+```{r, fig.cap = 'Reading Achievement and SES (NELS88).', fig.align = 'center'}
+# Scatter plot
+plot(x = ses, y = achmat08, col = "#4B9CD3", ylab = "Reading Achievement (Grade 8)", xlab = "SES")
+
+# Run the regression model
+mod <- lm(achmat08 ~ ses)
+
+# Add the regression line to the plot
+abline(mod) 
+```
+
+The strength and direction of the linear relationship between the two variables is summarized by their correlation (specifically, the Pearson product moment correlation). In the plot above, the correlation is
+
+```{r}
+options(digits = 4)
+cor(achmat08, ses)
+```
+
+This correlation means that eighth graders from more well-off families (higher SES) also tended to do better in reading (higher Reading Achievement). 
+
+This relationship has been widely documented and discussed in education research (e.g., https://www.apa.org/pi/ses/resources/publications/education). Please look over this web page and be prepared to share your thoughts about the relationship between SES and academic achievement in class.
+
+
+**Section \@ref(ols-2)**
+
+For the NELS example, the regression intercept and slope are, respectively: 
+
+```{r}
+coef(mod)
+```
+
+Please write down an interpretation of these numbers in terms of the line in Figure \@ref(fig:fig1), and be prepared to share your answers in class.
+
+**Section \@ref(rsquared-2)**
+
+Using all of the cases from the example (Figure \@ref(fig:fig1)), the R-squared statistic is: 
+
+```{r}
+options(digits = 5)
+summary(mod)$r.squared
+```
+
+Please write down an interpretation of this number and be prepared to share your answer in class.
+
+**Section \@ref(notation-2)**
+
+Please be prepared for a pop quiz on notation during class!
+
+Concept                Sample statistic    Population parameter               
+-------               ------------------  ----------------------
+regression line          
+slope                                            
+intercept                                        
+residual                                          
+variance explained      
+
+**Section \@ref(inference-for-slope-2)**
+
+```{r}
+summary(mod)
+```
+
+The corresponding $95\%$ confidence interval is
+
+```{r}
+confint(mod)
+```
+
+Please write down an interpretation of the t-test and confidence interval of the regression slope, and be prepared to share your answers in class!
+
+**Section \@ref(inference-for-rsquared-2)**
+
+Using the same output as above, please write down an interpretation of the F-test of R-squared and be prepared to share your answers in class. Note that the output uses the terminology "multiple R-squared" to refer to R-squared. 
+
+**Section \@ref(power-2)**
+
+When doing secondary data analysis (as in this class) there is not much point in solving for the sample size, since we already have the data. Instead, we can solve for the effect size. In the NELS example we have $N=500$ observations. The output below reports the smallest effect size we can detect with a power of .8 and $\alpha = .05$. This is sometimes called the "minimum detectable effect size" (MDES). Note that the output $u $ and $v$ denote the degrees of freedom in the numerator and denominator of the F-test of R-squared, respectively. 
+
+```{r}
+library(pwr)
+pwr.f2.test(u = 1, v = 498, sig.level = .05, power = .8)
+```
+
+What is the MDES for the NELS example? Please be prepared to share your answer in class.
 
 ## Exercises {#exercises-2}
   
-These exercises collect all of the R input used in this chapter in one step-by-step analysis, explain how the R input works, and provides some some additional exercises to work on. We will go through this material in class together. 
+These exercises collect all of the R input used in this chapter into a single step-by-step analysis. It explains how the R input works, and provides some some additional exercises. We will go through this material in class together, so you don't need to work on it before class (but you can if you want.)
 
 ### The `lm` function
 
@@ -416,7 +521,7 @@ The main argument that the user provides to the `lm` function is a formula. For 
 
 Here `Y` denotes the outcome variable and `X` is the predictor variable. The tilde `~` just means "equals", but the equals sign `=` is already used to assign values in R, so `~` is used in its place when writing a formula.  We will see more complicated formulas as we go through the course. For more information on R's formula syntax, see `help(formula)`. 
 
-Let's take a closer look using the following two variables from the NELS data, which is available on Sakai site for the course. 
+Let's take a closer look using the following two variables from the NELS data. 
   
   * `achmat08`: eighth grade math achievement (percent correct on a math test)
   
@@ -435,19 +540,20 @@ plot(x = ses, y = achmat08, col = "#4B9CD3")
 # Regress math achievement on SES; save output as "mod"
 mod <- lm(achmat08 ~ ses)
 
+# Add the regression line to the plot
+abline(mod)
+
 # Print out the regression coefficients
 coef(mod)
-
-# add the regression line to the plot
-abline(mod)
 ```
 
-Let's do some quick calculations to check that the `lm` output corresponds the formulas for the slope and intercept in Section \@ref(ols): 
+Let's do some quick calculations to check that the `lm` output corresponds the formulas for the slope and intercept in Section \@ref(ols-2): 
 
 $$ a = \bar Y - b \bar X \quad \text{and} \quad b = \frac{\text{Cov}(X, Y)}{s_X^2} $$
+We won't usually do these kind of "manual" calculations, but it is a good way consolidate knowledge presented in the readings with the output presented by R. It is also useful to refresh our memory about some useful R functions and how the R language works.  
 
 ```{r}
-# Confirm that the slope from m is just the covariance divided by the variance of X
+# Confirm that the slope from lm is equal to the covariance divided by the variance of X
 cov_xy <- cov(achmat08, ses)
 s_x <- var(ses)
 b <- cov_xy / s_x
@@ -465,21 +571,7 @@ Let's also check our interpretation of the parameters. If the answers to these q
 
 * What is the predicted value of `achmat08` when `ses` is equal to zero? 
 
-* How much do the predicted values of `achmat08` increase for each unit of increase in `ses`? 
-
-### Predicted values and residuals
-
-The `lm` function also returns the residuals $e_i$ and the predicted values $\widehat{Y_i}$, which we can access using the `$` operator. These are useful for various reasons, especially model diagnostics which we discuss later in the course. For now, lets take a look at the residual vs fitted plot. 
-
-```{r}
-yhat <- mod$fitted.values
-res <- mod$resid
-
-plot(yhat, res, col = "#4B9CD3")
-cor(yhat, res)
-```
-
-Note that the predicted values are uncorrelated with the residuals -- this is always the case in OLS. 
+* How much does the predicted value of `achmat08` increase for each unit of increase in `ses`? 
 
 ### Variance explained
 
@@ -491,7 +583,15 @@ from which we can compute the proportion of variation in Y that is associated wi
 
 $$R^2 = \frac{SS_{\text{reg}}}{SS_{\text{total}}}$$
 
-Let's compute $R^2$ "by hand" for our example. 
+
+The R-squared for the example is presented in the output below. You should be able to provide an interpretation of this number, so if it's not clear make sure to ask in class!  
+
+```{r}
+# R-squared from the example
+summary(mod)$r.squared
+```
+
+As above, let's compute $R^2$ "by hand" for our example. 
 
 ```{r}
 # Compute the sums of squares
@@ -507,29 +607,39 @@ ss_reg + ss_res
 # Compute R-squared
 ss_reg/ss_total
 
-# Check that this is the same as the regression output: 
-summary(mod)$r.squared
-
 # Check that R-squared is really equal to the square of the PPMC
 cor(achmat08, ses)^2
 ```
 
-### Inference
+### Predicted values and residuals
 
-At this point we can say that SES explained about 10% of the variation in eighth grade students' math achievement, in our sample. However, we haven't yet talked about statistical inference, or how we can make conclusions about a population based on a sample from that population. 
-
-Let's use the `summary` function to test the coefficients in our model.
+The `lm` function also returns the residuals $e_i$ and the predicted values $\widehat{Y_i}$, which we can access using the `$` operator. These are useful for various reasons, especially model diagnostics which we discuss later in the course. For now, lets just take a look at the residual vs fitted plot to illustrate the code. 
 
 ```{r}
-mod <- lm(achmat08 ~ ses)
+yhat <- mod$fitted.values
+res <- mod$resid
+
+plot(yhat, res, col = "#4B9CD3")
+cor(yhat, res)
+```
+
+Note that the predicted values are uncorrelated with the residuals -- this is always the case in OLS. 
+
+### Inference
+
+Next let's talk about statistical inference, or how we can make conclusions about a population based on a sample from that population. 
+
+We can use the `summary` function to test the coefficients in our model.
+
+```{r}
 summary(mod)
 ```
 
-In the table, the t-test and p-values are for the null hypothesis that the corresponding coefficient is zero in the population. We can see that the intercept and slope are both significantly different from zero at the .05 level, however, the test of the slope is not very meaningful. 
+In the table, the t-test and p-values are for the null hypothesis that the corresponding coefficient is zero in the population. We can see that the intercept and slope are both significantly different from zero at the .05 level. However, the test of the intercept is not very meaningful (why?). 
 
 The text below the table summarizes the output for R-squared, including its F-test, it's degrees of freedom, and the p-value. (We will talk about adjusted R-square in Chapter 4) 
 
-We can use the `confint` function to obtain confidence intervals for the regression coefficients. Use `help` to find out more about the `confint` function.
+We can also use the `confint` function to obtain confidence intervals for the regression coefficients. Use `help` to find out more about the `confint` function.
 
 ```{r}
 confint(mod)
@@ -539,9 +649,9 @@ Be sure to remember the correct interpretation of confidence intervals: *there i
 
 ### Power analysis 
 
-Power analyses should ideally be done prospectively -- i.e., before the data are collected. Since this class will work with secondary data analyses, most of our analyses will be retrospective. But don't let this mislead you about the importance of statistical power -- you should always do a power analysis before collecting data!! 
+Power analyses should ideally be done before the data are collected. Since this class will work with secondary data analyses, most of our analyses will be retrospective. But don't let this mislead you about the importance of statistical power -- you should always do a power analysis before collecting data!! 
 
-To do a power analsyes in R, we can install and load the `pwr` package. If you haven't installed an R package before it's pretty straight forward -- but just ask the instructor or a fellow student if you run into any issues. 
+To do a power analsyis in R, we can install and load the `pwr` package. If you haven't installed an R package before, it's pretty straight forward -- but just ask the instructor or a fellow student if you run into any issues. 
 
 ```{r, eval = F}
 # Install the package 
@@ -571,7 +681,7 @@ In simple regression, `u = 1` and `v = N - 2`.
 
 
 
-As an example of (prospective) power analysis, let's find out many observations would be required to detect an effet size of R-square = .1, using $\alpha = .05$ and power = .8? To find the answer, enter the provided information into the `pwr.f2.test` function, and the function will solve for the "missing piece" -- in this case $v = N - 2$.
+As an example of (prospective) power analysis, let's find out many observations would be required to detect an effet size of R-square = .1, using $\alpha = .05$ and power = .8. To find the answer, enter the provided information into the `pwr.f2.test` function, and the function will solve for the "missing piece" -- in this case $v = N - 2$.
 
 
 ```{r}
@@ -585,7 +695,7 @@ In this example we find that $v = 70.6$. Since $v = N - 2$, so we know that a sa
 
 ### Additional exercises
 
-If time permits, we will address these additional exercises in class. If you want more practice with R, please take a look at the review materials (on Sakai as of week 2; will be updated in the following section of the book as time permits). 
+If time permits, we will address these additional exercises in class.  
 
 These exercises replace `achmat08` with
 
@@ -602,9 +712,6 @@ Please answer the following questions using R.
 * How much do predicted Reading scores increase for a one unit of increase in SES? Is this a statistically significant at the .05 level?
 
 * What are your overall conclusions about the relationship between Academic Achievement and SES in the NELS data? 
-
-
-If you want more practice with R please take a look at the Review materials (on Sakai as of week 2; will be updated in the following section of the book as time permits). 
 
 ## Review {#review}
 
