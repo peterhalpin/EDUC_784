@@ -218,13 +218,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.5.1" data-path="4.5-interpretation-4.html"><a href="4.5-interpretation-4.html#holding-the-other-predictor-constant"><i class="fa fa-check"></i><b>4.5.1</b> “Holding the other predictor constant”</a></li>
 <li class="chapter" data-level="4.5.2" data-path="4.5-interpretation-4.html"><a href="4.5-interpretation-4.html#controlling-for-the-other-predictor"><i class="fa fa-check"></i><b>4.5.2</b> “Controlling for the other predictor”</a></li>
 <li class="chapter" data-level="4.5.3" data-path="4.5-interpretation-4.html"><a href="4.5-interpretation-4.html#the-ecls-example"><i class="fa fa-check"></i><b>4.5.3</b> The ECLS example</a></li>
+<li class="chapter" data-level="4.5.4" data-path="4.5-interpretation-4.html"><a href="4.5-interpretation-4.html#other-interpretations"><i class="fa fa-check"></i><b>4.5.4</b> Other interpretations</a></li>
 </ul></li>
 <li class="chapter" data-level="4.6" data-path="4.6-beta-4.html"><a href="4.6-beta-4.html"><i class="fa fa-check"></i><b>4.6</b> Standardized coefficients</a></li>
 <li class="chapter" data-level="4.7" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html"><i class="fa fa-check"></i><b>4.7</b> (Multiple) R-squared</a>
 <ul>
 <li class="chapter" data-level="4.7.1" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html#the-multiple-correlation"><i class="fa fa-check"></i><b>4.7.1</b> The multiple correlation</a></li>
 <li class="chapter" data-level="4.7.2" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html#relation-with-simple-regression"><i class="fa fa-check"></i><b>4.7.2</b> Relation with simple regression</a></li>
-<li class="chapter" data-level="4.7.3" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html#adjusted-r-squared"><i class="fa fa-check"></i><b>4.7.3</b> Adjusted R-squared</a></li>
+<li class="chapter" data-level="4.7.3" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html#relation-with-beta-weights"><i class="fa fa-check"></i><b>4.7.3</b> Relation with <span class="math inline">\(\beta\)</span>-weights</a></li>
+<li class="chapter" data-level="4.7.4" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html#adjusted-r-squared"><i class="fa fa-check"></i><b>4.7.4</b> Adjusted R-squared</a></li>
 </ul></li>
 <li class="chapter" data-level="4.8" data-path="4.8-inference-for-slopes-4.html"><a href="4.8-inference-for-slopes-4.html"><i class="fa fa-check"></i><b>4.8</b> Inference for the slopes</a>
 <ul>
@@ -248,7 +250,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.3" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html"><i class="fa fa-check"></i><b>5.3</b> Binary predictors</a>
 <ul>
 <li class="chapter" data-level="5.3.1" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html#relation-with-t-tests"><i class="fa fa-check"></i><b>5.3.1</b> Relation with t-tests</a></li>
-<li class="chapter" data-level="5.3.2" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html#summary-1"><i class="fa fa-check"></i><b>5.3.2</b> Summary</a></li>
+<li class="chapter" data-level="5.3.2" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html#some-math"><i class="fa fa-check"></i><b>5.3.2</b> Some math*</a></li>
+<li class="chapter" data-level="5.3.3" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html#summary-1"><i class="fa fa-check"></i><b>5.3.3</b> Summary</a></li>
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="5.4-reference-group-coding-5.html"><a href="5.4-reference-group-coding-5.html"><i class="fa fa-check"></i><b>5.4</b> Reference-group coding</a>
 <ul>
@@ -550,8 +553,8 @@ Figure 2.3: The Idea Behind R-squared.
 </div>
 <p>The R-squared statistic averages the variation in Reading Achievement associated with SES (i.e., the black dashed line) relative to the total variation in Reading Achievement (i.e., black + pink) for all students in the sample. R-squared is the a widely used statistic in regression analysis, so we will be seeing it a lot. Some authors call it the “coefficient of determination” instead of R-squared.</p>
 <p>Using all of the cases from the example (Figure <a href="2.1-example-2.html#fig:fig1">2.1</a>), the R-squared statistic is:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="2.4-rsquared-2.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">digits =</span> <span class="dv">5</span>)</span>
-<span id="cb8-2"><a href="2.4-rsquared-2.html#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod)<span class="sc">$</span>r.squared</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="2.4-rsquared-2.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">digits =</span> <span class="dv">5</span>)</span>
+<span id="cb7-2"><a href="2.4-rsquared-2.html#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod)<span class="sc">$</span>r.squared</span></code></pre></div>
 <pre><code>## [1] 0.10128</code></pre>
 <p><strong>Please write down an interpretation of this number and be prepared to share your answer in class.</strong></p>
 <div id="derivation" class="section level3" number="2.4.1">

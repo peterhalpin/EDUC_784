@@ -24,7 +24,7 @@
 <meta name="author" content="Peter Halpin" />
 
 
-<meta name="date" content="2022-04-17" />
+<meta name="date" content="2022-04-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -561,11 +561,11 @@ Figure 11.15: Predicted probabilities
 </ul>
 <div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="11.9-workbook-6.html#cb39-1"></a>ci.b &lt;-<span class="st"> </span><span class="kw">confint</span>(mod2)</span></code></pre></div>
 <pre><code>## Waiting for profiling to be done...</code></pre>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="11.9-workbook-6.html#cb41-1"></a>ci.table &lt;-<span class="st"> </span><span class="kw">cbind</span>(<span class="dt">coefs =</span> <span class="kw">coef</span>(mod1), ci.b)</span>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="11.9-workbook-6.html#cb41-1"></a>ci.table &lt;-<span class="st"> </span><span class="kw">cbind</span>(<span class="dt">coefs =</span> <span class="kw">coef</span>(mod2), ci.b)</span>
 <span id="cb41-2"><a href="11.9-workbook-6.html#cb41-2"></a><span class="kw">exp</span>(ci.table)</span></code></pre></div>
-<pre><code>##                    coefs           2.5 %        97.5 %
-## (Intercept) 0.5839380669 0.0004412620605 0.03892359506
-## age         1.0220503262 1.0692223156170 1.17586814070</code></pre>
+<pre><code>##                      coefs           2.5 %        97.5 %
+## (Intercept) 0.004944628842 0.0004412620605 0.03892359506
+## age         1.117306795032 1.0692223156170 1.17586814070</code></pre>
 <ul>
 <li>Please write down your interpretation of the LR test given below</li>
 </ul>

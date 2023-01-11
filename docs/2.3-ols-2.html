@@ -218,13 +218,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.5.1" data-path="4.5-interpretation-4.html"><a href="4.5-interpretation-4.html#holding-the-other-predictor-constant"><i class="fa fa-check"></i><b>4.5.1</b> “Holding the other predictor constant”</a></li>
 <li class="chapter" data-level="4.5.2" data-path="4.5-interpretation-4.html"><a href="4.5-interpretation-4.html#controlling-for-the-other-predictor"><i class="fa fa-check"></i><b>4.5.2</b> “Controlling for the other predictor”</a></li>
 <li class="chapter" data-level="4.5.3" data-path="4.5-interpretation-4.html"><a href="4.5-interpretation-4.html#the-ecls-example"><i class="fa fa-check"></i><b>4.5.3</b> The ECLS example</a></li>
+<li class="chapter" data-level="4.5.4" data-path="4.5-interpretation-4.html"><a href="4.5-interpretation-4.html#other-interpretations"><i class="fa fa-check"></i><b>4.5.4</b> Other interpretations</a></li>
 </ul></li>
 <li class="chapter" data-level="4.6" data-path="4.6-beta-4.html"><a href="4.6-beta-4.html"><i class="fa fa-check"></i><b>4.6</b> Standardized coefficients</a></li>
 <li class="chapter" data-level="4.7" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html"><i class="fa fa-check"></i><b>4.7</b> (Multiple) R-squared</a>
 <ul>
 <li class="chapter" data-level="4.7.1" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html#the-multiple-correlation"><i class="fa fa-check"></i><b>4.7.1</b> The multiple correlation</a></li>
 <li class="chapter" data-level="4.7.2" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html#relation-with-simple-regression"><i class="fa fa-check"></i><b>4.7.2</b> Relation with simple regression</a></li>
-<li class="chapter" data-level="4.7.3" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html#adjusted-r-squared"><i class="fa fa-check"></i><b>4.7.3</b> Adjusted R-squared</a></li>
+<li class="chapter" data-level="4.7.3" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html#relation-with-beta-weights"><i class="fa fa-check"></i><b>4.7.3</b> Relation with <span class="math inline">\(\beta\)</span>-weights</a></li>
+<li class="chapter" data-level="4.7.4" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html#adjusted-r-squared"><i class="fa fa-check"></i><b>4.7.4</b> Adjusted R-squared</a></li>
 </ul></li>
 <li class="chapter" data-level="4.8" data-path="4.8-inference-for-slopes-4.html"><a href="4.8-inference-for-slopes-4.html"><i class="fa fa-check"></i><b>4.8</b> Inference for the slopes</a>
 <ul>
@@ -248,7 +250,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.3" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html"><i class="fa fa-check"></i><b>5.3</b> Binary predictors</a>
 <ul>
 <li class="chapter" data-level="5.3.1" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html#relation-with-t-tests"><i class="fa fa-check"></i><b>5.3.1</b> Relation with t-tests</a></li>
-<li class="chapter" data-level="5.3.2" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html#summary-1"><i class="fa fa-check"></i><b>5.3.2</b> Summary</a></li>
+<li class="chapter" data-level="5.3.2" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html#some-math"><i class="fa fa-check"></i><b>5.3.2</b> Some math*</a></li>
+<li class="chapter" data-level="5.3.3" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html#summary-1"><i class="fa fa-check"></i><b>5.3.3</b> Summary</a></li>
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="5.4-reference-group-coding-5.html"><a href="5.4-reference-group-coding-5.html"><i class="fa fa-check"></i><b>5.4</b> Reference-group coding</a>
 <ul>
@@ -550,7 +553,7 @@ a = \bar Y - b \bar X \quad \quad \quad \quad b = \frac{\text{Cov}(X, Y)}{s^2_X}
 \]</span></p>
 <p>(If you aren’t familiar with the symbols in these equations, check out the review materials in Section <a href="2.13-review.html#review">2.13</a> for a refresher.)</p>
 <p>For the NELS example, the regression intercept and slope are, respectively:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="2.3-ols-2.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(mod)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="2.3-ols-2.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(mod)</span></code></pre></div>
 <pre><code>## (Intercept)         ses 
 ##     48.6780      0.4293</code></pre>
 <p><strong>Please write down an interpretation of these numbers in terms of the line in Figure <a href="2.1-example-2.html#fig:fig1">2.1</a>, and be prepared to share your answers in class!</strong></p>

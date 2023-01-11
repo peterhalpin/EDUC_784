@@ -541,7 +541,7 @@ MLEs have the property that they obey the central limit theorem. This means that
 So, if we divide the MLE by its standard error, we get an approximate z-test of statistical significance. This test is called a Wald test, and it is what R reports in the summary table below. You should have no problem interpreting these tests at this point in the course. 
 
 ```{r}
-summary(mod1)
+summary(mod2)
 ```
 
 In summary: The hypotheses pair $H_0: b = b_0$ versus $H_A: b \neq b_0$ can be tested using the statistic 
@@ -580,7 +580,7 @@ Below is the result of this procedure for our example.
 
 ```{r}
 ci.b <- confint(mod2)
-ci.table <- cbind(coefs = coef(mod1), ci.b)
+ci.table <- cbind(coefs = coef(mod2), ci.b)
 exp(ci.table)
 ```
 
@@ -900,7 +900,7 @@ visreg::visreg(mod2, xvar = "age", scale = "response")
 
 ```{r}
 ci.b <- confint(mod2)
-ci.table <- cbind(coefs = coef(mod1), ci.b)
+ci.table <- cbind(coefs = coef(mod2), ci.b)
 exp(ci.table)
 ```
 

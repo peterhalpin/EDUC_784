@@ -24,7 +24,11 @@
 <meta name="author" content="Peter Halpin" />
 
 
+<<<<<<< HEAD
 <meta name="date" content="2023-01-11" />
+=======
+<meta name="date" content="2022-04-20" />
+>>>>>>> 8da3784cfbfcf4d4afffa6ec0adb98c9ba4b7f45
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -548,25 +552,33 @@ In general, the Wald test should only be used when you have a large sample size.
 <h3><span class="header-section-number">11.5.1</span> Wald test</h3>
 <p>MLEs have the property that they obey the central limit theorem. This means that the sampling distribution of an MLE becomes more and more like a normal distribution as the sample size gets large. We say that the MLEs are “approximately” or “asymptotically” normal.</p>
 <p>So, if we divide the MLE by its standard error, we get an approximate z-test of statistical significance. This test is called a Wald test, and it is what R reports in the summary table below. You should have no problem interpreting these tests at this point in the course.</p>
+<<<<<<< HEAD
 <div class="sourceCode" id="cb416"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb416-1"><a href="11.5-inference-11.html#cb416-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod1)</span></code></pre></div>
+=======
+<div class="sourceCode" id="cb405"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb405-1"><a href="11.5-inference-11.html#cb405-1"></a><span class="kw">summary</span>(mod2)</span></code></pre></div>
+>>>>>>> 8da3784cfbfcf4d4afffa6ec0adb98c9ba4b7f45
 <pre><code>## 
 ## Call:
-## lm(formula = chd ~ age, data = chd.data)
+## glm(formula = chd ~ age, family = binomial, data = chd.data)
 ## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -0.8579 -0.3399 -0.0727  0.3166  0.9927 
+## Deviance Residuals: 
+##    Min      1Q  Median      3Q     Max  
+## -1.972  -0.846  -0.458   0.825   2.286  
 ## 
 ## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept) -0.53796    0.16881   -3.19   0.0019 ** 
-## age          0.02181    0.00368    5.93  4.6e-08 ***
+##             Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)  -5.3095     1.1337   -4.68  2.8e-06 ***
+## age           0.1109     0.0241    4.61  4.0e-06 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 0.429 on 98 degrees of freedom
-## Multiple R-squared:  0.264,  Adjusted R-squared:  0.256 
-## F-statistic: 35.2 on 1 and 98 DF,  p-value: 4.57e-08</code></pre>
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 136.66  on 99  degrees of freedom
+## Residual deviance: 107.35  on 98  degrees of freedom
+## AIC: 111.4
+## 
+## Number of Fisher Scoring iterations: 4</code></pre>
 <p>In summary: The hypotheses pair <span class="math inline">\(H_0: b = b_0\)</span> versus <span class="math inline">\(H_A: b \neq b_0\)</span> can be tested using the statistic</p>
 <p><span class="math display">\[ z = (\hat b - b_0) / s_{\hat b}, \]</span></p>
 <p>which has a standard normal distribution when the null is true. This tests assumes:</p>
@@ -594,11 +606,19 @@ In general, the Wald test should only be used when you have a large sample size.
 <p>Below is the result of this procedure for our example.</p>
 <div class="sourceCode" id="cb418"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb418-1"><a href="11.5-inference-11.html#cb418-1" aria-hidden="true" tabindex="-1"></a>ci.b <span class="ot">&lt;-</span> <span class="fu">confint</span>(mod2)</span></code></pre></div>
 <pre><code>## Waiting for profiling to be done...</code></pre>
+<<<<<<< HEAD
 <div class="sourceCode" id="cb420"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb420-1"><a href="11.5-inference-11.html#cb420-1" aria-hidden="true" tabindex="-1"></a>ci.table <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="at">coefs =</span> <span class="fu">coef</span>(mod1), ci.b)</span>
 <span id="cb420-2"><a href="11.5-inference-11.html#cb420-2" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(ci.table)</span></code></pre></div>
 <pre><code>##              coefs     2.5 %  97.5 %
 ## (Intercept) 0.5839 0.0004413 0.03892
 ## age         1.0221 1.0692223 1.17587</code></pre>
+=======
+<div class="sourceCode" id="cb409"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb409-1"><a href="11.5-inference-11.html#cb409-1"></a>ci.table &lt;-<span class="st"> </span><span class="kw">cbind</span>(<span class="dt">coefs =</span> <span class="kw">coef</span>(mod2), ci.b)</span>
+<span id="cb409-2"><a href="11.5-inference-11.html#cb409-2"></a><span class="kw">exp</span>(ci.table)</span></code></pre></div>
+<pre><code>##                coefs     2.5 %  97.5 %
+## (Intercept) 0.004945 0.0004413 0.03892
+## age         1.117307 1.0692223 1.17587</code></pre>
+>>>>>>> 8da3784cfbfcf4d4afffa6ec0adb98c9ba4b7f45
 <p><strong>Please write down your interpretation of the OR and its confidence interval for the example</strong></p>
 <p>Note that the confidence intervals produced by <span class="math inline">\(R\)</span> use the (profile) likelihood rather than the Wald test. So, the problems we discussed with the Wald test don’t apply to these confidence intervals. (You can get Waldian confidence intervals form the <code>confint</code> function, but this is not the default.)</p>
 </div>
