@@ -538,7 +538,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>This section collects the questions asked in this chapter. We will discuss these questions in class. If you haven’t written down / thought about the answers to these questions before class, the lesson will not be very useful for you! So, please engage with each question by writing down one or more answers, asking clarifying questions, posing follow up questions, etc.</p>
 <p><strong>Section <a href="2.1-example-2.html#example-2">2.1</a></strong></p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="2.11-workbook-2.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatter plot</span></span>
-<span id="cb18-2"><a href="2.11-workbook-2.html#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> ses, <span class="at">y =</span> achmat08, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Reading Achievement (Grade 8)&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;SES&quot;</span>)</span>
+<span id="cb18-2"><a href="2.11-workbook-2.html#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> ses, <span class="at">y =</span> achmat08, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Math Achievement (Grade 8)&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;SES&quot;</span>)</span>
 <span id="cb18-3"><a href="2.11-workbook-2.html#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-4"><a href="2.11-workbook-2.html#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the regression model</span></span>
 <span id="cb18-5"><a href="2.11-workbook-2.html#cb18-5" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(achmat08 <span class="sc">~</span> ses)</span>
@@ -546,16 +546,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb18-7"><a href="2.11-workbook-2.html#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Add the regression line to the plot</span></span>
 <span id="cb18-8"><a href="2.11-workbook-2.html#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(mod) </span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-19"></span>
-<img src="_main_files/figure-html/unnamed-chunk-19-1.png" alt="Reading Achievement and SES (NELS88)." width="672" />
+<img src="_main_files/figure-html/unnamed-chunk-19-1.png" alt="Math Achievement and SES (NELS88)." width="672" />
 <p class="caption">
-Figure 2.5: Reading Achievement and SES (NELS88).
+Figure 2.5: Math Achievement and SES (NELS88).
 </p>
 </div>
 <p>The strength and direction of the linear relationship between the two variables is summarized by their correlation (specifically, the Pearson product moment correlation). In the plot above, the correlation is</p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="2.11-workbook-2.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">digits =</span> <span class="dv">4</span>)</span>
 <span id="cb19-2"><a href="2.11-workbook-2.html#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(achmat08, ses)</span></code></pre></div>
 <pre><code>## [1] 0.3182</code></pre>
-<p>This correlation means that eighth graders from more well-off families (higher SES) also tended to do better in reading (higher Reading Achievement).</p>
+<p>This correlation means that eighth graders from more well-off families (higher SES) also tended to do better in Math (higher Math Achievement).</p>
 <p>This relationship has been widely documented and discussed in education research (e.g., <a href="https://www.apa.org/pi/ses/resources/publications/education" class="uri">https://www.apa.org/pi/ses/resources/publications/education</a>). Please look over this web page and be prepared to share your thoughts about the relationship between SES and academic achievement in class.</p>
 <p><strong>Section <a href="2.3-ols-2.html#ols-2">2.3</a></strong></p>
 <p>For the NELS example, the regression intercept and slope are, respectively:</p>

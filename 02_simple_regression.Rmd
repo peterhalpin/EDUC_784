@@ -20,17 +20,15 @@ The focus of this course is linear regression with multiple predictors (AKA *mul
 codefolder::bookdown(init = "hide", style = button)
 ```
 
-<!-- Oops! The example used math instead of reading! Also, replace this example with ECLS fro Chapter 4 --> 
+Figure \@ref(fig:fig1) shows the relationship between Grade 8 Math Achievement (percent correct on a math test) and Socioeconomic Status (SES; a composite measure on a scale from 0-35). The data are a subsample of the 1988 National Educational Longitudinal Survey (NELS; see https://nces.ed.gov/surveys/nels88/). 
 
-Figure \@ref(fig:fig1) shows the relationship between Grade 8 Reading Achievement (percent correct on a reading test) and Socioeconomic Status (SES; a composite measure on a scale from 0-35). The data are a subsample of the 1988 National Educational Longitudinal Survey (NELS; see https://nces.ed.gov/surveys/nels88/). 
-
-```{r fig1, fig.cap = 'Reading Achievement and SES (NELS88).', fig.align = 'center'}
+```{r fig1, fig.cap = 'Math Achievement and SES (NELS88).', fig.align = 'center'}
 # Load and attach the NELS88 data
 load("NELS.RData")
 attach(NELS)
 
 # Scatter plot
-plot(x = ses, y = achmat08, col = "#4B9CD3", ylab = "Reading Achievement (Grade 8)", xlab = "SES")
+plot(x = ses, y = achmat08, col = "#4B9CD3", ylab = "Math Achievement (Grade 8)", xlab = "SES")
 
 # Run the regression model
 mod <- lm(achmat08 ~ ses)
@@ -46,7 +44,7 @@ options(digits = 4)
 cor(achmat08, ses)
 ```
 
-This is a moderate, positive correlation between Reading Achievement and SES. This correlation means that eighth graders from more well-off families (higher SES) also tended to do better in reading (higher Reading Achievement). 
+This is a moderate, positive correlation between Math Achievement and SES. This correlation means that eighth graders from more well-off families (higher SES) also tended to do better in Math (higher Math Achievement). 
 
 This relationship has been widely documented and discussed in education research (e.g., https://www.apa.org/pi/ses/resources/publications/education). **Please look over this web page and be prepared to share your thoughts about the relationship between SES and Achievement in class.** 
 
@@ -66,12 +64,12 @@ The line in the Figure \@ref(fig:fig1) can be represented mathematically as
 
 where 
 
-* $Y$ denotes Reading Achievement
+* $Y$ denotes Math Achievement
 * $X$ denotes SES 
 * $a$ represents the regression intercept (the value of $\widehat Y$ when $X = 0$)
 * $b$ represents the regression slope (how much $\widehat Y$ increases for each unit of increase in $X$)
 
-Note that $Y$ represents the values of Reading Achievement in the data, whereas $\widehat Y$ represents the values computed from the regression equation (i.e., the values on the regression line). The difference $e = Y - \widehat Y$ is called a *residual*. The residuals for a subset of the data points in Figure \@ref(fig:fig1) are shown in pink in Figure \@ref(fig:fig2) 
+Note that $Y$ represents the values of Math Achievement in the data, whereas $\widehat Y$ represents the values computed from the regression equation (i.e., the values on the regression line). The difference $e = Y - \widehat Y$ is called a *residual*. The residuals for a subset of the data points in Figure \@ref(fig:fig1) are shown in pink in Figure \@ref(fig:fig2) 
 
 ```{r fig2, fig.cap = 'Residuals for a Subsample of the Example.', fig.align = 'center'}
 # Get predicted values from regression model
@@ -82,7 +80,7 @@ set.seed(10)
 index <- sample.int(500, 30)
 
 # plot again
-plot(x = ses[index], y = achmat08[index], ylab = "Reading Achievement (Grade 8)", xlab = "SES")
+plot(x = ses[index], y = achmat08[index], ylab = "Math Achievement (Grade 8)", xlab = "SES")
 abline(mod)
 
 # Add pink lines
@@ -165,17 +163,17 @@ So, regression, correlation, and covariance are all very closely related when we
 ```{r, echo=FALSE, results='asis'}
 codefolder::bookdown(init = "hide", style = button)
 ```
-In the previous section we saw that the predicted value of Reading Achievement increased by .43 units (about half a percentage point) for each unit of increase in SES. Another way to interpret this relationship is in terms of the proportion of variance in Reading Achievement that is associated with SES -- i.e., to what extent are individual differences in Reading Achievement associated with, or explained by, individual differences in SES? 
+In the previous section we saw that the predicted value of Math Achievement increased by .43 units (about half a percentage point) for each unit of increase in SES. Another way to interpret this relationship is in terms of the proportion of variance in Math Achievement that is associated with SES -- i.e., to what extent are individual differences in Math Achievement associated with, or explained by, individual differences in SES? 
 
-This question is represented graphically in Figure \@ref(fig:rsquared). The horizontal line denotes the mean of Reading Achievement. The difference between the indicated student's Reading Achievement score and the mean can be divided into two parts. 
+This question is represented graphically in Figure \@ref(fig:rsquared). The horizontal line denotes the mean of Math Achievement. The difference between the indicated student's Math Achievement score and the mean can be divided into two parts. 
 
-* The black dashed line shows how much closer we get to the student's Reading Achievement score ($Y$) by considering the predicted values ($\widehat Y$) instead of the overall mean ($\bar Y$). This represents the extent to which this student's Reading Achievement is explained by the linear relationship with SES. 
+* The black dashed line shows how much closer we get to the student's Math Achievement score ($Y$) by considering the predicted values ($\widehat Y$) instead of the overall mean ($\bar Y$). This represents the extent to which this student's Math Achievement is explained by the linear relationship with SES. 
 
-* The pink dashed line is the regression residual, which was introduced in Section \@ref(regression-line-2). This is the variation in Reading Achievement that is "left over" after considering the linear relationship with SES. 
+* The pink dashed line is the regression residual, which was introduced in Section \@ref(regression-line-2). This is the variation in Math Achievement that is "left over" after considering the linear relationship with SES. 
 
 
 ```{r rsquared, fig.cap = 'The Idea Behind R-squared.', fig.align = 'center', echo = F}
-plot(x = ses[index], y = achmat08[index], ylab = "Reading Achievement (Grade 8)", xlab = "SES")
+plot(x = ses[index], y = achmat08[index], ylab = "Math Achievement (Grade 8)", xlab = "SES")
 abline(mod)
 
 ybar <- mean(achmat08)
@@ -191,7 +189,7 @@ segments(x0 = ses[index[22]], y0 = yhat[index[22]] , x1 = ses[index[22]], y1 = y
 points(x = ses[index], y = achmat08[index], col = "#4B9CD3", pch = 16)
 ```
 
-The R-squared statistic averages the variation in Reading Achievement associated with SES (i.e., the black dashed line) relative to the total variation in Reading Achievement (i.e., black + pink) for all students in the sample. R-squared is the a widely used statistic in regression analysis, so we will be seeing it a lot. Some authors call it the "coefficient of determination" instead of R-squared. 
+The R-squared statistic averages the variation in Math Achievement associated with SES (i.e., the black dashed line) relative to the total variation in Math Achievement (i.e., black + pink) for all students in the sample. R-squared is the a widely used statistic in regression analysis, so we will be seeing it a lot. Some authors call it the "coefficient of determination" instead of R-squared. 
 
 Using all of the cases from the example (Figure \@ref(fig:fig1)), the R-squared statistic is: 
 
@@ -422,9 +420,9 @@ This section collects the questions asked in this chapter. We will discuss these
 
 **Section \@ref(example-2)**
 
-```{r, fig.cap = 'Reading Achievement and SES (NELS88).', fig.align = 'center'}
+```{r, fig.cap = 'Math Achievement and SES (NELS88).', fig.align = 'center'}
 # Scatter plot
-plot(x = ses, y = achmat08, col = "#4B9CD3", ylab = "Reading Achievement (Grade 8)", xlab = "SES")
+plot(x = ses, y = achmat08, col = "#4B9CD3", ylab = "Math Achievement (Grade 8)", xlab = "SES")
 
 # Run the regression model
 mod <- lm(achmat08 ~ ses)
@@ -440,7 +438,7 @@ options(digits = 4)
 cor(achmat08, ses)
 ```
 
-This correlation means that eighth graders from more well-off families (higher SES) also tended to do better in reading (higher Reading Achievement). 
+This correlation means that eighth graders from more well-off families (higher SES) also tended to do better in Math (higher Math Achievement). 
 
 This relationship has been widely documented and discussed in education research (e.g., https://www.apa.org/pi/ses/resources/publications/education). Please look over this web page and be prepared to share your thoughts about the relationship between SES and academic achievement in class.
 
@@ -698,7 +696,7 @@ If time permits, we will address these additional exercises in class.
 
 These exercises replace `achmat08` with
 
-* `achrdg08`: eighth grade reading achievement (percent correct on a reading test)
+* `achrdg08`: eighth grade Reading Achievement (percent correct on a reading test)
 
 Please answer the following questions using R. 
 

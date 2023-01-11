@@ -542,12 +542,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 \]</span></p>
 <p>where</p>
 <ul>
-<li><span class="math inline">\(Y\)</span> denotes Reading Achievement</li>
+<li><span class="math inline">\(Y\)</span> denotes Math Achievement</li>
 <li><span class="math inline">\(X\)</span> denotes SES</li>
 <li><span class="math inline">\(a\)</span> represents the regression intercept (the value of <span class="math inline">\(\widehat Y\)</span> when <span class="math inline">\(X = 0\)</span>)</li>
 <li><span class="math inline">\(b\)</span> represents the regression slope (how much <span class="math inline">\(\widehat Y\)</span> increases for each unit of increase in <span class="math inline">\(X\)</span>)</li>
 </ul>
-<p>Note that <span class="math inline">\(Y\)</span> represents the values of Reading Achievement in the data, whereas <span class="math inline">\(\widehat Y\)</span> represents the values computed from the regression equation (i.e., the values on the regression line). The difference <span class="math inline">\(e = Y - \widehat Y\)</span> is called a <em>residual</em>. The residuals for a subset of the data points in Figure <a href="2.1-example-2.html#fig:fig1">2.1</a> are shown in pink in Figure <a href="2.2-regression-line-2.html#fig:fig2">2.2</a></p>
+<p>Note that <span class="math inline">\(Y\)</span> represents the values of Math Achievement in the data, whereas <span class="math inline">\(\widehat Y\)</span> represents the values computed from the regression equation (i.e., the values on the regression line). The difference <span class="math inline">\(e = Y - \widehat Y\)</span> is called a <em>residual</em>. The residuals for a subset of the data points in Figure <a href="2.1-example-2.html#fig:fig1">2.1</a> are shown in pink in Figure <a href="2.2-regression-line-2.html#fig:fig2">2.2</a></p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="2.2-regression-line-2.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get predicted values from regression model</span></span>
 <span id="cb5-2"><a href="2.2-regression-line-2.html#cb5-2" aria-hidden="true" tabindex="-1"></a>yhat <span class="ot">&lt;-</span> mod<span class="sc">$</span>fitted.values</span>
 <span id="cb5-3"><a href="2.2-regression-line-2.html#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -556,7 +556,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb5-6"><a href="2.2-regression-line-2.html#cb5-6" aria-hidden="true" tabindex="-1"></a>index <span class="ot">&lt;-</span> <span class="fu">sample.int</span>(<span class="dv">500</span>, <span class="dv">30</span>)</span>
 <span id="cb5-7"><a href="2.2-regression-line-2.html#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-8"><a href="2.2-regression-line-2.html#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># plot again</span></span>
-<span id="cb5-9"><a href="2.2-regression-line-2.html#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> ses[index], <span class="at">y =</span> achmat08[index], <span class="at">ylab =</span> <span class="st">&quot;Reading Achievement (Grade 8)&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;SES&quot;</span>)</span>
+<span id="cb5-9"><a href="2.2-regression-line-2.html#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> ses[index], <span class="at">y =</span> achmat08[index], <span class="at">ylab =</span> <span class="st">&quot;Math Achievement (Grade 8)&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;SES&quot;</span>)</span>
 <span id="cb5-10"><a href="2.2-regression-line-2.html#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(mod)</span>
 <span id="cb5-11"><a href="2.2-regression-line-2.html#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-12"><a href="2.2-regression-line-2.html#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Add pink lines</span></span>

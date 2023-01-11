@@ -535,11 +535,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     codefolder('pre.sourceCode');
   });
 </script>
-<p>In the previous section we saw that the predicted value of Reading Achievement increased by .43 units (about half a percentage point) for each unit of increase in SES. Another way to interpret this relationship is in terms of the proportion of variance in Reading Achievement that is associated with SES – i.e., to what extent are individual differences in Reading Achievement associated with, or explained by, individual differences in SES?</p>
-<p>This question is represented graphically in Figure <a href="2.4-rsquared-2.html#fig:rsquared">2.3</a>. The horizontal line denotes the mean of Reading Achievement. The difference between the indicated student’s Reading Achievement score and the mean can be divided into two parts.</p>
+<p>In the previous section we saw that the predicted value of Math Achievement increased by .43 units (about half a percentage point) for each unit of increase in SES. Another way to interpret this relationship is in terms of the proportion of variance in Math Achievement that is associated with SES – i.e., to what extent are individual differences in Math Achievement associated with, or explained by, individual differences in SES?</p>
+<p>This question is represented graphically in Figure <a href="2.4-rsquared-2.html#fig:rsquared">2.3</a>. The horizontal line denotes the mean of Math Achievement. The difference between the indicated student’s Math Achievement score and the mean can be divided into two parts.</p>
 <ul>
-<li><p>The black dashed line shows how much closer we get to the student’s Reading Achievement score (<span class="math inline">\(Y\)</span>) by considering the predicted values (<span class="math inline">\(\widehat Y\)</span>) instead of the overall mean (<span class="math inline">\(\bar Y\)</span>). This represents the extent to which this student’s Reading Achievement is explained by the linear relationship with SES.</p></li>
-<li><p>The pink dashed line is the regression residual, which was introduced in Section <a href="2.2-regression-line-2.html#regression-line-2">2.2</a>. This is the variation in Reading Achievement that is “left over” after considering the linear relationship with SES.</p></li>
+<li><p>The black dashed line shows how much closer we get to the student’s Math Achievement score (<span class="math inline">\(Y\)</span>) by considering the predicted values (<span class="math inline">\(\widehat Y\)</span>) instead of the overall mean (<span class="math inline">\(\bar Y\)</span>). This represents the extent to which this student’s Math Achievement is explained by the linear relationship with SES.</p></li>
+<li><p>The pink dashed line is the regression residual, which was introduced in Section <a href="2.2-regression-line-2.html#regression-line-2">2.2</a>. This is the variation in Math Achievement that is “left over” after considering the linear relationship with SES.</p></li>
 </ul>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:rsquared"></span>
 <img src="_main_files/figure-html/rsquared-1.png" alt="The Idea Behind R-squared." width="672" />
@@ -547,7 +547,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 Figure 2.3: The Idea Behind R-squared.
 </p>
 </div>
-<p>The R-squared statistic averages the variation in Reading Achievement associated with SES (i.e., the black dashed line) relative to the total variation in Reading Achievement (i.e., black + pink) for all students in the sample. R-squared is the a widely used statistic in regression analysis, so we will be seeing it a lot. Some authors call it the “coefficient of determination” instead of R-squared.</p>
+<p>The R-squared statistic averages the variation in Math Achievement associated with SES (i.e., the black dashed line) relative to the total variation in Math Achievement (i.e., black + pink) for all students in the sample. R-squared is the a widely used statistic in regression analysis, so we will be seeing it a lot. Some authors call it the “coefficient of determination” instead of R-squared.</p>
 <p>Using all of the cases from the example (Figure <a href="2.1-example-2.html#fig:fig1">2.1</a>), the R-squared statistic is:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="2.4-rsquared-2.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">digits =</span> <span class="dv">5</span>)</span>
 <span id="cb8-2"><a href="2.4-rsquared-2.html#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod)<span class="sc">$</span>r.squared</span></code></pre></div>
