@@ -344,7 +344,7 @@ confint(mod)
 
 **Please write down an interpretation of the t-test and confidence interval of the regression slope, and be prepared to share your answers in class!** 
 
-## Inference for the intercept
+## Inference for the intercept {#inference-for-intercept-2}
 
 The situation for the regression intercept is similar to that for the slope: the OLS estimate is unbiased and its standard error is (cite:fox)
 
@@ -710,7 +710,7 @@ Please answer the following questions using R.
 
 * What are your overall conclusions about the relationship between Academic Achievement and SES in the NELS data? 
 
-## Review {#review}
+## Review {#review-2}
 
 In progress, check back soon! 
 
