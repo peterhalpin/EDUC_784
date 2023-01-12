@@ -133,7 +133,7 @@ Solving the  minimization problem (setting derivatives to zero) gives the follow
 a = \bar Y - b \bar X \quad \quad \quad \quad b = \frac{\text{Cov}(X, Y)}{s^2_X} = r_{XY} \frac{s_X}{s_Y}
 \]
 
-(If you aren't familiar with the symbols in these equations, check out the review materials in Section \@ref(review) for a refresher.)  
+(If you aren't familiar with the symbols in these equations, check out the review materials in Section \@ref(review-2) for a refresher.)  
 
 For the NELS example, the regression intercept and slope are, respectively: 
 
@@ -189,7 +189,7 @@ segments(x0 = ses[index[22]], y0 = yhat[index[22]] , x1 = ses[index[22]], y1 = y
 points(x = ses[index], y = achmat08[index], col = "#4B9CD3", pch = 16)
 ```
 
-The R-squared statistic averages the variation in Math Achievement associated with SES (i.e., the black dashed line) relative to the total variation in Math Achievement (i.e., black + pink) for all students in the sample. R-squared is the a widely used statistic in regression analysis, so we will be seeing it a lot. Some authors call it the "coefficient of determination" instead of R-squared. 
+The R-squared statistic averages the variation in Math Achievement associated with SES (i.e., the black dashed line) relative to the total variation in Math Achievement (i.e., black + pink) for all students in the sample. R-squared is a widely used statistic in regression analysis, so we will be seeing it a lot. Some authors call it the "coefficient of determination" instead of R-squared. 
 
 Using all of the cases from the example (Figure \@ref(fig:fig1)), the R-squared statistic is: 
 
@@ -210,13 +210,13 @@ It can be re-written using the predicted values $\widehat Y$:
 
 \[SS_{\text{total}} = \sum_{i = 1}^N [(Y_i - \widehat Y_i) + (\widehat Y_i - \bar Y)]^2. \]
 
-The right hand side can be reduced to two other sums of squares using the rules of summation algebra (see the review in Section \@ref(review)):
+The right hand side can be reduced to two other sums of squares using the rules of summation algebra (see the review in Section \@ref(review-2)):
 
 \begin{align} 
 SS_{\text{total}} & = \sum_{i = 1}^N (Y_i - \widehat Y_i)^2 + \sum_{i = 1}^N (\widehat Y_i - \bar Y)^2 \\
 \end{align} 
 
-The first part is just $SS_\text{res}$ from Section \@ref(ols). The second part is called the regression sum of squares and denoted $SS_\text{reg}$. Using this terminology we can re-write the above equation as
+The first part is just $SS_\text{res}$ from Section \@ref(ols-2). The second part is called the regression sum of squares and denoted $SS_\text{reg}$. Using this terminology we can re-write the above equation as
 
 \[ SS_{\text{total}} = SS_\text{res} + SS_\text{reg} \] 
 
@@ -226,17 +226,18 @@ The R-squared statistic is
 
 As discussed above, this is interpreted as the proportion of variance in $Y$ that is explained by its linear relationship with $X$. 
 
-<!-- ### Additional details* 
+<!--
+### Additional details* 
 
-$R$ is the correlation between $Y$ and $\widehat Y$. In simple regression, this is just equal to the regular correlation coefficient. 
+Another way to get to $R^2$ is through the definition of $R$ as the correlation between $Y$ and $\widehat Y$. In simple regression, this is just equal to the regular correlation coefficient (Again, you can use the rules of summation algebra to show this). 
 
-\[ R = \text{Cor}(Y, \widehat Y) = \text{Cor}(Y, a + bX) = \text{Cor}(Y, X)\]
-
-(You can prove this result using the rules of summation algebra.) 
-
-Consequently, in simple regression $R^2 = r^2_{XY}$. When we add multiple predictors, $R$ is called the multiple correlation and plays a very important -->
+\[ R = \text{cor}(Y, \widehat Y) = \text{cor}(Y, a + bX) = \text{cor}(Y, X)\]
 
 
+Consequently, in simple regression, $R^2 = r^2_{XY}$ -- i.e., the proportion of variance explained by the predictor is just the squared Person product moment correlation. When we add multiple predictors, this relationship between $R^2$ and $r^2_{XY}$ no longer holds. 
+
+Still need to show the two definitions of R-squared are equivalent
+-->
 ## The population model {#population-model-2}  
 
 In the NELS example, the population of interest is U.S. eighth graders in 1988. We want to be able to draw conclusions about that population based on the sample of eighth graders that participated in NELS. In order to do that, we make some statistical assumptions about the population, which are collectively referred to as the population model. We talk about how to check the plausibility of these assumptions in Chapter \@ref(chapter-8). 
@@ -306,7 +307,7 @@ When the population model is true, $\widehat b$ is an unbiased estimate of $b$. 
 
 \[ s_{\widehat b} = \frac{s_Y}{s_X} \sqrt{\frac{1-R^2}{N-2}} . \]
 
-Using these two results, we can compute t-tests and confidence intervals for the regression slope in the usual way. These are summarized below. See the review in Section \@ref(review) for background information on bias, standard errors, t-tests, and confidence intervals.
+Using these two results, we can compute t-tests and confidence intervals for the regression slope in the usual way. These are summarized below. See the review in Section \@ref(review-2) for background information on bias, standard errors, t-tests, and confidence intervals.
 
 ### t-tests
 
@@ -322,11 +323,11 @@ The test assumes that the population model is correct. The null hypothesis value
 
 For a given Type I Error rate, $\alpha$, the corresponding $(1-\alpha) \times 100\%$ confidence interval is
 
-\[ b_0 = \widehat b \pm t_{(1-\alpha/2)} \times s_{\widehat b} \]
+\[ b_0 = \widehat b \pm t_{\alpha/2} \times s_{\widehat b} \]
 
-where $t_{(1-\alpha/2)}$ denotes the $1 - \alpha/2$ quantile of the $t$-distribution with $N-2$ degrees of freedom. 
+where $t_{\alpha/2}$ denotes the $\alpha/2$ quantile of the $t$-distribution with $N-2$ degrees of freedom. 
 
-For example, if $\alpha$ is chosen to be $.05$, the corresponding $95\%$ confidence interval uses $t_{(.025)}$, or the 2.5-th percentile of the t-distribution. 
+For example, if $\alpha$ is chosen to be $.05$, the corresponding $95\%$ confidence interval uses $t_{.025}$, or the 2.5-th percentile of the t-distribution. 
 
 ### The NELS example 
 
@@ -375,7 +376,7 @@ The null hypothesis $H_0: R^2 = 0$ can be tested against the alternative $H_A: R
 
 which has a F-distribution on $1$ and $N – 2$ degrees of freedom when the null is true. The test assumes that the population model is true. Confidence intervals for R-squared are generally not reported. 
 
-The R output from Section \@ref(inference-for-slope) is presented again below. **Please write down an interpretation of the F-test of R-squared and be prepared to share your answers in class!** Note that the output uses the terminology "multiple R-squared" to refer to R-squared. 
+The R output from Section \@ref(inference-for-slope-2) is presented again below. **Please write down an interpretation of the F-test of R-squared and be prepared to share your answers in class!** Note that the output uses the terminology "multiple R-squared" to refer to R-squared. 
 
 
 ```{r}
@@ -401,7 +402,7 @@ Power analysis in regression is very similar to power analysis for the tests we 
 
 In principal, we can plug-in values for any three of these ingredients and then solve for the fourth. But, as mentioned, power analysis is most useful when we solve for $N$ while planning a study. When solving for $N$ "prospectively," the effect size $f^2$ should be based on reports of R-squared in past research. Power and $\alpha$ are usually chosen to be .8 and .05, respectively. 
 
-When doing secondary data analysis (as in this class) there is not much point in solving for the sample size, since we already have the data. Instead, we can solve for the effect size. In the NELS example we have $N=500$ observations. The output below reports the smallest effect size we can detect with a power of .8 and $\alpha = .05$. This is sometimes called the "minimum detectable effect size" (MDES). Note that the output $u $ and $v$ denote the degrees of freedom in the numerator and denominator of the F-test of R-squared, respectively. 
+When doing secondary data analysis (as in this class) there is not much point in solving for the sample size, since we already have the data. Instead, we can solve for the effect size. In the NELS example we have $N=500$ observations. The output below reports the smallest effect size we can detect with a power of .8 and $\alpha = .05$. This is sometimes called the "minimum detectable effect size" (MDES). Note that the output $u$ and $v$ denote the degrees of freedom in the numerator and denominator of the F-test of R-squared, respectively. 
 
 ```{r}
 library(pwr)
@@ -507,7 +508,7 @@ What is the MDES for the NELS example? Please be prepared to share your answer i
 
 ## Exercises {#exercises-2}
   
-These exercises collect all of the R input used in this chapter into a single step-by-step analysis. It explains how the R input works, and provides some some additional exercises. We will go through this material in class together, so you don't need to work on it before class (but you can if you want.)
+These exercises collect all of the R input used in this chapter into a single step-by-step analysis. It explains how the R input works, and provides some additional exercises. We will go through this material in class together, so you don't need to work on it before class (but you can if you want.)
 
 ### The `lm` function
 
@@ -712,48 +713,212 @@ Please answer the following questions using R.
 
 ## Review {#review-2}
 
-In progress, check back soon! 
+This is a short recap of stuff you need to know in this class. If this recap is too short, you'll need to go back to your notes from a previous Stats class. 
 
-### Summation algebra
+### Summation notation
 
-* Notation
-* 3 Rules
+Summation notation uses the symbol $\Sigma$ to stand in for summation. For example, instead of writing 
+
+$$ X_1 + X_2 + X_3 + .... + X_N$$
+
+to represent the sum of the values of the variable $X$ in a sample of size $N$, we can instead write: 
+
+$$ \sum_{i=1}^{N} X_i. $$
+
+The symbol $\Sigma$ stands in for the summation. The symbol is called "Sigma" -- it's the capital Greek letter corresponding to the Latin letter "S". The value $i$ is called the index, and $1$ is the starting value of the index and $N$ is the end value of the index. You can choose whatever start and end values you want to sum over. So, if you just want the second and third index, write
+
+$$ \sum_{i=2}^{3} X_i = X_2 + X_3. $$
+
+
+When it is clear from context, we can omit the start and end values:
+
+$$ \sum_i X_i. $$
+If you write it this way, the reader will assume that you mean to sum over all the values of $X$ in a sample. 
+
+Summation notation is useful because it is more compact, and we use it a lot to write the formulas for statistics. 
+
+There are also rules for manipulating summation notation that are useful for proving results in statistics. I'll often write things like "you can prove this result using the rules of summation algebra". You don't need to do mathematical proofs or derivations in this class, but you might like to (if not, you can skip to the next section). The rules are just things you learned in grade school, but they are presented using a new notation. Surprisingly, they can prove a lot about statistics. 
+
+Here are the rules:  
+
+* **Rule 1: Sum of a constant (multiplication)**. Summing the values of a constant $c$ is the same as multiplication. In this notation, we know the value $c$ is a constant because it doesn't have an index. Specifically, if you sum a constant $N$ times, this just $N$ times the constant: 
+
+\begin{align}
+\sum_{i = 1}^{N} c &= c + c +  .... \\
+& = Nc 
+\end{align}
+
+
+* **Rule 2: Distributive property** The sum of a variable $X_i$ times a constant $c$ is equal to the constant times the sum. 
+
+\begin{align}
+\sum_{i = 1}^{N} c X_i &= cX_1 + cX_2 + .... \\
+& = c(X_1 + X_2 + ....) \\ 
+& = c \sum_{i = 1}^{N} X_i 
+\end{align}
+
+* **Rule 3: Associative property ** It doesn't matter what order we do addition in:
+
+\begin{align}
+\sum_{i = 1}^{N} (X_i + Y_i) &= (X_1 + Y_1) + (X_2 + Y_2) + .... \\
+& = (X_1 + X_2 + ....) + (Y_1 + Y_2 + ....) \\
+& = \sum_{i = 1}^{N} X_i  + \sum_{i = 1}^{N} Y_i 
+\end{align}
 
 ### Sample statistics
 
-* Notation and formula's 
-* R code
+The main sample statistics we use in the class are the mean, standard deviation, variance, covariance and correlation. These are the building blocks for regression. Their symbols and formulas are presented below (using the shorthand summation notation). If you don't remember their interpretation, you will need to go back to your Stat 1 notes. 
+
+* The mean 
+
+$$\bar X = \frac{\sum_i X_i}{N}$$
+
+* The variance can be written as $\text{var}(X)$ or sometimes using the symbol $s^2$
+
+$$ \text{var}(X) = \frac{\sum_i (X_i - \bar X)}{N - 1} $$
+
+* The standard deviation can be written $\text{sd}(X)$ or using the letter $s$ 
+
+$$ \text{sd}(X) = \sqrt{\text{var}(X)} $$
+
+* The covariance is a generalization of the variance to two variables, it describes how they co-vary: 
+
+$$\text{cov}(X, Y) = \frac{\sum_i (X_i - \bar X) (Y_i - \bar Y)}{N - 1} $$
+
+* The correlation is the covariance divided by the product of the standard deviations of the variables. It takes on values between -1 and 1 and describes the strength and direction of the linear relationship between two variables.   
+
+$$\text{cor}(X, Y) = \frac{\text{cov}(X, Y)}{\sqrt{\text{var}(X)} \sqrt{\text{var}(Y)}} $$
+
+The code below shows how you compute these statistics in R, using reading and math in grade 8 from NELS as an example. The code should seem intuitive. The numbers (output) aren't important here, so they are suppressed.  
+
+```{r, results = 'hide'}
+mean(achmat08)
+var(achmat08)
+sd(achmat08)
+cov(achmat08, achrdg08)
+cor(achmat08, achrdg08)
+```
 
 ### Bias and precision
 
-* Sampling distributions
-* Expected values and bias
-* Standard errors and precision
+A sampling distribution is the distribution of a statistic that would arise if you did the following: 
+
+1. Take a sample of size $N$ from a population of interest.
+2. Compute a statistic using the sample data. It can be any statistic, but let's say the mean, $\bar X$, for concreteness. 
+3. Write down the value of mean and then return the sample to the population.
+ 
+After doing these 3 steps many times, you will have many values the sample mean, 
+
+$$ \bar{X}_1, \bar{X}_2, \bar{X}_3, ... $$
+
+These means are just like any other statistic -- i.e., they have a distribution. That distribution is called the sampling distribution (of the mean). 
+
+The sampling distribution is just like any other distribution (except that it is purely imaginary) -- so it has its own mean, and its own variance, etc. etc. These statistics, when computed for a sampling distribution, have special names. We are mostly interested in the following two statistics. 
+
+* **The expected value** of the mean, denoted $E(\bar X)$, is the mean of the sampling distribution of the mean. That is a mouthful alright! That is why we say the expected value of a statistic rather than the mean of a statistic. The latter would lead us to say ridiculous things like the mean of the variance, the mean of the standard deviation ... yuck! Anyway, its called the expected value because it's the average value over many samples. 
+
+* **The standard error** of the mean, denoted $SE(\bar X)$, is the standard deviation of the sampling distribution of the mean. It describes the sample-to-sample variation of the mean around its expected value. 
+
+There are two additional important concepts related to expectation and standard error: 
+
+* **Bias**: If the expected value of a statistic is equal to a population parameter, we say that the statistic is an unbiased estimated of that parameter. For example, the expected value of the sample mean is equal to the population mean (in symbols: $E(\bar{X}) = \mu)$, so we say the sample mean is an unbiased estimate of the population mean. 
+
+* **Precision**: The inverse of the squared standard error (i.e., one over the variance of the sampling distribution) is called the precision of a statistic. So, the less a statistic varies from sample to sample, the more precise it is. That should hopefully make intuitive sense. The main thing to know about precision is that it is usually increasing in the sample size -- i.e., we get more precise estimates by using larger samples. Again, this should feel intuitive. 
+
+Below is a figure that is often used to illustrate the ideas of bias and precision. The middle of the concentric circles represent the target parameter (like a bull's eye) and the dots represent the sampling distribution of a statistic. You should be able to describe each panel in terms of the bias and precision of the statistic. 
+
+```{r, bp, echo = F, fig.cap = "Bias and precision", fig.align = 'center', fig.width = 2}
+knitr::include_graphics("images/bias_and_precision.png", dpi = 200)
+```
+
+
+In general, we want to work with unbiased, precise statistics when making inferences from a sample back to the population from which it was drawn. 
 
 ### t-tests
+The t-test is used to make an inference about the value of an unknown  population parameter using an unbiased sample statistic that is normally distributed (i.e., that has a normally distributed sampling distribution). This includes sample means and regression coefficients. 
 
-* Conceptual formula
-* Null distribution
-* Setting alpha
-* Making a decision
-* Interpretation
-* R example
+The test compares the value of the statistic to some null-hypothesized value of the population parameter. The null hypothesis is usually that the population parameter is equal to zero. 
+
+The general formula for a t-test is
+
+$$ t = \frac{\text{sample value} - \text{null-hypothesized value}}{\text{standard error}} $$
+For a specific example, see section \@ref(inference-for-slope-2). 
+
+When we conduct a t-test we are basically saying "if the sample statistic is close the null hypothesized value of the parameter, then  $t$ should be close to zero". The null hypothesis usually translates into "no effect", so if $t$ is close to zero, it means there was no effect. If $t$ is far away from zero, it means there was an effect. 
+
+The problem in all of this is to give precise meaning to the terms "close" and "far". This is what we do when setting the significance level of the test, usually denoted $\alpha$. This number represents our tolerance for false negatives or Type I errors -- i.e., for incorrectly concluding that the null hypothesis is true (no effect). When we set $\alpha$ to a small number, we are saying that we want the probability of a false negative to be small. This means we are going to need strong evidence (i.e., a large value of $t$) before we reject the null hypothesis. Still, the question is "how large?"
+
+We denote the t-test using the letter $t$ because it has a t distribution when the null hypothesis is true (i.e., when the population parameter is equal to the null hypothesized value). So, this distribution tells what are the typical values of the t-test, if the null hypothesis is true. Some examples are shown below. 
+
+```{r, t, echo = F, fig.cap = "t distribution (source: https://en.wikipedia.org/wiki/Student%27s_t-distribution)", fig.align = 'center', out.width = "60%"}
+knitr::include_graphics("https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Student_t_pdf.svg/1920px-Student_t_pdf.svg.png", dpi = 200)
+```
+
+You can see that the t distribution looks like a normal distribution centered a zero. So, when the null hypothesis is true, the expected value of the t-test is zero. Values greater than $\pm 2$ are pretty unlikely if the null hypothesis is true, and values greater than $\pm 4$ are very unlikely. 
+
+Unlike the normal, the t distribution has a single parameter called its "degrees of freedom", which is denoted as $\nu$ in the figure. The degrees of freedom are always an increasing function of the sample size, so that larger samples lead to more degrees of freedom. When the degrees of freedom approach $\infty$, the t distribution approaches a normal distribution. When the degrees of freedom are small, the t distribution has wider tails than the normal distribution. This is important when doing statistical tests, because we are interested in values in the tails of the distribution -- i.e., large values of $t$. 
+
+We use the t-test to make an inference about the null hypothesis by comparing two probabilities: 
+
+1. The probability of observing a value of $t$ at least as large as the value in our sample, under the t distribution (i.e., under the assumption that the null hypothesis is true). This is called the $p$-value. 
+
+2. The significance level that represents our tolerance for a false negative, $\alpha$.
+
+If $p < \alpha$ (i.e., if $t$ is "far enough" away from zero) we reject the null hypothesis. Otherwise we retain the null hypothesis and conclude there was no effect.
+
+There is a lot more to say here, but all of this is what Stat 1 was for. Usually we set $\alpha = .05$ and that is that. 
+
+For an example of a t-test in R, see section \@ref(inference-for-slope-2).
 
 ### Confidence intervals 
 
-* Conceptual formula
-* Interpretation
-* Relation to hypothesis tests
-* R example
+A confidence interval is basically the same as a t-test, except we solve for the population parameter rather than the value of $t$. Whereas a t-test lets us make a guess about specific value of the parameter of interest (i.e., the null-hypothesized value), a confidence interval gives us a range of values that we can be sure include the parameter of interest, with some degree of "confidence." 
+
+Confidence intervals have the general formula:
+
+$$\text{Interval} = \text{sample value} \pm t \times {\text{standard error}}. $$
+We get the value of $t$ from the t distribution. In particular, if we want the interval to include the true population parameter $(1-\alpha) \times 100$ - percent of the time, the we choose $t$ to be the $\alpha/2 \times 100$ percentile of the $t$ distribution. For example, if we set $\alpha = .05$, we will have a $(1-\alpha) \times 100$ = 95% confidence interval by choosing $t$ to be the $\alpha/2 \times 100$ = 2.5th percentile of the t-distribution. 
+
+As mentioned, t-tests and confidence intervals are closely related. In particular, if the confidence interval includes the value $0$ -- i.e., we are confident that the parameter could equal zero -- then this is the same as retaining the null hypothesis that the parameter is equal to zero. This relationship assumes we use the same level of $\alpha$ for both the test and confidence interval. 
+
+In summary, if the confidence interval includes zero, we retain the null hypothesis. If the confidence interval does not include zero, we reject the null hypothesis. 
+
+For an example of a confidence in R, see section \@ref(inference-for-slope-2).
 
 ### F-tests
 
-* Conceptual formula
-* Interpretation
-* R example
+As noted above, the t-test is used when the sample statistic we are testing is normally distributed, usually a mean or a regression coefficient. The F-test is used when the sample statistic we are testing is a variance -- actually, the ratio of two independent variances. 
+
+A variance can be defined in general as a sum-of-squares divided by its degrees of freedom. For example, the sample variance shown above is just a sum-of-squared deviations from the sample mean (i.e., a sum of squares) divided by $N - 1$ (the degrees of freedom). The generic formula for an F-test is:
+
+$$F = \frac{SS_A / df_A}{SS_B / df_B}, $$
+
+where SS denotes sums-of-squares and df denotes degrees of freedom. 
+
+In regression, we often see the F-test when we want to make an inference about whether R-squared is statistically different from zero. Recall that R-squared is computed as the ratio of two sums-of-squares (see section \@ref(rsquared-2)). The F-test shown in section \@ref(inference-for-rsquared-2) provides the degrees of freedom that will convert R-squared into an F-test. 
+
+Just the like t-test, the F-test is called by the letter "F" because it has an F distribution when the null hypothesis is true. The plot below shows some example F distributions. These distributions tell us the values of F that are likely, if the null hypothesis is true (i.e., if R-squared is equal to zero in the population). 
+
+```{r, F, echo = F, fig.cap = "F distribution (source: https://en.wikipedia.org/wiki/F-distribution)", fig.align = 'center', out.width = "60%"}
+knitr::include_graphics("https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/F-distribution_pdf.svg/1920px-F-distribution_pdf.svg.png", dpi = 200)
+```
+
+The F distribution has two parameters, which are referred to as the "degrees of freedom in the numerator" and the "degrees of freedom in the denominator" (in the figure, d1 and d2, respectively). We always give the numerator df first and then the denominator. So we might say the green line in the figure is "an F distribution on 10 and 1 degrees of freedom", which means the df in the numerator is 10 and the df in the denominator is 1. 
+
+We use an F-test the same way we use a t-test -- we set a significance level and use this level to determine how large the F-test needs to be for us to reject the null hypothesis. The main difference is that F is non-negative, because it is the ratio of squared numbers. For this same reason, we don't usually compute confidence intervals for statistics with an F distribution. 
 
 ### APA reporting
 
+It is important that you can write up the results of an analysis in a way that other people will understand. For this reason, there are conventions about how to report statistical results. In this class, we will mainly use Table and Figures (formatted in R) rather than inline text. But sometimes the latter is inevitable, so you should know how to do it. 
+
+The examples below illustrate APA conventions for reporting some of the statistics we have talked about in this review. Everything about the formatting is important (spacing, italics, number of decimal places, whether or not to use a leading zero before a decimal, etc). More details are available [here](https://psych.uw.edu/storage/writing_center/stats.pdf). 
+You don't need to use APA (unless you are in psych or educ), but you should be familiar with some kind of conventions for reporting statistical results in your academic writing. 
+
+  * Jointly, the two predictors explained about 22% of the variation in Academic Achievement, which was statistically significant at the .05 level ($R^2 = .22, F(2, 247) = 29.63, p < .001$).
+  
+ * After controlling for SES, a one unit of increase in Maternal Education was associated with $b = 1.33$ units of increase in Academic Achievement ($t(247) = 5.26, p < .001$).
+  
+ * After controlling for Maternal Education, a one unit of increase in SES was associated with $b = 0.32$ units of increase in Academic Achievement. This was a statistically significant relationship ($t(247) = 2.91, p < .01$).
 
 
 
