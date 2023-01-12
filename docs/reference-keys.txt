@@ -43,3 +43,4 @@ t-tests-1
 confidence-intervals-1
 f-tests-1
 apa-reporting
+fig:unnamed-chunk-17
