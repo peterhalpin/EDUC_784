@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>5.7 Exercises | EDUC 784: Regression</title>
   <meta name="description" content="Course notes for EDUC 784" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
 
   <meta property="og:title" content="5.7 Exercises | EDUC 784: Regression" />
   <meta property="og:type" content="book" />
-  
   <meta property="og:image" content="/images/image1.png" />
   <meta property="og:description" content="Course notes for EDUC 784" />
   <meta name="github-repo" content="peterhalpin/EDUC_784" />
@@ -30,11 +29,10 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
-  <link rel="shortcut icon" href="null" type="image/x-icon" />
+  
 <link rel="prev" href="5.6-workbook-1.html"/>
 <link rel="next" href="6-chapter-6.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
-<script src="libs/jquery-3.5.1/jquery-3.5.1.min.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,8 +49,9 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -93,7 +92,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -106,7 +105,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -506,16 +505,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="exercises-1" class="section level2" number="5.7">
-<h2><span class="header-section-number">5.7</span> Exercises</h2>
+<div id="exercises-1" class="section level2 hasAnchor" number="5.7">
+<h2><span class="header-section-number">5.7</span> Exercises<a href="5.7-exercises-1.html#exercises-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>These exercises provide an overview of contrast coding with categorical predictors in R. Two preliminary topics are also discussed: linear regression with a binary predictor, and the <code>factor</code> data class in R.</p>
-<div id="a-single-binary-predictor" class="section level3" number="5.7.1">
-<h3><span class="header-section-number">5.7.1</span> A single binary predictor</h3>
-<p>Regression with a single binary predictor is equivalent to an independent groups t-test of a difference between means. Let’s illustrate this using reading achievement in grade 8 (<code>achrdg08</code>) and <code>gender</code> in the NELS dataset. Note that, although the construct gender need not be conceptualized as dichotomous or even categorical, the variable <code>gender</code> reported in NELS data is dichotomous, with values “Female” and “Male.”</p>
-<p>R treats variables like <code>gender</code> as “factors.” Factors have special properties that we are going to work with later on, but for now let’s recode <code>gender</code> to <code>binary_gender</code> by setting <code>Female = 0</code> and <code>Male = 1</code></p>
+<div id="a-single-binary-predictor" class="section level3 hasAnchor" number="5.7.1">
+<h3><span class="header-section-number">5.7.1</span> A single binary predictor<a href="5.7-exercises-1.html#a-single-binary-predictor" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Regression with a single binary predictor is equivalent to an independent groups t-test of a difference between means. Let’s illustrate this using reading achievement in grade 8 (<code>achrdg08</code>) and <code>gender</code> in the NELS dataset. Note that, although the construct gender need not be conceptualized as dichotomous or even categorical, the variable <code>gender</code> reported in NELS data is dichotomous, with values “Female” and “Male”.</p>
+<p>R treats variables like <code>gender</code> as “factors”. Factors have special properties that we are going to work with later on, but for now let’s recode <code>gender</code> to <code>binary_gender</code> by setting <code>Female = 0</code> and <code>Male = 1</code></p>
 </div>
-<div id="recoding-a-factor-to-numeric" class="section level3" number="5.7.2">
-<h3><span class="header-section-number">5.7.2</span> Recoding a factor to numeric</h3>
+<div id="recoding-a-factor-to-numeric" class="section level3 hasAnchor" number="5.7.2">
+<h3><span class="header-section-number">5.7.2</span> Recoding a factor to numeric<a href="5.7-exercises-1.html#recoding-a-factor-to-numeric" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="5.7-exercises-1.html#cb129-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;NELS.RData&quot;</span>)</span>
 <span id="cb129-2"><a href="5.7-exercises-1.html#cb129-2" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(NELS)</span>
 <span id="cb129-3"><a href="5.7-exercises-1.html#cb129-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -536,8 +535,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   Male     0 227</code></pre>
 <p>It is often hassle to get from factor to numeric or vice versa. Above we used the trick of first creating from the factor a logical vector (<code>gender == "Male"</code>) and then coercing the logical vector to binary by multiplying it by 1. Other strategies can be used. See <code>help(factor)</code> for more information.</p>
 </div>
-<div id="binary-predictors-and-independent-samples-t-tests" class="section level3" number="5.7.3">
-<h3><span class="header-section-number">5.7.3</span> Binary predictors and independent samples t-tests</h3>
+<div id="binary-predictors-and-independent-samples-t-tests" class="section level3 hasAnchor" number="5.7.3">
+<h3><span class="header-section-number">5.7.3</span> Binary predictors and independent samples t-tests<a href="5.7-exercises-1.html#binary-predictors-and-independent-samples-t-tests" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Now let’s get back to regressing reading achievement (<code>achrdg08</code>) on <code>binary_gender</code>, and comparing this to an independent groups t-test using the same two variables.</p>
 <div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="5.7-exercises-1.html#cb135-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Regression with a binary variable</span></span>
 <span id="cb135-2"><a href="5.7-exercises-1.html#cb135-2" aria-hidden="true" tabindex="-1"></a>mod1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(achrdg08 <span class="sc">~</span> binary_gender)</span>
@@ -567,7 +566,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 
 ## data:  achrdg08 by binary_gender
 ## t = 1.2, df = 498, p-value = 0.2
-## alternative hypothesis: true difference in means is not equal to 0
+## alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
 ## 95 percent confidence interval:
 ##  -0.6354  2.4801
 ## sample estimates:
@@ -588,8 +587,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><span class="math display">\[ t(498) = 1.1633, p = .245\]</span></p>
 <p>In summary, a t-test of a b-weight of a binary predictor is equal equivalent to a t-test of the mean difference.</p>
 </div>
-<div id="reference-group-coding" class="section level3" number="5.7.4">
-<h3><span class="header-section-number">5.7.4</span> Reference-group coding</h3>
+<div id="reference-group-coding" class="section level3 hasAnchor" number="5.7.4">
+<h3><span class="header-section-number">5.7.4</span> Reference-group coding<a href="5.7-exercises-1.html#reference-group-coding" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>As discussed in Section <a href="5.4-reference-group-coding-5.html#reference-group-coding-5">5.4</a>, the basic idea of contrast coding is to replace a categorical variable with <span class="math inline">\(C\)</span> categories with <span class="math inline">\(C-1\)</span> “dummy” variables. In reference-group coding, the dummy variables are binary, and the resulting interpretation is:</p>
 <ul>
 <li><p>The intercept is interpreted as the mean of the reference group. The reference is group is chosen by the analyst – it is the group that is coded zero on all dummies, or the group whose dummy variable is “left out” of the <span class="math inline">\(C-1\)</span> dummy variables.</p></li>
@@ -597,8 +596,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>Reference-group coding is the default contrast coding in R. However, in order for contrast coding to be implemented, our categorical predictor needs to be represented in R as a <code>factor</code>.</p>
 </div>
-<div id="more-about-factors" class="section level3" number="5.7.5">
-<h3><span class="header-section-number">5.7.5</span> More about factors</h3>
+<div id="more-about-factors" class="section level3 hasAnchor" number="5.7.5">
+<h3><span class="header-section-number">5.7.5</span> More about factors<a href="5.7-exercises-1.html#more-about-factors" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Factors are the way that R deals with categorical data. If you want to know if your variable is a factor or not, you can use the functions <code>class</code> or <code>is.factor</code>. Let’s illustrate this with the <code>urban</code> variable from NELS.</p>
 <div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="5.7-exercises-1.html#cb139-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Two ways of checking what type a variable is </span></span>
 <span id="cb139-2"><a href="5.7-exercises-1.html#cb139-2" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(urban)</span></code></pre></div>
@@ -630,8 +629,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb153-3"><a href="5.7-exercises-1.html#cb153-3" aria-hidden="true" tabindex="-1"></a><span class="fu">levels</span>(factor_gender)</span></code></pre></div>
 <pre><code>## [1] &quot;Female&quot; &quot;Male&quot;</code></pre>
 </div>
-<div id="back-to-reference-group-coding" class="section level3" number="5.7.6">
-<h3><span class="header-section-number">5.7.6</span> Back to reference-group coding</h3>
+<div id="back-to-reference-group-coding" class="section level3 hasAnchor" number="5.7.6">
+<h3><span class="header-section-number">5.7.6</span> Back to reference-group coding<a href="5.7-exercises-1.html#back-to-reference-group-coding" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>OK, back to reference coding. Let’s see what <code>lm</code> does when we regress <code>achrdg08</code> on <code>urban</code>.</p>
 <div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="5.7-exercises-1.html#cb155-1" aria-hidden="true" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(achrdg08 <span class="sc">~</span> urban)</span>
 <span id="cb155-2"><a href="5.7-exercises-1.html#cb155-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod2)</span></code></pre></div>
@@ -659,8 +658,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The intercept is the mean of the reference group (<code>rural</code>) – about 55% on the reading test.</p>
 <p>Note the R-squared – Urbanicity accounts for about 2% of the variation reading achievement. As usual, the F-test of R-squared has degrees of freedom <span class="math inline">\(K\)</span> and <span class="math inline">\(N - K -1\)</span>, but now <span class="math inline">\(K\)</span> (the number of predictors) is equal to <span class="math inline">\(C - 1\)</span> – the number of categories minus one.</p>
 </div>
-<div id="changing-the-reference-group" class="section level3" number="5.7.7">
-<h3><span class="header-section-number">5.7.7</span> Changing the reference group</h3>
+<div id="changing-the-reference-group" class="section level3 hasAnchor" number="5.7.7">
+<h3><span class="header-section-number">5.7.7</span> Changing the reference group<a href="5.7-exercises-1.html#changing-the-reference-group" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>What if we wanted to use a group other than <code>Rural</code> as the reference group? We can chose a different reference group using the <code>cont.treatment</code> function. This function takes two arguments</p>
 <ul>
 <li><code>n</code> tells R how many levels there</li>
@@ -716,8 +715,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>The R-square and F stay the same – in other words, the total amount of variation explained by the variable <code>urban</code> does not change, just because we changed the reference group.</p></li>
 </ul>
 </div>
-<div id="deviation-coding" class="section level3" number="5.7.8">
-<h3><span class="header-section-number">5.7.8</span> Deviation coding</h3>
+<div id="deviation-coding" class="section level3 hasAnchor" number="5.7.8">
+<h3><span class="header-section-number">5.7.8</span> Deviation coding<a href="5.7-exercises-1.html#deviation-coding" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>It is possible to change R’s default contrast coding to one of the other built-in contrasts (see <code>help(contrasts)</code> for more information on the built in contrasts).</p>
 <p>For instance, to change to deviation coding, we use R’s <code>contr.sum</code> function and tell it how many levels there are for the factor (<code>n</code>). In deviation coding, the intercept is equal to the unweighted mean of the predicted values, and the regression coefficients are difference between the indicated group and the unweighted mean.</p>
 <div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="5.7-exercises-1.html#cb165-1" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(urban) <span class="ot">&lt;-</span> <span class="fu">contr.sum</span>(<span class="at">n =</span> <span class="dv">3</span>)</span>
@@ -757,8 +756,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>The R-square does not change from <code>mod2</code> – again, the type of contrast coding used doesn’t affect how much variation is explained by the predictor.</p></li>
 </ul>
 </div>
-<div id="extra-relation-to-anova" class="section level3" number="5.7.9">
-<h3><span class="header-section-number">5.7.9</span> Extra: Relation to ANOVA</h3>
+<div id="extra-relation-to-anova" class="section level3 hasAnchor" number="5.7.9">
+<h3><span class="header-section-number">5.7.9</span> Extra: Relation to ANOVA<a href="5.7-exercises-1.html#extra-relation-to-anova" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>As our next exercise, let’s compare the output of <code>lm</code> and the output of <code>aov</code> – R’s module for Analysis of Variance. If regression and ANOVA are really doing the same thing, we should be able to illustrate it with these two modules. Note that if you check out <code>help(aov)</code>, it explicitly states that <code>aov</code> uses the <code>lm</code> function, so, finding that the two approaches give similar output shouldn’t be a big surprise!</p>
 <div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="5.7-exercises-1.html#cb170-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run our model as an ANOVA</span></span>
 <span id="cb170-2"><a href="5.7-exercises-1.html#cb170-2" aria-hidden="true" tabindex="-1"></a>aov1 <span class="ot">&lt;-</span> <span class="fu">aov</span>(achrdg08 <span class="sc">~</span> urban)</span>
@@ -796,8 +795,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## [1] 0.01905</code></pre>
 <p>In short, ANOVA and regression are doing the same thing: R-squared is the same as omega-squared and the ANOVA omnibus F-test is the same as the F-test of R-squared. The main difference is that <code>lm</code> focuses on contrasts for analyzing and interpreting the group differences, whereas ANOVA focuses on the F-test of the omnibus hypothesis and the procedures for analyzing group difference are conducted as a follow-up step.</p>
 </div>
-<div id="extra-group-mean-coding" class="section level3" number="5.7.10">
-<h3><span class="header-section-number">5.7.10</span> Extra: Group-mean coding</h3>
+<div id="extra-group-mean-coding" class="section level3 hasAnchor" number="5.7.10">
+<h3><span class="header-section-number">5.7.10</span> Extra: Group-mean coding<a href="5.7-exercises-1.html#extra-group-mean-coding" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>As a step towards addresses the issues with deviation coding, let’s consider another coding procedure. If we omit the intercept term, all of the reference-group coded dummies can be included and the regression coefficients now correspond to means of each group. We omit the intercept using <code>-1</code> in the model formula.</p>
 <div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="5.7-exercises-1.html#cb176-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Omit the intercept using -1</span></span>
 <span id="cb176-2"><a href="5.7-exercises-1.html#cb176-2" aria-hidden="true" tabindex="-1"></a>mod5 <span class="ot">&lt;-</span> <span class="fu">lm</span>(achrdg08 <span class="sc">~</span> <span class="sc">-</span><span class="dv">1</span> <span class="sc">+</span> urban)</span>
@@ -828,8 +827,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>By itself, group mean coding is not very interesting uninteresting – we don’t usually want to test whether the group means are different from zero. However, we will see in the next section that it can be used to provide an alternative to deviation coding.</p>
 </div>
-<div id="extra-weighted-versus-unweighted-deviation-coding" class="section level3" number="5.7.11">
-<h3><span class="header-section-number">5.7.11</span> Extra: Weighted versus unweighted deviation coding</h3>
+<div id="extra-weighted-versus-unweighted-deviation-coding" class="section level3 hasAnchor" number="5.7.11">
+<h3><span class="header-section-number">5.7.11</span> Extra: Weighted versus unweighted deviation coding<a href="5.7-exercises-1.html#extra-weighted-versus-unweighted-deviation-coding" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>This section presents a “hack” for addressing the two main issues with deviation coding noted in Section <a href="5.5-deviation-coding-5.html#deviation-coding-5">5.5</a>. This is a hack in the sense that we are working around R’s usual procedures rather than replacing them with a completely new procedure. The result of this hack is to provide deviation coding in which comparisons are made to grand mean on the outcome for all <span class="math inline">\(C\)</span> categories, not just <span class="math inline">\(C-1\)</span> categories. As a side effect, the F-test for the R-squared statistic is no longer correct, so you should not use this approach to report R-squared.</p>
 <p>First, note that the group sample sizes are not equal for <code>ubran</code></p>
 <div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="5.7-exercises-1.html#cb178-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(urban)</span></code></pre></div>
@@ -946,7 +945,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>11.3 Simple logistic regression | EDUC 784: Regression</title>
   <meta name="description" content="Course notes for EDUC 784" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
 
   <meta property="og:title" content="11.3 Simple logistic regression | EDUC 784: Regression" />
   <meta property="og:type" content="book" />
-  
   <meta property="og:image" content="/images/image1.png" />
   <meta property="og:description" content="Course notes for EDUC 784" />
   <meta name="github-repo" content="peterhalpin/EDUC_784" />
@@ -30,11 +29,10 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
-  <link rel="shortcut icon" href="null" type="image/x-icon" />
+  
 <link rel="prev" href="11.2-logit-11.html"/>
 <link rel="next" href="11.4-estimation-11.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
-<script src="libs/jquery-3.5.1/jquery-3.5.1.min.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,8 +49,9 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -93,7 +92,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -106,7 +105,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -506,8 +505,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="simple-11" class="section level2" number="11.3">
-<h2><span class="header-section-number">11.3</span> Simple logistic regression</h2>
+<div id="simple-11" class="section level2 hasAnchor" number="11.3">
+<h2><span class="header-section-number">11.3</span> Simple logistic regression<a href="11.3-simple-11.html#simple-11" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <input onclick="codefolder(&#39;pre.sourceCode&#39;);" type="button" value="Hide Code" id="codefolder-button" style="position: relative; &#10;            top: -25px; &#10;            left: 85%;   &#10;            color: white;&#10;            font-weight: bold;&#10;            background: #4B9CD3;&#10;            border: 1px #3079ED solid;&#10;            box-shadow: inset 0 1px 0 #80B0FB"/>
 <script>
   function codefolder(query) {
@@ -539,8 +538,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><span class="math display">\[ \text{logit}(CHD) = a + b (\text{age}). \]</span></p>
 <p>We are going to skip a few steps and go right into the interpretation of the R output. Once we know how to interpret the output, we will loop back to discuss technicals details of estimation and inference in the following sections.</p>
 <p>The summary R output for the example is below. The focus for now is just the interpretation of the values under the “Estimate” heading.</p>
-<div class="sourceCode" id="cb407"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb407-1"><a href="11.3-simple-11.html#cb407-1" aria-hidden="true" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">glm</span>(chd <span class="sc">~</span> age, <span class="at">family =</span> binomial, <span class="at">data =</span> chd.data)</span>
-<span id="cb407-2"><a href="11.3-simple-11.html#cb407-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod2)</span></code></pre></div>
+<div class="sourceCode" id="cb409"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb409-1"><a href="11.3-simple-11.html#cb409-1" aria-hidden="true" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">glm</span>(chd <span class="sc">~</span> age, <span class="at">family =</span> binomial, <span class="at">data =</span> chd.data)</span>
+<span id="cb409-2"><a href="11.3-simple-11.html#cb409-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod2)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = chd ~ age, family = binomial, data = chd.data)
@@ -589,10 +588,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>If <span class="math inline">\(b=-.025\)</span> what is the OR equal to? What is the percent change in the odds for a 10 unit increase in <span class="math inline">\(X\)</span>?</li>
 <li>If the odds increase 100% for a one unit increase in <span class="math inline">\(X\)</span>, what <span class="math inline">\(b\)</span> equal to?</li>
 </ul>
-<div id="other-interpretations-predicted-probabilities" class="section level3" number="11.3.1">
-<h3><span class="header-section-number">11.3.1</span> Other interpretations: Predicted probabilities</h3>
+<div id="other-interpretations-predicted-probabilities" class="section level3 hasAnchor" number="11.3.1">
+<h3><span class="header-section-number">11.3.1</span> Other interpretations: Predicted probabilities<a href="11.3-simple-11.html#other-interpretations-predicted-probabilities" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Another way to interpret the logistic model is in terms of the predicted probabilities, which are plotted below for the example data.</p>
-<div class="sourceCode" id="cb409"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb409-1"><a href="11.3-simple-11.html#cb409-1" aria-hidden="true" tabindex="-1"></a>visreg<span class="sc">::</span><span class="fu">visreg</span>(mod2, <span class="at">xvar =</span> <span class="st">&quot;age&quot;</span>, <span class="at">scale =</span> <span class="st">&quot;response&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb411"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb411-1"><a href="11.3-simple-11.html#cb411-1" aria-hidden="true" tabindex="-1"></a>visreg<span class="sc">::</span><span class="fu">visreg</span>(mod2, <span class="at">xvar =</span> <span class="st">&quot;age&quot;</span>, <span class="at">scale =</span> <span class="st">&quot;response&quot;</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:pred-prob"></span>
 <img src="_main_files/figure-html/pred-prob-1.png" alt="Predicted probabilities" width="672" />
 <p class="caption">
@@ -600,8 +599,8 @@ Figure 11.9: Predicted probabilities
 </p>
 </div>
 <p>using this plot, we can read off the probability of CHD for any given age. We might also want to report the probability of CHD for two or more chosen ages, which is an example of the MERV approach to marginal effects (see Section <a href="6.4-inference-for-interactions-6.html#inference-for-interactions-6">6.4</a>):</p>
-<div class="sourceCode" id="cb410"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb410-1"><a href="11.3-simple-11.html#cb410-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span>
-<span id="cb410-2"><a href="11.3-simple-11.html#cb410-2" aria-hidden="true" tabindex="-1"></a><span class="fu">emmeans</span>(mod2, <span class="at">specs =</span> <span class="st">&quot;age&quot;</span>, <span class="at">at =</span> <span class="fu">list</span>(<span class="at">age =</span> <span class="fu">c</span>(<span class="dv">20</span>, <span class="dv">40</span>)), <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb412"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb412-1"><a href="11.3-simple-11.html#cb412-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span>
+<span id="cb412-2"><a href="11.3-simple-11.html#cb412-2" aria-hidden="true" tabindex="-1"></a><span class="fu">emmeans</span>(mod2, <span class="at">specs =</span> <span class="st">&quot;age&quot;</span>, <span class="at">at =</span> <span class="fu">list</span>(<span class="at">age =</span> <span class="fu">c</span>(<span class="dv">20</span>, <span class="dv">40</span>)), <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)</span></code></pre></div>
 <pre><code>##  age   prob     SE  df asymp.LCL asymp.UCL
 ##   20 0.0435 0.0279 Inf    0.0121     0.145
 ##   40 0.2947 0.0578 Inf    0.1951     0.419
@@ -610,21 +609,21 @@ Figure 11.9: Predicted probabilities
 ## Intervals are back-transformed from the logit scale</code></pre>
 <p>The ratio of two probabilities is often called the <em>risk ratio</em>. So, we could also say that the risk ratio of CHD for someone who is 40 as compared to someone who is 20 is .2947 / .0435 = 6.77. Otherwise stated, the risk of having CHD when you are 40 years old is almost 7 times higher than it is for someone who is 20.</p>
 </div>
-<div id="other-interpretations-equal-odds" class="section level3" number="11.3.2">
-<h3><span class="header-section-number">11.3.2</span> Other interpretations: Equal odds</h3>
+<div id="other-interpretations-equal-odds" class="section level3 hasAnchor" number="11.3.2">
+<h3><span class="header-section-number">11.3.2</span> Other interpretations: Equal odds<a href="11.3-simple-11.html#other-interpretations-equal-odds" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Another interpretation of logistic regression is to report the value of <span class="math inline">\(X\)</span> at which the <span class="math inline">\(\text{odds}\)</span> of the outcome are equal to 1 (equivalently, the probability of the outcome is equal to .5). This idea is illustrated in Figure <a href="11.3-simple-11.html#fig:equal-odds">11.10</a>.</p>
-<div class="sourceCode" id="cb412"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb412-1"><a href="11.3-simple-11.html#cb412-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">age =</span> <span class="dv">20</span><span class="sc">:</span><span class="dv">70</span>)</span>
-<span id="cb412-2"><a href="11.3-simple-11.html#cb412-2" aria-hidden="true" tabindex="-1"></a>prob <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod2, <span class="at">newdata =</span> x, <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)</span>
-<span id="cb412-3"><a href="11.3-simple-11.html#cb412-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x<span class="sc">$</span>age, prob, <span class="at">xlab =</span> <span class="st">&quot;age&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;p(CHD)&quot;</span>, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span>
-<span id="cb412-4"><a href="11.3-simple-11.html#cb412-4" aria-hidden="true" tabindex="-1"></a><span class="fu">segments</span>(<span class="at">x0 =</span> <span class="dv">15</span>, <span class="at">y0 =</span> .<span class="dv">5</span>, <span class="at">x1 =</span> <span class="dv">48</span>, <span class="at">y1 =</span> .<span class="dv">5</span>, <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
-<span id="cb412-5"><a href="11.3-simple-11.html#cb412-5" aria-hidden="true" tabindex="-1"></a><span class="fu">segments</span>(<span class="at">x0 =</span> <span class="dv">48</span>, <span class="at">y0 =</span> <span class="dv">0</span>, <span class="at">x1 =</span> <span class="dv">48</span>, <span class="at">y1 =</span> .<span class="dv">5</span>, <span class="at">lty =</span> <span class="dv">3</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb414"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb414-1"><a href="11.3-simple-11.html#cb414-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">age =</span> <span class="dv">20</span><span class="sc">:</span><span class="dv">70</span>)</span>
+<span id="cb414-2"><a href="11.3-simple-11.html#cb414-2" aria-hidden="true" tabindex="-1"></a>prob <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod2, <span class="at">newdata =</span> x, <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)</span>
+<span id="cb414-3"><a href="11.3-simple-11.html#cb414-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x<span class="sc">$</span>age, prob, <span class="at">xlab =</span> <span class="st">&quot;age&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;p(CHD)&quot;</span>, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span>
+<span id="cb414-4"><a href="11.3-simple-11.html#cb414-4" aria-hidden="true" tabindex="-1"></a><span class="fu">segments</span>(<span class="at">x0 =</span> <span class="dv">15</span>, <span class="at">y0 =</span> .<span class="dv">5</span>, <span class="at">x1 =</span> <span class="dv">48</span>, <span class="at">y1 =</span> .<span class="dv">5</span>, <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb414-5"><a href="11.3-simple-11.html#cb414-5" aria-hidden="true" tabindex="-1"></a><span class="fu">segments</span>(<span class="at">x0 =</span> <span class="dv">48</span>, <span class="at">y0 =</span> <span class="dv">0</span>, <span class="at">x1 =</span> <span class="dv">48</span>, <span class="at">y1 =</span> .<span class="dv">5</span>, <span class="at">lty =</span> <span class="dv">3</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:equal-odds"></span>
 <img src="_main_files/figure-html/equal-odds-1.png" alt="The Equal Odds Interpretation" width="672" />
 <p class="caption">
 Figure 11.10: The Equal Odds Interpretation
 </p>
 </div>
-<p>First we find the probability of .5 on the <span class="math inline">\(Y\)</span> axis and then follow the horizontal dashed line to the logistic curve. Then we follow the vertical dashed line down to the value of <span class="math inline">\(X\)</span>. This gives use the age at which the probability of CHD is “50-50.” Based on the plot we can say that, after your 48th birthday, your chances of having CHD are above 50%.</p>
+<p>First we find the probability of .5 on the <span class="math inline">\(Y\)</span> axis and then follow the horizontal dashed line to the logistic curve. Then we follow the vertical dashed line down to the value of <span class="math inline">\(X\)</span>. This gives use the age at which the probability of CHD is “50-50”. Based on the plot we can say that, after your 48th birthday, your chances of having CHD are above 50%.</p>
 <p>The math behind this interpretation is below. Since</p>
 <p><span class="math display">\[ \log(.5/.5) = \log(1) = 0 \]</span></p>
 <p>we can solve</p>
@@ -636,14 +635,14 @@ Figure 11.10: The Equal Odds Interpretation
 <p>which confirms the conclusion we made looking at the plot.</p>
 <p>In summary, another way of interpreting regression coefficients in simple logistic regression is to compute <span class="math inline">\(-a / b\)</span>, which gives the value of <span class="math inline">\(X\)</span> at which <span class="math inline">\(p(Y = 1) = .5\)</span>.</p>
 </div>
-<div id="other-interpretations-rate-of-change" class="section level3" number="11.3.3">
-<h3><span class="header-section-number">11.3.3</span> Other interpretations: Rate of change</h3>
+<div id="other-interpretations-rate-of-change" class="section level3 hasAnchor" number="11.3.3">
+<h3><span class="header-section-number">11.3.3</span> Other interpretations: Rate of change<a href="11.3-simple-11.html#other-interpretations-rate-of-change" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Another interpretation is in terms of the slope of the straight line (tangent) through the point <span class="math inline">\(p(CHD) = .5\)</span>. This slope of this line describes the approximate rate of change in the probability of CHD for people who are “close to” the age of equal odds.</p>
 <p>It turns out that the slope of the tangent line is equal to <span class="math inline">\(b/4\)</span>. The derivation requires calculus and is omitted, but the line for our example is shown in Figure <a href="11.3-simple-11.html#fig:tangent">11.11</a>.</p>
-<div class="sourceCode" id="cb413"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb413-1"><a href="11.3-simple-11.html#cb413-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">age =</span> <span class="dv">20</span><span class="sc">:</span><span class="dv">70</span>)</span>
-<span id="cb413-2"><a href="11.3-simple-11.html#cb413-2" aria-hidden="true" tabindex="-1"></a>prob <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod2, <span class="at">newdata =</span> x, <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)</span>
-<span id="cb413-3"><a href="11.3-simple-11.html#cb413-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x<span class="sc">$</span>age, prob, <span class="at">xlab =</span> <span class="st">&quot;age&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;p(CHD)&quot;</span>, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span>
-<span id="cb413-4"><a href="11.3-simple-11.html#cb413-4" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">a =</span> <span class="sc">-</span>.<span class="dv">815</span>, <span class="at">b =</span> .<span class="dv">11</span><span class="sc">/</span><span class="dv">4</span>, <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb415"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb415-1"><a href="11.3-simple-11.html#cb415-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">age =</span> <span class="dv">20</span><span class="sc">:</span><span class="dv">70</span>)</span>
+<span id="cb415-2"><a href="11.3-simple-11.html#cb415-2" aria-hidden="true" tabindex="-1"></a>prob <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod2, <span class="at">newdata =</span> x, <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)</span>
+<span id="cb415-3"><a href="11.3-simple-11.html#cb415-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x<span class="sc">$</span>age, prob, <span class="at">xlab =</span> <span class="st">&quot;age&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;p(CHD)&quot;</span>, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span>
+<span id="cb415-4"><a href="11.3-simple-11.html#cb415-4" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">a =</span> <span class="sc">-</span>.<span class="dv">815</span>, <span class="at">b =</span> .<span class="dv">11</span><span class="sc">/</span><span class="dv">4</span>, <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:tangent"></span>
 <img src="_main_files/figure-html/tangent-1.png" alt="The Rate of Change Interpretation" width="672" />
 <p class="caption">
@@ -652,8 +651,8 @@ Figure 11.11: The Rate of Change Interpretation
 </div>
 <p>For the example data <span class="math inline">\(b / 4 = .11 / 4 = .0275\)</span>. So, for every additional year, the predicted probability of CHD increases by .0275. However, this interpretation only applies to people who “around” the age of equal odds (48 years old in this example). Looking at the plot, we can see that the approximation is pretty good for people between the ages of 40 and 60. (Note: This is also the age range over which the linear probability model would provide a reasonable approximation).</p>
 </div>
-<div id="summary-13" class="section level3" number="11.3.4">
-<h3><span class="header-section-number">11.3.4</span> Summary</h3>
+<div id="summary-13" class="section level3 hasAnchor" number="11.3.4">
+<h3><span class="header-section-number">11.3.4</span> Summary<a href="11.3-simple-11.html#summary-13" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The simple logistic regression model</p>
 <p><span class="math display">\[ \text{logit}(CHD) = a + b (\text{age}) \]</span></p>
 <p>has the following interpretations.</p>
@@ -737,7 +736,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

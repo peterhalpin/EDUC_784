@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>8.4 Normality | EDUC 784: Regression</title>
   <meta name="description" content="Course notes for EDUC 784" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
 
   <meta property="og:title" content="8.4 Normality | EDUC 784: Regression" />
   <meta property="og:type" content="book" />
-  
   <meta property="og:image" content="/images/image1.png" />
   <meta property="og:description" content="Course notes for EDUC 784" />
   <meta name="github-repo" content="peterhalpin/EDUC_784" />
@@ -30,11 +29,10 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
-  <link rel="shortcut icon" href="null" type="image/x-icon" />
+  
 <link rel="prev" href="8.3-homoskedasticity-8.html"/>
 <link rel="next" href="8.5-worked-example-8.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
-<script src="libs/jquery-3.5.1/jquery-3.5.1.min.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,8 +49,9 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -93,7 +92,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -106,7 +105,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -506,8 +505,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="normality-8" class="section level2" number="8.4">
-<h2><span class="header-section-number">8.4</span> Normality</h2>
+<div id="normality-8" class="section level2 hasAnchor" number="8.4">
+<h2><span class="header-section-number">8.4</span> Normality<a href="8.4-normality-8.html#normality-8" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <input onclick="codefolder(&#39;pre.sourceCode&#39;);" type="button" value="Hide Code" id="codefolder-button" style="position: relative; &#10;            top: -25px; &#10;            left: 85%;   &#10;            color: white;&#10;            font-weight: bold;&#10;            background: #4B9CD3;&#10;            border: 1px #3079ED solid;&#10;            box-shadow: inset 0 1px 0 #80B0FB"/>
 <script>
   function codefolder(query) {
@@ -539,45 +538,45 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>For our assumption, we want to compare the quantiles of our standardized residuals to the quantiles of a standard normal distribution. Standardizing means the residuals should have variance equal to one, and, combined with the other population assumptions of linear regression, this implies that the residuals should have a standard normal distribution (see Section <a href="8.1-recap-8.html#recap-8">8.1</a>).</p>
 <p>Since qq plots might not be something you have seen before, we’ll take a look at a few examples. Each figure below pairs a histogram and qq plot. In the qq plot, data points should fall on the diagonal line if the data are normally distributed. Focus on how the pattern in the histogram shows up as in deviations from the diagonal line the qq plot. We will discuss the interpretation of these patterns together in class. *Please write down any questions you have about the interpretation of the qq plots and we can address them together in class.**</p>
 <p>Also, it should be emphasized that the line in the normal qqplot is <em>not a regression line!</em> It is just the diagonal line <span class="math inline">\(Y = X\)</span>, and the bulk of the data points should fall on that line if the data were drawn from a normal distribution.</p>
-<div class="sourceCode" id="cb307"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb307-1"><a href="8.4-normality-8.html#cb307-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Comparing histograms and q-q plots</span></span>
-<span id="cb307-2"><a href="8.4-normality-8.html#cb307-2" aria-hidden="true" tabindex="-1"></a>distributions <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;distributions.csv&quot;</span>)</span>
-<span id="cb307-3"><a href="8.4-normality-8.html#cb307-3" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(distributions)[<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="st">&quot;normal&quot;</span></span>
-<span id="cb307-4"><a href="8.4-normality-8.html#cb307-4" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(distributions)</span>
-<span id="cb307-5"><a href="8.4-normality-8.html#cb307-5" aria-hidden="true" tabindex="-1"></a>dist_names <span class="ot">&lt;-</span> <span class="fu">names</span>(distributions)</span>
-<span id="cb307-6"><a href="8.4-normality-8.html#cb307-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb307-7"><a href="8.4-normality-8.html#cb307-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Normal </span></span>
-<span id="cb307-8"><a href="8.4-normality-8.html#cb307-8" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
-<span id="cb307-9"><a href="8.4-normality-8.html#cb307-9" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(normal, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span>
-<span id="cb307-10"><a href="8.4-normality-8.html#cb307-10" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(normal, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span>
-<span id="cb307-11"><a href="8.4-normality-8.html#cb307-11" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(normal)</span></code></pre></div>
+<div class="sourceCode" id="cb309"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb309-1"><a href="8.4-normality-8.html#cb309-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Comparing histograms and q-q plots</span></span>
+<span id="cb309-2"><a href="8.4-normality-8.html#cb309-2" aria-hidden="true" tabindex="-1"></a>distributions <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;distributions.csv&quot;</span>)</span>
+<span id="cb309-3"><a href="8.4-normality-8.html#cb309-3" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(distributions)[<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="st">&quot;normal&quot;</span></span>
+<span id="cb309-4"><a href="8.4-normality-8.html#cb309-4" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(distributions)</span>
+<span id="cb309-5"><a href="8.4-normality-8.html#cb309-5" aria-hidden="true" tabindex="-1"></a>dist_names <span class="ot">&lt;-</span> <span class="fu">names</span>(distributions)</span>
+<span id="cb309-6"><a href="8.4-normality-8.html#cb309-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb309-7"><a href="8.4-normality-8.html#cb309-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Normal </span></span>
+<span id="cb309-8"><a href="8.4-normality-8.html#cb309-8" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb309-9"><a href="8.4-normality-8.html#cb309-9" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(normal, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span>
+<span id="cb309-10"><a href="8.4-normality-8.html#cb309-10" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(normal, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span>
+<span id="cb309-11"><a href="8.4-normality-8.html#cb309-11" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(normal)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-158-1.png" width="672" /></p>
-<div class="sourceCode" id="cb308"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb308-1"><a href="8.4-normality-8.html#cb308-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Negative skew</span></span>
-<span id="cb308-2"><a href="8.4-normality-8.html#cb308-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
-<span id="cb308-3"><a href="8.4-normality-8.html#cb308-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(neg_skew, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span>
-<span id="cb308-4"><a href="8.4-normality-8.html#cb308-4" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(neg_skew, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span>
-<span id="cb308-5"><a href="8.4-normality-8.html#cb308-5" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(neg_skew)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-158-2.png" width="672" /></p>
-<div class="sourceCode" id="cb309"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb309-1"><a href="8.4-normality-8.html#cb309-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Positive skew</span></span>
-<span id="cb309-2"><a href="8.4-normality-8.html#cb309-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
-<span id="cb309-3"><a href="8.4-normality-8.html#cb309-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(pos_skew, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span>
-<span id="cb309-4"><a href="8.4-normality-8.html#cb309-4" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(pos_skew, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span>
-<span id="cb309-5"><a href="8.4-normality-8.html#cb309-5" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(pos_skew)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-158-3.png" width="672" /></p>
-<div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb310-1"><a href="8.4-normality-8.html#cb310-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Leptokurtic</span></span>
+<div class="sourceCode" id="cb310"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb310-1"><a href="8.4-normality-8.html#cb310-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Negative skew</span></span>
 <span id="cb310-2"><a href="8.4-normality-8.html#cb310-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
-<span id="cb310-3"><a href="8.4-normality-8.html#cb310-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(lepto, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span>
-<span id="cb310-4"><a href="8.4-normality-8.html#cb310-4" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(lepto, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span>
-<span id="cb310-5"><a href="8.4-normality-8.html#cb310-5" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(lepto)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-158-4.png" width="672" /></p>
-<div class="sourceCode" id="cb311"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb311-1"><a href="8.4-normality-8.html#cb311-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Platykurtic</span></span>
+<span id="cb310-3"><a href="8.4-normality-8.html#cb310-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(neg_skew, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span>
+<span id="cb310-4"><a href="8.4-normality-8.html#cb310-4" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(neg_skew, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span>
+<span id="cb310-5"><a href="8.4-normality-8.html#cb310-5" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(neg_skew)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-158-2.png" width="672" /></p>
+<div class="sourceCode" id="cb311"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb311-1"><a href="8.4-normality-8.html#cb311-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Positive skew</span></span>
 <span id="cb311-2"><a href="8.4-normality-8.html#cb311-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
-<span id="cb311-3"><a href="8.4-normality-8.html#cb311-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(platy, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span>
-<span id="cb311-4"><a href="8.4-normality-8.html#cb311-4" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(platy, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span>
-<span id="cb311-5"><a href="8.4-normality-8.html#cb311-5" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(platy)</span></code></pre></div>
+<span id="cb311-3"><a href="8.4-normality-8.html#cb311-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(pos_skew, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span>
+<span id="cb311-4"><a href="8.4-normality-8.html#cb311-4" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(pos_skew, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span>
+<span id="cb311-5"><a href="8.4-normality-8.html#cb311-5" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(pos_skew)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-158-3.png" width="672" /></p>
+<div class="sourceCode" id="cb312"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb312-1"><a href="8.4-normality-8.html#cb312-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Leptokurtic</span></span>
+<span id="cb312-2"><a href="8.4-normality-8.html#cb312-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb312-3"><a href="8.4-normality-8.html#cb312-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(lepto, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span>
+<span id="cb312-4"><a href="8.4-normality-8.html#cb312-4" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(lepto, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span>
+<span id="cb312-5"><a href="8.4-normality-8.html#cb312-5" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(lepto)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-158-4.png" width="672" /></p>
+<div class="sourceCode" id="cb313"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb313-1"><a href="8.4-normality-8.html#cb313-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Platykurtic</span></span>
+<span id="cb313-2"><a href="8.4-normality-8.html#cb313-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb313-3"><a href="8.4-normality-8.html#cb313-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(platy, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span>
+<span id="cb313-4"><a href="8.4-normality-8.html#cb313-4" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(platy, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span>
+<span id="cb313-5"><a href="8.4-normality-8.html#cb313-5" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(platy)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-158-5.png" width="672" /></p>
 <p>Next, let’s consider a more realistic example using the default plotting from the <code>lm</code> function. <strong>Please write down whether you think the normality assumption is problematic for the data in Figure @reff(fig:normality1), and be sure to explain why with reference to the plot.</strong> Hint: if you think the data are non-normal, you should be able to interpret the pattern of deviations with reference to the examples given above (e.g. skew, kurtosis).</p>
-<div class="sourceCode" id="cb312"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb312-1"><a href="8.4-normality-8.html#cb312-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example: regression c1rmscal on ses_orig and t1learn</span></span>
-<span id="cb312-2"><a href="8.4-normality-8.html#cb312-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod2, <span class="at">which =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb314"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb314-1"><a href="8.4-normality-8.html#cb314-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example: regression c1rmscal on ses_orig and t1learn</span></span>
+<span id="cb314-2"><a href="8.4-normality-8.html#cb314-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod2, <span class="at">which =</span> <span class="dv">2</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:normality1"></span>
 <img src="_main_files/figure-html/normality1-1.png" alt="An example from ECLS." width="768" />
 <p class="caption">
@@ -585,23 +584,23 @@ Figure 8.7: An example from ECLS.
 </p>
 </div>
 <p>Practice makes perfect, so lets work through a few more examples. In each of the examples in Figure <a href="8.4-normality-8.html#fig:normality2">8.8</a>, <strong>please write down whether you think the normality assumption is problematic and explain why with reference to the plots.</strong></p>
-<div class="sourceCode" id="cb313"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb313-1"><a href="8.4-normality-8.html#cb313-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example: regression c1rmscal on ses_orig and t1learn</span></span>
-<span id="cb313-2"><a href="8.4-normality-8.html#cb313-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">101</span>)</span>
-<span id="cb313-3"><a href="8.4-normality-8.html#cb313-3" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
-<span id="cb313-4"><a href="8.4-normality-8.html#cb313-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>) {</span>
-<span id="cb313-5"><a href="8.4-normality-8.html#cb313-5" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">200</span>)</span>
-<span id="cb313-6"><a href="8.4-normality-8.html#cb313-6" aria-hidden="true" tabindex="-1"></a>  e <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">200</span>)</span>
-<span id="cb313-7"><a href="8.4-normality-8.html#cb313-7" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> x <span class="sc">+</span> e </span>
-<span id="cb313-8"><a href="8.4-normality-8.html#cb313-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="fu">lm</span>(y <span class="sc">~</span> x), <span class="at">which =</span> <span class="dv">2</span>)</span>
-<span id="cb313-9"><a href="8.4-normality-8.html#cb313-9" aria-hidden="true" tabindex="-1"></a>}  </span></code></pre></div>
+<div class="sourceCode" id="cb315"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb315-1"><a href="8.4-normality-8.html#cb315-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example: regression c1rmscal on ses_orig and t1learn</span></span>
+<span id="cb315-2"><a href="8.4-normality-8.html#cb315-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">101</span>)</span>
+<span id="cb315-3"><a href="8.4-normality-8.html#cb315-3" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb315-4"><a href="8.4-normality-8.html#cb315-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>) {</span>
+<span id="cb315-5"><a href="8.4-normality-8.html#cb315-5" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">200</span>)</span>
+<span id="cb315-6"><a href="8.4-normality-8.html#cb315-6" aria-hidden="true" tabindex="-1"></a>  e <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">200</span>)</span>
+<span id="cb315-7"><a href="8.4-normality-8.html#cb315-7" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> x <span class="sc">+</span> e </span>
+<span id="cb315-8"><a href="8.4-normality-8.html#cb315-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="fu">lm</span>(y <span class="sc">~</span> x), <span class="at">which =</span> <span class="dv">2</span>)</span>
+<span id="cb315-9"><a href="8.4-normality-8.html#cb315-9" aria-hidden="true" tabindex="-1"></a>}  </span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:normality2"></span>
 <img src="_main_files/figure-html/normality2-1.png" alt="More examples." width="672" />
 <p class="caption">
 Figure 8.8: More examples.
 </p>
 </div>
-<div id="summary-10" class="section level3" number="8.4.1">
-<h3><span class="header-section-number">8.4.1</span> Summary</h3>
+<div id="summary-10" class="section level3 hasAnchor" number="8.4.1">
+<h3><span class="header-section-number">8.4.1</span> Summary<a href="8.4-normality-8.html#summary-10" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>To check the assumption of normality, we can use a qq plot of the standardized residuals against the standard normal distribution.</p>
 <ul>
 <li><p>If the points from the qq plot follows the line Y = X, then there is no evidence against the assumption</p></li>
@@ -672,7 +671,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>5.5 Deviation coding | EDUC 784: Regression</title>
   <meta name="description" content="Course notes for EDUC 784" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
 
   <meta property="og:title" content="5.5 Deviation coding | EDUC 784: Regression" />
   <meta property="og:type" content="book" />
-  
   <meta property="og:image" content="/images/image1.png" />
   <meta property="og:description" content="Course notes for EDUC 784" />
   <meta name="github-repo" content="peterhalpin/EDUC_784" />
@@ -30,11 +29,10 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
-  <link rel="shortcut icon" href="null" type="image/x-icon" />
+  
 <link rel="prev" href="5.4-reference-group-coding-5.html"/>
 <link rel="next" href="5.6-workbook-1.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
-<script src="libs/jquery-3.5.1/jquery-3.5.1.min.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,8 +49,9 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -93,7 +92,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -106,7 +105,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -506,8 +505,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="deviation-coding-5" class="section level2" number="5.5">
-<h2><span class="header-section-number">5.5</span> Deviation coding</h2>
+<div id="deviation-coding-5" class="section level2 hasAnchor" number="5.5">
+<h2><span class="header-section-number">5.5</span> Deviation coding<a href="5.5-deviation-coding-5.html#deviation-coding-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <input onclick="codefolder(&#39;pre.sourceCode&#39;);" type="button" value="Hide Code" id="codefolder-button" style="position: relative; &#10;            top: -25px; &#10;            left: 85%;   &#10;            color: white;&#10;            font-weight: bold;&#10;            background: #4B9CD3;&#10;            border: 1px #3079ED solid;&#10;            box-shadow: inset 0 1px 0 #80B0FB"/>
 <script>
   function codefolder(query) {
@@ -542,7 +541,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>The intercept is equal to the mean of the predicted values for each category i.e,</li>
 </ul>
 <p><span class="math display" id="eq:unweighted-mean">\[\begin{equation}
-b_0 = \frac{\sum_{c=1}^C \widehat Y_c} {C} 
+b_0 = \frac{\sum_{c=1}^C \widehat Y_c} {C}
 \tag{5.5}
 \end{equation}\]</span></p>
 <ul>
@@ -550,14 +549,14 @@ b_0 = \frac{\sum_{c=1}^C \widehat Y_c} {C}
 </ul>
 <p>The main difference compared to reference-group coding is the interpretation of the intercept – it is no longer an arbitrarily chosen reference-group, but instead represents the mean of the predicted values. For a single predictor, this is equal to overall mean on <span class="math inline">\(Y\)</span>, when the groups have equal sample size (<span class="math inline">\(n\)</span>):</p>
 <p><span class="math display">\[\begin{equation}
-b_0 = \frac{\sum_{c=1}^C \widehat Y_c} {C} 
- = \frac{\sum_{c=1}^C \bar Y_c}{C} = \frac{\sum_{c=1}^C \left(\frac{\sum_{i=1}^n Y_{ic}}{n}\right)} {C} =  \frac{\sum_{c=1}^C \sum_{i=1}^n Y_{ic}}{nC} = \bar Y 
+b_0 = \frac{\sum_{c=1}^C \widehat Y_c} {C}
+= \frac{\sum_{c=1}^C \bar Y_c}{C} = \frac{\sum_{c=1}^C \left(\frac{\sum_{i=1}^n Y_{ic}}{n}\right)} {C} =  \frac{\sum_{c=1}^C \sum_{i=1}^n Y_{ic}}{nC} = \bar Y
 \end{equation}\]</span></p>
 <p>This equation says that, when the groups have equal sample sizes, the deviation-coded intercept is equal to the overall mean <span class="math inline">\(\bar Y\)</span>. Consequently, the regression coefficients are interpreted as the deviation of each group mean from the overall mean. This is why it is called deviation coding.</p>
 <p>When the groups have unequal sample size, the situation is a bit more complicated. In particular, we have to weight the predicted values in Equation <a href="5.5-deviation-coding-5.html#eq:unweighted-mean">(5.5)</a> by the group sample sizes. This is addressed in <a href="5.5-deviation-coding-5.html#extra1-5">5.5.4</a> (optional). To clarify that intercept in deviation coding is not always equal to <span class="math inline">\(\bar Y\)</span>, we refer to it as an “unweighted mean” of group means / predicted scores.</p>
 <p>Note that there are still only <span class="math inline">\(C-1\)</span> regression coefficients. So one group gets left out of the analysis, and the researcher has to chose which one. This is a shortcoming of deviation coding, which is addressed in the Section <a href="5.5-deviation-coding-5.html#extra2-5">5.5.5</a> (optional)</p>
-<div id="a-hypothetical-example-1" class="section level3" number="5.5.1">
-<h3><span class="header-section-number">5.5.1</span> A hypothetical example</h3>
+<div id="a-hypothetical-example-1" class="section level3 hasAnchor" number="5.5.1">
+<h3><span class="header-section-number">5.5.1</span> A hypothetical example<a href="5.5-deviation-coding-5.html#a-hypothetical-example-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The International Development and Early Learning Assessment (IDELA) is an assessment designed to measure young children’s development in literacy, numeracy, social-emotional, and motor domains, in international settings. Figure <a href="5.5-deviation-coding-5.html#fig:idela1">5.4</a> shows the countries in which the IDELA had been used as of 2017 (<a href="https://www.savethechildren.net/sites/default/files/libraries/GS_0.pdf" class="uri">https://www.savethechildren.net/sites/default/files/libraries/GS_0.pdf</a>.)</p>
 <div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="5.5-deviation-coding-5.html#cb118-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;images/idela_map.png&quot;</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:idela1"></span>
@@ -587,8 +586,8 @@ Figure 5.5: Toy IDELA Example.
 </div>
 <p>Note that the dummy variables are different than for the case of reference-group coding discussed Section <a href="5.4-reference-group-coding-5.html#reference-group-coding-5">5.4</a>. In deviation coding, the dummies always take on values <span class="math inline">\(1, 0, -1\)</span>. The same group must receive the code <span class="math inline">\(-1\)</span> for all dummies. The group with the value <span class="math inline">\(-1\)</span> is the group that gets left out of the analysis.</p>
 </div>
-<div id="interpreting-the-regression-parameters-1" class="section level3" number="5.5.2">
-<h3><span class="header-section-number">5.5.2</span> Interpreting the regression parameters</h3>
+<div id="interpreting-the-regression-parameters-1" class="section level3 hasAnchor" number="5.5.2">
+<h3><span class="header-section-number">5.5.2</span> Interpreting the regression parameters<a href="5.5-deviation-coding-5.html#interpreting-the-regression-parameters-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Regressing IDELA on the dummies we have:</p>
 <p><span class="math display">\[ \widehat Y = b_0 + b_1 X_1 + b_2 X_2 \]</span></p>
 <p>In order to interpret the regression coefficients we proceed using the same two steps as in Section <a href="5.3-binary-predictors-5.html#binary-predictors-5">5.3</a> and Section <a href="5.4-reference-group-coding-5.html#reference-group-coding-5">5.4</a></p>
@@ -597,8 +596,8 @@ Figure 5.5: Toy IDELA Example.
 </ul>
 <p><span class="math display">\[\begin{align}
 \widehat Y (Ethiopia) &amp; = b_0 + b_1 (1) + b_2 (0) = b_0 + b_1\\
-\widehat Y (Vietnam) &amp; = b_0 + b_1 (0) + b_2 (1) = b_0 + b_2 \\ 
-\widehat Y (Bolivia) &amp; = b_0 + b_1 (-1) + b_2 (-1) = b_0 - b_1 - b_2 
+\widehat Y (Vietnam) &amp; = b_0 + b_1 (0) + b_2 (1) = b_0 + b_2 \\
+\widehat Y (Bolivia) &amp; = b_0 + b_1 (-1) + b_2 (-1) = b_0 - b_1 - b_2
 \end{align}\]</span></p>
 <ul>
 <li><em>Step 2.</em> Solve for the model parameters in terms the predicted values.</li>
@@ -608,16 +607,16 @@ b_1 &amp;= \widehat Y (Ethiopia) - b_0 \\
 b_2 &amp;= \widehat Y (Vietnam) - b_0 \\ \\
 b_0 &amp; = \widehat Y (Bolivia) + b_1 + b_2 \\  
 &amp; = \widehat Y (Bolivia) + \widehat Y (Ethiopia) - b_0 + \widehat Y (Vietnam) - b_0 \\
-\implies &amp; \\ 
+\implies &amp; \\
 3b_0 &amp; = \widehat Y (Bolivia) + \widehat Y (Ethiopia) + \widehat Y (Vietnam) \\
 
-\implies &amp; \\ 
+\implies &amp; \\
 b_0 &amp; = \frac{\widehat Y (Bolivia) + \widehat Y (Ethiopia) + \widehat Y (Vietnam)}{3}
 \end{align}\]</span></p>
 <p><strong>Using the above equations, please write down an interpretation of the regression parameters for the hypothetical example. In particular, what do you think about using the unweighted mean of countries’ predicted IDELA scores as the comparison point? Is this meaningful? Would another approach be better?</strong></p>
 </div>
-<div id="summary-3" class="section level3" number="5.5.3">
-<h3><span class="header-section-number">5.5.3</span> Summary</h3>
+<div id="summary-3" class="section level3 hasAnchor" number="5.5.3">
+<h3><span class="header-section-number">5.5.3</span> Summary<a href="5.5-deviation-coding-5.html#summary-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>In deviation coding with a single categorical variable:</p>
 <ul>
 <li><p>The intercept is interpreted as the unweighted mean of the groups’ means, which is equal to the overall mean on the <span class="math inline">\(Y\)</span> variable when the groups have equal sample sizes.</p></li>
@@ -625,15 +624,15 @@ b_0 &amp; = \frac{\widehat Y (Bolivia) + \widehat Y (Ethiopia) + \widehat Y (Vie
 <li><p>There are still only <span class="math inline">\(C - 1\)</span> regression coefficients, so one group gets left out (see extra material for how to get around this).</p></li>
 </ul>
 </div>
-<div id="extra1-5" class="section level3" number="5.5.4">
-<h3><span class="header-section-number">5.5.4</span> Extra: Deviation coding with unequal sample sizes*</h3>
+<div id="extra1-5" class="section level3 hasAnchor" number="5.5.4">
+<h3><span class="header-section-number">5.5.4</span> Extra: Deviation coding with unequal sample sizes*<a href="5.5-deviation-coding-5.html#extra1-5" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>When groups have unequal sample size, the unweighted mean of the group means is not the overall mean of the Y variable. This is not always a problem. For example, in the international comparisons example, it is reasonable (i.e., democratic) that each country should receive equal weight, even if the size of their populations differ.</p>
 <p>However, if you want to compare each groups’ mean to the overall mean on <span class="math inline">\(Y\)</span>, deviation coding can be adjusted by replacing the value <span class="math inline">\(-1\)</span> with the ratio of indicated group’s sample size to the omitted group’s sample size. An example for 3 groups is shown below.</p>
-<p><span class="math display">\[ \begin{matrix} &amp; \text{Dummy 1}&amp; \text{Dummy 2}\\ 
-                   \text{Group 1} &amp; 1 &amp; 0  \\ 
+<p><span class="math display">\[ \begin{matrix} &amp; \text{Dummy 1}&amp; \text{Dummy 2}\\
+                   \text{Group 1} &amp; 1 &amp; 0  \\
                    \text{Group 2} &amp; 0 &amp; 1 \\
                   \text{Group 3}  &amp; - n_1 /n_3 &amp; - n_2 / n_3 \\
-   \end{matrix} 
+   \end{matrix}
 \]</span></p>
 <p>You can use the 2-step procedure to show that this coding, called <em>weighted deviation coding</em>, results in</p>
 <p><span class="math display">\[\begin{equation}
@@ -641,8 +640,8 @@ b_0 = \frac{n_1 \widehat Y( \text{Group 1}) + n_2 \widehat Y( \text{Group 2}) + 
 \end{equation}\]</span></p>
 <p>Replacing <span class="math inline">\(\widehat Y( \text{Group }c )\)</span> with <span class="math inline">\(\bar Y_c\)</span> you can also show that <span class="math inline">\(b_0 = \bar Y\)</span>, using the rules of summation algebra. Unlike the case for the unweighted mean, this relationship holds regardless of the sample sizes of the groups.</p>
 </div>
-<div id="extra2-5" class="section level3" number="5.5.5">
-<h3><span class="header-section-number">5.5.5</span> Extra: Deviation coding all groups included*</h3>
+<div id="extra2-5" class="section level3 hasAnchor" number="5.5.5">
+<h3><span class="header-section-number">5.5.5</span> Extra: Deviation coding all groups included*<a href="5.5-deviation-coding-5.html#extra2-5" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Another issue with deviation coding is that it requires leaving one group out of the model. This is a shortcoming of the approach. As a work around, one can instead use the following approach. Note that this approach will affect the value, statistical significance, and interpretation of R-squared, so you should only use it if you aren’t interested in reporting R-squared.</p>
 <ul>
 <li>Step A: Standardize the <span class="math inline">\(Y\)</span> variable to have M = 0 and SD = 1.</li>
@@ -713,7 +712,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>3.2 Causation | EDUC 784: Regression</title>
   <meta name="description" content="Course notes for EDUC 784" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
 
   <meta property="og:title" content="3.2 Causation | EDUC 784: Regression" />
   <meta property="og:type" content="book" />
-  
   <meta property="og:image" content="/images/image1.png" />
   <meta property="og:description" content="Course notes for EDUC 784" />
   <meta name="github-repo" content="peterhalpin/EDUC_784" />
@@ -30,11 +29,10 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
-  <link rel="shortcut icon" href="null" type="image/x-icon" />
+  
 <link rel="prev" href="3.1-prediction.html"/>
 <link rel="next" href="3.3-explanation.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
-<script src="libs/jquery-3.5.1/jquery-3.5.1.min.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,8 +49,9 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -93,7 +92,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -106,7 +105,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -506,8 +505,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="causation" class="section level2" number="3.2">
-<h2><span class="header-section-number">3.2</span> Causation</h2>
+<div id="causation" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Causation<a href="3.2-causation.html#causation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>A causal interpretation of regression means that that changing <span class="math inline">\(X\)</span> by one unit will change <span class="math inline">\(\mu_{Y|X}\)</span> by <span class="math inline">\(b\)</span> units. Note that this is a statement about the population conditional mean function, not the sample predicted values.</p>
 <p>This is a much stronger interpretation than prediction because it requires stronger assumptions. In particular, regression parameters can only be interpreted causally when all variables that are correlated with <span class="math inline">\(Y\)</span> and <span class="math inline">\(X\)</span> are included as predictors in the model.</p>
 <p>When a variable is left out, this is called <em>omitted variable bias</em>. This situation is nicely explained by Gelman and Hill (cite:Gelman), and a modified version of their discussion is provided below. This discussion is a bit technical, but the take-home messages are summarized in the following points.</p>
@@ -518,8 +517,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>The overall idea is basically the same as saying “correlation does not imply causation” or the notion of spurious correlations. It is also an example of what is called “endogeneity” in regression (etymology: originating from within).</p></li>
 <li><p>In order to mitigate omitted variable bias, we want to include all relevant predictors in our regression models – i.e., multiple regression</p></li>
 </ul>
-<div id="omitted-variable-bias" class="section level3" number="3.2.1">
-<h3><span class="header-section-number">3.2.1</span> Omitted variable bias*</h3>
+<div id="omitted-variable-bias" class="section level3 hasAnchor" number="3.2.1">
+<h3><span class="header-section-number">3.2.1</span> Omitted variable bias*<a href="3.2-causation.html#omitted-variable-bias" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We start by assuming a “true” regression model with two predictors. In the context of our example, this means that there is one other variable, in addition to SES, that is important for predicting Reading Achievement. Of course, there are many predictors of Reading Achievement (see Section <a href="#Example-2"><strong>??</strong></a>), but we only need two to explain the problem of omitted variable bias.</p>
 <p>Let’s write the “true” model as:</p>
 <p><span class="math display" id="eq:2parm">\[\begin{equation}
@@ -541,9 +540,9 @@ X_2 = \alpha + \beta X_1 + \nu
 <p>where the regression parameters are written with Greek letters to distinguish them from the previous equations, and the residual is denoted <span class="math inline">\(\nu\)</span> instead of <span class="math inline">\(\epsilon\)</span> for the same reason.</p>
 <p>Next we use Equation <a href="3.2-causation.html#eq:X2">(3.3)</a> to substitute for <span class="math inline">\(X_2\)</span> in Equation <a href="3.2-causation.html#eq:2parm">(3.1)</a>,</p>
 <p><span class="math display" id="eq:3parm">\[\begin{align}
- Y &amp; = a + b_1 X_1 + b_2 X_2 + \epsilon \\
- Y &amp; = a + b_1 X_1 + b_2 (\alpha + \beta X_1 + \nu) \\
- Y &amp; = \color{orange}{(a + \alpha)} + \color{green}{(b_1 + b_2\beta)} X_1 + (\epsilon + \nu)
+Y &amp; = a + b_1 X_1 + b_2 X_2 + \epsilon \\
+Y &amp; = a + b_1 X_1 + b_2 (\alpha + \beta X_1 + \nu) \\
+Y &amp; = \color{orange}{(a + \alpha)} + \color{green}{(b_1 + b_2\beta)} X_1 + (\epsilon + \nu)
 \tag{3.4}
 \end{align}\]</span></p>
 <p>Notice that in the last line of Equation <a href="3.2-causation.html#eq:3parm">(3.4)</a>, <span class="math inline">\(Y\)</span> is predicted using only <span class="math inline">\(X_1\)</span>, so it is equivalent to Equation <a href="3.2-causation.html#eq:1parm">(3.2)</a>. Based on this comparison, we can write</p>
@@ -619,7 +618,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

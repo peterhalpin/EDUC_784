@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>6.6 Two categorical predictors | EDUC 784: Regression</title>
   <meta name="description" content="Course notes for EDUC 784" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
 
   <meta property="og:title" content="6.6 Two categorical predictors | EDUC 784: Regression" />
   <meta property="og:type" content="book" />
-  
   <meta property="og:image" content="/images/image1.png" />
   <meta property="og:description" content="Course notes for EDUC 784" />
   <meta name="github-repo" content="peterhalpin/EDUC_784" />
@@ -30,11 +29,10 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
-  <link rel="shortcut icon" href="null" type="image/x-icon" />
+  
 <link rel="prev" href="6.5-two-continuous-predictors-6.html"/>
 <link rel="next" href="6.7-workbook-3.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
-<script src="libs/jquery-3.5.1/jquery-3.5.1.min.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,8 +49,9 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -93,7 +92,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -106,7 +105,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -506,8 +505,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="two-categorical-predictors-6" class="section level2" number="6.6">
-<h2><span class="header-section-number">6.6</span> Two categorical predictors</h2>
+<div id="two-categorical-predictors-6" class="section level2 hasAnchor" number="6.6">
+<h2><span class="header-section-number">6.6</span> Two categorical predictors<a href="6.6-two-categorical-predictors-6.html#two-categorical-predictors-6" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <input onclick="codefolder(&#39;pre.sourceCode&#39;);" type="button" value="Hide Code" id="codefolder-button" style="position: relative; &#10;            top: -25px; &#10;            left: 85%;   &#10;            color: white;&#10;            font-weight: bold;&#10;            background: #4B9CD3;&#10;            border: 1px #3079ED solid;&#10;            box-shadow: inset 0 1px 0 #80B0FB"/>
 <script>
   function codefolder(query) {
@@ -537,8 +536,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </script>
 <p>This section addresses interactions between two categorical predictors. Up until now, we have looked at interactions only for categorical predictors that are dichotomous. In this section we address an example in which one of the categorical predictors has more than two levels. This requires combining what we learned about contrast coding (Chapter <a href="5-chapter-5.html#chapter-5">5</a>) with what we have learned about interactions. One nice aspect of interactions among categorical predictors is that we usually don’t need to use procedures like marginal effects to follow up significant interactions, so long as we make good use of contrast coding.</p>
 <p>In experimental (as opposed to observational) settings, interactions among categorical predictors fall under the much larger topic of ANOVA and experimental design. The analysis we look at in this section is a two-way between-subjects ANOVA, meaning that there are two categorical predictors considered, as well as their interaction, and both predictors are cross-sectional. ANOVA is a big topic and is not the focus of this course. However, we will discuss how to summarize the results of our analysis in an ANOVA table, and consider how this differs from the standard regression approach.</p>
-<div id="an-example-from-ecls" class="section level3" number="6.6.1">
-<h3><span class="header-section-number">6.6.1</span> An example from ECLS</h3>
+<div id="an-example-from-ecls" class="section level3 hasAnchor" number="6.6.1">
+<h3><span class="header-section-number">6.6.1</span> An example from ECLS<a href="6.6-two-categorical-predictors-6.html#an-example-from-ecls" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>For this topic we will switch over to the ECLS data and examine how SES and Pre-K attendance interact to predict Math Achievement at the beginning of Kindergarten. The variables we will examine are</p>
 <ul>
 <li>Math Achievement at the beginning of K (<code>c1rmscal</code>). This is the number of correct questions on a test with approximately 70 items.</li>
@@ -563,11 +562,11 @@ Figure 6.7: Math Achievement, Pre-K Attendence, and SES
 </p>
 </div>
 </div>
-<div id="the-no-interaction-model" class="section level3" number="6.6.2">
-<h3><span class="header-section-number">6.6.2</span> The “no-interaction” model</h3>
+<div id="the-no-interaction-model" class="section level3 hasAnchor" number="6.6.2">
+<h3><span class="header-section-number">6.6.2</span> The “no-interaction” model<a href="6.6-two-categorical-predictors-6.html#the-no-interaction-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>In order to represent a model with multiple categorical predictors, it is helpful to change our notation from the usual <span class="math inline">\(Y\)</span> and <span class="math inline">\(X\)</span> to something like the following:</p>
 <p><span class="math display" id="eq:prek-ses1">\[\begin{align}
-\widehat Y = b_0 + b_1 PREK + b_2SES_2 + b_3SES_3 + b_4 SES_4 + b_5 SES_5. 
+\widehat Y = b_0 + b_1 PREK + b_2SES_2 + b_3SES_3 + b_4 SES_4 + b_5 SES_5.
 \tag{6.4}
 \end{align}\]</span></p>
 <p>In in this notation, the predictor variables are indicators (binary dummies) that use the variable names rather than <span class="math inline">\(X_1\)</span>, <span class="math inline">\(X_2\)</span>, etc. The variable <span class="math inline">\(PREK\)</span> is just the indicator for Pre-K attendance, as defined above. The variable <span class="math inline">\(SES_j\)</span> is an indicator for the j-th quintile of SES. Note that both variables use reference-group coding, as discussed in Chapter <a href="5-chapter-5.html#chapter-5">5</a>.</p>
@@ -586,7 +585,7 @@ Figure 6.7: Math Achievement, Pre-K Attendence, and SES
 <p><span class="math display">\[\begin{align}
 \widehat Y(PREK = 1, SES = 1) &amp; = b_0 + b_1 (1) + b_2(0)+ b_3(0) + b_4 (0) + b_5 (0) \\  
 &amp; = b_0 + b_1 \\
-\implies &amp; 
+\implies &amp;
 \end{align}\]</span></p>
 <p><span class="math display">\[\begin{align}
 \widehat Y(PREK = 1, SES = 1) - \widehat Y(PREK = 0, SES = 1) &amp; = b_1
@@ -596,10 +595,10 @@ Figure 6.7: Math Achievement, Pre-K Attendence, and SES
 </ul>
 <p><span class="math display">\[\begin{align}
 \widehat Y(PREK = 0, SES = 2) &amp; = b_0 + b_1 (0) + b_2(1 )+ b_3(0) + b_4 (0) + b_5 (0)\\  
-&amp; = b_0 + b_2 \\ \\ 
+&amp; = b_0 + b_2 \\ \\
 \widehat Y(PREK = 1, SES = 2)&amp; = b_0 + b_1 (1) + b_2(1)+ b_3(0) + b_4 (0) + b_5 (0)\\  
-&amp; = b_0 + b_1 + b_2 \\ \\ 
-\implies &amp; 
+&amp; = b_0 + b_1 + b_2 \\ \\
+\implies &amp;
 \end{align}\]</span></p>
 <p><span class="math display">\[\begin{align}
 \widehat Y(PREK = 1, SES = 2) - \widehat Y(PREK = 0, SES = 2) = b_1  
@@ -607,14 +606,14 @@ Figure 6.7: Math Achievement, Pre-K Attendence, and SES
 <p>This equation says that the difference between the red and blue lines in the second column of Figure <a href="6.6-two-categorical-predictors-6.html#fig:prek-by-ses">6.7</a> is the same as the difference in the first column – i.e., they both equal <span class="math inline">\(b_1\)</span>. Similar calculations show that Equation <a href="6.6-two-categorical-predictors-6.html#eq:prek-ses1">(6.4)</a> implies that the effect of Pre-K is constant over all levels of SES. Hence, we need to change the model (i.e., add an interaction)</p>
 <p>Before moving on, note that similar calculations can be used to show that (a) the “effect” of being in any SES quintile, as compared to the first quintile, is just the regression coefficient on the indicator variable for that quintile, and (b) this effect is constant over levels of Pre-K attendance.</p>
 </div>
-<div id="adding-the-interactions" class="section level3" number="6.6.3">
-<h3><span class="header-section-number">6.6.3</span> Adding the interaction(s)</h3>
+<div id="adding-the-interactions" class="section level3 hasAnchor" number="6.6.3">
+<h3><span class="header-section-number">6.6.3</span> Adding the interaction(s)<a href="6.6-two-categorical-predictors-6.html#adding-the-interactions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We have just seen that Equation <a href="6.6-two-categorical-predictors-6.html#eq:prek-ses1">(6.4)</a> implies that the effect of Pre-K is constant over levels SES, and vise versa. In order to address our research question about whether the relationship between Pre-K attendance and Math Achievement depends on children’s SES, we will need to add something to the model – an interaction (surprise!).</p>
 <p>We know that interactions are just products (multiplication) of predictor variables. But, since SES is represented as 4 dummies, this means we need 4 products in order to represent the interaction of Pre-K with SES. The resulting model can be written:</p>
 <p><span class="math display" id="eq:prek-ses2">\[\begin{align}
-\widehat Y  = &amp; b_0 + b_1 PREK + b_2SES_2 + b_3SES_3 + b_4 SES_4 + b_5 SES_5 + \\ 
+\widehat Y  = &amp; b_0 + b_1 PREK + b_2SES_2 + b_3SES_3 + b_4 SES_4 + b_5 SES_5 + \\
 &amp;  b_6 (PREK \times SES_2) + b_7(PREK \times SES_3) + \\
-&amp; b_8 (PREK \times SES_4) + b_9 (PREK \times SES_5) 
+&amp; b_8 (PREK \times SES_4) + b_9 (PREK \times SES_5)
 \tag{6.5}
 \end{align}\]</span></p>
 <p>As you can see, our model is getting pretty full! Even though we are only considering two distinct “conceptual” variables, we have 9 coefficients in our regression model.</p>
@@ -627,11 +626,11 @@ Figure 6.7: Math Achievement, Pre-K Attendence, and SES
 <p><span class="math display">\[\begin{align}
 \widehat Y(PREK = 0, SES = 2) &amp; = b_0 + b_1 (0) + b_2(1 )+ b_3(0) + b_4 (0) + b_5 (0) + \\
 &amp;  b_6 (0 \times 1) + b_7(0 \times 0) + b_8 (0 \times 0) + b_9 (0\times 0) \\  
-&amp; = b_0 + b_2 \\ \\ 
+&amp; = b_0 + b_2 \\ \\
 \widehat Y(PREK = 1, SES = 2) &amp; = b_0 + b_1 (1) + b_2(1)+ b_3(0) + b_4 (0) + b_5 (0) + \\
 &amp;  b_6 (1 \times 1) + b_7(1 \times 0) + b_8 (1 \times 0) + b_9 (1\times 0) \\  
-&amp; = b_0 + b_1 + b_2 + b_6 \\ \\ 
-\implies &amp; 
+&amp; = b_0 + b_1 + b_2 + b_6 \\ \\
+\implies &amp;
 \end{align}\]</span></p>
 <p><span class="math display">\[\begin{align}
 \widehat Y(PREK = 1, SES = 2) - \widehat Y(PREK = 0, SES = 2) = b_1 + b_6
@@ -639,9 +638,9 @@ Figure 6.7: Math Achievement, Pre-K Attendence, and SES
 <p>The last line shows that the “effect” of Pre-K for students in the second SES quintile is <span class="math inline">\(b_1 + b_6\)</span>. This is not the same as for the effect for students in the first quintile, which was just <span class="math inline">\(b_1\)</span>. In other words, the difference between the red and blue lines in the first column of Figure <a href="6.6-two-categorical-predictors-6.html#fig:prek-by-ses">6.7</a> (i.e., <span class="math inline">\(b_1\)</span>) is not equal to the difference in the second column (i.e., <span class="math inline">\(b_1 + b_6\)</span>). Consequently, our new model with the interaction better reflects the example data.</p>
 <p>The same approach shows that the effect of Pre-K at each level of SES results in a similar equation:</p>
 <p><span class="math display">\[\begin{align}
-\widehat Y(PREK = 1, SES = 3) - \widehat Y(PREK = 0, SES = 3) &amp; = b_1 + b_7 \\ 
-\widehat Y(PREK = 1, SES = 4) - \widehat Y(PREK = 0, SES = 4) &amp; = b_1 + b_8 \\ 
-\widehat Y(PREK = 1, SES = 5) - \widehat Y(PREK = 0, SES = 5) &amp; = b_1 + b_9 \\ 
+\widehat Y(PREK = 1, SES = 3) - \widehat Y(PREK = 0, SES = 3) &amp; = b_1 + b_7 \\
+\widehat Y(PREK = 1, SES = 4) - \widehat Y(PREK = 0, SES = 4) &amp; = b_1 + b_8 \\
+\widehat Y(PREK = 1, SES = 5) - \widehat Y(PREK = 0, SES = 5) &amp; = b_1 + b_9 \\
 \end{align}\]</span></p>
 <p>This pattern makes it clear that, to isolate effect of each interaction (i.e., <span class="math inline">\(b_6\)</span> through <span class="math inline">\(b_9\)</span>), we need to subtract off <span class="math inline">\(b_1\)</span> – i.e., we need to subtract off the effect of Pre-K for students in the first SES quintile. In this sense, the interpretation of <span class="math inline">\(b_1\)</span> is quite similar the interpretation of the intercept in regular reference-group coding (see Section <a href="5.7-exercises-1.html#reference-group-coding">5.7.4</a>). It is the “reference effect” or baseline to which the interaction terms are compared.</p>
 <p>For example</p>
@@ -650,16 +649,16 @@ Figure 6.7: Math Achievement, Pre-K Attendence, and SES
 <li><p>The interaction between Pre-K and the third SES quintile is the additional effect pre-K has on Math Achievement for students in the 3rd SES quintile, <em>as compared to the effect in the first SES quintile.</em></p></li>
 <li><p>etc etc.</p></li>
 </ul>
-<p>Mathematically, the interaction terms are represented as “differences-in-differences.” For example,</p>
-<p><span class="math display">\[\begin{align} 
-b_6 &amp; = [\widehat Y(PREK = 1, SES = 2) - \widehat Y(PREK = 0, SES = 2)] -  b_1 \\ 
+<p>Mathematically, the interaction terms are represented as “differences-in-differences”. For example,</p>
+<p><span class="math display">\[\begin{align}
+b_6 &amp; = [\widehat Y(PREK = 1, SES = 2) - \widehat Y(PREK = 0, SES = 2)] -  b_1 \\
     &amp; = [\widehat Y(PREK = 1, SES = 2) - \widehat Y(PREK = 0, SES = 2)] \\
     &amp; - [\widehat Y(PREK = 1, SES = 1) - \widehat Y(PREK = 0, SES = 1)]
 \end{align}\]</span></p>
 <p>This looks quite complicated but it is just an extension of reference-group coding. This equation is saying that the “reference effect” or “baseline” for interpreting the interaction (<span class="math inline">\(b_6\)</span>) is the effect of Pre-K in the first SES quintile (i.e., <span class="math inline">\(b_1\)</span>). As noted above, all of the interaction terms have the same reference effect.</p>
 </div>
-<div id="back-to-the-example-1" class="section level3" number="6.6.4">
-<h3><span class="header-section-number">6.6.4</span> Back to the example</h3>
+<div id="back-to-the-example-1" class="section level3 hasAnchor" number="6.6.4">
+<h3><span class="header-section-number">6.6.4</span> Back to the example<a href="6.6-two-categorical-predictors-6.html#back-to-the-example-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>That last section was a lot to take in, so let’s put some numbers on the page to check our understanding. The output below shows the summary for a model that regresses Math Achievement on Pre-K, SES, and their interaction. <strong>Please write down an interpretation of magnitude, direction, and statistical significance of each regression coefficient in this output (including the intercept), and be prepared to share your answers in class.</strong> Remember that <code>wksesq5</code> is the variable code for the SES quintiles – the digit that follows the variable code indicates the level of variable. It may be helpful to refer to Figure <a href="6.6-two-categorical-predictors-6.html#fig:prek-by-ses">6.7</a> in your interpretations.</p>
 <div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="6.6-two-categorical-predictors-6.html#cb222-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(c1rmscal <span class="sc">~</span> prek<span class="sc">*</span>wksesq5, <span class="at">data =</span> ecls)</span>
 <span id="cb222-2"><a href="6.6-two-categorical-predictors-6.html#cb222-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod)</span></code></pre></div>
@@ -690,8 +689,8 @@ b_6 &amp; = [\widehat Y(PREK = 1, SES = 2) - \widehat Y(PREK = 0, SES = 2)] -  b
 ## Multiple R-squared:  0.162,  Adjusted R-squared:  0.159 
 ## F-statistic: 55.2 on 9 and 2567 DF,  p-value: &lt;2e-16</code></pre>
 </div>
-<div id="the-anova-approach" class="section level3" number="6.6.5">
-<h3><span class="header-section-number">6.6.5</span> The ANOVA approach</h3>
+<div id="the-anova-approach" class="section level3 hasAnchor" number="6.6.5">
+<h3><span class="header-section-number">6.6.5</span> The ANOVA approach<a href="6.6-two-categorical-predictors-6.html#the-anova-approach" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The output in the previous section is detailed enough that it is not usually required to follow-up a significant interactions among categorical predictors using marginal effects. However, the summary output omits some information we might be interested in. For example, what is the overall effect of Pre-K (i.e., is there a significant difference in Math Achievement for students who attended Pre-K or not, regardless of their level of SES)? Similarly, what is the overall effect of SES, regardless of Pre-K attendance. We can answer these questions by asking how much variance was explained by each predictor, rather than only examining the effect of the individual dummy variable. This is the ANOVA approach we discussed last semester, but now applied to two categorical predictors. `</p>
 <p>The ANOVA table for our example is below. Note that it leads to slightly different conclusions than the regression output above. We will discuss the discrepancies between the ANOVA and regression output in class, so please <strong>write down your interpretation of the ANOVA table below and be prepared to share you thoughts in class.</strong></p>
 <div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="6.6-two-categorical-predictors-6.html#cb224-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(mod)</span></code></pre></div>
@@ -764,7 +763,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

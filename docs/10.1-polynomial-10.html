@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>10.1 Polynomial regression | EDUC 784: Regression</title>
   <meta name="description" content="Course notes for EDUC 784" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
 
   <meta property="og:title" content="10.1 Polynomial regression | EDUC 784: Regression" />
   <meta property="og:type" content="book" />
-  
   <meta property="og:image" content="/images/image1.png" />
   <meta property="og:description" content="Course notes for EDUC 784" />
   <meta name="github-repo" content="peterhalpin/EDUC_784" />
@@ -30,11 +29,10 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
-  <link rel="shortcut icon" href="null" type="image/x-icon" />
+  
 <link rel="prev" href="10-chapter-10.html"/>
 <link rel="next" href="10.2-worked-example-10.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
-<script src="libs/jquery-3.5.1/jquery-3.5.1.min.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,8 +49,9 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -93,7 +92,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -106,7 +105,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -506,8 +505,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="polynomial-10" class="section level2" number="10.1">
-<h2><span class="header-section-number">10.1</span> Polynomial regression</h2>
+<div id="polynomial-10" class="section level2 hasAnchor" number="10.1">
+<h2><span class="header-section-number">10.1</span> Polynomial regression<a href="10.1-polynomial-10.html#polynomial-10" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <input onclick="codefolder(&#39;pre.sourceCode&#39;);" type="button" value="Hide Code" id="codefolder-button" style="position: relative; &#10;            top: -25px; &#10;            left: 85%;   &#10;            color: white;&#10;            font-weight: bold;&#10;            background: #4B9CD3;&#10;            border: 1px #3079ED solid;&#10;            box-shadow: inset 0 1px 0 #80B0FB"/>
 <script>
   function codefolder(query) {
@@ -543,8 +542,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Although we did not cover interactions among more than two variables in this course, they are computed in the same way – e.g., a “three-way” interaction is just the product of 3 predictors. Similarly, <span class="math inline">\(X^3\)</span> is just the three-fold product of a variable with itself. In general, interactions and polynomial regression are related in the same way as multiplication and exponentiation.</p>
 <p>Although polynomial regression is formally similar to interactions, it is used for a different purpose. Interactions address how the relationship between two variables changes as a function of a third. Their inclusion in a model is usually motivated by a specific research question that is formulated before doing the data analysis (see Chapter <a href="6-chapter-6.html#chapter-6">6</a>).</p>
 <p>By contrast, polynomial regression is used to address a non-linear relationship between <span class="math inline">\(Y\)</span> and <span class="math inline">\(X\)</span>, and is usually motivated by a preliminary examination of data that indicates the presence of such a relationship (e.g., a scatter plot of <span class="math inline">\(Y\)</span> versus <span class="math inline">\(X\)</span>; a residual versus fitted plot). While it is possible to formulate research questions about polynomial terms in a regression model, this is not necessarily or even usually the case when polynomial regression is used – often its just used to address violations of the linearity assumption.</p>
-<div id="recap-of-polynomials" class="section level3" number="10.1.1">
-<h3><span class="header-section-number">10.1.1</span> Recap of polynomials</h3>
+<div id="recap-of-polynomials" class="section level3 hasAnchor" number="10.1.1">
+<h3><span class="header-section-number">10.1.1</span> Recap of polynomials<a href="10.1-polynomial-10.html#recap-of-polynomials" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>In general, a polynomial of degree <span class="math inline">\(n\)</span> (i.e., highest power of <span class="math inline">\(n\)</span>) produces a curve that can have up to <span class="math inline">\(n-1\)</span> bends (minima and maxima). Some examples are illustrated in Figure <a href="10.1-polynomial-10.html#fig:poly">10.1</a> below.</p>
 <ul>
 <li>The (orange) linear function of <span class="math inline">\(X\)</span> is a polynomial of degree 1 and has zero bends.</li>
@@ -559,8 +558,8 @@ Figure 10.1: Examples of Polynomials
 </div>
 <p>As we can see, this is a very flexible approach to capturing non-linear relationships between two variables. In fact, it can be too flexible!</p>
 </div>
-<div id="polynomials-and-curve-fitting" class="section level3" number="10.1.2">
-<h3><span class="header-section-number">10.1.2</span> Polynomials and curve fitting</h3>
+<div id="polynomials-and-curve-fitting" class="section level3 hasAnchor" number="10.1.2">
+<h3><span class="header-section-number">10.1.2</span> Polynomials and curve fitting<a href="10.1-polynomial-10.html#polynomials-and-curve-fitting" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Figure <a href="10.1-polynomial-10.html#fig:overfit">10.2</a> shows three different regression models fitted to the same bivariate data.</p>
 <ul>
 <li><p>In the left panel, a standard linear regression model is used, and we can see that the model does not capture the nonlinear (quadratic) trend in the data.</p></li>
@@ -582,8 +581,8 @@ Figure 10.3: Polynomial Regression Examples (With New Data)
 </p>
 </div>
 </div>
-<div id="interpreting-the-model" class="section level3" number="10.1.3">
-<h3><span class="header-section-number">10.1.3</span> Interpreting the model</h3>
+<div id="interpreting-the-model" class="section level3 hasAnchor" number="10.1.3">
+<h3><span class="header-section-number">10.1.3</span> Interpreting the model<a href="10.1-polynomial-10.html#interpreting-the-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>As mentioned, polynomial terms are often added into a model as a way to address nonlinearity. When this is the case, the polynomial terms themselves are not of much substantive interest, and are just added to “patch up” the model after assumption checking.</p>
 <p>We saw an example of this in Section <a href="7.3-worked-example-7.html#worked-example-7">7.3</a>. In that example, a linear term and quadratic term were entered into the model in the same block of predictors. The R-squared was interpreted for the entire block, but the interpretation of the regression coefficient for the quadratic term was not addressed. This is a pretty common way of using polynomial regression – the polynomial terms are included so that the model assumptions (linearity) are met, but they are not necessarily interpreted beyond this.</p>
 <p>However, we can interpret the terms in a polynomial regression if we want to. This section addresses the interpretation of a quadratic regression, but a similar approach applies to models with higher-order terms.</p>
@@ -606,8 +605,8 @@ Figure 10.4: Yerkes-Dodson Law (Source: Wikipedia)
 <p>Here is a hint for the following question: In the Yerkes-Dodson law, when the <span class="math inline">\(X\)</span> variable is centered, the regression coefficient for the linear term is not statistically significant.</p>
 <p><strong>Based on this discussion, please use both the “basic” and “more complicated” interpretation of a quadratic relationship to describe the Yerkes-Dodson Law.</strong></p>
 </div>
-<div id="model-building" class="section level3" number="10.1.4">
-<h3><span class="header-section-number">10.1.4</span> Model building</h3>
+<div id="model-building" class="section level3 hasAnchor" number="10.1.4">
+<h3><span class="header-section-number">10.1.4</span> Model building<a href="10.1-polynomial-10.html#model-building" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Up to this point we have discussed the interpretation of polynomials. Now we consider how to build polynomial regression models in practice. A typical model-building process for polynomial regression might proceed as follows.</p>
 <ol style="list-style-type: decimal">
 <li><p>Enter the linear terms into the model and then examine a residual versus fitted plot.</p></li>
@@ -685,7 +684,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

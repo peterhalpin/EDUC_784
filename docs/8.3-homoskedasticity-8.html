@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>8.3 Homoskedasticity | EDUC 784: Regression</title>
   <meta name="description" content="Course notes for EDUC 784" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
 
   <meta property="og:title" content="8.3 Homoskedasticity | EDUC 784: Regression" />
   <meta property="og:type" content="book" />
-  
   <meta property="og:image" content="/images/image1.png" />
   <meta property="og:description" content="Course notes for EDUC 784" />
   <meta name="github-repo" content="peterhalpin/EDUC_784" />
@@ -30,11 +29,10 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
-  <link rel="shortcut icon" href="null" type="image/x-icon" />
+  
 <link rel="prev" href="8.2-linearity-8.html"/>
 <link rel="next" href="8.4-normality-8.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
-<script src="libs/jquery-3.5.1/jquery-3.5.1.min.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,8 +49,9 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -93,7 +92,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -106,7 +105,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -506,8 +505,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="homoskedasticity-8" class="section level2" number="8.3">
-<h2><span class="header-section-number">8.3</span> Homoskedasticity</h2>
+<div id="homoskedasticity-8" class="section level2 hasAnchor" number="8.3">
+<h2><span class="header-section-number">8.3</span> Homoskedasticity<a href="8.3-homoskedasticity-8.html#homoskedasticity-8" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <input onclick="codefolder(&#39;pre.sourceCode&#39;);" type="button" value="Hide Code" id="codefolder-button" style="position: relative; &#10;            top: -25px; &#10;            left: 85%;   &#10;            color: white;&#10;            font-weight: bold;&#10;            background: #4B9CD3;&#10;            border: 1px #3079ED solid;&#10;            box-shadow: inset 0 1px 0 #80B0FB"/>
 <script>
   function codefolder(query) {
@@ -537,21 +536,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </script>
 <p>This assumption means that the variance of the residuals should not change as a function of the predicted values. Because we are again concerned with residuals and predicted values, we can re-use the same plot we used to check linearity. However, we are no longer interested in whether the lowess trend (red line) systematically deviates from zero – we are interested in whether the range of the residuals (on the vertical axis) changes over the predicted values (on the horizontal axis).</p>
 <p>Figure <a href="8.3-homoskedasticity-8.html#fig:homo1">8.5</a> illustrates two data sets in which the assumption of linearity is met, but the right hand panel shows evidence of heteroskedasticity. This is apparent by observing the range of the residuals over values of <span class="math inline">\(\widehat Y\)</span>.</p>
-<div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb304-1"><a href="8.3-homoskedasticity-8.html#cb304-1" aria-hidden="true" tabindex="-1"></a><span class="co"># homoskedastic example</span></span>
-<span id="cb304-2"><a href="8.3-homoskedasticity-8.html#cb304-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb304-3"><a href="8.3-homoskedasticity-8.html#cb304-3" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">sort</span>(<span class="fu">rnorm</span>(<span class="dv">250</span>))</span>
-<span id="cb304-4"><a href="8.3-homoskedasticity-8.html#cb304-4" aria-hidden="true" tabindex="-1"></a>e <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">250</span>)</span>
-<span id="cb304-5"><a href="8.3-homoskedasticity-8.html#cb304-5" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> x <span class="sc">+</span> e</span>
-<span id="cb304-6"><a href="8.3-homoskedasticity-8.html#cb304-6" aria-hidden="true" tabindex="-1"></a>mod3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(y<span class="sc">~</span>x)</span>
-<span id="cb304-7"><a href="8.3-homoskedasticity-8.html#cb304-7" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
-<span id="cb304-8"><a href="8.3-homoskedasticity-8.html#cb304-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod3, <span class="at">which =</span> <span class="dv">1</span>)</span>
-<span id="cb304-9"><a href="8.3-homoskedasticity-8.html#cb304-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb304-10"><a href="8.3-homoskedasticity-8.html#cb304-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Heteroskedastic example</span></span>
-<span id="cb304-11"><a href="8.3-homoskedasticity-8.html#cb304-11" aria-hidden="true" tabindex="-1"></a>y2 <span class="ot">&lt;-</span> y</span>
-<span id="cb304-12"><a href="8.3-homoskedasticity-8.html#cb304-12" aria-hidden="true" tabindex="-1"></a>y2[x <span class="sc">&gt;</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> x[x <span class="sc">&gt;</span> <span class="dv">0</span>] <span class="sc">+</span> <span class="dv">3</span><span class="sc">*</span> e[x <span class="sc">&gt;</span> <span class="dv">0</span>]</span>
-<span id="cb304-13"><a href="8.3-homoskedasticity-8.html#cb304-13" aria-hidden="true" tabindex="-1"></a>y2[x <span class="sc">&lt;</span> <span class="sc">-</span><span class="dv">1</span>] <span class="ot">&lt;-</span> x[x <span class="sc">&lt;</span> <span class="sc">-</span><span class="dv">1</span>] <span class="sc">+</span> .<span class="dv">3</span><span class="sc">*</span> e[x <span class="sc">&lt;</span> <span class="sc">-</span><span class="dv">1</span>]</span>
-<span id="cb304-14"><a href="8.3-homoskedasticity-8.html#cb304-14" aria-hidden="true" tabindex="-1"></a>mod4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(y2<span class="sc">~</span>x)</span>
-<span id="cb304-15"><a href="8.3-homoskedasticity-8.html#cb304-15" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod4, <span class="at">which =</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb306-1"><a href="8.3-homoskedasticity-8.html#cb306-1" aria-hidden="true" tabindex="-1"></a><span class="co"># homoskedastic example</span></span>
+<span id="cb306-2"><a href="8.3-homoskedasticity-8.html#cb306-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb306-3"><a href="8.3-homoskedasticity-8.html#cb306-3" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">sort</span>(<span class="fu">rnorm</span>(<span class="dv">250</span>))</span>
+<span id="cb306-4"><a href="8.3-homoskedasticity-8.html#cb306-4" aria-hidden="true" tabindex="-1"></a>e <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">250</span>)</span>
+<span id="cb306-5"><a href="8.3-homoskedasticity-8.html#cb306-5" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> x <span class="sc">+</span> e</span>
+<span id="cb306-6"><a href="8.3-homoskedasticity-8.html#cb306-6" aria-hidden="true" tabindex="-1"></a>mod3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(y<span class="sc">~</span>x)</span>
+<span id="cb306-7"><a href="8.3-homoskedasticity-8.html#cb306-7" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb306-8"><a href="8.3-homoskedasticity-8.html#cb306-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod3, <span class="at">which =</span> <span class="dv">1</span>)</span>
+<span id="cb306-9"><a href="8.3-homoskedasticity-8.html#cb306-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb306-10"><a href="8.3-homoskedasticity-8.html#cb306-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Heteroskedastic example</span></span>
+<span id="cb306-11"><a href="8.3-homoskedasticity-8.html#cb306-11" aria-hidden="true" tabindex="-1"></a>y2 <span class="ot">&lt;-</span> y</span>
+<span id="cb306-12"><a href="8.3-homoskedasticity-8.html#cb306-12" aria-hidden="true" tabindex="-1"></a>y2[x <span class="sc">&gt;</span> <span class="dv">0</span>] <span class="ot">&lt;-</span> x[x <span class="sc">&gt;</span> <span class="dv">0</span>] <span class="sc">+</span> <span class="dv">3</span><span class="sc">*</span> e[x <span class="sc">&gt;</span> <span class="dv">0</span>]</span>
+<span id="cb306-13"><a href="8.3-homoskedasticity-8.html#cb306-13" aria-hidden="true" tabindex="-1"></a>y2[x <span class="sc">&lt;</span> <span class="sc">-</span><span class="dv">1</span>] <span class="ot">&lt;-</span> x[x <span class="sc">&lt;</span> <span class="sc">-</span><span class="dv">1</span>] <span class="sc">+</span> .<span class="dv">3</span><span class="sc">*</span> e[x <span class="sc">&lt;</span> <span class="sc">-</span><span class="dv">1</span>]</span>
+<span id="cb306-14"><a href="8.3-homoskedasticity-8.html#cb306-14" aria-hidden="true" tabindex="-1"></a>mod4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(y2<span class="sc">~</span>x)</span>
+<span id="cb306-15"><a href="8.3-homoskedasticity-8.html#cb306-15" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod4, <span class="at">which =</span> <span class="dv">1</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:homo1"></span>
 <img src="_main_files/figure-html/homo1-1.png" alt="Illustration of homo- and heteroskedasicity." width="768" />
 <p class="caption">
@@ -561,27 +560,27 @@ Figure 8.5: Illustration of homo- and heteroskedasicity.
 <p>To make it clearer what aspect of these plots is relevant for evaluating the assumption of homoskedasticity, the same figures are replicated below, but this time with blue lines represented my own “eye-balling” of the range of the residuals. In the left plot, the two lines are parallel, meaning the range is constant. In the right plot, the two lines form a cone, meaning the the range of the residuals increases for larger values of <span class="math inline">\(\widehat Y\)</span>.</p>
 <p>Note that I didn’t draw any lines in the tail ends of the plots – this is because there are fewer observations in the tails, so it is harder to make a judgment about the range of values. To avoid “reading the tea leaves” I focus on the range of values of <span class="math inline">\(\widehat Y\)</span> for which there are sufficient observations to judge the range of the residuals.</p>
 <p>To repeat, <em>the blue lines are just there for your reference</em>, to highlight the relevant information in the plot. You wouldn’t generally include these lines in the plot.</p>
-<div class="sourceCode" id="cb305"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb305-1"><a href="8.3-homoskedasticity-8.html#cb305-1" aria-hidden="true" tabindex="-1"></a><span class="co"># homoskedastic example with ref lines</span></span>
-<span id="cb305-2"><a href="8.3-homoskedasticity-8.html#cb305-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
-<span id="cb305-3"><a href="8.3-homoskedasticity-8.html#cb305-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod3, <span class="at">which =</span> <span class="dv">1</span>)</span>
-<span id="cb305-4"><a href="8.3-homoskedasticity-8.html#cb305-4" aria-hidden="true" tabindex="-1"></a><span class="fu">segments</span>(<span class="at">x0 =</span> <span class="sc">-</span><span class="fl">1.5</span>, <span class="at">y0 =</span> <span class="dv">2</span>, <span class="at">x1 =</span> <span class="fl">1.5</span>, <span class="at">y1 =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>, <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">lwd =</span> <span class="dv">3</span>)</span>
-<span id="cb305-5"><a href="8.3-homoskedasticity-8.html#cb305-5" aria-hidden="true" tabindex="-1"></a><span class="fu">segments</span>(<span class="at">x0 =</span> <span class="sc">-</span><span class="fl">1.5</span>, <span class="at">y0 =</span> <span class="sc">-</span><span class="dv">2</span>, <span class="at">x1 =</span> <span class="fl">1.5</span>, <span class="at">y1 =</span> <span class="sc">-</span><span class="dv">2</span>, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>, <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">lwd =</span> <span class="dv">3</span>)</span>
-<span id="cb305-6"><a href="8.3-homoskedasticity-8.html#cb305-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb305-7"><a href="8.3-homoskedasticity-8.html#cb305-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Heteroskedastic example</span></span>
-<span id="cb305-8"><a href="8.3-homoskedasticity-8.html#cb305-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod4, <span class="at">which =</span> <span class="dv">1</span>)</span>
-<span id="cb305-9"><a href="8.3-homoskedasticity-8.html#cb305-9" aria-hidden="true" tabindex="-1"></a><span class="fu">segments</span>(<span class="at">x0 =</span> <span class="sc">-</span><span class="fl">1.5</span>, <span class="at">y0 =</span> <span class="dv">1</span>, <span class="at">x1 =</span> <span class="fl">1.5</span>, <span class="at">y1 =</span> <span class="dv">8</span>, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>, <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">lwd =</span> <span class="dv">3</span>)</span>
-<span id="cb305-10"><a href="8.3-homoskedasticity-8.html#cb305-10" aria-hidden="true" tabindex="-1"></a><span class="fu">segments</span>(<span class="at">x0 =</span> <span class="sc">-</span><span class="fl">1.5</span>, <span class="at">y0 =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">x1 =</span> <span class="fl">1.5</span>, <span class="at">y1 =</span> <span class="sc">-</span><span class="dv">8</span>, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>, <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">lwd =</span> <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb307"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb307-1"><a href="8.3-homoskedasticity-8.html#cb307-1" aria-hidden="true" tabindex="-1"></a><span class="co"># homoskedastic example with ref lines</span></span>
+<span id="cb307-2"><a href="8.3-homoskedasticity-8.html#cb307-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb307-3"><a href="8.3-homoskedasticity-8.html#cb307-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod3, <span class="at">which =</span> <span class="dv">1</span>)</span>
+<span id="cb307-4"><a href="8.3-homoskedasticity-8.html#cb307-4" aria-hidden="true" tabindex="-1"></a><span class="fu">segments</span>(<span class="at">x0 =</span> <span class="sc">-</span><span class="fl">1.5</span>, <span class="at">y0 =</span> <span class="dv">2</span>, <span class="at">x1 =</span> <span class="fl">1.5</span>, <span class="at">y1 =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>, <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">lwd =</span> <span class="dv">3</span>)</span>
+<span id="cb307-5"><a href="8.3-homoskedasticity-8.html#cb307-5" aria-hidden="true" tabindex="-1"></a><span class="fu">segments</span>(<span class="at">x0 =</span> <span class="sc">-</span><span class="fl">1.5</span>, <span class="at">y0 =</span> <span class="sc">-</span><span class="dv">2</span>, <span class="at">x1 =</span> <span class="fl">1.5</span>, <span class="at">y1 =</span> <span class="sc">-</span><span class="dv">2</span>, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>, <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">lwd =</span> <span class="dv">3</span>)</span>
+<span id="cb307-6"><a href="8.3-homoskedasticity-8.html#cb307-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb307-7"><a href="8.3-homoskedasticity-8.html#cb307-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Heteroskedastic example</span></span>
+<span id="cb307-8"><a href="8.3-homoskedasticity-8.html#cb307-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod4, <span class="at">which =</span> <span class="dv">1</span>)</span>
+<span id="cb307-9"><a href="8.3-homoskedasticity-8.html#cb307-9" aria-hidden="true" tabindex="-1"></a><span class="fu">segments</span>(<span class="at">x0 =</span> <span class="sc">-</span><span class="fl">1.5</span>, <span class="at">y0 =</span> <span class="dv">1</span>, <span class="at">x1 =</span> <span class="fl">1.5</span>, <span class="at">y1 =</span> <span class="dv">8</span>, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>, <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">lwd =</span> <span class="dv">3</span>)</span>
+<span id="cb307-10"><a href="8.3-homoskedasticity-8.html#cb307-10" aria-hidden="true" tabindex="-1"></a><span class="fu">segments</span>(<span class="at">x0 =</span> <span class="sc">-</span><span class="fl">1.5</span>, <span class="at">y0 =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">x1 =</span> <span class="fl">1.5</span>, <span class="at">y1 =</span> <span class="sc">-</span><span class="dv">8</span>, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>, <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">lwd =</span> <span class="dv">3</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:homo2"></span>
 <img src="_main_files/figure-html/homo2-1.png" alt="Illustration of Homo- and Heteroskedasicity, with Reference Lines" width="768" />
 <p class="caption">
 Figure 8.6: Illustration of Homo- and Heteroskedasicity, with Reference Lines
 </p>
 </div>
-<div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb306-1"><a href="8.3-homoskedasticity-8.html#cb306-1" aria-hidden="true" tabindex="-1"></a><span class="co"># remove y2 from memory to avoid naming conflicts later on</span></span>
-<span id="cb306-2"><a href="8.3-homoskedasticity-8.html#cb306-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(y2)</span></code></pre></div>
+<div class="sourceCode" id="cb308"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb308-1"><a href="8.3-homoskedasticity-8.html#cb308-1" aria-hidden="true" tabindex="-1"></a><span class="co"># remove y2 from memory to avoid naming conflicts later on</span></span>
+<span id="cb308-2"><a href="8.3-homoskedasticity-8.html#cb308-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(y2)</span></code></pre></div>
 <p>Let’s take another look at the plots in Figure <a href="8.2-linearity-8.html#fig:linearity3">8.4</a>. <strong>Please write down whether you think the homoskedasticity assumption is problematic and explain why with reference to the plots</strong>.</p>
-<div id="summary-9" class="section level3" number="8.3.1">
-<h3><span class="header-section-number">8.3.1</span> Summary</h3>
+<div id="summary-9" class="section level3 hasAnchor" number="8.3.1">
+<h3><span class="header-section-number">8.3.1</span> Summary<a href="8.3-homoskedasticity-8.html#summary-9" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>To check the assumption of homoskedasticity, we can use a residual versus fitted plot (again).</p>
 <ul>
 <li><p>If the range of values on the vertical axis appears approximately constant over the horizontal axis, then there is no evidence against the assumption.</p></li>
@@ -647,7 +646,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

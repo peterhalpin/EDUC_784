@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>6.3 Binary + continuous + interaction | EDUC 784: Regression</title>
   <meta name="description" content="Course notes for EDUC 784" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
 
   <meta property="og:title" content="6.3 Binary + continuous + interaction | EDUC 784: Regression" />
   <meta property="og:type" content="book" />
-  
   <meta property="og:image" content="/images/image1.png" />
   <meta property="og:description" content="Course notes for EDUC 784" />
   <meta name="github-repo" content="peterhalpin/EDUC_784" />
@@ -30,11 +29,10 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
-  <link rel="shortcut icon" href="null" type="image/x-icon" />
+  
 <link rel="prev" href="6.2-binary-continuous-6.html"/>
 <link rel="next" href="6.4-inference-for-interactions-6.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
-<script src="libs/jquery-3.5.1/jquery-3.5.1.min.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,8 +49,9 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -93,7 +92,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -106,7 +105,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -506,8 +505,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="binary-continuous-interaction-6" class="section level2" number="6.3">
-<h2><span class="header-section-number">6.3</span> Binary + continuous + interaction</h2>
+<div id="binary-continuous-interaction-6" class="section level2 hasAnchor" number="6.3">
+<h2><span class="header-section-number">6.3</span> Binary + continuous + interaction<a href="6.3-binary-continuous-interaction-6.html#binary-continuous-interaction-6" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <input onclick="codefolder(&#39;pre.sourceCode&#39;);" type="button" value="Hide Code" id="codefolder-button" style="position: relative; &#10;            top: -25px; &#10;            left: 85%;   &#10;            color: white;&#10;            font-weight: bold;&#10;            background: #4B9CD3;&#10;            border: 1px #3079ED solid;&#10;            box-shadow: inset 0 1px 0 #80B0FB"/>
 <script>
   function codefolder(query) {
@@ -585,8 +584,8 @@ Figure 6.3: Math Achievement, Reading Achievement, and Gender (No Interaction).
 <li><p>The difference between the predicted values (i.e., the predicted gender gap in Math Achievement) is no longer constant, but is instead a function of <span class="math inline">\(X_1\)</span>. In particular, the gender gap in Math changes by <span class="math inline">\(b_3\)</span> units for each unit of change in Reading.</p></li>
 </ul>
 <p>This last point is especially important in the context of our example. The gender gap in Math Achievement is a function of Reading Achievement. This is the mathematical meaning behind the concept of an interaction – the relationship between two variables (Math and Gender) is changing as a function of a third variable (Reading). This is what is means when we say, e.g., that the relationship between Gender and Math depends on Reading.</p>
-<div id="choosing-the-moderator" class="section level3" number="6.3.1">
-<h3><span class="header-section-number">6.3.1</span> Choosing the moderator</h3>
+<div id="choosing-the-moderator" class="section level3 hasAnchor" number="6.3.1">
+<h3><span class="header-section-number">6.3.1</span> Choosing the moderator<a href="6.3-binary-continuous-interaction-6.html#choosing-the-moderator" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The concept of an interaction is “symmetrical” in the sense that we can chose which variable goes in the “depends on” clause. For example, it is equally valid to say</p>
 <ul>
 <li>the relationship between Math and Gender depends on Reading, or</li>
@@ -601,8 +600,8 @@ Figure 6.3: Math Achievement, Reading Achievement, and Gender (No Interaction).
 </ul>
 <p>This might feel less intuitive than talking about the gender gap, but the two interpretations are mathematicaly equivalent. Its just a matter of whether you want to interpret the regression coefficient <span class="math inline">\(b_3\)</span> with reference to the gender gap, or with reference to the simple trends.</p>
 </div>
-<div id="back-to-the-example" class="section level3" number="6.3.2">
-<h3><span class="header-section-number">6.3.2</span> Back to the example</h3>
+<div id="back-to-the-example" class="section level3 hasAnchor" number="6.3.2">
+<h3><span class="header-section-number">6.3.2</span> Back to the example<a href="6.3-binary-continuous-interaction-6.html#back-to-the-example" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The regression coefficients for the example data are shown below. <strong>Please use these numbers to provide an interpretation of the interaction between Gender and Reading.</strong> (Don’t worry about statistical significance, just focus on the meaning of the coefficients.)</p>
 <div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="6.3-binary-continuous-interaction-6.html#cb198-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(mod4)</span></code></pre></div>
 <pre><code>##     (Intercept)        achrdg12      genderMale genderXachrdg12 
@@ -618,8 +617,8 @@ Figure 6.3: Math Achievement, Reading Achievement, and Gender (No Interaction).
 <span id="cb200-8"><a href="6.3-binary-continuous-interaction-6.html#cb200-8" aria-hidden="true" tabindex="-1"></a><span class="co">#  For Females, Math scores are predicted to increase by .72 percentage points for each percentage point increase in Reading Achievement</span></span>
 <span id="cb200-9"><a href="6.3-binary-continuous-interaction-6.html#cb200-9" aria-hidden="true" tabindex="-1"></a><span class="co">#  For Males, Math scores are predicted to increase by .55 percentage points for each percentage point increase in Reading Achievement</span></span></code></pre></div>
 </div>
-<div id="centering-the-continuous-predictor" class="section level3" number="6.3.3">
-<h3><span class="header-section-number">6.3.3</span> Centering the continuous predictor</h3>
+<div id="centering-the-continuous-predictor" class="section level3 hasAnchor" number="6.3.3">
+<h3><span class="header-section-number">6.3.3</span> Centering the continuous predictor<a href="6.3-binary-continuous-interaction-6.html#centering-the-continuous-predictor" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>You may have noticed that coefficient on gender was wildly different in regression models with and without the interaction. In the model without the interaction (Section <a href="6.2-binary-continuous-6.html#binary-continuous-6">6.2</a>) the coefficient on Gender was 3.50, and in the model with the interaction (above), it was 13.40. So in one model, the “effect” of being Male was a 3.5 percentage points gain on a Math exam, but in the other model, it was a 13.40 percentage point gain. Why this huge difference in the effect of Gender?</p>
 <p>The answer can be seen in the equation for the gender gap. In the model <strong>without the interaction</strong>, the gender gap was constant and equal to the regression coefficient on Gender (denoted as <span class="math inline">\(b_2\)</span> in the model):</p>
 <p><span class="math display">\[ \widehat Y (Male) - \widehat Y (Female) = b_2 \]</span></p>
@@ -647,8 +646,8 @@ Figure 6.3: Math Achievement, Reading Achievement, and Gender (No Interaction).
 <p>The regression coefficient for Gender is now pretty close to what it was in the original model without the interaction, but the interpretation is different. Notice that the intercept in the multiple regression model with Reading centered has changed compared to the previous model in which Reading was not centered. However, the centering did not affect the regression coefficient for Reading or the interaction.</p>
 <p><strong>Please write down your interpretation of the intercept and the regression coefficient for Gender in the above regression output, and be prepared to share your answer in class</strong>.</p>
 </div>
-<div id="summary-5" class="section level3" number="6.3.4">
-<h3><span class="header-section-number">6.3.4</span> Summary</h3>
+<div id="summary-5" class="section level3 hasAnchor" number="6.3.4">
+<h3><span class="header-section-number">6.3.4</span> Summary<a href="6.3-binary-continuous-interaction-6.html#summary-5" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The interaction between two variables is just their product. When this product is added as a predictor in a multiple regression model with one continuous and one binary predictor:</p>
 <ul>
 <li>The model again results in two regression lines, one for each value of the binary predictor, but we get regression lines with
@@ -719,7 +718,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

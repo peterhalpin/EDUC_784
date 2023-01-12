@@ -44,9 +44,9 @@ options(digits = 4)
 cor(achmat08, ses)
 ```
 
-This is a moderate, positive correlation between Math Achievement and SES. This correlation means that eighth graders from more well-off families (higher SES) also tended to do better in Math (higher Math Achievement). 
+This is a moderate, positive correlation between Math Achievement and SES. This correlation means that eighth graders from more well-off families (higher SES) also tended to do better in math (higher Math Achievement). 
 
-This relationship has been widely documented and discussed in education research (e.g., https://www.apa.org/pi/ses/resources/publications/education). **Please look over this web page and be prepared to share your thoughts about the relationship between SES and Achievement in class.** 
+This relationship between SES and academic achievement has been widely documented and discussed in education research (e.g., https://www.apa.org/pi/ses/resources/publications/education). **Please look over this web page and be prepared to share your thoughts about this relationship.** 
 
 
 ## The regression line {#regression-line-2}
@@ -102,11 +102,11 @@ Both equations say the same thing, but Equation \@ref(eq:y) lets us talk about t
 Another way to write out the model is using the variable names (or abbreviations) in place of the more generic "X, Y" notation. For example, 
 
 \begin{align} 
-\widehat {READ} = a + b(SES). 
+\widehat {MATH} = a + b(SES). 
 (\#eq:read)
 \end{align} 
 
-This notation is more informative about the specific variables in the example. But it is also more clunky and doesn't lend itself to other mathematical expressions. For example, $r_{XY}$ is much clearer than $r_{SES, READ}$ -- in general, we want most of the text on the "baseline", not the subscripts or superscripts.
+This notation is more informative about the specific variables in the example. But it is also more clunky and doesn't lend itself to other mathematical expressions. For example, $r_{XY}$ is much clearer than $r_{SES, MATH}$ -- in general, we want most of the text on the "baseline", not the subscripts or superscripts.
 
 You should be familiar with all 3 ways of presenting regression equations and you are free to use whatever approach you like best in your own writing.  
 
@@ -440,7 +440,7 @@ cor(achmat08, ses)
 
 This correlation means that eighth graders from more well-off families (higher SES) also tended to do better in Math (higher Math Achievement). 
 
-This relationship has been widely documented and discussed in education research (e.g., https://www.apa.org/pi/ses/resources/publications/education). Please look over this web page and be prepared to share your thoughts about the relationship between SES and academic achievement in class.
+This relationship between SES and academic achievement has been widely documented and discussed in education research (e.g., https://www.apa.org/pi/ses/resources/publications/education). Please look over this web page and be prepared to share your thoughts about this relationship.
 
 
 **Section \@ref(ols-2)**

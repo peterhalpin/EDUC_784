@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>10.3 Piecewise regression | EDUC 784: Regression</title>
   <meta name="description" content="Course notes for EDUC 784" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
 
   <meta property="og:title" content="10.3 Piecewise regression | EDUC 784: Regression" />
   <meta property="og:type" content="book" />
-  
   <meta property="og:image" content="/images/image1.png" />
   <meta property="og:description" content="Course notes for EDUC 784" />
   <meta name="github-repo" content="peterhalpin/EDUC_784" />
@@ -30,11 +29,10 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
-  <link rel="shortcut icon" href="null" type="image/x-icon" />
+  
 <link rel="prev" href="10.2-worked-example-10.html"/>
 <link rel="next" href="10.4-heteroskedasticity-10.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
-<script src="libs/jquery-3.5.1/jquery-3.5.1.min.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,8 +49,9 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -93,7 +92,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -106,7 +105,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -506,8 +505,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="piecewise-10" class="section level2" number="10.3">
-<h2><span class="header-section-number">10.3</span> Piecewise regression</h2>
+<div id="piecewise-10" class="section level2 hasAnchor" number="10.3">
+<h2><span class="header-section-number">10.3</span> Piecewise regression<a href="10.3-piecewise-10.html#piecewise-10" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <input onclick="codefolder(&#39;pre.sourceCode&#39;);" type="button" value="Hide Code" id="codefolder-button" style="position: relative; &#10;            top: -25px; &#10;            left: 85%;   &#10;            color: white;&#10;            font-weight: bold;&#10;            background: #4B9CD3;&#10;            border: 1px #3079ED solid;&#10;            box-shadow: inset 0 1px 0 #80B0FB"/>
 <script>
   function codefolder(query) {
@@ -556,13 +555,13 @@ Figure 10.5: The Wages Example
 Figure 10.6: The wages example
 </p>
 </div>
-<div id="the-piecewise-model" class="section level3" number="10.3.1">
-<h3><span class="header-section-number">10.3.1</span> The piecewise model</h3>
+<div id="the-piecewise-model" class="section level3 hasAnchor" number="10.3.1">
+<h3><span class="header-section-number">10.3.1</span> The piecewise model<a href="10.3-piecewise-10.html#the-piecewise-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>We have reasoned that the relationship between wages and education might change as depending on whether people have a post-secondary education. We also noted that this sounds a lot like an interaction (because it is!), which is the basic approach we can use to create piecewise models.</p>
 <p>In order to run our basic piecewise regression, we need to create a dummy coded version of education that indicates whether the participant had more than 12 years education:</p>
 <p><span class="math display">\[ \text{educ12} = \left\{ \begin{matrix}  
-                     1 &amp; \text{if educ } &gt; 12\\ 
-                    0 &amp; \text{if educ } \leq 12 
+                     1 &amp; \text{if educ } &gt; 12\\
+                    0 &amp; \text{if educ } \leq 12
                 \end{matrix} \right.
 \]</span></p>
 <p>The we just create an interaction model for <code>educ</code> and the dummy-coded indicator</p>
@@ -570,8 +569,8 @@ Figure 10.6: The wages example
 <p><strong>Please take a moment to work out the interpretation of <span class="math inline">\(b_1\)</span> and <span class="math inline">\(b_3\)</span> in the model above, using the same approach as Section <a href="6.3-binary-continuous-interaction-6.html#binary-continuous-interaction-6">6.3</a>. (The interpretation of <span class="math inline">\(b_0\)</span> and <span class="math inline">\(b_2\)</span> is not very interesting but you can work them out too if you like.)</strong></p>
 <p>Note that there are more complex approaches that will search for breakpoints, or can be used to smoothly connect polynomial regressions rather than linear regressions, etc. We won’t cover these more complex approaches here, but check out the following resource if you are interested and feel free to ask questions in class: <a href="https://rpubs.com/MarkusLoew/12164" class="uri">https://rpubs.com/MarkusLoew/12164</a></p>
 </div>
-<div id="back-to-the-example-2" class="section level3" number="10.3.2">
-<h3><span class="header-section-number">10.3.2</span> Back to the example</h3>
+<div id="back-to-the-example-2" class="section level3 hasAnchor" number="10.3.2">
+<h3><span class="header-section-number">10.3.2</span> Back to the example<a href="10.3-piecewise-10.html#back-to-the-example-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Below is the summary output for the piecewise model, as well as the diagnostic plots. You should be able to come up with a viable interpretation of the model output, based on</p>
 <ul>
 <li><p>What you know about interactions between a binary and continuous variable (Section <a href="6.3-binary-continuous-interaction-6.html#binary-continuous-interaction-6">6.3</a> and above)</p></li>
@@ -669,7 +668,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');
