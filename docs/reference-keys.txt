@@ -312,7 +312,6 @@ chapter-10
 polynomial-10
 recap-of-polynomials
 polynomials-and-curve-fitting
-interpreting-the-model
 model-building
 worked-example-10
 piecewise-10

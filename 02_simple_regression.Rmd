@@ -1,3 +1,8 @@
+---
+output:
+  word_document: default
+  html_document: default
+---
 # Simple Regression {#chapter-2}
 
 ```{r, echo = F}
@@ -805,7 +810,7 @@ A sampling distribution is the distribution of a statistic that would arise if y
 
 1. Take a sample of size $N$ from a population of interest.
 2. Compute a statistic using the sample data. It can be any statistic, but let's say the mean, $\bar X$, for concreteness. 
-3. Write down the value of mean and then return the sample to the population.
+3. Write down the value of the mean and then return the sample to the population.
  
 After doing these 3 steps many times, you will have many values the sample mean, 
 
@@ -815,7 +820,7 @@ These means are just like any other statistic -- i.e., they have a distribution.
 
 The sampling distribution is just like any other distribution (except that it is purely imaginary) -- so it has its own mean, and its own variance, etc. etc. These statistics, when computed for a sampling distribution, have special names. We are mostly interested in the following two statistics. 
 
-* **The expected value** of the mean, denoted $E(\bar X)$, is the mean of the sampling distribution of the mean. That is a mouthful alright! That is why we say the expected value of a statistic rather than the mean of a statistic. The latter would lead us to say ridiculous things like the mean of the variance, the mean of the standard deviation ... yuck! Anyway, its called the expected value because it's the average value over many samples. 
+* **The expected value** of the mean, denoted $E(\bar X)$, is the mean of the sampling distribution of the mean. That is a mouthful alright! That is why we say the expected value of a statistic rather than the mean of a statistic. The latter would lead us to say ridiculous things like the mean of the variance, the mean of the standard deviation ... yuck! Anyway, it's called the expected value because it's the average value over many samples. 
 
 * **The standard error** of the mean, denoted $SE(\bar X)$, is the standard deviation of the sampling distribution of the mean. It describes the sample-to-sample variation of the mean around its expected value. 
 
@@ -837,42 +842,43 @@ In general, we want to work with unbiased, precise statistics when making infere
 ### t-tests
 The t-test is used to make an inference about the value of an unknown  population parameter using an unbiased sample statistic that is normally distributed (i.e., that has a normally distributed sampling distribution). This includes sample means and regression coefficients. 
 
-The test compares the value of the statistic to some null-hypothesized value of the population parameter. The null hypothesis is usually that the population parameter is equal to zero. 
+The test compares the value of the statistic to the null-hypothesized value of the population parameter. The null hypothesis is usually that the population parameter is equal to zero. 
 
 The general formula for a t-test is
 
 $$ t = \frac{\text{sample value} - \text{null-hypothesized value}}{\text{standard error}} $$
 For a specific example, see section \@ref(inference-for-slope-2). 
 
-When we conduct a t-test we are basically saying "if the sample statistic is close the null hypothesized value of the parameter, then  $t$ should be close to zero". The null hypothesis usually translates into "no effect", so if $t$ is close to zero, it means there was no effect. If $t$ is far away from zero, it means there was an effect. 
+When we conduct a t-test, the basic rationale is, "if the sample statistic is close the null hypothesized value of the parameter, then  $t$ should be close to zero". The null hypothesis usually translates into "no effect", so if $t$ is close to zero, it means there was no effect. If $t$ is far away from zero, it means there was an effect. 
 
-The problem in all of this is to give precise meaning to the terms "close" and "far". This is what we do when setting the significance level of the test, usually denoted $\alpha$. This number represents our tolerance for false negatives or Type I errors -- i.e., for incorrectly concluding that the null hypothesis is true (no effect). When we set $\alpha$ to a small number, we are saying that we want the probability of a false negative to be small. This means we are going to need strong evidence (i.e., a large value of $t$) before we reject the null hypothesis. Still, the question is "how large?"
-
-We denote the t-test using the letter $t$ because it has a t distribution when the null hypothesis is true (i.e., when the population parameter is equal to the null hypothesized value). So, this distribution tells what are the typical values of the t-test, if the null hypothesis is true. Some examples are shown below. 
+The problem in all of this is to give precise meaning to the terms "close" and "far". We can start to answer this question by looking at the t-distribution.  The t-distribution tells what are the typical values of the t-test, if the null hypothesis is true -- i.e., what values should $t$ have if the population parameter is equal to the null hypothesized value? Some examples of the t-distriubtion are shown below. 
 
 ```{r, t, echo = F, fig.cap = "t distribution (source: https://en.wikipedia.org/wiki/Student%27s_t-distribution)", fig.align = 'center', out.width = "60%"}
 knitr::include_graphics("https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Student_t_pdf.svg/1920px-Student_t_pdf.svg.png", dpi = 200)
 ```
 
-You can see that the t distribution looks like a normal distribution centered a zero. So, when the null hypothesis is true, the expected value of the t-test is zero. Values greater than $\pm 2$ are pretty unlikely if the null hypothesis is true, and values greater than $\pm 4$ are very unlikely. 
+You can see that the t-distribution looks like a normal distribution centered a zero. So, when the null hypothesis is true, the expected value of the t-test is zero. Values greater than $\pm 2$ are pretty unlikely if the null hypothesis is true, and values greater than $\pm 4$ are very unlikely. 
 
-Unlike the normal, the t distribution has a single parameter called its "degrees of freedom", which is denoted as $\nu$ in the figure. The degrees of freedom are always an increasing function of the sample size, so that larger samples lead to more degrees of freedom. When the degrees of freedom approach $\infty$, the t distribution approaches a normal distribution. When the degrees of freedom are small, the t distribution has wider tails than the normal distribution. This is important when doing statistical tests, because we are interested in values in the tails of the distribution -- i.e., large values of $t$. 
+So now we can say which values of $t$ are large -- the ones that are unlikely under the null hypothesis. But the problem now is to determine how unlikely is "unlikely enough" to reject the null hypothesis. 
 
-We use the t-test to make an inference about the null hypothesis by comparing two probabilities: 
+We answer this question by setting the significance level of the test, usually denoted $\alpha$. This number represents our tolerance for false negatives or Type I errors -- i.e., for incorrectly concluding that the null hypothesis is true (no effect). When we set $\alpha$ to a small number, we are saying that we want the probability of a false negative to be small. This means we are going to need strong evidence before we reject the null hypothesis -- i.e., the value of $t$ would need to be very unlikely under the null hypothesis. How unlikely?  Smaller than $\alpha$. 
 
-1. The probability of observing a value of $t$ at least as large as the value in our sample, under the t distribution (i.e., under the assumption that the null hypothesis is true). This is called the $p$-value. 
+In summary, we use the t-test to make an inference about the null hypothesis by comparing two probabilities: 
+
+1. The probability of observing the value in our sample, under the assumption that the null hypothesis is true (i.e., under the t-distribution). This is called the $p$-value. (Actually the $p$-value is probability of observing a value $t$ at least as large as the one in our sample, but this is a just technicality.)
 
 2. The significance level that represents our tolerance for a false negative, $\alpha$.
 
-If $p < \alpha$ (i.e., if $t$ is "far enough" away from zero) we reject the null hypothesis. Otherwise we retain the null hypothesis and conclude there was no effect.
+If $p < \alpha$ (i.e., if the likelihood of $t$ being a false negative is less than we have required), we reject the null hypothesis. Otherwise we retain the null hypothesis and conclude there was no effect.
 
 There is a lot more to say here, but all of this is what Stat 1 was for. Usually we set $\alpha = .05$ and that is that. 
 
-For an example of a t-test in R, see section \@ref(inference-for-slope-2).
+One last thing before moving on: unlike the normal distribution, the t-distribution has a single parameter called its "degrees of freedom", which is denoted as $\nu$ in the figure above. The degrees of freedom are always an increasing function of the sample size, so that larger samples lead to more degrees of freedom. When the degrees of freedom approach $\infty$, the t distribution approaches a normal distribution. When the degrees of freedom are small, the t distribution has wider tails than the normal distribution. This is important when doing statistical tests, because we are interested in values in the tails of the distribution -- i.e., the large / unlikely values of $t$. 
+
 
 ### Confidence intervals 
 
-A confidence interval is basically the same as a t-test, except we solve for the population parameter rather than the value of $t$. Whereas a t-test lets us make a guess about specific value of the parameter of interest (i.e., the null-hypothesized value), a confidence interval gives us a range of values that we can be sure include the parameter of interest, with some degree of "confidence." 
+A confidence interval use the same equation as a t-test, except we solve for the population parameter rather than the value of $t$. Whereas a t-test lets us make a guess about specific value of the parameter of interest (i.e., the null-hypothesized value), a confidence interval gives us a range of values that we can be sure include the parameter of interest, with some degree of "confidence." 
 
 Confidence intervals have the general formula:
 
@@ -909,7 +915,7 @@ We use an F-test the same way we use a t-test -- we set a significance level and
 
 ### APA reporting
 
-It is important that you can write up the results of an analysis in a way that other people will understand. For this reason, there are conventions about how to report statistical results. In this class, we will mainly use Table and Figures (formatted in R) rather than inline text. But sometimes the latter is inevitable, so you should know how to do it. 
+It is important that you can write up the results of an analysis in a way that other people will understand. For this reason, there are conventions about how to report statistical results. In this class, we will mainly use Table and Figures (formatted in R) rather than inline text. But sometimes the latter is unavoidalbe, so you should know how to do it. 
 
 The examples below illustrate APA conventions for reporting some of the statistics we have talked about in this review. Everything about the formatting is important (spacing, italics, number of decimal places, whether or not to use a leading zero before a decimal, etc). More details are available [here](https://psych.uw.edu/storage/writing_center/stats.pdf). 
 You don't need to use APA (unless you are in psych or educ), but you should be familiar with some kind of conventions for reporting statistical results in your academic writing. 

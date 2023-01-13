@@ -23,7 +23,7 @@
 <meta name="author" content="Peter Halpin" />
 
 
-<meta name="date" content="2023-01-12" />
+<meta name="date" content="2023-01-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -216,13 +216,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.5.1" data-path="4.5-interpretation-4.html"><a href="4.5-interpretation-4.html#holding-the-other-predictor-constant"><i class="fa fa-check"></i><b>4.5.1</b> “Holding the other predictor constant”</a></li>
 <li class="chapter" data-level="4.5.2" data-path="4.5-interpretation-4.html"><a href="4.5-interpretation-4.html#controlling-for-the-other-predictor"><i class="fa fa-check"></i><b>4.5.2</b> “Controlling for the other predictor”</a></li>
 <li class="chapter" data-level="4.5.3" data-path="4.5-interpretation-4.html"><a href="4.5-interpretation-4.html#the-ecls-example"><i class="fa fa-check"></i><b>4.5.3</b> The ECLS example</a></li>
+<li class="chapter" data-level="4.5.4" data-path="4.5-interpretation-4.html"><a href="4.5-interpretation-4.html#other-interpretations"><i class="fa fa-check"></i><b>4.5.4</b> Other interpretations</a></li>
 </ul></li>
 <li class="chapter" data-level="4.6" data-path="4.6-beta-4.html"><a href="4.6-beta-4.html"><i class="fa fa-check"></i><b>4.6</b> Standardized coefficients</a></li>
 <li class="chapter" data-level="4.7" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html"><i class="fa fa-check"></i><b>4.7</b> (Multiple) R-squared</a>
 <ul>
 <li class="chapter" data-level="4.7.1" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html#the-multiple-correlation"><i class="fa fa-check"></i><b>4.7.1</b> The multiple correlation</a></li>
 <li class="chapter" data-level="4.7.2" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html#relation-with-simple-regression"><i class="fa fa-check"></i><b>4.7.2</b> Relation with simple regression</a></li>
-<li class="chapter" data-level="4.7.3" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html#adjusted-r-squared"><i class="fa fa-check"></i><b>4.7.3</b> Adjusted R-squared</a></li>
+<li class="chapter" data-level="4.7.3" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html#relation-with-beta-weights"><i class="fa fa-check"></i><b>4.7.3</b> Relation with <span class="math inline">\(\beta\)</span>-weights</a></li>
+<li class="chapter" data-level="4.7.4" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html#adjusted-r-squared"><i class="fa fa-check"></i><b>4.7.4</b> Adjusted R-squared</a></li>
 </ul></li>
 <li class="chapter" data-level="4.8" data-path="4.8-inference-for-slopes-4.html"><a href="4.8-inference-for-slopes-4.html"><i class="fa fa-check"></i><b>4.8</b> Inference for the slopes</a>
 <ul>
@@ -246,7 +248,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.3" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html"><i class="fa fa-check"></i><b>5.3</b> Binary predictors</a>
 <ul>
 <li class="chapter" data-level="5.3.1" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html#relation-with-t-tests"><i class="fa fa-check"></i><b>5.3.1</b> Relation with t-tests</a></li>
-<li class="chapter" data-level="5.3.2" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html#summary-1"><i class="fa fa-check"></i><b>5.3.2</b> Summary</a></li>
+<li class="chapter" data-level="5.3.2" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html#some-math"><i class="fa fa-check"></i><b>5.3.2</b> Some math*</a></li>
+<li class="chapter" data-level="5.3.3" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html#summary-1"><i class="fa fa-check"></i><b>5.3.3</b> Summary</a></li>
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="5.4-reference-group-coding-5.html"><a href="5.4-reference-group-coding-5.html"><i class="fa fa-check"></i><b>5.4</b> Reference-group coding</a>
 <ul>
@@ -570,11 +573,11 @@ If you write it this way, the reader will assume that you mean to sum over all t
 </ul>
 <p><span class="math display">\[\text{cor}(X, Y) = \frac{\text{cov}(X, Y)}{\sqrt{\text{var}(X)} \sqrt{\text{var}(Y)}} \]</span></p>
 <p>The code below shows how you compute these statistics in R, using reading and math in grade 8 from NELS as an example. The code should seem intuitive. The numbers (output) aren’t important here, so they are suppressed.</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="2.13-review-2.html#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(achmat08)</span>
-<span id="cb60-2"><a href="2.13-review-2.html#cb60-2" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(achmat08)</span>
-<span id="cb60-3"><a href="2.13-review-2.html#cb60-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(achmat08)</span>
-<span id="cb60-4"><a href="2.13-review-2.html#cb60-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cov</span>(achmat08, achrdg08)</span>
-<span id="cb60-5"><a href="2.13-review-2.html#cb60-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(achmat08, achrdg08)</span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="2.13-review-2.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(achmat08)</span>
+<span id="cb59-2"><a href="2.13-review-2.html#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="fu">var</span>(achmat08)</span>
+<span id="cb59-3"><a href="2.13-review-2.html#cb59-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(achmat08)</span>
+<span id="cb59-4"><a href="2.13-review-2.html#cb59-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cov</span>(achmat08, achrdg08)</span>
+<span id="cb59-5"><a href="2.13-review-2.html#cb59-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(achmat08, achrdg08)</span></code></pre></div>
 </div>
 <div id="bias-and-precision" class="section level3 hasAnchor" number="2.13.3">
 <h3><span class="header-section-number">2.13.3</span> Bias and precision<a href="2.13-review-2.html#bias-and-precision" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -582,14 +585,14 @@ If you write it this way, the reader will assume that you mean to sum over all t
 <ol style="list-style-type: decimal">
 <li>Take a sample of size <span class="math inline">\(N\)</span> from a population of interest.</li>
 <li>Compute a statistic using the sample data. It can be any statistic, but let’s say the mean, <span class="math inline">\(\bar X\)</span>, for concreteness.</li>
-<li>Write down the value of mean and then return the sample to the population.</li>
+<li>Write down the value of the mean and then return the sample to the population.</li>
 </ol>
 <p>After doing these 3 steps many times, you will have many values the sample mean,</p>
 <p><span class="math display">\[ \bar{X}_1, \bar{X}_2, \bar{X}_3, ... \]</span></p>
 <p>These means are just like any other statistic – i.e., they have a distribution. That distribution is called the sampling distribution (of the mean).</p>
 <p>The sampling distribution is just like any other distribution (except that it is purely imaginary) – so it has its own mean, and its own variance, etc. etc. These statistics, when computed for a sampling distribution, have special names. We are mostly interested in the following two statistics.</p>
 <ul>
-<li><p><strong>The expected value</strong> of the mean, denoted <span class="math inline">\(E(\bar X)\)</span>, is the mean of the sampling distribution of the mean. That is a mouthful alright! That is why we say the expected value of a statistic rather than the mean of a statistic. The latter would lead us to say ridiculous things like the mean of the variance, the mean of the standard deviation … yuck! Anyway, its called the expected value because it’s the average value over many samples.</p></li>
+<li><p><strong>The expected value</strong> of the mean, denoted <span class="math inline">\(E(\bar X)\)</span>, is the mean of the sampling distribution of the mean. That is a mouthful alright! That is why we say the expected value of a statistic rather than the mean of a statistic. The latter would lead us to say ridiculous things like the mean of the variance, the mean of the standard deviation … yuck! Anyway, it’s called the expected value because it’s the average value over many samples.</p></li>
 <li><p><strong>The standard error</strong> of the mean, denoted <span class="math inline">\(SE(\bar X)\)</span>, is the standard deviation of the sampling distribution of the mean. It describes the sample-to-sample variation of the mean around its expected value.</p></li>
 </ul>
 <p>There are two additional important concepts related to expectation and standard error:</p>
@@ -609,33 +612,33 @@ Figure 2.6: Bias and precision
 <div id="t-tests-1" class="section level3 hasAnchor" number="2.13.4">
 <h3><span class="header-section-number">2.13.4</span> t-tests<a href="2.13-review-2.html#t-tests-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The t-test is used to make an inference about the value of an unknown population parameter using an unbiased sample statistic that is normally distributed (i.e., that has a normally distributed sampling distribution). This includes sample means and regression coefficients.</p>
-<p>The test compares the value of the statistic to some null-hypothesized value of the population parameter. The null hypothesis is usually that the population parameter is equal to zero.</p>
+<p>The test compares the value of the statistic to the null-hypothesized value of the population parameter. The null hypothesis is usually that the population parameter is equal to zero.</p>
 <p>The general formula for a t-test is</p>
 <p><span class="math display">\[ t = \frac{\text{sample value} - \text{null-hypothesized value}}{\text{standard error}} \]</span>
 For a specific example, see section <a href="2.7-inference-for-slope-2.html#inference-for-slope-2">2.7</a>.</p>
-<p>When we conduct a t-test we are basically saying “if the sample statistic is close the null hypothesized value of the parameter, then <span class="math inline">\(t\)</span> should be close to zero”. The null hypothesis usually translates into “no effect”, so if <span class="math inline">\(t\)</span> is close to zero, it means there was no effect. If <span class="math inline">\(t\)</span> is far away from zero, it means there was an effect.</p>
-<p>The problem in all of this is to give precise meaning to the terms “close” and “far”. This is what we do when setting the significance level of the test, usually denoted <span class="math inline">\(\alpha\)</span>. This number represents our tolerance for false negatives or Type I errors – i.e., for incorrectly concluding that the null hypothesis is true (no effect). When we set <span class="math inline">\(\alpha\)</span> to a small number, we are saying that we want the probability of a false negative to be small. This means we are going to need strong evidence (i.e., a large value of <span class="math inline">\(t\)</span>) before we reject the null hypothesis. Still, the question is “how large?”</p>
-<p>We denote the t-test using the letter <span class="math inline">\(t\)</span> because it has a t distribution when the null hypothesis is true (i.e., when the population parameter is equal to the null hypothesized value). So, this distribution tells what are the typical values of the t-test, if the null hypothesis is true. Some examples are shown below.</p>
+<p>When we conduct a t-test, the basic rationale is, “if the sample statistic is close the null hypothesized value of the parameter, then <span class="math inline">\(t\)</span> should be close to zero”. The null hypothesis usually translates into “no effect”, so if <span class="math inline">\(t\)</span> is close to zero, it means there was no effect. If <span class="math inline">\(t\)</span> is far away from zero, it means there was an effect.</p>
+<p>The problem in all of this is to give precise meaning to the terms “close” and “far”. We can start to answer this question by looking at the t-distribution. The t-distribution tells what are the typical values of the t-test, if the null hypothesis is true – i.e., what values should <span class="math inline">\(t\)</span> have if the population parameter is equal to the null hypothesized value? Some examples of the t-distriubtion are shown below.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:t"></span>
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Student_t_pdf.svg/1920px-Student_t_pdf.svg.png" alt="t distribution (source: https://en.wikipedia.org/wiki/Student%27s_t-distribution)" width="60%" />
 <p class="caption">
 Figure 2.7: t distribution (source: <a href="https://en.wikipedia.org/wiki/Student%27s_t-distribution" class="uri">https://en.wikipedia.org/wiki/Student%27s_t-distribution</a>)
 </p>
 </div>
-<p>You can see that the t distribution looks like a normal distribution centered a zero. So, when the null hypothesis is true, the expected value of the t-test is zero. Values greater than <span class="math inline">\(\pm 2\)</span> are pretty unlikely if the null hypothesis is true, and values greater than <span class="math inline">\(\pm 4\)</span> are very unlikely.</p>
-<p>Unlike the normal, the t distribution has a single parameter called its “degrees of freedom”, which is denoted as <span class="math inline">\(\nu\)</span> in the figure. The degrees of freedom are always an increasing function of the sample size, so that larger samples lead to more degrees of freedom. When the degrees of freedom approach <span class="math inline">\(\infty\)</span>, the t distribution approaches a normal distribution. When the degrees of freedom are small, the t distribution has wider tails than the normal distribution. This is important when doing statistical tests, because we are interested in values in the tails of the distribution – i.e., large values of <span class="math inline">\(t\)</span>.</p>
-<p>We use the t-test to make an inference about the null hypothesis by comparing two probabilities:</p>
+<p>You can see that the t-distribution looks like a normal distribution centered a zero. So, when the null hypothesis is true, the expected value of the t-test is zero. Values greater than <span class="math inline">\(\pm 2\)</span> are pretty unlikely if the null hypothesis is true, and values greater than <span class="math inline">\(\pm 4\)</span> are very unlikely.</p>
+<p>So now we can say which values of <span class="math inline">\(t\)</span> are large – the ones that are unlikely under the null hypothesis. But the problem now is to determine how unlikely is “unlikely enough” to reject the null hypothesis.</p>
+<p>We answer this question by setting the significance level of the test, usually denoted <span class="math inline">\(\alpha\)</span>. This number represents our tolerance for false negatives or Type I errors – i.e., for incorrectly concluding that the null hypothesis is true (no effect). When we set <span class="math inline">\(\alpha\)</span> to a small number, we are saying that we want the probability of a false negative to be small. This means we are going to need strong evidence before we reject the null hypothesis – i.e., the value of <span class="math inline">\(t\)</span> would need to be very unlikely under the null hypothesis. How unlikely? Smaller than <span class="math inline">\(\alpha\)</span>.</p>
+<p>In summary, we use the t-test to make an inference about the null hypothesis by comparing two probabilities:</p>
 <ol style="list-style-type: decimal">
-<li><p>The probability of observing a value of <span class="math inline">\(t\)</span> at least as large as the value in our sample, under the t distribution (i.e., under the assumption that the null hypothesis is true). This is called the <span class="math inline">\(p\)</span>-value.</p></li>
+<li><p>The probability of observing the value in our sample, under the assumption that the null hypothesis is true (i.e., under the t-distribution). This is called the <span class="math inline">\(p\)</span>-value. (Actually the <span class="math inline">\(p\)</span>-value is probability of observing a value <span class="math inline">\(t\)</span> at least as large as the one in our sample, but this is a just technicality.)</p></li>
 <li><p>The significance level that represents our tolerance for a false negative, <span class="math inline">\(\alpha\)</span>.</p></li>
 </ol>
-<p>If <span class="math inline">\(p &lt; \alpha\)</span> (i.e., if <span class="math inline">\(t\)</span> is “far enough” away from zero) we reject the null hypothesis. Otherwise we retain the null hypothesis and conclude there was no effect.</p>
+<p>If <span class="math inline">\(p &lt; \alpha\)</span> (i.e., if the likelihood of <span class="math inline">\(t\)</span> being a false negative is less than we have required), we reject the null hypothesis. Otherwise we retain the null hypothesis and conclude there was no effect.</p>
 <p>There is a lot more to say here, but all of this is what Stat 1 was for. Usually we set <span class="math inline">\(\alpha = .05\)</span> and that is that.</p>
-<p>For an example of a t-test in R, see section <a href="2.7-inference-for-slope-2.html#inference-for-slope-2">2.7</a>.</p>
+<p>One last thing before moving on: unlike the normal distribution, the t-distribution has a single parameter called its “degrees of freedom”, which is denoted as <span class="math inline">\(\nu\)</span> in the figure above. The degrees of freedom are always an increasing function of the sample size, so that larger samples lead to more degrees of freedom. When the degrees of freedom approach <span class="math inline">\(\infty\)</span>, the t distribution approaches a normal distribution. When the degrees of freedom are small, the t distribution has wider tails than the normal distribution. This is important when doing statistical tests, because we are interested in values in the tails of the distribution – i.e., the large / unlikely values of <span class="math inline">\(t\)</span>.</p>
 </div>
 <div id="confidence-intervals-1" class="section level3 hasAnchor" number="2.13.5">
 <h3><span class="header-section-number">2.13.5</span> Confidence intervals<a href="2.13-review-2.html#confidence-intervals-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>A confidence interval is basically the same as a t-test, except we solve for the population parameter rather than the value of <span class="math inline">\(t\)</span>. Whereas a t-test lets us make a guess about specific value of the parameter of interest (i.e., the null-hypothesized value), a confidence interval gives us a range of values that we can be sure include the parameter of interest, with some degree of “confidence.”</p>
+<p>A confidence interval use the same equation as a t-test, except we solve for the population parameter rather than the value of <span class="math inline">\(t\)</span>. Whereas a t-test lets us make a guess about specific value of the parameter of interest (i.e., the null-hypothesized value), a confidence interval gives us a range of values that we can be sure include the parameter of interest, with some degree of “confidence.”</p>
 <p>Confidence intervals have the general formula:</p>
 <p><span class="math display">\[\text{Interval} = \text{sample value} \pm t \times {\text{standard error}}. \]</span>
 We get the value of <span class="math inline">\(t\)</span> from the t distribution. In particular, if we want the interval to include the true population parameter <span class="math inline">\((1-\alpha) \times 100\)</span> - percent of the time, the we choose <span class="math inline">\(t\)</span> to be the <span class="math inline">\(\alpha/2 \times 100\)</span> percentile of the <span class="math inline">\(t\)</span> distribution. For example, if we set <span class="math inline">\(\alpha = .05\)</span>, we will have a <span class="math inline">\((1-\alpha) \times 100\)</span> = 95% confidence interval by choosing <span class="math inline">\(t\)</span> to be the <span class="math inline">\(\alpha/2 \times 100\)</span> = 2.5th percentile of the t-distribution.</p>
@@ -662,7 +665,7 @@ Figure 2.8: F distribution (source: <a href="https://en.wikipedia.org/wiki/F-dis
 </div>
 <div id="apa-reporting" class="section level3 hasAnchor" number="2.13.7">
 <h3><span class="header-section-number">2.13.7</span> APA reporting<a href="2.13-review-2.html#apa-reporting" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>It is important that you can write up the results of an analysis in a way that other people will understand. For this reason, there are conventions about how to report statistical results. In this class, we will mainly use Table and Figures (formatted in R) rather than inline text. But sometimes the latter is inevitable, so you should know how to do it.</p>
+<p>It is important that you can write up the results of an analysis in a way that other people will understand. For this reason, there are conventions about how to report statistical results. In this class, we will mainly use Table and Figures (formatted in R) rather than inline text. But sometimes the latter is unavoidalbe, so you should know how to do it.</p>
 <p>The examples below illustrate APA conventions for reporting some of the statistics we have talked about in this review. Everything about the formatting is important (spacing, italics, number of decimal places, whether or not to use a leading zero before a decimal, etc). More details are available <a href="https://psych.uw.edu/storage/writing_center/stats.pdf">here</a>.
 You don’t need to use APA (unless you are in psych or educ), but you should be familiar with some kind of conventions for reporting statistical results in your academic writing.</p>
 <ul>
