@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>4.10 Exercises | EDUC 784: Regression</title>
+  <meta name="description" content="Course notes for EDUC 784" />
+  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="4.10 Exercises | EDUC 784: Regression" />
+  <meta property="og:type" content="book" />
+  <meta property="og:image" content="/images/image1.png" />
+  <meta property="og:description" content="Course notes for EDUC 784" />
+  <meta name="github-repo" content="peterhalpin/EDUC_784" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="4.10 Exercises | EDUC 784: Regression" />
+  
+  <meta name="twitter:description" content="Course notes for EDUC 784" />
+  <meta name="twitter:image" content="/images/image1.png" />
+
+<meta name="author" content="Peter Halpin" />
+
+
+<meta name="date" content="2023-01-18" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="4.9-workbook.html"/>
+<link rel="next" href="5-chapter-5.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Course notes for EDUC 784</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About This Book</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="1.1-why-this-format.html"><a href="1.1-why-this-format.html"><i class="fa fa-check"></i><b>1.1</b> Why this format?</a></li>
+<li class="chapter" data-level="1.2" data-path="1.2-tips-for-using-the-notes.html"><a href="1.2-tips-for-using-the-notes.html"><i class="fa fa-check"></i><b>1.2</b> Tips for using the notes</a></li>
+<li class="chapter" data-level="1.3" data-path="1.3-summary.html"><a href="1.3-summary.html"><i class="fa fa-check"></i><b>1.3</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="2-chapter-2.html"><a href="2-chapter-2.html"><i class="fa fa-check"></i><b>2</b> Simple Regression</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="2.1-example-2.html"><a href="2.1-example-2.html"><i class="fa fa-check"></i><b>2.1</b> An example from NELS</a></li>
+<li class="chapter" data-level="2.2" data-path="2.2-regression-line-2.html"><a href="2.2-regression-line-2.html"><i class="fa fa-check"></i><b>2.2</b> The regression line</a></li>
+<li class="chapter" data-level="2.3" data-path="2.3-ols-2.html"><a href="2.3-ols-2.html"><i class="fa fa-check"></i><b>2.3</b> OLS</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="2.3-ols-2.html"><a href="2.3-ols-2.html#correlation-and-regression"><i class="fa fa-check"></i><b>2.3.1</b> Correlation and regression</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="2.4-rsquared-2.html"><a href="2.4-rsquared-2.html"><i class="fa fa-check"></i><b>2.4</b> R-squared</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="2.4-rsquared-2.html"><a href="2.4-rsquared-2.html#derivation"><i class="fa fa-check"></i><b>2.4.1</b> Derivation*</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="2.5-population-model-2.html"><a href="2.5-population-model-2.html"><i class="fa fa-check"></i><b>2.5</b> The population model</a></li>
+<li class="chapter" data-level="2.6" data-path="2.6-notation-2.html"><a href="2.6-notation-2.html"><i class="fa fa-check"></i><b>2.6</b> Clarifying notation</a></li>
+<li class="chapter" data-level="2.7" data-path="2.7-inference-for-slope-2.html"><a href="2.7-inference-for-slope-2.html"><i class="fa fa-check"></i><b>2.7</b> Inference for the slope</a>
+<ul>
+<li class="chapter" data-level="2.7.1" data-path="2.7-inference-for-slope-2.html"><a href="2.7-inference-for-slope-2.html#t-tests"><i class="fa fa-check"></i><b>2.7.1</b> t-tests</a></li>
+<li class="chapter" data-level="2.7.2" data-path="2.7-inference-for-slope-2.html"><a href="2.7-inference-for-slope-2.html#confidence-intervals"><i class="fa fa-check"></i><b>2.7.2</b> Confidence intervals</a></li>
+<li class="chapter" data-level="2.7.3" data-path="2.7-inference-for-slope-2.html"><a href="2.7-inference-for-slope-2.html#the-nels-example"><i class="fa fa-check"></i><b>2.7.3</b> The NELS example</a></li>
+</ul></li>
+<li class="chapter" data-level="2.8" data-path="2.8-inference-for-intercept-2.html"><a href="2.8-inference-for-intercept-2.html"><i class="fa fa-check"></i><b>2.8</b> Inference for the intercept</a></li>
+<li class="chapter" data-level="2.9" data-path="2.9-inference-for-rsquared-2.html"><a href="2.9-inference-for-rsquared-2.html"><i class="fa fa-check"></i><b>2.9</b> Inference for R-squared</a>
+<ul>
+<li class="chapter" data-level="2.9.1" data-path="2.9-inference-for-rsquared-2.html"><a href="2.9-inference-for-rsquared-2.html#f-tests"><i class="fa fa-check"></i><b>2.9.1</b> F-tests</a></li>
+</ul></li>
+<li class="chapter" data-level="2.10" data-path="2.10-power-2.html"><a href="2.10-power-2.html"><i class="fa fa-check"></i><b>2.10</b> Power analysis</a></li>
+<li class="chapter" data-level="2.11" data-path="2.11-workbook-2.html"><a href="2.11-workbook-2.html"><i class="fa fa-check"></i><b>2.11</b> Workbook</a></li>
+<li class="chapter" data-level="2.12" data-path="2.12-exercises-2.html"><a href="2.12-exercises-2.html"><i class="fa fa-check"></i><b>2.12</b> Exercises</a>
+<ul>
+<li class="chapter" data-level="2.12.1" data-path="2.12-exercises-2.html"><a href="2.12-exercises-2.html#the-lm-function"><i class="fa fa-check"></i><b>2.12.1</b> The <code>lm</code> function</a></li>
+<li class="chapter" data-level="2.12.2" data-path="2.12-exercises-2.html"><a href="2.12-exercises-2.html#variance-explained"><i class="fa fa-check"></i><b>2.12.2</b> Variance explained</a></li>
+<li class="chapter" data-level="2.12.3" data-path="2.12-exercises-2.html"><a href="2.12-exercises-2.html#predicted-values-and-residuals"><i class="fa fa-check"></i><b>2.12.3</b> Predicted values and residuals</a></li>
+<li class="chapter" data-level="2.12.4" data-path="2.12-exercises-2.html"><a href="2.12-exercises-2.html#inference"><i class="fa fa-check"></i><b>2.12.4</b> Inference</a></li>
+<li class="chapter" data-level="2.12.5" data-path="2.12-exercises-2.html"><a href="2.12-exercises-2.html#power-analysis"><i class="fa fa-check"></i><b>2.12.5</b> Power analysis</a></li>
+<li class="chapter" data-level="2.12.6" data-path="2.12-exercises-2.html"><a href="2.12-exercises-2.html#additional-exercises"><i class="fa fa-check"></i><b>2.12.6</b> Additional exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="2.13" data-path="2.13-review-2.html"><a href="2.13-review-2.html"><i class="fa fa-check"></i><b>2.13</b> Review</a>
+<ul>
+<li class="chapter" data-level="2.13.1" data-path="2.13-review-2.html"><a href="2.13-review-2.html#summation-notation"><i class="fa fa-check"></i><b>2.13.1</b> Summation notation</a></li>
+<li class="chapter" data-level="2.13.2" data-path="2.13-review-2.html"><a href="2.13-review-2.html#sample-statistics"><i class="fa fa-check"></i><b>2.13.2</b> Sample statistics</a></li>
+<li class="chapter" data-level="2.13.3" data-path="2.13-review-2.html"><a href="2.13-review-2.html#bias-and-precision"><i class="fa fa-check"></i><b>2.13.3</b> Bias and precision</a></li>
+<li class="chapter" data-level="2.13.4" data-path="2.13-review-2.html"><a href="2.13-review-2.html#t-tests-1"><i class="fa fa-check"></i><b>2.13.4</b> t-tests</a></li>
+<li class="chapter" data-level="2.13.5" data-path="2.13-review-2.html"><a href="2.13-review-2.html#confidence-intervals-1"><i class="fa fa-check"></i><b>2.13.5</b> Confidence intervals</a></li>
+<li class="chapter" data-level="2.13.6" data-path="2.13-review-2.html"><a href="2.13-review-2.html#f-tests-1"><i class="fa fa-check"></i><b>2.13.6</b> F-tests</a></li>
+<li class="chapter" data-level="2.13.7" data-path="2.13-review-2.html"><a href="2.13-review-2.html#apa-reporting"><i class="fa fa-check"></i><b>2.13.7</b> APA reporting</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="3-chapter-3.html"><a href="3-chapter-3.html"><i class="fa fa-check"></i><b>3</b> Interpretations of Regression</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="3.1-prediction.html"><a href="3.1-prediction.html"><i class="fa fa-check"></i><b>3.1</b> Prediction</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="3.1-prediction.html"><a href="3.1-prediction.html#more-about-prediction"><i class="fa fa-check"></i><b>3.1.1</b> More about prediction</a></li>
+<li class="chapter" data-level="3.1.2" data-path="3.1-prediction.html"><a href="3.1-prediction.html#regression-toward-the-mean"><i class="fa fa-check"></i><b>3.1.2</b> Regression toward the mean</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="3.2-causation.html"><a href="3.2-causation.html"><i class="fa fa-check"></i><b>3.2</b> Causation</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="3.2-causation.html"><a href="3.2-causation.html#omitted-variable-bias"><i class="fa fa-check"></i><b>3.2.1</b> Omitted variable bias*</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="3.3-explanation.html"><a href="3.3-explanation.html"><i class="fa fa-check"></i><b>3.3</b> Explanation</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="4-chapter-4.html"><a href="4-chapter-4.html"><i class="fa fa-check"></i><b>4</b> Regression with Two Predictors</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="4.1-ecls-4.html"><a href="4.1-ecls-4.html"><i class="fa fa-check"></i><b>4.1</b> An example from ECLS</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="4.1-ecls-4.html"><a href="4.1-ecls-4.html#correlation-matrices"><i class="fa fa-check"></i><b>4.1.1</b> Correlation matrices</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="4.2-the-two-predictor-model.html"><a href="4.2-the-two-predictor-model.html"><i class="fa fa-check"></i><b>4.2</b> The two-predictor model</a></li>
+<li class="chapter" data-level="4.3" data-path="4.3-ols-4.html"><a href="4.3-ols-4.html"><i class="fa fa-check"></i><b>4.3</b> OLS with two predictors</a></li>
+<li class="chapter" data-level="4.4" data-path="4.4-interpretation-4.html"><a href="4.4-interpretation-4.html"><i class="fa fa-check"></i><b>4.4</b> Interpreting the coefficients</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="4.4-interpretation-4.html"><a href="4.4-interpretation-4.html#holding-the-other-predictor-constant"><i class="fa fa-check"></i><b>4.4.1</b> “Holding the other predictor constant”</a></li>
+<li class="chapter" data-level="4.4.2" data-path="4.4-interpretation-4.html"><a href="4.4-interpretation-4.html#controlling-for-the-other-predictor"><i class="fa fa-check"></i><b>4.4.2</b> “Controlling for the other predictor”</a></li>
+<li class="chapter" data-level="4.4.3" data-path="4.4-interpretation-4.html"><a href="4.4-interpretation-4.html#the-ecls-example"><i class="fa fa-check"></i><b>4.4.3</b> The ECLS example</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="4.5-beta-4.html"><a href="4.5-beta-4.html"><i class="fa fa-check"></i><b>4.5</b> Standardized coefficients</a></li>
+<li class="chapter" data-level="4.6" data-path="4.6-rsquared-4.html"><a href="4.6-rsquared-4.html"><i class="fa fa-check"></i><b>4.6</b> (Multiple) R-squared</a>
+<ul>
+<li class="chapter" data-level="4.6.1" data-path="4.6-rsquared-4.html"><a href="4.6-rsquared-4.html#relation-with-simple-regression"><i class="fa fa-check"></i><b>4.6.1</b> Relation with simple regression</a></li>
+<li class="chapter" data-level="4.6.2" data-path="4.6-rsquared-4.html"><a href="4.6-rsquared-4.html#adjusted-r-squared"><i class="fa fa-check"></i><b>4.6.2</b> Adjusted R-squared</a></li>
+<li class="chapter" data-level="4.6.3" data-path="4.6-rsquared-4.html"><a href="4.6-rsquared-4.html#the-multiple-correlation"><i class="fa fa-check"></i><b>4.6.3</b> The multiple correlation</a></li>
+</ul></li>
+<li class="chapter" data-level="4.7" data-path="4.7-inference-for-slopes-4.html"><a href="4.7-inference-for-slopes-4.html"><i class="fa fa-check"></i><b>4.7</b> Inference for the slopes</a>
+<ul>
+<li class="chapter" data-level="4.7.1" data-path="4.7-inference-for-slopes-4.html"><a href="4.7-inference-for-slopes-4.html#precision"><i class="fa fa-check"></i><b>4.7.1</b> Precision</a></li>
+</ul></li>
+<li class="chapter" data-level="4.8" data-path="4.8-inference-for-rsquared-4.html"><a href="4.8-inference-for-rsquared-4.html"><i class="fa fa-check"></i><b>4.8</b> Inference for R-squared</a></li>
+<li class="chapter" data-level="4.9" data-path="4.9-workbook.html"><a href="4.9-workbook.html"><i class="fa fa-check"></i><b>4.9</b> Workbook</a></li>
+<li class="chapter" data-level="4.10" data-path="4.10-exercises.html"><a href="4.10-exercises.html"><i class="fa fa-check"></i><b>4.10</b> Exercises</a>
+<ul>
+<li class="chapter" data-level="4.10.1" data-path="4.10-exercises.html"><a href="4.10-exercises.html#the-ecls250-data"><i class="fa fa-check"></i><b>4.10.1</b> The ECLS250 data</a></li>
+<li class="chapter" data-level="4.10.2" data-path="4.10-exercises.html"><a href="4.10-exercises.html#multiple-regression-with-lm"><i class="fa fa-check"></i><b>4.10.2</b> Multiple regression with <code>lm</code></a></li>
+<li class="chapter" data-level="4.10.3" data-path="4.10-exercises.html"><a href="4.10-exercises.html#relations-between-simple-and-multiple-regression"><i class="fa fa-check"></i><b>4.10.3</b> Relations between simple and multiple regression</a></li>
+<li class="chapter" data-level="4.10.4" data-path="4.10-exercises.html"><a href="4.10-exercises.html#inference-with-2-predictors"><i class="fa fa-check"></i><b>4.10.4</b> Inference with 2 predictors</a></li>
+<li class="chapter" data-level="4.10.5" data-path="4.10-exercises.html"><a href="4.10-exercises.html#apa-reporting-of-results"><i class="fa fa-check"></i><b>4.10.5</b> APA reporting of results</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="5-chapter-5.html"><a href="5-chapter-5.html"><i class="fa fa-check"></i><b>5</b> Categorical Predictors</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="5.1-focus-on-interpretation.html"><a href="5.1-focus-on-interpretation.html"><i class="fa fa-check"></i><b>5.1</b> Focus on interpretation</a></li>
+<li class="chapter" data-level="5.2" data-path="5.2-data-and-social-constructs.html"><a href="5.2-data-and-social-constructs.html"><i class="fa fa-check"></i><b>5.2</b> Data and social constructs</a></li>
+<li class="chapter" data-level="5.3" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html"><i class="fa fa-check"></i><b>5.3</b> Binary predictors</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html#relation-with-t-tests"><i class="fa fa-check"></i><b>5.3.1</b> Relation with t-tests</a></li>
+<li class="chapter" data-level="5.3.2" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html#summary-1"><i class="fa fa-check"></i><b>5.3.2</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="5.4-reference-group-coding-5.html"><a href="5.4-reference-group-coding-5.html"><i class="fa fa-check"></i><b>5.4</b> Reference-group coding</a>
+<ul>
+<li class="chapter" data-level="5.4.1" data-path="5.4-reference-group-coding-5.html"><a href="5.4-reference-group-coding-5.html#a-hypothetical-example"><i class="fa fa-check"></i><b>5.4.1</b> A hypothetical example</a></li>
+<li class="chapter" data-level="5.4.2" data-path="5.4-reference-group-coding-5.html"><a href="5.4-reference-group-coding-5.html#interpreting-the-regression-parameters"><i class="fa fa-check"></i><b>5.4.2</b> Interpreting the regression parameters</a></li>
+<li class="chapter" data-level="5.4.3" data-path="5.4-reference-group-coding-5.html"><a href="5.4-reference-group-coding-5.html#categories"><i class="fa fa-check"></i><b>5.4.3</b> <span class="math inline">\(&gt; 3\)</span> categories</a></li>
+<li class="chapter" data-level="5.4.4" data-path="5.4-reference-group-coding-5.html"><a href="5.4-reference-group-coding-5.html#summary-2"><i class="fa fa-check"></i><b>5.4.4</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="5.5-deviation-coding-5.html"><a href="5.5-deviation-coding-5.html"><i class="fa fa-check"></i><b>5.5</b> Deviation coding</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="5.5-deviation-coding-5.html"><a href="5.5-deviation-coding-5.html#a-hypothetical-example-1"><i class="fa fa-check"></i><b>5.5.1</b> A hypothetical example</a></li>
+<li class="chapter" data-level="5.5.2" data-path="5.5-deviation-coding-5.html"><a href="5.5-deviation-coding-5.html#interpreting-the-regression-parameters-1"><i class="fa fa-check"></i><b>5.5.2</b> Interpreting the regression parameters</a></li>
+<li class="chapter" data-level="5.5.3" data-path="5.5-deviation-coding-5.html"><a href="5.5-deviation-coding-5.html#summary-3"><i class="fa fa-check"></i><b>5.5.3</b> Summary</a></li>
+<li class="chapter" data-level="5.5.4" data-path="5.5-deviation-coding-5.html"><a href="5.5-deviation-coding-5.html#extra1-5"><i class="fa fa-check"></i><b>5.5.4</b> Extra: Deviation coding with unequal sample sizes*</a></li>
+<li class="chapter" data-level="5.5.5" data-path="5.5-deviation-coding-5.html"><a href="5.5-deviation-coding-5.html#extra2-5"><i class="fa fa-check"></i><b>5.5.5</b> Extra: Deviation coding all groups included*</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="5.6-workbook-1.html"><a href="5.6-workbook-1.html"><i class="fa fa-check"></i><b>5.6</b> Workbook</a></li>
+<li class="chapter" data-level="5.7" data-path="5.7-exercises-1.html"><a href="5.7-exercises-1.html"><i class="fa fa-check"></i><b>5.7</b> Exercises</a>
+<ul>
+<li class="chapter" data-level="5.7.1" data-path="5.7-exercises-1.html"><a href="5.7-exercises-1.html#a-single-binary-predictor"><i class="fa fa-check"></i><b>5.7.1</b> A single binary predictor</a></li>
+<li class="chapter" data-level="5.7.2" data-path="5.7-exercises-1.html"><a href="5.7-exercises-1.html#recoding-a-factor-to-numeric"><i class="fa fa-check"></i><b>5.7.2</b> Recoding a factor to numeric</a></li>
+<li class="chapter" data-level="5.7.3" data-path="5.7-exercises-1.html"><a href="5.7-exercises-1.html#binary-predictors-and-independent-samples-t-tests"><i class="fa fa-check"></i><b>5.7.3</b> Binary predictors and independent samples t-tests</a></li>
+<li class="chapter" data-level="5.7.4" data-path="5.7-exercises-1.html"><a href="5.7-exercises-1.html#reference-group-coding"><i class="fa fa-check"></i><b>5.7.4</b> Reference-group coding</a></li>
+<li class="chapter" data-level="5.7.5" data-path="5.7-exercises-1.html"><a href="5.7-exercises-1.html#more-about-factors"><i class="fa fa-check"></i><b>5.7.5</b> More about factors</a></li>
+<li class="chapter" data-level="5.7.6" data-path="5.7-exercises-1.html"><a href="5.7-exercises-1.html#back-to-reference-group-coding"><i class="fa fa-check"></i><b>5.7.6</b> Back to reference-group coding</a></li>
+<li class="chapter" data-level="5.7.7" data-path="5.7-exercises-1.html"><a href="5.7-exercises-1.html#changing-the-reference-group"><i class="fa fa-check"></i><b>5.7.7</b> Changing the reference group</a></li>
+<li class="chapter" data-level="5.7.8" data-path="5.7-exercises-1.html"><a href="5.7-exercises-1.html#deviation-coding"><i class="fa fa-check"></i><b>5.7.8</b> Deviation coding</a></li>
+<li class="chapter" data-level="5.7.9" data-path="5.7-exercises-1.html"><a href="5.7-exercises-1.html#extra-relation-to-anova"><i class="fa fa-check"></i><b>5.7.9</b> Extra: Relation to ANOVA</a></li>
+<li class="chapter" data-level="5.7.10" data-path="5.7-exercises-1.html"><a href="5.7-exercises-1.html#extra-group-mean-coding"><i class="fa fa-check"></i><b>5.7.10</b> Extra: Group-mean coding</a></li>
+<li class="chapter" data-level="5.7.11" data-path="5.7-exercises-1.html"><a href="5.7-exercises-1.html#extra-weighted-versus-unweighted-deviation-coding"><i class="fa fa-check"></i><b>5.7.11</b> Extra: Weighted versus unweighted deviation coding</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="6-chapter-6.html"><a href="6-chapter-6.html"><i class="fa fa-check"></i><b>6</b> Interactions</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="6.1-example-6.html"><a href="6.1-example-6.html"><i class="fa fa-check"></i><b>6.1</b> An example from NELS</a></li>
+<li class="chapter" data-level="6.2" data-path="6.2-binary-continuous-6.html"><a href="6.2-binary-continuous-6.html"><i class="fa fa-check"></i><b>6.2</b> Binary + continuous</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="6.2-binary-continuous-6.html"><a href="6.2-binary-continuous-6.html#marginal-means"><i class="fa fa-check"></i><b>6.2.1</b> Marginal means</a></li>
+<li class="chapter" data-level="6.2.2" data-path="6.2-binary-continuous-6.html"><a href="6.2-binary-continuous-6.html#summary-4"><i class="fa fa-check"></i><b>6.2.2</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="6.3-binary-continuous-interaction-6.html"><a href="6.3-binary-continuous-interaction-6.html"><i class="fa fa-check"></i><b>6.3</b> Binary + continuous + interaction</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="6.3-binary-continuous-interaction-6.html"><a href="6.3-binary-continuous-interaction-6.html#choosing-the-moderator"><i class="fa fa-check"></i><b>6.3.1</b> Choosing the moderator</a></li>
+<li class="chapter" data-level="6.3.2" data-path="6.3-binary-continuous-interaction-6.html"><a href="6.3-binary-continuous-interaction-6.html#back-to-the-example"><i class="fa fa-check"></i><b>6.3.2</b> Back to the example</a></li>
+<li class="chapter" data-level="6.3.3" data-path="6.3-binary-continuous-interaction-6.html"><a href="6.3-binary-continuous-interaction-6.html#centering-the-continuous-predictor"><i class="fa fa-check"></i><b>6.3.3</b> Centering the continuous predictor</a></li>
+<li class="chapter" data-level="6.3.4" data-path="6.3-binary-continuous-interaction-6.html"><a href="6.3-binary-continuous-interaction-6.html#summary-5"><i class="fa fa-check"></i><b>6.3.4</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="6.4-inference-for-interactions-6.html"><a href="6.4-inference-for-interactions-6.html"><i class="fa fa-check"></i><b>6.4</b> Inference for interactions</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="6.4-inference-for-interactions-6.html"><a href="6.4-inference-for-interactions-6.html#marginal-effects"><i class="fa fa-check"></i><b>6.4.1</b> Marginal effects</a></li>
+<li class="chapter" data-level="6.4.2" data-path="6.4-inference-for-interactions-6.html"><a href="6.4-inference-for-interactions-6.html#simple-trends"><i class="fa fa-check"></i><b>6.4.2</b> Simple trends</a></li>
+<li class="chapter" data-level="6.4.3" data-path="6.4-inference-for-interactions-6.html"><a href="6.4-inference-for-interactions-6.html#a-note-on-plotting"><i class="fa fa-check"></i><b>6.4.3</b> A note on plotting</a></li>
+<li class="chapter" data-level="6.4.4" data-path="6.4-inference-for-interactions-6.html"><a href="6.4-inference-for-interactions-6.html#summary-6"><i class="fa fa-check"></i><b>6.4.4</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="6.5-two-continuous-predictors-6.html"><a href="6.5-two-continuous-predictors-6.html"><i class="fa fa-check"></i><b>6.5</b> Two continuous predictors</a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="6.5-two-continuous-predictors-6.html"><a href="6.5-two-continuous-predictors-6.html#another-nels-example"><i class="fa fa-check"></i><b>6.5.1</b> Another NELS example</a></li>
+<li class="chapter" data-level="6.5.2" data-path="6.5-two-continuous-predictors-6.html"><a href="6.5-two-continuous-predictors-6.html#centering-the-predictors"><i class="fa fa-check"></i><b>6.5.2</b> Centering the predictors</a></li>
+<li class="chapter" data-level="6.5.3" data-path="6.5-two-continuous-predictors-6.html"><a href="6.5-two-continuous-predictors-6.html#simple-trends-1"><i class="fa fa-check"></i><b>6.5.3</b> Simple trends</a></li>
+<li class="chapter" data-level="6.5.4" data-path="6.5-two-continuous-predictors-6.html"><a href="6.5-two-continuous-predictors-6.html#summary-7"><i class="fa fa-check"></i><b>6.5.4</b> Summary</a></li>
+<li class="chapter" data-level="6.5.5" data-path="6.5-two-continuous-predictors-6.html"><a href="6.5-two-continuous-predictors-6.html#extra-how-centering-works"><i class="fa fa-check"></i><b>6.5.5</b> Extra: How centering works*</a></li>
+</ul></li>
+<li class="chapter" data-level="6.6" data-path="6.6-two-categorical-predictors-6.html"><a href="6.6-two-categorical-predictors-6.html"><i class="fa fa-check"></i><b>6.6</b> Two categorical predictors</a>
+<ul>
+<li class="chapter" data-level="6.6.1" data-path="6.6-two-categorical-predictors-6.html"><a href="6.6-two-categorical-predictors-6.html#an-example-from-ecls"><i class="fa fa-check"></i><b>6.6.1</b> An example from ECLS</a></li>
+<li class="chapter" data-level="6.6.2" data-path="6.6-two-categorical-predictors-6.html"><a href="6.6-two-categorical-predictors-6.html#the-no-interaction-model"><i class="fa fa-check"></i><b>6.6.2</b> The “no-interaction” model</a></li>
+<li class="chapter" data-level="6.6.3" data-path="6.6-two-categorical-predictors-6.html"><a href="6.6-two-categorical-predictors-6.html#adding-the-interactions"><i class="fa fa-check"></i><b>6.6.3</b> Adding the interaction(s)</a></li>
+<li class="chapter" data-level="6.6.4" data-path="6.6-two-categorical-predictors-6.html"><a href="6.6-two-categorical-predictors-6.html#back-to-the-example-1"><i class="fa fa-check"></i><b>6.6.4</b> Back to the example</a></li>
+<li class="chapter" data-level="6.6.5" data-path="6.6-two-categorical-predictors-6.html"><a href="6.6-two-categorical-predictors-6.html#the-anova-approach"><i class="fa fa-check"></i><b>6.6.5</b> The ANOVA approach</a></li>
+</ul></li>
+<li class="chapter" data-level="6.7" data-path="6.7-workbook-3.html"><a href="6.7-workbook-3.html"><i class="fa fa-check"></i><b>6.7</b> Workbook</a></li>
+<li class="chapter" data-level="6.8" data-path="6.8-exercises-6.html"><a href="6.8-exercises-6.html"><i class="fa fa-check"></i><b>6.8</b> Exercises</a>
+<ul>
+<li class="chapter" data-level="6.8.1" data-path="6.8-exercises-6.html"><a href="6.8-exercises-6.html#binary-continuous-interaction"><i class="fa fa-check"></i><b>6.8.1</b> Binary + continuous + interaction</a></li>
+<li class="chapter" data-level="6.8.2" data-path="6.8-exercises-6.html"><a href="6.8-exercises-6.html#centering-continuous-predictors"><i class="fa fa-check"></i><b>6.8.2</b> Centering continuous predictors</a></li>
+<li class="chapter" data-level="6.8.3" data-path="6.8-exercises-6.html"><a href="6.8-exercises-6.html#breaking-down-a-significant-interaction"><i class="fa fa-check"></i><b>6.8.3</b> Breaking down a significant interaction</a></li>
+<li class="chapter" data-level="6.8.4" data-path="6.8-exercises-6.html"><a href="6.8-exercises-6.html#marginal-effects-1"><i class="fa fa-check"></i><b>6.8.4</b> Marginal effects</a></li>
+<li class="chapter" data-level="6.8.5" data-path="6.8-exercises-6.html"><a href="6.8-exercises-6.html#simple-trends-2"><i class="fa fa-check"></i><b>6.8.5</b> Simple trends</a></li>
+<li class="chapter" data-level="6.8.6" data-path="6.8-exercises-6.html"><a href="6.8-exercises-6.html#two-continuous-predictors"><i class="fa fa-check"></i><b>6.8.6</b> Two continuous predictors</a></li>
+<li class="chapter" data-level="6.8.7" data-path="6.8-exercises-6.html"><a href="6.8-exercises-6.html#two-categorical-predictors"><i class="fa fa-check"></i><b>6.8.7</b> Two categorical predictors</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="7-chapter-7.html"><a href="7-chapter-7.html"><i class="fa fa-check"></i><b>7</b> Model Building</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="7.1-hierarchical-models-7.html"><a href="7.1-hierarchical-models-7.html"><i class="fa fa-check"></i><b>7.1</b> Hierarhical models</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="7.1-hierarchical-models-7.html"><a href="7.1-hierarchical-models-7.html#example-of-blocks"><i class="fa fa-check"></i><b>7.1.1</b> Example of blocks</a></li>
+<li class="chapter" data-level="7.1.2" data-path="7.1-hierarchical-models-7.html"><a href="7.1-hierarchical-models-7.html#nested-models"><i class="fa fa-check"></i><b>7.1.2</b> Nested models</a></li>
+<li class="chapter" data-level="7.1.3" data-path="7.1-hierarchical-models-7.html"><a href="7.1-hierarchical-models-7.html#some-practical-advice"><i class="fa fa-check"></i><b>7.1.3</b> Some practical advice</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="7.2-delta-rsquared-7.html"><a href="7.2-delta-rsquared-7.html"><i class="fa fa-check"></i><b>7.2</b> <span class="math inline">\(\Delta R^2\)</span></a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="7.2-delta-rsquared-7.html"><a href="7.2-delta-rsquared-7.html#inference-for-delta-r2"><i class="fa fa-check"></i><b>7.2.1</b> Inference for <span class="math inline">\(\Delta R^2\)</span></a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="7.3-worked-example-7.html"><a href="7.3-worked-example-7.html"><i class="fa fa-check"></i><b>7.3</b> A worked example</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="7.3-worked-example-7.html"><a href="7.3-worked-example-7.html#statement-of-research-questions"><i class="fa fa-check"></i><b>7.3.1</b> Statement of research questions</a></li>
+<li class="chapter" data-level="7.3.2" data-path="7.3-worked-example-7.html"><a href="7.3-worked-example-7.html#modeling-building-strategy"><i class="fa fa-check"></i><b>7.3.2</b> Modeling building strategy</a></li>
+<li class="chapter" data-level="7.3.3" data-path="7.3-worked-example-7.html"><a href="7.3-worked-example-7.html#results"><i class="fa fa-check"></i><b>7.3.3</b> Results</a></li>
+<li class="chapter" data-level="7.3.4" data-path="7.3-worked-example-7.html"><a href="7.3-worked-example-7.html#interpretation"><i class="fa fa-check"></i><b>7.3.4</b> Interpretation</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="7.4-too-many-predictors-7.html"><a href="7.4-too-many-predictors-7.html"><i class="fa fa-check"></i><b>7.4</b> Too many predictors?</a>
+<ul>
+<li class="chapter" data-level="7.4.1" data-path="7.4-too-many-predictors-7.html"><a href="7.4-too-many-predictors-7.html#nk"><i class="fa fa-check"></i><b>7.4.1</b> <span class="math inline">\(N/K\)</span></a></li>
+<li class="chapter" data-level="7.4.2" data-path="7.4-too-many-predictors-7.html"><a href="7.4-too-many-predictors-7.html#multicollinearity"><i class="fa fa-check"></i><b>7.4.2</b> Multicollinearity</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="7.5-workbook-4.html"><a href="7.5-workbook-4.html"><i class="fa fa-check"></i><b>7.5</b> Workbook</a></li>
+<li class="chapter" data-level="7.6" data-path="7.6-exercises-3.html"><a href="7.6-exercises-3.html"><i class="fa fa-check"></i><b>7.6</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="8-chapter-8.html"><a href="8-chapter-8.html"><i class="fa fa-check"></i><b>8</b> Assumption checking</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="8.1-recap-8.html"><a href="8.1-recap-8.html"><i class="fa fa-check"></i><b>8.1</b> Recap of population model</a></li>
+<li class="chapter" data-level="8.2" data-path="8.2-linearity-8.html"><a href="8.2-linearity-8.html"><i class="fa fa-check"></i><b>8.2</b> Linearity</a>
+<ul>
+<li class="chapter" data-level="8.2.1" data-path="8.2-linearity-8.html"><a href="8.2-linearity-8.html#summary-8"><i class="fa fa-check"></i><b>8.2.1</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="8.3-homoskedasticity-8.html"><a href="8.3-homoskedasticity-8.html"><i class="fa fa-check"></i><b>8.3</b> Homoskedasticity</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="8.3-homoskedasticity-8.html"><a href="8.3-homoskedasticity-8.html#summary-9"><i class="fa fa-check"></i><b>8.3.1</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="8.4-normality-8.html"><a href="8.4-normality-8.html"><i class="fa fa-check"></i><b>8.4</b> Normality</a>
+<ul>
+<li class="chapter" data-level="8.4.1" data-path="8.4-normality-8.html"><a href="8.4-normality-8.html#summary-10"><i class="fa fa-check"></i><b>8.4.1</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="8.5" data-path="8.5-worked-example-8.html"><a href="8.5-worked-example-8.html"><i class="fa fa-check"></i><b>8.5</b> A worked example</a></li>
+<li class="chapter" data-level="8.6" data-path="8.6-diagnostics-8.html"><a href="8.6-diagnostics-8.html"><i class="fa fa-check"></i><b>8.6</b> Diagnostics*</a>
+<ul>
+<li class="chapter" data-level="8.6.1" data-path="8.6-diagnostics-8.html"><a href="8.6-diagnostics-8.html#leverage"><i class="fa fa-check"></i><b>8.6.1</b> Leverage</a></li>
+<li class="chapter" data-level="8.6.2" data-path="8.6-diagnostics-8.html"><a href="8.6-diagnostics-8.html#distance-residuals"><i class="fa fa-check"></i><b>8.6.2</b> Distance (residuals)</a></li>
+<li class="chapter" data-level="8.6.3" data-path="8.6-diagnostics-8.html"><a href="8.6-diagnostics-8.html#influence"><i class="fa fa-check"></i><b>8.6.3</b> Influence</a></li>
+<li class="chapter" data-level="8.6.4" data-path="8.6-diagnostics-8.html"><a href="8.6-diagnostics-8.html#a-more-realistic-example"><i class="fa fa-check"></i><b>8.6.4</b> A more realistic example</a></li>
+</ul></li>
+<li class="chapter" data-level="8.7" data-path="8.7-workbook-5.html"><a href="8.7-workbook-5.html"><i class="fa fa-check"></i><b>8.7</b> Workbook</a></li>
+<li class="chapter" data-level="8.8" data-path="8.8-exercises-4.html"><a href="8.8-exercises-4.html"><i class="fa fa-check"></i><b>8.8</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="9-chapter-9.html"><a href="9-chapter-9.html"><i class="fa fa-check"></i><b>9</b> Log-linear regression</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="9.1-math-review-9.html"><a href="9.1-math-review-9.html"><i class="fa fa-check"></i><b>9.1</b> Math review</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="9.1-math-review-9.html"><a href="9.1-math-review-9.html#natural-logarithm"><i class="fa fa-check"></i><b>9.1.1</b> Natural logarithm</a></li>
+<li class="chapter" data-level="9.1.2" data-path="9.1-math-review-9.html"><a href="9.1-math-review-9.html#log-and-exp"><i class="fa fa-check"></i><b>9.1.2</b> log and exp</a></li>
+<li class="chapter" data-level="9.1.3" data-path="9.1-math-review-9.html"><a href="9.1-math-review-9.html#pop-quiz"><i class="fa fa-check"></i><b>9.1.3</b> Pop quiz</a></li>
+<li class="chapter" data-level="9.1.4" data-path="9.1-math-review-9.html"><a href="9.1-math-review-9.html#rules-for-log-and-exp"><i class="fa fa-check"></i><b>9.1.4</b> Rules for log and exp*</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="9.2-the-log-linear-model.html"><a href="9.2-the-log-linear-model.html"><i class="fa fa-check"></i><b>9.2</b> The log-linear model</a></li>
+<li class="chapter" data-level="9.3" data-path="9.3-distribution-9.html"><a href="9.3-distribution-9.html"><i class="fa fa-check"></i><b>9.3</b> Distribution of <span class="math inline">\(\log(Y)\)</span></a>
+<ul>
+<li class="chapter" data-level="9.3.1" data-path="9.3-distribution-9.html"><a href="9.3-distribution-9.html#why-logx1"><i class="fa fa-check"></i><b>9.3.1</b> Why <span class="math inline">\(\log(x+1)\)</span>?</a></li>
+<li class="chapter" data-level="9.3.2" data-path="9.3-distribution-9.html"><a href="9.3-distribution-9.html#what-about-negative-values-of-x"><i class="fa fa-check"></i><b>9.3.2</b> What about negative values of <span class="math inline">\(x\)</span>?</a></li>
+<li class="chapter" data-level="9.3.3" data-path="9.3-distribution-9.html"><a href="9.3-distribution-9.html#skew-versus-censoring"><i class="fa fa-check"></i><b>9.3.3</b> Skew versus censoring</a></li>
+<li class="chapter" data-level="9.3.4" data-path="9.3-distribution-9.html"><a href="9.3-distribution-9.html#final-comments-on-dealing-with-skew"><i class="fa fa-check"></i><b>9.3.4</b> Final comments on dealing with skew</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="9.4-relationship-9.html"><a href="9.4-relationship-9.html"><i class="fa fa-check"></i><b>9.4</b> Relationship with <span class="math inline">\(X\)</span></a></li>
+<li class="chapter" data-level="9.5" data-path="9.5-interpretation-9.html"><a href="9.5-interpretation-9.html"><i class="fa fa-check"></i><b>9.5</b> Interpretation</a>
+<ul>
+<li class="chapter" data-level="9.5.1" data-path="9.5-interpretation-9.html"><a href="9.5-interpretation-9.html#approximate-9"><i class="fa fa-check"></i><b>9.5.1</b> Approximate interpretation</a></li>
+<li class="chapter" data-level="9.5.2" data-path="9.5-interpretation-9.html"><a href="9.5-interpretation-9.html#a-hypothetical-example-2"><i class="fa fa-check"></i><b>9.5.2</b> A hypothetical example</a></li>
+<li class="chapter" data-level="9.5.3" data-path="9.5-interpretation-9.html"><a href="9.5-interpretation-9.html#exact-9"><i class="fa fa-check"></i><b>9.5.3</b> Exact interpretation</a></li>
+<li class="chapter" data-level="9.5.4" data-path="9.5-interpretation-9.html"><a href="9.5-interpretation-9.html#summary-11"><i class="fa fa-check"></i><b>9.5.4</b> Summary</a></li>
+<li class="chapter" data-level="9.5.5" data-path="9.5-interpretation-9.html"><a href="9.5-interpretation-9.html#derivation-9"><i class="fa fa-check"></i><b>9.5.5</b> Derivation of Equation @ref(eq:expb)</a></li>
+</ul></li>
+<li class="chapter" data-level="9.6" data-path="9.6-worked-example-9.html"><a href="9.6-worked-example-9.html"><i class="fa fa-check"></i><b>9.6</b> Worked example</a>
+<ul>
+<li class="chapter" data-level="9.6.1" data-path="9.6-worked-example-9.html"><a href="9.6-worked-example-9.html#log-linear-regression-of-wages-on-education"><i class="fa fa-check"></i><b>9.6.1</b> Log-linear regression of Wages on Education</a></li>
+</ul></li>
+<li class="chapter" data-level="9.7" data-path="9.7-workbook-6.html"><a href="9.7-workbook-6.html"><i class="fa fa-check"></i><b>9.7</b> Workbook</a></li>
+<li class="chapter" data-level="9.8" data-path="9.8-exercises-5.html"><a href="9.8-exercises-5.html"><i class="fa fa-check"></i><b>9.8</b> Exercises</a>
+<ul>
+<li class="chapter" data-level="9.8.1" data-path="9.8-exercises-5.html"><a href="9.8-exercises-5.html#linear-regression-of-wages-on-education"><i class="fa fa-check"></i><b>9.8.1</b> Linear regression of Wages on Education</a></li>
+<li class="chapter" data-level="9.8.2" data-path="9.8-exercises-5.html"><a href="9.8-exercises-5.html#log-linear-regression-of-wages-on-education-1"><i class="fa fa-check"></i><b>9.8.2</b> Log-linear regression of Wages on Education</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="10-chapter-10.html"><a href="10-chapter-10.html"><i class="fa fa-check"></i><b>10</b> Polynomial regression, etc</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="10.1-polynomial-10.html"><a href="10.1-polynomial-10.html"><i class="fa fa-check"></i><b>10.1</b> Polynomial regression</a>
+<ul>
+<li class="chapter" data-level="10.1.1" data-path="10.1-polynomial-10.html"><a href="10.1-polynomial-10.html#recap-of-polynomials"><i class="fa fa-check"></i><b>10.1.1</b> Recap of polynomials</a></li>
+<li class="chapter" data-level="10.1.2" data-path="10.1-polynomial-10.html"><a href="10.1-polynomial-10.html#polynomials-and-curve-fitting"><i class="fa fa-check"></i><b>10.1.2</b> Polynomials and curve fitting</a></li>
+<li class="chapter" data-level="10.1.3" data-path="10.1-polynomial-10.html"><a href="10.1-polynomial-10.html#interpreting-the-model"><i class="fa fa-check"></i><b>10.1.3</b> Interpreting the model</a></li>
+<li class="chapter" data-level="10.1.4" data-path="10.1-polynomial-10.html"><a href="10.1-polynomial-10.html#model-building"><i class="fa fa-check"></i><b>10.1.4</b> Model building</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="10.2-worked-example-10.html"><a href="10.2-worked-example-10.html"><i class="fa fa-check"></i><b>10.2</b> A worked example</a></li>
+<li class="chapter" data-level="10.3" data-path="10.3-piecewise-10.html"><a href="10.3-piecewise-10.html"><i class="fa fa-check"></i><b>10.3</b> Piecewise regression</a>
+<ul>
+<li class="chapter" data-level="10.3.1" data-path="10.3-piecewise-10.html"><a href="10.3-piecewise-10.html#the-piecewise-model"><i class="fa fa-check"></i><b>10.3.1</b> The piecewise model</a></li>
+<li class="chapter" data-level="10.3.2" data-path="10.3-piecewise-10.html"><a href="10.3-piecewise-10.html#back-to-the-example-2"><i class="fa fa-check"></i><b>10.3.2</b> Back to the example</a></li>
+</ul></li>
+<li class="chapter" data-level="10.4" data-path="10.4-heteroskedasticity-10.html"><a href="10.4-heteroskedasticity-10.html"><i class="fa fa-check"></i><b>10.4</b> Heteroskedasticity</a></li>
+<li class="chapter" data-level="10.5" data-path="10.5-workbook-7.html"><a href="10.5-workbook-7.html"><i class="fa fa-check"></i><b>10.5</b> Workbook</a></li>
+<li class="chapter" data-level="10.6" data-path="10.6-exercises-7.html"><a href="10.6-exercises-7.html"><i class="fa fa-check"></i><b>10.6</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="11-chapter-11.html"><a href="11-chapter-11.html"><i class="fa fa-check"></i><b>11</b> Logistic Regression</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="11.1-chd-example-11.html"><a href="11.1-chd-example-11.html"><i class="fa fa-check"></i><b>11.1</b> The CHD example</a></li>
+<li class="chapter" data-level="11.2" data-path="11.2-logit-11.html"><a href="11.2-logit-11.html"><i class="fa fa-check"></i><b>11.2</b> Logit &amp; logistic functions</a>
+<ul>
+<li class="chapter" data-level="11.2.1" data-path="11.2-logit-11.html"><a href="11.2-logit-11.html#from-binary-to-probability"><i class="fa fa-check"></i><b>11.2.1</b> From binary to probability</a></li>
+<li class="chapter" data-level="11.2.2" data-path="11.2-logit-11.html"><a href="11.2-logit-11.html#from-probability-to-logistic"><i class="fa fa-check"></i><b>11.2.2</b> From probability to logistic</a></li>
+<li class="chapter" data-level="11.2.3" data-path="11.2-logit-11.html"><a href="11.2-logit-11.html#logistic-to-log-odds-logit"><i class="fa fa-check"></i><b>11.2.3</b> Logistic to log odds (logit)</a></li>
+<li class="chapter" data-level="11.2.4" data-path="11.2-logit-11.html"><a href="11.2-logit-11.html#interpretation-1"><i class="fa fa-check"></i><b>11.2.4</b> Interpretation</a></li>
+<li class="chapter" data-level="11.2.5" data-path="11.2-logit-11.html"><a href="11.2-logit-11.html#pop-quiz-1"><i class="fa fa-check"></i><b>11.2.5</b> Pop quiz</a></li>
+<li class="chapter" data-level="11.2.6" data-path="11.2-logit-11.html"><a href="11.2-logit-11.html#summary-12"><i class="fa fa-check"></i><b>11.2.6</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="11.3-simple-11.html"><a href="11.3-simple-11.html"><i class="fa fa-check"></i><b>11.3</b> Simple logistic regression</a>
+<ul>
+<li class="chapter" data-level="11.3.1" data-path="11.3-simple-11.html"><a href="11.3-simple-11.html#other-interpretations-predicted-probabilities"><i class="fa fa-check"></i><b>11.3.1</b> Other interpretations: Predicted probabilities</a></li>
+<li class="chapter" data-level="11.3.2" data-path="11.3-simple-11.html"><a href="11.3-simple-11.html#other-interpretations-equal-odds"><i class="fa fa-check"></i><b>11.3.2</b> Other interpretations: Equal odds</a></li>
+<li class="chapter" data-level="11.3.3" data-path="11.3-simple-11.html"><a href="11.3-simple-11.html#other-interpretations-rate-of-change"><i class="fa fa-check"></i><b>11.3.3</b> Other interpretations: Rate of change</a></li>
+<li class="chapter" data-level="11.3.4" data-path="11.3-simple-11.html"><a href="11.3-simple-11.html#summary-13"><i class="fa fa-check"></i><b>11.3.4</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="11.4-estimation-11.html"><a href="11.4-estimation-11.html"><i class="fa fa-check"></i><b>11.4</b> Estimation</a>
+<ul>
+<li class="chapter" data-level="11.4.1" data-path="11.4-estimation-11.html"><a href="11.4-estimation-11.html#ml-vs-ols"><i class="fa fa-check"></i><b>11.4.1</b> ML vs OLS</a></li>
+<li class="chapter" data-level="11.4.2" data-path="11.4-estimation-11.html"><a href="11.4-estimation-11.html#the-likelihood"><i class="fa fa-check"></i><b>11.4.2</b> The likelihood</a></li>
+<li class="chapter" data-level="11.4.3" data-path="11.4-estimation-11.html"><a href="11.4-estimation-11.html#summary-14"><i class="fa fa-check"></i><b>11.4.3</b> Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="11.5" data-path="11.5-inference-11.html"><a href="11.5-inference-11.html"><i class="fa fa-check"></i><b>11.5</b> Inference</a>
+<ul>
+<li class="chapter" data-level="11.5.1" data-path="11.5-inference-11.html"><a href="11.5-inference-11.html#wald-test"><i class="fa fa-check"></i><b>11.5.1</b> Wald test</a></li>
+<li class="chapter" data-level="11.5.2" data-path="11.5-inference-11.html"><a href="11.5-inference-11.html#odds-ratio-or"><i class="fa fa-check"></i><b>11.5.2</b> Odds ratio (OR)</a></li>
+<li class="chapter" data-level="11.5.3" data-path="11.5-inference-11.html"><a href="11.5-inference-11.html#likelihood-ratio-test"><i class="fa fa-check"></i><b>11.5.3</b> Likelihood ratio test</a></li>
+</ul></li>
+<li class="chapter" data-level="11.6" data-path="11.6-r-squared-11.html"><a href="11.6-r-squared-11.html"><i class="fa fa-check"></i><b>11.6</b> (Pseudo) R-squared</a>
+<ul>
+<li class="chapter" data-level="11.6.1" data-path="11.6-r-squared-11.html"><a href="11.6-r-squared-11.html#mcfaddens-pseudo-r-squared"><i class="fa fa-check"></i><b>11.6.1</b> McFadden’s Pseudo R-squared</a></li>
+</ul></li>
+<li class="chapter" data-level="11.7" data-path="11.7-assumption-checking-11.html"><a href="11.7-assumption-checking-11.html"><i class="fa fa-check"></i><b>11.7</b> Assumption checking</a>
+<ul>
+<li class="chapter" data-level="11.7.1" data-path="11.7-assumption-checking-11.html"><a href="11.7-assumption-checking-11.html#more-details-on-the-hl-test"><i class="fa fa-check"></i><b>11.7.1</b> More details on the HL test</a></li>
+</ul></li>
+<li class="chapter" data-level="11.8" data-path="11.8-multiple-11.html"><a href="11.8-multiple-11.html"><i class="fa fa-check"></i><b>11.8</b> Exercise: Multiple logistic regression</a>
+<ul>
+<li class="chapter" data-level="11.8.1" data-path="11.8-multiple-11.html"><a href="11.8-multiple-11.html#predicted-probabilities"><i class="fa fa-check"></i><b>11.8.1</b> Predicted probabilities</a></li>
+<li class="chapter" data-level="11.8.2" data-path="11.8-multiple-11.html"><a href="11.8-multiple-11.html#interactions"><i class="fa fa-check"></i><b>11.8.2</b> Interactions</a></li>
+</ul></li>
+<li class="chapter" data-level="11.9" data-path="11.9-workbook-8.html"><a href="11.9-workbook-8.html"><i class="fa fa-check"></i><b>11.9</b> Workbook</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/peterhalpin/EDUC_784" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">EDUC 784: Regression</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="exercises" class="section level2 hasAnchor" number="4.10">
+<h2><span class="header-section-number">4.10</span> Exercises<a href="4.10-exercises.html#exercises" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>These notes provide an overview of regression with two variables in R. They also walk through some details of the ECLS data.</p>
+<div id="the-ecls250-data" class="section level3 hasAnchor" number="4.10.1">
+<h3><span class="header-section-number">4.10.1</span> The ECLS250 data<a href="4.10-exercises.html#the-ecls250-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Let’s start by getting our example data loaded into R. We will be using a subset of <span class="math inline">\(N = 250\)</span> cases from the Early Childhood Longitudinal Survey 1998-1998 (ECLS-K). Here is a description of the data from the official NCES codebook (page 1-1 of <a href="https://nces.ed.gov/ecls/data/ECLSK_K8_Manual_part1.pdf" class="uri">https://nces.ed.gov/ecls/data/ECLSK_K8_Manual_part1.pdf</a>):</p>
+<p><em>The ECLS-K focuses on children’s early school experiences beginning with kindergarten and ending with eighth grade. It is a multisource, multimethod study that includes interviews with parents, the collection of data from principals and teachers, and student records abstracts, as well as direct child assessments. In the eighth-grade data collection, a student paper-and-pencil questionnaire was added. The ECLS-K was developed under the sponsorship of the U.S. Department of Education, Institute of Education Sciences, National Center for Education Statistics (NCES). Westat conducted this study with assistance provided by Educational Testing Service (ETS) in Princeton, New Jersey.</em></p>
+<p><em>The ECLS-K followed a nationally representative cohort of children from kindergarten into middle school. The base-year data were collected in the fall and spring of the 1998–99 school year when the sampled children were in kindergarten. A total of 21,260 kindergartners throughout the nation participated</em>.</p>
+<p>The subset of the ECLS-K data used in this class was obtained from the link below. The codebook for these data is available in our Resources folder. Note that we will be using only a small subset of the full ECLS2577 data for this example</p>
+<p><a href="http://routledgetextbooks.com/textbooks/_author/ware-9780415996006/data.php" class="uri">http://routledgetextbooks.com/textbooks/_author/ware-9780415996006/data.php</a></p>
+<p>Let’s load ECLS-K data into R. Make sure to download the file <code>ECLS250.RData</code> from this week’s resources folder and save the file in your working directory – check out the R exercises from our first lesson for a refresher of how to do this.</p>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="4.10-exercises.html#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="co"># remove previously attached data</span></span>
+<span id="cb77-2"><a href="4.10-exercises.html#cb77-2" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;ECLS250.RData&quot;</span>) <span class="co"># load new example</span></span>
+<span id="cb77-3"><a href="4.10-exercises.html#cb77-3" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(ecls) <span class="co"># attach </span></span>
+<span id="cb77-4"><a href="4.10-exercises.html#cb77-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-5"><a href="4.10-exercises.html#cb77-5" aria-hidden="true" tabindex="-1"></a><span class="co"># knitr and kable are just used to print nicely -- you can just use head(ecls[, 1:5]) </span></span>
+<span id="cb77-6"><a href="4.10-exercises.html#cb77-6" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(ecls[, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]))</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="right">caseid</th>
+<th align="right">gender</th>
+<th align="right">race</th>
+<th align="right">c1rrscal</th>
+<th align="right">c1rrttsco</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">960</td>
+<td align="right">2</td>
+<td align="right">1</td>
+<td align="right">28</td>
+<td align="right">58</td>
+</tr>
+<tr class="even">
+<td align="right">113</td>
+<td align="right">1</td>
+<td align="right">8</td>
+<td align="right">14</td>
+<td align="right">39</td>
+</tr>
+<tr class="odd">
+<td align="right">1828</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">22</td>
+<td align="right">50</td>
+</tr>
+<tr class="even">
+<td align="right">1693</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">21</td>
+<td align="right">50</td>
+</tr>
+<tr class="odd">
+<td align="right">643</td>
+<td align="right">2</td>
+<td align="right">1</td>
+<td align="right">14</td>
+<td align="right">39</td>
+</tr>
+<tr class="even">
+<td align="right">772</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">21</td>
+<td align="right">49</td>
+</tr>
+</tbody>
+</table>
+<p>The naming conventions for these data are bit challenging.</p>
+<ul>
+<li><p>Variable names begin with <code>c</code>, <code>p</code>, or <code>t</code> depending on whether the respondent was the child, parent, or teacher. Variables that start with <code>wk</code> were created by the ECLS using other data sources available in during the kindergarten year of the study.</p></li>
+<li><p>The time points (1-4 denoting fall and spring of K and Gr 1) appear as the second character.</p></li>
+<li><p>The rest of the name describes the variable.</p></li>
+</ul>
+<p>The variables we will use for this illustration are:</p>
+<ul>
+<li><p><code>c1rmscal</code>: Child’s score on a math assessment, in first semester of Kindergarten . The scores can be interpreted as number of correct responses out of a total of approximately 80 math exam questions.</p></li>
+<li><p><code>wksesl</code>: An SES composite of household factors (e.g., parental education, household income) ranging from 30-72.</p></li>
+<li><p><code>t1learn</code>: Approaches to Learning Scale (ATLS), teacher reported in first semester of kindergarten. This scale measures behaviors that affect the ease with which children can benefit from the learning environment. It includes six items that rate the child’s attentiveness, task persistence, eagerness to learn, learning independence, flexibility, and organization. The items have 4 response categories (1-4), coded so that higher values represent more positive responses, and the scale is an unweighted average the six items.</p></li>
+</ul>
+<p>To get started lets produce the simple regression of Math with SES. This is another look at the relationship between Academic Achievement and SES that we discussed in Chapter <a href="2-chapter-2.html#chapter-2">2</a>. If you do not feel comfortable running this analysis or interpreting the output, take another look at Section <a href="2.12-exercises-2.html#exercises-2">2.12</a>.</p>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="4.10-exercises.html#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> wksesl, <span class="at">y =</span> c1rmscal, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span>
+<span id="cb78-2"><a href="4.10-exercises.html#cb78-2" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(c1rmscal <span class="sc">~</span> wksesl)</span>
+<span id="cb78-3"><a href="4.10-exercises.html#cb78-3" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(mod)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-56-1.png" width="672" /></p>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="4.10-exercises.html#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = c1rmscal ~ wksesl)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -16.131  -4.355  -0.849   3.678  31.536 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)   0.6159     2.7393    0.22     0.82    
+## wksesl        0.4359     0.0567    7.68  3.6e-13 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 6.5 on 248 degrees of freedom
+## Multiple R-squared:  0.192,  Adjusted R-squared:  0.189 
+## F-statistic:   59 on 1 and 248 DF,  p-value: 3.61e-13</code></pre>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="4.10-exercises.html#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(wksesl, c1rmscal)</span></code></pre></div>
+<pre><code>## [1] 0.44</code></pre>
+</div>
+<div id="multiple-regression-with-lm" class="section level3 hasAnchor" number="4.10.2">
+<h3><span class="header-section-number">4.10.2</span> Multiple regression with <code>lm</code><a href="4.10-exercises.html#multiple-regression-with-lm" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>First, let’s tale a look at the “zero-order” relationship among the three variables. This type of descriptive, two-way analysis is a good way to get familiar with your data before getting into multiple regression. We can see that the variables are all moderately correlated and their relationships appear reasonably linear.</p>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="4.10-exercises.html#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use cbind to create a data.frame with just the 3 variables we want to examine</span></span>
+<span id="cb83-2"><a href="4.10-exercises.html#cb83-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">cbind</span>(c1rmscal, wksesl, t1learn)</span>
+<span id="cb83-3"><a href="4.10-exercises.html#cb83-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb83-4"><a href="4.10-exercises.html#cb83-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Correlations</span></span>
+<span id="cb83-5"><a href="4.10-exercises.html#cb83-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(data)</span></code></pre></div>
+<pre><code>##          c1rmscal wksesl t1learn
+## c1rmscal     1.00   0.44    0.40
+## wksesl       0.44   1.00    0.29
+## t1learn      0.40   0.29    1.00</code></pre>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="4.10-exercises.html#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatterplots</span></span>
+<span id="cb85-2"><a href="4.10-exercises.html#cb85-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(data, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>) </span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-57-1.png" width="672" /></p>
+<p>In terms of input, multiple regression with <code>lm</code> is similar to simple regression. The only difference is the model formula. To include more predictors in a formula, just include them on the right hand side, separated by at <code>+</code> sign.</p>
+<ul>
+<li>e.g, <code>Y ~ Χ1 + Χ2</code></li>
+</ul>
+<p>For our example, let’s consider the regression of math achievement on SES and Approaches to Learning. We’ll save our result as <code>mod1</code> which is short for “model one”.</p>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="4.10-exercises.html#cb86-1" aria-hidden="true" tabindex="-1"></a>mod1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(c1rmscal <span class="sc">~</span> wksesl <span class="sc">+</span> t1learn)</span>
+<span id="cb86-2"><a href="4.10-exercises.html#cb86-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod1)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = c1rmscal ~ wksesl + t1learn)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -14.10  -4.03  -1.07   3.29  29.54 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  -6.0502     2.9003   -2.09    0.038 *  
+## wksesl        0.3512     0.0563    6.24  1.9e-09 ***
+## t1learn       3.5212     0.6739    5.23  3.7e-07 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 6.2 on 247 degrees of freedom
+## Multiple R-squared:  0.273,  Adjusted R-squared:  0.267 
+## F-statistic: 46.3 on 2 and 247 DF,  p-value: &lt;2e-16</code></pre>
+<p>We can see from the output that regression coefficient for <code>t1learn</code> is about 3.5. This means that, as the predictor increases by a single unit, children’s predicted math scores increase by 3.5 points (out of 80), after controlling for the SES. You should be able to provide a similar interpretation of the regression coefficient for <code>wksesl</code>. Together, both predictors accounted for about 27% of the variation in students’ math scores. In education, this would be considered a pretty large effect”.</p>
+<p>We will talk about the statistical tests later on. For now let’s consider the relationship with simple regression.</p>
+</div>
+<div id="relations-between-simple-and-multiple-regression" class="section level3 hasAnchor" number="4.10.3">
+<h3><span class="header-section-number">4.10.3</span> Relations between simple and multiple regression<a href="4.10-exercises.html#relations-between-simple-and-multiple-regression" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>First let’s consider how the two simple regression compare to the multiple regression with two variables. Here is the relevant output:</p>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="4.10-exercises.html#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare the multiple regression output to the simple regressions</span></span>
+<span id="cb88-2"><a href="4.10-exercises.html#cb88-2" aria-hidden="true" tabindex="-1"></a>mod2a <span class="ot">&lt;-</span> <span class="fu">lm</span>(c1rmscal <span class="sc">~</span> wksesl)</span>
+<span id="cb88-3"><a href="4.10-exercises.html#cb88-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod2a)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = c1rmscal ~ wksesl)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -16.131  -4.355  -0.849   3.678  31.536 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)   0.6159     2.7393    0.22     0.82    
+## wksesl        0.4359     0.0567    7.68  3.6e-13 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 6.5 on 248 degrees of freedom
+## Multiple R-squared:  0.192,  Adjusted R-squared:  0.189 
+## F-statistic:   59 on 1 and 248 DF,  p-value: 3.61e-13</code></pre>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="4.10-exercises.html#cb90-1" aria-hidden="true" tabindex="-1"></a>mod2b <span class="ot">&lt;-</span> <span class="fu">lm</span>(c1rmscal <span class="sc">~</span> t1learn)</span>
+<span id="cb90-2"><a href="4.10-exercises.html#cb90-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod2b)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = c1rmscal ~ t1learn)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -14.40  -4.21  -1.00   3.77  31.84 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)    7.039      2.148    3.28   0.0012 ** 
+## t1learn        4.730      0.693    6.83  6.7e-11 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 6.6 on 248 degrees of freedom
+## Multiple R-squared:  0.158,  Adjusted R-squared:  0.155 
+## F-statistic: 46.6 on 1 and 248 DF,  p-value: 6.66e-11</code></pre>
+<p>The important things to note here are</p>
+<ul>
+<li><p>The regression coefficients from the simple models (<span class="math inline">\(b_{ses} = 4.38\)</span> and <span class="math inline">\(b_{t1learn} = 4.73\)</span>) are larger than the regression coefficients from the two-predictor model. Can you explain why? (Hint: see Section <a href="4.4-interpretation-4.html#interpretation-4">4.4</a>.)</p></li>
+<li><p>The R-squared terms in the two simple models (.194 + .158 = .352) add up to more than the R-squared in the two-predictor model (.274). Again, take a moment to think about why before reading on. (Hint: see Section <a href="4.6-rsquared-4.html#rsquared-4">4.6</a>.)</p></li>
+</ul>
+</div>
+<div id="inference-with-2-predictors" class="section level3 hasAnchor" number="4.10.4">
+<h3><span class="header-section-number">4.10.4</span> Inference with 2 predictors<a href="4.10-exercises.html#inference-with-2-predictors" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Let’s move on now to consider the statistical tests and confidence intervals provided with the <code>lm</code> summary output.</p>
+<p>For regression with more than one predictor, both the t-tests and F-tests have a very similar construction and interpretation as with simple regression. The main differences are (see Sections <a href="4.7-inference-for-slopes-4.html#inference-for-slopes-4">4.7</a> and <a href="4.8-inference-for-rsquared-4.html#inference-for-rsquared-4">4.8</a>):</p>
+<ul>
+<li><p>The degrees of freedom for both tests now involve <span class="math inline">\(J\)</span>, the number of predictors.</p></li>
+<li><p>The standard error of the b-weight is more complicated, because it involves the inter-correlation among the predictors.</p></li>
+</ul>
+<p>We can see for <code>mod1</code> that both b-weights are significant at the .05 level, and so is the R-square. As mentioned previously, it is not usual to interpret or report results on the regression intercept unless you have a special reason to do so (e.g., see Chapter <a href="5-chapter-5.html#chapter-5">5</a>).</p>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="4.10-exercises.html#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Revisting the output of mod1</span></span>
+<span id="cb92-2"><a href="4.10-exercises.html#cb92-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod1)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = c1rmscal ~ wksesl + t1learn)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -14.10  -4.03  -1.07   3.29  29.54 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  -6.0502     2.9003   -2.09    0.038 *  
+## wksesl        0.3512     0.0563    6.24  1.9e-09 ***
+## t1learn       3.5212     0.6739    5.23  3.7e-07 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 6.2 on 247 degrees of freedom
+## Multiple R-squared:  0.273,  Adjusted R-squared:  0.267 
+## F-statistic: 46.3 on 2 and 247 DF,  p-value: &lt;2e-16</code></pre>
+</div>
+<div id="apa-reporting-of-results" class="section level3 hasAnchor" number="4.10.5">
+<h3><span class="header-section-number">4.10.5</span> APA reporting of results<a href="4.10-exercises.html#apa-reporting-of-results" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In terms of writing out the results, there are many formatting styles used in social sciences. As one example, the convention for APA style is to write the coefficient, followed by the test statistic (with its degrees of freedom) and then the p-value. It is also conventional to use 2 decimal places, unless more decimal places are needed to address rounding error.</p>
+<p>Here is how we might write out the results of our regression using APA format:</p>
+<ul>
+<li><p>The regression of Math Achievement on SES was positive and statistically significant at the .05 level (<span class="math inline">\(b = 3.53, t(247) = 6.27, p &lt; .001\)</span>).</p></li>
+<li><p>The regression of Math Achievement on Approaches to Learning was also positive and statistically significant at the .05 level (<span class="math inline">\(b = 3.50, t(247) = 5.20, p &lt; .001\)</span>).</p></li>
+<li><p>Together both predictors accounted for about 27% of the variation in Math Achievement (<span class="math inline">\(R^2\)</span> = .274, adjusted <span class="math inline">\(R^2\)</span> = .268), which was also statistically significant at the .05 level (<span class="math inline">\(F(2, 247) = 45.54, p &lt; .001\)</span>).</p></li>
+</ul>
+<p>Instead of, or in addition to, the statistical tests, we could include the confidence intervals for the regression coefficients. It is not usual to report confidence intervals on R-squared.</p>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="4.10-exercises.html#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(mod1)</span></code></pre></div>
+<pre><code>##              2.5 % 97.5 %
+## (Intercept) -11.76  -0.34
+## wksesl        0.24   0.46
+## t1learn       2.19   4.85</code></pre>
+<ul>
+<li>The 95% confidence interval on the regression coefficient of Math achievement on SES was <span class="math inline">\([2.42 , 4.64]\)</span>. For Approaches to Learning, the 95% confidence interval was <span class="math inline">\([2.18, 4.83]\)</span>.</li>
+</ul>
+<p>When we have a regression model with many predictors, or are comparing among different models, it is more usual to put all the relevant statistics in a table rather than writing them out one by one. We will see how to do that later on in the course.</p>
+<p>For more info on APA format, see the APA publications manual (<a href="https://www.apastyle.org/manual" class="uri">https://www.apastyle.org/manual</a>).</p>
+
+</div>
+</div>
+<!-- </div> -->
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="4.9-workbook.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="5-chapter-5.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": null,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/peterhalpin/EDUC_784/edit/master/04_two_predictors.Rmd",
+"text": "Suggest an edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+},
+"info": true
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -23,7 +23,7 @@
 <meta name="author" content="Peter Halpin" />
 
 
-<meta name="date" content="2023-01-13" />
+<meta name="date" content="2023-01-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -153,6 +153,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.4" data-path="2.4-rsquared-2.html"><a href="2.4-rsquared-2.html"><i class="fa fa-check"></i><b>2.4</b> R-squared</a>
 <ul>
 <li class="chapter" data-level="2.4.1" data-path="2.4-rsquared-2.html"><a href="2.4-rsquared-2.html#derivation"><i class="fa fa-check"></i><b>2.4.1</b> Derivation*</a></li>
+<li class="chapter" data-level="2.4.2" data-path="2.4-rsquared-2.html"><a href="2.4-rsquared-2.html#additional-details"><i class="fa fa-check"></i><b>2.4.2</b> Additional details*</a></li>
 </ul></li>
 <li class="chapter" data-level="2.5" data-path="2.5-population-model-2.html"><a href="2.5-population-model-2.html"><i class="fa fa-check"></i><b>2.5</b> The population model</a></li>
 <li class="chapter" data-level="2.6" data-path="2.6-notation-2.html"><a href="2.6-notation-2.html"><i class="fa fa-check"></i><b>2.6</b> Clarifying notation</a></li>
@@ -204,7 +205,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4" data-path="4-chapter-4.html"><a href="4-chapter-4.html"><i class="fa fa-check"></i><b>4</b> Regression with Two Predictors</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="4.1-ecls-4.html"><a href="4.1-ecls-4.html"><i class="fa fa-check"></i><b>4.1</b> An example from ECLS</a></li>
+<li class="chapter" data-level="4.1" data-path="4.1-ecls-4.html"><a href="4.1-ecls-4.html"><i class="fa fa-check"></i><b>4.1</b> An example from ECLS</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="4.1-ecls-4.html"><a href="4.1-ecls-4.html#correlation-matrices"><i class="fa fa-check"></i><b>4.1.1</b> Correlation matrices</a></li>
+</ul></li>
 <li class="chapter" data-level="4.2" data-path="4.2-the-two-predictor-model.html"><a href="4.2-the-two-predictor-model.html"><i class="fa fa-check"></i><b>4.2</b> The two-predictor model</a></li>
 <li class="chapter" data-level="4.3" data-path="4.3-comparison-4.html"><a href="4.3-comparison-4.html"><i class="fa fa-check"></i><b>4.3</b> Multiple vs simple regression</a>
 <ul>
@@ -246,7 +250,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.3" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html"><i class="fa fa-check"></i><b>5.3</b> Binary predictors</a>
 <ul>
 <li class="chapter" data-level="5.3.1" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html#relation-with-t-tests"><i class="fa fa-check"></i><b>5.3.1</b> Relation with t-tests</a></li>
-<li class="chapter" data-level="5.3.2" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html#summary-1"><i class="fa fa-check"></i><b>5.3.2</b> Summary</a></li>
+<li class="chapter" data-level="5.3.2" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html#some-math"><i class="fa fa-check"></i><b>5.3.2</b> Some math*</a></li>
+<li class="chapter" data-level="5.3.3" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html#summary-1"><i class="fa fa-check"></i><b>5.3.3</b> Summary</a></li>
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="5.4-reference-group-coding-5.html"><a href="5.4-reference-group-coding-5.html"><i class="fa fa-check"></i><b>5.4</b> Reference-group coding</a>
 <ul>
@@ -541,26 +546,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>“Simple (SES)” regresses Math Achievement on SES only.</li>
 <li>“Simple (ALT)” regresses Math Achievement on ALT only.</li>
 </ul>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="4.3-comparison-4.html#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run models</span></span>
-<span id="cb67-2"><a href="4.3-comparison-4.html#cb67-2" aria-hidden="true" tabindex="-1"></a>mod1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Math <span class="sc">~</span> SES  <span class="sc">+</span> ATL, <span class="at">data =</span> example_data)</span>
-<span id="cb67-3"><a href="4.3-comparison-4.html#cb67-3" aria-hidden="true" tabindex="-1"></a>mod2a <span class="ot">&lt;-</span> <span class="fu">lm</span>(Math  <span class="sc">~</span> SES, <span class="at">data =</span> example_data)</span>
-<span id="cb67-4"><a href="4.3-comparison-4.html#cb67-4" aria-hidden="true" tabindex="-1"></a>mod2b <span class="ot">&lt;-</span> <span class="fu">lm</span>(Math  <span class="sc">~</span> ATL, <span class="at">data =</span> example_data)</span>
-<span id="cb67-5"><a href="4.3-comparison-4.html#cb67-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-6"><a href="4.3-comparison-4.html#cb67-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Collect output</span></span>
-<span id="cb67-7"><a href="4.3-comparison-4.html#cb67-7" aria-hidden="true" tabindex="-1"></a>out1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">coef</span>(mod1), <span class="fu">summary</span>(mod1)<span class="sc">$</span>r.squared)</span>
-<span id="cb67-8"><a href="4.3-comparison-4.html#cb67-8" aria-hidden="true" tabindex="-1"></a>out2a <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">coef</span>(mod2a), <span class="cn">NA</span>, <span class="fu">summary</span>(mod2a)<span class="sc">$</span>r.squared)</span>
-<span id="cb67-9"><a href="4.3-comparison-4.html#cb67-9" aria-hidden="true" tabindex="-1"></a>out2b <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">coef</span>(mod2b), <span class="cn">NA</span>, <span class="fu">summary</span>(mod2b)<span class="sc">$</span>r.squared)[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">4</span>)]</span>
-<span id="cb67-10"><a href="4.3-comparison-4.html#cb67-10" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">rbind</span>(out1, out2a, out2b))</span>
-<span id="cb67-11"><a href="4.3-comparison-4.html#cb67-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-12"><a href="4.3-comparison-4.html#cb67-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Clean up names</span></span>
-<span id="cb67-13"><a href="4.3-comparison-4.html#cb67-13" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(out) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">names</span>(<span class="fu">coef</span>(mod1)), <span class="st">&quot;R-squared&quot;</span>)</span>
-<span id="cb67-14"><a href="4.3-comparison-4.html#cb67-14" aria-hidden="true" tabindex="-1"></a>out<span class="sc">$</span>Model <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Multiple&quot;</span>, <span class="st">&quot;Simple (SES)&quot;</span>, <span class="st">&quot;Simple (ATL)&quot;</span>)</span>
-<span id="cb67-15"><a href="4.3-comparison-4.html#cb67-15" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> out[<span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>)]</span>
-<span id="cb67-16"><a href="4.3-comparison-4.html#cb67-16" aria-hidden="true" tabindex="-1"></a><span class="fu">row.names</span>(out) <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb67-17"><a href="4.3-comparison-4.html#cb67-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-18"><a href="4.3-comparison-4.html#cb67-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Table </span></span>
-<span id="cb67-19"><a href="4.3-comparison-4.html#cb67-19" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">knitr.kable.NA =</span> <span class="st">&#39;---&#39;</span>)</span>
-<span id="cb67-20"><a href="4.3-comparison-4.html#cb67-20" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(out, <span class="at">caption =</span> <span class="st">&quot;Regression Coefficients and R-squared From the Three Models&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="4.3-comparison-4.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run models</span></span>
+<span id="cb4-2"><a href="4.3-comparison-4.html#cb4-2" aria-hidden="true" tabindex="-1"></a>mod1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(Math <span class="sc">~</span> SES  <span class="sc">+</span> ATL, <span class="at">data =</span> example_data)</span>
+<span id="cb4-3"><a href="4.3-comparison-4.html#cb4-3" aria-hidden="true" tabindex="-1"></a>mod2a <span class="ot">&lt;-</span> <span class="fu">lm</span>(Math  <span class="sc">~</span> SES, <span class="at">data =</span> example_data)</span>
+<span id="cb4-4"><a href="4.3-comparison-4.html#cb4-4" aria-hidden="true" tabindex="-1"></a>mod2b <span class="ot">&lt;-</span> <span class="fu">lm</span>(Math  <span class="sc">~</span> ATL, <span class="at">data =</span> example_data)</span>
+<span id="cb4-5"><a href="4.3-comparison-4.html#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="4.3-comparison-4.html#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Collect output</span></span>
+<span id="cb4-7"><a href="4.3-comparison-4.html#cb4-7" aria-hidden="true" tabindex="-1"></a>out1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">coef</span>(mod1), <span class="fu">summary</span>(mod1)<span class="sc">$</span>r.squared)</span>
+<span id="cb4-8"><a href="4.3-comparison-4.html#cb4-8" aria-hidden="true" tabindex="-1"></a>out2a <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">coef</span>(mod2a), <span class="cn">NA</span>, <span class="fu">summary</span>(mod2a)<span class="sc">$</span>r.squared)</span>
+<span id="cb4-9"><a href="4.3-comparison-4.html#cb4-9" aria-hidden="true" tabindex="-1"></a>out2b <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">coef</span>(mod2b), <span class="cn">NA</span>, <span class="fu">summary</span>(mod2b)<span class="sc">$</span>r.squared)[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">4</span>)]</span>
+<span id="cb4-10"><a href="4.3-comparison-4.html#cb4-10" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">rbind</span>(out1, out2a, out2b))</span>
+<span id="cb4-11"><a href="4.3-comparison-4.html#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="4.3-comparison-4.html#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Clean up names</span></span>
+<span id="cb4-13"><a href="4.3-comparison-4.html#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(out) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">names</span>(<span class="fu">coef</span>(mod1)), <span class="st">&quot;R-squared&quot;</span>)</span>
+<span id="cb4-14"><a href="4.3-comparison-4.html#cb4-14" aria-hidden="true" tabindex="-1"></a>out<span class="sc">$</span>Model <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Multiple&quot;</span>, <span class="st">&quot;Simple (SES)&quot;</span>, <span class="st">&quot;Simple (ATL)&quot;</span>)</span>
+<span id="cb4-15"><a href="4.3-comparison-4.html#cb4-15" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> out[<span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>)]</span>
+<span id="cb4-16"><a href="4.3-comparison-4.html#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="fu">row.names</span>(out) <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb4-17"><a href="4.3-comparison-4.html#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-18"><a href="4.3-comparison-4.html#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Table </span></span>
+<span id="cb4-19"><a href="4.3-comparison-4.html#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">knitr.kable.NA =</span> <span class="st">&#39;---&#39;</span>)</span>
+<span id="cb4-20"><a href="4.3-comparison-4.html#cb4-20" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(out, <span class="at">caption =</span> <span class="st">&quot;Regression Coefficients and R-squared From the Three Models&quot;</span>)</span></code></pre></div>
 <table>
 <caption><span id="tab:compare">Table 4.1: </span>Regression Coefficients and R-squared From the Three Models</caption>
 <thead>

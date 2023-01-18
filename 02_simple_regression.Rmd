@@ -135,7 +135,7 @@ where $i = 1 \dots N$ indexes the respondents in the sample. OLS regression is v
 Solving the  minimization problem (setting derivatives to zero) gives the following equations for the regression parameters: 
 
 \[ 
-a = \bar Y - b \bar X \quad \quad \quad \quad b = \frac{\text{Cov}(X, Y)}{s^2_X} = r_{XY} \frac{s_X}{s_Y}
+a = \bar Y - b \bar X \quad \quad \quad \quad b = \frac{\text{Cov}(X, Y)}{s^2_X} = r_{XY} \frac{s_Y}{s_X}
 \]
 
 (If you aren't familiar with the symbols in these equations, check out the review materials in Section \@ref(review-2) for a refresher.)  
@@ -861,15 +861,15 @@ You can see that the t-distribution looks like a normal distribution centered a 
 
 So now we can say which values of $t$ are large -- the ones that are unlikely under the null hypothesis. But the problem now is to determine how unlikely is "unlikely enough" to reject the null hypothesis. 
 
-We answer this question by setting the significance level of the test, usually denoted $\alpha$. This number represents our tolerance for false negatives or Type I errors -- i.e., for incorrectly concluding that the null hypothesis is true (no effect). When we set $\alpha$ to a small number, we are saying that we want the probability of a false negative to be small. This means we are going to need strong evidence before we reject the null hypothesis -- i.e., the value of $t$ would need to be very unlikely under the null hypothesis. How unlikely?  Smaller than $\alpha$. 
+We answer this question by setting the significance level of the test, usually denoted $\alpha$. This number represents our tolerance for false positives or Type I errors -- i.e., for incorrectly concluding that the null hypothesis is false. When we set $\alpha$ to a small number, we are saying that we want the probability of a false positive to be small. This means we are going to need strong evidence before we reject the null hypothesis -- i.e., the value of $t$ would need to be very unlikely under the null hypothesis. How unlikely?  Smaller than $\alpha$. 
 
 In summary, we use the t-test to make an inference about the null hypothesis by comparing two probabilities: 
 
 1. The probability of observing the value in our sample, under the assumption that the null hypothesis is true (i.e., under the t-distribution). This is called the $p$-value. (Actually the $p$-value is probability of observing a value $t$ at least as large as the one in our sample, but this is a just technicality.)
 
-2. The significance level that represents our tolerance for a false negative, $\alpha$.
+2. The significance level that represents our tolerance for a false positive, $\alpha$.
 
-If $p < \alpha$ (i.e., if the likelihood of $t$ being a false negative is less than we have required), we reject the null hypothesis. Otherwise we retain the null hypothesis and conclude there was no effect.
+If $p < \alpha$ (i.e., if the likelihood of $t$ being a false positive is less than we have required), we reject the null hypothesis. Otherwise we retain the null hypothesis and conclude there was no effect.
 
 There is a lot more to say here, but all of this is what Stat 1 was for. Usually we set $\alpha = .05$ and that is that. 
 
@@ -926,5 +926,6 @@ You don't need to use APA (unless you are in psych or educ), but you should be f
   
  * After controlling for Maternal Education, a one unit of increase in SES was associated with $b = 0.32$ units of increase in Academic Achievement. This was a statistically significant relationship ($t(247) = 2.91, p < .01$).
 
-
-
+```{r, echo=F}
+detach(NELS)
+```

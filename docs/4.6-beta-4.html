@@ -23,7 +23,7 @@
 <meta name="author" content="Peter Halpin" />
 
 
-<meta name="date" content="2023-01-13" />
+<meta name="date" content="2023-01-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -153,6 +153,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.4" data-path="2.4-rsquared-2.html"><a href="2.4-rsquared-2.html"><i class="fa fa-check"></i><b>2.4</b> R-squared</a>
 <ul>
 <li class="chapter" data-level="2.4.1" data-path="2.4-rsquared-2.html"><a href="2.4-rsquared-2.html#derivation"><i class="fa fa-check"></i><b>2.4.1</b> Derivation*</a></li>
+<li class="chapter" data-level="2.4.2" data-path="2.4-rsquared-2.html"><a href="2.4-rsquared-2.html#additional-details"><i class="fa fa-check"></i><b>2.4.2</b> Additional details*</a></li>
 </ul></li>
 <li class="chapter" data-level="2.5" data-path="2.5-population-model-2.html"><a href="2.5-population-model-2.html"><i class="fa fa-check"></i><b>2.5</b> The population model</a></li>
 <li class="chapter" data-level="2.6" data-path="2.6-notation-2.html"><a href="2.6-notation-2.html"><i class="fa fa-check"></i><b>2.6</b> Clarifying notation</a></li>
@@ -204,7 +205,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4" data-path="4-chapter-4.html"><a href="4-chapter-4.html"><i class="fa fa-check"></i><b>4</b> Regression with Two Predictors</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="4.1-ecls-4.html"><a href="4.1-ecls-4.html"><i class="fa fa-check"></i><b>4.1</b> An example from ECLS</a></li>
+<li class="chapter" data-level="4.1" data-path="4.1-ecls-4.html"><a href="4.1-ecls-4.html"><i class="fa fa-check"></i><b>4.1</b> An example from ECLS</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="4.1-ecls-4.html"><a href="4.1-ecls-4.html#correlation-matrices"><i class="fa fa-check"></i><b>4.1.1</b> Correlation matrices</a></li>
+</ul></li>
 <li class="chapter" data-level="4.2" data-path="4.2-the-two-predictor-model.html"><a href="4.2-the-two-predictor-model.html"><i class="fa fa-check"></i><b>4.2</b> The two-predictor model</a></li>
 <li class="chapter" data-level="4.3" data-path="4.3-comparison-4.html"><a href="4.3-comparison-4.html"><i class="fa fa-check"></i><b>4.3</b> Multiple vs simple regression</a>
 <ul>
@@ -246,7 +250,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.3" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html"><i class="fa fa-check"></i><b>5.3</b> Binary predictors</a>
 <ul>
 <li class="chapter" data-level="5.3.1" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html#relation-with-t-tests"><i class="fa fa-check"></i><b>5.3.1</b> Relation with t-tests</a></li>
-<li class="chapter" data-level="5.3.2" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html#summary-1"><i class="fa fa-check"></i><b>5.3.2</b> Summary</a></li>
+<li class="chapter" data-level="5.3.2" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html#some-math"><i class="fa fa-check"></i><b>5.3.2</b> Some math*</a></li>
+<li class="chapter" data-level="5.3.3" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html#summary-1"><i class="fa fa-check"></i><b>5.3.3</b> Summary</a></li>
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="5.4-reference-group-coding-5.html"><a href="5.4-reference-group-coding-5.html"><i class="fa fa-check"></i><b>5.4</b> Reference-group coding</a>
 <ul>
@@ -539,10 +544,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Comparison with Equations <a href="4.4-ols-4.html#eq:2pred">(4.2)</a> shows that <span class="math inline">\(\beta_0 = 0\)</span> and</p>
 <p><span class="math display">\[ \beta_j = b_j \frac{s_Y}{s_j}. \]</span></p>
 <p>For the ECLS example, the <span class="math inline">\(\beta\)</span>-weights are reported below. Notice that, while the regression coefficients (and their standard errors) have changed compared to the unstandardized output reported in Section <a href="4.5-interpretation-4.html#interpretation-4">4.5</a>, much of the output is the same (t-tests, p-values, R-squared, its F-test).</p>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="4.6-beta-4.html#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Unlike other software, R doesn&#39;t have a convenience functions for beta coefficients. </span></span>
-<span id="cb70-2"><a href="4.6-beta-4.html#cb70-2" aria-hidden="true" tabindex="-1"></a>z_example_data <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">scale</span>(example_data))</span>
-<span id="cb70-3"><a href="4.6-beta-4.html#cb70-3" aria-hidden="true" tabindex="-1"></a>z_mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(Math <span class="sc">~</span> SES  <span class="sc">+</span> ATL, <span class="at">data =</span> z_example_data)</span>
-<span id="cb70-4"><a href="4.6-beta-4.html#cb70-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(z_mod)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="4.6-beta-4.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Unlike other software, R doesn&#39;t have a convenience functions for beta coefficients. </span></span>
+<span id="cb7-2"><a href="4.6-beta-4.html#cb7-2" aria-hidden="true" tabindex="-1"></a>z_example_data <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">scale</span>(example_data))</span>
+<span id="cb7-3"><a href="4.6-beta-4.html#cb7-3" aria-hidden="true" tabindex="-1"></a>z_mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(Math <span class="sc">~</span> SES  <span class="sc">+</span> ATL, <span class="at">data =</span> z_example_data)</span>
+<span id="cb7-4"><a href="4.6-beta-4.html#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(z_mod)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = Math ~ SES + ATL, data = z_example_data)
