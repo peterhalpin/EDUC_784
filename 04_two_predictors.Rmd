@@ -23,11 +23,11 @@ codefolder::bookdown(init = "hide", style = button)
 
 This section considers a subset of data from the 1998 Early Childhood Longitudinal Study (ECLS; https://nces.ed.gov/ecls/). We focus on the following three variables. 
 
-* Math Achievement in the first semester of Kindergarten. This variable can be interpreted as the number of questions (out of 61) answered correctly on a math test. Don't worry -- the respondents in this study did not have to write a 61-question math test in the first semester of K! Students only answered a few of the questions and their scores were re-scaled to be out a the total of 61 questions afterwards. 
+* Math Achievement in the first semester of Kindergarten. This variable can be interpreted as the number of questions (out of 61) answered correctly on a math test. Don't worry -- the respondents in this study did not have to write a 61-question math test in the first semester of K! Students only answered a few of the questions and their scores were re-scaled to be out a total of 61 questions afterwards. 
 
 * Socioecomonic Status (SES), which is a composite of household factors (e.g., parental education, household income) ranging from 30-72. 
 
-* Approaches to Learning (ATL), which is a teacher reported measure of behaviors that affect the ease with which children can benefit from the learning environment. It includes six items that rate the child’s attentiveness, task persistence, eagerness to learn, learning independence, flexibility, and organization. The items have 4 response categories (1-4), coded so that higher values represent more positive responses, and the scale is an unweighted average the six items.
+* Approaches to Learning (ATL), which is a teacher-reported measure of behaviors that affect the ease with which children can benefit from the learning environment. It includes six items that rate the child’s attentiveness, task persistence, eagerness to learn, learning independence, flexibility, and organization. The items have 4 response categories (1-4), coded so that higher values represent more positive responses, and the scale is an unweighted average the six items.
 
 More details about these variables  are available in the ECLS user manual: https://nces.ed.gov/ecls/data/ECLSK_K8_Manual_part1.pdf.
 
