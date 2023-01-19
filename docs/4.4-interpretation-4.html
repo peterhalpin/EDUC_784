@@ -225,7 +225,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4.7" data-path="4.7-inference-for-slopes-4.html"><a href="4.7-inference-for-slopes-4.html"><i class="fa fa-check"></i><b>4.7</b> Inference for the slopes</a>
 <ul>
-<li class="chapter" data-level="4.7.1" data-path="4.7-inference-for-slopes-4.html"><a href="4.7-inference-for-slopes-4.html#precision"><i class="fa fa-check"></i><b>4.7.1</b> Precision</a></li>
+<li class="chapter" data-level="4.7.1" data-path="4.7-inference-for-slopes-4.html"><a href="4.7-inference-for-slopes-4.html#precision-of-hat-b"><i class="fa fa-check"></i><b>4.7.1</b> Precision of <span class="math inline">\(\hat b\)</span></a></li>
 </ul></li>
 <li class="chapter" data-level="4.8" data-path="4.8-inference-for-rsquared-4.html"><a href="4.8-inference-for-rsquared-4.html"><i class="fa fa-check"></i><b>4.8</b> Inference for R-squared</a></li>
 <li class="chapter" data-level="4.9" data-path="4.9-workbook.html"><a href="4.9-workbook.html"><i class="fa fa-check"></i><b>4.9</b> Workbook</a></li>
@@ -541,19 +541,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>If we increase <span class="math inline">\(SES\)</span> by one unit and hold <span class="math inline">\(ATL\)</span> constant, we get</p>
 <p><span class="math display">\[ \widehat {MATH^*} = b_0 + b_1 (SES + 1) + b_2 (ATL). \]</span></p>
 <p>The difference between <span class="math inline">\(\widehat{MATH^*}\)</span> and <span class="math inline">\(\widehat{MATH}\)</span> is how much the predicted value changes for a one unit increase in SES, while holding ATL constant:</p>
-<p><span class="math display">\[ \widehat{MATH^*} - \widehat{MATH}  = b_1\]</span></p>
-<p>So, this why we interpret the regression coefficients in multiple regression differently than simple regression. In multiple regression, we interpret the “effect” of one predictor while holding the other predictor(s) constant.</p>
+<p><span class="math display">\[ \widehat{MATH^*} - \widehat{MATH}  = b_1.\]</span></p>
+<p>So, this why we interpret the regression coefficients in multiple regression differently than simple regression. In multiple regression, we interpret the “effect” of each predictor while holding the other predictor(s) constant.</p>
 </div>
 <div id="controlling-for-the-other-predictor" class="section level3 hasAnchor" number="4.4.2">
 <h3><span class="header-section-number">4.4.2</span> “Controlling for the other predictor”<a href="4.4-interpretation-4.html#controlling-for-the-other-predictor" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Another interpretation of the regression coefficients is in terms of equations in for <span class="math inline">\(b_1\)</span> and <span class="math inline">\(b_2\)</span> presented in Section <a href="4.3-ols-4.html#ols-4">4.3</a>. For example, the equation for <span class="math inline">\(b_1\)</span> (the regression coefficient)</p>
+<p>Another interpretation of the regression coefficients is in terms of the equations in for <span class="math inline">\(b_1\)</span> and <span class="math inline">\(b_2\)</span> presented in Section <a href="4.3-ols-4.html#ols-4">4.3</a>. For example, the equation for <span class="math inline">\(b_1\)</span> is</p>
 <p><span class="math display">\[\begin{equation}
-b_1 = \frac{r_{Y1} - r_{Y2} \color{red}{r_{12}}} {1 - \color{red}{r^2_{12}}} \frac{s_1}{s_Y}
+b_1 = \frac{r_{Y1} - r_{Y2} \color{red}{r_{12}}} {1 - \color{red}{r^2_{12}}} \frac{s_1}{s_Y}.
 \end{equation}\]</span></p>
-<p>The correlation between the predictors is shown in red. Note that if the predictors are uncorrelated (i.e., <span class="math inline">\(\color{red}{r^2_{12}} = 0\)</span>) then</p>
+<p>This is the same equation as from Section <a href="4.3-ols-4.html#ols-4">4.3</a>, but the correlation between the predictors is shown in red. Note that if the predictors are uncorrelated (i.e., <span class="math inline">\(\color{red}{r^2_{12}} = 0\)</span>) then</p>
 <p><span class="math display">\[ b_1 = r_{Y1} \frac{s_1}{s_Y}, \]</span></p>
 <p>which is just the regression coefficient from simple regression (Section <a href="2.3-ols-2.html#ols-2">2.3</a>).</p>
-<p>In general, the formulas for the regression coefficients in the two-predictor model are more complicated because they are “control for” or “account for” the relationship between the predictors. In simple regression, we only had one predictor, so we didn’t need to account for how the predictors were related.</p>
+<p>In general, the formulas for the regression coefficients in the two-predictor model are more complicated because they “control for” or “account for” the relationship between the predictors. In simple regression, we only had one predictor, so we didn’t need to account for how the predictors were related.</p>
 <p>Another way of saying this is that, if your predictors are uncorrelated, then multiple regression is just the same thing as doing simple regression multiple times. However, most of the time our predictors will be correlated, which is why multiple regression is more complicated than simple regression. In particular, the regression coefficients “control for” or “adjust for” the correlation between the predictors.</p>
 </div>
 <div id="the-ecls-example" class="section level3 hasAnchor" number="4.4.3">

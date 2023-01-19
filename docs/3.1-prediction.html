@@ -225,7 +225,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4.7" data-path="4.7-inference-for-slopes-4.html"><a href="4.7-inference-for-slopes-4.html"><i class="fa fa-check"></i><b>4.7</b> Inference for the slopes</a>
 <ul>
-<li class="chapter" data-level="4.7.1" data-path="4.7-inference-for-slopes-4.html"><a href="4.7-inference-for-slopes-4.html#precision"><i class="fa fa-check"></i><b>4.7.1</b> Precision</a></li>
+<li class="chapter" data-level="4.7.1" data-path="4.7-inference-for-slopes-4.html"><a href="4.7-inference-for-slopes-4.html#precision-of-hat-b"><i class="fa fa-check"></i><b>4.7.1</b> Precision of <span class="math inline">\(\hat b\)</span></a></li>
 </ul></li>
 <li class="chapter" data-level="4.8" data-path="4.8-inference-for-rsquared-4.html"><a href="4.8-inference-for-rsquared-4.html"><i class="fa fa-check"></i><b>4.8</b> Inference for R-squared</a></li>
 <li class="chapter" data-level="4.9" data-path="4.9-workbook.html"><a href="4.9-workbook.html"><i class="fa fa-check"></i><b>4.9</b> Workbook</a></li>
@@ -538,7 +538,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>When we are interested in using values of <span class="math inline">\(X\)</span> to make predictions about (yet unobserved) values of <span class="math inline">\(Y\)</span>, we use <span class="math inline">\(\hat Y\)</span> as our guess. This is why <span class="math inline">\(\hat Y\)</span> is called the “predicted value” of <span class="math inline">\(Y\)</span>.</p>
 <p>When making predictions, we usually want some additional information about how good the predictions will be. In OLS regression, this information is provided by the prediction error variance (cite: Fox)</p>
 <p><span class="math display">\[ s^2_{\hat Y_i} = \frac{SS_{\text{res}}}{N - 2} \left(1 +  \frac{1}{N} + \frac{(X_i - \bar X)^2}{(N-1) s^2_X} \right). \]</span></p>
-<p>The prediction errors for NELS example in Figure <a href="2.1-example-2.html#fig:fig1">2.1</a> are represented in Figure <a href="3.1-prediction.html#fig:fig3">3.1</a> as a gray band around the regression line.</p>
+<p>The prediction errors for the NELS example in Figure <a href="2.1-example-2.html#fig:fig1">2.1</a> are represented in Figure <a href="3.1-prediction.html#fig:fig3">3.1</a> as a gray band around the regression line.</p>
 <!-- This figure is plotting the in-sample prediction error, not the out-of-sample prediction error (i.e., the error band it too small. Need to do plot manually to get correct predictor bands) -->
 <div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="3.1-prediction.html#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;NELS.RData&quot;</span>)</span>
 <span id="cb61-2"><a href="3.1-prediction.html#cb61-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>

@@ -225,7 +225,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4.7" data-path="4.7-inference-for-slopes-4.html"><a href="4.7-inference-for-slopes-4.html"><i class="fa fa-check"></i><b>4.7</b> Inference for the slopes</a>
 <ul>
-<li class="chapter" data-level="4.7.1" data-path="4.7-inference-for-slopes-4.html"><a href="4.7-inference-for-slopes-4.html#precision"><i class="fa fa-check"></i><b>4.7.1</b> Precision</a></li>
+<li class="chapter" data-level="4.7.1" data-path="4.7-inference-for-slopes-4.html"><a href="4.7-inference-for-slopes-4.html#precision-of-hat-b"><i class="fa fa-check"></i><b>4.7.1</b> Precision of <span class="math inline">\(\hat b\)</span></a></li>
 </ul></li>
 <li class="chapter" data-level="4.8" data-path="4.8-inference-for-rsquared-4.html"><a href="4.8-inference-for-rsquared-4.html"><i class="fa fa-check"></i><b>4.8</b> Inference for R-squared</a></li>
 <li class="chapter" data-level="4.9" data-path="4.9-workbook.html"><a href="4.9-workbook.html"><i class="fa fa-check"></i><b>4.9</b> Workbook</a></li>
@@ -514,7 +514,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">4.6.1</span> Relation with simple regression<a href="4.6-rsquared-4.html#relation-with-simple-regression" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Like the regression coefficients in Equation <a href="4.3-ols-4.html#eq:2pred">(4.2)</a>, the equation for R-squared can also be written in terms of the correlations among the three variables:</p>
 <p><span class="math display">\[ R^2 = \frac{r^2_{Y1} + r^2_{Y2} - 2 r_{12}r_{Y1}r_{Y2}}{1 - r^2_{12}} \]</span></p>
-<p>If the correlation between the predictors is zero, then we have the simplified formula</p>
+<p>If the correlation between the predictors is zero, then thus equation simplifies to</p>
 <p><span class="math display">\[ R^2 = r^2_{Y1} + r^2_{Y2}. \]</span></p>
 <p>But, when the predictors are correlated, either positively or negatively, it can be show that</p>
 <p><span class="math display">\[ R^2 &lt; r^2_{Y1} + r^2_{Y2}. \]</span></p>
@@ -526,7 +526,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 Figure 4.2: Shared Variance Among <span class="math inline">\(Y\)</span>, <span class="math inline">\(X_1\)</span>, and <span class="math inline">\(X_2\)</span>.
 </p>
 </div>
-<p>The circles represent the variance of each variable and the overlap between circles represents their shared variance. If we do two simple regression and the up the R-squared values, we would double count the area labelled “b”. When we compute R-squared in multiple regression, we only count that area once.
+<p>The circles represent the variance of each variable and the overlap between circles represents their shared variance. If we do two simple regression and then add up the R-squared values, we would double count the area labelled “b”. When we compute R-squared in multiple regression, we only count that area once.</p>
 <!--
 \begin{align}
 R^2_{Y.12} & = \frac{A + B + C}{A + B + C + D} \\ \\
@@ -558,7 +558,7 @@ r^2_{Y2 \mid 1} & = \frac{B}{A + B + C + D}
 Using this relationship, we can see that squared semi partials (and hence the \beta-weights) 
 \end{align} \]
 
---></p>
+-->
 </div>
 <div id="adjusted-r-squared" class="section level3 hasAnchor" number="4.6.2">
 <h3><span class="header-section-number">4.6.2</span> Adjusted R-squared<a href="4.6-rsquared-4.html#adjusted-r-squared" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -572,8 +572,8 @@ Figure 4.3: Sampling Distribution of <span class="math inline">\(r\)</span> and 
 ho = 0$.
 </p>
 </div>
-<p>For the “un-squared” correlation, <span class="math inline">\(r\)</span>, the sample distribution is centered at the true value <span class="math inline">\(\rho = 0\)</span>, so it is an unbiased estimate of <span class="math inline">\(\rho\)</span>.</p>
-<p>But for the squared correlation, <span class="math inline">\(r^2\)</span>, the mean of the sampling distribution is slightly above zero because all of the random deviations are now positive (because they have been squared). Since the expected value of the <span class="math inline">\(r^2\)</span> is greater than the population (<span class="math inline">\(\rho = 0\)</span>), we say that <span class="math inline">\(r^2\)</span> is an upwardly biased (i.e., too large) estimate of <span class="math inline">\(\rho^2\)</span>.</p>
+<p>For the “un-squared” correlation, <span class="math inline">\(r\)</span>, the sample distribution is centered at the true value <span class="math inline">\(\rho = 0\)</span>. This means that <span class="math inline">\(r\)</span> is an unbiased estimate of <span class="math inline">\(\rho\)</span>.</p>
+<p>But for the squared correlation, <span class="math inline">\(r^2\)</span>, the mean of the sampling distribution is slightly above zero. This is because all of the random deviations are now positive (because they have been squared). Since the average value of <span class="math inline">\(r^2\)</span> is greater than the population value (<span class="math inline">\(\rho = 0\)</span>), we say that <span class="math inline">\(r^2\)</span> is an upwardly biased estimate of <span class="math inline">\(\rho^2\)</span>. (i.e., it’s too large)</p>
 <p>The adjusted R-squared corrects this bias. The formula for the adjustment is:</p>
 <p><span class="math display">\[ \tilde R^2 = 1 - (1 - R^2) \frac{N-1}{N - J - 1} \]</span></p>
 <p>where <span class="math inline">\(J\)</span> is the number of predictors in the model. It can be seen that the adjustment is larger when</p>

@@ -225,7 +225,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4.7" data-path="4.7-inference-for-slopes-4.html"><a href="4.7-inference-for-slopes-4.html"><i class="fa fa-check"></i><b>4.7</b> Inference for the slopes</a>
 <ul>
-<li class="chapter" data-level="4.7.1" data-path="4.7-inference-for-slopes-4.html"><a href="4.7-inference-for-slopes-4.html#precision"><i class="fa fa-check"></i><b>4.7.1</b> Precision</a></li>
+<li class="chapter" data-level="4.7.1" data-path="4.7-inference-for-slopes-4.html"><a href="4.7-inference-for-slopes-4.html#precision-of-hat-b"><i class="fa fa-check"></i><b>4.7.1</b> Precision of <span class="math inline">\(\hat b\)</span></a></li>
 </ul></li>
 <li class="chapter" data-level="4.8" data-path="4.8-inference-for-rsquared-4.html"><a href="4.8-inference-for-rsquared-4.html"><i class="fa fa-check"></i><b>4.8</b> Inference for R-squared</a></li>
 <li class="chapter" data-level="4.9" data-path="4.9-workbook.html"><a href="4.9-workbook.html"><i class="fa fa-check"></i><b>4.9</b> Workbook</a></li>
@@ -562,9 +562,9 @@ s_{\widehat b_j} = \frac{s_y}{s_x} \sqrt{\frac{1 - R^2}{N - J - 1}} \times \sqrt
 ## Residual standard error: 6.2 on 247 degrees of freedom
 ## Multiple R-squared:  0.273,  Adjusted R-squared:  0.267 
 ## F-statistic: 46.3 on 2 and 247 DF,  p-value: &lt;2e-16</code></pre>
-<div id="precision" class="section level3 hasAnchor" number="4.7.1">
-<h3><span class="header-section-number">4.7.1</span> Precision<a href="4.7-inference-for-slopes-4.html#precision" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>We can use Equation <a href="4.7-inference-for-slopes-4.html#eq:se-4">(4.3)</a> to understand the factors that influence the size of the standard errors. Recall that standard errors describe the sample-to-sample variability of a statistic. If there is a lot sample-to-sample variability, the statistic is said to be imprecise.</p>
+<div id="precision-of-hat-b" class="section level3 hasAnchor" number="4.7.1">
+<h3><span class="header-section-number">4.7.1</span> Precision of <span class="math inline">\(\hat b\)</span><a href="4.7-inference-for-slopes-4.html#precision-of-hat-b" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We can use Equation <a href="4.7-inference-for-slopes-4.html#eq:se-4">(4.3)</a> to understand the factors that influence the size of the standard errors of the regression coefficients. Recall that standard errors describe the sample-to-sample variability of a statistic. If there is a lot sample-to-sample variability, the statistic is said to be imprecise. Equation <a href="4.7-inference-for-slopes-4.html#eq:se-4">(4.3)</a> shows us what factors make <span class="math inline">\(\hat b\)</span> more or less precise.</p>
 <ul>
 <li>The standard errors <em>decrease</em> with
 <ul>
@@ -577,7 +577,7 @@ s_{\widehat b_j} = \frac{s_y}{s_x} \sqrt{\frac{1 - R^2}{N - J - 1}} \times \sqrt
 <li>The proportion of variance in the predictor that is explained by the other predictors, <span class="math inline">\(R^2_j\)</span></li>
 </ul></li>
 </ul>
-<p>So, large sample sizes and small residual variance (<span class="math inline">\(1 - R^2\)</span>) lead to high precision in multiple regression. On the other hand, including many highly correlated predictors in the model leads to less precision. In particular, the situation where <span class="math inline">\(R^2_j\)</span> approaches the value of <span class="math inline">\(1\)</span> is called <em>multicollinearity</em> (or just <em>collinearity</em> with 2 predictors). We will talk about multicollinearity in more detail in Chapter <a href="6-chapter-6.html#chapter-6">6</a>.</p>
+<p>So, large sample sizes and a large proportion of variance explained lead to high precision in multiple regression. On the other hand, including many predictors that are highly correlated with each other leads to less precision. In particular, the situation where <span class="math inline">\(R^2_j\)</span> approaches the value of <span class="math inline">\(1\)</span> is called <em>multicollinearity</em> (or just <em>collinearity</em> with 2 predictors). We will talk about multicollinearity in more detail in Chapter <a href="6-chapter-6.html#chapter-6">6</a>.</p>
 </div>
 </div>
             </section>

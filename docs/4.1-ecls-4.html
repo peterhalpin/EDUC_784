@@ -225,7 +225,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4.7" data-path="4.7-inference-for-slopes-4.html"><a href="4.7-inference-for-slopes-4.html"><i class="fa fa-check"></i><b>4.7</b> Inference for the slopes</a>
 <ul>
-<li class="chapter" data-level="4.7.1" data-path="4.7-inference-for-slopes-4.html"><a href="4.7-inference-for-slopes-4.html#precision"><i class="fa fa-check"></i><b>4.7.1</b> Precision</a></li>
+<li class="chapter" data-level="4.7.1" data-path="4.7-inference-for-slopes-4.html"><a href="4.7-inference-for-slopes-4.html#precision-of-hat-b"><i class="fa fa-check"></i><b>4.7.1</b> Precision of <span class="math inline">\(\hat b\)</span></a></li>
 </ul></li>
 <li class="chapter" data-level="4.8" data-path="4.8-inference-for-rsquared-4.html"><a href="4.8-inference-for-rsquared-4.html"><i class="fa fa-check"></i><b>4.8</b> Inference for R-squared</a></li>
 <li class="chapter" data-level="4.9" data-path="4.9-workbook.html"><a href="4.9-workbook.html"><i class="fa fa-check"></i><b>4.9</b> Workbook</a></li>
@@ -535,7 +535,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </script>
 <p>This section considers a subset of data from the 1998 Early Childhood Longitudinal Study (ECLS; <a href="https://nces.ed.gov/ecls/" class="uri">https://nces.ed.gov/ecls/</a>). We focus on the following three variables.</p>
 <ul>
-<li><p>Math Achievement in the first semester of Kindergarten. This variable can be interpreted as the number of questions out of 61 answered correctly on a math test. Don’t worry – the respondents in this study did not have to write a 61-question math test in the first semester of K! Students only answered a few of the questions and their scores were re-scaled to be out of the total of 61 questions afterwards.</p></li>
+<li><p>Math Achievement in the first semester of Kindergarten. This variable can be interpreted as the number of questions (out of 61) answered correctly on a math test. Don’t worry – the respondents in this study did not have to write a 61-question math test in the first semester of K! Students only answered a few of the questions and their scores were re-scaled to be out a the total of 61 questions afterwards.</p></li>
 <li><p>Socioecomonic Status (SES), which is a composite of household factors (e.g., parental education, household income) ranging from 30-72.</p></li>
 <li><p>Approaches to Learning (ATL), which is a teacher reported measure of behaviors that affect the ease with which children can benefit from the learning environment. It includes six items that rate the child’s attentiveness, task persistence, eagerness to learn, learning independence, flexibility, and organization. The items have 4 response categories (1-4), coded so that higher values represent more positive responses, and the scale is an unweighted average the six items.</p></li>
 </ul>
@@ -562,7 +562,7 @@ Figure 4.1: ECLS Example Data.
 ## SES  0.44 1.00 0.29
 ## ATL  0.40 0.29 1.00</code></pre>
 <p>Again, notice that the entries below the diagonal are mirrored by the entries above the diagonal. We can see that all three variables are positively correlated. SES and ATL have similar correlations with Math Achievement (.44 and .40, respectively), and are also moderately correlated with each other (.29).</p>
-<p>In order to represent correlation matrix among a single outcome (<span class="math inline">\(Y\)</span>) and two predictors (<span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span>) we will use the following notation.</p>
+<p>In order to represent the correlation matrix among a single outcome variable (<span class="math inline">\(Y\)</span>) and two predictors (<span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span>) we will use the following notation.</p>
 <p><span class="math display">\[
 \begin{array}{c}
 \text{var } Y \\ \text{var } X_1 \\ \text{var } X_2
@@ -589,7 +589,7 @@ r_{2Y}  &amp; r_{21}  &amp; 1
 <!-- \end{array} -->
 <!--  \right] -->
 <!-- \] -->
-<p>This notation is a bit tricky to understand, but the basic idea is that each correlation coefficient has two subscripts. The subscripts tell us which two variables are being correlated. For the outcome variable, we use the subscript <span class="math inline">\(Y\)</span>, and for the two predictors we use the subscripts <span class="math inline">\(1\)</span> and <span class="math inline">\(2\)</span>. As with the above example, the values below the diagonal mirror the values above the diagonal and the values on the diagonal are all equal to 1. So, we really just need the three correlations show in the matrix below</p>
+<p>This notation is a bit tricky to understand, but the basic idea is that each correlation coefficient has two subscripts. The subscripts tell us which two variables are being correlated. For the outcome variable we use the subscript <span class="math inline">\(Y\)</span>, and for the two predictors we use the subscripts <span class="math inline">\(1\)</span> and <span class="math inline">\(2\)</span>. As with the numerical examples, the values below the diagonal mirror the values above the diagonal. So, we really just need the three correlations shown in the matrix below.</p>
 <p><span class="math display">\[
 \begin{array}{c}
 \text{var } Y \\ \text{var } X_1 \\ \text{var } X_2
@@ -603,7 +603,7 @@ r_{2Y}  &amp; r_{21}  &amp; 1
 \end{array}
 \right]
 \]</span></p>
-<p>The three correlation are interpreted as follows:</p>
+<p>The three correlations are interpreted as follows:</p>
 <ul>
 <li><p><span class="math inline">\(r_{Y1}\)</span> - the correlation between the outcome (<span class="math inline">\(Y\)</span>) and the first predictor (<span class="math inline">\(X_1\)</span>).</p></li>
 <li><p><span class="math inline">\(r_{Y2}\)</span> - the correlation between the outcome (<span class="math inline">\(Y\)</span>) and the second predictor (<span class="math inline">\(X_2\)</span>).</p></li>

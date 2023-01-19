@@ -225,7 +225,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4.7" data-path="4.7-inference-for-slopes-4.html"><a href="4.7-inference-for-slopes-4.html"><i class="fa fa-check"></i><b>4.7</b> Inference for the slopes</a>
 <ul>
-<li class="chapter" data-level="4.7.1" data-path="4.7-inference-for-slopes-4.html"><a href="4.7-inference-for-slopes-4.html#precision"><i class="fa fa-check"></i><b>4.7.1</b> Precision</a></li>
+<li class="chapter" data-level="4.7.1" data-path="4.7-inference-for-slopes-4.html"><a href="4.7-inference-for-slopes-4.html#precision-of-hat-b"><i class="fa fa-check"></i><b>4.7.1</b> Precision of <span class="math inline">\(\hat b\)</span></a></li>
 </ul></li>
 <li class="chapter" data-level="4.8" data-path="4.8-inference-for-rsquared-4.html"><a href="4.8-inference-for-rsquared-4.html"><i class="fa fa-check"></i><b>4.8</b> Inference for R-squared</a></li>
 <li class="chapter" data-level="4.9" data-path="4.9-workbook.html"><a href="4.9-workbook.html"><i class="fa fa-check"></i><b>4.9</b> Workbook</a></li>
@@ -506,16 +506,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="ols-4" class="section level2 hasAnchor" number="4.3">
 <h2><span class="header-section-number">4.3</span> OLS with two predictors<a href="4.3-ols-4.html#ols-4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>We can estimate the parameters of the two-predictor regression model in Equation <a href="4.2-the-two-predictor-model.html#eq:yhat-4">(4.1)</a> model using same approach as for simple regression, OLS. We do this by choosing the values of <span class="math inline">\(b_0, b_1, b_2\)</span> that minimize</p>
+<p>We can estimate the parameters of the two-predictor regression model in Equation <a href="4.2-the-two-predictor-model.html#eq:yhat-4">(4.1)</a> model using same approach as for simple regression. We do this by choosing the values of <span class="math inline">\(b_0, b_1, b_2\)</span> that minimize</p>
 <p><span class="math display">\[SS_\text{res} = \sum_i e_i^2.\]</span></p>
-<p>Solving the minization problem (taking derivatives) leads to the following equations for the regression coefficients (remember, the subscript <span class="math inline">\(1\)</span> denotes the first predictor and the subscript <span class="math inline">\(2\)</span> denotes the second predictor)</p>
+<p>Solving the minization problem (setting derivatives to zero) leads to the following equations for the regression coefficients (remember, the subscript <span class="math inline">\(1\)</span> denotes the first predictor and the subscript <span class="math inline">\(2\)</span> denotes the second predictor)</p>
 <p><span class="math display" id="eq:2pred">\[\begin{align}
 b_0 &amp; = \bar Y - b_1 \bar X_1 - b_2 \bar X_2 \\ \\
 b_1 &amp; = \frac{r_{Y1} - r_{Y2} r_{12}}{1 - r^2_{12}} \frac{s_1}{s_Y} \\ \\
 b_2 &amp; = \frac{r_{Y2} - r_{Y1} r_{12}}{1 - r^2_{12}} \frac{s_2}{s_Y}
 \tag{4.2}
 \end{align}\]</span></p>
-<p>As promised, these equations are more complicated than for simple regression :) The next section addresses the interpretation of the regression coefficients. But for now, the main thing to note is that multiple regression</p>
+<p>As promised, these equations are more complicated than for simple regression :) The next section addresses the interpretation of the regression coefficients.</p>
 <!-- The simple regression model was a line in two dimensions, which was easy to visualize. The two-predictor models is technically a plane in 3 dimensions. This makes it harder to visual the model, especially as the number of predictors increases. But we can use various work arounds. For example, rather than plotting Y against X, we can plot the residuals against the fitted values as in Figure \@ref(fig:fig1-4). The pink lines in Figure \@ref(fig:fig1-4) have the same interpretation as in Figure \@ref(fig:fig2): they show how far the data points are form the predicted values. 
 
 

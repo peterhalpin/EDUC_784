@@ -39,7 +39,7 @@ When making predictions, we usually want some additional information about how g
 
 \[ s^2_{\hat Y_i} = \frac{SS_{\text{res}}}{N - 2} \left(1 +  \frac{1}{N} + \frac{(X_i - \bar X)^2}{(N-1) s^2_X} \right). \]
 
-The prediction errors for NELS example in Figure \@ref(fig:fig1) are represented in Figure \@ref(fig:fig3) as a gray band around the regression line.
+The prediction errors for the NELS example in Figure \@ref(fig:fig1) are represented in Figure \@ref(fig:fig3) as a gray band around the regression line.
 
 <!-- This figure is plotting the in-sample prediction error, not the out-of-sample prediction error (i.e., the error band it too small. Need to do plot manually to get correct predictor bands) --> 
 
@@ -79,27 +79,27 @@ A causal interpretation of regression means that that changing $X$ by one unit w
 
 The gold standard for ensuring a causal interpretation of a regression coefficient is to randomly assign people to the different levels of the predictor. While this type of experimental design is possible in some settings, there are many types of variables we cannot feasibly randomly assign (e.g., SES). 
 
-In regression analysis, the concept of an omitted variable is used to  understand how lack of random assignment affects the interpretation of the model parameters. An omitted variable is any variable that is correlated with both $Y$ and $X$. In the experimental context, randomly assignment serves to ensure that $X$ is not correlated with any pre-treatment variables. In other words, random assignment can be interpreted as an experimental procedure for eliminating omitted variables. 
+In regression analysis, the concept of an omitted variable is used to  understand how lack of random assignment affects the interpretation of the model parameters. An omitted variable is any variable that is correlated with both $Y$ and $X$. In the experimental context, random assignment serves to ensure that $X$ is not correlated with any pre-treatment variables. In other words, random assignment can be interpreted as an experimental procedure for eliminating omitted variables. 
 
-The problem that arises when we don't use random assignment is with a problem called *omitted variable bias*. This situation is nicely explained by Gelman and Hill (cite:Gelman), and a modified version of their discussion is provided below. The overall idea is the same as "correlation $\neq$ causation", but the discussion is a bit technical, so the take-home messages are summarized in the following points. 
+The problem that arises when we don't use random assignment is called *omitted variable bias*. This situation is nicely explained by Gelman and Hill (cite:Gelman), and a modified version of their discussion is provided below. The overall idea is the same as "correlation $\neq$ causation", but the discussion is a bit technical, so the take-home messages are summarized in the following points. 
 
 * When a predictor variable that is correlated with $Y$ and with $X$ is left out of a regression model, it is called an omitted variable.
 
 * The problem is not just that we have an incomplete picture of how the omitted variable is related to $Y$. 
 
-* Omitted variable bias means that the predictor variables that *were included in the model* end up having the wrong regression coefficients. Otherwise stated, the regression coefficients of the predictors in the model are biased. 
+* Omitted variable bias means that the predictor variable that *was included in the model* ends up having the wrong regression coefficient. Otherwise stated, the regression coefficient of the predictor in the model is biased. 
 
 * In order to mitigate omitted variable bias, we want to include plausible omitted variables in our regression models -- i.e., multiple regression. 
 
 
 ### Omitted variable bias*
 
-We start by assuming a "true" regression model with two predictors. In the context of our example, this means that there is one other variable, in addition to SES, that is important for predicting Math Achievement. Of course, there are many predictors of Math Achievement (see Section \@ref(#example-2)), but we only need two to explain the problem of omitted variable bias.
+We start by assuming a "true" regression model with two predictors. In the context of our example, this means that there is one other variable, in addition to SES, that is important for predicting Math Achievement. Of course, there are many predictors of Math Achievement (see Section \@ref(example-2)), but we only need two to explain the problem of omitted variable bias.
 
 Let's write the "true" model as:
 
 \begin{equation}
-Y = a + b_1 X_1 + b_2 X_2 + e
+Y = a + b_1 X_1 + b_2 X_2 + \epsilon
 (\#eq:2parm)
 \end{equation}
 
@@ -108,27 +108,27 @@ where $X_1$ is SES and $X_2$ is any other variable that is correlated with both 
 Next, imagine that instead of using the model in \@ref(eq:2parm), we analyze the data using the model with just SES. In our example, this would reflect a situation in which we don't have data on maternal education, so we have to make due with just SES, leading to the usual regression line (Section \@ref(regression-line-2)):
 
 \[
-\hat Y = a^* + b^*_1 X_1 + e^*
+\hat Y = a^* + b^*_1 X_1 + \epsilon^*
 (\#eq:1parm)
 \]
 
-The basic problem of omitted variable bias is that $b_1 \neq b^*_1$ -- i.e., the regression coefficient in the true model is not the same as the regression coefficient in the model with only one predictor. This is perhaps surprising -- leaving out the maternal education gives us the wrong regression coefficient for SES!
+The basic problem of omitted variable bias is that $b_1 \neq b^*_1$ -- i.e., the regression coefficient in the true model is not the same as the regression coefficient in the model with only one predictor. This is perhaps surprising -- leaving out maternal education gives us the wrong regression coefficient for SES!
 
 To see why, start by writing $X_2$ as a function of $X_1$.
 
 \[
-X_2 = \alpha + \beta X_1 + u
+X_2 = \alpha + \beta X_1 + \nu
 (\#eq:X2)
 \]
 
-where the regression coefficients are written with Greek letters to distinguish them from the previous equations, and the residual is denoted $u$ instead of $e$ for the same reason. 
+where the regression coefficients are written with Greek letters to distinguish them from the previous equations, and the residual is denoted $\nu$ instead of $\epsilon$ for the same reason. 
 
 Next we use Equation \@ref(eq:X2) to substitute for $X_2$ in Equation \@ref(eq:2parm),
 
 \begin{align}
- Y & = a + b_1 X_1 + b_2 X_2 + e \\
- Y & = a + b_1 X_1 + b_2 (\alpha + \beta X_1 + u) \\
- Y & = \color{orange}{(a + \alpha)} + \color{green}{(b_1 + b_2\beta)} X_1 + (e + u)
+ Y & = a + b_1 X_1 + b_2 X_2 + \epsilon \\
+ Y & = a + b_1 X_1 + b_2 (\alpha + \beta X_1 + \nu) \\
+ Y & = \color{orange}{(a + \alpha)} + \color{green}{(b_1 + b_2\beta)} X_1 + (e + \nu)
 (\#eq:3parm)
 \end{align}
 
@@ -136,11 +136,11 @@ Notice that in the last line of Equation \@ref(eq:3parm), $Y$ is predicted using
 
 * $a^* = \color{orange}{a + \alpha}$
 * $b^*_1 = \color{green}{b_1 + b_2\beta}$
-* $e^* = e + u$
+* $\epsilon^* = \epsilon + \nu$
 
 The equation for $b^*_1$ is what we are most interested in. It shows that the regression parameter in our one-parameter model ($b^*_1$) is not equal to the "true" regression parameter using both predictors ($b_1$).
 
-This is what omitted variable means -- leaving out $X_2$ in Equation \@ref(eq:1parm) gives us the wrong regression parameter for $X_1$. This is one of the main motivations for including more than one predictor variable in a regression model -- i.e., to avoid omitted variable bias.
+This is what omitted variable bias means -- leaving out $X_2$ in Equation \@ref(eq:1parm) gives us the wrong regression parameter for $X_1$. This is one of the main motivations for including more than one predictor variable in a regression model -- i.e., to avoid omitted variable bias.
 
 
 Notice that there two special situations in which omitted variable bias is not a problem:
@@ -152,7 +152,7 @@ We will discuss the interpretation of these situations in class.
 
 ## Explanation
 
-Many uses of regression fall somewhere between prediction and causation. We want to do more than just predict outcomes of interest, but we often don't have a basis for making the strong assumptions required for causal interpretation of regression coefficients. This gray area between prediction and causation can be referred to as explanation.
+Many uses of regression fall somewhere between prediction and causation. We want to do more than just predict outcomes of interest, but we often don't have a basis for making the strong assumptions required for a causal interpretation of regression coefficients. This grey area between prediction and causation can be referred to as explanation.
 
 In terms of our example, we might want to explain why eighth graders differ in their Math Achievement in terms of a large number of potential predictors, such as
 
@@ -173,8 +173,8 @@ In terms of our example, we might want to explain why eighth graders differ in t
   * number of books in the household
   * ...
   
-When the goal of an analysis is explanation, it usual to focus on the proportion of variation in the outcome variable that is explained by the predictors, i.e., R-squared (see Section \@ref(rsquared-2). Later in the course we will see how we can systematically study the variance explained by individual predictors, or blocks of 1 predictor (e.g., Student factors, School factors). 
+When the goal of an analysis is explanation, it usual to focus on the proportion of variation in the outcome variable that is explained by the predictors, i.e., R-squared (see Section \@ref(rsquared-2)). Later in the course we will see how to systematically study the variance explained by individual predictors, or blocks of multiple predictor (e.g., student factors, school factors). 
 
-Note, that even a long list of predictors such as that above leaves out potential omitted variables. While the addition of more predictors can help us explain more of the variation in Math Achievement, it is rarely the case that we can claim that all predictors have been included in the model. 
+Note that even a long list of predictors such as that above leaves out potential omitted variables. While the addition of more predictors can help us explain more of the variation in Math Achievement, it is rarely the case that we can claim that all predictors have been included in the model. 
 
 

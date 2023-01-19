@@ -225,7 +225,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4.7" data-path="4.7-inference-for-slopes-4.html"><a href="4.7-inference-for-slopes-4.html"><i class="fa fa-check"></i><b>4.7</b> Inference for the slopes</a>
 <ul>
-<li class="chapter" data-level="4.7.1" data-path="4.7-inference-for-slopes-4.html"><a href="4.7-inference-for-slopes-4.html#precision"><i class="fa fa-check"></i><b>4.7.1</b> Precision</a></li>
+<li class="chapter" data-level="4.7.1" data-path="4.7-inference-for-slopes-4.html"><a href="4.7-inference-for-slopes-4.html#precision-of-hat-b"><i class="fa fa-check"></i><b>4.7.1</b> Precision of <span class="math inline">\(\hat b\)</span></a></li>
 </ul></li>
 <li class="chapter" data-level="4.8" data-path="4.8-inference-for-rsquared-4.html"><a href="4.8-inference-for-rsquared-4.html"><i class="fa fa-check"></i><b>4.8</b> Inference for R-squared</a></li>
 <li class="chapter" data-level="4.9" data-path="4.9-workbook.html"><a href="4.9-workbook.html"><i class="fa fa-check"></i><b>4.9</b> Workbook</a></li>
@@ -506,7 +506,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="explanation" class="section level2 hasAnchor" number="3.3">
 <h2><span class="header-section-number">3.3</span> Explanation<a href="3.3-explanation.html#explanation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Many uses of regression fall somewhere between prediction and causation. We want to do more than just predict outcomes of interest, but we often don’t have a basis for making the strong assumptions required for causal interpretation of regression coefficients. This gray area between prediction and causation can be referred to as explanation.</p>
+<p>Many uses of regression fall somewhere between prediction and causation. We want to do more than just predict outcomes of interest, but we often don’t have a basis for making the strong assumptions required for a causal interpretation of regression coefficients. This grey area between prediction and causation can be referred to as explanation.</p>
 <p>In terms of our example, we might want to explain why eighth graders differ in their Math Achievement in terms of a large number of potential predictors, such as</p>
 <ul>
 <li>Student factors
@@ -532,8 +532,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>…</li>
 </ul></li>
 </ul>
-<p>When the goal of an analysis is explanation, it usual to focus on the proportion of variation in the outcome variable that is explained by the predictors, i.e., R-squared (see Section <a href="2.4-rsquared-2.html#rsquared-2">2.4</a>. Later in the course we will see how we can systematically study the variance explained by individual predictors, or blocks of 1 predictor (e.g., Student factors, School factors).</p>
-<p>Note, that even a long list of predictors such as that above leaves out potential omitted variables. While the addition of more predictors can help us explain more of the variation in Math Achievement, it is rarely the case that we can claim that all predictors have been included in the model.</p>
+<p>When the goal of an analysis is explanation, it usual to focus on the proportion of variation in the outcome variable that is explained by the predictors, i.e., R-squared (see Section <a href="2.4-rsquared-2.html#rsquared-2">2.4</a>). Later in the course we will see how to systematically study the variance explained by individual predictors, or blocks of multiple predictor (e.g., student factors, school factors).</p>
+<p>Note that even a long list of predictors such as that above leaves out potential omitted variables. While the addition of more predictors can help us explain more of the variation in Math Achievement, it is rarely the case that we can claim that all predictors have been included in the model.</p>
 
 </div>
 <!-- </div> -->

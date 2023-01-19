@@ -225,7 +225,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4.7" data-path="4.7-inference-for-slopes-4.html"><a href="4.7-inference-for-slopes-4.html"><i class="fa fa-check"></i><b>4.7</b> Inference for the slopes</a>
 <ul>
-<li class="chapter" data-level="4.7.1" data-path="4.7-inference-for-slopes-4.html"><a href="4.7-inference-for-slopes-4.html#precision"><i class="fa fa-check"></i><b>4.7.1</b> Precision</a></li>
+<li class="chapter" data-level="4.7.1" data-path="4.7-inference-for-slopes-4.html"><a href="4.7-inference-for-slopes-4.html#precision-of-hat-b"><i class="fa fa-check"></i><b>4.7.1</b> Precision of <span class="math inline">\(\hat b\)</span></a></li>
 </ul></li>
 <li class="chapter" data-level="4.8" data-path="4.8-inference-for-rsquared-4.html"><a href="4.8-inference-for-rsquared-4.html"><i class="fa fa-check"></i><b>4.8</b> Inference for R-squared</a></li>
 <li class="chapter" data-level="4.9" data-path="4.9-workbook.html"><a href="4.9-workbook.html"><i class="fa fa-check"></i><b>4.9</b> Workbook</a></li>
@@ -518,14 +518,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><span class="math inline">\(b_1\)</span> and <span class="math inline">\(b_2\)</span> are the regression slopes.</li>
 <li>The intercept is denoted by <span class="math inline">\(b_0\)</span> (rather than <span class="math inline">\(a\)</span>).</li>
 </ul>
-<p>Just like simple regression, the residual for Equation <a href="4.2-the-two-predictor-model.html#eq:yhat-4">(4.1)</a> is defined as <span class="math inline">\(e = Y - \widehat Y\)</span> and the model can be equivalently written as <span class="math inline">\(Y = \widehat Y + e\)</span>. Also, remember that to write out the model using the variable names in places of <span class="math inline">\(Y\)</span> and <span class="math inline">\(X\)</span> if that helps makes things clear.</p>
+<p>Just like simple regression, the residual for Equation <a href="4.2-the-two-predictor-model.html#eq:yhat-4">(4.1)</a> is defined as <span class="math inline">\(e = Y - \widehat Y\)</span> and the model can be equivalently written as <span class="math inline">\(Y = \widehat Y + e\)</span>. Also, remember that you can write out the model using the variable names in place of <span class="math inline">\(Y\)</span> and <span class="math inline">\(X\)</span> if that helps keep track of all the notation.</p>
 <p>The correlations reported in Section <a href="4.1-ecls-4.html#ecls-4">4.1</a> address how the three variables are (linearly) related in the ECLS data. Multiple regression lets us additionally address the following types of questions:</p>
 <ul>
 <li>Does ATL “add anything” to our understanding of Math Achievement, beyond SES alone?</li>
 <li>What is the relative importance of the two predictors?</li>
 <li>How much of the variance in Math Achievement do both predictors explain together?</li>
 </ul>
-<p>As a first step towards answering these questions, the next section contrasts multiple regression with simple regression.</p>
 <!--
 
 ## Multiple vs simple regression {#comparison-4}
