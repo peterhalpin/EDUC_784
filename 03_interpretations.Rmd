@@ -13,7 +13,7 @@ button <-  "position: relative;
 ```
 
 
-Before moving onto more complicated regression models, let's consider why we might be interested in them first place. As discussed in the following sections, regression has three main uses:
+Before moving onto more complicated regression models, let's consider why we might be interested in them in the first place. As discussed in the following sections, regression has three main uses:
 
 * Prediction (focus on $\hat Y$)
 * Causation (focus on $b$)
