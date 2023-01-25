@@ -1,11 +1,6 @@
 
 #  Categorical Predictors {#chapter-5}
 
-<!-- notes
-Include venn diagram for relating regression coefficients and Rsquare
-Include discussion of subscripts for correlations in a correlation matrix
--->
-
 ```{r, echo = F}
 button <-  "position: relative; 
             top: -25px; 
@@ -36,11 +31,11 @@ In an experimental context, the canonical example of a categorical predictor is 
 
 This chapter will focus on the topic of "contrast coding" (also called "effect coding" or "dummy coding"). In particular, we will 
 
-* Address the special case of a single binary predictor
+* Address the special case of a single binary predictor.
 
 * Show some ways that this approach generalizes to categorical predictors with more than 2 categories, specifically
-  * reference-group coding (called treatment contrasts in R) 
-  * deviation coding (called sum contrasts in R). 
+  * reference-group coding (called "treatment" contrasts in R).
+  * deviation coding (called "sum" contrasts in R). 
 
 The main thing to know about the different approaches to contrast coding is that they each lead to a different interpretation of the coefficients in the regression model. In this chapter we will use a two-step procedure to work out how to interpret the regression coefficients. We will apply this two-step approach to the types of contrast coding listed above, and you can use the same approach to work out the interpretation of other contrasts that you may encounter in your research (there are many different types of contrasts out there!). 
 
@@ -58,11 +53,10 @@ For example, the two models below uses the same data and the same variables (Mat
 
 The `lm` output doesn’t tell us what kind of coding was used for our categorical variables – we need to know what is going on “under the hood” so that we can interpret the output correctly. 
 
-Notice that nothing has changed with respect to the computation of standard errors, R-squared, t-tests, F-tests, or p-values -- all of this is the same as the previous chapters. The difference between these two models is just how the categorical predictor is interpreted. 
+Notice that nothing has changed with respect to the computation of the statistics reported in the table -- all the  formulas are the same as last week. The difference between these two models is just how the categorical predictor is interpreted. 
 
 
 ```{r}
-detach(ecls)
 load("NELS.RData")
 attach(NELS)
 
@@ -77,7 +71,6 @@ egB <- lm(achrdg08 ~ urban)
 # print
 summary(egA)
 summary(egB)
-detach(NELS)
 ```
 
 ## Data and social constructs
@@ -85,11 +78,11 @@ Before getting into the math, let's consider some conceptual points.
 
 First, some terminology. *Binary* means the a variable can take on only two values: 1 and 0. If a variable takes on two values but these are represented with other numbers (e.g., 1 and 2) or with non-numeric values ("male", "female"), it is called *dichotomous* rather than binary. Otherwise stated, a binary variable is a dichotomous variable whose values are 1 and 0. The term *categorical* is used to describe variables with two or more categories. 
 
-Note that encoding a variable as dichotomous does not imply that the underlying social construct is dichotomous. For example, we can encode educational attainment as a dichotomous variable indicating whether a person has graduated high school or not. This does not imply that educational attainment has only two values in real life, or even that educational attainment is best conceptualized in terms of years of formal education. Nonetheless, for many outcomes of interest it can be meaningful to consider whether individuals have completed high school (e.g., https://www.ssa.gov/policy/docs/research-summaries/education-earnings.html)
+Note that encoding a variable as dichotomous does not imply that the underlying social construct is dichotomous. For example, we can encode educational attainment as a dichotomous variable indicating whether or not a person has graduated high school. This does not imply that educational attainment has only two values "irl", or even that educational attainment is best conceptualized in terms of years of formal education. Nonetheless, for many outcomes of interest it can be meaningful to consider whether individuals have completed high school (e.g., https://www.ssa.gov/policy/docs/research-summaries/education-earnings.html).
 
-In general, the way that a variable is encoded in a dataset is not a statement about reality -- it reflects a choice made by researchers about how to represent reality. In particular, we are often faced with less-than-ideal encodings of so-called demographic variables in quantitative data. For example, both NELS and ECLS conceptualize gender as dichotomous and use a limited set of categories for race. These representations are not well aligned with current literature on gender and racial identity. 
+In general, the way that a variable is encoded in a dataset is not a statement about reality -- it reflects a choice made by researchers about how to represent social constructs. In particular, we are often faced with less-than-ideal encodings of so-called demographic variables in quantitative data. For example, both NELS and ECLS conceptualize gender as dichotomous and use a limited set of categories for race. These representations are not well aligned with current literature on gender and racial identity. Some recent perspectives on how these issues play into quantitative research are available here: https://www.sree.org/critical-perspectives. 
 
-Nonetheless, I would argue that these categorical variables have utility, *especially* in the study of social inequality. Here is an example of why I think gender qua "male/female" is a flawed but important consideration in global education: https://www.unicef.org/education/girls-education.  
+In general, I would argue that categorical variables often have utility, *especially* in the study of social inequality. Here is an example of why I think gender qua "male/female" is a flawed but important consideration in global education: https://www.unicef.org/education/girls-education.  
 
 **Please take a moment to write down your thoughts on the tensions that arise when conceptualizing social constructs such as gender or race as categorical, and I will invite you to share you thoughts in class.**
 
@@ -103,11 +96,22 @@ Let's start our interpretation of categorical predictors with the simplest case:
 
 Figure \@ref(fig:reading-on-gender-5) illustrates the regression of Reading Achievement in Grade 8 (`achrdg08`) on a binary encoding of Gender (female = 0, male = 1) using the NELS data. There isn't a lot going on the plot! However, we can see the conditional distributions of Reading Achievement for each value of Gender, and the means of the two groups are indicated. 
 
-```{r reading-on-gender-5, fig.cap = 'Reading Achievement on Binary Gender.', fig.align = 'center'}
-knitr::include_graphics("images/reading_on_gender.png")
+```{r reading-on-gender-5, fig.cap = 'Reading Achievement on Binary Gender.', fig.align = 'center', fig.width=5}
+# Don't read this unless you really like working on graphics :) 
+binary_gender <- (gender == "Male") * 1 
+plot(binary_gender, achrdg08, col = "#4B9CD3", 
+     xlab = "binary gender (Female = 0, Male = 1)",
+     ylab = "Reading (Grade 8)")
+
+means <- tapply(achrdg08, binary_gender, mean)
+labels <- c(expression(bar(Y)[0]), expression(bar(Y)[1]))
+
+text(x = c(.1, .9), y = means, labels = labels, cex = 1.5) 
+text(x = c(0, 1), y = means, labels = c("_", "_"), cex = 2) 
+# knitr::include_graphics("images/reading_on_gender.png")
 ```
 
-In this situation, the simple regression equation from Section \@ref(regression-line) still holds
+In this situation, the simple regression equation from Section \@ref(regression-line-2) still holds
 
 \[ \widehat Y = b_0 + b_1 X, \]
 
@@ -133,7 +137,7 @@ For a single categorical predictor, the predicted values for each category are j
 
 \begin{align}
 b_0 & = \bar Y_0 (\#eq:binary3-5) \\ 
-b_1 & = \bar Y_0 - \bar Y_1 (\#eq:binary4-5)
+b_1 & = \bar Y_1 - \bar Y_0 (\#eq:binary4-5)
 \end{align}
 
 Note that we will use the equivalence between the predicted values for each category and the mean of the corresponding group throughout this chapter. This equivalence holds when there is only one categorical predictor in the model, and no other predictors. Additional predictors are discussed in the next chapter. 
@@ -142,13 +146,11 @@ Note that we will use the equivalence between the predicted values for each cate
 For the example data, regression coefficients are: 
 
 ```{r} 
-attach(NELS)
 # convert "Female / Male" coding to binary
 gender <- NELS$gender
 binary_gender <- (gender == "Male")*1
 mod_binary <- lm(achrdg08 ~ binary_gender)
 coef(mod_binary)
-detach(NELS)
 ```
 
 **Please take a moment and write down how these two numbers are related to Figure \@ref(fig:reading-on-gender-5). In particular, what is $\bar Y_0$ equal to, what is $\bar Y_1$ equal to, and what is their difference equal to?**
@@ -159,23 +161,21 @@ detach(NELS)
 Simple regression with a binary predictor is equivalent to conducting an independent samples t-test in which the $X$ variable (Gender) is the grouping variable and the $Y$ variable (Reading Achievement) is the outcome. The following output illustrates this. 
 
 
-For the regression model: 
+For the regression model (same as above): 
 ```{r}
 summary(mod_binary)
 ```
 
 For the independent samples t-test (with homogeneity of variance assumed): 
 ```{r}
-attach(NELS)
+options(digits = 4)
 t.test(achrdg08 ~ binary_gender, var.equal = T)
-detach(NELS )
 ```
-
-Although the two functions produce different output, we can see that the pattern of values in the two sets of output corresponds to Equations \@ref(eq:binary3-5) and \@ref(eq:binary4-5). In particular, the t-value and p-value for `binary_gender` in the regression output is equivalent to the t-value and p-value in the two sample t-test (other than the sign of the t-value).  
+The differences between the two outputs is just rounding error -- I am not sure why bookdown prints  `t.test` with only 2 significant digits but the `summary(lm)` with 3 digits...sigh. Anyway, if you try this out in R, you'll see the output is the same other than the sign of the difference (i.e., `lm` subtracts males from females, `t.test` subtracts females from males). 
 
 **If you have any questions about the relation between these two sets of output, please note them now and be prepared ask them in class.**
 
-<!-- derive the result that the hats equal the predicted values 
+<!-- Derive the result that the hats equal the predicted values? 
 ### Some math*
 We have -->
 
@@ -183,12 +183,12 @@ We have -->
 
 When doing regression with a binary predictor: 
 
-* The intercept is equal to the mean of the group coded "0"
+* The intercept is equal to the mean of the group coded "0".
 
-* The regression coefficient is equal to the mean difference between the groups
+* The regression coefficient is equal to the mean difference between the groups.
 
 * Testing $H_0: b_1 = 0$ is equivalent to testing the mean difference $H_0: \mu_1 – \mu_0 = 0$
-  * i.e., regression with a binary variable is the same as a t-test of means for independent groups
+  * i.e., regression with a binary variable is the same as a t-test of means for independent groups.
 
 ## Reference-group coding {#reference-group-coding-5}
 
@@ -283,7 +283,7 @@ knitr::include_graphics("images/marital_status2.png")
 
 \[ \widehat Y = b_0 + b_1 X_1 + b_2 X_2 + b_3 X_3  \]
 
-* **Bonus: What would happen if we included dummies for all 4 categories of Mstatus in the model?** 
+
 
 ### Summary 
 
@@ -380,15 +380,22 @@ In order to interpret the regression coefficients we proceed using the same two 
 
 \begin{align}
 b_1 &= \widehat Y (Ethiopia) - b_0 \\
-b_2 &= \widehat Y (Vietnam) - b_0 \\ \\
+b_2 &= \widehat Y (Vietnam) - b_0 \\
 b_0 & = \widehat Y (Bolivia) + b_1 + b_2 \\  
-& = \widehat Y (Bolivia) + \widehat Y (Ethiopia) - b_0 + \widehat Y (Vietnam) - b_0 \\
+\end{align}
+
+At this point, we want to use the first two lines to substitute in for $b_1$ and $b_2$ in the last line: 
+
+\begin{align}
+ b_0 & = \widehat Y (Bolivia) + \widehat Y (Ethiopia) - b_0 + \widehat Y (Vietnam) - b_0 \\
 \implies & \\ 
 3b_0 & = \widehat Y (Bolivia) + \widehat Y (Ethiopia) + \widehat Y (Vietnam) \\
 
 \implies & \\ 
 b_0 & = \frac{\widehat Y (Bolivia) + \widehat Y (Ethiopia) + \widehat Y (Vietnam)}{3}
 \end{align}
+
+In the last line we see that $b_0$ is equal to the (unweighted) mean of the predicted values. 
 
 **Using the above equations, please write down an interpretation of the regression parameters for the hypothetical example. In particular, what do you think about using the unweighted mean of countries' predicted IDELA scores as the comparison point? Is this meaningful? Would another approach be better?**
 
@@ -406,7 +413,7 @@ In deviation coding with a single categorical variable:
 
 When groups have unequal sample size, the unweighted mean of the group means is not the overall mean of the Y variable. This is not always a problem. For example, in the international comparisons example, it is reasonable (i.e., democratic) that each country should receive equal weight, even if the size of their populations differ.
 
-However, if you want to compare each groups' mean to the overall mean on $Y$, deviation coding can be adjusted by replacing the value $-1$ with the ratio of indicated group's sample size to the omitted group's sample size. An example for 3 groups is shown below. 
+However, if you want to compare each groups' mean to the overall mean on $Y$, deviation coding can be adjusted by replacing the dummy-coded value $-1$ with the ratio of indicated group's sample size to the omitted group's sample size. An example for 3 groups is shown below. 
 
 \[ \begin{matrix} & \text{Dummy 1}& \text{Dummy 2}\\ 
                    \text{Group 1} & 1 & 0  \\ 
@@ -421,7 +428,7 @@ You can use the 2-step procedure to show that this coding, called *weighted devi
 b_0 = \frac{n_1 \widehat Y( \text{Group 1}) + n_2 \widehat Y( \text{Group 2}) + n_3 \widehat Y( \text{Group 3})}{n_1 + n_2 + n_3}
 \end{equation}
 
-Replacing $\widehat Y( \text{Group }c )$ with $\bar Y_c$ you can also show that $b_0 = \bar Y$, using the rules of summation algebra. Unlike the case for the unweighted mean, this relationship holds regardless of the sample sizes of the groups. 
+Replacing $\widehat Y( \text{Group }c )$ with $\bar Y_c$ you can also show that $b_0 = \bar Y$, using the rules of summation algebra. So, unlike the case for the deviation coding, the intercept in *weighted deviation coding*  is always equal to the overall mean on the outcome variance, regardless of the sample sizes of the groups. 
 
 ### Extra: Deviation coding all groups included* {#extra2-5}
 
@@ -452,7 +459,7 @@ This section collects the questions asked in this chapter. We will discuss these
 
 **Section \@ref(binary-predictors-5)**
 
-* Please take a moment and write down how these two numbers in the R output are related to the Figure (reproduced below). In particular, what is $\bar Y_0$ equal to, what is $\bar Y_1$ equal to, and what is their difference equal to?
+* Please take a moment and write down how these the regression output below is related to the Figure. In particular, what is $\bar Y_0$ equal to, what is $\bar Y_1$ equal to, and what is their difference equal to?
 
 
 ```{r} 
@@ -464,9 +471,8 @@ coef(mod_binary)
 knitr::include_graphics("images/reading_on_gender.png")
 ```
 
-* If you have any questions about the relation between regression with a binary predictor and an independent samples t-test (output below), please note them now and be prepared ask them in class.
+* If you have any questions about the relation between regression with a binary predictor and an independent samples t-test (output below), please note them now and be prepared ask them in class. (Recall the the outputs differ due to different rounding -- I am not sure why bookdown prints  `t.test` with only 2 significant digits but the `summary(lm)` with 3 digits, but if you try this out in R, you'll see the output is the same other than the sign of the difference.)
 
- 
 ```{r}
 summary(mod_binary)
 ```
@@ -483,7 +489,7 @@ t.test(achrdg08~binary_gender, var.equal = T, data = NELS)
 knitr::include_graphics("images/marital_status1.png")
 ```
 
-* Using the equations below, please write down an interpretation of the regression parameters for the hypothetical example. (Note: this question is not asking for a numerical answer, it is just asking you to put the above equations into words.)
+* Using the equations below, please write down an interpretation of the regression parameters for the hypothetical example. (Note: this question is not asking for a numerical answer, it is just asking you to put the equations into words.)
 
 \begin{align}
 b_0 & = \widehat Y (Single) \\ 
@@ -496,8 +502,7 @@ b_2 & = \widehat Y (Divorced) - b_0 = \widehat Y (Divorced) - \widehat Y (Single
   * How should $X_3$ be coded so that "single" is the reference-group? 
   * Using the two-step approach illustrated above, write out the interpretation of the model parameters in the following regression equation:
 \[ \widehat Y = b_0 + b_1 X_1 + b_2 X_2 + b_3 X_3  \]
-  * Bonus: What would happen if we included dummies for all 4 categories of Mstatus in the model?
-
+ 
 ```{r fig.cap = 'Toy Martital Status Example, Part 2.', fig.align = 'center'}
 knitr::include_graphics("images/marital_status2.png")
 ```
@@ -538,7 +543,7 @@ R treats variables like `gender` as "factors". Factors have special properties t
 
 ```{r}
 load("NELS.RData")
-attach(NELS)
+# attach(NELS)
 
 # Note that gender is non-numeric -- it is a factor with levels "Female" and "Male"
 head(gender)

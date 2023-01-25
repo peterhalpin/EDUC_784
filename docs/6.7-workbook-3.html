@@ -6,10 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>6.7 Workbook | EDUC 784: Regression</title>
   <meta name="description" content="Course notes for EDUC 784" />
-  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="6.7 Workbook | EDUC 784: Regression" />
   <meta property="og:type" content="book" />
+  
   <meta property="og:image" content="/images/image1.png" />
   <meta property="og:description" content="Course notes for EDUC 784" />
   <meta name="github-repo" content="peterhalpin/EDUC_784" />
@@ -23,16 +24,17 @@
 <meta name="author" content="Peter Halpin" />
 
 
-<meta name="date" content="2023-01-18" />
+<meta name="date" content="2023-01-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
-  
+  <link rel="shortcut icon" href="null" type="image/x-icon" />
 <link rel="prev" href="6.6-two-categorical-predictors-6.html"/>
 <link rel="next" href="6.8-exercises-6.html"/>
-<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.5.1/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -49,9 +51,8 @@
 
 
 
-<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
-<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -92,7 +93,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
+code span.bu { } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -105,7 +106,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.im { } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -504,8 +505,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="workbook-3" class="section level2 hasAnchor" number="6.7">
-<h2><span class="header-section-number">6.7</span> Workbook<a href="6.7-workbook-3.html#workbook-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="workbook-3" class="section level2" number="6.7">
+<h2><span class="header-section-number">6.7</span> Workbook</h2>
 <input onclick="codefolder(&#39;pre.sourceCode&#39;);" type="button" value="Hide Code" id="codefolder-button" style="position: relative; &#10;            top: -25px; &#10;            left: 85%;   &#10;            color: white;&#10;            font-weight: bold;&#10;            background: #4B9CD3;&#10;            border: 1px #3079ED solid;&#10;            box-shadow: inset 0 1px 0 #80B0FB"/>
 <script>
   function codefolder(query) {
@@ -535,27 +536,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </script>
 <p>This section collects the questions asked in this chapter. We will discuss these questions in class. If you haven’t written down / thought about the answers to these questions before class, the lesson will not be very useful for you! So, please engage with each question by writing down one or more answers, asking clarifying questions, posing follow up questions, etc.</p>
 <p><strong>Section <a href="6.1-example-6.html#example-6">6.1</a></strong></p>
-<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="6.7-workbook-3.html#cb224-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(NELS)</span>
-<span id="cb224-2"><a href="6.7-workbook-3.html#cb224-2" aria-hidden="true" tabindex="-1"></a>mod1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(achmat12[females] <span class="sc">~</span> achrdg12[females])</span>
-<span id="cb224-3"><a href="6.7-workbook-3.html#cb224-3" aria-hidden="true" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(achmat12[males] <span class="sc">~</span> achrdg12[males])</span>
-<span id="cb224-4"><a href="6.7-workbook-3.html#cb224-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb224-5"><a href="6.7-workbook-3.html#cb224-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot reading and math for females</span></span>
-<span id="cb224-6"><a href="6.7-workbook-3.html#cb224-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(achrdg12[females], achmat12[females], <span class="at">xlab =</span> <span class="st">&quot;Reading&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Math&quot;</span>)</span>
-<span id="cb224-7"><a href="6.7-workbook-3.html#cb224-7" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(mod1, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
-<span id="cb224-8"><a href="6.7-workbook-3.html#cb224-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb224-9"><a href="6.7-workbook-3.html#cb224-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Add points and line for males</span></span>
-<span id="cb224-10"><a href="6.7-workbook-3.html#cb224-10" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(achrdg12[males], achmat12[males], <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>, <span class="at">pch =</span> <span class="dv">2</span>)</span>
-<span id="cb224-11"><a href="6.7-workbook-3.html#cb224-11" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(mod2, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
-<span id="cb224-12"><a href="6.7-workbook-3.html#cb224-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb224-13"><a href="6.7-workbook-3.html#cb224-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a legend</span></span>
-<span id="cb224-14"><a href="6.7-workbook-3.html#cb224-14" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="at">x =</span> <span class="st">&quot;topleft&quot;</span>, <span class="at">legend =</span> <span class="fu">levels</span>(gender), <span class="at">pch =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="at">col =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="st">&quot;#4B9CD3&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="6.7-workbook-3.html#cb218-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(NELS)</span>
+<span id="cb218-2"><a href="6.7-workbook-3.html#cb218-2" aria-hidden="true" tabindex="-1"></a>mod1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(achmat12[females] <span class="sc">~</span> achrdg12[females])</span>
+<span id="cb218-3"><a href="6.7-workbook-3.html#cb218-3" aria-hidden="true" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(achmat12[males] <span class="sc">~</span> achrdg12[males])</span>
+<span id="cb218-4"><a href="6.7-workbook-3.html#cb218-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb218-5"><a href="6.7-workbook-3.html#cb218-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot reading and math for females</span></span>
+<span id="cb218-6"><a href="6.7-workbook-3.html#cb218-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(achrdg12[females], achmat12[females], <span class="at">xlab =</span> <span class="st">&quot;Reading&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Math&quot;</span>)</span>
+<span id="cb218-7"><a href="6.7-workbook-3.html#cb218-7" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(mod1, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb218-8"><a href="6.7-workbook-3.html#cb218-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb218-9"><a href="6.7-workbook-3.html#cb218-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Add points and line for males</span></span>
+<span id="cb218-10"><a href="6.7-workbook-3.html#cb218-10" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(achrdg12[males], achmat12[males], <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>, <span class="at">pch =</span> <span class="dv">2</span>)</span>
+<span id="cb218-11"><a href="6.7-workbook-3.html#cb218-11" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(mod2, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb218-12"><a href="6.7-workbook-3.html#cb218-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb218-13"><a href="6.7-workbook-3.html#cb218-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a legend</span></span>
+<span id="cb218-14"><a href="6.7-workbook-3.html#cb218-14" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="at">x =</span> <span class="st">&quot;topleft&quot;</span>, <span class="at">legend =</span> <span class="fu">levels</span>(gender), <span class="at">pch =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="at">col =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="st">&quot;#4B9CD3&quot;</span>))</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:example-1"></span>
 <img src="_main_files/figure-html/example-1-1.png" alt="Math Achievement, Reading Achievement, and Gender." width="672" />
 <p class="caption">
 Figure 6.8: Math Achievement, Reading Achievement, and Gender.
 </p>
 </div>
-<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="6.7-workbook-3.html#cb225-1" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(NELS)</span></code></pre></div>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="6.7-workbook-3.html#cb219-1" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(NELS)</span></code></pre></div>
 <p>Take a minute to think about what this plot is telling us about the relationships among Math Achievement, Reading Achievement, and Gender.</p>
 <ul>
 <li>Is the gender gap in math constant?</li>
@@ -566,80 +567,80 @@ Figure 6.8: Math Achievement, Reading Achievement, and Gender.
 <ul>
 <li>No interaction model: The regression coefficients for the example data are shown below. Please use these numbers to provide an interpretation of the simple trends and the gender gap in Math Achievement for the NELS example. (Don’t worry about statistical significance, just focus on the meaning of the coefficients.)</li>
 </ul>
-<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="6.7-workbook-3.html#cb226-1" aria-hidden="true" tabindex="-1"></a>mod3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(achmat12 <span class="sc">~</span> achrdg12 <span class="sc">+</span> gender, <span class="at">data =</span> NELS)</span>
-<span id="cb226-2"><a href="6.7-workbook-3.html#cb226-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(mod3)</span></code></pre></div>
+<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="6.7-workbook-3.html#cb220-1" aria-hidden="true" tabindex="-1"></a>mod3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(achmat12 <span class="sc">~</span> achrdg12 <span class="sc">+</span> gender, <span class="at">data =</span> NELS)</span>
+<span id="cb220-2"><a href="6.7-workbook-3.html#cb220-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(mod3)</span></code></pre></div>
 <pre><code>## (Intercept)    achrdg12  genderMale 
 ##     19.9812      0.6355      3.5017</code></pre>
 <p><strong>Section <a href="6.3-binary-continuous-interaction-6.html#binary-continuous-interaction-6">6.3</a></strong></p>
 <ul>
 <li>Interaction model: The regression coefficients for the example data are shown below. Please use these numbers to provide an interpretation of the interaction between Gender and Reading. (Don’t worry about statistical significance, just focus on the meaning of the coefficients.)</li>
 </ul>
-<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="6.7-workbook-3.html#cb228-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(NELS)</span>
-<span id="cb228-2"><a href="6.7-workbook-3.html#cb228-2" aria-hidden="true" tabindex="-1"></a>genderXachrdg12 <span class="ot">&lt;-</span> (<span class="fu">as.numeric</span>(gender) <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> achrdg12</span>
-<span id="cb228-3"><a href="6.7-workbook-3.html#cb228-3" aria-hidden="true" tabindex="-1"></a>mod4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(achmat12 <span class="sc">~</span> achrdg12 <span class="sc">+</span> gender <span class="sc">+</span> genderXachrdg12)</span>
-<span id="cb228-4"><a href="6.7-workbook-3.html#cb228-4" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(mod4)</span></code></pre></div>
+<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="6.7-workbook-3.html#cb222-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(NELS)</span>
+<span id="cb222-2"><a href="6.7-workbook-3.html#cb222-2" aria-hidden="true" tabindex="-1"></a>genderXachrdg12 <span class="ot">&lt;-</span> (<span class="fu">as.numeric</span>(gender) <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> achrdg12</span>
+<span id="cb222-3"><a href="6.7-workbook-3.html#cb222-3" aria-hidden="true" tabindex="-1"></a>mod4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(achmat12 <span class="sc">~</span> achrdg12 <span class="sc">+</span> gender <span class="sc">+</span> genderXachrdg12)</span>
+<span id="cb222-4"><a href="6.7-workbook-3.html#cb222-4" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(mod4)</span></code></pre></div>
 <pre><code>##     (Intercept)        achrdg12      genderMale genderXachrdg12 
 ##         14.8031          0.7282         13.3933         -0.1779</code></pre>
-<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="6.7-workbook-3.html#cb230-1" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(NELS)</span></code></pre></div>
+<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="6.7-workbook-3.html#cb224-1" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(NELS)</span></code></pre></div>
 <ul>
 <li>Interaction model with centered continuous predictor: Please write down your interpretation of the intercept and the regression coefficient for Gender in the regression output below.</li>
 </ul>
-<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="6.7-workbook-3.html#cb231-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(NELS)</span>
-<span id="cb231-2"><a href="6.7-workbook-3.html#cb231-2" aria-hidden="true" tabindex="-1"></a><span class="co"># compute the deviation scores for reading</span></span>
-<span id="cb231-3"><a href="6.7-workbook-3.html#cb231-3" aria-hidden="true" tabindex="-1"></a>reading_dev <span class="ot">&lt;-</span> achrdg12 <span class="sc">-</span> <span class="fu">mean</span>(achrdg12, <span class="at">na.rm =</span> T) </span>
-<span id="cb231-4"><a href="6.7-workbook-3.html#cb231-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb231-5"><a href="6.7-workbook-3.html#cb231-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the interaction model as above</span></span>
-<span id="cb231-6"><a href="6.7-workbook-3.html#cb231-6" aria-hidden="true" tabindex="-1"></a>genderXreading_dev <span class="ot">&lt;-</span> (<span class="fu">as.numeric</span>(gender) <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> reading_dev</span>
-<span id="cb231-7"><a href="6.7-workbook-3.html#cb231-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb231-8"><a href="6.7-workbook-3.html#cb231-8" aria-hidden="true" tabindex="-1"></a>mod5 <span class="ot">&lt;-</span> <span class="fu">lm</span>(achmat12 <span class="sc">~</span> reading_dev <span class="sc">+</span> gender <span class="sc">+</span> genderXreading_dev)</span>
-<span id="cb231-9"><a href="6.7-workbook-3.html#cb231-9" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(mod5)</span></code></pre></div>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="6.7-workbook-3.html#cb225-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(NELS)</span>
+<span id="cb225-2"><a href="6.7-workbook-3.html#cb225-2" aria-hidden="true" tabindex="-1"></a><span class="co"># compute the deviation scores for reading</span></span>
+<span id="cb225-3"><a href="6.7-workbook-3.html#cb225-3" aria-hidden="true" tabindex="-1"></a>reading_dev <span class="ot">&lt;-</span> achrdg12 <span class="sc">-</span> <span class="fu">mean</span>(achrdg12, <span class="at">na.rm =</span> T) </span>
+<span id="cb225-4"><a href="6.7-workbook-3.html#cb225-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb225-5"><a href="6.7-workbook-3.html#cb225-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the interaction model as above</span></span>
+<span id="cb225-6"><a href="6.7-workbook-3.html#cb225-6" aria-hidden="true" tabindex="-1"></a>genderXreading_dev <span class="ot">&lt;-</span> (<span class="fu">as.numeric</span>(gender) <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> reading_dev</span>
+<span id="cb225-7"><a href="6.7-workbook-3.html#cb225-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb225-8"><a href="6.7-workbook-3.html#cb225-8" aria-hidden="true" tabindex="-1"></a>mod5 <span class="ot">&lt;-</span> <span class="fu">lm</span>(achmat12 <span class="sc">~</span> reading_dev <span class="sc">+</span> gender <span class="sc">+</span> genderXreading_dev)</span>
+<span id="cb225-9"><a href="6.7-workbook-3.html#cb225-9" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(mod5)</span></code></pre></div>
 <pre><code>##        (Intercept)        reading_dev         genderMale genderXreading_dev 
 ##            55.2944             0.7282             3.4993            -0.1779</code></pre>
-<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="6.7-workbook-3.html#cb233-1" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(NELS)</span></code></pre></div>
+<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="6.7-workbook-3.html#cb227-1" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(NELS)</span></code></pre></div>
 <p><strong>Section <a href="6.4-inference-for-interactions-6.html#inference-for-interactions-6">6.4</a></strong></p>
 <ul>
 <li>The output shows the gender gap in Math Achievement for 5 values of Reading Achievement. The values of Reading Achievement are the 5 quartiles. Please examine the statistical significance of the gender gap in Math Achievement at the 5 quartiles of Reading Achievement and make a conclusion whether the gap “dissapeared” for students with higher levels of Reading Achievement.</li>
 </ul>
-<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="6.7-workbook-3.html#cb234-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install the package if you haven&#39;t already done so</span></span>
-<span id="cb234-2"><a href="6.7-workbook-3.html#cb234-2" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;emmeans&quot;)</span></span>
-<span id="cb234-3"><a href="6.7-workbook-3.html#cb234-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb234-4"><a href="6.7-workbook-3.html#cb234-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the package into memory</span></span>
-<span id="cb234-5"><a href="6.7-workbook-3.html#cb234-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span>
-<span id="cb234-6"><a href="6.7-workbook-3.html#cb234-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb234-7"><a href="6.7-workbook-3.html#cb234-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the model using R&#39;s formula syntax for interaction &#39;*&#39;</span></span>
-<span id="cb234-8"><a href="6.7-workbook-3.html#cb234-8" aria-hidden="true" tabindex="-1"></a>mod6 <span class="ot">&lt;-</span> <span class="fu">lm</span>(achmat12 <span class="sc">~</span> gender<span class="sc">*</span>achrdg12, <span class="at">data=</span> NELS)</span>
-<span id="cb234-9"><a href="6.7-workbook-3.html#cb234-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb234-10"><a href="6.7-workbook-3.html#cb234-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the emmeans function to get the gender means on math, broken down by reading</span></span>
-<span id="cb234-11"><a href="6.7-workbook-3.html#cb234-11" aria-hidden="true" tabindex="-1"></a>gap <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(mod6, <span class="at">specs =</span> <span class="st">&quot;gender&quot;</span>, <span class="at">by =</span> <span class="st">&quot;achrdg12&quot;</span>, <span class="at">cov.reduce =</span> quantile)</span>
-<span id="cb234-12"><a href="6.7-workbook-3.html#cb234-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb234-13"><a href="6.7-workbook-3.html#cb234-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Test whether the differences are significant</span></span>
-<span id="cb234-14"><a href="6.7-workbook-3.html#cb234-14" aria-hidden="true" tabindex="-1"></a><span class="fu">contrast</span>(gap, <span class="at">method =</span> <span class="st">&quot;pairwise&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="6.7-workbook-3.html#cb228-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install the package if you haven&#39;t already done so</span></span>
+<span id="cb228-2"><a href="6.7-workbook-3.html#cb228-2" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;emmeans&quot;)</span></span>
+<span id="cb228-3"><a href="6.7-workbook-3.html#cb228-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb228-4"><a href="6.7-workbook-3.html#cb228-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the package into memory</span></span>
+<span id="cb228-5"><a href="6.7-workbook-3.html#cb228-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span>
+<span id="cb228-6"><a href="6.7-workbook-3.html#cb228-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb228-7"><a href="6.7-workbook-3.html#cb228-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the model using R&#39;s formula syntax for interaction &#39;*&#39;</span></span>
+<span id="cb228-8"><a href="6.7-workbook-3.html#cb228-8" aria-hidden="true" tabindex="-1"></a>mod6 <span class="ot">&lt;-</span> <span class="fu">lm</span>(achmat12 <span class="sc">~</span> gender<span class="sc">*</span>achrdg12, <span class="at">data=</span> NELS)</span>
+<span id="cb228-9"><a href="6.7-workbook-3.html#cb228-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb228-10"><a href="6.7-workbook-3.html#cb228-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the emmeans function to get the gender means on math, broken down by reading</span></span>
+<span id="cb228-11"><a href="6.7-workbook-3.html#cb228-11" aria-hidden="true" tabindex="-1"></a>gap <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(mod6, <span class="at">specs =</span> <span class="st">&quot;gender&quot;</span>, <span class="at">by =</span> <span class="st">&quot;achrdg12&quot;</span>, <span class="at">cov.reduce =</span> quantile)</span>
+<span id="cb228-12"><a href="6.7-workbook-3.html#cb228-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb228-13"><a href="6.7-workbook-3.html#cb228-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Test whether the differences are significant</span></span>
+<span id="cb228-14"><a href="6.7-workbook-3.html#cb228-14" aria-hidden="true" tabindex="-1"></a><span class="fu">contrast</span>(gap, <span class="at">method =</span> <span class="st">&quot;pairwise&quot;</span>)</span></code></pre></div>
 <pre><code>## achrdg12 = 31.8:
 ##  contrast      estimate    SE  df t.ratio p.value
-##  Female - Male    -7.74 1.637 496  -4.728  &lt;.0001
+##  Female - Male    -7.74 1.637 496 -4.728  &lt;.0001 
 ## 
 ## achrdg12 = 51.2:
 ##  contrast      estimate    SE  df t.ratio p.value
-##  Female - Male    -4.27 0.593 496  -7.207  &lt;.0001
+##  Female - Male    -4.27 0.593 496 -7.207  &lt;.0001 
 ## 
 ## achrdg12 = 57.0:
 ##  contrast      estimate    SE  df t.ratio p.value
-##  Female - Male    -3.25 0.529 496  -6.138  &lt;.0001
+##  Female - Male    -3.25 0.529 496 -6.138  &lt;.0001 
 ## 
 ## achrdg12 = 61.7:
 ##  contrast      estimate    SE  df t.ratio p.value
-##  Female - Male    -2.41 0.658 496  -3.659  0.0003
+##  Female - Male    -2.41 0.658 496 -3.659  0.0003 
 ## 
 ## achrdg12 = 68.1:
 ##  contrast      estimate    SE  df t.ratio p.value
-##  Female - Male    -1.28 0.967 496  -1.321  0.1872</code></pre>
+##  Female - Male    -1.28 0.967 496 -1.321  0.1872</code></pre>
 <p><strong>Section <a href="6.5-two-continuous-predictors-6.html#two-continuous-predictors-6">6.5</a></strong></p>
 <ul>
 <li>To check your understanding of centering with two continuous predictors, please provide an interpretation of all four regression coefficients in the centered model (below). Your interpretations should make reference to the situation where one or both predictors are equal to zero (see Equation <a href="6.5-two-continuous-predictors-6.html#eq:simple">(6.3)</a>) and should also mentioned the interpretation of the value of zero for the centered variables.</li>
 </ul>
-<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="6.7-workbook-3.html#cb236-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(NELS)</span>
-<span id="cb236-2"><a href="6.7-workbook-3.html#cb236-2" aria-hidden="true" tabindex="-1"></a>mod8 <span class="ot">&lt;-</span> <span class="fu">lm</span>(achmat12 <span class="sc">~</span> achrdg12_dev<span class="sc">*</span>ses_dev)</span>
-<span id="cb236-3"><a href="6.7-workbook-3.html#cb236-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod8)</span></code></pre></div>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="6.7-workbook-3.html#cb230-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(NELS)</span>
+<span id="cb230-2"><a href="6.7-workbook-3.html#cb230-2" aria-hidden="true" tabindex="-1"></a>mod8 <span class="ot">&lt;-</span> <span class="fu">lm</span>(achmat12 <span class="sc">~</span> achrdg12_dev<span class="sc">*</span>ses_dev)</span>
+<span id="cb230-3"><a href="6.7-workbook-3.html#cb230-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod8)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = achmat12 ~ achrdg12_dev * ses_dev)
@@ -660,24 +661,24 @@ Figure 6.8: Math Achievement, Reading Achievement, and Gender.
 ## Residual standard error: 6.03 on 496 degrees of freedom
 ## Multiple R-squared:  0.418,  Adjusted R-squared:  0.415 
 ## F-statistic:  119 on 3 and 496 DF,  p-value: &lt;2e-16</code></pre>
-<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="6.7-workbook-3.html#cb238-1" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(NELS)</span></code></pre></div>
+<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="6.7-workbook-3.html#cb232-1" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(NELS)</span></code></pre></div>
 <p><strong>Section <a href="6.6-two-categorical-predictors-6.html#two-categorical-predictors-6">6.6</a></strong></p>
 <ul>
 <li>Please take a moment to write down how the Figure below would be different if there was no interaction between Pre-K and SES.</li>
 </ul>
-<div class="sourceCode" id="cb239"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb239-1"><a href="6.7-workbook-3.html#cb239-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;ECLS2577.Rdata&quot;</span>)</span>
-<span id="cb239-2"><a href="6.7-workbook-3.html#cb239-2" aria-hidden="true" tabindex="-1"></a>ecls<span class="sc">$</span>prek <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="dv">2</span> <span class="sc">-</span> ecls<span class="sc">$</span>p1center)</span>
-<span id="cb239-3"><a href="6.7-workbook-3.html#cb239-3" aria-hidden="true" tabindex="-1"></a>ecls<span class="sc">$</span>wksesq5 <span class="ot">&lt;-</span> <span class="fu">factor</span>(ecls<span class="sc">$</span>wksesq5)</span>
-<span id="cb239-4"><a href="6.7-workbook-3.html#cb239-4" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(c1rmscal <span class="sc">~</span> prek<span class="sc">*</span>wksesq5, <span class="at">data =</span> ecls)</span>
-<span id="cb239-5"><a href="6.7-workbook-3.html#cb239-5" aria-hidden="true" tabindex="-1"></a>visreg<span class="sc">::</span><span class="fu">visreg</span>(mod, <span class="at">xvar =</span> <span class="st">&quot;wksesq5&quot;</span>, <span class="at">by =</span> <span class="st">&quot;prek&quot;</span>, </span>
-<span id="cb239-6"><a href="6.7-workbook-3.html#cb239-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">partial =</span> F, <span class="at">rug =</span> F, <span class="at">overlay =</span> T, </span>
-<span id="cb239-7"><a href="6.7-workbook-3.html#cb239-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">strip.names =</span> T, <span class="at">xlab =</span> <span class="st">&quot;SES&quot;</span>, </span>
-<span id="cb239-8"><a href="6.7-workbook-3.html#cb239-8" aria-hidden="true" tabindex="-1"></a>               <span class="at">ylab =</span> <span class="st">&quot;Math Achievement in K&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-121-1.png" width="672" /></p>
+<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="6.7-workbook-3.html#cb233-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;ECLS2577.Rdata&quot;</span>)</span>
+<span id="cb233-2"><a href="6.7-workbook-3.html#cb233-2" aria-hidden="true" tabindex="-1"></a>ecls<span class="sc">$</span>prek <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="dv">2</span> <span class="sc">-</span> ecls<span class="sc">$</span>p1center)</span>
+<span id="cb233-3"><a href="6.7-workbook-3.html#cb233-3" aria-hidden="true" tabindex="-1"></a>ecls<span class="sc">$</span>wksesq5 <span class="ot">&lt;-</span> <span class="fu">factor</span>(ecls<span class="sc">$</span>wksesq5)</span>
+<span id="cb233-4"><a href="6.7-workbook-3.html#cb233-4" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(c1rmscal <span class="sc">~</span> prek<span class="sc">*</span>wksesq5, <span class="at">data =</span> ecls)</span>
+<span id="cb233-5"><a href="6.7-workbook-3.html#cb233-5" aria-hidden="true" tabindex="-1"></a>visreg<span class="sc">::</span><span class="fu">visreg</span>(mod, <span class="at">xvar =</span> <span class="st">&quot;wksesq5&quot;</span>, <span class="at">by =</span> <span class="st">&quot;prek&quot;</span>, </span>
+<span id="cb233-6"><a href="6.7-workbook-3.html#cb233-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">partial =</span> F, <span class="at">rug =</span> F, <span class="at">overlay =</span> T, </span>
+<span id="cb233-7"><a href="6.7-workbook-3.html#cb233-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">strip.names =</span> T, <span class="at">xlab =</span> <span class="st">&quot;SES&quot;</span>, </span>
+<span id="cb233-8"><a href="6.7-workbook-3.html#cb233-8" aria-hidden="true" tabindex="-1"></a>               <span class="at">ylab =</span> <span class="st">&quot;Math Achievement in K&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-122-1.png" width="672" /></p>
 <ul>
 <li>Please write down an interpretation of magnitude, direction, and statistical significance of each regression coefficient in this output (including the intercept), and be prepared to share your answers in class. Remember that <code>wksesq5</code> is the variable code for the SES quintiles – the digit that follows the variable code indicates the level of variable.</li>
 </ul>
-<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="6.7-workbook-3.html#cb240-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod)</span></code></pre></div>
+<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="6.7-workbook-3.html#cb234-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = c1rmscal ~ prek * wksesq5, data = ecls)
@@ -707,7 +708,7 @@ Figure 6.8: Math Achievement, Reading Achievement, and Gender.
 <ul>
 <li>Write down your interpretation of the ANOVA table below and be prepared to share you thoughts in class.</li>
 </ul>
-<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="6.7-workbook-3.html#cb242-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(mod)</span></code></pre></div>
+<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="6.7-workbook-3.html#cb236-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(mod)</span></code></pre></div>
 <pre><code>## Analysis of Variance Table
 ## 
 ## Response: c1rmscal
@@ -776,7 +777,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

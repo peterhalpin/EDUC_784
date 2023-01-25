@@ -1,6 +1,6 @@
 #  Regression with Two Predictors {#chapter-4}
 
-
+<!-- Move definition of R to chapter 2, show relation with r^2. -->
 
 ```{r, echo = F}
 rm(list = ls())
@@ -149,7 +149,7 @@ Table \@ref(tab:compare) compares the output of three regression models using th
 
 * "Multiple" is a two-predictor model that regresses Math Achievement on SES and ATL.
 * "Simple (SES)" regresses Math Achievement on SES only. 
-* "Simple (ALT)" regresses Math Achievement on ALT only.  
+* "Simple (ATL)" regresses Math Achievement on ATL only.  
   
 
 ```{r compare}
@@ -296,9 +296,9 @@ There are other interpretation of the regression coefficients, and if time permi
 codefolder::bookdown(init = "hide", style = button)
 ```
 
-One question that arises in the interpretation of the example is the relative contribution of the two predictors to Kindergartener's Math Achievement. In particular, the regression coefficient for ALT is 10 times larger than the regression coefficient for SES -- does this mean that ALT is 10 times more important than SES? 
+One question that arises in the interpretation of the example is the relative contribution of the two predictors to Kindergartener's Math Achievement. In particular, the regression coefficient for ATL is 10 times larger than the regression coefficient for SES -- does this mean that ATL is 10 times more important than SES? 
 
-The short answer is, "no." ALT is on a scale of 1-4 whereas SES ranges from 30-72. In order to make the regression coefficients more comparable, we can standardize the $X$ variables so that they have the same variance. 
+The short answer is, "no." ATL is on a scale of 1-4 whereas SES ranges from 30-72. In order to make the regression coefficients more comparable, we can standardize the $X$ variables so that they have the same variance. 
 
 Many researchers go a step further and standardize all of the variables $Y, X_1, X_2$ to be z-scores with M = 0 and SD = 1. The resulting regression coefficients are often called $\beta$-coefficients or $\beta$-weights.
 
@@ -319,9 +319,9 @@ z_mod <- lm(Math ~ SES  + ATL, data = z_example_data)
 summary(z_mod)
 ```
 
-**Please write down an interpretation of the of beta coefficients in the above output. Is one predictor more important than the other? Your interpretation should include reference to the fact that the variables have been standardized. Please be prepared to share your interpretation / questions in class!** 
+You should be careful when using $\Beta$-coefficients to "ease" the comparison of regression predictors. In the context of our example, we might wonder whether the overall cost of raising a child's Approaches to Learning by 1 SD is comparable to the overall cost of raising their family's SES by 1 SD. In general, putting variables on the same scale is only a superficial way of making comparisons among their regression coefficients. 
 
-There are a number of potential pitfalls of using Beta coefficients to "ease" the comparison of regression coefficients. In the context of our example, we might wonder whether the overall cost of raising a child's Approaches to Learning by 1 SD is comparable to the overall cost of raising their family's SES by 1 SD. In general, putting variables on the same scale is only a superficial way of making comparisons among their regression coefficients. 
+**Please write down an interpretation of the of beta coefficients in the above output. Is one predictor more important than the other? Your interpretation should include reference to the fact that the variables have been standardized. Please be prepared to share your interpretation / questions in class!** 
 
 ## (Multiple) R-squared {#rsquared-4}
 R-squared in multiple regression has the same general formula and interpretation as in simple regression: 
@@ -338,7 +338,7 @@ Like the regression coefficients in Equation \@ref(eq:2pred), the equation for R
 
 \[ R^2 = \frac{r^2_{Y1} + r^2_{Y2} - 2 r_{12}r_{Y1}r_{Y2}}{1 - r^2_{12}} \]
 
-If the correlation between the predictors is zero, then thus equation simplifies to
+If the correlation between the predictors is zero, then this equation simplifies to
 
 \[ R^2 = r^2_{Y1} + r^2_{Y2}. \]
 
@@ -346,16 +346,16 @@ But, when the predictors are correlated, either positively or negatively, it can
 
 \[ R^2 < r^2_{Y1} + r^2_{Y2}. \]
 
-In other words, correlated predictors will jointly explain less variance in the outcome than when considering each predictor separately. Again, the reason is the correlation between the two predictors -- if the predictors are correlated, then share some variation with each other. If we considered the predictors one at a time, we double-count their shared variation. 
+In other words, correlated predictors will jointly explain less variance in the outcome than when considering each predictor separately. Again, the reason is the correlation between the two predictors -- if the predictors are correlated, then they share some variation with each other. If we considered the predictors one at a time, we double-count their shared variation. 
 
 
-The conceptual relationships between R-squared and the correlation coefficients can be represented in terms of the following Venn diagram. 
+The conceptual relationships between R-squared for one versus two predictors can be represented in terms of the following Venn diagram. 
 
 ```{r, venn-diagram, echo = F, fig.cap = "Shared Variance Among $Y$, $X_1$, and $X_2$.", fig.align = 'center'}
 knitr::include_graphics("images/venn_diagram.png")
 ```
 
-The circles represent the variance of each variable and the overlap between circles represents their shared variance. If we do two simple regression and then add up the R-squared values, we would double count the area labelled "b". When we compute R-squared in  multiple regression, we only count that area once. 
+The circles represent the variance of each variable and the overlap between circles represents their shared variance. If we do two simple regression and then add up the R-squared values, we would double count the area labelled "B". When we compute R-squared in multiple regression, we only count that area once. 
 
 <!--
 \begin{align}
@@ -394,26 +394,21 @@ Using this relationship, we can see that squared semi partials (and hence the \b
 ### Adjusted R-squared
 
 The sample R-squared is an upwardly biased estimate of the population R-squared.
-This bias is illustrated in the figure below. In the example, we are considering simple regression, and we assume that the population correlation between the two variables is zero (i.e., $\rho = 0$). 
+This bias is illustrated in the figure below. In the example, we are considering simple regression (one predictor), and we assume that the population correlation between the predictor and the outcome is zero (i.e., $\rho = 0$). 
 
 ```{r, adjusted, echo = F, fig.cap = "Sampling Distribution of $r$ and $r^2$ when $\rho = 0$.", fig.align = 'center'}
 knitr::include_graphics("images/adjusted_rsquared.png")
 ```
 
-For the "un-squared" correlation, $r$, the sample distribution is centered at the true value $\rho = 0$. This means that $r$ is an unbiased estimate of $\rho$. 
+In the left panel, we can see that "un-squared" correlation, $r$, has a sampling distribution that is centered at the true value $\rho = 0$. This means that $r$ is an unbiased estimate of $\rho$. 
 
-But for the squared correlation, $r^2$, the mean of the sampling distribution is slightly above zero. This is because all of the random deviations are now positive (because they have been squared). Since the average value of $r^2$ is greater than the population value ($\rho = 0$),  we say that $r^2$ is an upwardly biased estimate of $\rho^2$.  (i.e., it's too large) 
+But in the right panel, we can see that the sampling distribution of the squared correlation  $r^2$, has a  mean that is slightly above zero. This is because all of the random sample-to-sample deviations in left panel are now positive (because they have been squared). Since the average value of $r^2$ is greater than the population value ($\rho = 0$),  we say that $r^2$ is an upwardly biased estimate of $\rho^2$.  (i.e., it's too large). 
 
 The adjusted R-squared corrects this bias. The formula for the adjustment is: 
 
 \[ \tilde R^2 = 1 - (1 - R^2) \frac{N-1}{N - J - 1} \]
 
-where $J$ is the number of predictors in the model. It can be seen that the adjustment is larger when
-
-* The number of predictors $J$ is large relative to the sample size $N$.
-* R-squared is closer to zero. 
-
-So, roughly speaking, the adjustment will be more severe when there are a lot of predictors in the model, but the predictors don't explain a lot of variation in the outcome. This situation is sometimes called "overfitting" the data. 
+where $J$ is the number of predictors in the model. It can be seen that the adjustment is larger when the number of predictors $J$ is large relative to the sample size $N$. So, roughly speaking, the adjustment will be more severe when there are a lot of predictors in the model. This situation is sometimes called "overfitting" the data. 
 
 There is no established cut-off for when you should reported R-squared or adjusted R-squared. I recommend that you report both whenever the two values would lead to different substantive conclusions. We can discuss this more in class. 
 
@@ -425,6 +420,7 @@ $R$, the square-root of $R^2$, is called the *multiple correlation* because
 
 It is the correlation between the observed $Y$ values and the predicted $\widehat Y$ values. In simple regression, the multiple correlation is just the same the regular correlation coefficient $r_{XY}$. But in multiple regression, it is the correlation between the observed $Y$ values and a linear combination of the $X$ values (i.e., $\widehat Y$), so it gets a special name, the "multiple correlation." 
 
+(This should go in Chapter 2!)
 
 ## Inference for the slopes {#inference-for-slopes-4}
 
@@ -432,7 +428,7 @@ It is the correlation between the observed $Y$ values and the predicted $\wideha
 codefolder::bookdown(init = "hide", style = button)
 ```
 
-There isn't really any thing new that about inference with multiple regression, except the formula for the standard errors: 
+There isn't really any thing new that about inference with multiple regression, except the formula for the standard errors (cite:fox): 
 
 \[ 
 s_{\widehat b_j} = \frac{s_y}{s_x} \sqrt{\frac{1 - R^2}{N - J - 1}} \times \sqrt{\frac{1}{1 - R_j^2}} 
@@ -557,7 +553,6 @@ detach(ecls)
 ```
 
 ```{r}
-# remove previously attached data
 load("ECLS250.RData") # load new example
 attach(ecls) # attach 
 
@@ -682,3 +677,7 @@ confint(mod1)
 When we have a regression model with many predictors, or are comparing among different models, it is more usual to put all the relevant statistics in a table rather than writing them out one by one. We will see how to do that later on in the course.
 
 For more info on APA format, see the APA publications manual (https://www.apastyle.org/manual). 
+
+```{r echo = F}
+detach(ecls)
+```

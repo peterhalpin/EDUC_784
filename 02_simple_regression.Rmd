@@ -241,7 +241,11 @@ Another way to get to $R^2$ is through the definition of $R$ as the correlation 
 
 Consequently, in simple regression, $R^2 = r^2_{XY}$ -- i.e., the proportion of variance explained by the predictor is just the squared Person product moment correlation. When we add multiple predictors, this relationship between $R^2$ and $r^2_{XY}$ no longer holds. 
 
-Still need to show the two definitions of R-squared are equivalent
+Still need to show the two definitions of R-squared are equivalent ;
+
+\[ R^2 = SS_reg /SS_total = \text{var}(\hat Y) / \text{var}(Y) = \text{var}(a + bX) / \text{var}(Y)
+= b^2 \text{var}(X) / \text{var}(Y)= \text{cov}(X, Y)^2 / \text{var}(X) \text{var}(Y)= r^2
+\]
 -->
 ## The population model {#population-model-2}  
 

@@ -6,10 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>11.6 (Pseudo) R-squared | EDUC 784: Regression</title>
   <meta name="description" content="Course notes for EDUC 784" />
-  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="11.6 (Pseudo) R-squared | EDUC 784: Regression" />
   <meta property="og:type" content="book" />
+  
   <meta property="og:image" content="/images/image1.png" />
   <meta property="og:description" content="Course notes for EDUC 784" />
   <meta name="github-repo" content="peterhalpin/EDUC_784" />
@@ -23,16 +24,17 @@
 <meta name="author" content="Peter Halpin" />
 
 
-<meta name="date" content="2023-01-18" />
+<meta name="date" content="2023-01-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
-  
+  <link rel="shortcut icon" href="null" type="image/x-icon" />
 <link rel="prev" href="11.5-inference-11.html"/>
 <link rel="next" href="11.7-assumption-checking-11.html"/>
-<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.5.1/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -49,9 +51,8 @@
 
 
 
-<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
-<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -92,7 +93,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
+code span.bu { } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -105,7 +106,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.im { } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -504,8 +505,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="r-squared-11" class="section level2 hasAnchor" number="11.6">
-<h2><span class="header-section-number">11.6</span> (Pseudo) R-squared<a href="11.6-r-squared-11.html#r-squared-11" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="r-squared-11" class="section level2" number="11.6">
+<h2><span class="header-section-number">11.6</span> (Pseudo) R-squared</h2>
 <input onclick="codefolder(&#39;pre.sourceCode&#39;);" type="button" value="Hide Code" id="codefolder-button" style="position: relative; &#10;            top: -25px; &#10;            left: 85%;   &#10;            color: white;&#10;            font-weight: bold;&#10;            background: #4B9CD3;&#10;            border: 1px #3079ED solid;&#10;            box-shadow: inset 0 1px 0 #80B0FB"/>
 <script>
   function codefolder(query) {
@@ -537,8 +538,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>There are actually a number of statistics, called <em>pseudo R-squareds</em>, that have been developed to address this question.
 The pseudo R-squareds are not proportions of variance, but they try to come close, each with their own shortcomings and limitations.</p>
 <p>There is no clear “victor” in the battle of pseudo R-squareds, so we will just present one exemplar that is straight forward to compute and interpret</p>
-<div id="mcfaddens-pseudo-r-squared" class="section level3 hasAnchor" number="11.6.1">
-<h3><span class="header-section-number">11.6.1</span> McFadden’s Pseudo R-squared<a href="11.6-r-squared-11.html#mcfaddens-pseudo-r-squared" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="mcfaddens-pseudo-r-squared" class="section level3" number="11.6.1">
+<h3><span class="header-section-number">11.6.1</span> McFadden’s Pseudo R-squared</h3>
 <p>McFadden’s Pseudo R-squared captures the idea of how much the likelihood improves when adding more predictors into the model. For model 1 nested within model 2, it is computed as:</p>
 <p><span class="math display">\[ R^2 = 1 - \frac{\hat \ell_2}{\hat \ell_1} \]</span></p>
 <p>Note that if the model 2 does not “add anything” to model 1, then the two models have the same likelihood (see Section <a href="11.5-inference-11.html#inference-11">11.5</a>). Thus</p>
@@ -549,19 +550,19 @@ The pseudo R-squareds are not proportions of variance, but they try to come clos
 <p>Thus</p>
 <p><span class="math display">\[ R^2 = 1 - \frac{\hat \ell_2}{\hat \ell_1} = 1 - 0/1 = 1. \]</span></p>
 <p>In summary, McFadden’s Rsquared is equal to zero if model 2 does not add anything to model 1, and is equal to 1 if model 2 provides perfect prediction of each case (but model 1 does not). This is close to, but not quite the same as, the interpretation of <span class="math inline">\(\Delta R^2\)</span> in linear regression.</p>
-<p>Because the McFadden’s R-squared is not about proportion of variance, we can’t interpret it the same way as OLS R-squared. Instead, it is usually interpreted in terms of model <em>fit</em>. Here “fit” means how much the model’s predictions improve, with zero meaning “not at all” and one meaning “perfect prediction”.</p>
+<p>Because the McFadden’s R-squared is not about proportion of variance, we can’t interpret it the same way as OLS R-squared. Instead, it is usually interpreted in terms of model <em>fit</em>. Here “fit” means how much the model’s predictions improve, with zero meaning “not at all” and one meaning “perfect prediction.”</p>
 <p>The following output shows McFadden’s R-squared for the example data. <strong>Please write down an interpretation of the R-square value</strong> and we will discuss you interpretations in class. You can use the “show code” button to see an example interpretation.</p>
 <p>McFadden’s R-squared:</p>
-<div class="sourceCode" id="cb424"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb424-1"><a href="11.6-r-squared-11.html#cb424-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using the deviance of the models</span></span>
-<span id="cb424-2"><a href="11.6-r-squared-11.html#cb424-2" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> mod2<span class="sc">$</span>deviance<span class="sc">/</span>mod0<span class="sc">$</span>deviance</span></code></pre></div>
+<div class="sourceCode" id="cb416"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb416-1"><a href="11.6-r-squared-11.html#cb416-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using the deviance of the models</span></span>
+<span id="cb416-2"><a href="11.6-r-squared-11.html#cb416-2" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> mod2<span class="sc">$</span>deviance<span class="sc">/</span>mod0<span class="sc">$</span>deviance</span></code></pre></div>
 <pre><code>## [1] 0.2145</code></pre>
 <p>Interpretation (try it by yourself first!):</p>
-<div class="sourceCode" id="cb426"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb426-1"><a href="11.6-r-squared-11.html#cb426-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Interpretation: Relative a model with no predictors, </span></span>
-<span id="cb426-2"><a href="11.6-r-squared-11.html#cb426-2" aria-hidden="true" tabindex="-1"></a><span class="co"># the inclusion of age improved model fit by about 21.4% </span></span>
-<span id="cb426-3"><a href="11.6-r-squared-11.html#cb426-3" aria-hidden="true" tabindex="-1"></a><span class="co"># of that expected by a model with perfect predictions. </span></span>
-<span id="cb426-4"><a href="11.6-r-squared-11.html#cb426-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb426-5"><a href="11.6-r-squared-11.html#cb426-5" aria-hidden="true" tabindex="-1"></a><span class="co"># More elliptically: the inclusion of age improved model </span></span>
-<span id="cb426-6"><a href="11.6-r-squared-11.html#cb426-6" aria-hidden="true" tabindex="-1"></a><span class="co"># fit by about 21.4\%</span></span></code></pre></div>
+<div class="sourceCode" id="cb418"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb418-1"><a href="11.6-r-squared-11.html#cb418-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Interpretation: Relative a model with no predictors, </span></span>
+<span id="cb418-2"><a href="11.6-r-squared-11.html#cb418-2" aria-hidden="true" tabindex="-1"></a><span class="co"># the inclusion of age improved model fit by about 21.4% </span></span>
+<span id="cb418-3"><a href="11.6-r-squared-11.html#cb418-3" aria-hidden="true" tabindex="-1"></a><span class="co"># of that expected by a model with perfect predictions. </span></span>
+<span id="cb418-4"><a href="11.6-r-squared-11.html#cb418-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb418-5"><a href="11.6-r-squared-11.html#cb418-5" aria-hidden="true" tabindex="-1"></a><span class="co"># More elliptically: the inclusion of age improved model </span></span>
+<span id="cb418-6"><a href="11.6-r-squared-11.html#cb418-6" aria-hidden="true" tabindex="-1"></a><span class="co"># fit by about 21.4\%</span></span></code></pre></div>
 </div>
 </div>
             </section>
@@ -621,7 +622,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

@@ -6,10 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>1.2 Tips for using the notes | EDUC 784: Regression</title>
   <meta name="description" content="Course notes for EDUC 784" />
-  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="1.2 Tips for using the notes | EDUC 784: Regression" />
   <meta property="og:type" content="book" />
+  
   <meta property="og:image" content="/images/image1.png" />
   <meta property="og:description" content="Course notes for EDUC 784" />
   <meta name="github-repo" content="peterhalpin/EDUC_784" />
@@ -23,16 +24,17 @@
 <meta name="author" content="Peter Halpin" />
 
 
-<meta name="date" content="2023-01-18" />
+<meta name="date" content="2023-01-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
-  
+  <link rel="shortcut icon" href="null" type="image/x-icon" />
 <link rel="prev" href="1.1-why-this-format.html"/>
 <link rel="next" href="1.3-summary.html"/>
-<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.5.1/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -49,9 +51,8 @@
 
 
 
-<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
-<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -92,7 +93,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
+code span.bu { } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -105,7 +106,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.im { } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -504,8 +505,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="tips-for-using-the-notes" class="section level2 hasAnchor" number="1.2">
-<h2><span class="header-section-number">1.2</span> Tips for using the notes<a href="1.2-tips-for-using-the-notes.html#tips-for-using-the-notes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="tips-for-using-the-notes" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> Tips for using the notes</h2>
 <input onclick="codefolder(&#39;pre.sourceCode&#39;);" type="button" value="Hide Code" id="codefolder-button" style="position: relative; &#10;                top: -25px; &#10;                left: 85%;   &#10;                color: white;&#10;                font-weight: bold;&#10;                background: #4B9CD3;&#10;                border: 1px #3079ED solid;&#10;                box-shadow: inset 0 1px 0 #80B0FB"/>
 <script>
   function codefolder(query) {
@@ -533,7 +534,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     codefolder('pre.sourceCode');
   });
 </script>
-<p>In my experience, students often prefer to have a conceptual overview of the material before getting into the coding. To facilitate this, these notes uses “code folding”. An example of code folding is given on this page. A histogram is presented below. By clicking on the button called “Show Code” on the top of the page, the R code that produced the histogram will become visible. Notice that you may need to scroll horizontally to see all of the text in the code window. Also notice that when you hover your mouse over the code window, an icon appears in the top right corner – this lets you copy the block of code with one click. (I don’t recommend always copy-pasting code, but it’s a good way to get started.)</p>
+<p>In my experience, students often prefer to have a conceptual overview of the material before getting into the coding. To facilitate this, these notes uses “code folding.” An example of code folding is given on this page. A histogram is presented below. By clicking on the button called “Show Code” on the top of the page, the R code that produced the histogram will become visible. Notice that you may need to scroll horizontally to see all of the text in the code window. Also notice that when you hover your mouse over the code window, an icon appears in the top right corner – this lets you copy the block of code with one click. (I don’t recommend always copy-pasting code, but it’s a good way to get started.)</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="1.2-tips-for-using-the-notes.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Here is some R code. You don&#39;t have to look at it when reading the book, but it is here when you need it</span></span>
 <span id="cb1-2"><a href="1.2-tips-for-using-the-notes.html#cb1-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">200</span>)</span>
 <span id="cb1-3"><a href="1.2-tips-for-using-the-notes.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(x, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span></code></pre></div>
@@ -541,7 +542,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The overall idea is that you will read the notes for conceptual understanding before class, and then we will review the concepts and do the coding together during class. Note that sections denoted with an asterisk (*) are optional!</p>
 <p>Two other important points:</p>
 <ul>
-<li><p>The readings contain questions that are written in <strong>bold font</strong>. The questions are also collected in the section of each chapter called “Workbook”. During class time, we will discuss the Workbook questions, your answers, any additional question you have, etc. So, it really is important for you to do the readings, and write down your responses to the questions, before class. You won’t get much out of the lessons if you haven’t done this preparation.</p></li>
+<li><p>The readings contain questions that are written in <strong>bold font</strong>. The questions are also collected in the section of each chapter called “Workbook.” During class time, we will discuss the Workbook questions, your answers, any additional question you have, etc. So, it really is important for you to do the readings, and write down your responses to the questions, before class. You won’t get much out of the lessons if you haven’t done this preparation.</p></li>
 <li><p>Some chapters contain a section called “Exercises” that collect all the R code in the chapter into a single overall workflow. <strong>You don’t need to do the exercises before class</strong>, but you can if you want to. The main advantage of doing the readings and questions ahead of time is that it will free up more class time for us to work on exercises together. Coding is very much a “hands on” activity and it is easy to get frustrated or discouraged when the software doesn’t do what you want it to. So, having others there to help you along while coding (e.g., the instructor, TA, your fellow students) is a big advantage! If the chapter doesn’t have an Exercises section, that means we will be working on an assignment together instead.</p></li>
 </ul>
 </div>
@@ -602,7 +603,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

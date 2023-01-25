@@ -6,10 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>5.3 Binary predictors | EDUC 784: Regression</title>
   <meta name="description" content="Course notes for EDUC 784" />
-  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="5.3 Binary predictors | EDUC 784: Regression" />
   <meta property="og:type" content="book" />
+  
   <meta property="og:image" content="/images/image1.png" />
   <meta property="og:description" content="Course notes for EDUC 784" />
   <meta name="github-repo" content="peterhalpin/EDUC_784" />
@@ -23,16 +24,17 @@
 <meta name="author" content="Peter Halpin" />
 
 
-<meta name="date" content="2023-01-18" />
+<meta name="date" content="2023-01-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
-  
+  <link rel="shortcut icon" href="null" type="image/x-icon" />
 <link rel="prev" href="5.2-data-and-social-constructs.html"/>
 <link rel="next" href="5.4-reference-group-coding-5.html"/>
-<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.5.1/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -49,9 +51,8 @@
 
 
 
-<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
-<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -92,7 +93,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
+code span.bu { } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -105,7 +106,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.im { } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -504,8 +505,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="binary-predictors-5" class="section level2 hasAnchor" number="5.3">
-<h2><span class="header-section-number">5.3</span> Binary predictors<a href="5.3-binary-predictors-5.html#binary-predictors-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="binary-predictors-5" class="section level2" number="5.3">
+<h2><span class="header-section-number">5.3</span> Binary predictors</h2>
 <input onclick="codefolder(&#39;pre.sourceCode&#39;);" type="button" value="Hide Code" id="codefolder-button" style="position: relative; &#10;            top: -25px; &#10;            left: 85%;   &#10;            color: white;&#10;            font-weight: bold;&#10;            background: #4B9CD3;&#10;            border: 1px #3079ED solid;&#10;            box-shadow: inset 0 1px 0 #80B0FB"/>
 <script>
   function codefolder(query) {
@@ -535,56 +536,62 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </script>
 <p>Let’s start our interpretation of categorical predictors with the simplest case: a single binary predictor.</p>
 <p>Figure <a href="5.3-binary-predictors-5.html#fig:reading-on-gender-5">5.1</a> illustrates the regression of Reading Achievement in Grade 8 (<code>achrdg08</code>) on a binary encoding of Gender (female = 0, male = 1) using the NELS data. There isn’t a lot going on the plot! However, we can see the conditional distributions of Reading Achievement for each value of Gender, and the means of the two groups are indicated.</p>
-<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="5.3-binary-predictors-5.html#cb101-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;images/reading_on_gender.png&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="5.3-binary-predictors-5.html#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Don&#39;t read this unless you really like working on graphics :) </span></span>
+<span id="cb100-2"><a href="5.3-binary-predictors-5.html#cb100-2" aria-hidden="true" tabindex="-1"></a>binary_gender <span class="ot">&lt;-</span> (gender <span class="sc">==</span> <span class="st">&quot;Male&quot;</span>) <span class="sc">*</span> <span class="dv">1</span> </span>
+<span id="cb100-3"><a href="5.3-binary-predictors-5.html#cb100-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(binary_gender, achrdg08, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>, </span>
+<span id="cb100-4"><a href="5.3-binary-predictors-5.html#cb100-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">&quot;binary gender (Female = 0, Male = 1)&quot;</span>,</span>
+<span id="cb100-5"><a href="5.3-binary-predictors-5.html#cb100-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">&quot;Reading (Grade 8)&quot;</span>)</span>
+<span id="cb100-6"><a href="5.3-binary-predictors-5.html#cb100-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb100-7"><a href="5.3-binary-predictors-5.html#cb100-7" aria-hidden="true" tabindex="-1"></a>means <span class="ot">&lt;-</span> <span class="fu">tapply</span>(achrdg08, binary_gender, mean)</span>
+<span id="cb100-8"><a href="5.3-binary-predictors-5.html#cb100-8" aria-hidden="true" tabindex="-1"></a>labels <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">expression</span>(<span class="fu">bar</span>(Y)[<span class="dv">0</span>]), <span class="fu">expression</span>(<span class="fu">bar</span>(Y)[<span class="dv">1</span>]))</span>
+<span id="cb100-9"><a href="5.3-binary-predictors-5.html#cb100-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb100-10"><a href="5.3-binary-predictors-5.html#cb100-10" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="at">x =</span> <span class="fu">c</span>(.<span class="dv">1</span>, .<span class="dv">9</span>), <span class="at">y =</span> means, <span class="at">labels =</span> labels, <span class="at">cex =</span> <span class="fl">1.5</span>) </span>
+<span id="cb100-11"><a href="5.3-binary-predictors-5.html#cb100-11" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">y =</span> means, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;_&quot;</span>, <span class="st">&quot;_&quot;</span>), <span class="at">cex =</span> <span class="dv">2</span>) </span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:reading-on-gender-5"></span>
-<img src="images/reading_on_gender.png" alt="Reading Achievement on Binary Gender." width="462" />
+<img src="_main_files/figure-html/reading-on-gender-5-1.png" alt="Reading Achievement on Binary Gender." width="480" />
 <p class="caption">
 Figure 5.1: Reading Achievement on Binary Gender.
 </p>
 </div>
-<p>In this situation, the simple regression equation from Section <a href="#regression-line"><strong>??</strong></a> still holds</p>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="5.3-binary-predictors-5.html#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="co"># knitr::include_graphics(&quot;images/reading_on_gender.png&quot;)</span></span></code></pre></div>
+<p>In this situation, the simple regression equation from Section <a href="2.2-regression-line-2.html#regression-line-2">2.2</a> still holds</p>
 <p><span class="math display">\[ \widehat Y = b_0 + b_1 X, \]</span></p>
 <p>but <span class="math inline">\(X\)</span> can only take on one of two values: 0 or 1. The question we want to answer is how to interpret the regression coefficients in this context. The general strategy for approaching this kind of problem has two steps:</p>
 <ul>
 <li><em>Step 1.</em> Plug the values for <span class="math inline">\(X\)</span> into the regression equation.</li>
 </ul>
 <p><span class="math display">\[\begin{align}
-\widehat Y (Female) &amp; = b_0 + b_1 (0) = b_0 \\
-\widehat Y (Male) &amp; = b_0 + b_1 (1) = b_0 + b_1
+\widehat Y (Female) &amp; = b_0 + b_1 (0) = b_0 \\ 
+\widehat Y (Male) &amp; = b_0 + b_1 (1) = b_0 + b_1 
 \end{align}\]</span></p>
 <ul>
 <li><em>Step 2.</em> Solve for the model parameters in terms the predicted values.</li>
 </ul>
 <p><span class="math display" id="eq:binary2-5" id="eq:binary1-5">\[\begin{align}
-b_0 &amp; = \widehat Y (Female) \tag{5.1}\\
+b_0 &amp; = \widehat Y (Female) \tag{5.1}\\ 
 b_1 &amp; = \widehat Y (Male) - b_0 = \widehat Y (Male) - \widehat Y (Female) \tag{5.2}
 \end{align}\]</span></p>
 <p>Looking at Equation <a href="5.3-binary-predictors-5.html#eq:binary1-5">(5.1)</a> we can conclude that intercept (<span class="math inline">\(b_0\)</span>) is equal to the predicted value of Reading Achievement for Females, and Equation <a href="5.3-binary-predictors-5.html#eq:binary2-5">(5.2)</a> shows that the regression slope (<span class="math inline">\(b_1\)</span>) is equal to the difference between predicted Reading Achievement for Males and Females.</p>
 <p>For a single categorical predictor, the predicted values for each category are just the group means on the <span class="math inline">\(Y\)</span> variable. So, using the notation of Figure <a href="5.3-binary-predictors-5.html#fig:reading-on-gender-5">5.1</a> we can re-write Equations <a href="5.3-binary-predictors-5.html#eq:binary1-5">(5.1)</a> and <a href="5.3-binary-predictors-5.html#eq:binary2-5">(5.2)</a> as</p>
 <p><span class="math display" id="eq:binary4-5" id="eq:binary3-5">\[\begin{align}
-b_0 &amp; = \bar Y_0 \tag{5.3} \\
-b_1 &amp; = \bar Y_0 - \bar Y_1 \tag{5.4}
+b_0 &amp; = \bar Y_0 \tag{5.3} \\ 
+b_1 &amp; = \bar Y_1 - \bar Y_0 \tag{5.4}
 \end{align}\]</span></p>
 <p>Note that we will use the equivalence between the predicted values for each category and the mean of the corresponding group throughout this chapter. This equivalence holds when there is only one categorical predictor in the model, and no other predictors. Additional predictors are discussed in the next chapter.</p>
 <p>For the example data, regression coefficients are:</p>
-<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="5.3-binary-predictors-5.html#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(NELS)</span></code></pre></div>
-<pre><code>## The following object is masked _by_ .GlobalEnv:
-## 
-##     urban</code></pre>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="5.3-binary-predictors-5.html#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="co"># convert &quot;Female / Male&quot; coding to binary</span></span>
-<span id="cb104-2"><a href="5.3-binary-predictors-5.html#cb104-2" aria-hidden="true" tabindex="-1"></a>gender <span class="ot">&lt;-</span> NELS<span class="sc">$</span>gender</span>
-<span id="cb104-3"><a href="5.3-binary-predictors-5.html#cb104-3" aria-hidden="true" tabindex="-1"></a>binary_gender <span class="ot">&lt;-</span> (gender <span class="sc">==</span> <span class="st">&quot;Male&quot;</span>)<span class="sc">*</span><span class="dv">1</span></span>
-<span id="cb104-4"><a href="5.3-binary-predictors-5.html#cb104-4" aria-hidden="true" tabindex="-1"></a>mod_binary <span class="ot">&lt;-</span> <span class="fu">lm</span>(achrdg08 <span class="sc">~</span> binary_gender)</span>
-<span id="cb104-5"><a href="5.3-binary-predictors-5.html#cb104-5" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(mod_binary)</span></code></pre></div>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="5.3-binary-predictors-5.html#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="co"># convert &quot;Female / Male&quot; coding to binary</span></span>
+<span id="cb102-2"><a href="5.3-binary-predictors-5.html#cb102-2" aria-hidden="true" tabindex="-1"></a>gender <span class="ot">&lt;-</span> NELS<span class="sc">$</span>gender</span>
+<span id="cb102-3"><a href="5.3-binary-predictors-5.html#cb102-3" aria-hidden="true" tabindex="-1"></a>binary_gender <span class="ot">&lt;-</span> (gender <span class="sc">==</span> <span class="st">&quot;Male&quot;</span>)<span class="sc">*</span><span class="dv">1</span></span>
+<span id="cb102-4"><a href="5.3-binary-predictors-5.html#cb102-4" aria-hidden="true" tabindex="-1"></a>mod_binary <span class="ot">&lt;-</span> <span class="fu">lm</span>(achrdg08 <span class="sc">~</span> binary_gender)</span>
+<span id="cb102-5"><a href="5.3-binary-predictors-5.html#cb102-5" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(mod_binary)</span></code></pre></div>
 <pre><code>##   (Intercept) binary_gender 
 ##       56.4678       -0.9223</code></pre>
-<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="5.3-binary-predictors-5.html#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(NELS)</span></code></pre></div>
 <p><strong>Please take a moment and write down how these two numbers are related to Figure <a href="5.3-binary-predictors-5.html#fig:reading-on-gender-5">5.1</a>. In particular, what is <span class="math inline">\(\bar Y_0\)</span> equal to, what is <span class="math inline">\(\bar Y_1\)</span> equal to, and what is their difference equal to?</strong></p>
-<div id="relation-with-t-tests" class="section level3 hasAnchor" number="5.3.1">
-<h3><span class="header-section-number">5.3.1</span> Relation with t-tests<a href="5.3-binary-predictors-5.html#relation-with-t-tests" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="relation-with-t-tests" class="section level3" number="5.3.1">
+<h3><span class="header-section-number">5.3.1</span> Relation with t-tests</h3>
 <p>Simple regression with a binary predictor is equivalent to conducting an independent samples t-test in which the <span class="math inline">\(X\)</span> variable (Gender) is the grouping variable and the <span class="math inline">\(Y\)</span> variable (Reading Achievement) is the outcome. The following output illustrates this.</p>
-<p>For the regression model:</p>
-<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="5.3-binary-predictors-5.html#cb107-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_binary)</span></code></pre></div>
+<p>For the regression model (same as above):</p>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="5.3-binary-predictors-5.html#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_binary)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = achrdg08 ~ binary_gender)
@@ -604,38 +611,34 @@ b_1 &amp; = \bar Y_0 - \bar Y_1 \tag{5.4}
 ## Multiple R-squared:  0.00271,    Adjusted R-squared:  0.000708 
 ## F-statistic: 1.35 on 1 and 498 DF,  p-value: 0.245</code></pre>
 <p>For the independent samples t-test (with homogeneity of variance assumed):</p>
-<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="5.3-binary-predictors-5.html#cb109-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(NELS)</span></code></pre></div>
-<pre><code>## The following objects are masked _by_ .GlobalEnv:
-## 
-##     gender, urban</code></pre>
-<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="5.3-binary-predictors-5.html#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(achrdg08 <span class="sc">~</span> binary_gender, <span class="at">var.equal =</span> T)</span></code></pre></div>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="5.3-binary-predictors-5.html#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">digits =</span> <span class="dv">4</span>)</span>
+<span id="cb106-2"><a href="5.3-binary-predictors-5.html#cb106-2" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(achrdg08 <span class="sc">~</span> binary_gender, <span class="at">var.equal =</span> T)</span></code></pre></div>
 <pre><code>## 
 ##  Two Sample t-test
 ## 
 ## data:  achrdg08 by binary_gender
 ## t = 1.2, df = 498, p-value = 0.2
-## alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
+## alternative hypothesis: true difference in means is not equal to 0
 ## 95 percent confidence interval:
 ##  -0.6354  2.4801
 ## sample estimates:
 ## mean in group 0 mean in group 1 
 ##           56.47           55.55</code></pre>
-<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="5.3-binary-predictors-5.html#cb113-1" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(NELS )</span></code></pre></div>
-<p>Although the two functions produce different output, we can see that the pattern of values in the two sets of output corresponds to Equations <a href="5.3-binary-predictors-5.html#eq:binary3-5">(5.3)</a> and <a href="5.3-binary-predictors-5.html#eq:binary4-5">(5.4)</a>. In particular, the t-value and p-value for <code>binary_gender</code> in the regression output is equivalent to the t-value and p-value in the two sample t-test (other than the sign of the t-value).</p>
+<p>The differences between the two outputs is just rounding error – I am not sure why bookdown prints <code>t.test</code> with only 2 significant digits but the <code>summary(lm)</code> with 3 digits…sigh. Anyway, if you try this out in R, you’ll see the output is the same other than the sign of the difference (i.e., <code>lm</code> subtracts males from females, <code>t.test</code> subtracts females from males).</p>
 <p><strong>If you have any questions about the relation between these two sets of output, please note them now and be prepared ask them in class.</strong></p>
-<!-- derive the result that the hats equal the predicted values 
+<!-- Derive the result that the hats equal the predicted values? 
 ### Some math*
 We have -->
 </div>
-<div id="summary-1" class="section level3 hasAnchor" number="5.3.2">
-<h3><span class="header-section-number">5.3.2</span> Summary<a href="5.3-binary-predictors-5.html#summary-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="summary-1" class="section level3" number="5.3.2">
+<h3><span class="header-section-number">5.3.2</span> Summary</h3>
 <p>When doing regression with a binary predictor:</p>
 <ul>
-<li><p>The intercept is equal to the mean of the group coded “0”</p></li>
-<li><p>The regression coefficient is equal to the mean difference between the groups</p></li>
+<li><p>The intercept is equal to the mean of the group coded “0.”</p></li>
+<li><p>The regression coefficient is equal to the mean difference between the groups.</p></li>
 <li><p>Testing <span class="math inline">\(H_0: b_1 = 0\)</span> is equivalent to testing the mean difference <span class="math inline">\(H_0: \mu_1 – \mu_0 = 0\)</span></p>
 <ul>
-<li>i.e., regression with a binary variable is the same as a t-test of means for independent groups</li>
+<li>i.e., regression with a binary variable is the same as a t-test of means for independent groups.</li>
 </ul></li>
 </ul>
 </div>
@@ -697,7 +700,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

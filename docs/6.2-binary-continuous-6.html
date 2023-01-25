@@ -6,10 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>6.2 Binary + continuous | EDUC 784: Regression</title>
   <meta name="description" content="Course notes for EDUC 784" />
-  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="6.2 Binary + continuous | EDUC 784: Regression" />
   <meta property="og:type" content="book" />
+  
   <meta property="og:image" content="/images/image1.png" />
   <meta property="og:description" content="Course notes for EDUC 784" />
   <meta name="github-repo" content="peterhalpin/EDUC_784" />
@@ -23,16 +24,17 @@
 <meta name="author" content="Peter Halpin" />
 
 
-<meta name="date" content="2023-01-18" />
+<meta name="date" content="2023-01-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
-  
+  <link rel="shortcut icon" href="null" type="image/x-icon" />
 <link rel="prev" href="6.1-example-6.html"/>
 <link rel="next" href="6.3-binary-continuous-interaction-6.html"/>
-<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.5.1/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -49,9 +51,8 @@
 
 
 
-<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
-<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -92,7 +93,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
+code span.bu { } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -105,7 +106,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.im { } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -504,8 +505,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="binary-continuous-6" class="section level2 hasAnchor" number="6.2">
-<h2><span class="header-section-number">6.2</span> Binary + continuous<a href="6.2-binary-continuous-6.html#binary-continuous-6" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="binary-continuous-6" class="section level2" number="6.2">
+<h2><span class="header-section-number">6.2</span> Binary + continuous</h2>
 <input onclick="codefolder(&#39;pre.sourceCode&#39;);" type="button" value="Hide Code" id="codefolder-button" style="position: relative; &#10;            top: -25px; &#10;            left: 85%;   &#10;            color: white;&#10;            font-weight: bold;&#10;            background: #4B9CD3;&#10;            border: 1px #3079ED solid;&#10;            box-shadow: inset 0 1px 0 #80B0FB"/>
 <script>
   function codefolder(query) {
@@ -534,7 +535,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   });
 </script>
 <p>As a first step, let’s consider what happens when we include both Gender and Reading Achievement as predictors of Math Achievement in our usual multiple regression equation:</p>
-<p><span class="math display" id="eq:yhat-6a">\[\widehat Y = b_0 + b_1X_1 + b_2 X_2
+<p><span class="math display" id="eq:yhat-6a">\[\widehat Y = b_0 + b_1X_1 + b_2 X_2 
 \tag{6.1}
 \]</span></p>
 <p>where</p>
@@ -544,31 +545,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><span class="math inline">\(X_2\)</span> is Gender (binary, with Female = 0 and Male = 1)</li>
 </ul>
 <p>Note that this model does <strong>not</strong> include an interaction between the two predictors – we are first going to consider what is “missing” from the usual regression model, and then use this to motivate inclusion of another predictor that represents the interaction. To get an initial sense of what is missing, the model in Equation <a href="6.2-binary-continuous-6.html#eq:yhat-6a">(6.1)</a> is plotted Figure <a href="6.2-binary-continuous-6.html#fig:math-reading-2">6.2</a> – can you spot the difference with Figure <a href="6.1-example-6.html#fig:math-reading-1">6.1</a>?</p>
-<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="6.2-binary-continuous-6.html#cb190-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(NELS)</span>
-<span id="cb190-2"><a href="6.2-binary-continuous-6.html#cb190-2" aria-hidden="true" tabindex="-1"></a>mod3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(achmat12 <span class="sc">~</span> achrdg12 <span class="sc">+</span> gender, <span class="at">data =</span> NELS)</span>
-<span id="cb190-3"><a href="6.2-binary-continuous-6.html#cb190-3" aria-hidden="true" tabindex="-1"></a>a_females <span class="ot">&lt;-</span> <span class="fu">coef</span>(mod3)[<span class="dv">1</span>]</span>
-<span id="cb190-4"><a href="6.2-binary-continuous-6.html#cb190-4" aria-hidden="true" tabindex="-1"></a>b_females <span class="ot">&lt;-</span> <span class="fu">coef</span>(mod3)[<span class="dv">2</span>]</span>
-<span id="cb190-5"><a href="6.2-binary-continuous-6.html#cb190-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb190-6"><a href="6.2-binary-continuous-6.html#cb190-6" aria-hidden="true" tabindex="-1"></a>a_males <span class="ot">&lt;-</span> a_females <span class="sc">+</span> <span class="fu">coef</span>(mod3)[<span class="dv">3</span>]</span>
-<span id="cb190-7"><a href="6.2-binary-continuous-6.html#cb190-7" aria-hidden="true" tabindex="-1"></a>b_males <span class="ot">&lt;-</span> b_females </span>
-<span id="cb190-8"><a href="6.2-binary-continuous-6.html#cb190-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb190-9"><a href="6.2-binary-continuous-6.html#cb190-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot reading and math for females</span></span>
-<span id="cb190-10"><a href="6.2-binary-continuous-6.html#cb190-10" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(achrdg12[females], achmat12[females], <span class="at">xlab =</span> <span class="st">&quot;reading&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;math&quot;</span>)</span>
-<span id="cb190-11"><a href="6.2-binary-continuous-6.html#cb190-11" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(a_females, b_females, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
-<span id="cb190-12"><a href="6.2-binary-continuous-6.html#cb190-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb190-13"><a href="6.2-binary-continuous-6.html#cb190-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Add points and line for males</span></span>
-<span id="cb190-14"><a href="6.2-binary-continuous-6.html#cb190-14" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(achrdg12[males], achmat12[males], <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>, <span class="at">pch =</span> <span class="dv">2</span>)</span>
-<span id="cb190-15"><a href="6.2-binary-continuous-6.html#cb190-15" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(a_males, b_males, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
-<span id="cb190-16"><a href="6.2-binary-continuous-6.html#cb190-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb190-17"><a href="6.2-binary-continuous-6.html#cb190-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a legend</span></span>
-<span id="cb190-18"><a href="6.2-binary-continuous-6.html#cb190-18" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="at">x =</span> <span class="st">&quot;topleft&quot;</span>, <span class="at">legend =</span> <span class="fu">levels</span>(gender), <span class="at">pch =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="at">col =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="st">&quot;#4B9CD3&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="6.2-binary-continuous-6.html#cb184-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(NELS)</span>
+<span id="cb184-2"><a href="6.2-binary-continuous-6.html#cb184-2" aria-hidden="true" tabindex="-1"></a>mod3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(achmat12 <span class="sc">~</span> achrdg12 <span class="sc">+</span> gender, <span class="at">data =</span> NELS)</span>
+<span id="cb184-3"><a href="6.2-binary-continuous-6.html#cb184-3" aria-hidden="true" tabindex="-1"></a>a_females <span class="ot">&lt;-</span> <span class="fu">coef</span>(mod3)[<span class="dv">1</span>]</span>
+<span id="cb184-4"><a href="6.2-binary-continuous-6.html#cb184-4" aria-hidden="true" tabindex="-1"></a>b_females <span class="ot">&lt;-</span> <span class="fu">coef</span>(mod3)[<span class="dv">2</span>]</span>
+<span id="cb184-5"><a href="6.2-binary-continuous-6.html#cb184-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb184-6"><a href="6.2-binary-continuous-6.html#cb184-6" aria-hidden="true" tabindex="-1"></a>a_males <span class="ot">&lt;-</span> a_females <span class="sc">+</span> <span class="fu">coef</span>(mod3)[<span class="dv">3</span>]</span>
+<span id="cb184-7"><a href="6.2-binary-continuous-6.html#cb184-7" aria-hidden="true" tabindex="-1"></a>b_males <span class="ot">&lt;-</span> b_females </span>
+<span id="cb184-8"><a href="6.2-binary-continuous-6.html#cb184-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb184-9"><a href="6.2-binary-continuous-6.html#cb184-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot reading and math for females</span></span>
+<span id="cb184-10"><a href="6.2-binary-continuous-6.html#cb184-10" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(achrdg12[females], achmat12[females], <span class="at">xlab =</span> <span class="st">&quot;reading&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;math&quot;</span>)</span>
+<span id="cb184-11"><a href="6.2-binary-continuous-6.html#cb184-11" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(a_females, b_females, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb184-12"><a href="6.2-binary-continuous-6.html#cb184-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb184-13"><a href="6.2-binary-continuous-6.html#cb184-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Add points and line for males</span></span>
+<span id="cb184-14"><a href="6.2-binary-continuous-6.html#cb184-14" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(achrdg12[males], achmat12[males], <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>, <span class="at">pch =</span> <span class="dv">2</span>)</span>
+<span id="cb184-15"><a href="6.2-binary-continuous-6.html#cb184-15" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(a_males, b_males, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb184-16"><a href="6.2-binary-continuous-6.html#cb184-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb184-17"><a href="6.2-binary-continuous-6.html#cb184-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a legend</span></span>
+<span id="cb184-18"><a href="6.2-binary-continuous-6.html#cb184-18" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="at">x =</span> <span class="st">&quot;topleft&quot;</span>, <span class="at">legend =</span> <span class="fu">levels</span>(gender), <span class="at">pch =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="at">col =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="st">&quot;#4B9CD3&quot;</span>))</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:math-reading-2"></span>
 <img src="_main_files/figure-html/math-reading-2-1.png" alt="Math Achievement, Reading Achievement, and Gender (No Interaction)." width="672" />
 <p class="caption">
 Figure 6.2: Math Achievement, Reading Achievement, and Gender (No Interaction).
 </p>
 </div>
-<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="6.2-binary-continuous-6.html#cb191-1" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(NELS)</span></code></pre></div>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="6.2-binary-continuous-6.html#cb185-1" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(NELS)</span></code></pre></div>
 <p>In order to interpret our multiple regression model, we can take the same two-step approach we used to interpret categorical predictors in Chapter <a href="5-chapter-5.html#chapter-5">5</a>. First, we plug in values for the categorical predictor, then we use the resulting equations solve for quantities of interest. In particular,</p>
 <p><span class="math display">\[\begin{align}
 \widehat Y (Female) &amp; = b_0 + b_1X_1 + b_2 (0) \\ &amp; = b_0 + b_1X_1  \\\\
@@ -584,11 +585,11 @@ Figure 6.2: Math Achievement, Reading Achievement, and Gender (No Interaction).
 <li>The difference between the predicted values (i.e., the predicted gender gap in Math Achievement) is a constant, and is equal to the regression coefficient for Gender (<span class="math inline">\(b_2\)</span>)</li>
 </ul>
 <p>The regression coefficients for the example data are shown below. <strong>Please use these numbers to provide an interpretation of the simple trends and the gender gap in Math Achievement for the NELS example</strong> (Don’t worry about statistical significance, just focus on the meaning of the coefficients.)</p>
-<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="6.2-binary-continuous-6.html#cb192-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(mod3)</span></code></pre></div>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="6.2-binary-continuous-6.html#cb186-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(mod3)</span></code></pre></div>
 <pre><code>## (Intercept)    achrdg12  genderMale 
 ##     19.9812      0.6355      3.5017</code></pre>
-<div id="marginal-means" class="section level3 hasAnchor" number="6.2.1">
-<h3><span class="header-section-number">6.2.1</span> Marginal means<a href="6.2-binary-continuous-6.html#marginal-means" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="marginal-means" class="section level3" number="6.2.1">
+<h3><span class="header-section-number">6.2.1</span> Marginal means</h3>
 <p>Before moving on to discuss what is missing from the regression model in Equation <a href="6.2-binary-continuous-6.html#eq:yhat-6a">(6.1)</a>, it is important to note that the interpretation of the regression coefficient on gender has changed from what we discussed in Chapter <a href="5-chapter-5.html#chapter-5">5</a>. In Chapter <a href="5-chapter-5.html#chapter-5">5</a>, we noted that the regression coefficient on a dummy variables can be interpreted as the mean of the group indicated by the dummy (e.g. the mean of Math Achievement for Males, or for Females). However, when additional predictors are included in the regression model, this relationship no longer holds in general.</p>
 <p>To see this we can compare the output of the t-test in Section <a href="6.1-example-6.html#example-6">6.1</a> with the regression output shown above. In the t-test, the group means for Math Achievement were 55.47 for Females and 58.63 for males, so the mean difference was</p>
 <p><span class="math display">\[58.63 - 55.47 58.63 - 55.47 = 3.16 \]</span></p>
@@ -596,13 +597,13 @@ Figure 6.2: Math Achievement, Reading Achievement, and Gender (No Interaction).
 <p>We actually saw the answer to this question in Chapter <a href="4-chapter-4.html#chapter-4">4</a> when we discussed the interpretation of regression coefficients in multiple regression. In the multiple regression model, the regression coefficient on Gender controls for (“partials out”) the relationship between Reading Achievement and Gender. So, the multiple regression coefficient represents the relationship between Gender and Math, after controlling for Reading, whereas the group mean difference does not control for Reading. These two values will be the same only if the two predictors are uncorrelated.</p>
 <p>In order to emphasize the distinction between “raw” group means computed from the data and the predicted group means obtained from a multiple regression model, the latter are referred to as <em>marginal means</em>, or sometimes as <em>adjusted means</em> or <em>least squares means</em>.</p>
 </div>
-<div id="summary-4" class="section level3 hasAnchor" number="6.2.2">
-<h3><span class="header-section-number">6.2.2</span> Summary<a href="6.2-binary-continuous-6.html#summary-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="summary-4" class="section level3" number="6.2.2">
+<h3><span class="header-section-number">6.2.2</span> Summary</h3>
 <p>In a regression model with one continuous and one binary predictor (and no interaction):</p>
 <ul>
 <li>The model results in two regression lines, one for each value of the binary predictor. These are called the simple trends.</li>
 <li>In a standard multiple regression model, the simple trends are parallel but can have a different intercept; the difference in the intercepts is equal to regression coefficient of the binary variable.</li>
-<li>The difference between the simple trends is often called a “gap”, and the gap is also equal to the regression coefficient of the binary variable.</li>
+<li>The difference between the simple trends is often called a “gap,” and the gap is also equal to the regression coefficient of the binary variable.</li>
 <li>It is important to note that the predicted group means for the binary variable are no longer equal to the “raw” group means computed directly from the data, because the predicted group means now control for the intercorrelation among the predictors. The predicted group means are called marginal means to emphasize this distinction.</li>
 </ul>
 </div>
@@ -664,7 +665,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

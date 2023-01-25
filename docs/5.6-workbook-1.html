@@ -6,10 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>5.6 Workbook | EDUC 784: Regression</title>
   <meta name="description" content="Course notes for EDUC 784" />
-  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="5.6 Workbook | EDUC 784: Regression" />
   <meta property="og:type" content="book" />
+  
   <meta property="og:image" content="/images/image1.png" />
   <meta property="og:description" content="Course notes for EDUC 784" />
   <meta name="github-repo" content="peterhalpin/EDUC_784" />
@@ -23,16 +24,17 @@
 <meta name="author" content="Peter Halpin" />
 
 
-<meta name="date" content="2023-01-18" />
+<meta name="date" content="2023-01-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
-  
+  <link rel="shortcut icon" href="null" type="image/x-icon" />
 <link rel="prev" href="5.5-deviation-coding-5.html"/>
 <link rel="next" href="5.7-exercises-1.html"/>
-<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.5.1/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -49,9 +51,8 @@
 
 
 
-<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
-<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -92,7 +93,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
+code span.bu { } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -105,7 +106,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.im { } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -504,8 +505,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="workbook-1" class="section level2 hasAnchor" number="5.6">
-<h2><span class="header-section-number">5.6</span> Workbook<a href="5.6-workbook-1.html#workbook-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="workbook-1" class="section level2" number="5.6">
+<h2><span class="header-section-number">5.6</span> Workbook</h2>
 <p>This section collects the questions asked in this chapter. We will discuss these questions in class. If you haven’t written down / thought about the answers to these questions before class, the lesson will not be very useful for you! So, please engage with each question by writing down one or more answers, asking clarifying questions, posing follow up questions, etc.</p>
 <p><strong>Section <a href="5.2-data-and-social-constructs.html#data-and-social-constructs">5.2</a></strong></p>
 <ul>
@@ -513,23 +514,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p><strong>Section <a href="5.3-binary-predictors-5.html#binary-predictors-5">5.3</a></strong></p>
 <ul>
-<li>Please take a moment and write down how these two numbers in the R output are related to the Figure (reproduced below). In particular, what is <span class="math inline">\(\bar Y_0\)</span> equal to, what is <span class="math inline">\(\bar Y_1\)</span> equal to, and what is their difference equal to?</li>
+<li>Please take a moment and write down how these the regression output below is related to the Figure. In particular, what is <span class="math inline">\(\bar Y_0\)</span> equal to, what is <span class="math inline">\(\bar Y_1\)</span> equal to, and what is their difference equal to?</li>
 </ul>
-<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="5.6-workbook-1.html#cb118-1" aria-hidden="true" tabindex="-1"></a><span class="co"># regression coefficients from Reading Achievement on Binary Gender</span></span>
-<span id="cb118-2"><a href="5.6-workbook-1.html#cb118-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(mod_binary)</span></code></pre></div>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="5.6-workbook-1.html#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="co"># regression coefficients from Reading Achievement on Binary Gender</span></span>
+<span id="cb112-2"><a href="5.6-workbook-1.html#cb112-2" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(mod_binary)</span></code></pre></div>
 <pre><code>##   (Intercept) binary_gender 
 ##       56.4678       -0.9223</code></pre>
-<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="5.6-workbook-1.html#cb120-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;images/reading_on_gender.png&quot;</span>)</span></code></pre></div>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-72"></span>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="5.6-workbook-1.html#cb114-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;images/reading_on_gender.png&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-73"></span>
 <img src="images/reading_on_gender.png" alt="Reading Achievement on Binary Gender." width="462" />
 <p class="caption">
 Figure 5.6: Reading Achievement on Binary Gender.
 </p>
 </div>
 <ul>
-<li>If you have any questions about the relation between regression with a binary predictor and an independent samples t-test (output below), please note them now and be prepared ask them in class.</li>
+<li>If you have any questions about the relation between regression with a binary predictor and an independent samples t-test (output below), please note them now and be prepared ask them in class. (Recall the the outputs differ due to different rounding – I am not sure why bookdown prints <code>t.test</code> with only 2 significant digits but the <code>summary(lm)</code> with 3 digits, but if you try this out in R, you’ll see the output is the same other than the sign of the difference.)</li>
 </ul>
-<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="5.6-workbook-1.html#cb121-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_binary)</span></code></pre></div>
+<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="5.6-workbook-1.html#cb115-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod_binary)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = achrdg08 ~ binary_gender)
@@ -548,13 +549,13 @@ Figure 5.6: Reading Achievement on Binary Gender.
 ## Residual standard error: 8.83 on 498 degrees of freedom
 ## Multiple R-squared:  0.00271,    Adjusted R-squared:  0.000708 
 ## F-statistic: 1.35 on 1 and 498 DF,  p-value: 0.245</code></pre>
-<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="5.6-workbook-1.html#cb123-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(achrdg08<span class="sc">~</span>binary_gender, <span class="at">var.equal =</span> T, <span class="at">data =</span> NELS)</span></code></pre></div>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="5.6-workbook-1.html#cb117-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(achrdg08<span class="sc">~</span>binary_gender, <span class="at">var.equal =</span> T, <span class="at">data =</span> NELS)</span></code></pre></div>
 <pre><code>## 
 ##  Two Sample t-test
 ## 
 ## data:  achrdg08 by binary_gender
 ## t = 1.2, df = 498, p-value = 0.2
-## alternative hypothesis: true difference in means between group 0 and group 1 is not equal to 0
+## alternative hypothesis: true difference in means is not equal to 0
 ## 95 percent confidence interval:
 ##  -0.6354  2.4801
 ## sample estimates:
@@ -564,19 +565,19 @@ Figure 5.6: Reading Achievement on Binary Gender.
 <ul>
 <li>What is the is reference-group in the example below? Please write down your answer and be prepared to share it in class.</li>
 </ul>
-<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="5.6-workbook-1.html#cb125-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;images/marital_status1.png&quot;</span>)</span></code></pre></div>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-75"></span>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="5.6-workbook-1.html#cb119-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;images/marital_status1.png&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-76"></span>
 <img src="images/marital_status1.png" alt="Toy Martital Status Example." width="348" />
 <p class="caption">
 Figure 5.7: Toy Martital Status Example.
 </p>
 </div>
 <ul>
-<li>Using the equations below, please write down an interpretation of the regression parameters for the hypothetical example. (Note: this question is not asking for a numerical answer, it is just asking you to put the above equations into words.)</li>
+<li>Using the equations below, please write down an interpretation of the regression parameters for the hypothetical example. (Note: this question is not asking for a numerical answer, it is just asking you to put the equations into words.)</li>
 </ul>
 <p><span class="math display">\[\begin{align}
-b_0 &amp; = \widehat Y (Single) \\
-b_1 &amp; = \widehat Y (Married) - b_0 = \widehat Y (Married) - \widehat Y (Single) \\
+b_0 &amp; = \widehat Y (Single) \\ 
+b_1 &amp; = \widehat Y (Married) - b_0 = \widehat Y (Married) - \widehat Y (Single) \\ 
 b_2 &amp; = \widehat Y (Divorced) - b_0 = \widehat Y (Divorced) - \widehat Y (Single)
 \end{align}\]</span></p>
 <ul>
@@ -585,11 +586,10 @@ b_2 &amp; = \widehat Y (Divorced) - b_0 = \widehat Y (Divorced) - \widehat Y (Si
 <li>How should <span class="math inline">\(X_3\)</span> be coded so that “single” is the reference-group?</li>
 <li>Using the two-step approach illustrated above, write out the interpretation of the model parameters in the following regression equation:
 <span class="math display">\[ \widehat Y = b_0 + b_1 X_1 + b_2 X_2 + b_3 X_3  \]</span></li>
-<li>Bonus: What would happen if we included dummies for all 4 categories of Mstatus in the model?</li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="5.6-workbook-1.html#cb126-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;images/marital_status2.png&quot;</span>)</span></code></pre></div>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-76"></span>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="5.6-workbook-1.html#cb120-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;images/marital_status2.png&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-77"></span>
 <img src="images/marital_status2.png" alt="Toy Martital Status Example, Part 2." width="419" />
 <p class="caption">
 Figure 5.8: Toy Martital Status Example, Part 2.
@@ -604,10 +604,10 @@ b_1 &amp;= \widehat Y (Ethiopia) - b_0 \\
 b_2 &amp;= \widehat Y (Vietnam) - b_0 \\ \\
 b_0 &amp; = \widehat Y (Bolivia) + b_1 + b_2 \\  
 &amp; = \widehat Y (Bolivia) + \widehat Y (Ethiopia) - b_0 + \widehat Y (Vietnam) - b_0 \\
-\implies &amp; \\
+\implies &amp; \\ 
 3b_0 &amp; = \widehat Y (Bolivia) + \widehat Y (Ethiopia) + \widehat Y (Vietnam) \\
 
-\implies &amp; \\
+\implies &amp; \\ 
 b_0 &amp; = \frac{\widehat Y (Bolivia) + \widehat Y (Ethiopia) + \widehat Y (Vietnam)}{3}
 \end{align}\]</span></p>
 </div>
@@ -668,7 +668,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');
