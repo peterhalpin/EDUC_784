@@ -306,7 +306,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.5.2" data-path="6.5-two-continuous-predictors-6.html"><a href="6.5-two-continuous-predictors-6.html#centering-the-predictors"><i class="fa fa-check"></i><b>6.5.2</b> Centering the predictors</a></li>
 <li class="chapter" data-level="6.5.3" data-path="6.5-two-continuous-predictors-6.html"><a href="6.5-two-continuous-predictors-6.html#simple-trends-1"><i class="fa fa-check"></i><b>6.5.3</b> Simple trends</a></li>
 <li class="chapter" data-level="6.5.4" data-path="6.5-two-continuous-predictors-6.html"><a href="6.5-two-continuous-predictors-6.html#summary-7"><i class="fa fa-check"></i><b>6.5.4</b> Summary</a></li>
-<li class="chapter" data-level="6.5.5" data-path="6.5-two-continuous-predictors-6.html"><a href="6.5-two-continuous-predictors-6.html#extra-how-centering-works"><i class="fa fa-check"></i><b>6.5.5</b> Extra: How centering works*</a></li>
+<li class="chapter" data-level="6.5.5" data-path="6.5-two-continuous-predictors-6.html"><a href="6.5-two-continuous-predictors-6.html#how-centering-works-6"><i class="fa fa-check"></i><b>6.5.5</b> Extra: How centering works*</a></li>
 </ul></li>
 <li class="chapter" data-level="6.6" data-path="6.6-two-categorical-predictors-6.html"><a href="6.6-two-categorical-predictors-6.html"><i class="fa fa-check"></i><b>6.6</b> Two categorical predictors</a>
 <ul>
@@ -516,15 +516,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>In this equation, <span class="math inline">\(\widehat{X}_{ij}\)</span> is the predicted value that results from regressing <span class="math inline">\(X_j\)</span> on the remaining <span class="math inline">\(J-1\)</span> predictors. Comparing this equation to Equation <a href="4.7-inference-for-slopes-4.html#eq:se-4">(4.3)</a>, the main difference is that the <span class="math inline">\((1 - R^2)\)</span> term for the <span class="math inline">\(Y\)</span> variable is now replaced with a crossproduct of residuals for the <span class="math inline">\(X_j\)</span> and <span class="math inline">\(Y\)</span> variables. The equation is not very intuitive to look at, but the general idea is that it can be derived without assuming homoskedasticity.</p>
 <p>The procedure for using HC standard errors in R has two steps. First, we estimate the HC standard errors. Then, we use the HC standard errors to compute the correct t-tests and p-values (or confidence intervals). The following example shows how to implement HC standard errors in R, using the piecewise regression from Section <a href="10.3-piecewise-10.html#piecewise-10">10.3</a> wages example.</p>
 <p>The code is shown by default, because the main thing about this example is to see how it works in R – you already know how to interpret SEs, t-tests, p-values, etc. Your will need two packages installed – <code>car</code> and <code>lmtest</code> – for this example to work.</p>
-<div class="sourceCode" id="cb365"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb365-1"><a href="10.4-heteroskedasticity-10.html#cb365-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Make sure the required pacakges are installed</span></span>
-<span id="cb365-2"><a href="10.4-heteroskedasticity-10.html#cb365-2" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;car&quot;)</span></span>
-<span id="cb365-3"><a href="10.4-heteroskedasticity-10.html#cb365-3" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;lmtest&quot;)</span></span>
-<span id="cb365-4"><a href="10.4-heteroskedasticity-10.html#cb365-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb365-5"><a href="10.4-heteroskedasticity-10.html#cb365-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 1. Use &quot;hccm&quot; to get the HC SEs for our piecewise model </span></span>
-<span id="cb365-6"><a href="10.4-heteroskedasticity-10.html#cb365-6" aria-hidden="true" tabindex="-1"></a>hcse <span class="ot">&lt;-</span> car<span class="sc">::</span><span class="fu">hccm</span>(mod4)</span>
-<span id="cb365-7"><a href="10.4-heteroskedasticity-10.html#cb365-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb365-8"><a href="10.4-heteroskedasticity-10.html#cb365-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 2. Use &quot;coeftest&quot; to compute t-tests with the HC SEs</span></span>
-<span id="cb365-9"><a href="10.4-heteroskedasticity-10.html#cb365-9" aria-hidden="true" tabindex="-1"></a>lmtest<span class="sc">::</span><span class="fu">coeftest</span>(mod4, hcse)</span></code></pre></div>
+<div class="sourceCode" id="cb419"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb419-1"><a href="10.4-heteroskedasticity-10.html#cb419-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Make sure the required pacakges are installed</span></span>
+<span id="cb419-2"><a href="10.4-heteroskedasticity-10.html#cb419-2" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;car&quot;)</span></span>
+<span id="cb419-3"><a href="10.4-heteroskedasticity-10.html#cb419-3" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;lmtest&quot;)</span></span>
+<span id="cb419-4"><a href="10.4-heteroskedasticity-10.html#cb419-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb419-5"><a href="10.4-heteroskedasticity-10.html#cb419-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 1. Use &quot;hccm&quot; to get the HC SEs for our piecewise model </span></span>
+<span id="cb419-6"><a href="10.4-heteroskedasticity-10.html#cb419-6" aria-hidden="true" tabindex="-1"></a>hcse <span class="ot">&lt;-</span> car<span class="sc">::</span><span class="fu">hccm</span>(mod4)</span>
+<span id="cb419-7"><a href="10.4-heteroskedasticity-10.html#cb419-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb419-8"><a href="10.4-heteroskedasticity-10.html#cb419-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 2. Use &quot;coeftest&quot; to compute t-tests with the HC SEs</span></span>
+<span id="cb419-9"><a href="10.4-heteroskedasticity-10.html#cb419-9" aria-hidden="true" tabindex="-1"></a>lmtest<span class="sc">::</span><span class="fu">coeftest</span>(mod4, hcse)</span></code></pre></div>
 <pre><code>## 
 ## t test of coefficients:
 ## 

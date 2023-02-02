@@ -306,7 +306,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.5.2" data-path="6.5-two-continuous-predictors-6.html"><a href="6.5-two-continuous-predictors-6.html#centering-the-predictors"><i class="fa fa-check"></i><b>6.5.2</b> Centering the predictors</a></li>
 <li class="chapter" data-level="6.5.3" data-path="6.5-two-continuous-predictors-6.html"><a href="6.5-two-continuous-predictors-6.html#simple-trends-1"><i class="fa fa-check"></i><b>6.5.3</b> Simple trends</a></li>
 <li class="chapter" data-level="6.5.4" data-path="6.5-two-continuous-predictors-6.html"><a href="6.5-two-continuous-predictors-6.html#summary-7"><i class="fa fa-check"></i><b>6.5.4</b> Summary</a></li>
-<li class="chapter" data-level="6.5.5" data-path="6.5-two-continuous-predictors-6.html"><a href="6.5-two-continuous-predictors-6.html#extra-how-centering-works"><i class="fa fa-check"></i><b>6.5.5</b> Extra: How centering works*</a></li>
+<li class="chapter" data-level="6.5.5" data-path="6.5-two-continuous-predictors-6.html"><a href="6.5-two-continuous-predictors-6.html#how-centering-works-6"><i class="fa fa-check"></i><b>6.5.5</b> Extra: How centering works*</a></li>
 </ul></li>
 <li class="chapter" data-level="6.6" data-path="6.6-two-categorical-predictors-6.html"><a href="6.6-two-categorical-predictors-6.html"><i class="fa fa-check"></i><b>6.6</b> Two categorical predictors</a>
 <ul>
@@ -534,6 +534,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   });
 </script>
 <p>Below are some examples of the log transform applied to positively skewed data. We can see a range of results, from “wow, that definitely worked” in the first example to, “better but still not great” in the second two examples. These are realistic reflections of how a log transform works to address skew. We will discuss the data used for the third example in more detail in the following subsections, but for now it is sufficient to note that the plots for the third example show the hourly wages of a sample 200 individuals from 1985.</p>
+<pre><code>## The following object is masked from NELS:
+## 
+##     gender</code></pre>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:skew1"></span>
 <img src="_main_files/figure-html/skew1-1.png" alt="Example 1: Log transforming ECLS math" width="672" />
 <p class="caption">
@@ -546,6 +549,9 @@ Figure 9.5: Example 1: Log transforming ECLS math
 Figure 9.6: Example 2: Log transforming ECLS reading
 </p>
 </div>
+<pre><code>## The following object is masked from NELS:
+## 
+##     id</code></pre>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:skew3"></span>
 <img src="_main_files/figure-html/skew3-1.png" alt="Example 3: Log transforming hourly wages" width="672" />
 <p class="caption">
@@ -565,6 +571,9 @@ Figure 9.8: Logs for small values of X
 <p><span class="math display">\[ b^{-x} = \frac{1}{b^x}. \]</span></p>
 <p>The upshot is that, if your variable takes on values in the range <span class="math inline">\((0, 1)\)</span>, the log transform is going to change those values into large negative numbers. This can result in negative skew, rather fixing your positive skew.</p>
 <p>We can see this in Figure <a href="9.3-distribution-9.html#fig:skew4">9.9</a> below. The top row of the Figure shows the same variable as Example 1 above (ECLS Math Achievement), and the bottom shows the variable transformed to a proportion. In the left hand panels we can see that the distribution of the proportions is qualitatively the same the as the distribution of the original variable. However, the log transform behaves much differently for these two cases. Why? Because logs are “weird” on the range <span class="math inline">\((0, 1)\)</span>.</p>
+<pre><code>## The following object is masked from NELS:
+## 
+##     gender</code></pre>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:skew4"></span>
 <img src="_main_files/figure-html/skew4-1.png" alt="Comparing Log transforms of ECLS math total score versus proportion correct" width="672" />
 <p class="caption">

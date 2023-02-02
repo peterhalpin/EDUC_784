@@ -306,7 +306,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.5.2" data-path="6.5-two-continuous-predictors-6.html"><a href="6.5-two-continuous-predictors-6.html#centering-the-predictors"><i class="fa fa-check"></i><b>6.5.2</b> Centering the predictors</a></li>
 <li class="chapter" data-level="6.5.3" data-path="6.5-two-continuous-predictors-6.html"><a href="6.5-two-continuous-predictors-6.html#simple-trends-1"><i class="fa fa-check"></i><b>6.5.3</b> Simple trends</a></li>
 <li class="chapter" data-level="6.5.4" data-path="6.5-two-continuous-predictors-6.html"><a href="6.5-two-continuous-predictors-6.html#summary-7"><i class="fa fa-check"></i><b>6.5.4</b> Summary</a></li>
-<li class="chapter" data-level="6.5.5" data-path="6.5-two-continuous-predictors-6.html"><a href="6.5-two-continuous-predictors-6.html#extra-how-centering-works"><i class="fa fa-check"></i><b>6.5.5</b> Extra: How centering works*</a></li>
+<li class="chapter" data-level="6.5.5" data-path="6.5-two-continuous-predictors-6.html"><a href="6.5-two-continuous-predictors-6.html#how-centering-works-6"><i class="fa fa-check"></i><b>6.5.5</b> Extra: How centering works*</a></li>
 </ul></li>
 <li class="chapter" data-level="6.6" data-path="6.6-two-categorical-predictors-6.html"><a href="6.6-two-categorical-predictors-6.html"><i class="fa fa-check"></i><b>6.6</b> Two categorical predictors</a>
 <ul>
@@ -535,6 +535,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </script>
 <p>Piecewise or segmented regression is another approach to dealing with nonlinearity. Like polynomial regression, it is mathematically similar to interaction. Also like polynomial regression, it has a special interpretation and application that makes it practically distinct from interaction.</p>
 <p>In the simplest case, piecewise regression involves interacting a predictor variable with a binary re-coding of itself. To illustrate how the approach works, let’s again consider our wages and education example. The scatter plot of log-wages versus education is presented again below for reference.</p>
+<pre><code>## The following object is masked from NELS:
+## 
+##     id</code></pre>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:piecewise1"></span>
 <img src="_main_files/figure-html/piecewise1-1.png" alt="The Wages Example" width="672" />
 <p class="caption">
@@ -548,6 +551,9 @@ Figure 10.5: The Wages Example
 <li><p>To restate this as an interaction: the relationship between wage and education appears different for people who have a post-secondary education versus those who do not.</p></li>
 </ul>
 <p>To represent this reasoning visually we can modify Figure <a href="10.3-piecewise-10.html#fig:piecewise1">10.5</a> as shown in Figure <a href="10.3-piecewise-10.html#fig:piecewise2">10.6</a>. This captures the basic idea behind piecewise regression – we have different regression lines over different ranges of the predictor, and the overall regression is piecewise or segmented.</p>
+<pre><code>## The following object is masked from NELS:
+## 
+##     id</code></pre>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:piecewise2"></span>
 <img src="_main_files/figure-html/piecewise2-1.png" alt="The wages example" width="672" />
 <p class="caption">

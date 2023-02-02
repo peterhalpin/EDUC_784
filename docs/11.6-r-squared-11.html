@@ -306,7 +306,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.5.2" data-path="6.5-two-continuous-predictors-6.html"><a href="6.5-two-continuous-predictors-6.html#centering-the-predictors"><i class="fa fa-check"></i><b>6.5.2</b> Centering the predictors</a></li>
 <li class="chapter" data-level="6.5.3" data-path="6.5-two-continuous-predictors-6.html"><a href="6.5-two-continuous-predictors-6.html#simple-trends-1"><i class="fa fa-check"></i><b>6.5.3</b> Simple trends</a></li>
 <li class="chapter" data-level="6.5.4" data-path="6.5-two-continuous-predictors-6.html"><a href="6.5-two-continuous-predictors-6.html#summary-7"><i class="fa fa-check"></i><b>6.5.4</b> Summary</a></li>
-<li class="chapter" data-level="6.5.5" data-path="6.5-two-continuous-predictors-6.html"><a href="6.5-two-continuous-predictors-6.html#extra-how-centering-works"><i class="fa fa-check"></i><b>6.5.5</b> Extra: How centering works*</a></li>
+<li class="chapter" data-level="6.5.5" data-path="6.5-two-continuous-predictors-6.html"><a href="6.5-two-continuous-predictors-6.html#how-centering-works-6"><i class="fa fa-check"></i><b>6.5.5</b> Extra: How centering works*</a></li>
 </ul></li>
 <li class="chapter" data-level="6.6" data-path="6.6-two-categorical-predictors-6.html"><a href="6.6-two-categorical-predictors-6.html"><i class="fa fa-check"></i><b>6.6</b> Two categorical predictors</a>
 <ul>
@@ -552,16 +552,16 @@ The pseudo R-squareds are not proportions of variance, but they try to come clos
 <p>Because the McFadden’s R-squared is not about proportion of variance, we can’t interpret it the same way as OLS R-squared. Instead, it is usually interpreted in terms of model <em>fit</em>. Here “fit” means how much the model’s predictions improve, with zero meaning “not at all” and one meaning “perfect prediction”.</p>
 <p>The following output shows McFadden’s R-squared for the example data. <strong>Please write down an interpretation of the R-square value</strong> and we will discuss you interpretations in class. You can use the “show code” button to see an example interpretation.</p>
 <p>McFadden’s R-squared:</p>
-<div class="sourceCode" id="cb418"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb418-1"><a href="11.6-r-squared-11.html#cb418-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using the deviance of the models</span></span>
-<span id="cb418-2"><a href="11.6-r-squared-11.html#cb418-2" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> mod2<span class="sc">$</span>deviance<span class="sc">/</span>mod0<span class="sc">$</span>deviance</span></code></pre></div>
+<div class="sourceCode" id="cb478"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb478-1"><a href="11.6-r-squared-11.html#cb478-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using the deviance of the models</span></span>
+<span id="cb478-2"><a href="11.6-r-squared-11.html#cb478-2" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> mod2<span class="sc">$</span>deviance<span class="sc">/</span>mod0<span class="sc">$</span>deviance</span></code></pre></div>
 <pre><code>## [1] 0.2145</code></pre>
 <p>Interpretation (try it by yourself first!):</p>
-<div class="sourceCode" id="cb420"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb420-1"><a href="11.6-r-squared-11.html#cb420-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Interpretation: Relative a model with no predictors, </span></span>
-<span id="cb420-2"><a href="11.6-r-squared-11.html#cb420-2" aria-hidden="true" tabindex="-1"></a><span class="co"># the inclusion of age improved model fit by about 21.4% </span></span>
-<span id="cb420-3"><a href="11.6-r-squared-11.html#cb420-3" aria-hidden="true" tabindex="-1"></a><span class="co"># of that expected by a model with perfect predictions. </span></span>
-<span id="cb420-4"><a href="11.6-r-squared-11.html#cb420-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb420-5"><a href="11.6-r-squared-11.html#cb420-5" aria-hidden="true" tabindex="-1"></a><span class="co"># More elliptically: the inclusion of age improved model </span></span>
-<span id="cb420-6"><a href="11.6-r-squared-11.html#cb420-6" aria-hidden="true" tabindex="-1"></a><span class="co"># fit by about 21.4\%</span></span></code></pre></div>
+<div class="sourceCode" id="cb480"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb480-1"><a href="11.6-r-squared-11.html#cb480-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Interpretation: Relative a model with no predictors, </span></span>
+<span id="cb480-2"><a href="11.6-r-squared-11.html#cb480-2" aria-hidden="true" tabindex="-1"></a><span class="co"># the inclusion of age improved model fit by about 21.4% </span></span>
+<span id="cb480-3"><a href="11.6-r-squared-11.html#cb480-3" aria-hidden="true" tabindex="-1"></a><span class="co"># of that expected by a model with perfect predictions. </span></span>
+<span id="cb480-4"><a href="11.6-r-squared-11.html#cb480-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb480-5"><a href="11.6-r-squared-11.html#cb480-5" aria-hidden="true" tabindex="-1"></a><span class="co"># More elliptically: the inclusion of age improved model </span></span>
+<span id="cb480-6"><a href="11.6-r-squared-11.html#cb480-6" aria-hidden="true" tabindex="-1"></a><span class="co"># fit by about 21.4\%</span></span></code></pre></div>
 </div>
 </div>
             </section>

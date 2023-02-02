@@ -306,7 +306,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.5.2" data-path="6.5-two-continuous-predictors-6.html"><a href="6.5-two-continuous-predictors-6.html#centering-the-predictors"><i class="fa fa-check"></i><b>6.5.2</b> Centering the predictors</a></li>
 <li class="chapter" data-level="6.5.3" data-path="6.5-two-continuous-predictors-6.html"><a href="6.5-two-continuous-predictors-6.html#simple-trends-1"><i class="fa fa-check"></i><b>6.5.3</b> Simple trends</a></li>
 <li class="chapter" data-level="6.5.4" data-path="6.5-two-continuous-predictors-6.html"><a href="6.5-two-continuous-predictors-6.html#summary-7"><i class="fa fa-check"></i><b>6.5.4</b> Summary</a></li>
-<li class="chapter" data-level="6.5.5" data-path="6.5-two-continuous-predictors-6.html"><a href="6.5-two-continuous-predictors-6.html#extra-how-centering-works"><i class="fa fa-check"></i><b>6.5.5</b> Extra: How centering works*</a></li>
+<li class="chapter" data-level="6.5.5" data-path="6.5-two-continuous-predictors-6.html"><a href="6.5-two-continuous-predictors-6.html#how-centering-works-6"><i class="fa fa-check"></i><b>6.5.5</b> Extra: How centering works*</a></li>
 </ul></li>
 <li class="chapter" data-level="6.6" data-path="6.6-two-categorical-predictors-6.html"><a href="6.6-two-categorical-predictors-6.html"><i class="fa fa-check"></i><b>6.6</b> Two categorical predictors</a>
 <ul>
@@ -534,11 +534,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   });
 </script>
 <p>As a working example, we will use data contained in the file <code>CHD.RData</code> to explore the relationship between age in years (“age”) and evidence (absence or presence) of coronary heart disease (“chd”). The data set contains 100 cases. Respondents’ ages range from 20 to 69, while evidence of CHD is coded 0 when it is absent and 1 when it is present. A sample of 20 cases is shown below. (Source: Applied Logistic Regression by David W. Hosmer and Stanley Lemeshow, 1989, John Wiley and Sons.)</p>
-<div class="sourceCode" id="cb392"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb392-1"><a href="11.1-chd-example-11.html#cb392-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;CHD.RData&quot;</span>)</span>
-<span id="cb392-2"><a href="11.1-chd-example-11.html#cb392-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">list</span>(chd.data[<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, <span class="dv">10</span>),<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>], chd.data[<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, <span class="dv">10</span>),<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>]), <span class="at">row.names =</span> F, <span class="at">caption =</span> <span class="st">&quot;The CHD example&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb450"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb450-1"><a href="11.1-chd-example-11.html#cb450-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;CHD.RData&quot;</span>)</span>
+<span id="cb450-2"><a href="11.1-chd-example-11.html#cb450-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">list</span>(chd.data[<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, <span class="dv">10</span>),<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>], chd.data[<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, <span class="dv">10</span>),<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>]), <span class="at">row.names =</span> F, <span class="at">caption =</span> <span class="st">&quot;The CHD example&quot;</span>)</span></code></pre></div>
 <table class="kable_wrapper">
 <caption>
-<span id="tab:unnamed-chunk-224">Table 11.1: </span>The CHD example
+<span id="tab:unnamed-chunk-225">Table 11.1: </span>The CHD example
 </caption>
 <tbody>
 <tr>

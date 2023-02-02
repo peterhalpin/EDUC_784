@@ -57,10 +57,10 @@ fig:homo1
 fig:homo2
 fig:normality1
 fig:normality2
-fig:unnamed-chunk-174
 fig:unnamed-chunk-175
 fig:unnamed-chunk-176
 fig:unnamed-chunk-177
+fig:unnamed-chunk-178
 fig:logx
 fig:logdata
 fig:loge
@@ -77,7 +77,7 @@ fig:nonlinear1
 eq:logy
 eq:expb
 fig:expb
-fig:unnamed-chunk-195
+fig:unnamed-chunk-196
 fig:poly
 fig:overfit
 fig:overfit2
@@ -86,10 +86,10 @@ fig:piecewise1
 fig:piecewise2
 fig:piecewise3
 eq:se-10
-fig:unnamed-chunk-212
 fig:unnamed-chunk-213
-fig:unnamed-chunk-219
-tab:unnamed-chunk-224
+fig:unnamed-chunk-214
+fig:unnamed-chunk-220
+tab:unnamed-chunk-225
 fig:lpm
 fig:props
 eq:prob
@@ -112,9 +112,9 @@ eq:Li
 eq:L
 eq:ell
 fig:HLtest
-fig:unnamed-chunk-250
 fig:unnamed-chunk-251
 fig:unnamed-chunk-252
+fig:unnamed-chunk-253
 about-this-book
 why-this-format
 tips-for-using-the-notes
@@ -233,7 +233,7 @@ another-nels-example
 centering-the-predictors
 simple-trends-1
 summary-7
-extra-how-centering-works
+how-centering-works-6
 two-categorical-predictors-6
 an-example-from-ecls
 the-no-interaction-model
@@ -350,10 +350,3 @@ multiple-11
 predicted-probabilities
 interactions
 workbook-8
-additional-details
-comparison-4
-what-is-the-missing-ingredient
-other-interpretations
-relation-with-beta-weights
-some-math
-how-centering-works-6
