@@ -521,21 +521,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>achrdg12</code> is Reading Achievement (percent correct on a reading test) in grade 12.</li>
 <li><code>gender</code> is dichotomous encoding of gender with values <code>Male</code> and <code>Female</code> (it is not a binary variable, but a factor, as discussed in Section <a href="9.8-exercises-5.html#exercises-5">9.8</a>).</li>
 </ul>
-<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="6.8-exercises-6.html#cb262-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;NELS.RData&quot;</span>)</span>
-<span id="cb262-2"><a href="6.8-exercises-6.html#cb262-2" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(NELS)</span></code></pre></div>
-<pre><code>## The following objects are masked from NELS (pos = 5):
-## 
-##     absent12, achmat08, achmat10, achmat12, achrdg08, achrdg10,
-##     achrdg12, achsci08, achsci10, achsci12, achsls08, achsls10,
-##     achsls12, advmath8, alcbinge, algebra8, apoffer, approg, cigarett,
-##     computer, cuts12, edexpect, excurr12, expinc30, famsize, gender,
-##     homelang, hsprog, hwkin12, hwkout12, id, late12, marijuan, numinst,
-##     nursery, parmarl8, region, schattrt, schtyp8, ses, slfcnc08,
-##     slfcnc10, slfcnc12, tcherint, unitcalc, unitengl, unitmath, urban</code></pre>
-<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="6.8-exercises-6.html#cb264-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Interaction via hard coding</span></span>
-<span id="cb264-2"><a href="6.8-exercises-6.html#cb264-2" aria-hidden="true" tabindex="-1"></a>genderXreading <span class="ot">&lt;-</span> (<span class="fu">as.numeric</span>(gender) <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> achrdg12</span>
-<span id="cb264-3"><a href="6.8-exercises-6.html#cb264-3" aria-hidden="true" tabindex="-1"></a>mod1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(achmat12 <span class="sc">~</span> achrdg12 <span class="sc">+</span> gender <span class="sc">+</span> genderXreading)</span>
-<span id="cb264-4"><a href="6.8-exercises-6.html#cb264-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod1)</span></code></pre></div>
+<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="6.8-exercises-6.html#cb234-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Interaction via hard coding</span></span>
+<span id="cb234-2"><a href="6.8-exercises-6.html#cb234-2" aria-hidden="true" tabindex="-1"></a>genderXreading <span class="ot">&lt;-</span> (<span class="fu">as.numeric</span>(gender) <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> achrdg12</span>
+<span id="cb234-3"><a href="6.8-exercises-6.html#cb234-3" aria-hidden="true" tabindex="-1"></a>mod1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(achmat12 <span class="sc">~</span> achrdg12 <span class="sc">+</span> gender <span class="sc">+</span> genderXreading)</span>
+<span id="cb234-4"><a href="6.8-exercises-6.html#cb234-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod1)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = achmat12 ~ achrdg12 + gender + genderXreading)
@@ -556,9 +545,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Residual standard error: 5.8 on 496 degrees of freedom
 ## Multiple R-squared:  0.462,  Adjusted R-squared:  0.459 
 ## F-statistic:  142 on 3 and 496 DF,  p-value: &lt;2e-16</code></pre>
-<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="6.8-exercises-6.html#cb266-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Interaction via `:` operator</span></span>
-<span id="cb266-2"><a href="6.8-exercises-6.html#cb266-2" aria-hidden="true" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(achmat12 <span class="sc">~</span> achrdg12 <span class="sc">+</span> gender <span class="sc">+</span> achrdg12<span class="sc">:</span>gender)</span>
-<span id="cb266-3"><a href="6.8-exercises-6.html#cb266-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod2)</span></code></pre></div>
+<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="6.8-exercises-6.html#cb236-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Interaction via `:` operator</span></span>
+<span id="cb236-2"><a href="6.8-exercises-6.html#cb236-2" aria-hidden="true" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(achmat12 <span class="sc">~</span> achrdg12 <span class="sc">+</span> gender <span class="sc">+</span> achrdg12<span class="sc">:</span>gender)</span>
+<span id="cb236-3"><a href="6.8-exercises-6.html#cb236-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod2)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = achmat12 ~ achrdg12 + gender + achrdg12:gender)
@@ -579,9 +568,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Residual standard error: 5.8 on 496 degrees of freedom
 ## Multiple R-squared:  0.462,  Adjusted R-squared:  0.459 
 ## F-statistic:  142 on 3 and 496 DF,  p-value: &lt;2e-16</code></pre>
-<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="6.8-exercises-6.html#cb268-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Interaction via `*` operator</span></span>
-<span id="cb268-2"><a href="6.8-exercises-6.html#cb268-2" aria-hidden="true" tabindex="-1"></a>mod3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(achmat12 <span class="sc">~</span> achrdg12<span class="sc">*</span>gender)</span>
-<span id="cb268-3"><a href="6.8-exercises-6.html#cb268-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod3)</span></code></pre></div>
+<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="6.8-exercises-6.html#cb238-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Interaction via `*` operator</span></span>
+<span id="cb238-2"><a href="6.8-exercises-6.html#cb238-2" aria-hidden="true" tabindex="-1"></a>mod3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(achmat12 <span class="sc">~</span> achrdg12<span class="sc">*</span>gender)</span>
+<span id="cb238-3"><a href="6.8-exercises-6.html#cb238-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod3)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = achmat12 ~ achrdg12 * gender)
@@ -608,10 +597,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">6.8.2</span> Centering continuous predictors<a href="6.8-exercises-6.html#centering-continuous-predictors" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>As noted in Section <a href="6.3-binary-continuous-interaction-6.html#binary-continuous-interaction-6">6.3</a>, the regression coefficient on Gender is not very interpretable when there is an interaction in the model. In the above output, the coefficient on gender tells us the gender gap in Math Achievement when <code>achrdg12 = 0</code>. We can fix this issue by re-scaling <code>achrdg12</code> so that zero has a meaningful value. One easy and widely used approach is to center <code>achrdg12</code> at its mean. When a variable is centered at its mean it is called a deviation score.</p>
 <p>Let’s see what happens when we use deviation scores <code>achrdg12</code> instead of the “raw” score</p>
-<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="6.8-exercises-6.html#cb270-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Re-run the model with reading centered at its mean</span></span>
-<span id="cb270-2"><a href="6.8-exercises-6.html#cb270-2" aria-hidden="true" tabindex="-1"></a>achrdg12_dev <span class="ot">&lt;-</span> achrdg12 <span class="sc">-</span> <span class="fu">mean</span>(achrdg12)</span>
-<span id="cb270-3"><a href="6.8-exercises-6.html#cb270-3" aria-hidden="true" tabindex="-1"></a>mod4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(achmat12 <span class="sc">~</span> achrdg12_dev<span class="sc">*</span>gender)</span>
-<span id="cb270-4"><a href="6.8-exercises-6.html#cb270-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod4)</span></code></pre></div>
+<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="6.8-exercises-6.html#cb240-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Re-run the model with reading centered at its mean</span></span>
+<span id="cb240-2"><a href="6.8-exercises-6.html#cb240-2" aria-hidden="true" tabindex="-1"></a>achrdg12_dev <span class="ot">&lt;-</span> achrdg12 <span class="sc">-</span> <span class="fu">mean</span>(achrdg12)</span>
+<span id="cb240-3"><a href="6.8-exercises-6.html#cb240-3" aria-hidden="true" tabindex="-1"></a>mod4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(achmat12 <span class="sc">~</span> achrdg12_dev<span class="sc">*</span>gender)</span>
+<span id="cb240-4"><a href="6.8-exercises-6.html#cb240-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod4)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = achmat12 ~ achrdg12_dev * gender)
@@ -634,13 +623,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## F-statistic:  142 on 3 and 496 DF,  p-value: &lt;2e-16</code></pre>
 <p>Note that the intercept and the regression coefficient on gender have changed values compared to <code>mod3</code>. What is the interpretation of these coefficients in the new model? Also note the coefficient on reading and the interaction don’t change. We showed why in section <a href="6.5-two-continuous-predictors-6.html#how-centering-works-6">6.5.5</a>.</p>
 <p>Next, let’s plot our model with the interaction term. One advantage of having everything in a single model is that we can level-up our plotting! The following code uses the <code>visreg</code> package. Note that the error bands in the plot are produced using the standard errors from <code>emmeans</code>, which is discussed in the following section. If you want to know more about how visreg works, type <code>help(visreg)</code>.</p>
-<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="6.8-exercises-6.html#cb272-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install the package if you haven&#39;t already done so</span></span>
-<span id="cb272-2"><a href="6.8-exercises-6.html#cb272-2" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;visreg&quot;)</span></span>
-<span id="cb272-3"><a href="6.8-exercises-6.html#cb272-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb272-4"><a href="6.8-exercises-6.html#cb272-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the package into memory</span></span>
-<span id="cb272-5"><a href="6.8-exercises-6.html#cb272-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(visreg)</span>
-<span id="cb272-6"><a href="6.8-exercises-6.html#cb272-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb272-7"><a href="6.8-exercises-6.html#cb272-7" aria-hidden="true" tabindex="-1"></a><span class="fu">visreg</span>(mod3, <span class="at">xvar =</span> <span class="st">&quot;achrdg12&quot;</span>, <span class="at">by =</span> <span class="st">&quot;gender&quot;</span>, <span class="at">overlay =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="6.8-exercises-6.html#cb242-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install the package if you haven&#39;t already done so</span></span>
+<span id="cb242-2"><a href="6.8-exercises-6.html#cb242-2" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;visreg&quot;)</span></span>
+<span id="cb242-3"><a href="6.8-exercises-6.html#cb242-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb242-4"><a href="6.8-exercises-6.html#cb242-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the package into memory</span></span>
+<span id="cb242-5"><a href="6.8-exercises-6.html#cb242-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(visreg)</span>
+<span id="cb242-6"><a href="6.8-exercises-6.html#cb242-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb242-7"><a href="6.8-exercises-6.html#cb242-7" aria-hidden="true" tabindex="-1"></a><span class="fu">visreg</span>(mod3, <span class="at">xvar =</span> <span class="st">&quot;achrdg12&quot;</span>, <span class="at">by =</span> <span class="st">&quot;gender&quot;</span>, <span class="at">overlay =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-128-1.png" width="672" /></p>
 </div>
 <div id="breaking-down-a-significant-interaction" class="section level3 hasAnchor" number="6.8.3">
@@ -662,31 +651,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>by</code> – which predictor(s) we want to use to breakdown the means (i.e., the moderator(s))</li>
 </ul>
 <p>We can use <code>emmeans</code> to compute the marginal effect at the mean (MEM) as follows:</p>
-<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb273-1"><a href="6.8-exercises-6.html#cb273-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install the package if you haven&#39;t already done so</span></span>
-<span id="cb273-2"><a href="6.8-exercises-6.html#cb273-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># install.packages(&quot;emmeans&quot;)</span></span>
-<span id="cb273-3"><a href="6.8-exercises-6.html#cb273-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb273-4"><a href="6.8-exercises-6.html#cb273-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the package into memory</span></span>
-<span id="cb273-5"><a href="6.8-exercises-6.html#cb273-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span>
-<span id="cb273-6"><a href="6.8-exercises-6.html#cb273-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb273-7"><a href="6.8-exercises-6.html#cb273-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the emmeans function to get the gender means on math, broken down by reading</span></span>
-<span id="cb273-8"><a href="6.8-exercises-6.html#cb273-8" aria-hidden="true" tabindex="-1"></a>gap <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(mod3, <span class="at">specs =</span> <span class="st">&quot;gender&quot;</span>, <span class="at">by =</span> <span class="st">&quot;achrdg12&quot;</span>)</span>
-<span id="cb273-9"><a href="6.8-exercises-6.html#cb273-9" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(gap)</span></code></pre></div>
+<div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="6.8-exercises-6.html#cb243-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install the package if you haven&#39;t already done so</span></span>
+<span id="cb243-2"><a href="6.8-exercises-6.html#cb243-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># install.packages(&quot;emmeans&quot;)</span></span>
+<span id="cb243-3"><a href="6.8-exercises-6.html#cb243-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb243-4"><a href="6.8-exercises-6.html#cb243-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the package into memory</span></span>
+<span id="cb243-5"><a href="6.8-exercises-6.html#cb243-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span>
+<span id="cb243-6"><a href="6.8-exercises-6.html#cb243-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb243-7"><a href="6.8-exercises-6.html#cb243-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the emmeans function to get the gender means on math, broken down by reading</span></span>
+<span id="cb243-8"><a href="6.8-exercises-6.html#cb243-8" aria-hidden="true" tabindex="-1"></a>gap <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(mod3, <span class="at">specs =</span> <span class="st">&quot;gender&quot;</span>, <span class="at">by =</span> <span class="st">&quot;achrdg12&quot;</span>)</span>
+<span id="cb243-9"><a href="6.8-exercises-6.html#cb243-9" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(gap)</span></code></pre></div>
 <pre><code>## achrdg12 = 55.6:
 ##  gender emmean    SE  df lower.CL upper.CL
 ##  Female   55.3 0.351 496     54.6     56.0
 ##  Male     58.8 0.385 496     58.0     59.5
 ## 
 ## Confidence level used: 0.95</code></pre>
-<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb275-1"><a href="6.8-exercises-6.html#cb275-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test whether the difference is significant</span></span>
-<span id="cb275-2"><a href="6.8-exercises-6.html#cb275-2" aria-hidden="true" tabindex="-1"></a><span class="fu">contrast</span>(gap, <span class="at">method =</span> <span class="st">&quot;pairwise&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="6.8-exercises-6.html#cb245-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test whether the difference is significant</span></span>
+<span id="cb245-2"><a href="6.8-exercises-6.html#cb245-2" aria-hidden="true" tabindex="-1"></a><span class="fu">contrast</span>(gap, <span class="at">method =</span> <span class="st">&quot;pairwise&quot;</span>)</span></code></pre></div>
 <pre><code>## achrdg12 = 55.6:
 ##  contrast      estimate    SE  df t.ratio p.value
 ##  Female - Male     -3.5 0.521 496  -6.712  &lt;.0001</code></pre>
 <p>In the above output, we only get one Gender difference in Math, and that is computed for the value of <code>achrdg12 = 55.6</code>, which is the mean value of Reading. As noted, this is called the marginal effect at the mean (MEM).</p>
 <p>It is often more helpful to report Gender difference for multiple different values of <code>achrdg12</code>, which is called MERV (marginal effects at representative values). While there are many ways to chose the representative values, one convenient approach approach is to use the quartiles of <code>achrdg12</code>. This is accomplished using the <code>cov.reduce</code> argument of <code>emmeans</code> as follows.</p>
-<div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb277-1"><a href="6.8-exercises-6.html#cb277-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the the covarate reduce option of emmeans with the quantile function</span></span>
-<span id="cb277-2"><a href="6.8-exercises-6.html#cb277-2" aria-hidden="true" tabindex="-1"></a>gap_quartiles <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(mod3, <span class="at">specs =</span> <span class="st">&quot;gender&quot;</span>, <span class="at">by =</span> <span class="st">&quot;achrdg12&quot;</span>, <span class="at">cov.reduce =</span> quantile)</span>
-<span id="cb277-3"><a href="6.8-exercises-6.html#cb277-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(gap_quartiles)</span></code></pre></div>
+<div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="6.8-exercises-6.html#cb247-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the the covarate reduce option of emmeans with the quantile function</span></span>
+<span id="cb247-2"><a href="6.8-exercises-6.html#cb247-2" aria-hidden="true" tabindex="-1"></a>gap_quartiles <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(mod3, <span class="at">specs =</span> <span class="st">&quot;gender&quot;</span>, <span class="at">by =</span> <span class="st">&quot;achrdg12&quot;</span>, <span class="at">cov.reduce =</span> quantile)</span>
+<span id="cb247-3"><a href="6.8-exercises-6.html#cb247-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(gap_quartiles)</span></code></pre></div>
 <pre><code>## achrdg12 = 31.8:
 ##  gender emmean    SE  df lower.CL upper.CL
 ##  Female   37.9 1.186 496     35.6     40.3
@@ -713,8 +702,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  Male     65.7 0.693 496     64.3     67.0
 ## 
 ## Confidence level used: 0.95</code></pre>
-<div class="sourceCode" id="cb279"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb279-1"><a href="6.8-exercises-6.html#cb279-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test whether the gender difference in math achievement is significant at each quartile of reading achievement</span></span>
-<span id="cb279-2"><a href="6.8-exercises-6.html#cb279-2" aria-hidden="true" tabindex="-1"></a><span class="fu">contrast</span>(gap_quartiles, <span class="at">method =</span> <span class="st">&quot;pairwise&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="6.8-exercises-6.html#cb249-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test whether the gender difference in math achievement is significant at each quartile of reading achievement</span></span>
+<span id="cb249-2"><a href="6.8-exercises-6.html#cb249-2" aria-hidden="true" tabindex="-1"></a><span class="fu">contrast</span>(gap_quartiles, <span class="at">method =</span> <span class="st">&quot;pairwise&quot;</span>)</span></code></pre></div>
 <pre><code>## achrdg12 = 31.8:
 ##  contrast      estimate    SE  df t.ratio p.value
 ##  Female - Male    -7.74 1.637 496  -4.728  &lt;.0001
@@ -746,15 +735,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>specs</code> – which factor predictor(s) in the model to break the trend down by</li>
 </ul>
 <p>Let’s see how it works.</p>
-<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb281-1"><a href="6.8-exercises-6.html#cb281-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the emtrends function to get the regression coefficients on reading, broken down by gender</span></span>
-<span id="cb281-2"><a href="6.8-exercises-6.html#cb281-2" aria-hidden="true" tabindex="-1"></a>simple_slopes <span class="ot">&lt;-</span> <span class="fu">emtrends</span>(mod3, <span class="at">var =</span> <span class="st">&quot;achrdg12&quot;</span>, <span class="at">specs =</span> <span class="st">&quot;gender&quot;</span>)</span>
-<span id="cb281-3"><a href="6.8-exercises-6.html#cb281-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(simple_slopes)</span></code></pre></div>
+<div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="6.8-exercises-6.html#cb251-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the emtrends function to get the regression coefficients on reading, broken down by gender</span></span>
+<span id="cb251-2"><a href="6.8-exercises-6.html#cb251-2" aria-hidden="true" tabindex="-1"></a>simple_slopes <span class="ot">&lt;-</span> <span class="fu">emtrends</span>(mod3, <span class="at">var =</span> <span class="st">&quot;achrdg12&quot;</span>, <span class="at">specs =</span> <span class="st">&quot;gender&quot;</span>)</span>
+<span id="cb251-3"><a href="6.8-exercises-6.html#cb251-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(simple_slopes)</span></code></pre></div>
 <pre><code>##  gender achrdg12.trend     SE  df lower.CL upper.CL
 ##  Female          0.728 0.0470 496    0.636    0.821
 ##  Male            0.550 0.0451 496    0.462    0.639
 ## 
 ## Confidence level used: 0.95</code></pre>
-<div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb283-1"><a href="6.8-exercises-6.html#cb283-1" aria-hidden="true" tabindex="-1"></a><span class="fu">test</span>(simple_slopes)</span></code></pre></div>
+<div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="6.8-exercises-6.html#cb253-1" aria-hidden="true" tabindex="-1"></a><span class="fu">test</span>(simple_slopes)</span></code></pre></div>
 <pre><code>##  gender achrdg12.trend     SE  df t.ratio p.value
 ##  Female          0.728 0.0470 496  15.487  &lt;.0001
 ##  Male            0.550 0.0451 496  12.208  &lt;.0001</code></pre>
@@ -765,9 +754,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Interactions with continuous predictors are basically the same as for continuous and categorical. One main issue is that we should always center the predictors, not only to facilitate interpretation of the regression coefficients, but also to reduce the correlation between the main effects and the interaction.</p>
 <p>For an example, let’s replace gender with SES from our previous analysis. Apologies that this new example is mainly for convenience and doesn’t represent a great research question about, e.g., about why the relationships between math and reading might change as a function of SES!</p>
 <p>Here we will focus on how centering affects the results of a regression with interactions among continuous predictors.</p>
-<div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb285-1"><a href="6.8-exercises-6.html#cb285-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Without centering</span></span>
-<span id="cb285-2"><a href="6.8-exercises-6.html#cb285-2" aria-hidden="true" tabindex="-1"></a>mod5 <span class="ot">&lt;-</span> <span class="fu">lm</span>(achmat12 <span class="sc">~</span> achrdg12<span class="sc">*</span>ses)</span>
-<span id="cb285-3"><a href="6.8-exercises-6.html#cb285-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod1)</span></code></pre></div>
+<div class="sourceCode" id="cb255"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb255-1"><a href="6.8-exercises-6.html#cb255-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Without centering</span></span>
+<span id="cb255-2"><a href="6.8-exercises-6.html#cb255-2" aria-hidden="true" tabindex="-1"></a>mod5 <span class="ot">&lt;-</span> <span class="fu">lm</span>(achmat12 <span class="sc">~</span> achrdg12<span class="sc">*</span>ses)</span>
+<span id="cb255-3"><a href="6.8-exercises-6.html#cb255-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod1)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = achmat12 ~ achrdg12 + gender + genderXreading)
@@ -788,11 +777,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Residual standard error: 5.8 on 496 degrees of freedom
 ## Multiple R-squared:  0.462,  Adjusted R-squared:  0.459 
 ## F-statistic:  142 on 3 and 496 DF,  p-value: &lt;2e-16</code></pre>
-<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="6.8-exercises-6.html#cb287-1" aria-hidden="true" tabindex="-1"></a><span class="co"># With centering</span></span>
-<span id="cb287-2"><a href="6.8-exercises-6.html#cb287-2" aria-hidden="true" tabindex="-1"></a>achrdg12_dev <span class="ot">&lt;-</span> achrdg12 <span class="sc">-</span> <span class="fu">mean</span>(achrdg12)</span>
-<span id="cb287-3"><a href="6.8-exercises-6.html#cb287-3" aria-hidden="true" tabindex="-1"></a>ses_dev <span class="ot">&lt;-</span> ses <span class="sc">-</span> <span class="fu">mean</span>(ses)</span>
-<span id="cb287-4"><a href="6.8-exercises-6.html#cb287-4" aria-hidden="true" tabindex="-1"></a>mod6 <span class="ot">&lt;-</span> <span class="fu">lm</span>(achmat12 <span class="sc">~</span> achrdg12_dev<span class="sc">*</span>ses_dev)</span>
-<span id="cb287-5"><a href="6.8-exercises-6.html#cb287-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod2)</span></code></pre></div>
+<div class="sourceCode" id="cb257"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb257-1"><a href="6.8-exercises-6.html#cb257-1" aria-hidden="true" tabindex="-1"></a><span class="co"># With centering</span></span>
+<span id="cb257-2"><a href="6.8-exercises-6.html#cb257-2" aria-hidden="true" tabindex="-1"></a>achrdg12_dev <span class="ot">&lt;-</span> achrdg12 <span class="sc">-</span> <span class="fu">mean</span>(achrdg12)</span>
+<span id="cb257-3"><a href="6.8-exercises-6.html#cb257-3" aria-hidden="true" tabindex="-1"></a>ses_dev <span class="ot">&lt;-</span> ses <span class="sc">-</span> <span class="fu">mean</span>(ses)</span>
+<span id="cb257-4"><a href="6.8-exercises-6.html#cb257-4" aria-hidden="true" tabindex="-1"></a>mod6 <span class="ot">&lt;-</span> <span class="fu">lm</span>(achmat12 <span class="sc">~</span> achrdg12_dev<span class="sc">*</span>ses_dev)</span>
+<span id="cb257-5"><a href="6.8-exercises-6.html#cb257-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod2)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = achmat12 ~ achrdg12 + gender + achrdg12:gender)
@@ -815,9 +804,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## F-statistic:  142 on 3 and 496 DF,  p-value: &lt;2e-16</code></pre>
 <p>We can see that, while both models account for the same overall variation in math, SES is significant in the centered model. This has to do both with changing the interpretation of the coefficient (it now represents the relationship between math and reading for students with average reading) and because it is no longer so highly redundant with the interaction term.</p>
 <p>Although the interaction with SES was not significant in either model, let’s break down the interaction with <code>emtrends</code> just to see how it works. This time we will use the <code>at</code> option rather than the ’cov.reduce<code>option to break down the interaction. The values 9, 19, and 28 are the 10th, 50th, and 90th percentile of SES, which is the same approach</code>visreg<code>uses (You can overwrite the defaults using the</code>breaks<code>argument -- see</code>help(visreg)`).</p>
-<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb289-1"><a href="6.8-exercises-6.html#cb289-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Break down interaction with SES as moderator</span></span>
-<span id="cb289-2"><a href="6.8-exercises-6.html#cb289-2" aria-hidden="true" tabindex="-1"></a>simple_slopes <span class="ot">&lt;-</span><span class="fu">emtrends</span>(mod5, <span class="at">var =</span> <span class="st">&quot;achrdg12&quot;</span>, <span class="at">specs =</span> <span class="st">&quot;ses&quot;</span>, <span class="at">at =</span> <span class="fu">list</span>(<span class="at">ses =</span> <span class="fu">c</span>(<span class="dv">9</span>, <span class="dv">19</span>, <span class="dv">28</span>)))</span>
-<span id="cb289-3"><a href="6.8-exercises-6.html#cb289-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(simple_slopes)</span></code></pre></div>
+<div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="6.8-exercises-6.html#cb259-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Break down interaction with SES as moderator</span></span>
+<span id="cb259-2"><a href="6.8-exercises-6.html#cb259-2" aria-hidden="true" tabindex="-1"></a>simple_slopes <span class="ot">&lt;-</span><span class="fu">emtrends</span>(mod5, <span class="at">var =</span> <span class="st">&quot;achrdg12&quot;</span>, <span class="at">specs =</span> <span class="st">&quot;ses&quot;</span>, <span class="at">at =</span> <span class="fu">list</span>(<span class="at">ses =</span> <span class="fu">c</span>(<span class="dv">9</span>, <span class="dv">19</span>, <span class="dv">28</span>)))</span>
+<span id="cb259-3"><a href="6.8-exercises-6.html#cb259-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(simple_slopes)</span></code></pre></div>
 <pre><code>##  ses achrdg12.trend     SE  df lower.CL upper.CL
 ##    9          0.550 0.0583 496    0.435    0.665
 ##   19          0.593 0.0365 496    0.521    0.664
@@ -825,8 +814,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 
 ## Confidence level used: 0.95</code></pre>
 <p>Finally let’s summarize our (non significant) interaction with a nice plot.</p>
-<div class="sourceCode" id="cb291"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb291-1"><a href="6.8-exercises-6.html#cb291-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Note that band = F removes the confidence intervals</span></span>
-<span id="cb291-2"><a href="6.8-exercises-6.html#cb291-2" aria-hidden="true" tabindex="-1"></a><span class="fu">visreg</span>(mod5, <span class="at">xvar =</span> <span class="st">&quot;achrdg12&quot;</span>, <span class="at">by =</span> <span class="st">&quot;ses&quot;</span>, <span class="at">overlay =</span> <span class="cn">TRUE</span>, <span class="at">band =</span> F)</span></code></pre></div>
+<div class="sourceCode" id="cb261"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb261-1"><a href="6.8-exercises-6.html#cb261-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Note that band = F removes the confidence intervals</span></span>
+<span id="cb261-2"><a href="6.8-exercises-6.html#cb261-2" aria-hidden="true" tabindex="-1"></a><span class="fu">visreg</span>(mod5, <span class="at">xvar =</span> <span class="st">&quot;achrdg12&quot;</span>, <span class="at">by =</span> <span class="st">&quot;ses&quot;</span>, <span class="at">overlay =</span> <span class="cn">TRUE</span>, <span class="at">band =</span> F)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-134-1.png" width="672" /></p>
 </div>
 <div id="two-categorical-predictors" class="section level3 hasAnchor" number="6.8.7">
@@ -838,11 +827,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>SES, coded as quintiles (<code>wksesq5</code>). We will denote this variable as SES, but keep in mind it is quintiles in this example (e.g., SES = 1 are the respondents with SES between the minimum and the first quintile).</li>
 </ul>
 <p>The regression model is as follows. Note that both variables need to be converted to factors in R, so that R will treat them as categorical variables. Also recall that in R the default contrast coding for categorical predictors is reference-group coding.</p>
-<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb292-1"><a href="6.8-exercises-6.html#cb292-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;ECLS2577.Rdata&quot;</span>)</span>
-<span id="cb292-2"><a href="6.8-exercises-6.html#cb292-2" aria-hidden="true" tabindex="-1"></a>ecls<span class="sc">$</span>prek <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="dv">2</span> <span class="sc">-</span> ecls<span class="sc">$</span>p1center)</span>
-<span id="cb292-3"><a href="6.8-exercises-6.html#cb292-3" aria-hidden="true" tabindex="-1"></a>ecls<span class="sc">$</span>wksesq5 <span class="ot">&lt;-</span> <span class="fu">factor</span>(ecls<span class="sc">$</span>wksesq5)</span>
-<span id="cb292-4"><a href="6.8-exercises-6.html#cb292-4" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(c1rmscal <span class="sc">~</span> prek<span class="sc">*</span>wksesq5, <span class="at">data =</span> ecls)</span>
-<span id="cb292-5"><a href="6.8-exercises-6.html#cb292-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod)</span></code></pre></div>
+<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="6.8-exercises-6.html#cb262-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;ECLS2577.Rdata&quot;</span>)</span>
+<span id="cb262-2"><a href="6.8-exercises-6.html#cb262-2" aria-hidden="true" tabindex="-1"></a>ecls<span class="sc">$</span>prek <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="dv">2</span> <span class="sc">-</span> ecls<span class="sc">$</span>p1center)</span>
+<span id="cb262-3"><a href="6.8-exercises-6.html#cb262-3" aria-hidden="true" tabindex="-1"></a>ecls<span class="sc">$</span>wksesq5 <span class="ot">&lt;-</span> <span class="fu">factor</span>(ecls<span class="sc">$</span>wksesq5)</span>
+<span id="cb262-4"><a href="6.8-exercises-6.html#cb262-4" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(c1rmscal <span class="sc">~</span> prek<span class="sc">*</span>wksesq5, <span class="at">data =</span> ecls)</span>
+<span id="cb262-5"><a href="6.8-exercises-6.html#cb262-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = c1rmscal ~ prek * wksesq5, data = ecls)
@@ -870,13 +859,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Multiple R-squared:  0.162,  Adjusted R-squared:  0.159 
 ## F-statistic: 55.2 on 9 and 2567 DF,  p-value: &lt;2e-16</code></pre>
 <p>To facilitate interpretation of the ouput, you can refer to the plot below. Each regression coefficient in the output corresponds to a feature of this plot.</p>
-<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb294-1"><a href="6.8-exercises-6.html#cb294-1" aria-hidden="true" tabindex="-1"></a>visreg<span class="sc">::</span><span class="fu">visreg</span>(mod, <span class="at">xvar =</span> <span class="st">&quot;wksesq5&quot;</span>, <span class="at">by =</span> <span class="st">&quot;prek&quot;</span>, </span>
-<span id="cb294-2"><a href="6.8-exercises-6.html#cb294-2" aria-hidden="true" tabindex="-1"></a>               <span class="at">partial =</span> F, <span class="at">rug =</span> F, <span class="at">overlay =</span> T, </span>
-<span id="cb294-3"><a href="6.8-exercises-6.html#cb294-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">strip.names =</span> T, <span class="at">xlab =</span> <span class="st">&quot;SES&quot;</span>, </span>
-<span id="cb294-4"><a href="6.8-exercises-6.html#cb294-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">ylab =</span> <span class="st">&quot;Math Achievement in K&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="6.8-exercises-6.html#cb264-1" aria-hidden="true" tabindex="-1"></a>visreg<span class="sc">::</span><span class="fu">visreg</span>(mod, <span class="at">xvar =</span> <span class="st">&quot;wksesq5&quot;</span>, <span class="at">by =</span> <span class="st">&quot;prek&quot;</span>, </span>
+<span id="cb264-2"><a href="6.8-exercises-6.html#cb264-2" aria-hidden="true" tabindex="-1"></a>               <span class="at">partial =</span> F, <span class="at">rug =</span> F, <span class="at">overlay =</span> T, </span>
+<span id="cb264-3"><a href="6.8-exercises-6.html#cb264-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">strip.names =</span> T, <span class="at">xlab =</span> <span class="st">&quot;SES&quot;</span>, </span>
+<span id="cb264-4"><a href="6.8-exercises-6.html#cb264-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">ylab =</span> <span class="st">&quot;Math Achievement in K&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-136-1.png" width="672" /></p>
 <p>In order to summarize the model as an ANOVA table, we can use the following code. Note that the ANOVA output tests the variance explained (i.e., R-squared) of the original variables, and does not include dummy variables.</p>
-<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb295-1"><a href="6.8-exercises-6.html#cb295-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(mod)</span></code></pre></div>
+<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="6.8-exercises-6.html#cb265-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(mod)</span></code></pre></div>
 <pre><code>## Analysis of Variance Table
 ## 
 ## Response: c1rmscal
@@ -888,7 +877,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>In an ANOVA context, the R-squared statistics are called eta-squared. They are reported below:</p>
-<div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb297-1"><a href="6.8-exercises-6.html#cb297-1" aria-hidden="true" tabindex="-1"></a>effectsize<span class="sc">::</span><span class="fu">eta_squared</span>(mod, <span class="at">partial =</span> F)</span></code></pre></div>
+<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="6.8-exercises-6.html#cb267-1" aria-hidden="true" tabindex="-1"></a>effectsize<span class="sc">::</span><span class="fu">eta_squared</span>(mod, <span class="at">partial =</span> F)</span></code></pre></div>
 <pre><code>## # Effect Size for ANOVA (Type I)
 ## 
 ## Parameter    |     Eta2 |       95% CI

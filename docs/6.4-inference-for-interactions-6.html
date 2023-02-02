@@ -535,7 +535,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </script>
 <p>Compared to the two simple regression models discussed in Section <a href="6.1-example-6.html#example-6">6.1</a>, the real power of the multiple regression model is that it facilitates statistical inference about the simple trends and “gaps”.</p>
 <p>For example, in the standard summary output for the regression model, we now have a test of whether the interaction terms is statistically significant. You should feel comfortable interpreting the regression coefficients in this output based on the work we have done so far in this chapter, but now is a good time double check. The interpretation of the standard errors, tests of statistical significance, R-squared, etc, are all the same as in Chapter <a href="4-chapter-4.html#chapter-4">4</a>.</p>
-<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="6.4-inference-for-interactions-6.html#cb204-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod5)</span></code></pre></div>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="6.4-inference-for-interactions-6.html#cb194-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod5)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = achmat12 ~ reading_dev + gender + genderXreading_dev)
@@ -576,20 +576,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p><span class="math display">\[ MERV =  \{\Delta(X^*_1), \Delta(X^\dagger_1), \dots \} \]</span></p>
 <p>MEM and AVE are equivalent for linear regression models (but we will visit the distinction again when we get to logistic regression). In this section we focus on MERV, which is the more widely used approach. One usual choice for the “interesting values” is the quartiles of <span class="math inline">\(X_1\)</span>, which is reported below. Another popular choice is the mean of <span class="math inline">\(X_1\)</span> plus or minus 1 SD.</p>
-<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="6.4-inference-for-interactions-6.html#cb206-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install the package if you haven&#39;t already done so</span></span>
-<span id="cb206-2"><a href="6.4-inference-for-interactions-6.html#cb206-2" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;emmeans&quot;)</span></span>
-<span id="cb206-3"><a href="6.4-inference-for-interactions-6.html#cb206-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb206-4"><a href="6.4-inference-for-interactions-6.html#cb206-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the package into memory</span></span>
-<span id="cb206-5"><a href="6.4-inference-for-interactions-6.html#cb206-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span>
-<span id="cb206-6"><a href="6.4-inference-for-interactions-6.html#cb206-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb206-7"><a href="6.4-inference-for-interactions-6.html#cb206-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the model using R&#39;s formula syntax for interaction &#39;*&#39;</span></span>
-<span id="cb206-8"><a href="6.4-inference-for-interactions-6.html#cb206-8" aria-hidden="true" tabindex="-1"></a>mod6 <span class="ot">&lt;-</span> <span class="fu">lm</span>(achmat12 <span class="sc">~</span> gender<span class="sc">*</span>achrdg12, <span class="at">data =</span> NELS)</span>
-<span id="cb206-9"><a href="6.4-inference-for-interactions-6.html#cb206-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb206-10"><a href="6.4-inference-for-interactions-6.html#cb206-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the emmeans function to get the gender means on math, broken down by reading</span></span>
-<span id="cb206-11"><a href="6.4-inference-for-interactions-6.html#cb206-11" aria-hidden="true" tabindex="-1"></a>gap <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(mod6, <span class="at">specs =</span> <span class="st">&quot;gender&quot;</span>, <span class="at">by =</span> <span class="st">&quot;achrdg12&quot;</span>, <span class="at">cov.reduce =</span> quantile)</span>
-<span id="cb206-12"><a href="6.4-inference-for-interactions-6.html#cb206-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb206-13"><a href="6.4-inference-for-interactions-6.html#cb206-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Test whether the differences are significant</span></span>
-<span id="cb206-14"><a href="6.4-inference-for-interactions-6.html#cb206-14" aria-hidden="true" tabindex="-1"></a><span class="fu">contrast</span>(gap, <span class="at">method =</span> <span class="st">&quot;pairwise&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="6.4-inference-for-interactions-6.html#cb196-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install the package if you haven&#39;t already done so</span></span>
+<span id="cb196-2"><a href="6.4-inference-for-interactions-6.html#cb196-2" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;emmeans&quot;)</span></span>
+<span id="cb196-3"><a href="6.4-inference-for-interactions-6.html#cb196-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-4"><a href="6.4-inference-for-interactions-6.html#cb196-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the package into memory</span></span>
+<span id="cb196-5"><a href="6.4-inference-for-interactions-6.html#cb196-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span>
+<span id="cb196-6"><a href="6.4-inference-for-interactions-6.html#cb196-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-7"><a href="6.4-inference-for-interactions-6.html#cb196-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the model using R&#39;s formula syntax for interaction &#39;*&#39;</span></span>
+<span id="cb196-8"><a href="6.4-inference-for-interactions-6.html#cb196-8" aria-hidden="true" tabindex="-1"></a>mod6 <span class="ot">&lt;-</span> <span class="fu">lm</span>(achmat12 <span class="sc">~</span> gender<span class="sc">*</span>achrdg12, <span class="at">data =</span> NELS)</span>
+<span id="cb196-9"><a href="6.4-inference-for-interactions-6.html#cb196-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-10"><a href="6.4-inference-for-interactions-6.html#cb196-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the emmeans function to get the gender means on math, broken down by reading</span></span>
+<span id="cb196-11"><a href="6.4-inference-for-interactions-6.html#cb196-11" aria-hidden="true" tabindex="-1"></a>gap <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(mod6, <span class="at">specs =</span> <span class="st">&quot;gender&quot;</span>, <span class="at">by =</span> <span class="st">&quot;achrdg12&quot;</span>, <span class="at">cov.reduce =</span> quantile)</span>
+<span id="cb196-12"><a href="6.4-inference-for-interactions-6.html#cb196-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb196-13"><a href="6.4-inference-for-interactions-6.html#cb196-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Test whether the differences are significant</span></span>
+<span id="cb196-14"><a href="6.4-inference-for-interactions-6.html#cb196-14" aria-hidden="true" tabindex="-1"></a><span class="fu">contrast</span>(gap, <span class="at">method =</span> <span class="st">&quot;pairwise&quot;</span>)</span></code></pre></div>
 <pre><code>## achrdg12 = 31.8:
 ##  contrast      estimate    SE  df t.ratio p.value
 ##  Female - Male    -7.74 1.637 496  -4.728  &lt;.0001
@@ -622,9 +622,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>Note that what is missing, or implicit, in this output is a test of the simple trend for males (the group designated as one on the binary predictor). The standard regression output does not provide a statistical test of whether this trend is different from zero. To get this, we need to test the simple trends.</p>
 <p>The test of the simple trends for the example are reported below. Again, these aren’t super interesting in the context of our example, but you should <strong>check your understanding of simple trends by writing down an interpretation of the output below</strong>.</p>
-<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="6.4-inference-for-interactions-6.html#cb208-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the emtrends function to get the regression coefficients on reading, broken down by gender</span></span>
-<span id="cb208-2"><a href="6.4-inference-for-interactions-6.html#cb208-2" aria-hidden="true" tabindex="-1"></a>simple_slopes <span class="ot">&lt;-</span> <span class="fu">emtrends</span>(mod6, <span class="at">var =</span> <span class="st">&quot;achrdg12&quot;</span>, <span class="at">specs =</span> <span class="st">&quot;gender&quot;</span>)</span>
-<span id="cb208-3"><a href="6.4-inference-for-interactions-6.html#cb208-3" aria-hidden="true" tabindex="-1"></a><span class="fu">test</span>(simple_slopes)</span></code></pre></div>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="6.4-inference-for-interactions-6.html#cb198-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the emtrends function to get the regression coefficients on reading, broken down by gender</span></span>
+<span id="cb198-2"><a href="6.4-inference-for-interactions-6.html#cb198-2" aria-hidden="true" tabindex="-1"></a>simple_slopes <span class="ot">&lt;-</span> <span class="fu">emtrends</span>(mod6, <span class="at">var =</span> <span class="st">&quot;achrdg12&quot;</span>, <span class="at">specs =</span> <span class="st">&quot;gender&quot;</span>)</span>
+<span id="cb198-3"><a href="6.4-inference-for-interactions-6.html#cb198-3" aria-hidden="true" tabindex="-1"></a><span class="fu">test</span>(simple_slopes)</span></code></pre></div>
 <pre><code>##  gender achrdg12.trend     SE  df t.ratio p.value
 ##  Female          0.728 0.0470 496  15.487  &lt;.0001
 ##  Male            0.550 0.0451 496  12.208  &lt;.0001</code></pre>
@@ -632,13 +632,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="a-note-on-plotting" class="section level3 hasAnchor" number="6.4.3">
 <h3><span class="header-section-number">6.4.3</span> A note on plotting<a href="6.4-inference-for-interactions-6.html#a-note-on-plotting" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Another nice advantage of having everything in one model is that we can level-up our plotting. Check out this plot from the <code>visreg</code> package (and its only line of code!). You should be able to draw a similar conclusion from the plot as you did from looking at the MERVs.</p>
-<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="6.4-inference-for-interactions-6.html#cb210-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install the package if you haven&#39;t already done so</span></span>
-<span id="cb210-2"><a href="6.4-inference-for-interactions-6.html#cb210-2" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;visreg&quot;)</span></span>
-<span id="cb210-3"><a href="6.4-inference-for-interactions-6.html#cb210-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the package into memory</span></span>
-<span id="cb210-4"><a href="6.4-inference-for-interactions-6.html#cb210-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(visreg)</span>
-<span id="cb210-5"><a href="6.4-inference-for-interactions-6.html#cb210-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb210-6"><a href="6.4-inference-for-interactions-6.html#cb210-6" aria-hidden="true" tabindex="-1"></a>mod6 <span class="ot">&lt;-</span> <span class="fu">lm</span>(achmat12 <span class="sc">~</span> gender<span class="sc">*</span>achrdg12, <span class="at">data=</span> NELS)</span>
-<span id="cb210-7"><a href="6.4-inference-for-interactions-6.html#cb210-7" aria-hidden="true" tabindex="-1"></a><span class="fu">visreg</span>(mod6, <span class="at">xvar =</span> <span class="st">&quot;achrdg12&quot;</span>, <span class="at">by =</span> <span class="st">&quot;gender&quot;</span>, <span class="at">overlay =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="6.4-inference-for-interactions-6.html#cb200-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install the package if you haven&#39;t already done so</span></span>
+<span id="cb200-2"><a href="6.4-inference-for-interactions-6.html#cb200-2" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;visreg&quot;)</span></span>
+<span id="cb200-3"><a href="6.4-inference-for-interactions-6.html#cb200-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the package into memory</span></span>
+<span id="cb200-4"><a href="6.4-inference-for-interactions-6.html#cb200-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(visreg)</span>
+<span id="cb200-5"><a href="6.4-inference-for-interactions-6.html#cb200-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb200-6"><a href="6.4-inference-for-interactions-6.html#cb200-6" aria-hidden="true" tabindex="-1"></a>mod6 <span class="ot">&lt;-</span> <span class="fu">lm</span>(achmat12 <span class="sc">~</span> gender<span class="sc">*</span>achrdg12, <span class="at">data=</span> NELS)</span>
+<span id="cb200-7"><a href="6.4-inference-for-interactions-6.html#cb200-7" aria-hidden="true" tabindex="-1"></a><span class="fu">visreg</span>(mod6, <span class="at">xvar =</span> <span class="st">&quot;achrdg12&quot;</span>, <span class="at">by =</span> <span class="st">&quot;gender&quot;</span>, <span class="at">overlay =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:visreg"></span>
 <img src="_main_files/figure-html/visreg-1.png" alt="Example of a plot using the `visreg` package." width="672" />
 <p class="caption">

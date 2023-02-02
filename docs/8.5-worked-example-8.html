@@ -537,30 +537,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>For this example, we will use the ECLS data to regress reading achievement at the beginning of Kindergarten (<code>c1rrscal</code>) on SES (<code>wksesl</code>), parental (mother’s and father’s) education (<code>wkmomed</code> and <code>wkdaded</code>, respectively), and attendance in center-based care before K (<code>p1center</code>). This is model 3 from Section <a href="7.3-worked-example-7.html#worked-example-7">7.3</a> (we don’t consider the model with the interactions).</p>
 <p>The workflow for assumption checking requires first running the model and then producing the residual vs fitted plot and a qqplot of the residuals. If the plots look OK, we go ahead and interpret the model results. If the plots don’t look OK, we give up and wonder why we ever bothered with regression in the first place. Just kidding :) – the next two chapters of these notes address how to deal with violations of the assumptions.</p>
 <p>After running the model, we obtain the following two plots from the regression output. <strong>For each of the three population assumptions of linear regression, please write down whether you think the assumption is problematic and explain why with reference to the plots.</strong></p>
-<div class="sourceCode" id="cb340"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb340-1"><a href="8.5-worked-example-8.html#cb340-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run model</span></span>
-<span id="cb340-2"><a href="8.5-worked-example-8.html#cb340-2" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;ECLS2577.RData&quot;</span>)</span>
-<span id="cb340-3"><a href="8.5-worked-example-8.html#cb340-3" aria-hidden="true" tabindex="-1"></a>mod5 <span class="ot">&lt;-</span> <span class="fu">lm</span>(c1rrscal <span class="sc">~</span> <span class="fu">factor</span>(p1center) <span class="sc">+</span> wksesl <span class="sc">+</span> wkmomed <span class="sc">+</span> wkdaded, <span class="at">data =</span> ecls)</span>
-<span id="cb340-4"><a href="8.5-worked-example-8.html#cb340-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb340-5"><a href="8.5-worked-example-8.html#cb340-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Check assumptions</span></span>
-<span id="cb340-6"><a href="8.5-worked-example-8.html#cb340-6" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
-<span id="cb340-7"><a href="8.5-worked-example-8.html#cb340-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod5, <span class="dv">1</span>)</span>
-<span id="cb340-8"><a href="8.5-worked-example-8.html#cb340-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod5, <span class="dv">2</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-165-1.png" width="672" /></p>
-<p>To foreshadow the next couple of chapters, here is what the plots looked like after dealing with the problematic assumptions. The data still exhibit heteroskedasticity, but we can address that using heteroskedasticity consistent standard errors (Chapter 9).</p>
-<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb341-1"><a href="8.5-worked-example-8.html#cb341-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run model</span></span>
-<span id="cb341-2"><a href="8.5-worked-example-8.html#cb341-2" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(ecls)</span></code></pre></div>
-<pre><code>## The following object is masked from NELS:
-## 
-##     gender</code></pre>
-<div class="sourceCode" id="cb343"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb343-1"><a href="8.5-worked-example-8.html#cb343-1" aria-hidden="true" tabindex="-1"></a>log_c1rrscal <span class="ot">&lt;-</span> <span class="fu">log</span>(c1rrscal <span class="sc">-</span> <span class="fu">min</span>(c1rrscal) <span class="sc">+</span> <span class="dv">1</span>)</span>
-<span id="cb343-2"><a href="8.5-worked-example-8.html#cb343-2" aria-hidden="true" tabindex="-1"></a>wksesl_sq <span class="ot">&lt;-</span> wksesl<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb343-3"><a href="8.5-worked-example-8.html#cb343-3" aria-hidden="true" tabindex="-1"></a>mod6 <span class="ot">&lt;-</span> <span class="fu">lm</span>(log_c1rrscal <span class="sc">~</span> <span class="fu">factor</span>(p1center) <span class="sc">+</span> wksesl <span class="sc">+</span> wksesl_sq <span class="sc">+</span> wkmomed <span class="sc">+</span> wkdaded)</span>
-<span id="cb343-4"><a href="8.5-worked-example-8.html#cb343-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb343-5"><a href="8.5-worked-example-8.html#cb343-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Check assumptions</span></span>
-<span id="cb343-6"><a href="8.5-worked-example-8.html#cb343-6" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
-<span id="cb343-7"><a href="8.5-worked-example-8.html#cb343-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod6, <span class="dv">1</span>)</span>
-<span id="cb343-8"><a href="8.5-worked-example-8.html#cb343-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod6, <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb306"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb306-1"><a href="8.5-worked-example-8.html#cb306-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run model</span></span>
+<span id="cb306-2"><a href="8.5-worked-example-8.html#cb306-2" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;ECLS2577.RData&quot;</span>)</span>
+<span id="cb306-3"><a href="8.5-worked-example-8.html#cb306-3" aria-hidden="true" tabindex="-1"></a>mod5 <span class="ot">&lt;-</span> <span class="fu">lm</span>(c1rrscal <span class="sc">~</span> <span class="fu">factor</span>(p1center) <span class="sc">+</span> wksesl <span class="sc">+</span> wkmomed <span class="sc">+</span> wkdaded, <span class="at">data =</span> ecls)</span>
+<span id="cb306-4"><a href="8.5-worked-example-8.html#cb306-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb306-5"><a href="8.5-worked-example-8.html#cb306-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Check assumptions</span></span>
+<span id="cb306-6"><a href="8.5-worked-example-8.html#cb306-6" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb306-7"><a href="8.5-worked-example-8.html#cb306-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod5, <span class="dv">1</span>)</span>
+<span id="cb306-8"><a href="8.5-worked-example-8.html#cb306-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod5, <span class="dv">2</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-166-1.png" width="672" /></p>
+<p>To foreshadow the next couple of chapters, here is what the plots looked like after dealing with the problematic assumptions. The data still exhibit heteroskedasticity, but we can address that using heteroskedasticity consistent standard errors (Chapter 9).</p>
+<div class="sourceCode" id="cb307"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb307-1"><a href="8.5-worked-example-8.html#cb307-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run model</span></span>
+<span id="cb307-2"><a href="8.5-worked-example-8.html#cb307-2" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(ecls)</span>
+<span id="cb307-3"><a href="8.5-worked-example-8.html#cb307-3" aria-hidden="true" tabindex="-1"></a>log_c1rrscal <span class="ot">&lt;-</span> <span class="fu">log</span>(c1rrscal <span class="sc">-</span> <span class="fu">min</span>(c1rrscal) <span class="sc">+</span> <span class="dv">1</span>)</span>
+<span id="cb307-4"><a href="8.5-worked-example-8.html#cb307-4" aria-hidden="true" tabindex="-1"></a>wksesl_sq <span class="ot">&lt;-</span> wksesl<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb307-5"><a href="8.5-worked-example-8.html#cb307-5" aria-hidden="true" tabindex="-1"></a>mod6 <span class="ot">&lt;-</span> <span class="fu">lm</span>(log_c1rrscal <span class="sc">~</span> <span class="fu">factor</span>(p1center) <span class="sc">+</span> wksesl <span class="sc">+</span> wksesl_sq <span class="sc">+</span> wkmomed <span class="sc">+</span> wkdaded)</span>
+<span id="cb307-6"><a href="8.5-worked-example-8.html#cb307-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb307-7"><a href="8.5-worked-example-8.html#cb307-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Check assumptions</span></span>
+<span id="cb307-8"><a href="8.5-worked-example-8.html#cb307-8" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb307-9"><a href="8.5-worked-example-8.html#cb307-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod6, <span class="dv">1</span>)</span>
+<span id="cb307-10"><a href="8.5-worked-example-8.html#cb307-10" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod6, <span class="dv">2</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-167-1.png" width="672" /></p>
 </div>
             </section>
 

@@ -565,11 +565,11 @@ it has to do with the relation between predictor <span class="math inline">\(k\)
 </ul>
 <p>In general, it is a good practice to check VIF as part of model diagnostics, which is the topic of the next chapter. For our example, the VIF statistics for Model 3 and Model 4 are reported below.</p>
 <p>Model 3:</p>
-<div class="sourceCode" id="cb307"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb307-1"><a href="7.4-too-many-predictors-7.html#cb307-1" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">vif</span>(mod3)</span></code></pre></div>
+<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb275-1"><a href="7.4-too-many-predictors-7.html#cb275-1" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">vif</span>(mod3)</span></code></pre></div>
 <pre><code>##    z_wksesl z_wksesl_sq   z_wkmomed   z_wkdaded    p1center 
 ##       6.290       1.206       2.950       3.377       1.054</code></pre>
 <p>Model 4</p>
-<div class="sourceCode" id="cb309"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb309-1"><a href="7.4-too-many-predictors-7.html#cb309-1" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">vif</span>(mod4)</span></code></pre></div>
+<div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb277-1"><a href="7.4-too-many-predictors-7.html#cb277-1" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">vif</span>(mod4)</span></code></pre></div>
 <pre><code>## there are higher-order terms (interactions) in this model
 ## consider setting type = &#39;predictor&#39;; see ?vif</code></pre>
 <pre><code>##             z_wksesl          z_wksesl_sq            z_wkmomed 

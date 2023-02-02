@@ -538,8 +538,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>Please take a moment to write down you conclusions about whether the assumptions of linear regression are met for these data, and any other details you may notice about the linear probability model.</li>
 </ul>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-251"></span>
-<img src="_main_files/figure-html/unnamed-chunk-251-1.png" alt="Linear probability model with CHD example" width="1152" />
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-252"></span>
+<img src="_main_files/figure-html/unnamed-chunk-252-1.png" alt="Linear probability model with CHD example" width="1152" />
 <p class="caption">
 Figure 11.13: Linear probability model with CHD example
 </p>
@@ -581,7 +581,7 @@ Figure 11.13: Linear probability model with CHD example
 <li>If the logit = 1.098 corresponds to probability = .75, what probability does logit = -1.098 correspond to?</li>
 </ul></li>
 </ul>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-252"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-253"></span>
 <img src="images/logit-table.png" alt="Logistic, odds, and logit" width="455" />
 <p class="caption">
 Figure 11.14: Logistic, odds, and logit
@@ -608,9 +608,9 @@ Figure 11.14: Logistic, odds, and logit
 <li><span class="math inline">\(b / 4\)</span> is the approximate rate of increase (slope) of the probability of having CHD for people close to the “50-50” point.</li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb512"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb512-1"><a href="11.9-workbook-8.html#cb512-1" aria-hidden="true" tabindex="-1"></a>visreg<span class="sc">::</span><span class="fu">visreg</span>(mod2, <span class="at">xvar =</span> <span class="st">&quot;age&quot;</span>, <span class="at">scale =</span> <span class="st">&quot;response&quot;</span>)</span></code></pre></div>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-253"></span>
-<img src="_main_files/figure-html/unnamed-chunk-253-1.png" alt="Predicted probabilities" width="672" />
+<div class="sourceCode" id="cb446"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb446-1"><a href="11.9-workbook-8.html#cb446-1" aria-hidden="true" tabindex="-1"></a>visreg<span class="sc">::</span><span class="fu">visreg</span>(mod2, <span class="at">xvar =</span> <span class="st">&quot;age&quot;</span>, <span class="at">scale =</span> <span class="st">&quot;response&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-254"></span>
+<img src="_main_files/figure-html/unnamed-chunk-254-1.png" alt="Predicted probabilities" width="672" />
 <p class="caption">
 Figure 11.15: Predicted probabilities
 </p>
@@ -623,10 +623,10 @@ Figure 11.15: Predicted probabilities
 <ul>
 <li>Please write down your interpretation of the OR and its confidence interval for the example below</li>
 </ul>
-<div class="sourceCode" id="cb513"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb513-1"><a href="11.9-workbook-8.html#cb513-1" aria-hidden="true" tabindex="-1"></a>ci.b <span class="ot">&lt;-</span> <span class="fu">confint</span>(mod2)</span></code></pre></div>
+<div class="sourceCode" id="cb447"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb447-1"><a href="11.9-workbook-8.html#cb447-1" aria-hidden="true" tabindex="-1"></a>ci.b <span class="ot">&lt;-</span> <span class="fu">confint</span>(mod2)</span></code></pre></div>
 <pre><code>## Waiting for profiling to be done...</code></pre>
-<div class="sourceCode" id="cb515"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb515-1"><a href="11.9-workbook-8.html#cb515-1" aria-hidden="true" tabindex="-1"></a>ci.table <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="at">coefs =</span> <span class="fu">coef</span>(mod2), ci.b)</span>
-<span id="cb515-2"><a href="11.9-workbook-8.html#cb515-2" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(ci.table)</span></code></pre></div>
+<div class="sourceCode" id="cb449"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb449-1"><a href="11.9-workbook-8.html#cb449-1" aria-hidden="true" tabindex="-1"></a>ci.table <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="at">coefs =</span> <span class="fu">coef</span>(mod2), ci.b)</span>
+<span id="cb449-2"><a href="11.9-workbook-8.html#cb449-2" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(ci.table)</span></code></pre></div>
 <pre><code>##                 coefs     2.5 %   97.5 %
 ## (Intercept)  0.001205 6.636e-05  0.01315
 ## age          1.125791 1.073e+00  1.19145
@@ -634,11 +634,11 @@ Figure 11.15: Predicted probabilities
 <ul>
 <li>Please write down your interpretation of the LR test given below</li>
 </ul>
-<div class="sourceCode" id="cb517"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb517-1"><a href="11.9-workbook-8.html#cb517-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The model with no predictors</span></span>
-<span id="cb517-2"><a href="11.9-workbook-8.html#cb517-2" aria-hidden="true" tabindex="-1"></a>mod0 <span class="ot">&lt;-</span> <span class="fu">glm</span>(chd <span class="sc">~</span> <span class="dv">1</span>, <span class="at">family =</span> <span class="st">&quot;binomial&quot;</span>, <span class="at">data =</span> chd.data)</span>
-<span id="cb517-3"><a href="11.9-workbook-8.html#cb517-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb517-4"><a href="11.9-workbook-8.html#cb517-4" aria-hidden="true" tabindex="-1"></a><span class="co"># The LR test (enter the smaller model first)</span></span>
-<span id="cb517-5"><a href="11.9-workbook-8.html#cb517-5" aria-hidden="true" tabindex="-1"></a>lmtest<span class="sc">::</span><span class="fu">lrtest</span>(mod0, mod2)</span></code></pre></div>
+<div class="sourceCode" id="cb451"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb451-1"><a href="11.9-workbook-8.html#cb451-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The model with no predictors</span></span>
+<span id="cb451-2"><a href="11.9-workbook-8.html#cb451-2" aria-hidden="true" tabindex="-1"></a>mod0 <span class="ot">&lt;-</span> <span class="fu">glm</span>(chd <span class="sc">~</span> <span class="dv">1</span>, <span class="at">family =</span> <span class="st">&quot;binomial&quot;</span>, <span class="at">data =</span> chd.data)</span>
+<span id="cb451-3"><a href="11.9-workbook-8.html#cb451-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb451-4"><a href="11.9-workbook-8.html#cb451-4" aria-hidden="true" tabindex="-1"></a><span class="co"># The LR test (enter the smaller model first)</span></span>
+<span id="cb451-5"><a href="11.9-workbook-8.html#cb451-5" aria-hidden="true" tabindex="-1"></a>lmtest<span class="sc">::</span><span class="fu">lrtest</span>(mod0, mod2)</span></code></pre></div>
 <pre><code>## Likelihood ratio test
 ## 
 ## Model 1: chd ~ 1
@@ -653,23 +653,23 @@ Figure 11.15: Predicted probabilities
 <li>Please write down an interpretation of McFadden’s R-squared for the example and we will discuss you interpretations in class.</li>
 </ul>
 <p>McFadden’s R-squared:</p>
-<div class="sourceCode" id="cb519"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb519-1"><a href="11.9-workbook-8.html#cb519-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using the deviance of the models</span></span>
-<span id="cb519-2"><a href="11.9-workbook-8.html#cb519-2" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> mod2<span class="sc">$</span>deviance<span class="sc">/</span>mod0<span class="sc">$</span>deviance</span></code></pre></div>
+<div class="sourceCode" id="cb453"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb453-1"><a href="11.9-workbook-8.html#cb453-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using the deviance of the models</span></span>
+<span id="cb453-2"><a href="11.9-workbook-8.html#cb453-2" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> mod2<span class="sc">$</span>deviance<span class="sc">/</span>mod0<span class="sc">$</span>deviance</span></code></pre></div>
 <pre><code>## [1] 0.3853</code></pre>
 <p><strong>Section <a href="11.7-assumption-checking-11.html#assumption-checking-11">11.7</a></strong></p>
 <ul>
 <li>Please write down your interpretation of the HL test and be prepared to share you answer in class</li>
 </ul>
-<div class="sourceCode" id="cb521"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb521-1"><a href="11.9-workbook-8.html#cb521-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Note: Install package &quot;generalhoslem&quot; if you haven&#39;t do so already</span></span>
-<span id="cb521-2"><a href="11.9-workbook-8.html#cb521-2" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;generalhoslem&quot;)</span></span>
-<span id="cb521-3"><a href="11.9-workbook-8.html#cb521-3" aria-hidden="true" tabindex="-1"></a>HLtest <span class="ot">&lt;-</span> generalhoslem<span class="sc">::</span><span class="fu">logitgof</span>(<span class="at">obs =</span> chd, <span class="at">exp =</span> <span class="fu">fitted</span>(mod2), <span class="at">g =</span> <span class="dv">5</span>)</span>
-<span id="cb521-4"><a href="11.9-workbook-8.html#cb521-4" aria-hidden="true" tabindex="-1"></a>HLtest</span></code></pre></div>
+<div class="sourceCode" id="cb455"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb455-1"><a href="11.9-workbook-8.html#cb455-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Note: Install package &quot;generalhoslem&quot; if you haven&#39;t do so already</span></span>
+<span id="cb455-2"><a href="11.9-workbook-8.html#cb455-2" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;generalhoslem&quot;)</span></span>
+<span id="cb455-3"><a href="11.9-workbook-8.html#cb455-3" aria-hidden="true" tabindex="-1"></a>HLtest <span class="ot">&lt;-</span> generalhoslem<span class="sc">::</span><span class="fu">logitgof</span>(<span class="at">obs =</span> chd, <span class="at">exp =</span> <span class="fu">fitted</span>(mod2), <span class="at">g =</span> <span class="dv">5</span>)</span>
+<span id="cb455-4"><a href="11.9-workbook-8.html#cb455-4" aria-hidden="true" tabindex="-1"></a>HLtest</span></code></pre></div>
 <pre><code>## 
 ##  Hosmer and Lemeshow test (binary model)
 ## 
 ## data:  chd, fitted(mod2)
 ## X-squared = 3.7, df = 3, p-value = 0.3</code></pre>
-<div class="sourceCode" id="cb523"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb523-1"><a href="11.9-workbook-8.html#cb523-1" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(chd.data)</span></code></pre></div>
+<div class="sourceCode" id="cb457"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb457-1"><a href="11.9-workbook-8.html#cb457-1" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(chd.data)</span></code></pre></div>
 
 </div>
 <!-- </div> -->

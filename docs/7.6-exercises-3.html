@@ -508,48 +508,46 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">7.6</span> Exercises<a href="7.6-exercises-3.html#exercises-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The exercises reproduce the worked example in Section <a href="7.3-worked-example-7.html#worked-example-7">7.3</a>. For additional details on the interpretation of the output, please see that section.</p>
 <p>First we set up the variables</p>
-<div class="sourceCode" id="cb313"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb313-1"><a href="7.6-exercises-3.html#cb313-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>()) <span class="co"># clean up environment</span></span>
-<span id="cb313-2"><a href="7.6-exercises-3.html#cb313-2" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;ECLS2577.RData&quot;</span>)</span>
-<span id="cb313-3"><a href="7.6-exercises-3.html#cb313-3" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(ecls)</span></code></pre></div>
-<pre><code>## The following object is masked from NELS:
-## 
-##     gender</code></pre>
-<div class="sourceCode" id="cb315"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb315-1"><a href="7.6-exercises-3.html#cb315-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Recode variables</span></span>
-<span id="cb315-2"><a href="7.6-exercises-3.html#cb315-2" aria-hidden="true" tabindex="-1"></a>p1center <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">-</span> p1center</span>
-<span id="cb315-3"><a href="7.6-exercises-3.html#cb315-3" aria-hidden="true" tabindex="-1"></a>z_c1rrscal <span class="ot">&lt;-</span> <span class="fu">scale</span>(c1rrscal)</span>
-<span id="cb315-4"><a href="7.6-exercises-3.html#cb315-4" aria-hidden="true" tabindex="-1"></a>z_wksesl <span class="ot">&lt;-</span> <span class="fu">scale</span>(wksesl)</span>
-<span id="cb315-5"><a href="7.6-exercises-3.html#cb315-5" aria-hidden="true" tabindex="-1"></a>z_wksesl_sq <span class="ot">&lt;-</span> z_wksesl<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb315-6"><a href="7.6-exercises-3.html#cb315-6" aria-hidden="true" tabindex="-1"></a>z_wkmomed <span class="ot">&lt;-</span> <span class="fu">scale</span>(wkmomed)</span>
-<span id="cb315-7"><a href="7.6-exercises-3.html#cb315-7" aria-hidden="true" tabindex="-1"></a>z_wkdaded <span class="ot">&lt;-</span> <span class="fu">scale</span>(wkdaded)</span>
-<span id="cb315-8"><a href="7.6-exercises-3.html#cb315-8" aria-hidden="true" tabindex="-1"></a>log_c1rrscal <span class="ot">&lt;-</span> <span class="fu">log</span>(z_c1rrscal <span class="sc">-</span> <span class="fu">min</span>(z_c1rrscal) <span class="sc">+</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb281-1"><a href="7.6-exercises-3.html#cb281-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>()) <span class="co"># clean up environment</span></span>
+<span id="cb281-2"><a href="7.6-exercises-3.html#cb281-2" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;ECLS2577.RData&quot;</span>)</span>
+<span id="cb281-3"><a href="7.6-exercises-3.html#cb281-3" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(ecls)</span>
+<span id="cb281-4"><a href="7.6-exercises-3.html#cb281-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb281-5"><a href="7.6-exercises-3.html#cb281-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Recode variables</span></span>
+<span id="cb281-6"><a href="7.6-exercises-3.html#cb281-6" aria-hidden="true" tabindex="-1"></a>p1center <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">-</span> p1center</span>
+<span id="cb281-7"><a href="7.6-exercises-3.html#cb281-7" aria-hidden="true" tabindex="-1"></a>z_c1rrscal <span class="ot">&lt;-</span> <span class="fu">scale</span>(c1rrscal)</span>
+<span id="cb281-8"><a href="7.6-exercises-3.html#cb281-8" aria-hidden="true" tabindex="-1"></a>z_wksesl <span class="ot">&lt;-</span> <span class="fu">scale</span>(wksesl)</span>
+<span id="cb281-9"><a href="7.6-exercises-3.html#cb281-9" aria-hidden="true" tabindex="-1"></a>z_wksesl_sq <span class="ot">&lt;-</span> z_wksesl<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb281-10"><a href="7.6-exercises-3.html#cb281-10" aria-hidden="true" tabindex="-1"></a>z_wkmomed <span class="ot">&lt;-</span> <span class="fu">scale</span>(wkmomed)</span>
+<span id="cb281-11"><a href="7.6-exercises-3.html#cb281-11" aria-hidden="true" tabindex="-1"></a>z_wkdaded <span class="ot">&lt;-</span> <span class="fu">scale</span>(wkdaded)</span>
+<span id="cb281-12"><a href="7.6-exercises-3.html#cb281-12" aria-hidden="true" tabindex="-1"></a>log_c1rrscal <span class="ot">&lt;-</span> <span class="fu">log</span>(z_c1rrscal <span class="sc">-</span> <span class="fu">min</span>(z_c1rrscal) <span class="sc">+</span> <span class="dv">1</span>)</span></code></pre></div>
 <p>Next, run the models.</p>
-<div class="sourceCode" id="cb316"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb316-1"><a href="7.6-exercises-3.html#cb316-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run models</span></span>
-<span id="cb316-2"><a href="7.6-exercises-3.html#cb316-2" aria-hidden="true" tabindex="-1"></a>mod1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(log_c1rrscal <span class="sc">~</span>  z_wksesl <span class="sc">+</span> z_wksesl_sq)</span>
-<span id="cb316-3"><a href="7.6-exercises-3.html#cb316-3" aria-hidden="true" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(log_c1rrscal <span class="sc">~</span>  z_wksesl <span class="sc">+</span> z_wksesl_sq <span class="sc">+</span> z_wkmomed <span class="sc">+</span> z_wkdaded)</span>
-<span id="cb316-4"><a href="7.6-exercises-3.html#cb316-4" aria-hidden="true" tabindex="-1"></a>mod3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(log_c1rrscal <span class="sc">~</span>  z_wksesl <span class="sc">+</span> z_wksesl_sq <span class="sc">+</span> z_wkmomed <span class="sc">+</span> z_wkdaded <span class="sc">+</span> p1center)</span>
-<span id="cb316-5"><a href="7.6-exercises-3.html#cb316-5" aria-hidden="true" tabindex="-1"></a>mod4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(log_c1rrscal <span class="sc">~</span>  (z_wksesl <span class="sc">+</span> z_wksesl_sq <span class="sc">+</span> z_wkmomed <span class="sc">+</span> z_wkdaded)<span class="sc">*</span>p1center)</span>
-<span id="cb316-6"><a href="7.6-exercises-3.html#cb316-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb316-7"><a href="7.6-exercises-3.html#cb316-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Regression Table</span></span>
-<span id="cb316-8"><a href="7.6-exercises-3.html#cb316-8" aria-hidden="true" tabindex="-1"></a><span class="co">#stargazer::stargazer(mod1, mod2, mod3, mod4, type = &#39;html&#39;, omit = &quot;Constant&quot;)</span></span>
-<span id="cb316-9"><a href="7.6-exercises-3.html#cb316-9" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(ecls)</span></code></pre></div>
+<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="7.6-exercises-3.html#cb282-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run models</span></span>
+<span id="cb282-2"><a href="7.6-exercises-3.html#cb282-2" aria-hidden="true" tabindex="-1"></a>mod1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(log_c1rrscal <span class="sc">~</span>  z_wksesl <span class="sc">+</span> z_wksesl_sq)</span>
+<span id="cb282-3"><a href="7.6-exercises-3.html#cb282-3" aria-hidden="true" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(log_c1rrscal <span class="sc">~</span>  z_wksesl <span class="sc">+</span> z_wksesl_sq <span class="sc">+</span> z_wkmomed <span class="sc">+</span> z_wkdaded)</span>
+<span id="cb282-4"><a href="7.6-exercises-3.html#cb282-4" aria-hidden="true" tabindex="-1"></a>mod3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(log_c1rrscal <span class="sc">~</span>  z_wksesl <span class="sc">+</span> z_wksesl_sq <span class="sc">+</span> z_wkmomed <span class="sc">+</span> z_wkdaded <span class="sc">+</span> p1center)</span>
+<span id="cb282-5"><a href="7.6-exercises-3.html#cb282-5" aria-hidden="true" tabindex="-1"></a>mod4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(log_c1rrscal <span class="sc">~</span>  (z_wksesl <span class="sc">+</span> z_wksesl_sq <span class="sc">+</span> z_wkmomed <span class="sc">+</span> z_wkdaded)<span class="sc">*</span>p1center)</span>
+<span id="cb282-6"><a href="7.6-exercises-3.html#cb282-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb282-7"><a href="7.6-exercises-3.html#cb282-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Regression Table</span></span>
+<span id="cb282-8"><a href="7.6-exercises-3.html#cb282-8" aria-hidden="true" tabindex="-1"></a><span class="co">#stargazer::stargazer(mod1, mod2, mod3, mod4, type = &#39;html&#39;, omit = &quot;Constant&quot;)</span></span>
+<span id="cb282-9"><a href="7.6-exercises-3.html#cb282-9" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(ecls)</span></code></pre></div>
 <p>The <code>stargazer</code> table doesn’t format nicely in markdown, so I attach a screen shot instead. We will go through some different types of output with stargazer in class You must install the <code>stargazer</code> package for the function to work.</p>
-<div class="sourceCode" id="cb317"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb317-1"><a href="7.6-exercises-3.html#cb317-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;images/stargazer.png&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb283-1"><a href="7.6-exercises-3.html#cb283-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;images/stargazer.png&quot;</span>)</span></code></pre></div>
 <p><img src="images/stargazer.png" width="677" style="display: block; margin: auto;" /></p>
 <p>The above table reports the <span class="math inline">\(R^2\)</span> for each model but does not provide the <span class="math inline">\(\Delta R^2\)</span> statistics or the corresponding F-tests. The <span class="math inline">\(\Delta R^2\)</span> statistics were</p>
-<div class="sourceCode" id="cb318"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb318-1"><a href="7.6-exercises-3.html#cb318-1" aria-hidden="true" tabindex="-1"></a>R2_1 <span class="ot">&lt;-</span> <span class="fu">summary</span>(mod1)<span class="sc">$</span>r.squared</span>
-<span id="cb318-2"><a href="7.6-exercises-3.html#cb318-2" aria-hidden="true" tabindex="-1"></a>R2_2 <span class="ot">&lt;-</span> <span class="fu">summary</span>(mod2)<span class="sc">$</span>r.squared</span>
-<span id="cb318-3"><a href="7.6-exercises-3.html#cb318-3" aria-hidden="true" tabindex="-1"></a>R2_3 <span class="ot">&lt;-</span> <span class="fu">summary</span>(mod3)<span class="sc">$</span>r.squared</span>
-<span id="cb318-4"><a href="7.6-exercises-3.html#cb318-4" aria-hidden="true" tabindex="-1"></a>R2_4 <span class="ot">&lt;-</span> <span class="fu">summary</span>(mod4)<span class="sc">$</span>r.squared</span>
-<span id="cb318-5"><a href="7.6-exercises-3.html#cb318-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb318-6"><a href="7.6-exercises-3.html#cb318-6" aria-hidden="true" tabindex="-1"></a>delta_rsquared <span class="ot">&lt;-</span> <span class="fu">c</span>(R2_1, R2_2 <span class="sc">-</span> R2_1, R2_3 <span class="sc">-</span> R2_2, R2_4 <span class="sc">-</span> R2_3)</span>
-<span id="cb318-7"><a href="7.6-exercises-3.html#cb318-7" aria-hidden="true" tabindex="-1"></a>Models <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;Model &quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>)</span>
-<span id="cb318-8"><a href="7.6-exercises-3.html#cb318-8" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(delta_rsquared) <span class="ot">&lt;-</span> Models</span>
-<span id="cb318-9"><a href="7.6-exercises-3.html#cb318-9" aria-hidden="true" tabindex="-1"></a>delta_rsquared</span></code></pre></div>
+<div class="sourceCode" id="cb284"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb284-1"><a href="7.6-exercises-3.html#cb284-1" aria-hidden="true" tabindex="-1"></a>R2_1 <span class="ot">&lt;-</span> <span class="fu">summary</span>(mod1)<span class="sc">$</span>r.squared</span>
+<span id="cb284-2"><a href="7.6-exercises-3.html#cb284-2" aria-hidden="true" tabindex="-1"></a>R2_2 <span class="ot">&lt;-</span> <span class="fu">summary</span>(mod2)<span class="sc">$</span>r.squared</span>
+<span id="cb284-3"><a href="7.6-exercises-3.html#cb284-3" aria-hidden="true" tabindex="-1"></a>R2_3 <span class="ot">&lt;-</span> <span class="fu">summary</span>(mod3)<span class="sc">$</span>r.squared</span>
+<span id="cb284-4"><a href="7.6-exercises-3.html#cb284-4" aria-hidden="true" tabindex="-1"></a>R2_4 <span class="ot">&lt;-</span> <span class="fu">summary</span>(mod4)<span class="sc">$</span>r.squared</span>
+<span id="cb284-5"><a href="7.6-exercises-3.html#cb284-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb284-6"><a href="7.6-exercises-3.html#cb284-6" aria-hidden="true" tabindex="-1"></a>delta_rsquared <span class="ot">&lt;-</span> <span class="fu">c</span>(R2_1, R2_2 <span class="sc">-</span> R2_1, R2_3 <span class="sc">-</span> R2_2, R2_4 <span class="sc">-</span> R2_3)</span>
+<span id="cb284-7"><a href="7.6-exercises-3.html#cb284-7" aria-hidden="true" tabindex="-1"></a>Models <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">&quot;Model &quot;</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>)</span>
+<span id="cb284-8"><a href="7.6-exercises-3.html#cb284-8" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(delta_rsquared) <span class="ot">&lt;-</span> Models</span>
+<span id="cb284-9"><a href="7.6-exercises-3.html#cb284-9" aria-hidden="true" tabindex="-1"></a>delta_rsquared</span></code></pre></div>
 <pre><code>##  Model 1  Model 2  Model 3  Model 4 
 ## 0.176122 0.003150 0.005124 0.002133</code></pre>
 <p>The F-tests of the <span class="math inline">\(\Delta R^2\)</span>s for each model are give are reported below. The rows of the table below the report the F-test of <span class="math inline">\(\Delta R^2\)</span> for each model. The test for Model 1 is omitted.</p>
-<div class="sourceCode" id="cb320"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb320-1"><a href="7.6-exercises-3.html#cb320-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tests of R-square change</span></span>
-<span id="cb320-2"><a href="7.6-exercises-3.html#cb320-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">cbind</span>(Models, <span class="fu">anova</span>(mod1, mod2, mod3, mod4)))</span></code></pre></div>
+<div class="sourceCode" id="cb286"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb286-1"><a href="7.6-exercises-3.html#cb286-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tests of R-square change</span></span>
+<span id="cb286-2"><a href="7.6-exercises-3.html#cb286-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">cbind</span>(Models, <span class="fu">anova</span>(mod1, mod2, mod3, mod4)))</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -602,10 +600,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tbody>
 </table>
 <p>The variance inflation factors for Model 3 and Model 4 are obtained use the <code>vif</code> function of the <code>car</code> package (you must install the package for this code to work)</p>
-<div class="sourceCode" id="cb321"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb321-1"><a href="7.6-exercises-3.html#cb321-1" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">vif</span>(mod3)</span></code></pre></div>
+<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="7.6-exercises-3.html#cb287-1" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">vif</span>(mod3)</span></code></pre></div>
 <pre><code>##    z_wksesl z_wksesl_sq   z_wkmomed   z_wkdaded    p1center 
 ##       6.290       1.206       2.950       3.377       1.054</code></pre>
-<div class="sourceCode" id="cb323"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb323-1"><a href="7.6-exercises-3.html#cb323-1" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">vif</span>(mod4)</span></code></pre></div>
+<div class="sourceCode" id="cb289"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb289-1"><a href="7.6-exercises-3.html#cb289-1" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">vif</span>(mod4)</span></code></pre></div>
 <pre><code>## there are higher-order terms (interactions) in this model
 ## consider setting type = &#39;predictor&#39;; see ?vif</code></pre>
 <pre><code>##             z_wksesl          z_wksesl_sq            z_wkmomed 

@@ -538,8 +538,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>Please take a moment to write down your intuitions about what is going in the right-hand panel of the figure below and whether this model really is better than the one in the middle panel. I will ask you to share your thoughts in class.**</li>
 </ul>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-213"></span>
-<img src="_main_files/figure-html/unnamed-chunk-213-1.png" alt="Polynomial Regression Examples" width="1152" />
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-214"></span>
+<img src="_main_files/figure-html/unnamed-chunk-214-1.png" alt="Polynomial Regression Examples" width="1152" />
 <p class="caption">
 Figure 10.8: Polynomial Regression Examples
 </p>
@@ -547,7 +547,7 @@ Figure 10.8: Polynomial Regression Examples
 <ul>
 <li>Please use both the “basic” and “more complicated” interpretation of a quadratic relationship to describe the Yerkes-Dodson Law.</li>
 </ul>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-214"></span>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-215"></span>
 <img src="images/YerkesDodson.png" alt="Yerkes-Dodson Law (Source: Wikipedia)" width="563" />
 <p class="caption">
 Figure 10.9: Yerkes-Dodson Law (Source: Wikipedia)
@@ -557,23 +557,20 @@ Figure 10.9: Yerkes-Dodson Law (Source: Wikipedia)
 <ul>
 <li>What is your interpretation of the log-linear model with the quadratic term for education included (below)? Does this address the non-linear relationship observed in the log-linear model? What would you do next?</li>
 </ul>
-<div class="sourceCode" id="cb421"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb421-1"><a href="10.5-workbook-7.html#cb421-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(wages)</span></code></pre></div>
-<pre><code>## The following object is masked from NELS:
-## 
-##     id</code></pre>
-<div class="sourceCode" id="cb423"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb423-1"><a href="10.5-workbook-7.html#cb423-1" aria-hidden="true" tabindex="-1"></a>log_wage <span class="ot">&lt;-</span> <span class="fu">log</span>(wage <span class="sc">+</span> <span class="dv">1</span>)</span>
-<span id="cb423-2"><a href="10.5-workbook-7.html#cb423-2" aria-hidden="true" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(log_wage <span class="sc">~</span> <span class="fu">poly</span>(educ, <span class="dv">2</span>))</span>
-<span id="cb423-3"><a href="10.5-workbook-7.html#cb423-3" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
-<span id="cb423-4"><a href="10.5-workbook-7.html#cb423-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(educ, log_wage, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span>
-<span id="cb423-5"><a href="10.5-workbook-7.html#cb423-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb423-6"><a href="10.5-workbook-7.html#cb423-6" aria-hidden="true" tabindex="-1"></a><span class="co"># To plot the trend we need to we first need to order the data and the predicted values ... </span></span>
-<span id="cb423-7"><a href="10.5-workbook-7.html#cb423-7" aria-hidden="true" tabindex="-1"></a>sort_educ <span class="ot">&lt;-</span> educ[<span class="fu">order</span>(educ)]</span>
-<span id="cb423-8"><a href="10.5-workbook-7.html#cb423-8" aria-hidden="true" tabindex="-1"></a>sort_fitted<span class="ot">&lt;-</span> <span class="fu">fitted</span>(mod2)[<span class="fu">order</span>(educ)]</span>
-<span id="cb423-9"><a href="10.5-workbook-7.html#cb423-9" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(sort_educ, sort_fitted, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>)</span>
-<span id="cb423-10"><a href="10.5-workbook-7.html#cb423-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb423-11"><a href="10.5-workbook-7.html#cb423-11" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod2, <span class="dv">1</span>, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-215-1.png" width="672" /></p>
-<div class="sourceCode" id="cb424"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb424-1"><a href="10.5-workbook-7.html#cb424-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod2)</span></code></pre></div>
+<div class="sourceCode" id="cb365"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb365-1"><a href="10.5-workbook-7.html#cb365-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(wages)</span>
+<span id="cb365-2"><a href="10.5-workbook-7.html#cb365-2" aria-hidden="true" tabindex="-1"></a>log_wage <span class="ot">&lt;-</span> <span class="fu">log</span>(wage <span class="sc">+</span> <span class="dv">1</span>)</span>
+<span id="cb365-3"><a href="10.5-workbook-7.html#cb365-3" aria-hidden="true" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(log_wage <span class="sc">~</span> <span class="fu">poly</span>(educ, <span class="dv">2</span>))</span>
+<span id="cb365-4"><a href="10.5-workbook-7.html#cb365-4" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb365-5"><a href="10.5-workbook-7.html#cb365-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(educ, log_wage, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span>
+<span id="cb365-6"><a href="10.5-workbook-7.html#cb365-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb365-7"><a href="10.5-workbook-7.html#cb365-7" aria-hidden="true" tabindex="-1"></a><span class="co"># To plot the trend we need to we first need to order the data and the predicted values ... </span></span>
+<span id="cb365-8"><a href="10.5-workbook-7.html#cb365-8" aria-hidden="true" tabindex="-1"></a>sort_educ <span class="ot">&lt;-</span> educ[<span class="fu">order</span>(educ)]</span>
+<span id="cb365-9"><a href="10.5-workbook-7.html#cb365-9" aria-hidden="true" tabindex="-1"></a>sort_fitted<span class="ot">&lt;-</span> <span class="fu">fitted</span>(mod2)[<span class="fu">order</span>(educ)]</span>
+<span id="cb365-10"><a href="10.5-workbook-7.html#cb365-10" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(sort_educ, sort_fitted, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>)</span>
+<span id="cb365-11"><a href="10.5-workbook-7.html#cb365-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb365-12"><a href="10.5-workbook-7.html#cb365-12" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod2, <span class="dv">1</span>, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-216-1.png" width="672" /></p>
+<div class="sourceCode" id="cb366"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb366-1"><a href="10.5-workbook-7.html#cb366-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod2)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = log_wage ~ poly(educ, 2))
@@ -593,7 +590,7 @@ Figure 10.9: Yerkes-Dodson Law (Source: Wikipedia)
 ## Residual standard error: 0.422 on 397 degrees of freedom
 ## Multiple R-squared:  0.216,  Adjusted R-squared:  0.212 
 ## F-statistic: 54.8 on 2 and 397 DF,  p-value: &lt;2e-16</code></pre>
-<div class="sourceCode" id="cb426"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb426-1"><a href="10.5-workbook-7.html#cb426-1" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(wages)</span></code></pre></div>
+<div class="sourceCode" id="cb368"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb368-1"><a href="10.5-workbook-7.html#cb368-1" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(wages)</span></code></pre></div>
 <p><strong>Section <a href="10.3-piecewise-10.html#piecewise-10">10.3</a></strong></p>
 <ul>
 <li>Please take a moment to work out the interpretation of <span class="math inline">\(b_1\)</span> and <span class="math inline">\(b_3\)</span> in the model below, using the same approach as Section <a href="6.3-binary-continuous-interaction-6.html#binary-continuous-interaction-6">6.3</a>. (The interpretation of <span class="math inline">\(b_0\)</span> and <span class="math inline">\(b_2\)</span> is not very interesting but you can work them out too if you like.)</li>
@@ -607,7 +604,7 @@ Figure 10.9: Yerkes-Dodson Law (Source: Wikipedia)
 <ul>
 <li>The diagnostics plots and parameter estimates for the piecewise model are presented below. Please provide an overall interpretation of the results and be prepared to share your answers in class.</li>
 </ul>
-<div class="sourceCode" id="cb427"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb427-1"><a href="10.5-workbook-7.html#cb427-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod4)</span></code></pre></div>
+<div class="sourceCode" id="cb369"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb369-1"><a href="10.5-workbook-7.html#cb369-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod4)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = log(wage + 1) ~ educ * educ12)
@@ -628,16 +625,16 @@ Figure 10.9: Yerkes-Dodson Law (Source: Wikipedia)
 ## Residual standard error: 0.42 on 396 degrees of freedom
 ## Multiple R-squared:  0.226,  Adjusted R-squared:  0.22 
 ## F-statistic: 38.6 on 3 and 396 DF,  p-value: &lt;2e-16</code></pre>
-<div class="sourceCode" id="cb429"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb429-1"><a href="10.5-workbook-7.html#cb429-1" aria-hidden="true" tabindex="-1"></a>emmeans<span class="sc">::</span><span class="fu">emtrends</span>(mod4, <span class="at">specs =</span> <span class="st">&quot;educ12&quot;</span>, <span class="at">var =</span> <span class="st">&quot;educ&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb371"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb371-1"><a href="10.5-workbook-7.html#cb371-1" aria-hidden="true" tabindex="-1"></a>emmeans<span class="sc">::</span><span class="fu">emtrends</span>(mod4, <span class="at">specs =</span> <span class="st">&quot;educ12&quot;</span>, <span class="at">var =</span> <span class="st">&quot;educ&quot;</span>)</span></code></pre></div>
 <pre><code>##  educ12 educ.trend     SE  df lower.CL upper.CL
 ##       0     0.0174 0.0216 396  -0.0251   0.0598
 ##       1     0.0788 0.0168 396   0.0457   0.1119
 ## 
 ## Confidence level used: 0.95</code></pre>
-<div class="sourceCode" id="cb431"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb431-1"><a href="10.5-workbook-7.html#cb431-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
-<span id="cb431-2"><a href="10.5-workbook-7.html#cb431-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod4, <span class="dv">1</span>, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span>
-<span id="cb431-3"><a href="10.5-workbook-7.html#cb431-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod4, <span class="dv">2</span>, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-216-1.png" width="672" /></p>
+<div class="sourceCode" id="cb373"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb373-1"><a href="10.5-workbook-7.html#cb373-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb373-2"><a href="10.5-workbook-7.html#cb373-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod4, <span class="dv">1</span>, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span>
+<span id="cb373-3"><a href="10.5-workbook-7.html#cb373-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod4, <span class="dv">2</span>, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-217-1.png" width="672" /></p>
 </div>
             </section>
 

@@ -507,17 +507,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="exercises-4" class="section level2 hasAnchor" number="8.8">
 <h2><span class="header-section-number">8.8</span> Exercises<a href="8.8-exercises-4.html#exercises-4" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>There isn’t much new in terms of R code in this chapter. Once we run a model with <code>lm</code>, we just call the <code>plot</code> function on the <code>lm</code> output to produce the graphics requires for assumption checking. This section shows these steps for the worked example in Section <a href="8.5-worked-example-8.html#worked-example-8">8.5</a>. Please refer to that section for interpretation of the output.</p>
-<div class="sourceCode" id="cb362"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb362-1"><a href="8.8-exercises-4.html#cb362-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run model</span></span>
-<span id="cb362-2"><a href="8.8-exercises-4.html#cb362-2" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;ECLS2577.RData&quot;</span>)</span>
-<span id="cb362-3"><a href="8.8-exercises-4.html#cb362-3" aria-hidden="true" tabindex="-1"></a>mod5 <span class="ot">&lt;-</span> <span class="fu">lm</span>(c1rrscal <span class="sc">~</span> <span class="fu">factor</span>(p1center) <span class="sc">+</span> wksesl <span class="sc">+</span> wkmomed <span class="sc">+</span> wkdaded, <span class="at">data =</span> ecls)</span>
-<span id="cb362-4"><a href="8.8-exercises-4.html#cb362-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb362-5"><a href="8.8-exercises-4.html#cb362-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Puts both plots in one figure</span></span>
-<span id="cb362-6"><a href="8.8-exercises-4.html#cb362-6" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)) </span>
-<span id="cb362-7"><a href="8.8-exercises-4.html#cb362-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb362-8"><a href="8.8-exercises-4.html#cb362-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Check assumptions</span></span>
-<span id="cb362-9"><a href="8.8-exercises-4.html#cb362-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod5, <span class="dv">1</span>)</span>
-<span id="cb362-10"><a href="8.8-exercises-4.html#cb362-10" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod5, <span class="dv">2</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-180-1.png" width="672" /></p>
+<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb326-1"><a href="8.8-exercises-4.html#cb326-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run model</span></span>
+<span id="cb326-2"><a href="8.8-exercises-4.html#cb326-2" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;ECLS2577.RData&quot;</span>)</span>
+<span id="cb326-3"><a href="8.8-exercises-4.html#cb326-3" aria-hidden="true" tabindex="-1"></a>mod5 <span class="ot">&lt;-</span> <span class="fu">lm</span>(c1rrscal <span class="sc">~</span> <span class="fu">factor</span>(p1center) <span class="sc">+</span> wksesl <span class="sc">+</span> wkmomed <span class="sc">+</span> wkdaded, <span class="at">data =</span> ecls)</span>
+<span id="cb326-4"><a href="8.8-exercises-4.html#cb326-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb326-5"><a href="8.8-exercises-4.html#cb326-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Puts both plots in one figure</span></span>
+<span id="cb326-6"><a href="8.8-exercises-4.html#cb326-6" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)) </span>
+<span id="cb326-7"><a href="8.8-exercises-4.html#cb326-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb326-8"><a href="8.8-exercises-4.html#cb326-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Check assumptions</span></span>
+<span id="cb326-9"><a href="8.8-exercises-4.html#cb326-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod5, <span class="dv">1</span>)</span>
+<span id="cb326-10"><a href="8.8-exercises-4.html#cb326-10" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod5, <span class="dv">2</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-181-1.png" width="672" /></p>
 
 </div>
 <!-- </div> -->

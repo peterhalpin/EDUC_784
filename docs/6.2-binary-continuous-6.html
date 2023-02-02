@@ -544,40 +544,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><span class="math inline">\(X_2\)</span> is Gender (binary, with Female = 0 and Male = 1)</li>
 </ul>
 <p>Note that this model does <strong>not</strong> include an interaction between the two predictors – we are first going to consider what is “missing” from the usual regression model, and then use this to motivate inclusion of another predictor that represents the interaction. To get an initial sense of what is missing, the model in Equation <a href="6.2-binary-continuous-6.html#eq:yhat-6a">(6.1)</a> is plotted Figure <a href="6.2-binary-continuous-6.html#fig:math-reading-2">6.2</a> – can you spot the difference with Figure <a href="6.1-example-6.html#fig:math-reading-1">6.1</a>?</p>
-<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="6.2-binary-continuous-6.html#cb186-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(NELS)</span></code></pre></div>
-<pre><code>## The following objects are masked from NELS (pos = 3):
-## 
-##     absent12, achmat08, achmat10, achmat12, achrdg08, achrdg10,
-##     achrdg12, achsci08, achsci10, achsci12, achsls08, achsls10,
-##     achsls12, advmath8, alcbinge, algebra8, apoffer, approg, cigarett,
-##     computer, cuts12, edexpect, excurr12, expinc30, famsize, gender,
-##     homelang, hsprog, hwkin12, hwkout12, id, late12, marijuan, numinst,
-##     nursery, parmarl8, region, schattrt, schtyp8, ses, slfcnc08,
-##     slfcnc10, slfcnc12, tcherint, unitcalc, unitengl, unitmath, urban</code></pre>
-<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="6.2-binary-continuous-6.html#cb188-1" aria-hidden="true" tabindex="-1"></a>mod3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(achmat12 <span class="sc">~</span> achrdg12 <span class="sc">+</span> gender, <span class="at">data =</span> NELS)</span>
-<span id="cb188-2"><a href="6.2-binary-continuous-6.html#cb188-2" aria-hidden="true" tabindex="-1"></a>a_females <span class="ot">&lt;-</span> <span class="fu">coef</span>(mod3)[<span class="dv">1</span>]</span>
-<span id="cb188-3"><a href="6.2-binary-continuous-6.html#cb188-3" aria-hidden="true" tabindex="-1"></a>b_females <span class="ot">&lt;-</span> <span class="fu">coef</span>(mod3)[<span class="dv">2</span>]</span>
-<span id="cb188-4"><a href="6.2-binary-continuous-6.html#cb188-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb188-5"><a href="6.2-binary-continuous-6.html#cb188-5" aria-hidden="true" tabindex="-1"></a>a_males <span class="ot">&lt;-</span> a_females <span class="sc">+</span> <span class="fu">coef</span>(mod3)[<span class="dv">3</span>]</span>
-<span id="cb188-6"><a href="6.2-binary-continuous-6.html#cb188-6" aria-hidden="true" tabindex="-1"></a>b_males <span class="ot">&lt;-</span> b_females </span>
-<span id="cb188-7"><a href="6.2-binary-continuous-6.html#cb188-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb188-8"><a href="6.2-binary-continuous-6.html#cb188-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot reading and math for females</span></span>
-<span id="cb188-9"><a href="6.2-binary-continuous-6.html#cb188-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(achrdg12[females], achmat12[females], <span class="at">xlab =</span> <span class="st">&quot;reading&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;math&quot;</span>)</span>
-<span id="cb188-10"><a href="6.2-binary-continuous-6.html#cb188-10" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(a_females, b_females, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
-<span id="cb188-11"><a href="6.2-binary-continuous-6.html#cb188-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb188-12"><a href="6.2-binary-continuous-6.html#cb188-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Add points and line for males</span></span>
-<span id="cb188-13"><a href="6.2-binary-continuous-6.html#cb188-13" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(achrdg12[males], achmat12[males], <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>, <span class="at">pch =</span> <span class="dv">2</span>)</span>
-<span id="cb188-14"><a href="6.2-binary-continuous-6.html#cb188-14" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(a_males, b_males, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
-<span id="cb188-15"><a href="6.2-binary-continuous-6.html#cb188-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb188-16"><a href="6.2-binary-continuous-6.html#cb188-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a legend</span></span>
-<span id="cb188-17"><a href="6.2-binary-continuous-6.html#cb188-17" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="at">x =</span> <span class="st">&quot;topleft&quot;</span>, <span class="at">legend =</span> <span class="fu">levels</span>(gender), <span class="at">pch =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="at">col =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="st">&quot;#4B9CD3&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="6.2-binary-continuous-6.html#cb185-1" aria-hidden="true" tabindex="-1"></a>mod3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(achmat12 <span class="sc">~</span> achrdg12 <span class="sc">+</span> gender, <span class="at">data =</span> NELS)</span>
+<span id="cb185-2"><a href="6.2-binary-continuous-6.html#cb185-2" aria-hidden="true" tabindex="-1"></a>a_females <span class="ot">&lt;-</span> <span class="fu">coef</span>(mod3)[<span class="dv">1</span>]</span>
+<span id="cb185-3"><a href="6.2-binary-continuous-6.html#cb185-3" aria-hidden="true" tabindex="-1"></a>b_females <span class="ot">&lt;-</span> <span class="fu">coef</span>(mod3)[<span class="dv">2</span>]</span>
+<span id="cb185-4"><a href="6.2-binary-continuous-6.html#cb185-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb185-5"><a href="6.2-binary-continuous-6.html#cb185-5" aria-hidden="true" tabindex="-1"></a>a_males <span class="ot">&lt;-</span> a_females <span class="sc">+</span> <span class="fu">coef</span>(mod3)[<span class="dv">3</span>]</span>
+<span id="cb185-6"><a href="6.2-binary-continuous-6.html#cb185-6" aria-hidden="true" tabindex="-1"></a>b_males <span class="ot">&lt;-</span> b_females </span>
+<span id="cb185-7"><a href="6.2-binary-continuous-6.html#cb185-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb185-8"><a href="6.2-binary-continuous-6.html#cb185-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot reading and math for females</span></span>
+<span id="cb185-9"><a href="6.2-binary-continuous-6.html#cb185-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(achrdg12[females], achmat12[females], <span class="at">xlab =</span> <span class="st">&quot;reading&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;math&quot;</span>)</span>
+<span id="cb185-10"><a href="6.2-binary-continuous-6.html#cb185-10" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(a_females, b_females, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb185-11"><a href="6.2-binary-continuous-6.html#cb185-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb185-12"><a href="6.2-binary-continuous-6.html#cb185-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Add points and line for males</span></span>
+<span id="cb185-13"><a href="6.2-binary-continuous-6.html#cb185-13" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(achrdg12[males], achmat12[males], <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>, <span class="at">pch =</span> <span class="dv">2</span>)</span>
+<span id="cb185-14"><a href="6.2-binary-continuous-6.html#cb185-14" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(a_males, b_males, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb185-15"><a href="6.2-binary-continuous-6.html#cb185-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb185-16"><a href="6.2-binary-continuous-6.html#cb185-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a legend</span></span>
+<span id="cb185-17"><a href="6.2-binary-continuous-6.html#cb185-17" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="at">x =</span> <span class="st">&quot;topleft&quot;</span>, <span class="at">legend =</span> <span class="fu">levels</span>(gender), <span class="at">pch =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="at">col =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="st">&quot;#4B9CD3&quot;</span>))</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:math-reading-2"></span>
 <img src="_main_files/figure-html/math-reading-2-1.png" alt="Math Achievement, Reading Achievement, and Gender (No Interaction)." width="672" />
 <p class="caption">
 Figure 6.2: Math Achievement, Reading Achievement, and Gender (No Interaction).
 </p>
 </div>
-<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="6.2-binary-continuous-6.html#cb189-1" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(NELS)</span></code></pre></div>
 <p>In order to interpret our multiple regression model, we can take the same two-step approach we used to interpret categorical predictors in Chapter <a href="5-chapter-5.html#chapter-5">5</a>. First, we plug in values for the categorical predictor, then we use the resulting equations solve for quantities of interest. In particular,</p>
 <p><span class="math display">\[\begin{align}
 \widehat Y (Female) &amp; = b_0 + b_1X_1 + b_2 (0) \\ &amp; = b_0 + b_1X_1  \\\\
@@ -593,7 +582,7 @@ Figure 6.2: Math Achievement, Reading Achievement, and Gender (No Interaction).
 <li>The difference between the predicted values (i.e., the predicted gender gap in Math Achievement) is a constant, and is equal to the regression coefficient for Gender (<span class="math inline">\(b_2\)</span>)</li>
 </ul>
 <p>The regression coefficients for the example data are shown below. <strong>Please use these numbers to provide an interpretation of the simple trends and the gender gap in Math Achievement for the NELS example</strong> (Don’t worry about statistical significance, just focus on the meaning of the coefficients.)</p>
-<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="6.2-binary-continuous-6.html#cb190-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(mod3)</span></code></pre></div>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="6.2-binary-continuous-6.html#cb186-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(mod3)</span></code></pre></div>
 <pre><code>## (Intercept)    achrdg12  genderMale 
 ##     19.9812      0.6355      3.5017</code></pre>
 <div id="marginal-means" class="section level3 hasAnchor" number="6.2.1">

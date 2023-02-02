@@ -550,11 +550,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>What do you think about the example given in the Figure below. Is addressing the normality assumption “worth it”? Why or why not?</li>
 </ul>
-<pre><code>## The following object is masked from NELS:
-## 
-##     gender</code></pre>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-196"></span>
-<img src="_main_files/figure-html/unnamed-chunk-196-1.png" alt="Nonlinear vs non-normality when log transforming Y" width="672" />
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-197"></span>
+<img src="_main_files/figure-html/unnamed-chunk-197-1.png" alt="Nonlinear vs non-normality when log transforming Y" width="672" />
 <p class="caption">
 Figure 9.15: Nonlinear vs non-normality when log transforming Y
 </p>
@@ -574,15 +571,12 @@ Figure 9.15: Nonlinear vs non-normality when log transforming Y
 <ul>
 <li>Please take a moment to write down your interpretation of the regression coefficient for <code>educ</code> in the summary output below.</li>
 </ul>
-<div class="sourceCode" id="cb381"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb381-1"><a href="9.7-workbook-6.html#cb381-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(wages)</span></code></pre></div>
-<pre><code>## The following object is masked from NELS:
-## 
-##     id</code></pre>
-<div class="sourceCode" id="cb383"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb383-1"><a href="9.7-workbook-6.html#cb383-1" aria-hidden="true" tabindex="-1"></a>log_wage <span class="ot">&lt;-</span> <span class="fu">log</span>(wage <span class="sc">+</span> <span class="dv">1</span>)</span>
-<span id="cb383-2"><a href="9.7-workbook-6.html#cb383-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb383-3"><a href="9.7-workbook-6.html#cb383-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Regress it on educ</span></span>
-<span id="cb383-4"><a href="9.7-workbook-6.html#cb383-4" aria-hidden="true" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(log_wage <span class="sc">~</span> educ)</span>
-<span id="cb383-5"><a href="9.7-workbook-6.html#cb383-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod2)</span></code></pre></div>
+<div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb337-1"><a href="9.7-workbook-6.html#cb337-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(wages)</span>
+<span id="cb337-2"><a href="9.7-workbook-6.html#cb337-2" aria-hidden="true" tabindex="-1"></a>log_wage <span class="ot">&lt;-</span> <span class="fu">log</span>(wage <span class="sc">+</span> <span class="dv">1</span>)</span>
+<span id="cb337-3"><a href="9.7-workbook-6.html#cb337-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb337-4"><a href="9.7-workbook-6.html#cb337-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Regress it on educ</span></span>
+<span id="cb337-5"><a href="9.7-workbook-6.html#cb337-5" aria-hidden="true" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(log_wage <span class="sc">~</span> educ)</span>
+<span id="cb337-6"><a href="9.7-workbook-6.html#cb337-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod2)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = log_wage ~ educ)
@@ -601,14 +595,14 @@ Figure 9.15: Nonlinear vs non-normality when log transforming Y
 ## Residual standard error: 0.423 on 398 degrees of freedom
 ## Multiple R-squared:  0.21,   Adjusted R-squared:  0.208 
 ## F-statistic:  106 on 1 and 398 DF,  p-value: &lt;2e-16</code></pre>
-<div class="sourceCode" id="cb385"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb385-1"><a href="9.7-workbook-6.html#cb385-1" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(wages)</span></code></pre></div>
+<div class="sourceCode" id="cb339"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb339-1"><a href="9.7-workbook-6.html#cb339-1" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(wages)</span></code></pre></div>
 <ul>
 <li>Please write down your interpretation of the transformed regression coefficient for educ in the output below</li>
 </ul>
-<div class="sourceCode" id="cb386"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb386-1"><a href="9.7-workbook-6.html#cb386-1" aria-hidden="true" tabindex="-1"></a>conf.b <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="fu">coef</span>(mod2), <span class="fu">confint</span>(mod2))</span>
-<span id="cb386-2"><a href="9.7-workbook-6.html#cb386-2" aria-hidden="true" tabindex="-1"></a>exp.b <span class="ot">&lt;-</span> <span class="fu">exp</span>(conf.b) <span class="sc">-</span> <span class="dv">1</span></span>
-<span id="cb386-3"><a href="9.7-workbook-6.html#cb386-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(exp.b)[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;exp - 1&quot;</span>)</span>
-<span id="cb386-4"><a href="9.7-workbook-6.html#cb386-4" aria-hidden="true" tabindex="-1"></a>exp.b</span></code></pre></div>
+<div class="sourceCode" id="cb340"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb340-1"><a href="9.7-workbook-6.html#cb340-1" aria-hidden="true" tabindex="-1"></a>conf.b <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="fu">coef</span>(mod2), <span class="fu">confint</span>(mod2))</span>
+<span id="cb340-2"><a href="9.7-workbook-6.html#cb340-2" aria-hidden="true" tabindex="-1"></a>exp.b <span class="ot">&lt;-</span> <span class="fu">exp</span>(conf.b) <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb340-3"><a href="9.7-workbook-6.html#cb340-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(exp.b)[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;exp - 1&quot;</span>)</span>
+<span id="cb340-4"><a href="9.7-workbook-6.html#cb340-4" aria-hidden="true" tabindex="-1"></a>exp.b</span></code></pre></div>
 <pre><code>##             exp - 1   2.5 %  97.5 %
 ## (Intercept) 2.28291 1.68467 3.01445
 ## educ        0.07767 0.06239 0.09317</code></pre>

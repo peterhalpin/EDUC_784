@@ -1,3 +1,8 @@
+---
+output:
+  word_document: default
+  html_document: default
+---
 # Interactions {#chapter-6}
 
 
@@ -40,13 +45,13 @@ There is well-documented gender gap in STEM achievement by the end of high schoo
 
 ```{r}
 load("NELS.RData")
-t.test(achmat12 ~ gender, var.equal = T, data = NELS)
+attach(NELS)
+t.test(achmat12 ~ gender, var.equal = T)
 ```
 
 In this chapter, our first goal is to use linear regression to better understand this gender gap in Math Achievement. To do this, we consider a third variable, Reading Achievement. The plot below shows the relationship between Math Achievement and Reading Achievement estimated just for males (Blue), and the same relationship estimated just for females (Black). 
 
 ```{r math-reading-1, fig.cap = 'Math Achievement, Reading Achievement, and Gender.', fig.align = 'center'}
-attach(NELS)
 females <- gender == "Female"
 males <- gender == "Male"
 
@@ -63,7 +68,6 @@ abline(mod2, col = "#4B9CD3", lwd = 2)
 
 # Add a legend
 legend(x = "topleft", legend = levels(gender), pch = c(1, 2), col = c(1, "#4B9CD3"))
-detach(NELS)
 ```
 
 **Take a minute to think about what this plot is telling us about the relationships among Math Achievement, Reading Achievement, and Gender.**
@@ -97,7 +101,6 @@ Note that this model does **not** include an interaction between the two predict
 
 
 ```{r math-reading-2, fig.cap = 'Math Achievement, Reading Achievement, and Gender (No Interaction).', fig.align = 'center'}
-attach(NELS)
 mod3 <- lm(achmat12 ~ achrdg12 + gender, data = NELS)
 a_females <- coef(mod3)[1]
 b_females <- coef(mod3)[2]
@@ -115,7 +118,6 @@ abline(a_males, b_males, col = "#4B9CD3", lwd = 2)
 
 # Add a legend
 legend(x = "topleft", legend = levels(gender), pch = c(1, 2), col = c(1, "#4B9CD3"))
-detach(NELS)
 ```
 
 In order to interpret our multiple regression model, we can take the same two-step approach we used to interpret categorical predictors in Chapter \@ref(chapter-5). First, we plug in values for the categorical predictor, then we use the resulting equations solve for quantities of interest. In particular, 
@@ -182,7 +184,6 @@ For the NELS example, this regression model is depicted in Figure \@ref(fig:math
 
 
 ```{r math-reading-3, fig.cap = 'Math Achievement, Reading Achievement, and Gender (No Interaction).', fig.align = 'center'}
-attach(NELS)
 # Interaction via hard coding
 genderXachrdg12 <- (as.numeric(gender) - 1) * achrdg12
 mod4 <- lm(achmat12 ~ achrdg12 + gender + genderXachrdg12)
@@ -203,7 +204,6 @@ abline(a_males, b_males, col = "#4B9CD3", lwd = 2)
 
 # Add a legend
 legend(x = "topleft", legend = levels(gender), pch = c(1, 2), col = c(1, "#4B9CD3"))
-detach(NELS)
 ```
 
 To see what the model says about the data, let's work through the model equations using our two-step procedure. As usual, we first plug in values for the categorical predictor, then we use the resulting equations solve for quantities of interest (the simple trends and the gender gap). 
@@ -293,7 +293,6 @@ Since $D_1 = 0$ when $X_1 = \bar X_1$, the regression coefficient on Gender ($b_
 In the example, this approach yields the following model parameters: 
 
 ```{r}
-attach(NELS)
 # compute the deviation scores for reading
 reading_dev <- achrdg12 - mean(achrdg12, na.rm = T) 
 
@@ -302,7 +301,6 @@ genderXreading_dev <- (as.numeric(gender) - 1) * reading_dev
 
 mod5 <- lm(achmat12 ~ reading_dev + gender + genderXreading_dev)
 coef(mod5)
-detach(NELS)
 ```
 
 The regression coefficient for Gender is now pretty close to what it was in the original model without the interaction, but the interpretation is different. Notice that the intercept in the multiple regression model with Reading centered has changed compared to the previous model in which Reading was not centered. However, the centering did not affect the regression coefficient for Reading or the interaction. 
@@ -481,7 +479,6 @@ There is another reason for centering continuous predictors when there is an int
 To see how this works, let's take a look at Figure \@ref(fig:centering). The left hand panel shows that SES and its interaction with reading are highly correlated. This is because (a) SES and Reading are themselves positively correlated, and (b)  both SES and Reading take on strictly positive values. As mentioned, the interaction term will be positively correlated with both predictors whenever these two conditions hold. (The figure just shows the correlation between SES and the interaction, but the same situation holds for Reading.) 
 
 ```{r centering, fig.cap = 'Correlation Between SES and SES X Reading, With and Without Centering', fig.align = 'center'}
-attach(NELS)
 # Correlation without centering
 r <- cor(ses, achrdg12*ses)
 
@@ -497,7 +494,6 @@ r <- cor(ses_dev, achrdg12_dev*ses_dev)
 # Plot
 title <- paste0("correlation = ", round(r, 3))
 plot(ses_dev, achrdg12_dev*ses_dev, col = "#4B9CD3", main = title, xlab = "SES Centered", ylab = "SES Centered X Reading Centered")
-detach(NELS)
 ```
 
 We can see in the right hand panel of Figure \@ref(fig:centering) how centering the two predictors "breaks" the linear relationship between SES and its interaction with Reading. After centering, the relationship between the SES and its interaction is now highly non-linear, and the correlation is approximately zero. Again, the same is true for the relationship between Reading and the interaction, but the figure only shows the situation for SES. The upshot of all this is that centering reduces multicollinearity between the "main effects" of the predictors and their interaction. 
@@ -507,7 +503,6 @@ The two sets of output below show the regression of Math on Reading, SES, and th
 We can see that  SES is a significant predictor in the centered model but not in the "un-centered" model. This has to do with changing the interpretation of the coefficient (it now represents the relationship between Math and SES for students with average Reading), and also reflects the fact that SES is no longer so highly correlated with the interaction term after centering. 
 
 ```{r}
-attach(NELS)
 # Without centering
 mod7 <- lm(achmat12 ~ achrdg12*ses)
 summary(mod7)
@@ -517,7 +512,6 @@ summary(mod7)
 # With centering
 mod8 <- lm(achmat12 ~ achrdg12_dev*ses_dev)
 summary(mod8)
-detach(NELS)
 ```
 
 **To check your understanding of the output above, please provide an interpretation of all four regression coefficients in the centered model. Your interpretations should make reference to the situation where one or both predictors are equal to zero (see Equation \@ref(eq:simple) above) and should also mentioned the interpretation of the value of zero for the centered variables**
@@ -767,7 +761,6 @@ This section collects the questions asked in this chapter. We will discuss these
 **Section \@ref(example-6)**
 
 ```{r example-1, fig.cap = 'Math Achievement, Reading Achievement, and Gender.', fig.align = 'center'}
-attach(NELS)
 mod1 <- lm(achmat12[females] ~ achrdg12[females])
 mod2 <- lm(achmat12[males] ~ achrdg12[males])
 
@@ -781,7 +774,6 @@ abline(mod2, col = "#4B9CD3", lwd = 2)
 
 # Add a legend
 legend(x = "topleft", legend = levels(gender), pch = c(1, 2), col = c(1, "#4B9CD3"))
-detach(NELS)
 ```
 
 Take a minute to think about what this plot is telling us about the relationships among Math Achievement, Reading Achievement, and Gender.
@@ -805,17 +797,14 @@ coef(mod3)
 * Interaction model: The regression coefficients for the example data are shown below. Please use these numbers to provide an interpretation of the interaction between Gender and Reading. (Don't worry about statistical significance, just focus on the meaning of the coefficients.) 
 
 ```{r}
-attach(NELS)
 genderXachrdg12 <- (as.numeric(gender) - 1) * achrdg12
 mod4 <- lm(achmat12 ~ achrdg12 + gender + genderXachrdg12)
 coef(mod4)
-detach(NELS)
 ```
 
 * Interaction model with centered continuous predictor: Please write down your interpretation of the intercept and the regression coefficient for Gender in the regression output below. 
 
 ```{r}
-attach(NELS)
 # compute the deviation scores for reading
 reading_dev <- achrdg12 - mean(achrdg12, na.rm = T) 
 
@@ -824,7 +813,6 @@ genderXreading_dev <- (as.numeric(gender) - 1) * reading_dev
 
 mod5 <- lm(achmat12 ~ reading_dev + gender + genderXreading_dev)
 coef(mod5)
-detach(NELS)
 ```
 
 **Section \@ref(inference-for-interactions-6)**
@@ -854,10 +842,8 @@ contrast(gap, method = "pairwise")
 * To check your understanding of centering with two continuous predictors, please provide an interpretation of all four regression coefficients in the centered model (below). Your interpretations should make reference to the situation where one or both predictors are equal to zero (see Equation \@ref(eq:simple)) and should also mentioned the interpretation of the value of zero for the centered variables.
  
 ```{r}
-attach(NELS)
 mod8 <- lm(achmat12 ~ achrdg12_dev*ses_dev)
 summary(mod8)
-detach(NELS)
 ```
 
 **Section \@ref(two-categorical-predictors-6)**
@@ -917,8 +903,6 @@ The following code illustrates the three approaches and shows that they all prod
 * `gender` is dichotomous encoding of gender with values `Male` and `Female` (it is not a binary variable, but a factor, as discussed in Section \@ref(exercises-5)). 
 
 ```{r}
-load("NELS.RData")
-attach(NELS)
 # Interaction via hard coding
 genderXreading <- (as.numeric(gender) - 1) * achrdg12
 mod1 <- lm(achmat12 ~ achrdg12 + gender + genderXreading)
@@ -1111,3 +1095,8 @@ In an ANOVA context, the R-squared statistics are called  eta-squared. They are 
 ```{r}
 effectsize::eta_squared(mod, partial = F)
 ```
+
+```{r, echo = F}
+detach(NELS)
+```
+

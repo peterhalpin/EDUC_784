@@ -542,9 +542,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 &amp; \neq a + bX + \epsilon. \\
 \end{align}\]</span></p>
 <p>What this means in practice is that addressing positive skew using a log transform can sometimes create more problems than it solves. Figure <a href="9.4-relationship-9.html#fig:nonlinear1">9.13</a> illustrates this situation. In the top row, we see the residual versus fitted plot and qqplot of residuals for the regression of Math Achievement (<code>c1rmscal</code>) on SES (<code>wksesl</code>). The linear regression resulted in a clear violation of normality (positive skew). In the bottom row, we see same output after log transforming Math Achievement – it fixed the issue with normality, but also made the nonlinearity more apparent.</p>
-<pre><code>## The following object is masked from NELS:
-## 
-##     gender</code></pre>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:nonlinear1"></span>
 <img src="_main_files/figure-html/nonlinear1-1.png" alt="Nonlinear vs non-normality when log transforming Y" width="672" />
 <p class="caption">
