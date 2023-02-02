@@ -350,3 +350,10 @@ multiple-11
 predicted-probabilities
 interactions
 workbook-8
+additional-details
+comparison-4
+what-is-the-missing-ingredient
+other-interpretations
+relation-with-beta-weights
+some-math
+how-centering-works-6

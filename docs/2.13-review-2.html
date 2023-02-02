@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>2.13 Review | EDUC 784: Regression</title>
   <meta name="description" content="Course notes for EDUC 784" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
 
   <meta property="og:title" content="2.13 Review | EDUC 784: Regression" />
   <meta property="og:type" content="book" />
-  
   <meta property="og:image" content="/images/image1.png" />
   <meta property="og:description" content="Course notes for EDUC 784" />
   <meta name="github-repo" content="peterhalpin/EDUC_784" />
@@ -24,17 +23,16 @@
 <meta name="author" content="Peter Halpin" />
 
 
-<meta name="date" content="2023-01-25" />
+<meta name="date" content="2023-02-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
-  <link rel="shortcut icon" href="null" type="image/x-icon" />
+  
 <link rel="prev" href="2.12-exercises-2.html"/>
 <link rel="next" href="3-chapter-3.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
-<script src="libs/jquery-3.5.1/jquery-3.5.1.min.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,8 +49,9 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -93,7 +92,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -106,7 +105,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -505,37 +504,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="review-2" class="section level2" number="2.13">
-<h2><span class="header-section-number">2.13</span> Review</h2>
+<div id="review-2" class="section level2 hasAnchor" number="2.13">
+<h2><span class="header-section-number">2.13</span> Review<a href="2.13-review-2.html#review-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>This is a short recap of stuff you need to know in this class. If this recap is too short, you’ll need to go back to your notes from a previous Stats class.</p>
-<div id="summation-notation" class="section level3" number="2.13.1">
-<h3><span class="header-section-number">2.13.1</span> Summation notation</h3>
+<div id="summation-notation" class="section level3 hasAnchor" number="2.13.1">
+<h3><span class="header-section-number">2.13.1</span> Summation notation<a href="2.13-review-2.html#summation-notation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Summation notation uses the symbol <span class="math inline">\(\Sigma\)</span> to stand in for summation. For example, instead of writing</p>
 <p><span class="math display">\[ X_1 + X_2 + X_3 + .... + X_N\]</span></p>
 <p>to represent the sum of the values of the variable <span class="math inline">\(X\)</span> in a sample of size <span class="math inline">\(N\)</span>, we can instead write:</p>
 <p><span class="math display">\[ \sum_{i=1}^{N} X_i. \]</span></p>
-<p>The symbol <span class="math inline">\(\Sigma\)</span> stands in for the summation. The symbol is called “Sigma” – it’s the capital Greek letter corresponding to the Latin letter “S.” The value <span class="math inline">\(i\)</span> is called the index, and <span class="math inline">\(1\)</span> is the starting value of the index and <span class="math inline">\(N\)</span> is the end value of the index. You can choose whatever start and end values you want to sum over. So, if you just want the second and third index, write</p>
+<p>The symbol <span class="math inline">\(\Sigma\)</span> stands in for the summation. The symbol is called “Sigma” – it’s the capital Greek letter corresponding to the Latin letter “S”. The value <span class="math inline">\(i\)</span> is called the index, and <span class="math inline">\(1\)</span> is the starting value of the index and <span class="math inline">\(N\)</span> is the end value of the index. You can choose whatever start and end values you want to sum over. So, if you just want the second and third index, write</p>
 <p><span class="math display">\[ \sum_{i=2}^{3} X_i = X_2 + X_3. \]</span></p>
 <p>When it is clear from context, we can omit the start and end values:</p>
 <p><span class="math display">\[ \sum_i X_i. \]</span>
 If you write it this way, the reader will assume that you mean to sum over all the values of <span class="math inline">\(X\)</span> in a sample.</p>
 <p>Summation notation is useful because it is more compact, and we use it a lot to write the formulas for statistics.</p>
-<p>There are also rules for manipulating summation notation that are useful for proving results in statistics. I’ll often write things like “you can prove this result using the rules of summation algebra.” You don’t need to do mathematical proofs or derivations in this class, but you might like to (if not, you can skip to the next section). The rules are just things you learned in grade school, but they are presented using a new notation. Surprisingly, they can prove a lot about statistics.</p>
+<p>There are also rules for manipulating summation notation that are useful for proving results in statistics. I’ll often write things like “you can prove this result using the rules of summation algebra”. You don’t need to do mathematical proofs or derivations in this class, but you might like to (if not, you can skip to the next section). The rules are just things you learned in grade school, but they are presented using a new notation. Surprisingly, they can prove a lot about statistics.</p>
 <p>Here are the rules:</p>
 <ul>
 <li><strong>Rule 1: Sum of a constant (multiplication)</strong>. Summing the values of a constant <span class="math inline">\(c\)</span> is the same as multiplication. In this notation, we know the value <span class="math inline">\(c\)</span> is a constant because it doesn’t have an index. Specifically, if you sum a constant <span class="math inline">\(N\)</span> times, this just <span class="math inline">\(N\)</span> times the constant:</li>
 </ul>
 <p><span class="math display">\[\begin{align}
 \sum_{i = 1}^{N} c &amp;= c + c +  .... \\
-&amp; = Nc 
+&amp; = Nc
 \end{align}\]</span></p>
 <ul>
 <li><strong>Rule 2: Distributive property</strong> The sum of a variable <span class="math inline">\(X_i\)</span> times a constant <span class="math inline">\(c\)</span> is equal to the constant times the sum.</li>
 </ul>
 <p><span class="math display">\[\begin{align}
 \sum_{i = 1}^{N} c X_i &amp;= cX_1 + cX_2 + .... \\
-&amp; = c(X_1 + X_2 + ....) \\ 
-&amp; = c \sum_{i = 1}^{N} X_i 
+&amp; = c(X_1 + X_2 + ....) \\
+&amp; = c \sum_{i = 1}^{N} X_i
 \end{align}\]</span></p>
 <ul>
 <li><strong>Rule 3: Associative property </strong> It doesn’t matter what order we do addition in:</li>
@@ -543,11 +542,11 @@ If you write it this way, the reader will assume that you mean to sum over all t
 <p><span class="math display">\[\begin{align}
 \sum_{i = 1}^{N} (X_i + Y_i) &amp;= (X_1 + Y_1) + (X_2 + Y_2) + .... \\
 &amp; = (X_1 + X_2 + ....) + (Y_1 + Y_2 + ....) \\
-&amp; = \sum_{i = 1}^{N} X_i  + \sum_{i = 1}^{N} Y_i 
+&amp; = \sum_{i = 1}^{N} X_i  + \sum_{i = 1}^{N} Y_i
 \end{align}\]</span></p>
 </div>
-<div id="sample-statistics" class="section level3" number="2.13.2">
-<h3><span class="header-section-number">2.13.2</span> Sample statistics</h3>
+<div id="sample-statistics" class="section level3 hasAnchor" number="2.13.2">
+<h3><span class="header-section-number">2.13.2</span> Sample statistics<a href="2.13-review-2.html#sample-statistics" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The main sample statistics we use in the class are the mean, standard deviation, variance, covariance and correlation. These are the building blocks for regression. Their symbols and formulas are presented below (using the shorthand summation notation). If you don’t remember their interpretation, you will need to go back to your Stat 1 notes.</p>
 <ul>
 <li>The mean</li>
@@ -576,8 +575,8 @@ If you write it this way, the reader will assume that you mean to sum over all t
 <span id="cb60-4"><a href="2.13-review-2.html#cb60-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cov</span>(achmat08, achrdg08)</span>
 <span id="cb60-5"><a href="2.13-review-2.html#cb60-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(achmat08, achrdg08)</span></code></pre></div>
 </div>
-<div id="bias-and-precision" class="section level3" number="2.13.3">
-<h3><span class="header-section-number">2.13.3</span> Bias and precision</h3>
+<div id="bias-and-precision" class="section level3 hasAnchor" number="2.13.3">
+<h3><span class="header-section-number">2.13.3</span> Bias and precision<a href="2.13-review-2.html#bias-and-precision" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>A sampling distribution is the distribution of a statistic that would arise if you did the following:</p>
 <ol style="list-style-type: decimal">
 <li>Take a sample of size <span class="math inline">\(N\)</span> from a population of interest.</li>
@@ -606,15 +605,15 @@ Figure 2.6: Bias and precision
 </div>
 <p>In general, we want to work with unbiased, precise statistics when making inferences from a sample back to the population from which it was drawn.</p>
 </div>
-<div id="t-tests-1" class="section level3" number="2.13.4">
-<h3><span class="header-section-number">2.13.4</span> t-tests</h3>
+<div id="t-tests-1" class="section level3 hasAnchor" number="2.13.4">
+<h3><span class="header-section-number">2.13.4</span> t-tests<a href="2.13-review-2.html#t-tests-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The t-test is used to make an inference about the value of an unknown population parameter using an unbiased sample statistic that is normally distributed (i.e., that has a normally distributed sampling distribution). This includes sample means and regression coefficients.</p>
 <p>The test compares the value of the statistic to the null-hypothesized value of the population parameter. The null hypothesis is usually that the population parameter is equal to zero.</p>
 <p>The general formula for a t-test is</p>
 <p><span class="math display">\[ t = \frac{\text{sample value} - \text{null-hypothesized value}}{\text{standard error}} \]</span>
 For a specific example, see section <a href="2.7-inference-for-slope-2.html#inference-for-slope-2">2.7</a>.</p>
-<p>When we conduct a t-test, the basic rationale is, “if the sample statistic is close the null hypothesized value of the parameter, then <span class="math inline">\(t\)</span> should be close to zero.” The null hypothesis usually translates into “no effect,” so if <span class="math inline">\(t\)</span> is close to zero, it means there was no effect. If <span class="math inline">\(t\)</span> is far away from zero, it means there was an effect.</p>
-<p>The problem in all of this is to give precise meaning to the terms “close” and “far.” We can start to answer this question by looking at the t-distribution. The t-distribution tells what are the typical values of the t-test, if the null hypothesis is true – i.e., what values should <span class="math inline">\(t\)</span> have if the population parameter is equal to the null hypothesized value? Some examples of the t-distriubtion are shown below.</p>
+<p>When we conduct a t-test, the basic rationale is, “if the sample statistic is close the null hypothesized value of the parameter, then <span class="math inline">\(t\)</span> should be close to zero”. The null hypothesis usually translates into “no effect”, so if <span class="math inline">\(t\)</span> is close to zero, it means there was no effect. If <span class="math inline">\(t\)</span> is far away from zero, it means there was an effect.</p>
+<p>The problem in all of this is to give precise meaning to the terms “close” and “far”. We can start to answer this question by looking at the t-distribution. The t-distribution tells what are the typical values of the t-test, if the null hypothesis is true – i.e., what values should <span class="math inline">\(t\)</span> have if the population parameter is equal to the null hypothesized value? Some examples of the t-distriubtion are shown below.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:t"></span>
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Student_t_pdf.svg/1920px-Student_t_pdf.svg.png" alt="t distribution (source: https://en.wikipedia.org/wiki/Student%27s_t-distribution)" width="60%" />
 <p class="caption">
@@ -631,10 +630,10 @@ Figure 2.7: t distribution (source: <a href="https://en.wikipedia.org/wiki/Stude
 </ol>
 <p>If <span class="math inline">\(p &lt; \alpha\)</span> (i.e., if the likelihood of <span class="math inline">\(t\)</span> being a false positive is less than we have required), we reject the null hypothesis. Otherwise we retain the null hypothesis and conclude there was no effect.</p>
 <p>There is a lot more to say here, but all of this is what Stat 1 was for. Usually we set <span class="math inline">\(\alpha = .05\)</span> and that is that.</p>
-<p>One last thing before moving on: unlike the normal distribution, the t-distribution has a single parameter called its “degrees of freedom,” which is denoted as <span class="math inline">\(\nu\)</span> in the figure above. The degrees of freedom are always an increasing function of the sample size, so that larger samples lead to more degrees of freedom. When the degrees of freedom approach <span class="math inline">\(\infty\)</span>, the t distribution approaches a normal distribution. When the degrees of freedom are small, the t distribution has wider tails than the normal distribution. This is important when doing statistical tests, because we are interested in values in the tails of the distribution – i.e., the large / unlikely values of <span class="math inline">\(t\)</span>.</p>
+<p>One last thing before moving on: unlike the normal distribution, the t-distribution has a single parameter called its “degrees of freedom”, which is denoted as <span class="math inline">\(\nu\)</span> in the figure above. The degrees of freedom are always an increasing function of the sample size, so that larger samples lead to more degrees of freedom. When the degrees of freedom approach <span class="math inline">\(\infty\)</span>, the t distribution approaches a normal distribution. When the degrees of freedom are small, the t distribution has wider tails than the normal distribution. This is important when doing statistical tests, because we are interested in values in the tails of the distribution – i.e., the large / unlikely values of <span class="math inline">\(t\)</span>.</p>
 </div>
-<div id="confidence-intervals-1" class="section level3" number="2.13.5">
-<h3><span class="header-section-number">2.13.5</span> Confidence intervals</h3>
+<div id="confidence-intervals-1" class="section level3 hasAnchor" number="2.13.5">
+<h3><span class="header-section-number">2.13.5</span> Confidence intervals<a href="2.13-review-2.html#confidence-intervals-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>A confidence interval use the same equation as a t-test, except we solve for the population parameter rather than the value of <span class="math inline">\(t\)</span>. Whereas a t-test lets us make a guess about specific value of the parameter of interest (i.e., the null-hypothesized value), a confidence interval gives us a range of values that we can be sure include the parameter of interest, with some degree of “confidence.”</p>
 <p>Confidence intervals have the general formula:</p>
 <p><span class="math display">\[\text{Interval} = \text{sample value} \pm t \times {\text{standard error}}. \]</span>
@@ -643,8 +642,8 @@ We get the value of <span class="math inline">\(t\)</span> from the t distributi
 <p>In summary, if the confidence interval includes zero, we retain the null hypothesis. If the confidence interval does not include zero, we reject the null hypothesis.</p>
 <p>For an example of a confidence in R, see section <a href="2.7-inference-for-slope-2.html#inference-for-slope-2">2.7</a>.</p>
 </div>
-<div id="f-tests-1" class="section level3" number="2.13.6">
-<h3><span class="header-section-number">2.13.6</span> F-tests</h3>
+<div id="f-tests-1" class="section level3 hasAnchor" number="2.13.6">
+<h3><span class="header-section-number">2.13.6</span> F-tests<a href="2.13-review-2.html#f-tests-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>As noted above, the t-test is used when the sample statistic we are testing is normally distributed, usually a mean or a regression coefficient. The F-test is used when the sample statistic we are testing is a variance – actually, the ratio of two independent variances.</p>
 <p>A variance can be defined in general as a sum-of-squares divided by its degrees of freedom. For example, the sample variance shown above is just a sum-of-squared deviations from the sample mean (i.e., a sum of squares) divided by <span class="math inline">\(N - 1\)</span> (the degrees of freedom). The generic formula for an F-test is:</p>
 <p><span class="math display">\[F = \frac{SS_A / df_A}{SS_B / df_B}, \]</span></p>
@@ -657,11 +656,11 @@ We get the value of <span class="math inline">\(t\)</span> from the t distributi
 Figure 2.8: F distribution (source: <a href="https://en.wikipedia.org/wiki/F-distribution" class="uri">https://en.wikipedia.org/wiki/F-distribution</a>)
 </p>
 </div>
-<p>The F distribution has two parameters, which are referred to as the “degrees of freedom in the numerator” and the “degrees of freedom in the denominator” (in the figure, d1 and d2, respectively). We always give the numerator df first and then the denominator. So we might say the green line in the figure is “an F distribution on 10 and 1 degrees of freedom,” which means the df in the numerator is 10 and the df in the denominator is 1.</p>
+<p>The F distribution has two parameters, which are referred to as the “degrees of freedom in the numerator” and the “degrees of freedom in the denominator” (in the figure, d1 and d2, respectively). We always give the numerator df first and then the denominator. So we might say the green line in the figure is “an F distribution on 10 and 1 degrees of freedom”, which means the df in the numerator is 10 and the df in the denominator is 1.</p>
 <p>We use an F-test the same way we use a t-test – we set a significance level and use this level to determine how large the F-test needs to be for us to reject the null hypothesis. The main difference is that F is non-negative, because it is the ratio of squared numbers. For this same reason, we don’t usually compute confidence intervals for statistics with an F distribution.</p>
 </div>
-<div id="apa-reporting" class="section level3" number="2.13.7">
-<h3><span class="header-section-number">2.13.7</span> APA reporting</h3>
+<div id="apa-reporting" class="section level3 hasAnchor" number="2.13.7">
+<h3><span class="header-section-number">2.13.7</span> APA reporting<a href="2.13-review-2.html#apa-reporting" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>It is important that you can write up the results of an analysis in a way that other people will understand. For this reason, there are conventions about how to report statistical results. In this class, we will mainly use Table and Figures (formatted in R) rather than inline text. But sometimes the latter is unavoidalbe, so you should know how to do it.</p>
 <p>The examples below illustrate APA conventions for reporting some of the statistics we have talked about in this review. Everything about the formatting is important (spacing, italics, number of decimal places, whether or not to use a leading zero before a decimal, etc). More details are available <a href="https://psych.uw.edu/storage/writing_center/stats.pdf">here</a>.
 You don’t need to use APA (unless you are in psych or educ), but you should be familiar with some kind of conventions for reporting statistical results in your academic writing.</p>
@@ -731,7 +730,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

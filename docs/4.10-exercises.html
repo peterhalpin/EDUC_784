@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>4.10 Exercises | EDUC 784: Regression</title>
   <meta name="description" content="Course notes for EDUC 784" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
 
   <meta property="og:title" content="4.10 Exercises | EDUC 784: Regression" />
   <meta property="og:type" content="book" />
-  
   <meta property="og:image" content="/images/image1.png" />
   <meta property="og:description" content="Course notes for EDUC 784" />
   <meta name="github-repo" content="peterhalpin/EDUC_784" />
@@ -24,17 +23,16 @@
 <meta name="author" content="Peter Halpin" />
 
 
-<meta name="date" content="2023-01-25" />
+<meta name="date" content="2023-02-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
-  <link rel="shortcut icon" href="null" type="image/x-icon" />
+  
 <link rel="prev" href="4.9-workbook.html"/>
 <link rel="next" href="5-chapter-5.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
-<script src="libs/jquery-3.5.1/jquery-3.5.1.min.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,8 +49,9 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -93,7 +92,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -106,7 +105,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -505,11 +504,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="exercises" class="section level2" number="4.10">
-<h2><span class="header-section-number">4.10</span> Exercises</h2>
+<div id="exercises" class="section level2 hasAnchor" number="4.10">
+<h2><span class="header-section-number">4.10</span> Exercises<a href="4.10-exercises.html#exercises" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>These notes provide an overview of regression with two variables in R. They also walk through some details of the ECLS data.</p>
-<div id="the-ecls250-data" class="section level3" number="4.10.1">
-<h3><span class="header-section-number">4.10.1</span> The ECLS250 data</h3>
+<div id="the-ecls250-data" class="section level3 hasAnchor" number="4.10.1">
+<h3><span class="header-section-number">4.10.1</span> The ECLS250 data<a href="4.10-exercises.html#the-ecls250-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Let’s start by getting our example data loaded into R. We will be using a subset of <span class="math inline">\(N = 250\)</span> cases from the Early Childhood Longitudinal Survey 1998-1998 (ECLS-K). Here is a description of the data from the official NCES codebook (page 1-1 of <a href="https://nces.ed.gov/ecls/data/ECLSK_K8_Manual_part1.pdf" class="uri">https://nces.ed.gov/ecls/data/ECLSK_K8_Manual_part1.pdf</a>):</p>
 <p><em>The ECLS-K focuses on children’s early school experiences beginning with kindergarten and ending with eighth grade. It is a multisource, multimethod study that includes interviews with parents, the collection of data from principals and teachers, and student records abstracts, as well as direct child assessments. In the eighth-grade data collection, a student paper-and-pencil questionnaire was added. The ECLS-K was developed under the sponsorship of the U.S. Department of Education, Institute of Education Sciences, National Center for Education Statistics (NCES). Westat conducted this study with assistance provided by Educational Testing Service (ETS) in Princeton, New Jersey.</em></p>
 <p><em>The ECLS-K followed a nationally representative cohort of children from kindergarten into middle school. The base-year data were collected in the fall and spring of the 1998–99 school year when the sampled children were in kindergarten. A total of 21,260 kindergartners throughout the nation participated</em>.</p>
@@ -615,8 +614,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="4.10-exercises.html#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(wksesl, c1rmscal)</span></code></pre></div>
 <pre><code>## [1] 0.44</code></pre>
 </div>
-<div id="multiple-regression-with-lm" class="section level3" number="4.10.2">
-<h3><span class="header-section-number">4.10.2</span> Multiple regression with <code>lm</code></h3>
+<div id="multiple-regression-with-lm" class="section level3 hasAnchor" number="4.10.2">
+<h3><span class="header-section-number">4.10.2</span> Multiple regression with <code>lm</code><a href="4.10-exercises.html#multiple-regression-with-lm" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>First, let’s tale a look at the “zero-order” relationship among the three variables. This type of descriptive, two-way analysis is a good way to get familiar with your data before getting into multiple regression. We can see that the variables are all moderately correlated and their relationships appear reasonably linear.</p>
 <div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="4.10-exercises.html#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Use cbind to create a data.frame with just the 3 variables we want to examine</span></span>
 <span id="cb83-2"><a href="4.10-exercises.html#cb83-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">cbind</span>(c1rmscal, wksesl, t1learn)</span>
@@ -634,7 +633,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>e.g, <code>Y ~ Χ1 + Χ2</code></li>
 </ul>
-<p>For our example, let’s consider the regression of math achievement on SES and Approaches to Learning. We’ll save our result as <code>mod1</code> which is short for “model one.”</p>
+<p>For our example, let’s consider the regression of math achievement on SES and Approaches to Learning. We’ll save our result as <code>mod1</code> which is short for “model one”.</p>
 <div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="4.10-exercises.html#cb86-1" aria-hidden="true" tabindex="-1"></a>mod1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(c1rmscal <span class="sc">~</span> wksesl <span class="sc">+</span> t1learn)</span>
 <span id="cb86-2"><a href="4.10-exercises.html#cb86-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod1)</span></code></pre></div>
 <pre><code>## 
@@ -659,8 +658,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>We can see from the output that regression coefficient for <code>t1learn</code> is about 3.5. This means that, as the predictor increases by a single unit, children’s predicted math scores increase by 3.5 points (out of 80), after controlling for the SES. You should be able to provide a similar interpretation of the regression coefficient for <code>wksesl</code>. Together, both predictors accounted for about 27% of the variation in students’ math scores. In education, this would be considered a pretty large effect”.</p>
 <p>We will talk about the statistical tests later on. For now let’s consider the relationship with simple regression.</p>
 </div>
-<div id="relations-between-simple-and-multiple-regression" class="section level3" number="4.10.3">
-<h3><span class="header-section-number">4.10.3</span> Relations between simple and multiple regression</h3>
+<div id="relations-between-simple-and-multiple-regression" class="section level3 hasAnchor" number="4.10.3">
+<h3><span class="header-section-number">4.10.3</span> Relations between simple and multiple regression<a href="4.10-exercises.html#relations-between-simple-and-multiple-regression" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>First let’s consider how the two simple regression compare to the multiple regression with two variables. Here is the relevant output:</p>
 <div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="4.10-exercises.html#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare the multiple regression output to the simple regressions</span></span>
 <span id="cb88-2"><a href="4.10-exercises.html#cb88-2" aria-hidden="true" tabindex="-1"></a>mod2a <span class="ot">&lt;-</span> <span class="fu">lm</span>(c1rmscal <span class="sc">~</span> wksesl)</span>
@@ -709,8 +708,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>The R-squared terms in the two simple models (.194 + .158 = .352) add up to more than the R-squared in the two-predictor model (.274). Again, take a moment to think about why before reading on. (Hint: see Section <a href="4.6-rsquared-4.html#rsquared-4">4.6</a>.)</p></li>
 </ul>
 </div>
-<div id="inference-with-2-predictors" class="section level3" number="4.10.4">
-<h3><span class="header-section-number">4.10.4</span> Inference with 2 predictors</h3>
+<div id="inference-with-2-predictors" class="section level3 hasAnchor" number="4.10.4">
+<h3><span class="header-section-number">4.10.4</span> Inference with 2 predictors<a href="4.10-exercises.html#inference-with-2-predictors" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Let’s move on now to consider the statistical tests and confidence intervals provided with the <code>lm</code> summary output.</p>
 <p>For regression with more than one predictor, both the t-tests and F-tests have a very similar construction and interpretation as with simple regression. The main differences are (see Sections <a href="4.7-inference-for-slopes-4.html#inference-for-slopes-4">4.7</a> and <a href="4.8-inference-for-rsquared-4.html#inference-for-rsquared-4">4.8</a>):</p>
 <ul>
@@ -740,8 +739,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Multiple R-squared:  0.273,  Adjusted R-squared:  0.267 
 ## F-statistic: 46.3 on 2 and 247 DF,  p-value: &lt;2e-16</code></pre>
 </div>
-<div id="apa-reporting-of-results" class="section level3" number="4.10.5">
-<h3><span class="header-section-number">4.10.5</span> APA reporting of results</h3>
+<div id="apa-reporting-of-results" class="section level3 hasAnchor" number="4.10.5">
+<h3><span class="header-section-number">4.10.5</span> APA reporting of results<a href="4.10-exercises.html#apa-reporting-of-results" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>In terms of writing out the results, there are many formatting styles used in social sciences. As one example, the convention for APA style is to write the coefficient, followed by the test statistic (with its degrees of freedom) and then the p-value. It is also conventional to use 2 decimal places, unless more decimal places are needed to address rounding error.</p>
 <p>Here is how we might write out the results of our regression using APA format:</p>
 <ul>
@@ -821,7 +820,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

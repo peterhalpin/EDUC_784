@@ -1,15 +1,11 @@
 # Interactions {#chapter-6}
 
-<!-- NOTES
-Intro: Clarify that the focus is two way interactions, main effects, what is not  
-6.4: Change "inference for interactions" to "following up interactions", move material on moderation to 6.4?  
---> 
 
 ```{r, echo = F}
 # Clean up check
- detach(NELS)
+# detach(NELS)
 rm(list = ls())
-
+options(digits = 4)
 button <-  "position: relative; 
             top: -25px; 
             left: 85%;   
@@ -21,7 +17,7 @@ button <-  "position: relative;
 ```
 
 
-In statistics, the term *interaction* means that the relationship between two variables depends on a third variable. In the context of regression, we are usually interested in the situation where the relationship between the outcome $Y$ and a predictor $X_1$ depends on the value of another predictor $X_2$. This situation is also referred to as *moderation* or sometimes as *effect heterogeneity*.<!-- two way, main effects, etc". -->
+In statistics, the term *interaction* means that the relationship between two variables depends on a third variable. In the context of regression, we are usually interested in the situation where the relationship between the outcome $Y$ and a predictor $X_1$ depends on the value of another predictor $X_2$. This situation is also referred to as *moderation* or sometimes as *effect heterogeneity*.
 
 Interactions are a "big picture" idea with a lot conceptual power, especially when describing topics related to social inequality or "gaps". Some examples of interactions are:  
 
@@ -30,7 +26,10 @@ Interactions are a "big picture" idea with a lot conceptual power, especially wh
 * The effect of COVID-19 school shutdowns on academic achievement depends on SES. (https://www.mckinsey.com/industries/education/our-insights/covid-19-and-student-learning-in-the-united-states-the-hurt-could-last-a-lifetime) 
 
 
-This chapter starts by considering what happens when both categorical and continuous predictors are used in a model, and uses this combination of predictors as a way of digging into the math behind interactions. Later sections will consider what happens when we have interactions between two continuous predictors, or two categorical predictors. 
+This chapter starts by considering what happens when both categorical and continuous predictors are used together in a model, and uses this combination of predictors as a way of digging into the math behind interactions. Later sections will consider what happens when we have interactions between two continuous predictors, or two categorical predictors. 
+
+
+In this chapter we are exclusively interested in interactions between two predictors at a time -- *two-way interactions*. It is possible to consider "higher-order" interactions as well, e.g., interactions among three predictors or *three-way interactions*. But we will just focus on the simplest case. Sometimes we will also use the terminology *main effect* to describe the relationship between each individual predictor and the outcome variable, as distinct from the interactions among the predictors. Up to now, we have be working only with main effects. 
 
 ## An example from NELS{#example-6}
 
@@ -151,7 +150,7 @@ To see this we can compare the output of the t-test in Section \@ref(example-6) 
 
 However, the regression coefficient on gender in the multiple regression model above is equal to $3.50$. Why the difference? 
 
-We actually saw the answer to this question in Chapter \@ref(chapter-4) when we discussed the interpretation of regression coefficients in multiple regression. In the multiple regression model, the regression coefficient on Gender controls for ("partials out") the relationship between Reading Achievement and Gender. So, the multiple regression coefficient represents the relationship between Gender and Math, after controlling for Reading, whereas the group mean difference does not control for Reading. These two values will be the same only if the two predictors are uncorrelated. 
+Remember that in the multiple regression model, the regression coefficient on Gender controls for the relationship between Reading Achievement and Gender. So, the multiple regression coefficient represents the relationship between Gender and Math, after controlling for Reading. The t-test doesnt control for Reading.  
 
 In order to emphasize the distinction between "raw" group means computed from the data and the predicted group means obtained from a multiple regression model, the latter are referred to as *marginal means*, or sometimes as *adjusted means* or *least squares means*. 
 
@@ -170,7 +169,7 @@ In a regression model with one continuous and one binary predictor (and no inter
 codefolder::bookdown(init = "hide", style = button)
 ```
 
-In the previous section, the multiple regression model led us to conclude that the gender gap in Math Achievement is constant and equal to 3.50 (i.e., the regression coefficient on Gender). As we saw in Figure \@ref(fig:math-reading-2), this implies that the simple trends are parallel. However, these conclusions do not agree with what we saw in Section \@ref(example-6) when we fitted two simple regression model to the NELS data. As we discuss in this section, what is missing from the multiple regression model in Equation \@ref(eq:yhat-6a) is the interaction between Gender and Reading. 
+In the previous section, the multiple regression model led us to conclude that the gender gap in Math Achievement is constant and equal to 3.50 (i.e., the regression coefficient on Gender). As we saw in Figure \@ref(fig:math-reading-2), this implies that the simple trends are parallel. However, these conclusions do not agree with what we saw in Section \@ref(example-6) when we fitted two simple regression model to the NELS data. In this section, we discuss what is missing from the multiple regression model in Equation \@ref(eq:yhat-6a): the interaction between Gender and Reading. 
 
 Mathematically, an interaction is just the product between two variables. Equation \@ref(eq:yhat-6b) shows how to include this product in our multiple regression model -- we just take the product of the two predictors and add it into the model as a third predictor:
 
@@ -269,7 +268,7 @@ Some potential answers are hidden below, but don't peak until you have tried it 
 
 ### Centering the continuous predictor
 
-You may have noticed that coefficient on gender was wildly different in regression models with and without the interaction. In the model without the interaction (Section \@ref(binary-continuous-6)) the coefficient on Gender was 3.50, and in the model with the interaction (above), it was 13.40. So in one model, the "effect" of being Male was a 3.5 percentage points gain on a Math exam, but in the other model, it was a 13.40 percentage point gain. Why this huge difference in the effect of Gender? 
+You may have noticed that the coefficient on gender was wildly different in regression models with and without the interaction. In the model without the interaction (Section \@ref(binary-continuous-6)) the coefficient on Gender was 3.50, and in the model with the interaction (above), it was 13.40. So in one model, the "effect" of being Male was a 3.5 percentage points gain on a Math exam, but in the other model, it was a 13.40 percentage point gain. Why this huge difference in the effect of Gender? 
 
 The answer can be seen in the equation for the gender gap. In the model **without the interaction**, the gender gap was constant and equal to the regression coefficient on Gender (denoted as $b_2$ in the model): 
 
@@ -319,7 +318,7 @@ different intercepts *and different slopes*.
 * The difference in slopes is equal to the regression coefficient on the interaction term.
 * The difference (“gap”) between the regression lines changes as a linear function of the continuous predictor, and this change is again equal to the regression coefficient on the interaction term.
 * These last two points are equivalent ways of stating the central idea behind a (two-way) interaction: the relationship between two variables changes as a function of a third variable.
-* When interpreting an interaction, the research chooses which pair of variables will be the "focal relationship" and which variable will be the moderator.  
+* When interpreting an interaction, the researcher chooses which pair of variables will be the "focal relationship" and which variable will be the moderator.  
 * Centering the continuous predictor can be helpful for ensuring that the regression coefficient on the binary variable remains interpretable in the presense of an interaction. 
 
 ## Inference for interactions {#inference-for-interactions-6}
@@ -336,9 +335,9 @@ For example, in the standard summary output for the regression model, we now hav
 summary(mod5)
 ```
 
-Note that the output above doesn't answer all of the questions we might have about a  interaction. For example, since we are interested in the gender gap in Math Achievement, we might want to know for which students the gap is statistically significant. In particular, does the gap disappear for students with higher levels of Reading Achievement? We can answer this type of question by testing marginal effects, which are a generalization of the marginal means discussed in section \@ref(binary-continuous-6). In general, marginal effects are useful when the goal is to "follow up" a significant interaction in which the focal predictor is categorical, as opposed to continuous. 
+Note that the output above doesn't answer all of the questions we might have about a  interaction. For example, since we are interested in the gender gap in Math Achievement, we might want to know for which students the gap is statistically significant. In particular, does the gap disappear for students with higher levels of Reading Achievement? We can answer this type of question by testing marginal effects, which are a generalization of the marginal means discussed in section \@ref(binary-continuous-6). **In general, marginal effects are useful when the goal is to "follow up" a significant interaction in which the focal predictor is categorical (the moderator cab be categorical or continuous).** 
 
-Note that marginal effects are only of interest when the interaction is significant -- if the interaction is not significant, then we know that the relationship between the focal variables doesn't depend on the moderator, so there is nothing left to say about that dependence. 
+Note that marginal effects are only of interest when the interaction is significant -- if the interaction is not significant, then we know that the relationship between the focal variables doesn't depend on the moderator. 
 
 ### Marginal effects
 
@@ -360,9 +359,7 @@ Then we having the following marginal effects that can be computed:
 
  \[ MERV =  \{\Delta(X^*_1), \Delta(X^\dagger_1), \dots \} \] 
  
- MEM and AVE are equivalent for linear regression models (but we will visit the distinction again when we get to logistic regression).  We already have used this approach when we centered the continuous predictor in order to interpret the regression coefficient on Gender -- this coefficient was the MEM / AVE.  
- 
- In this section we focus on MERV, which is the more widely used approach. One usual choice for the "interesting values" is the quartiles of $X_1$, which is reported below. Another popular choice is the mean of $X_1$ plus or minus 1 SD. 
+ MEM and AVE are equivalent for linear regression models (but we will visit the distinction again when we get to logistic regression).  In this section we focus on MERV, which is the more widely used approach. One usual choice for the "interesting values" is the quartiles of $X_1$, which is reported below. Another popular choice is the mean of $X_1$ plus or minus 1 SD. 
 
 ```{r}
 # Install the package if you haven't already done so
@@ -388,7 +385,7 @@ Note that the computations going on "under the hood" for testing marginal means 
 
 ### Simple trends
 
-Another way to follow-up a significant interaction is to examine the statistical significance of the simple trends. As discussed in Section \@ref(binary-continuous-interaction-6), the simple trends aren't very meaningful in the context of our example, so this section is just about illustrating the technique, not about adding anything to our discussion of the gender gap in STEM. In general, testing simple trends can be useful when following-up a significant interaction in which the focal predictor is continuous, rather than categorical. 
+Another way to follow-up a significant interaction is to examine the statistical significance of the simple trends. As discussed in Section \@ref(binary-continuous-interaction-6), the simple trends aren't very meaningful in the context of our example, so this section is just about illustrating the technique, not about adding anything to our discussion of the gender gap in STEM. **In general, testing simple trends can be useful when following-up a significant interaction in which the focal predictor is continuous (the moderator can be categorical or continuous).** 
 
 We can understand simple trends in reference to what they add to the standard `summary` output for the `lm` function (reported at the beginning of Section \@ref(inference-for-interactions-6)): 
 
@@ -396,7 +393,7 @@ We can understand simple trends in reference to what they add to the standard `s
 
 * The regression coefficient on the interaction term tells whether the simple trends differ for the two groups (e.g., whether the simple trend for males differs from the simple trend for females). 
 
-Note that what is missing, or implicit, in this output is a test of the simple trend for the group designated as one on the binary predictor. Although we can compute the simple trend for this group from the output, the output does not provide a statistical test of whether this trend is different from zero. So, in our example, the `summary` output doesn't tell us whether the simple trend for males is different from zero. 
+Note that what is missing, or implicit, in this output is a test of the simple trend for males (the group designated as one on the binary predictor). The standard regression output does not provide a statistical test of whether this trend is different from zero. To get this, we need to test the simple trends. 
 
 The test of the simple trends for the example are reported below. Again, these aren't super interesting in the context of our example, but you should **check your understanding of simple trends by writing down an interpretation of the output below**. 
 
@@ -427,9 +424,9 @@ When making inferences about an interaction:
 
 * Often we can get all of the information we need from the regression coefficient on the interaction term, and its associated test of significance. If the interaction isn't significant, we stop there. But if the interaction is significant, we may want to report more information about how the focal relationship depends on the moderator. 
 
-* When the focal predictor is categorical it can be interesting to "follow up" a significant interaction by taking a closer look at the statistical significance of the marginal means (e.g, how the gender gap in Math changes as a function of Reading)
+* When the focal predictor is categorical it can be interesting to "follow-up" a significant interaction by taking a closer look at the statistical significance of the marginal means (e.g, how the gender gap in Math changes as a function of Reading)
 
-* When the focal predictor is continuous, it can be interesting to "follow up" a significant interaction by taking a closer look at the statistical significance of the simple trends / simple slopes. 
+* When the focal predictor is continuous, it can be interesting to "follow-up" a significant interaction by taking a closer look at the statistical significance of the simple trends / simple slopes. 
 
 ## Two continuous predictors {#two-continuous-predictors-6}
 
@@ -463,7 +460,7 @@ visreg(mod7, xvar = "achrdg12", by = "ses", overlay = TRUE, band = F)
 
 ### Centering the predictors
 
-Centering the predictors facilitates the interpretation of their regression coefficients in the presences of an interaction, just as it did Section \@ref(binary-continuous-interaction-6). In particular, the coefficients $b_1$ and $b_2$ in the regression model
+Centering the predictors facilitates the interpretation of their regression coefficients in the presence of an interaction, just as it did Section \@ref(binary-continuous-interaction-6). In particular, the coefficients $b_1$ and $b_2$ in the regression model
 
 \[ \widehat Y = b_0 + b_1X_1 + b_2X_2 + b_3 (X_1 \times X_2) \]
 
@@ -479,9 +476,9 @@ For example, $b_1$ is the relationship between $Y$ and $X_1$, when $X_2$ is equa
 
 In general, setting a variable to the value of zero may not be meaningful. But, when setting a *centered* variable (i.e., a deviation score) to zero, this is equivalent to setting the original variable to its mean. So, if the variables in Equation \@ref(eq:simple) were centered, we could say that $b_1$ is the relationship between $Y$ and $X_1$, when $X_2$ is equal to its mean. Again, this is just the same trick as Section \@ref(binary-continuous-interaction-6), but this time both predictors are continuous and both are centered. 
 
-There is another reason for centering continuous predictors when there is an interaction in the model, and this has to do with reducing the correlation among the predictors and their interaction. In general, the interaction term will be positively correlated with both predictors if (a) the predictors themselves are positively correlated and (b) the predictors take on strictly positive (or strictly negative) values. Highly correlated predictors lead to redundant information the model, so we generally want to avoid this situation (this is technically called *multicollinearity* and we discuss it in more detail in a later Chapter). Centering can "break" the correlation between the preditors and the interaction, thereby making the predictors less redundant with their interaction. 
+There is another reason for centering continuous predictors when there is an interaction in the model, and this has to do with reducing the correlation among the predictors and their interaction. In general, the interaction term will be positively correlated with both predictors if (a) the predictors themselves are positively correlated and (b) the predictors take on strictly positive (or strictly negative) values. Highly correlated predictors lead to redundant information the model, so we generally want to avoid this situation (this is technically called *multicollinearity* and we discuss it in more detail in a  Chapter \@ref(chapter-7)). Centering can "break" the correlation between the preditors and the interaction, thereby making the predictors less redundant with their interaction. 
 
-To see how this works, let's take a look at Figure \@ref(fig:centering). The left hand panel shows that SES and its interaction with reading are highly correlated. This is because (a) SES and Reading are themselves positively correlated, and (b)  both SES and Reading take on strictly positive values. As mentioned, the interaction term will be positively correlated with both predictors whenever these two conditions hold. (The figure just shows the correlation with SES, but the same situation holds for Reading.) 
+To see how this works, let's take a look at Figure \@ref(fig:centering). The left hand panel shows that SES and its interaction with reading are highly correlated. This is because (a) SES and Reading are themselves positively correlated, and (b)  both SES and Reading take on strictly positive values. As mentioned, the interaction term will be positively correlated with both predictors whenever these two conditions hold. (The figure just shows the correlation between SES and the interaction, but the same situation holds for Reading.) 
 
 ```{r centering, fig.cap = 'Correlation Between SES and SES X Reading, With and Without Centering', fig.align = 'center'}
 attach(NELS)
@@ -503,7 +500,7 @@ plot(ses_dev, achrdg12_dev*ses_dev, col = "#4B9CD3", main = title, xlab = "SES C
 detach(NELS)
 ```
 
-We can see in the right hand panel of Figure \@ref(fig:centering) how centering the two predictors "breaks" the linear relationship between SES and its interaction with Reading. After centering, the relationship between the SES and its interaction is now highly non-linear, and the correlation is approximately zero. Again, the same is true for the relationship between Reading and the interaction, but the figure only shows the situation for SES. The upshot of all this is that the predictors will be less redundant with the interaction term -- i.e., centering reduces multicollinearity between the "main effects" of the predictors and their interaction. 
+We can see in the right hand panel of Figure \@ref(fig:centering) how centering the two predictors "breaks" the linear relationship between SES and its interaction with Reading. After centering, the relationship between the SES and its interaction is now highly non-linear, and the correlation is approximately zero. Again, the same is true for the relationship between Reading and the interaction, but the figure only shows the situation for SES. The upshot of all this is that centering reduces multicollinearity between the "main effects" of the predictors and their interaction. 
 
 The two sets of output below show the regression of Math on Reading, SES, and their interaction. The first ouptut does not center the predictors, but the second output does (the `_dev` notation denotes the centered predictors).  
 
@@ -525,21 +522,21 @@ detach(NELS)
 
 **To check your understanding of the output above, please provide an interpretation of all four regression coefficients in the centered model. Your interpretations should make reference to the situation where one or both predictors are equal to zero (see Equation \@ref(eq:simple) above) and should also mentioned the interpretation of the value of zero for the centered variables**
 
-Note that coefficient on interaction, the R-squared, and their associated tests do not change value. This is discussed in more detail in the extra material at the end of this section, but it is sufficient to note that centering only affects the interpretation of the main effects (and the intercept, of course). 
+Note that the interaction, the R-squared, and their associated tests do not change value. This is discussed in more detail in the extra material at the end of this section, but it is sufficient to note that centering only affects the interpretation of the main effects (and the intercept, of course). 
 
 ### Simple trends
 
 Centering helps us interpret the "main effects" of the individual predictors, but we haven't yet discussed how to interpret the interaction term when both predictors are continuous. In the case with a binary predictor, we had two different regression lines. So what do we get when both predictors are continuous? 
 
-The usual way to answer this question is an extension of the MERV approach to marginal effects, discussed in Section \@ref(inference-for-interactions-6). The basic idea is to present the relationship between the two focal variables, for a selection of values of the moderator. The is shown in Figure \@ref(readingXses) above. As with MERV, the choice of values of the moderator is up to the researcher, but usual choices are 
+The usual way to answer this question is an extension of the MERV approach to marginal effects, discussed in Section \@ref(inference-for-interactions-6). The basic idea is to present the relationship between the two focal variables, for a selection of values of the moderator. This idea is shown in Figure \@ref(fig:readingXses) above. As with MERV, the choice of values of the moderator is up to the researcher, but some usual choices are 
 
 * The quartiles of the moderator (i.e., the five number summary) or subset thereof
 * M $\pm$ 1 SD of the moderator
 * A selection of percentiles (`visreg` uses the 10th, 50th, and 90th)
 
-These are all doing very similar things, so the choosing among them isn't very important. 
+These are all doing very similar things, so choosing among them isn't very important. 
 
-Although the interaction between Reading and SES was not significant in our example model, let's break down the interaction with SES as the moderator just to see how this approach works. The first part output below shows the simple slopes for the three values of SES shown in Figure \@ref(fig:readingXses) (i.e., the 10th, 50th, and 90th deciles). We can see that the simple slopes are all different from zero (and the non-significant interaction tells us that they are not different from one-another). 
+Although the interaction between Reading and SES was not significant in our example model, let's break down the interaction using SES as the moderator, just to see how this approach works. The first part output below shows the simple slopes for the three values of SES shown in Figure \@ref(fig:readingXses) (i.e., the 10th, 50th, and 90th deciles). We can see that the simple slopes are all different from zero (and the non-significant interaction tells us that they are not different from one-another). 
 
 ```{r}
 # Break down interaction with SES as moderator
@@ -551,11 +548,11 @@ test(simple_slopes)
 
 When regressing an outcome on two continuous predictors and their interaction, the overall interpretation of the model is same as discussed in Section \@ref(binary-continuous-interaction-6), but: 
 
-* It is useful to center both predictors, both to facilitate the interpretation of the regression coefficients on the predictors (the "main effects"), and to reduce the correlation between the predictors and their interaction (i.e., reduce multicollinearity). 
+* It is useful to center both predictors, to facilitate the interpretation of the main effects (i.e., regression coefficients on the individual predictors), and to reduce the correlation between the predictors and their interaction (i.e., reduce multicollinearity). 
 
 * When following up a significant interaction, the usual approach is to report the simple trends between the focal variables for a selection of values of the moderator (e.g., a selection of percentiles). The example illustrated how to do this even though the interaction was not significant, but you shouldn't follow up a non-significant interaction. 
 
-### Extra: How centering works* 
+### Extra: How centering works* {#how-centering-works-6}
 
 It might seem that centering both predictors to improve the chances of getting significant main effects is a dubious practice. However, using the centered or the un-centered variables doesn’t really make a difference in term of what predictors are in the model are. The follow algebra show why, using $D = X - \bar X$ for the centered variables: 
 
@@ -583,14 +580,16 @@ In experimental (as opposed to observational) settings, interactions among categ
 For this topic we will switch over to the ECLS data and examine how SES and Pre-K attendance interact to predict Math Achievement at the beginning of Kindergarten. The variables we will examine are
 
 * Math Achievement at the beginning of K (`c1rmscal`). This is the number of correct questions on a test with approximately 70 items. 
+
 * Whether the child attended Pre-K (`p1center`). This is a binary variable that indicates pre-K attendance. 
+
 * SES, coded as quintiles (`wksesq5`). We will denote this variable as SES, but keep in mind it is quintiles in this example (e.g., SES = 1 are the respondents with SES between the minimum and the first quintile). 
 
 Coding SES as quintiles allows us to consider it as a categorical predictor with 5 levels. This is convenient for our illustration of interactions between categorical predictors. It is also a widely-used practice in policy research, because SES often has non-linear relationships with outcome variables of interest, and these relationships can be more easily captured by treating SES as a categorical variable. 
 
-In this analysis, our focus will be whether the "effect" of Pre-K on Math Achievement depends on (i.e., is moderated by) the child's SES. The research question is relevant to the discussion we previously had concerning the paper shared by Andrea (http://dx.doi.org/10.1037/dev0001301). Also note that I will use the term "effect" in this section to simplify language, but we know that Pre-K attendance was not randomly assigned in ECLS, so please keep in mind that this terminology is not strictly correct. 
+In this analysis, our focus will be whether the "effect" of Pre-K on Math Achievement depends on (i.e., is moderated by) the child's SES. Please note that I will use the term "effect" in this section to simplify language, but we know that Pre-K attendance was not randomly assigned in ECLS, so please keep in mind that this terminology is not strictly correct. 
 
-The relationship among the three variables is summarized in the `visreg` plot below. We can see that the effect of Pre-K on Math Achievement appears to differ as a function of SES -- i.e., there is an interaction between Pre-K and SES. Our goal in this section is to produce an analysis corresponding to the Figure. As in Section \@ref(binary-continuous-6), we will start with a model that does not include the interaction as a first step. **Before moving on, please take a moment to write down how Figure \@ref(fig:prek-by-ses) would be different if there was no interaction between Pre-K and SES**. 
+The relationship among the three variables is summarized in the `visreg` plot below. We can see that the effect of Pre-K on Math Achievement appears to differ as a function of SES -- i.e., it appears that there is an interaction between Pre-K and SES. Our goal in this section is to produce an analysis corresponding to the figure. **Before moving on, please take a moment to write down your interpretation of  Figure \@ref(fig:prek-by-ses), focussing on how it illustrates an interaction between SES and Pre-K. Additionally, please describe how the figure would be different if there was no interaction between Pre-K and SES**. 
 
 ```{r, prek-by-ses, fig.cap = 'Math Achievement, Pre-K Attendence, and SES', fig.align = 'center'}
 load("ECLS2577.Rdata")
@@ -605,16 +604,20 @@ visreg::visreg(mod, xvar = "wksesq5", by = "prek",
 
 ### The "no-interaction" model 
 
-In order to represent a model with multiple categorical predictors, it is helpful to change our notation from the usual $Y$ and $X$ to something like the following:
+As in Section \@ref(binary-continuous-6), we will start with a model that includes only the main effects of SES and Pre-K. Seeing where that model "goes wrong" is a good way of understanding the interaction between the two predictors. 
+
+In order to represent a model with multiple categorical predictors, it is helpful to change our notation from the usual $Y$ and $X$ to the more informative "variable names" notation:
 
 \begin{align}
 \widehat Y = b_0 + b_1 PREK + b_2SES_2 + b_3SES_3 + b_4 SES_4 + b_5 SES_5. 
 (\#eq:prek-ses1)
 \end{align}
 
-In in this notation, the predictor variables are indicators (binary dummies) that use the variable names rather than $X_1$, $X_2$, etc. The variable $PREK$ is just the indicator for Pre-K attendance, as defined above. The variable $SES_j$ is an indicator for the j-th quintile of SES. Note that both variables use reference-group coding, as discussed in Chapter \@ref(chapter-5). 
+In this notation, the predictor variables are indicators (binary dummies) that use the variable names rather than $X_1$, $X_2$, etc. The variable $PREK$ is just the indicator for Pre-K attendance, as defined above. The variable $SES_j$ is an indicator for the j-th quintile of SES. 
 
-We can interpret the coefficients in this model in using the same two-step procedure described in Chapter \@ref(chapter-5). Since there are many terms in the model, things are going to start getting messy quickly, so brace yourself for some long equations (but simple math!). 
+Note that both predictors use reference-group coding, as discussed in Chapter \@ref(chapter-5). For $PREK$, reference-group coding is implied because it is a binary indicator. For $SES$, reference-group coding is accomplished by omitting the dummy for the first quintile (i.e., the first quintile is the reference group). 
+
+We can interpret the coefficients in this model using the same two-step procedure described in Chapter \@ref(chapter-5). Since there are many terms in the model, things are going to start getting messy quickly, so brace yourself for some long equations (but simple math!). 
 
 The main points about the interpretation of this model are as follows. 
 
@@ -651,9 +654,9 @@ The main points about the interpretation of this model are as follows.
 \widehat Y(PREK = 1, SES = 2) - \widehat Y(PREK = 0, SES = 2) = b_1  
 \end{align}
 
-This equation says that the difference between the red and blue lines in the second column of Figure \@ref(fig:prek-by-ses) is the same as the difference in the first column -- i.e., they both equal $b_1$. Similar calculations show that Equation \@ref(eq:prek-ses1) implies that the effect of Pre-K is constant over all levels of SES. Hence, we need to change the model (i.e., add an interaction)
+This equation says that the difference between the red and blue lines in the second column of Figure \@ref(fig:prek-by-ses) is the same as the difference in the first column -- i.e., they both equal $b_1$. This is what it means for there to be no interaction between two categorical predictors. 
 
-Before moving on, note that similar calculations can be used to show that (a) the "effect" of being in any SES quintile, as compared to the first quintile, is just the regression coefficient on the indicator variable for that quintile, and (b) this effect is constant over levels of Pre-K attendance. 
+If you want more practice with this, you can show that Equation \@ref(eq:prek-ses1) implies the effect of Pre-K is constant over all levels of SES. Additionally, you can use the 2-step approach to show that the effect of SES is constant over levels of Pre-K attendance. 
 
 ### Adding the interaction(s)
 
@@ -668,13 +671,13 @@ We know that interactions are just products (multiplication) of predictor variab
 (\#eq:prek-ses2)
 \end{align}
 
-As you can see, our model is getting pretty full! Even though we are only considering two distinct "conceptual" variables, we have 9 coefficients in our regression model. 
+As you can see, we have a lot of predictors in this model! Although we are only considering two distinct "conceptual" predictors, we have 9 coefficients in our regression model (+ the intercept). 
 
 Again, there are a few main things to notice: 
 
 * The interpretation of the intercept has not changed. It still corresponds to the blue line in the first column of Figure \@ref(fig:prek-by-ses). 
 
-* The regression coefficient on $PREK$ is still the "effect" of Pre-K for students in the first SES quintile. It corresponds to the difference betwee the red and blue line in the first column of Figure \@ref(fig:prek-by-ses). This is because all the $SES_j$ variables are equal to zero for students in the first SES quintile, and so all of the interaction terms in Equation \@ref(eq:prek-ses2) are equal to zero for this case. 
+* The regression coefficient on $PREK$ is still the "effect" of Pre-K for students in the first SES quintile. It corresponds to the difference between the red and blue line in the first column of Figure \@ref(fig:prek-by-ses). This is because all the $SES_j$ variables are equal to zero for students in the first SES quintile, and so all of the interaction terms in Equation \@ref(eq:prek-ses2) are equal to zero for this case. 
 
 * The effect of Pre-K is no longer constant over levels of SES. Again we will focus on SES = 2, but the same approach works for the other levels of SES.
 
@@ -732,13 +735,25 @@ summary(mod)
 ```
 
 ### The ANOVA approach 
-The output in the previous section is detailed enough that it is not usually required to follow-up a significant interactions among categorical predictors using marginal effects. However, the summary output omits some information we might be interested in. For example, what is the overall effect of Pre-K (i.e., is there a significant difference in Math Achievement for students who attended Pre-K or not, regardless of their level of SES)? Similarly, what is the overall effect of SES, regardless of Pre-K attendance. We can answer these questions by asking how much variance was explained by each predictor, rather than only examining the effect of the individual dummy variable. This is the ANOVA approach we discussed last semester, but now applied to two categorical predictors. `
+The output in the previous section is detailed enough that it is not usually required to follow-up a significant interaction among categorical predictors using marginal effects. However, the summary output omits some information we might be interested in. For example, the Pre-K indicator in the above output tells us the effect of Pre-K, but only for children in the first SES quintile. We might also want to know, what is the main effect of Pre-K across levels of SES -- i.e., is there a significant difference in Math Achievement for students who attended Pre-K or not, after controlling for their level of SES? Similarly, what is the main effect of SES? 
 
-The ANOVA table for our example is below. Note that it leads to slightly different conclusions than the regression output above. We will discuss the discrepancies between the ANOVA and regression output in class, so please **write down your interpretation of the ANOVA table below and be prepared to share you thoughts in class.**
+I'll note that some people think it is bad practice to interpret main effects in the presence of an interaction. The main effects tell us what the effect of a predictor is "on average" or overall, after controlling for the other predictor(s). But the interaction tells us that this effect depends on the other predictor(s). Some people think that you shouldn't report the overall effect when the "real message" of the interaction is that the effect changes as a function of the other predictors. I think that main effects and interactions aren't really incompatible concepts, but you should be careful with them. 
+
+Anyway, we can summarize the main effects of Pre-K and SES, well as their interaction, by asking how much variance they explain, after controlling for the other predictor(s). This is the ANOVA approach we discussed last semester, but now applied to two categorical predictors. 
+
+The ANOVA table for our example is below, and it is followed by the R-squared coefficients for each predictor, which are called "eta-squared" ($\eta^2$) in the context of ANOVA. These R-squared (eta-squared) coefficients tell us what proportion of the variance in Math Achievement is attributable to the main effects and the interaction. Note that the R-squared (eta-squared) values do not add up to the total R-squared reported in the `lm` output above. This is because any variance that is jointly explained by the predictors is not attributed to individual predictors (e.g., the area "B" in the Venn diagram in Figure \@ref(fig:venn-diagram) is not counted towards the effects for the individual predictors). In the next chapter, we will address how to build models so that we can systematically divide up the variance explained by the predictors. 
+
 
 ```{r}
+# ANOVA Table
 anova(mod)
+
+# R-squared (eta-squared)
+#install.packages("effectsize")
+effectsize::eta_squared(mod, partial = F)
 ```
+
+**Please write down your interpretation of the ANOVA table and R-squared (eta-squared) coefficients and be prepared to share you thoughts in class.** Note that the ANOVA output leads to different conclusions than the regression output above. We will discuss the discrepancies between the ANOVA and regression output in class. 
 
 ## Workbook 
 
@@ -847,7 +862,7 @@ detach(NELS)
 
 **Section \@ref(two-categorical-predictors-6)**
 
-* Please take a moment to write down how the Figure below would be different if there was no interaction between Pre-K and SES. 
+* Please take a moment to write down your interpretation of the  figure below, focussing on how it illustrates an interaction between SES and Pre-K. Additionally, please describe how the figure would be different if there was no interaction between Pre-K and SES.
 
 ```{r}
 load("ECLS2577.Rdata")
@@ -867,10 +882,13 @@ visreg::visreg(mod, xvar = "wksesq5", by = "prek",
 summary(mod)
 ```
 
-* Write down your interpretation of the ANOVA table below and be prepared to share you thoughts in class.
+* Please write down your interpretation of the ANOVA table and R-squared (eta-squared) coefficients reported below, and be prepared to share you thoughts in class.** .
+
+**Please write down your interpretation of the ANOVA table and R-squared (eta-squared) coefficients and be prepared to share you thoughts in class.** 
 
 ```{r}
 anova(mod)
+effectsize::eta_squared(mod, partial = F)
 ```
 
 ## Exercises {#exercises-6}
@@ -892,11 +910,11 @@ There are multiple ways of implementing interactions in R.
   
   * We can use R's formula notation for factorial interactions (`*`)
   
-The following three models illustrate how to use these three approaches, and show that they all producing the same output. In general, the `*` syntax is the easiest to use, so we will stick with that one going forward. The variables used in the example are from the NELS data: 
+The following code illustrates the three approaches and shows that they all producing the same output. In general, the `*` syntax is the easiest to use, so we will stick with that one going forward. The variables used in the example are from the NELS data: 
 
 * `achmat12` is Mat Achievement (percent correct on a mat test) in grade 12. 
 * `achrdg12` is Reading Achievement (percent correct on a reading test) in grade 12. 
-* `gender` is dichotomous encoding of gender with values `Male` and `Female` (it is not a binary variable, but a factor, as discussed in Section \@ref(exercies-5)). 
+* `gender` is dichotomous encoding of gender with values `Male` and `Female` (it is not a binary variable, but a factor, as discussed in Section \@ref(exercises-5)). 
 
 ```{r}
 load("NELS.RData")
@@ -919,7 +937,9 @@ Before moving on, check your interpretation of the coefficients in the models. I
 
 ### Centering continuous predictors
 
-As noted in Section \@ref(binary-continuous-interaction-6), the regression coefficient on Gender is not very interpretable when the interaction in the model, because it now corresponds to the gender gap when `achrdg12 = 0`. We can fix this issue by re-scaling `achrdg12` so that zero has a meaningful value. One easy and widely used approach is to center `achrdg12` at its mean, or, stated otherwise, to work with the deviation scores `achrdg12` instead of the "raw" score. Let's see what happens
+As noted in Section \@ref(binary-continuous-interaction-6), the regression coefficient on Gender is not very interpretable when there is an interaction in the model. In the above output, the coefficient on gender tells us the gender gap in Math Achievement when `achrdg12 = 0`. We can fix this issue by re-scaling `achrdg12` so that zero has a meaningful value. One easy and widely used approach is to center `achrdg12` at its mean. When a variable is centered at its mean it is called a deviation score.
+
+Let's see what happens when we use deviation scores `achrdg12` instead of the "raw" score
 
 ```{r}
 # Re-run the model with reading centered at its mean
@@ -928,9 +948,9 @@ mod4 <- lm(achmat12 ~ achrdg12_dev*gender)
 summary(mod4)
 ```
   
-Note that the intercept and the regression coefficient on gender have changed values compared to `mod3`. What is the interpretation of these coefficients in the new model?
+Note that the intercept and the regression coefficient on gender have changed values compared to `mod3`. What is the interpretation of these coefficients in the new model? Also note the coefficient on reading and the interaction don't change. We showed why in section \@ref(how-centering-works-6).
 
-Next, let's plot our model with the interaction term.  One advantage of having everything in a single model is that we can level-up our plotting! The following code uses the `visreg` package.  Note that the error bands in the plot are produced using the standard errors from `emmeans`, which is discussed in the following section. We 
+Next, let's plot our model with the interaction term.  One advantage of having everything in a single model is that we can level-up our plotting! The following code uses the `visreg` package.  Note that the error bands in the plot are produced using the standard errors from `emmeans`, which is discussed in the following section. If you want to know more about how visreg works, type `help(visreg)`.
 
 ```{r}
 # Install the package if you haven't already done so
@@ -942,7 +962,6 @@ library(visreg)
 visreg(mod3, xvar = "achrdg12", by = "gender", overlay = TRUE)
 ```
 
-If you want to know more about how visreg works, type `help(visreg)`. 
 
 ### Breaking down a significant interaction
 
@@ -956,13 +975,13 @@ Usually, the researcher will chose one or the other approach, whichever is best 
 
 ### Marginal effects
 
-Let's break the interaction by asking how the relationship between Math and Gender (i.e., the gender achievement gap in Math) changes as a function of Reading. This can be done using `emmeans` package, and the main function in that pacakge  is also called `emmeans`.
+Let's breakdown the interaction by asking how the relationship between Math and Gender (i.e., the gender achievement gap in Math) changes as a function of Reading. This can be done using `emmeans` package, and the main function in that pacakge  is also called `emmeans`.
 
 The three main arguments for the `emmeans` function: 
 
   * `object` -- the output of `lm`. This is the first argument
-  * `specs` -- which factors(s) in the model we want the means of
-  * `by` -- which other predictors break the means down by
+  * `specs` -- which factors in the model we want the means of (i.e., the focal predictor)
+  * `by` -- which predictor(s) we want to use to breakdown the means (i.e., the moderator(s))
   
 We can use `emmeans` to compute the marginal effect at the mean (MEM) as follows: 
 
@@ -981,9 +1000,9 @@ summary(gap)
 contrast(gap, method = "pairwise")
 ```
 
-In the above output, we only get one Gender difference in Math, and that is computed for the value of `achrdg12 = 55.60188`, which is the mean values of Reading. As noted, this is called the marginal effect at the mean (MEM).   
+In the above output, we only get one Gender difference in Math, and that is computed for the value of `achrdg12 = 55.6`, which is the mean value of Reading. As noted, this is called the marginal effect at the mean (MEM).   
 
-It is often more helpful to report Gender difference for multiple different values of `achrdg12`, which is called MERV (marginal effects at representative values). While there are many ways to do chose the values, one convenient approach approach is to use the quartiles of `achrdg12`. This is accomplished using the `cov.reduce` argument of `emmeans` as follows.   
+It is often more helpful to report Gender difference for multiple different values of `achrdg12`, which is called MERV (marginal effects at representative values). While there are many ways to  chose the representative values, one convenient approach approach is to use the quartiles of `achrdg12`. This is accomplished using the `cov.reduce` argument of `emmeans` as follows.   
 
 ```{r}
 # Use the the covarate reduce option of emmeans with the quantile function
@@ -1015,7 +1034,7 @@ summary(simple_slopes)
 test(simple_slopes)
 ```
 
-The foregoing analysis tells us how the relationship between reading and math changes as a function of gender, and, in particular, whether the simple slopes are significant for males and females. 
+The foregoing analysis tells us how the relationship between reading and math changes as a function of gender, and, in particular, whether the simple slopes are significant for males and females. Recall that the simple slope for females (the group coded zero) is just the regression coefficient on reading in the original `lm` output. So, the only new thing this output gives us is the simple slope for males. 
 
 ### Two continuous predictors
 
@@ -1039,14 +1058,15 @@ summary(mod2)
 
 We can see that, while both models account for the same overall variation in math, SES is significant in the centered model. This has to do both with changing the interpretation of the coefficient (it now represents the relationship between math and reading for students with average reading) and because it is no longer so highly redundant with the interaction term. 
 
-Although the interaction with SES was not significant in either model, let's break down the interaction with `emtrends` just to see how it works. This time we will use the `at` option rather than the 'cov.reduce` option to break down the interaction.  
+Although the interaction with SES was not significant in either model, let's break down the interaction with `emtrends` just to see how it works. This time we will use the `at` option rather than the 'cov.reduce` option to break down the interaction. The values 9, 19, and 28 are the 10th, 50th, and 90th percentile of SES, which is the same approach `visreg` uses (You can overwrite the defaults using the `breaks` argument -- see `help(visreg)`).
 
 ```{r}
 # Break down interaction with SES as moderator
 simple_slopes <-emtrends(mod5, var = "achrdg12", specs = "ses", at = list(ses = c(9, 19, 28)))
 summary(simple_slopes)
 ```
-Finally let's summarize our (non significant) interaction with a nice plot.  Note that `visreg`  breaks the interaction down at the 10th, 50th, and 90th percentile of the `by` variable. You can overwrite the defaults using the `breaks` argument (see `help(visreg)`). 
+
+Finally let's summarize our (non significant) interaction with a nice plot. 
 
 ```{r}
 # Note that band = F removes the confidence intervals
@@ -1084,4 +1104,10 @@ In order to summarize the model as an ANOVA table, we can use the following code
 
 ```{r}
 anova(mod)
+```
+
+In an ANOVA context, the R-squared statistics are called  eta-squared. They are reported below: 
+
+```{r}
+effectsize::eta_squared(mod, partial = F)
 ```

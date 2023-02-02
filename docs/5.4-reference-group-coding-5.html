@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>5.4 Reference-group coding | EDUC 784: Regression</title>
   <meta name="description" content="Course notes for EDUC 784" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
 
   <meta property="og:title" content="5.4 Reference-group coding | EDUC 784: Regression" />
   <meta property="og:type" content="book" />
-  
   <meta property="og:image" content="/images/image1.png" />
   <meta property="og:description" content="Course notes for EDUC 784" />
   <meta name="github-repo" content="peterhalpin/EDUC_784" />
@@ -24,17 +23,16 @@
 <meta name="author" content="Peter Halpin" />
 
 
-<meta name="date" content="2023-01-25" />
+<meta name="date" content="2023-02-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
-  <link rel="shortcut icon" href="null" type="image/x-icon" />
+  
 <link rel="prev" href="5.3-binary-predictors-5.html"/>
 <link rel="next" href="5.5-deviation-coding-5.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
-<script src="libs/jquery-3.5.1/jquery-3.5.1.min.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,8 +49,9 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -93,7 +92,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -106,7 +105,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -505,8 +504,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="reference-group-coding-5" class="section level2" number="5.4">
-<h2><span class="header-section-number">5.4</span> Reference-group coding</h2>
+<div id="reference-group-coding-5" class="section level2 hasAnchor" number="5.4">
+<h2><span class="header-section-number">5.4</span> Reference-group coding<a href="5.4-reference-group-coding-5.html#reference-group-coding-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <input onclick="codefolder(&#39;pre.sourceCode&#39;);" type="button" value="Hide Code" id="codefolder-button" style="position: relative; &#10;            top: -25px; &#10;            left: 85%;   &#10;            color: white;&#10;            font-weight: bold;&#10;            background: #4B9CD3;&#10;            border: 1px #3079ED solid;&#10;            box-shadow: inset 0 1px 0 #80B0FB"/>
 <script>
   function codefolder(query) {
@@ -534,7 +533,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     codefolder('pre.sourceCode');
   });
 </script>
-<p>Now that we know how regression with a binary predictor works, let’s consider how to extend this approach to categorical predictors with <span class="math inline">\(C ≥ 2\)</span> categories. There are many ways to do this, and the general topic is variously called “contrast coding,” “effect coding,” or “dummy coding.”</p>
+<p>Now that we know how regression with a binary predictor works, let’s consider how to extend this approach to categorical predictors with <span class="math inline">\(C ≥ 2\)</span> categories. There are many ways to do this, and the general topic is variously called “contrast coding”, “effect coding”, or “dummy coding”.</p>
 <p>The basic idea is to represent the <span class="math inline">\(C\)</span> categories of a predictor in terms of <span class="math inline">\(C – 1\)</span> dummy variables. Binary coding of a dichotomous predictor is one example of this: We represented a categorical variable with <span class="math inline">\(C = 2\)</span> categories using <span class="math inline">\(1\)</span> binary predictor.</p>
 <p>The most common approach to contrast coding is called <em>reference-group</em> coding. In R, the approach is called <em>treatment contrasts</em> and is the default coding for categorical predictors.</p>
 <p>It is called reference-group coding because:</p>
@@ -550,8 +549,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>The regression coefficient was equal to the mean difference between males and females.</li>
 </ul>
 <p>The rest of this section considers how to generalize this approach to greater than 2 groups.</p>
-<div id="a-hypothetical-example" class="section level3" number="5.4.1">
-<h3><span class="header-section-number">5.4.1</span> A hypothetical example</h3>
+<div id="a-hypothetical-example" class="section level3 hasAnchor" number="5.4.1">
+<h3><span class="header-section-number">5.4.1</span> A hypothetical example<a href="5.4-reference-group-coding-5.html#a-hypothetical-example" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Figure <a href="5.4-reference-group-coding-5.html#fig:martital-status1">5.2</a> presents a toy data example. The data show the Age and marital status (Mstatus) of 16 hypothetical individuals. Marital status is encoded as</p>
 <ul>
 <li>Single (never married)</li>
@@ -567,15 +566,15 @@ Figure 5.2: Toy Martital Status Example.
 </div>
 <p>These 3 categories are represented by two binary variables, denoted <span class="math inline">\(X_1\)</span> and <span class="math inline">\(X_2\)</span>.</p>
 <ul>
-<li><span class="math inline">\(X_1\)</span> is a binary variable that is equal to 1 when Mstatus is “married,” and equal to 0 otherwise.</li>
-<li><span class="math inline">\(X_2\)</span> is a binary variable that is equal to 1 when Mstatus is “divorced,” and equal to 0 otherwise.</li>
+<li><span class="math inline">\(X_1\)</span> is a binary variable that is equal to 1 when Mstatus is “married”, and equal to 0 otherwise.</li>
+<li><span class="math inline">\(X_2\)</span> is a binary variable that is equal to 1 when Mstatus is “divorced”, and equal to 0 otherwise.</li>
 </ul>
 <p>The binary variables are often called <em>dummies</em> or <em>indicators</em>. For example, <span class="math inline">\(X_1\)</span> is a dummy or indicator for married respondents.</p>
 <p>In reference-group coding, the group that does not have a dummy variable is the reference group. It is also the group that is coded zero on all of the included dummies.</p>
 <p><strong>What is the is reference-group for this example? Please write down your answer and be prepared to share it in class.</strong></p>
 </div>
-<div id="interpreting-the-regression-parameters" class="section level3" number="5.4.2">
-<h3><span class="header-section-number">5.4.2</span> Interpreting the regression parameters</h3>
+<div id="interpreting-the-regression-parameters" class="section level3 hasAnchor" number="5.4.2">
+<h3><span class="header-section-number">5.4.2</span> Interpreting the regression parameters<a href="5.4-reference-group-coding-5.html#interpreting-the-regression-parameters" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Regressing Age on the dummies we have:</p>
 <p><span class="math display">\[ \widehat Y = b_0 + b_1 X_1 + b_2 X_2 \]</span></p>
 <p>In order to interpret the regression coefficients we can use the same two steps as in Section <a href="5.3-binary-predictors-5.html#binary-predictors-5">5.3</a></p>
@@ -584,21 +583,21 @@ Figure 5.2: Toy Martital Status Example.
 </ul>
 <p><span class="math display">\[\begin{align}
 \widehat Y (Single) &amp; = b_0 + b_1 (0) + b_2 (0) = b_0 \\
-\widehat Y (Married) &amp; = b_0 + b_1 (1) + b_2 (0) = b_0 + b_1 \\ 
-\widehat Y (Divorced) &amp; = b_0 + b_1 (0) + b_2 (1) = b_0 + b_2 
+\widehat Y (Married) &amp; = b_0 + b_1 (1) + b_2 (0) = b_0 + b_1 \\
+\widehat Y (Divorced) &amp; = b_0 + b_1 (0) + b_2 (1) = b_0 + b_2
 \end{align}\]</span></p>
 <ul>
 <li><em>Step 2.</em> Solve for the model parameters in terms the predicted values.</li>
 </ul>
 <p><span class="math display">\[\begin{align}
-b_0 &amp; = \widehat Y (Single) \\ 
-b_1 &amp; = \widehat Y (Married) - b_0 = \widehat Y (Married) - \widehat Y (Single) \\ 
+b_0 &amp; = \widehat Y (Single) \\
+b_1 &amp; = \widehat Y (Married) - b_0 = \widehat Y (Married) - \widehat Y (Single) \\
 b_2 &amp; = \widehat Y (Divorced) - b_0 = \widehat Y (Divorced) - \widehat Y (Single)
 \end{align}\]</span></p>
 <p><strong>Using the above equations, please write down an interpretation of the regression parameters for the hypothetical example. (Note: this question is not asking for a numerical answer, it is just asking you to put the above equations into words.)</strong></p>
 </div>
-<div id="categories" class="section level3" number="5.4.3">
-<h3><span class="header-section-number">5.4.3</span> <span class="math inline">\(&gt; 3\)</span> categories</h3>
+<div id="categories" class="section level3 hasAnchor" number="5.4.3">
+<h3><span class="header-section-number">5.4.3</span> <span class="math inline">\(&gt; 3\)</span> categories<a href="5.4-reference-group-coding-5.html#categories" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Figure <a href="5.4-reference-group-coding-5.html#fig:martital-status1">5.2</a> extends the toy data example by adding another category for Mstatus (“widowed”).</p>
 <div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="5.4-reference-group-coding-5.html#cb109-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;images/marital_status2.png&quot;</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:martital-status2"></span>
@@ -614,8 +613,8 @@ Figure 5.3: Toy Martital Status Example, Part 2.
 </ul>
 <p><span class="math display">\[ \widehat Y = b_0 + b_1 X_1 + b_2 X_2 + b_3 X_3  \]</span></p>
 </div>
-<div id="summary-2" class="section level3" number="5.4.4">
-<h3><span class="header-section-number">5.4.4</span> Summary</h3>
+<div id="summary-2" class="section level3 hasAnchor" number="5.4.4">
+<h3><span class="header-section-number">5.4.4</span> Summary<a href="5.4-reference-group-coding-5.html#summary-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>In reference-group coding with a single categorical variable:</p>
 <ul>
 <li><p>The reference is group is chosen by the analyst – it is the group that is coded zero on all dummies, or the one that has its dummy left out of the <span class="math inline">\(C-1\)</span> dummies used in the model.</p></li>
@@ -681,7 +680,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

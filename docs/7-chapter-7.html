@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 7 Model Building | EDUC 784: Regression</title>
   <meta name="description" content="Course notes for EDUC 784" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 7 Model Building | EDUC 784: Regression" />
   <meta property="og:type" content="book" />
-  
   <meta property="og:image" content="/images/image1.png" />
   <meta property="og:description" content="Course notes for EDUC 784" />
   <meta name="github-repo" content="peterhalpin/EDUC_784" />
@@ -24,17 +23,16 @@
 <meta name="author" content="Peter Halpin" />
 
 
-<meta name="date" content="2023-01-25" />
+<meta name="date" content="2023-02-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
-  <link rel="shortcut icon" href="null" type="image/x-icon" />
+  
 <link rel="prev" href="6.8-exercises-6.html"/>
 <link rel="next" href="7.1-hierarchical-models-7.html"/>
-<script src="libs/header-attrs-2.11/header-attrs.js"></script>
-<script src="libs/jquery-3.5.1/jquery-3.5.1.min.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -51,8 +49,9 @@
 
 
 
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -93,7 +92,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -106,7 +105,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -505,11 +504,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="chapter-7" class="section level1" number="7">
-<h1><span class="header-section-number">Chapter 7</span> Model Building</h1>
+<div id="chapter-7" class="section level1 hasAnchor" number="7">
+<h1><span class="header-section-number">Chapter 7</span> Model Building<a href="7-chapter-7.html#chapter-7" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>Up until this point we have considered models with only a handful of predictors. This chapter addresses how to scale-up to ‘real life’ applications in which we may have many predictors.</p>
 <p>There are two basic approaches to model building with many predictors. A <em>simulataneous</em> model is a single regression model that includes all predictors of interest. When there are many predictors, this is sometimes referred to the “kitchen sink” approach – just put everything in the model (including the kitchen sink). Conceptually, this approach has the advantage that it mitigates omitted variable bias and therefore helps justify the causal interpretation of regression coefficients. However, in practice it can lead to computational problems, especially when highly correlated predictors are included in the model. We discuss this situation in Section <a href="7.4-too-many-predictors-7.html#too-many-predictors-7">7.4</a></p>
-<p><em>Hierarchical</em> model building is an alternative approach in which predictors are added into a model sequentially. A hierarchical approach is most appropriate when the predictors can be partitioned into conceptual “blocks,” and the blocks are added into the model one at a time. A block is just a conceptual grouping of one or more predictors, and we will some examples as well as in Sections <a href="7.1-hierarchical-models-7.html#hierarchical-models-7">7.1</a> and <a href="7.3-worked-example-7.html#worked-example-7">7.3</a>)
+<p><em>Hierarchical</em> model building is an alternative approach in which predictors are added into a model sequentially. A hierarchical approach is most appropriate when the predictors can be partitioned into conceptual “blocks”, and the blocks are added into the model one at a time. A block is just a conceptual grouping of one or more predictors, and we will some examples as well as in Sections <a href="7.1-hierarchical-models-7.html#hierarchical-models-7">7.1</a> and <a href="7.3-worked-example-7.html#worked-example-7">7.3</a>)
 The rationale for adding the blocks of predictors sequentially is to isolate the proportion of variance in the outcome (i.e., R-squared) attributable to each block.</p>
 <p>Let’s illustrate the difference between these two approaches with a hypothetical example. In the example, we seek to explain Reading Achievement using predictors that can be conceptually grouped into student and curriculum factors.</p>
 <ul>
@@ -531,7 +530,7 @@ The rationale for adding the blocks of predictors sequentially is to isolate the
 <p>In a simultaneous model, all predictors would be entered into a regression model at the same time and we would interpret the regression coefficients and R-squared from that one model.</p>
 <p>In a hierarchical model, we could instead proceed as follows.</p>
 <ul>
-<li><p>First we run a regression model with just the student factors. These variables are known to predict Reading Achievement, but are not malleable from the perspective of educational policy. That is, we know they are important for predicting the outcome, but they aren’t the types of factors that can be intervened upon via schooling. These types of predictors are often called “control variables.” What counts as a control variable is a largely non-statistical consideration that depends on the research context.</p>
+<li><p>First we run a regression model with just the student factors. These variables are known to predict Reading Achievement, but are not malleable from the perspective of educational policy. That is, we know they are important for predicting the outcome, but they aren’t the types of factors that can be intervened upon via schooling. These types of predictors are often called “control variables”. What counts as a control variable is a largely non-statistical consideration that depends on the research context.</p>
 <ul>
 <li>After we run the regression model with this first block of predictors, we record the R-squared statistic. We don’t care about the value of the regression coefficients at this point, since we know we have left out the curriculum factors. <br></br></li>
 </ul></li>
@@ -544,7 +543,7 @@ The rationale for adding the blocks of predictors sequentially is to isolate the
 <li><p>We usually interpret the regression coefficients in the simultaneous model only (i.e., in the last step of the hierarchical model), because any model that doesn’t include all of the relevant predictors is subject to omitted variable bias.</p></li>
 <li><p>It is important to distinguish model building from variable selection. Model building is about research-question-driven strategies for including a fixed set of predictors in a regression model. Variable selection is about “weeding out” predictors that are not useful. So, in model building, the final model should always include all of the potential predictors, but in variable selection, the final model may include only a subset of the potential predictors.</p></li>
 <li><p>Variable selection is an important topic that is the focus of a lot current research in machine learning (e.g, LASSO). There was also a large number of “step-wise” regression procedures proposed for variable selection in last century, but they didn’t work (i.e., different procedures resulted in different models and there were no good criteria by which to choose amongst them). If you have a research scenario that requires variable selection, this problem is best dealt with through machine learning. If you are interested, check out this resource: <a href="https://glmnet.stanford.edu" class="uri">https://glmnet.stanford.edu</a> and feel free to ask questions in class.</p></li>
-<li><p>A note on terminology: In some research areas, “hierarchical” is used to refer to multilevel models (e.g., “hierarchical linear models” in sociology). That is not the usage here. It would make sense to refer to the types of models we are calling “hierarchical” as “step-wise,” but, as mentioned, the term “step-wise” already refers to a large number flawed techniques for variable selection. So… here we are.</p></li>
+<li><p>A note on terminology: In some research areas, “hierarchical” is used to refer to multilevel models (e.g., “hierarchical linear models” in sociology). That is not the usage here. It would make sense to refer to the types of models we are calling “hierarchical” as “step-wise”, but, as mentioned, the term “step-wise” already refers to a large number flawed techniques for variable selection. So… here we are.</p></li>
 </ul>
 <p>One last thing – in general, you should build models that answer your research questions. This chapter illustrates the main statistical techniques in terms of hierarchical regression, but you can use those techniques in other ways as well.</p>
 </div>
@@ -605,7 +604,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');
