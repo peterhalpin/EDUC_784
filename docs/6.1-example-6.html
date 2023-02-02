@@ -535,17 +535,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </script>
 <p>There is well-documented gender gap in STEM achievement by the end of high school. The t-test reported below illustrates the gap in Math Achievement using the NELS data.</p>
 <div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="6.1-example-6.html#cb180-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;NELS.RData&quot;</span>)</span>
-<span id="cb180-2"><a href="6.1-example-6.html#cb180-2" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(NELS)</span></code></pre></div>
-<pre><code>## The following objects are masked from NELS (pos = 3):
-## 
-##     absent12, achmat08, achmat10, achmat12, achrdg08, achrdg10,
-##     achrdg12, achsci08, achsci10, achsci12, achsls08, achsls10,
-##     achsls12, advmath8, alcbinge, algebra8, apoffer, approg, cigarett,
-##     computer, cuts12, edexpect, excurr12, expinc30, famsize, gender,
-##     homelang, hsprog, hwkin12, hwkout12, id, late12, marijuan, numinst,
-##     nursery, parmarl8, region, schattrt, schtyp8, ses, slfcnc08,
-##     slfcnc10, slfcnc12, tcherint, unitcalc, unitengl, unitmath, urban</code></pre>
-<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="6.1-example-6.html#cb182-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(achmat12 <span class="sc">~</span> gender, <span class="at">var.equal =</span> T)</span></code></pre></div>
+<span id="cb180-2"><a href="6.1-example-6.html#cb180-2" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(NELS)</span>
+<span id="cb180-3"><a href="6.1-example-6.html#cb180-3" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(achmat12 <span class="sc">~</span> gender, <span class="at">var.equal =</span> T)</span></code></pre></div>
 <pre><code>## 
 ##  Two Sample t-test
 ## 
@@ -558,22 +549,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## mean in group Female   mean in group Male 
 ##                55.47                58.63</code></pre>
 <p>In this chapter, our first goal is to use linear regression to better understand this gender gap in Math Achievement. To do this, we consider a third variable, Reading Achievement. The plot below shows the relationship between Math Achievement and Reading Achievement estimated just for males (Blue), and the same relationship estimated just for females (Black).</p>
-<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="6.1-example-6.html#cb184-1" aria-hidden="true" tabindex="-1"></a>females <span class="ot">&lt;-</span> gender <span class="sc">==</span> <span class="st">&quot;Female&quot;</span></span>
-<span id="cb184-2"><a href="6.1-example-6.html#cb184-2" aria-hidden="true" tabindex="-1"></a>males <span class="ot">&lt;-</span> gender <span class="sc">==</span> <span class="st">&quot;Male&quot;</span></span>
-<span id="cb184-3"><a href="6.1-example-6.html#cb184-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb184-4"><a href="6.1-example-6.html#cb184-4" aria-hidden="true" tabindex="-1"></a>mod1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(achmat12[females] <span class="sc">~</span> achrdg12[females])</span>
-<span id="cb184-5"><a href="6.1-example-6.html#cb184-5" aria-hidden="true" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(achmat12[males] <span class="sc">~</span> achrdg12[males])</span>
-<span id="cb184-6"><a href="6.1-example-6.html#cb184-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb184-7"><a href="6.1-example-6.html#cb184-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot reading and math for females</span></span>
-<span id="cb184-8"><a href="6.1-example-6.html#cb184-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(achrdg12[females], achmat12[females], <span class="at">xlab =</span> <span class="st">&quot;Reading&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Math&quot;</span>)</span>
-<span id="cb184-9"><a href="6.1-example-6.html#cb184-9" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(mod1, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
-<span id="cb184-10"><a href="6.1-example-6.html#cb184-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb184-11"><a href="6.1-example-6.html#cb184-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Add points and line for males</span></span>
-<span id="cb184-12"><a href="6.1-example-6.html#cb184-12" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(achrdg12[males], achmat12[males], <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>, <span class="at">pch =</span> <span class="dv">2</span>)</span>
-<span id="cb184-13"><a href="6.1-example-6.html#cb184-13" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(mod2, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
-<span id="cb184-14"><a href="6.1-example-6.html#cb184-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb184-15"><a href="6.1-example-6.html#cb184-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a legend</span></span>
-<span id="cb184-16"><a href="6.1-example-6.html#cb184-16" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="at">x =</span> <span class="st">&quot;topleft&quot;</span>, <span class="at">legend =</span> <span class="fu">levels</span>(gender), <span class="at">pch =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="at">col =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="st">&quot;#4B9CD3&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="6.1-example-6.html#cb182-1" aria-hidden="true" tabindex="-1"></a>females <span class="ot">&lt;-</span> gender <span class="sc">==</span> <span class="st">&quot;Female&quot;</span></span>
+<span id="cb182-2"><a href="6.1-example-6.html#cb182-2" aria-hidden="true" tabindex="-1"></a>males <span class="ot">&lt;-</span> gender <span class="sc">==</span> <span class="st">&quot;Male&quot;</span></span>
+<span id="cb182-3"><a href="6.1-example-6.html#cb182-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb182-4"><a href="6.1-example-6.html#cb182-4" aria-hidden="true" tabindex="-1"></a>mod1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(achmat12[females] <span class="sc">~</span> achrdg12[females])</span>
+<span id="cb182-5"><a href="6.1-example-6.html#cb182-5" aria-hidden="true" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(achmat12[males] <span class="sc">~</span> achrdg12[males])</span>
+<span id="cb182-6"><a href="6.1-example-6.html#cb182-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb182-7"><a href="6.1-example-6.html#cb182-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot reading and math for females</span></span>
+<span id="cb182-8"><a href="6.1-example-6.html#cb182-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(achrdg12[females], achmat12[females], <span class="at">xlab =</span> <span class="st">&quot;Reading&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Math&quot;</span>)</span>
+<span id="cb182-9"><a href="6.1-example-6.html#cb182-9" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(mod1, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb182-10"><a href="6.1-example-6.html#cb182-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb182-11"><a href="6.1-example-6.html#cb182-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Add points and line for males</span></span>
+<span id="cb182-12"><a href="6.1-example-6.html#cb182-12" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(achrdg12[males], achmat12[males], <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>, <span class="at">pch =</span> <span class="dv">2</span>)</span>
+<span id="cb182-13"><a href="6.1-example-6.html#cb182-13" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(mod2, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb182-14"><a href="6.1-example-6.html#cb182-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb182-15"><a href="6.1-example-6.html#cb182-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a legend</span></span>
+<span id="cb182-16"><a href="6.1-example-6.html#cb182-16" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="at">x =</span> <span class="st">&quot;topleft&quot;</span>, <span class="at">legend =</span> <span class="fu">levels</span>(gender), <span class="at">pch =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="at">col =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="st">&quot;#4B9CD3&quot;</span>))</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:math-reading-1"></span>
 <img src="_main_files/figure-html/math-reading-1-1.png" alt="Math Achievement, Reading Achievement, and Gender." width="672" />
 <p class="caption">

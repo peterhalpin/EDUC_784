@@ -542,7 +542,7 @@ R treats variables like `gender` as "factors". Factors have special properties t
 ### Recoding a factor to numeric
 
 ```{r}
-load("NELS.RData")
+# load("NELS.RData")
 # attach(NELS)
 
 # Note that gender is non-numeric -- it is a factor with levels "Female" and "Male"
@@ -808,6 +808,7 @@ Note the following things about the output:
   * The regression coefficients compare each group's mean to the overall mean on the outcome. Urban students are significantly above average, Rural and Suburban students are below average but the difference is not significant. 
   
   * The R-square is the same as `mod2` because the Y variable is centered, but the F test **does** change from `mod2`, because there are now 3 variables included in the model. In general, when the intercept is omitted, R-square and its F-test do not have the usual interpretation. So, when reporting R-squared and F-test, we should use a model with the intercept, rather than the approach outlined here. 
-  
 
-
+```{r, echo = F}
+detach(NELS)
+```

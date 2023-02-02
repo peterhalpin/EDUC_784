@@ -733,9 +733,9 @@ The output in the previous section is detailed enough that it is not usually req
 
 I'll note that some people think it is bad practice to interpret main effects in the presence of an interaction. The main effects tell us what the effect of a predictor is "on average" or overall, after controlling for the other predictor(s). But the interaction tells us that this effect depends on the other predictor(s). Some people think that you shouldn't report the overall effect when the "real message" of the interaction is that the effect changes as a function of the other predictors. I think that main effects and interactions aren't really incompatible concepts, but you should be careful with them. 
 
-Anyway, we can summarize the main effects of Pre-K and SES, well as their interaction, by asking how much variance they explain, after controlling for the other predictor(s). This is the ANOVA approach we discussed last semester, but now applied to two categorical predictors. 
+Anyway, we can summarize the main effects of Pre-K and SES, as well as their interaction, by asking how much variance they explain. Note that this is variance explained, after controlling for the other predictors in the model. Also note that this is just the ANOVA approach we discussed last semester, but now applied to two categorical predictors. 
 
-The ANOVA table for our example is below, and it is followed by the R-squared coefficients for each predictor, which are called "eta-squared" ($\eta^2$) in the context of ANOVA. These R-squared (eta-squared) coefficients tell us what proportion of the variance in Math Achievement is attributable to the main effects and the interaction. Note that the R-squared (eta-squared) values do not add up to the total R-squared reported in the `lm` output above. This is because any variance that is jointly explained by the predictors is not attributed to individual predictors (e.g., the area "B" in the Venn diagram in Figure \@ref(fig:venn-diagram) is not counted towards the effects for the individual predictors). In the next chapter, we will address how to build models so that we can systematically divide up the variance explained by the predictors. 
+The ANOVA table for our example is below, and it is followed by the R-squared coefficients for each predictor, which are called "eta-squared" ($\eta^2$) in the context of ANOVA. These R-squared (eta-squared) coefficients tell us what proportion of the variance in Math Achievement is attributable to the main effects and the interaction. Note that the R-squared (eta-squared) values do not add up to the total R-squared reported in the `lm` output above. This is because any variance that is jointly explained by the predictors is not attributed to the individual predictors (e.g., the area "B" in the Venn diagram in Figure \@ref(fig:venn-diagram) is not counted towards the effects for the individual predictors). In the next chapter, we will address how to build models so that we can systematically divide up the variance explained by the predictors. 
 
 
 ```{r}
@@ -1097,6 +1097,6 @@ effectsize::eta_squared(mod, partial = F)
 ```
 
 ```{r, echo = F}
-detach(NELS)
+#detach(NELS)
 ```
 

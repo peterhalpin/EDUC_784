@@ -57,10 +57,10 @@ fig:homo1
 fig:homo2
 fig:normality1
 fig:normality2
-fig:unnamed-chunk-176
 fig:unnamed-chunk-177
 fig:unnamed-chunk-178
 fig:unnamed-chunk-179
+fig:unnamed-chunk-180
 fig:logx
 fig:logdata
 fig:loge
@@ -77,7 +77,7 @@ fig:nonlinear1
 eq:logy
 eq:expb
 fig:expb
-fig:unnamed-chunk-197
+fig:unnamed-chunk-198
 fig:poly
 fig:overfit
 fig:overfit2
@@ -86,10 +86,10 @@ fig:piecewise1
 fig:piecewise2
 fig:piecewise3
 eq:se-10
-fig:unnamed-chunk-214
 fig:unnamed-chunk-215
-fig:unnamed-chunk-221
-tab:unnamed-chunk-226
+fig:unnamed-chunk-216
+fig:unnamed-chunk-222
+tab:unnamed-chunk-227
 fig:lpm
 fig:props
 eq:prob
@@ -112,9 +112,9 @@ eq:Li
 eq:L
 eq:ell
 fig:HLtest
-fig:unnamed-chunk-252
 fig:unnamed-chunk-253
 fig:unnamed-chunk-254
+fig:unnamed-chunk-255
 about-this-book
 why-this-format
 tips-for-using-the-notes

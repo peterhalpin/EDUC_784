@@ -3,7 +3,7 @@
 ```{r, echo = F}
 # Clean up check
 rm(list = ls())
-detach(ecls)
+# detach(ecls)
 
 button <-  "position: relative; 
             top: -25px; 

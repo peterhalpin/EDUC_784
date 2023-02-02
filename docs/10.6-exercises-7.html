@@ -509,30 +509,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>This section collects the code from Section <a href="10.2-worked-example-10.html#worked-example-10">10.2</a> and Section <a href="10.3-piecewise-10.html#piecewise-10">10.3</a> and your can refer to those sections for more details on interpretation.</p>
 <p>You’ll see that some of the plots below require a lot of fiddling about, especially for the piecewise regression model. We will cover some tricks and shortcuts for producing these types plots during the open lab sessions for Assignment 4. So don’t worry too much about the complicated-looking coded for the plots at this point!</p>
 <p>Let’s start with the “Vanella” log-linear model for the wages examples</p>
-<div class="sourceCode" id="cb374"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb374-1"><a href="10.6-exercises-7.html#cb374-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the data and take a look</span></span>
-<span id="cb374-2"><a href="10.6-exercises-7.html#cb374-2" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;Wages.RData&quot;</span>)</span>
-<span id="cb374-3"><a href="10.6-exercises-7.html#cb374-3" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(wages)</span>
-<span id="cb374-4"><a href="10.6-exercises-7.html#cb374-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb374-5"><a href="10.6-exercises-7.html#cb374-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Create log transform of wage</span></span>
-<span id="cb374-6"><a href="10.6-exercises-7.html#cb374-6" aria-hidden="true" tabindex="-1"></a>log_wage <span class="ot">&lt;-</span> <span class="fu">log</span>(wage <span class="sc">+</span> <span class="dv">1</span>)</span>
-<span id="cb374-7"><a href="10.6-exercises-7.html#cb374-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb374-8"><a href="10.6-exercises-7.html#cb374-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Regress it on educ</span></span>
-<span id="cb374-9"><a href="10.6-exercises-7.html#cb374-9" aria-hidden="true" tabindex="-1"></a>mod1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(log_wage <span class="sc">~</span> educ)</span>
-<span id="cb374-10"><a href="10.6-exercises-7.html#cb374-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb374-11"><a href="10.6-exercises-7.html#cb374-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Check out model fit</span></span>
-<span id="cb374-12"><a href="10.6-exercises-7.html#cb374-12" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
-<span id="cb374-13"><a href="10.6-exercises-7.html#cb374-13" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(educ, log_wage, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span>
-<span id="cb374-14"><a href="10.6-exercises-7.html#cb374-14" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(mod1)</span>
-<span id="cb374-15"><a href="10.6-exercises-7.html#cb374-15" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod1, <span class="dv">1</span>, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-218-1.png" width="672" /></p>
+<div class="sourceCode" id="cb405"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb405-1"><a href="10.6-exercises-7.html#cb405-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the data and take a look</span></span>
+<span id="cb405-2"><a href="10.6-exercises-7.html#cb405-2" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;Wages.RData&quot;</span>)</span>
+<span id="cb405-3"><a href="10.6-exercises-7.html#cb405-3" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(wages)</span></code></pre></div>
+<pre><code>## The following object is masked from NELS:
+## 
+##     id</code></pre>
+<div class="sourceCode" id="cb407"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb407-1"><a href="10.6-exercises-7.html#cb407-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create log transform of wage</span></span>
+<span id="cb407-2"><a href="10.6-exercises-7.html#cb407-2" aria-hidden="true" tabindex="-1"></a>log_wage <span class="ot">&lt;-</span> <span class="fu">log</span>(wage <span class="sc">+</span> <span class="dv">1</span>)</span>
+<span id="cb407-3"><a href="10.6-exercises-7.html#cb407-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb407-4"><a href="10.6-exercises-7.html#cb407-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Regress it on educ</span></span>
+<span id="cb407-5"><a href="10.6-exercises-7.html#cb407-5" aria-hidden="true" tabindex="-1"></a>mod1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(log_wage <span class="sc">~</span> educ)</span>
+<span id="cb407-6"><a href="10.6-exercises-7.html#cb407-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb407-7"><a href="10.6-exercises-7.html#cb407-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Check out model fit</span></span>
+<span id="cb407-8"><a href="10.6-exercises-7.html#cb407-8" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb407-9"><a href="10.6-exercises-7.html#cb407-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(educ, log_wage, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span>
+<span id="cb407-10"><a href="10.6-exercises-7.html#cb407-10" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(mod1)</span>
+<span id="cb407-11"><a href="10.6-exercises-7.html#cb407-11" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod1, <span class="dv">1</span>, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-219-1.png" width="672" /></p>
 <p>Because there is one prominent bend in our residual vs fitted plot of the log-linear model (at <span class="math inline">\(\hat Y \approx 2.1\)</span>), let’s see if adding a quadratic term to the model can improve the model fit.</p>
 <p>The <code>poly</code> function in <code>R</code> makes it easy to do polynomial regression, without having to hard-code new variables like <code>educ^2</code> into our dataset. This function automatically uses orthogonal (uncorrelated) polynomials, so we don’t have to worry about centering, either. The basic interpretation of the model coefficients in an orthogonal polynomial regression is the same as discussed in Section <a href="10.1-polynomial-10.html#polynomial-10">10.1</a>, but the “more complicated” interpretation of the model parameters is not straightforward. To find out more, use <code>help(poly)</code>.</p>
 <p>The diagnostic plots for the log-linear model with a quadratic term included for education is shown below, along with the model summary. In the output, <code>poly(educ, 2)n</code> is the <span class="math inline">\(n\)</span>-th degree term in the polynomial.</p>
-<div class="sourceCode" id="cb375"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb375-1"><a href="10.6-exercises-7.html#cb375-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Regress log_wage on a quadratic function of eduction </span></span>
-<span id="cb375-2"><a href="10.6-exercises-7.html#cb375-2" aria-hidden="true" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(log_wage <span class="sc">~</span> <span class="fu">poly</span>(educ, <span class="dv">2</span>))</span>
-<span id="cb375-3"><a href="10.6-exercises-7.html#cb375-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb375-4"><a href="10.6-exercises-7.html#cb375-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Model output</span></span>
-<span id="cb375-5"><a href="10.6-exercises-7.html#cb375-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod2)</span></code></pre></div>
+<div class="sourceCode" id="cb408"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb408-1"><a href="10.6-exercises-7.html#cb408-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Regress log_wage on a quadratic function of eduction </span></span>
+<span id="cb408-2"><a href="10.6-exercises-7.html#cb408-2" aria-hidden="true" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(log_wage <span class="sc">~</span> <span class="fu">poly</span>(educ, <span class="dv">2</span>))</span>
+<span id="cb408-3"><a href="10.6-exercises-7.html#cb408-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb408-4"><a href="10.6-exercises-7.html#cb408-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Model output</span></span>
+<span id="cb408-5"><a href="10.6-exercises-7.html#cb408-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod2)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = log_wage ~ poly(educ, 2))
@@ -552,22 +554,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Residual standard error: 0.422 on 397 degrees of freedom
 ## Multiple R-squared:  0.216,  Adjusted R-squared:  0.212 
 ## F-statistic: 54.8 on 2 and 397 DF,  p-value: &lt;2e-16</code></pre>
-<div class="sourceCode" id="cb377"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb377-1"><a href="10.6-exercises-7.html#cb377-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Diagnostic plots</span></span>
-<span id="cb377-2"><a href="10.6-exercises-7.html#cb377-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
-<span id="cb377-3"><a href="10.6-exercises-7.html#cb377-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb377-4"><a href="10.6-exercises-7.html#cb377-4" aria-hidden="true" tabindex="-1"></a><span class="co"># scatter plot with trend</span></span>
-<span id="cb377-5"><a href="10.6-exercises-7.html#cb377-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(educ, log_wage, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span>
-<span id="cb377-6"><a href="10.6-exercises-7.html#cb377-6" aria-hidden="true" tabindex="-1"></a><span class="co"># order the data and the predicted values ... </span></span>
-<span id="cb377-7"><a href="10.6-exercises-7.html#cb377-7" aria-hidden="true" tabindex="-1"></a>sort_educ <span class="ot">&lt;-</span> educ[<span class="fu">order</span>(educ)]</span>
-<span id="cb377-8"><a href="10.6-exercises-7.html#cb377-8" aria-hidden="true" tabindex="-1"></a>sort_fitted <span class="ot">&lt;-</span> <span class="fu">fitted</span>(mod2)[<span class="fu">order</span>(educ)]</span>
-<span id="cb377-9"><a href="10.6-exercises-7.html#cb377-9" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(sort_educ, sort_fitted, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>)</span>
-<span id="cb377-10"><a href="10.6-exercises-7.html#cb377-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb377-11"><a href="10.6-exercises-7.html#cb377-11" aria-hidden="true" tabindex="-1"></a><span class="co"># residual versus fitted</span></span>
-<span id="cb377-12"><a href="10.6-exercises-7.html#cb377-12" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod2, <span class="dv">1</span>, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-219-1.png" width="672" /></p>
+<div class="sourceCode" id="cb410"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb410-1"><a href="10.6-exercises-7.html#cb410-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Diagnostic plots</span></span>
+<span id="cb410-2"><a href="10.6-exercises-7.html#cb410-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb410-3"><a href="10.6-exercises-7.html#cb410-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb410-4"><a href="10.6-exercises-7.html#cb410-4" aria-hidden="true" tabindex="-1"></a><span class="co"># scatter plot with trend</span></span>
+<span id="cb410-5"><a href="10.6-exercises-7.html#cb410-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(educ, log_wage, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span>
+<span id="cb410-6"><a href="10.6-exercises-7.html#cb410-6" aria-hidden="true" tabindex="-1"></a><span class="co"># order the data and the predicted values ... </span></span>
+<span id="cb410-7"><a href="10.6-exercises-7.html#cb410-7" aria-hidden="true" tabindex="-1"></a>sort_educ <span class="ot">&lt;-</span> educ[<span class="fu">order</span>(educ)]</span>
+<span id="cb410-8"><a href="10.6-exercises-7.html#cb410-8" aria-hidden="true" tabindex="-1"></a>sort_fitted <span class="ot">&lt;-</span> <span class="fu">fitted</span>(mod2)[<span class="fu">order</span>(educ)]</span>
+<span id="cb410-9"><a href="10.6-exercises-7.html#cb410-9" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(sort_educ, sort_fitted, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>)</span>
+<span id="cb410-10"><a href="10.6-exercises-7.html#cb410-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb410-11"><a href="10.6-exercises-7.html#cb410-11" aria-hidden="true" tabindex="-1"></a><span class="co"># residual versus fitted</span></span>
+<span id="cb410-12"><a href="10.6-exercises-7.html#cb410-12" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod2, <span class="dv">1</span>, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-220-1.png" width="672" /></p>
 <p>Using the same approach for the cubic model:</p>
-<div class="sourceCode" id="cb378"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb378-1"><a href="10.6-exercises-7.html#cb378-1" aria-hidden="true" tabindex="-1"></a>mod3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(log_wage <span class="sc">~</span> <span class="fu">poly</span>(educ, <span class="dv">3</span>))</span>
-<span id="cb378-2"><a href="10.6-exercises-7.html#cb378-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod3)</span></code></pre></div>
+<div class="sourceCode" id="cb411"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb411-1"><a href="10.6-exercises-7.html#cb411-1" aria-hidden="true" tabindex="-1"></a>mod3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(log_wage <span class="sc">~</span> <span class="fu">poly</span>(educ, <span class="dv">3</span>))</span>
+<span id="cb411-2"><a href="10.6-exercises-7.html#cb411-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod3)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = log_wage ~ poly(educ, 3))
@@ -588,22 +590,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Residual standard error: 0.422 on 396 degrees of freedom
 ## Multiple R-squared:  0.22,   Adjusted R-squared:  0.214 
 ## F-statistic: 37.2 on 3 and 396 DF,  p-value: &lt;2e-16</code></pre>
-<div class="sourceCode" id="cb380"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb380-1"><a href="10.6-exercises-7.html#cb380-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Same plots as above, reusing variable names here</span></span>
-<span id="cb380-2"><a href="10.6-exercises-7.html#cb380-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
-<span id="cb380-3"><a href="10.6-exercises-7.html#cb380-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(educ, log_wage, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span>
-<span id="cb380-4"><a href="10.6-exercises-7.html#cb380-4" aria-hidden="true" tabindex="-1"></a>sort_fitted <span class="ot">&lt;-</span> <span class="fu">fitted</span>(mod3)[<span class="fu">order</span>(educ)]</span>
-<span id="cb380-5"><a href="10.6-exercises-7.html#cb380-5" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(sort_educ, sort_fitted, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>)</span>
-<span id="cb380-6"><a href="10.6-exercises-7.html#cb380-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod3, <span class="dv">1</span>, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-220-1.png" width="672" /></p>
+<div class="sourceCode" id="cb413"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb413-1"><a href="10.6-exercises-7.html#cb413-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Same plots as above, reusing variable names here</span></span>
+<span id="cb413-2"><a href="10.6-exercises-7.html#cb413-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb413-3"><a href="10.6-exercises-7.html#cb413-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(educ, log_wage, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span>
+<span id="cb413-4"><a href="10.6-exercises-7.html#cb413-4" aria-hidden="true" tabindex="-1"></a>sort_fitted <span class="ot">&lt;-</span> <span class="fu">fitted</span>(mod3)[<span class="fu">order</span>(educ)]</span>
+<span id="cb413-5"><a href="10.6-exercises-7.html#cb413-5" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(sort_educ, sort_fitted, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>)</span>
+<span id="cb413-6"><a href="10.6-exercises-7.html#cb413-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod3, <span class="dv">1</span>, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-221-1.png" width="672" /></p>
 <p>Moving on, let’s consider the piecewise model from Section <a href="10.3-piecewise-10.html#piecewise-10">10.3</a></p>
-<div class="sourceCode" id="cb381"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb381-1"><a href="10.6-exercises-7.html#cb381-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a dummy variable indicating if education is at least 12 years or more</span></span>
-<span id="cb381-2"><a href="10.6-exercises-7.html#cb381-2" aria-hidden="true" tabindex="-1"></a>educ12 <span class="ot">&lt;-</span> (educ <span class="sc">&gt;</span> <span class="dv">12</span>)<span class="sc">*</span><span class="dv">1</span></span>
-<span id="cb381-3"><a href="10.6-exercises-7.html#cb381-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb381-4"><a href="10.6-exercises-7.html#cb381-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Interact the dummy with educ</span></span>
-<span id="cb381-5"><a href="10.6-exercises-7.html#cb381-5" aria-hidden="true" tabindex="-1"></a>mod4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log</span>(wage <span class="sc">+</span> <span class="dv">1</span>) <span class="sc">~</span> educ<span class="sc">*</span>educ12) </span>
-<span id="cb381-6"><a href="10.6-exercises-7.html#cb381-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb381-7"><a href="10.6-exercises-7.html#cb381-7" aria-hidden="true" tabindex="-1"></a><span class="co"># The model output</span></span>
-<span id="cb381-8"><a href="10.6-exercises-7.html#cb381-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod4)</span></code></pre></div>
+<div class="sourceCode" id="cb414"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb414-1"><a href="10.6-exercises-7.html#cb414-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a dummy variable indicating if education is at least 12 years or more</span></span>
+<span id="cb414-2"><a href="10.6-exercises-7.html#cb414-2" aria-hidden="true" tabindex="-1"></a>educ12 <span class="ot">&lt;-</span> (educ <span class="sc">&gt;</span> <span class="dv">12</span>)<span class="sc">*</span><span class="dv">1</span></span>
+<span id="cb414-3"><a href="10.6-exercises-7.html#cb414-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb414-4"><a href="10.6-exercises-7.html#cb414-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Interact the dummy with educ</span></span>
+<span id="cb414-5"><a href="10.6-exercises-7.html#cb414-5" aria-hidden="true" tabindex="-1"></a>mod4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log</span>(wage <span class="sc">+</span> <span class="dv">1</span>) <span class="sc">~</span> educ<span class="sc">*</span>educ12) </span>
+<span id="cb414-6"><a href="10.6-exercises-7.html#cb414-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb414-7"><a href="10.6-exercises-7.html#cb414-7" aria-hidden="true" tabindex="-1"></a><span class="co"># The model output</span></span>
+<span id="cb414-8"><a href="10.6-exercises-7.html#cb414-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod4)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = log(wage + 1) ~ educ * educ12)
@@ -624,33 +626,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Residual standard error: 0.42 on 396 degrees of freedom
 ## Multiple R-squared:  0.226,  Adjusted R-squared:  0.22 
 ## F-statistic: 38.6 on 3 and 396 DF,  p-value: &lt;2e-16</code></pre>
-<div class="sourceCode" id="cb383"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb383-1"><a href="10.6-exercises-7.html#cb383-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The simple trends</span></span>
-<span id="cb383-2"><a href="10.6-exercises-7.html#cb383-2" aria-hidden="true" tabindex="-1"></a>emmeans<span class="sc">::</span><span class="fu">emtrends</span>(mod4, <span class="at">specs =</span> <span class="st">&quot;educ12&quot;</span>, <span class="at">var =</span> <span class="st">&quot;educ&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb416"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb416-1"><a href="10.6-exercises-7.html#cb416-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The simple trends</span></span>
+<span id="cb416-2"><a href="10.6-exercises-7.html#cb416-2" aria-hidden="true" tabindex="-1"></a>emmeans<span class="sc">::</span><span class="fu">emtrends</span>(mod4, <span class="at">specs =</span> <span class="st">&quot;educ12&quot;</span>, <span class="at">var =</span> <span class="st">&quot;educ&quot;</span>)</span></code></pre></div>
 <pre><code>##  educ12 educ.trend     SE  df lower.CL upper.CL
 ##       0     0.0174 0.0216 396  -0.0251   0.0598
 ##       1     0.0788 0.0168 396   0.0457   0.1119
 ## 
 ## Confidence level used: 0.95</code></pre>
-<div class="sourceCode" id="cb385"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb385-1"><a href="10.6-exercises-7.html#cb385-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The diagnostic plots</span></span>
-<span id="cb385-2"><a href="10.6-exercises-7.html#cb385-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
-<span id="cb385-3"><a href="10.6-exercises-7.html#cb385-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod4, <span class="dv">1</span>, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span>
-<span id="cb385-4"><a href="10.6-exercises-7.html#cb385-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod4, <span class="dv">2</span>, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span></code></pre></div>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-221"></span>
-<img src="_main_files/figure-html/unnamed-chunk-221-1.png" alt="The wages example" width="672" />
+<div class="sourceCode" id="cb418"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb418-1"><a href="10.6-exercises-7.html#cb418-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The diagnostic plots</span></span>
+<span id="cb418-2"><a href="10.6-exercises-7.html#cb418-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb418-3"><a href="10.6-exercises-7.html#cb418-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod4, <span class="dv">1</span>, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span>
+<span id="cb418-4"><a href="10.6-exercises-7.html#cb418-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod4, <span class="dv">2</span>, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-222"></span>
+<img src="_main_files/figure-html/unnamed-chunk-222-1.png" alt="The wages example" width="672" />
 <p class="caption">
 Figure 10.10: The wages example
 </p>
 </div>
 <p>We can still see some evidence of heteroskedasticity in the residual versus fitted plot, so the last step is to use heteroskedasticity-corrected standard errors to ensure we are making the right conclusions about statistical significance</p>
-<div class="sourceCode" id="cb386"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb386-1"><a href="10.6-exercises-7.html#cb386-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Make sure the required pacakges are installed</span></span>
-<span id="cb386-2"><a href="10.6-exercises-7.html#cb386-2" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;car&quot;)</span></span>
-<span id="cb386-3"><a href="10.6-exercises-7.html#cb386-3" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;lmtest&quot;)</span></span>
-<span id="cb386-4"><a href="10.6-exercises-7.html#cb386-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb386-5"><a href="10.6-exercises-7.html#cb386-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 1. Use &quot;hccm&quot; to get the HC SEs for our piecewise model </span></span>
-<span id="cb386-6"><a href="10.6-exercises-7.html#cb386-6" aria-hidden="true" tabindex="-1"></a>hcse <span class="ot">&lt;-</span> car<span class="sc">::</span><span class="fu">hccm</span>(mod4)</span>
-<span id="cb386-7"><a href="10.6-exercises-7.html#cb386-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb386-8"><a href="10.6-exercises-7.html#cb386-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 2. Use &quot;coeftest&quot; to compute t-tests with the HC SEs</span></span>
-<span id="cb386-9"><a href="10.6-exercises-7.html#cb386-9" aria-hidden="true" tabindex="-1"></a>lmtest<span class="sc">::</span><span class="fu">coeftest</span>(mod4, hcse)</span></code></pre></div>
+<div class="sourceCode" id="cb419"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb419-1"><a href="10.6-exercises-7.html#cb419-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Make sure the required pacakges are installed</span></span>
+<span id="cb419-2"><a href="10.6-exercises-7.html#cb419-2" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;car&quot;)</span></span>
+<span id="cb419-3"><a href="10.6-exercises-7.html#cb419-3" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;lmtest&quot;)</span></span>
+<span id="cb419-4"><a href="10.6-exercises-7.html#cb419-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb419-5"><a href="10.6-exercises-7.html#cb419-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 1. Use &quot;hccm&quot; to get the HC SEs for our piecewise model </span></span>
+<span id="cb419-6"><a href="10.6-exercises-7.html#cb419-6" aria-hidden="true" tabindex="-1"></a>hcse <span class="ot">&lt;-</span> car<span class="sc">::</span><span class="fu">hccm</span>(mod4)</span>
+<span id="cb419-7"><a href="10.6-exercises-7.html#cb419-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb419-8"><a href="10.6-exercises-7.html#cb419-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 2. Use &quot;coeftest&quot; to compute t-tests with the HC SEs</span></span>
+<span id="cb419-9"><a href="10.6-exercises-7.html#cb419-9" aria-hidden="true" tabindex="-1"></a>lmtest<span class="sc">::</span><span class="fu">coeftest</span>(mod4, hcse)</span></code></pre></div>
 <pre><code>## 
 ## t test of coefficients:
 ## 
@@ -662,28 +664,28 @@ Figure 10.10: The wages example
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>The next bit is optional. It shows how to produce the piecewise regression plot, which takes quite a bit of messing about with R…Let me know if you find an easier way to do this (in base R).</p>
-<div class="sourceCode" id="cb388"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb388-1"><a href="10.6-exercises-7.html#cb388-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Building the piecewise regression plot -- yeeesh</span></span>
-<span id="cb388-2"><a href="10.6-exercises-7.html#cb388-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb388-3"><a href="10.6-exercises-7.html#cb388-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Add fitted values to dataset</span></span>
-<span id="cb388-4"><a href="10.6-exercises-7.html#cb388-4" aria-hidden="true" tabindex="-1"></a>wages<span class="sc">$</span>fitted <span class="ot">&lt;-</span> <span class="fu">fitted</span>(mod4)</span>
-<span id="cb388-5"><a href="10.6-exercises-7.html#cb388-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb388-6"><a href="10.6-exercises-7.html#cb388-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Sort data on educ</span></span>
-<span id="cb388-7"><a href="10.6-exercises-7.html#cb388-7" aria-hidden="true" tabindex="-1"></a>wages <span class="ot">&lt;-</span> wages[<span class="fu">order</span>(educ), ]</span>
-<span id="cb388-8"><a href="10.6-exercises-7.html#cb388-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb388-9"><a href="10.6-exercises-7.html#cb388-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot</span></span>
-<span id="cb388-10"><a href="10.6-exercises-7.html#cb388-10" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span>
-<span id="cb388-11"><a href="10.6-exercises-7.html#cb388-11" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(educ, <span class="fu">log</span>(wage <span class="sc">+</span> <span class="dv">1</span>), <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span>
-<span id="cb388-12"><a href="10.6-exercises-7.html#cb388-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb388-13"><a href="10.6-exercises-7.html#cb388-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Change color for the points with educ ≤ 12</span></span>
-<span id="cb388-14"><a href="10.6-exercises-7.html#cb388-14" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(<span class="fu">subset</span>(wages, educ <span class="sc">&lt;=</span> <span class="dv">12</span>), <span class="fu">points</span>(educ, <span class="fu">log</span>(wage <span class="sc">+</span> <span class="dv">1</span>)))</span>
-<span id="cb388-15"><a href="10.6-exercises-7.html#cb388-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb388-16"><a href="10.6-exercises-7.html#cb388-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the predicted values for educ &gt; 12</span></span>
-<span id="cb388-17"><a href="10.6-exercises-7.html#cb388-17" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(<span class="fu">subset</span>(wages, educ <span class="sc">&gt;</span> <span class="dv">12</span>), <span class="fu">lines</span>(educ, fitted, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>))</span>
-<span id="cb388-18"><a href="10.6-exercises-7.html#cb388-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb388-19"><a href="10.6-exercises-7.html#cb388-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the predicted values for educ ≤ 12</span></span>
-<span id="cb388-20"><a href="10.6-exercises-7.html#cb388-20" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(<span class="fu">subset</span>(wages, educ <span class="sc">&lt;=</span> <span class="dv">12</span>), <span class="fu">lines</span>(educ, fitted))</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-223-1.png" width="672" /></p>
-<div class="sourceCode" id="cb389"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb389-1"><a href="10.6-exercises-7.html#cb389-1" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(wages)</span></code></pre></div>
+<div class="sourceCode" id="cb421"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb421-1"><a href="10.6-exercises-7.html#cb421-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Building the piecewise regression plot -- yeeesh</span></span>
+<span id="cb421-2"><a href="10.6-exercises-7.html#cb421-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb421-3"><a href="10.6-exercises-7.html#cb421-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Add fitted values to dataset</span></span>
+<span id="cb421-4"><a href="10.6-exercises-7.html#cb421-4" aria-hidden="true" tabindex="-1"></a>wages<span class="sc">$</span>fitted <span class="ot">&lt;-</span> <span class="fu">fitted</span>(mod4)</span>
+<span id="cb421-5"><a href="10.6-exercises-7.html#cb421-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb421-6"><a href="10.6-exercises-7.html#cb421-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Sort data on educ</span></span>
+<span id="cb421-7"><a href="10.6-exercises-7.html#cb421-7" aria-hidden="true" tabindex="-1"></a>wages <span class="ot">&lt;-</span> wages[<span class="fu">order</span>(educ), ]</span>
+<span id="cb421-8"><a href="10.6-exercises-7.html#cb421-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb421-9"><a href="10.6-exercises-7.html#cb421-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot</span></span>
+<span id="cb421-10"><a href="10.6-exercises-7.html#cb421-10" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb421-11"><a href="10.6-exercises-7.html#cb421-11" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(educ, <span class="fu">log</span>(wage <span class="sc">+</span> <span class="dv">1</span>), <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span>
+<span id="cb421-12"><a href="10.6-exercises-7.html#cb421-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb421-13"><a href="10.6-exercises-7.html#cb421-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Change color for the points with educ ≤ 12</span></span>
+<span id="cb421-14"><a href="10.6-exercises-7.html#cb421-14" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(<span class="fu">subset</span>(wages, educ <span class="sc">&lt;=</span> <span class="dv">12</span>), <span class="fu">points</span>(educ, <span class="fu">log</span>(wage <span class="sc">+</span> <span class="dv">1</span>)))</span>
+<span id="cb421-15"><a href="10.6-exercises-7.html#cb421-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb421-16"><a href="10.6-exercises-7.html#cb421-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the predicted values for educ &gt; 12</span></span>
+<span id="cb421-17"><a href="10.6-exercises-7.html#cb421-17" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(<span class="fu">subset</span>(wages, educ <span class="sc">&gt;</span> <span class="dv">12</span>), <span class="fu">lines</span>(educ, fitted, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>))</span>
+<span id="cb421-18"><a href="10.6-exercises-7.html#cb421-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb421-19"><a href="10.6-exercises-7.html#cb421-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the predicted values for educ ≤ 12</span></span>
+<span id="cb421-20"><a href="10.6-exercises-7.html#cb421-20" aria-hidden="true" tabindex="-1"></a><span class="fu">with</span>(<span class="fu">subset</span>(wages, educ <span class="sc">&lt;=</span> <span class="dv">12</span>), <span class="fu">lines</span>(educ, fitted))</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-224-1.png" width="672" /></p>
+<div class="sourceCode" id="cb422"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb422-1"><a href="10.6-exercises-7.html#cb422-1" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(wages)</span></code></pre></div>
 
 </div>
 <!-- </div> -->

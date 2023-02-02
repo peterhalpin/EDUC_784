@@ -534,24 +534,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   });
 </script>
 <p>This assumption is about whether the regression function is “really” a line or if it could be better represented as some other relationship. A classic example is shown below. The example is from Anscombe’s quartet, which we address in more detail in Section <a href="8.6-diagnostics-8.html#diagnostics-8">8.6</a></p>
-<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb292-1"><a href="8.2-linearity-8.html#cb292-1" aria-hidden="true" tabindex="-1"></a><span class="co"># non linearity in Anscombe&#39;s second example</span></span>
-<span id="cb292-2"><a href="8.2-linearity-8.html#cb292-2" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(anscombe)</span>
-<span id="cb292-3"><a href="8.2-linearity-8.html#cb292-3" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(y2 <span class="sc">~</span> x2)</span>
-<span id="cb292-4"><a href="8.2-linearity-8.html#cb292-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb292-5"><a href="8.2-linearity-8.html#cb292-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Take a look at the raw data</span></span>
-<span id="cb292-6"><a href="8.2-linearity-8.html#cb292-6" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
-<span id="cb292-7"><a href="8.2-linearity-8.html#cb292-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x2, y2, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;X&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Y&quot;</span>)</span>
-<span id="cb292-8"><a href="8.2-linearity-8.html#cb292-8" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(mod)</span>
-<span id="cb292-9"><a href="8.2-linearity-8.html#cb292-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb292-10"><a href="8.2-linearity-8.html#cb292-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare to the residual vs fitted plot</span></span>
-<span id="cb292-11"><a href="8.2-linearity-8.html#cb292-11" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod, <span class="at">which =</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb294-1"><a href="8.2-linearity-8.html#cb294-1" aria-hidden="true" tabindex="-1"></a><span class="co"># non linearity in Anscombe&#39;s second example</span></span>
+<span id="cb294-2"><a href="8.2-linearity-8.html#cb294-2" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(anscombe)</span>
+<span id="cb294-3"><a href="8.2-linearity-8.html#cb294-3" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(y2 <span class="sc">~</span> x2)</span>
+<span id="cb294-4"><a href="8.2-linearity-8.html#cb294-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb294-5"><a href="8.2-linearity-8.html#cb294-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Take a look at the raw data</span></span>
+<span id="cb294-6"><a href="8.2-linearity-8.html#cb294-6" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span>
+<span id="cb294-7"><a href="8.2-linearity-8.html#cb294-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x2, y2, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;X&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Y&quot;</span>)</span>
+<span id="cb294-8"><a href="8.2-linearity-8.html#cb294-8" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(mod)</span>
+<span id="cb294-9"><a href="8.2-linearity-8.html#cb294-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb294-10"><a href="8.2-linearity-8.html#cb294-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare to the residual vs fitted plot</span></span>
+<span id="cb294-11"><a href="8.2-linearity-8.html#cb294-11" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod, <span class="at">which =</span> <span class="dv">1</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:linearity1"></span>
 <img src="_main_files/figure-html/linearity1-1.png" alt="Anscombe's second dataset" width="768" />
 <p class="caption">
 Figure 8.2: Anscombe’s second dataset
 </p>
 </div>
-<div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb293-1"><a href="8.2-linearity-8.html#cb293-1" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(anscombe)</span></code></pre></div>
+<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb295-1"><a href="8.2-linearity-8.html#cb295-1" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(anscombe)</span></code></pre></div>
 <p>The left hand panel of Figure <a href="8.2-linearity-8.html#fig:linearity1">8.2</a> shows the scatter plot of the example data. It is pretty obvious that the relationship between <span class="math inline">\(Y\)</span> and <span class="math inline">\(X\)</span> is not linear.</p>
 <p>The right hand panel shows the residuals versus the predicted (“fitted”) values from the regression of <span class="math inline">\(Y\)</span> on <span class="math inline">\(X\)</span>. This is the sample analogue of the population model in Figure <a href="8.1-recap-8.html#fig:pop-model-e">8.1</a>. It is important to note the following about this plot:</p>
 <ul>
@@ -566,10 +566,10 @@ Figure 8.2: Anscombe’s second dataset
 </ul>
 <p>In this Figure <a href="8.2-linearity-8.html#fig:linearity1">8.2</a>, the assumption is clearly not met. In fact, this is so obvious that it doesn’t require looking at the residual versus fitted plot at all. So, why do we use the residual versus plot? The answer is, when we have <span class="math inline">\(K &gt; 1\)</span> predictors, the “raw” data are not so easy to interpret. In general, the assumption is much more easily checked using the residual versus fitted plot, even if the patterns are a bit harder to interpret.</p>
 <p>This situation is illustrated with reference to Figure <a href="8.2-linearity-8.html#fig:linearity2">8.3</a>. Note that in this example the regression model has 2 predictors. We could produce a 3-D plot in which <span class="math inline">\(\widehat Y\)</span> is represented by a plane, but the <span class="math inline">\(Y\)</span> versus <span class="math inline">\(X\)</span> approach will not extend beyond 2 predictors. On the other hand, the residual versus fitted plot can be used with any number of predictors.</p>
-<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb294-1"><a href="8.2-linearity-8.html#cb294-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example: regression c1rmscal on ses_orig and t1learn</span></span>
-<span id="cb294-2"><a href="8.2-linearity-8.html#cb294-2" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;ECLS250.RData&quot;</span>)</span>
-<span id="cb294-3"><a href="8.2-linearity-8.html#cb294-3" aria-hidden="true" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(c1rmscal <span class="sc">~</span> ses_orig <span class="sc">+</span> t1learn, <span class="at">data =</span> ecls)</span>
-<span id="cb294-4"><a href="8.2-linearity-8.html#cb294-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod2, <span class="at">which =</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb296-1"><a href="8.2-linearity-8.html#cb296-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example: regression c1rmscal on ses_orig and t1learn</span></span>
+<span id="cb296-2"><a href="8.2-linearity-8.html#cb296-2" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;ECLS250.RData&quot;</span>)</span>
+<span id="cb296-3"><a href="8.2-linearity-8.html#cb296-3" aria-hidden="true" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(c1rmscal <span class="sc">~</span> ses_orig <span class="sc">+</span> t1learn, <span class="at">data =</span> ecls)</span>
+<span id="cb296-4"><a href="8.2-linearity-8.html#cb296-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod2, <span class="at">which =</span> <span class="dv">1</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:linearity2"></span>
 <img src="_main_files/figure-html/linearity2-1.png" alt="An example from ECLS." width="768" />
 <p class="caption">
@@ -578,15 +578,15 @@ Figure 8.3: An example from ECLS.
 </div>
 <p><strong>Please write down whether you think the linearity assumption is problematic for this second example, and be sure to explain why with reference to Figure <a href="8.2-linearity-8.html#fig:linearity2">8.3</a>.</strong></p>
 <p>Before moving on, let’s take a look at a few more examples. In each of these examples, <strong>please write down whether you think the linearity assumption is problematic and explain why with reference to the plots.</strong>. Hint: be careful not to over-interpret the lowess line in the tails of the plots, where only a few data points can have a big impact on the local trend. Focus your interpretation on the bulk of the data, and whether it shows a systemic trend away from the horizontal line at 0.</p>
-<div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb295-1"><a href="8.2-linearity-8.html#cb295-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example: regression c1rmscal on ses_orig and t1learn</span></span>
-<span id="cb295-2"><a href="8.2-linearity-8.html#cb295-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">101</span>)</span>
-<span id="cb295-3"><a href="8.2-linearity-8.html#cb295-3" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
-<span id="cb295-4"><a href="8.2-linearity-8.html#cb295-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>) {</span>
-<span id="cb295-5"><a href="8.2-linearity-8.html#cb295-5" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">200</span>)</span>
-<span id="cb295-6"><a href="8.2-linearity-8.html#cb295-6" aria-hidden="true" tabindex="-1"></a>  e <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">200</span>)</span>
-<span id="cb295-7"><a href="8.2-linearity-8.html#cb295-7" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> x <span class="sc">+</span> e </span>
-<span id="cb295-8"><a href="8.2-linearity-8.html#cb295-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="fu">lm</span>(y <span class="sc">~</span> x), <span class="at">which =</span> <span class="dv">1</span>)</span>
-<span id="cb295-9"><a href="8.2-linearity-8.html#cb295-9" aria-hidden="true" tabindex="-1"></a>}  </span></code></pre></div>
+<div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb297-1"><a href="8.2-linearity-8.html#cb297-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example: regression c1rmscal on ses_orig and t1learn</span></span>
+<span id="cb297-2"><a href="8.2-linearity-8.html#cb297-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">101</span>)</span>
+<span id="cb297-3"><a href="8.2-linearity-8.html#cb297-3" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb297-4"><a href="8.2-linearity-8.html#cb297-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>) {</span>
+<span id="cb297-5"><a href="8.2-linearity-8.html#cb297-5" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">200</span>)</span>
+<span id="cb297-6"><a href="8.2-linearity-8.html#cb297-6" aria-hidden="true" tabindex="-1"></a>  e <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">200</span>)</span>
+<span id="cb297-7"><a href="8.2-linearity-8.html#cb297-7" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> x <span class="sc">+</span> e </span>
+<span id="cb297-8"><a href="8.2-linearity-8.html#cb297-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="fu">lm</span>(y <span class="sc">~</span> x), <span class="at">which =</span> <span class="dv">1</span>)</span>
+<span id="cb297-9"><a href="8.2-linearity-8.html#cb297-9" aria-hidden="true" tabindex="-1"></a>}  </span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:linearity3"></span>
 <img src="_main_files/figure-html/linearity3-1.png" alt="More examples." width="672" />
 <p class="caption">

@@ -542,6 +542,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 &amp; \neq a + bX + \epsilon. \\
 \end{align}\]</span></p>
 <p>What this means in practice is that addressing positive skew using a log transform can sometimes create more problems than it solves. Figure <a href="9.4-relationship-9.html#fig:nonlinear1">9.13</a> illustrates this situation. In the top row, we see the residual versus fitted plot and qqplot of residuals for the regression of Math Achievement (<code>c1rmscal</code>) on SES (<code>wksesl</code>). The linear regression resulted in a clear violation of normality (positive skew). In the bottom row, we see same output after log transforming Math Achievement – it fixed the issue with normality, but also made the nonlinearity more apparent.</p>
+<pre><code>## The following objects are masked from ecls (pos = 4):
+## 
+##     c1fmotor, c1gmotor, c1rgscal, c1rgtsco, c1rmscal, c1rmtsco,
+##     c1rrscal, c1rrtsco, c2rgscal, c2rgtsco, c2rmscal, c2rmtsco,
+##     c2rrscal, c2rrtsco, c3rgscal, c3rgtsco, c3rmscal, c3rmtsco,
+##     c3rrscal, c3rrtsco, c4rgscal, c4rgtsco, c4rmscal, c4rmtsco,
+##     c4rrscal, c4rrtsco, caseid, gender, p1build, p1center, p1chlboo,
+##     p1chores, p1chsesa, p1contro, p1count, p1disabl, p1expect,
+##     p1firkdg, p1games, p1helpar, p1hfamil, p1hrsprk, p1htotal, p1learn,
+##     p1letter, p1nature, p1pencil, p1readbo, p1singso, p1social,
+##     p1sport, p1still, p1tellst, p1verbal, p2bktog, p2burglr, p2drug,
+##     p2garbag, p2librar, p2safepl, p2vacant, p2violen, plshare, race,
+##     s2kpupri, t1contro, t1extern, t1intern, t1interp, t1learn, wkdaded,
+##     wklangst, wkmomed, wksesl, wksesq5</code></pre>
+<pre><code>## The following object is masked from NELS:
+## 
+##     gender</code></pre>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:nonlinear1"></span>
 <img src="_main_files/figure-html/nonlinear1-1.png" alt="Nonlinear vs non-normality when log transforming Y" width="672" />
 <p class="caption">
