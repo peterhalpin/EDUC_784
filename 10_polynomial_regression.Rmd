@@ -1,6 +1,5 @@
-# Polynomial regression, etc {#chapter-10}
+# Polynomial Regression, etc {#chapter-10}
 
-<!-- this should be called nonlinearity (and heteroskedasticity) and come before log-linear modeling --> 
 
 ```{r, echo = F}
 # Clean up check
@@ -26,7 +25,6 @@ One approach involves transforming the $X$-variable(s), which can be done in add
 
 Both polynomial and piecewise regression are very useful in practice and lead to advanced topics like splines and semi-parametric regression. They also turn out to be special cases of interactions, so we have already covered a lot of the technical details in Chapter \@ref(chapter-6) -- phew! 
 
-We also consider how to deal with heteroskedasticity. The short version is that heteroskedasticity affects the standard errors of regression coefficients, and, consequently, the t-values, p-values, and confidence intervals. There are lots of ways to make standard errors robust to heteroskedasticity, and we will focus on one widely used procedure called heteroskedasticity-corrected (HC) standard errors. 
 
 ## Polynomial regression {#polynomial-10}
 
@@ -349,41 +347,6 @@ par(mfrow = c(1, 2))
 plot(mod4, 1, col = "#4B9CD3")
 plot(mod4, 2, col = "#4B9CD3")
 ```
-
-## Heteroskedasticity {#heteroskedasticity-10}
-
-Heteroskedasticity in linear regression, and corrections thereof, is a pretty big topic in the methodological literature (see Cite:fox).  In this section we are just going to discuss one widely used solution, and how to implement it in `R`. 
-
-In terms of our example, we can see in the residual versus fitted plot in Figure \@ref(fig:piecewise3) that the residuals are less spread out for lower ranges of the fitted values (i.e., for $<12$ years of educ). As mentioned previously, heteroskedasticity will affect the standard errors of the regression coefficients, and consequently the t-tests, p-values, and confidence intervals. What this means is that the p-values for the regression coefficients will be wrong (usually too small) if the data are heteroskedastic but we mistakenly assume they are homoskedastic. Note that heteroskedasticity won't affect the estimated values of the coefficients (i.e., the $\widehat{b}$'s, and also doesn't affect R-squared or its F-test. 
-
-
-"Heteroskedasticity-corrected" (HC) standard errors do not assume the data homoskedastic. Technically, they can be used regardless of whether the homoskedasticity assumption is met. But, when the data are homoskedastic, the "regular" OLS standard errors are more efficient (i.e., precise). So, we usually don't want to make the correction unless there is evidence of heteroskedasticity in the data. HC standard errors are also sometimes called heteroskedasticity-consistent, heteroskedastcicity-robust, or just robust.  
-
-There are many different version of HC standard errors, but they are all equivalent with "large" samples. The simplest version is (see cite:Wooldridge)
-
-\[ \text{HCSE}_{\hat{b}_j} = \sqrt{\frac{\sum_{i=1}^N (X_{ij} - \widehat{X}_{ij})^2 (Y_i-\widehat{Y}_i)^2} {\sum_{i=1}^N (X_{ij} - \bar X_j)^2 (1 - R^2_j)}}
-(\#eq:se-10)
-\] 
-
-In this equation, $\widehat{X}_{ij}$ is the predicted value that results from regressing $X_j$ on the remaining $J-1$ predictors. Comparing this equation to Equation  \@ref(eq:se-4), the main difference is that the $(1 - R^2)$ term for the $Y$ variable is now replaced with a crossproduct of residuals for the $X_j$ and $Y$ variables. The equation is not very intuitive to look at, but the general idea is that it can be derived without assuming homoskedasticity. 
-
-The procedure for using HC standard errors in R has two steps. First, we estimate the HC standard errors. Then, we use the HC standard errors to compute the correct t-tests and p-values (or confidence intervals).  The following example shows how to implement HC standard errors in R, using the piecewise regression from Section \@ref(piecewise-10) wages example.
-
-The code is shown by default, because the main thing about this example is to see how it works in R -- you already know how to interpret SEs, t-tests, p-values, etc. Your will need two packages installed -- `car` and `lmtest` -- for this example to work. 
-
-```{r}
-## Make sure the required pacakges are installed
-# install.packages("car")
-# install.packages("lmtest")
-
-# Step 1. Use "hccm" to get the HC SEs for our piecewise model 
-hcse <- car::hccm(mod4)
-
-# Step 2. Use "coeftest" to compute t-tests with the HC SEs
-lmtest::coeftest(mod4, hcse)
-```
-
-This example is a bit unusual because the HC standard errors were actually a bit smaller than the regular OLS standard errors (see the output in Section \@ref(piecewise-10)) -- more often the opposite is true. Nonetheless, you should have no problems interpreting the output above.  
 
 ## Workbook
 

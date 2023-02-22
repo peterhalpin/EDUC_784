@@ -1,4 +1,4 @@
-# Assumption checking {#chapter-8}
+# Assumption Checking {#chapter-8}
 
 ```{r, echo = F}
 # Clean up check
@@ -29,11 +29,13 @@ Why do we care about assumption checking? Well, if the population assumptions of
 
 Basically, all of the numbers we get in the regression output from R could be wrong. 
 
-The philosophy of assumption checking is not to verify the assumptions or prove beyond doubt that they are true -- i.e., we are not *testing* assumptions, we are just checking them. Checking means we want to know if there are any problems with a regression model that might affect our conclusions (e.g., which predictors are significant). So, for example, we don’t really care if the residuals are normally distributed – we just care if there are any violations of this assumption that might be affecting the results our analysis. If there is no evidence that an assumption is problematic, we proceed with the main analysis as intended. We address ways to deal with "violations" of model assumptions in Chapter 9. 
+The philosophy of assumption checking is not to verify the assumptions or prove beyond doubt that they are true -- i.e., we are not *testing* assumptions, we are just checking them. Checking means we want to know if there are any problems with a regression model that might affect our conclusions (e.g., which predictors are significant). So, for example, we don’t really care if the residuals are normally distributed – we just care if there are any violations of this assumption that might be affecting the results our analysis. If there is no evidence that an assumption is problematic, we proceed with the main analysis as intended. 
 
 Assumption checking generally involves plotting the residuals from a regression model and trying to infer what the plots tell us about the population model. The focus of this chapter is to introduce you to these plots and how to interpret them. Sometimes assumption checking can feel a bit like reading tea leaves, because interpreting plots can be pretty subjective. Honing your interpretation of will happen gradually with experience. 
 
-*Regression diagnostics* are a related topic that we also introduce this chapter. These are procedures for detecting outliers. Unlike assumption checking, which focuses on the model *per se*, diagnostics focus on whether individual data points are having an undue influence on the model (e.g., the predicted values or the parameter estimates). We only cover the basics behind diagnostics in this chapter and the material is optional (i.e., it will not be assessed in this course, but you may find it useful for your research). 
+This chapter focusses on checking assumptions, and the following two chapters talk about strategies for dealing with assumption violations. There is one exception -- in this chapter we address how to deal with heteroskedasticity. The short version is that heteroskedasticity affects the standard errors of regression coefficients (and, consequently, the t-values, p-values, and confidence intervals). However, there are corrections to the standard errors that can be used to address this. Since the solution to this assumption is relatively "plug-and-play", we cover it in this chapter. In particular, we will focus on one widely used procedure called heteroskedasticity-corrected (HC) standard errors. 
+
+*Regression diagnostics* are a related topic that we also introduced this chapter. These are procedures for detecting outliers. Unlike assumption checking, which focuses on the model *per se*, diagnostics focus on whether individual data points are having an undue influence on the model (e.g., the predicted values or the parameter estimates). We only cover the basics behind diagnostics in this chapter and the material is optional (i.e., it will not be assessed in this course, but you may find it useful for your research). 
 
 Outlier detection can be useful for identifying influential data points, but it is almost never the the case that data points should be omitted because they are outliers. Unless you can find something specifically wrong with a data point (e.g., a data entry error) you should not omit data. A better way to deal with outliers is by using statistical procedures that are specifically designed to deal with them, called *robust statistics*. Robust regression is an advanced topic that we won't get to in this course, but check out this resource if you are interested and feel free to ask questions in class: https://cran.r-project.org/web/views/Robust.html. 
 
@@ -205,6 +207,46 @@ To check the assumption of homoskedasticity, we can use a residual versus fitted
 * If the range does show a pattern (e.g., cone, bow-tie, ellipse), then we should worry about this assumption. 
 
 * If the assumption is violated, it will affect the standard errors of the regression coefficients as well as the resulting t-tests and confidence intervals. There are heteroskedasticity robust standard errors that can address this issue (Chapter 9). 
+
+
+### Dealing with Heteroskedasticity {#heteroskedasticity-8}
+
+**Under construction** 
+
+As mentionend above, heteroskedasticity affects the standard errors of regression coefficients, and, consequently, the t-values, p-values, and confidence intervals. There are lots of ways to make standard errors robust to heteroskedasticity, and we will focus on one widely used procedure called heteroskedasticity-corrected (HC) standard errors. 
+Heteroskedasticity in linear regression, and corrections thereof, is a pretty big topic in the methodological literature (see Cite:fox).  In this section we are just going to discuss one widely used solution, and how to implement it in `R`. 
+
+In terms of our example, we can see in the residual versus fitted plot in Figure \@ref(fig:piecewise3) that the residuals are less spread out for lower ranges of the fitted values (i.e., for $<12$ years of educ). As mentioned previously, heteroskedasticity will affect the standard errors of the regression coefficients, and consequently the t-tests, p-values, and confidence intervals. What this means is that the p-values for the regression coefficients will be wrong (usually too small) if the data are heteroskedastic but we mistakenly assume they are homoskedastic. Note that heteroskedasticity won't affect the estimated values of the coefficients (i.e., the $\widehat{b}$'s, and also doesn't affect R-squared or its F-test. 
+
+
+"Heteroskedasticity-corrected" (HC) standard errors do not assume the data homoskedastic. Technically, they can be used regardless of whether the homoskedasticity assumption is met. But, when the data are homoskedastic, the "regular" OLS standard errors are more efficient (i.e., precise). So, we usually don't want to make the correction unless there is evidence of heteroskedasticity in the data. HC standard errors are also sometimes called heteroskedasticity-consistent, heteroskedastcicity-robust, or just robust.  
+
+There are many different version of HC standard errors, but they are all equivalent with "large" samples. The simplest version is (see cite:Wooldridge)
+
+\[ \text{HCSE}_{\hat{b}_j} = \sqrt{\frac{\sum_{i=1}^N (X_{ij} - \widehat{X}_{ij})^2 (Y_i-\widehat{Y}_i)^2} {\sum_{i=1}^N (X_{ij} - \bar X_j)^2 (1 - R^2_j)}}
+(\#eq:se-10)
+\] 
+
+In this equation, $\widehat{X}_{ij}$ is the predicted value that results from regressing $X_j$ on the remaining $J-1$ predictors. Comparing this equation to Equation  \@ref(eq:se-4), the main difference is that the $(1 - R^2)$ term for the $Y$ variable is now replaced with a crossproduct of residuals for the $X_j$ and $Y$ variables. The equation is not very intuitive to look at, but the general idea is that it can be derived without assuming homoskedasticity. 
+
+The procedure for using HC standard errors in R has two steps. First, we estimate the HC standard errors. Then, we use the HC standard errors to compute the correct t-tests and p-values (or confidence intervals).  The following example shows how to implement HC standard errors in R, using the piecewise regression from Section \@ref(piecewise-10) wages example.
+
+The code is shown by default, because the main thing about this example is to see how it works in R -- you already know how to interpret SEs, t-tests, p-values, etc. Your will need two packages installed -- `car` and `lmtest` -- for this example to work. 
+
+```{r}
+## Make sure the required pacakges are installed
+# install.packages("car")
+# install.packages("lmtest")
+
+# Step 1. Use "hccm" to get the HC SEs for our piecewise model 
+hcse <- car::hccm(mod4)
+
+# Step 2. Use "coeftest" to compute t-tests with the HC SEs
+lmtest::coeftest(mod4, hcse)
+```
+
+This example is a bit unusual because the HC standard errors were actually a bit smaller than the regular OLS standard errors (see the output in Section \@ref(piecewise-10)) -- more often the opposite is true. Nonetheless, you should have no problems interpreting the output above.  
+
 
 ## Normality {#normality-8}
 

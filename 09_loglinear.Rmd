@@ -1,4 +1,4 @@
-# Log-linear regression {#chapter-9}
+# Log-linear Regression {#chapter-9}
 
 ```{r, echo = F}
 # Clean up check

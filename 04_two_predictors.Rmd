@@ -206,8 +206,8 @@ Solving the minization problem (setting derivatives to zero) leads to the follow
 
 \begin{align}
 b_0 & = \bar Y - b_1 \bar X_1 - b_2 \bar X_2 \\ \\ 
-b_1 & = \frac{r_{Y1} - r_{Y2} r_{12}}{1 - r^2_{12}} \frac{s_1}{s_Y} \\ \\
-b_2 & = \frac{r_{Y2} - r_{Y1} r_{12}}{1 - r^2_{12}} \frac{s_2}{s_Y}
+b_1 & = \frac{r_{Y1} - r_{Y2} r_{12}}{1 - r^2_{12}} \frac{s_Y}{s_1} \\ \\
+b_2 & = \frac{r_{Y2} - r_{Y1} r_{12}}{1 - r^2_{12}} \frac{s_Y}{s_2}
 (\#eq:2pred)
 \end{align}
 
@@ -304,7 +304,7 @@ Many researchers go a step further and standardize all of the variables $Y, X_1,
 
 The $\beta$-weights are related to the regular regression coefficients from Section \@ref(ols-4):
 
-\[ \beta_j = b_j \frac{s_Y}{s_j}. \] 
+\[ \beta_j = b_j \frac{s_j}{s_Y}. \] 
 
 However, the `lm` function in R does not provide an option to report standardized output. So, if you want to get the $\beta$-coefficients in R, it's easiest to just standardized the variables first and then do the regression with the standardized variables. 
 

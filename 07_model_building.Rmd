@@ -19,7 +19,7 @@ Up until this point we have considered models with only a handful of predictors.
 
 There are two basic approaches to model building with many predictors. A *simulataneous* model is a single regression model that includes all predictors of interest. When there are many predictors, this is sometimes referred to the "kitchen sink" approach -- just put everything in the model (including the kitchen sink). Conceptually, this approach has the advantage that it mitigates  omitted variable bias and therefore helps justify the causal interpretation of regression coefficients. However, in practice it can lead to computational problems, especially when highly correlated predictors are included in the model. We discuss this situation in Section \@ref(too-many-predictors-7)
 
-*Hierarchical* model building is an alternative approach in which predictors are added into a model sequentially. A hierarchical approach is most appropriate when the predictors can be partitioned into conceptual "blocks", and the blocks are added into the model one at a time. A block is just a conceptual grouping of one or more predictors, and we will some examples as well as in Sections \@ref(hierarchical-models-7) and \@ref(worked-example-7))
+*Hierarchical* model building is an alternative approach in which predictors are added into a model sequentially. A hierarchical approach is most appropriate when the predictors can be partitioned into conceptual "blocks", and the blocks are added into the model one at a time. A block is just a conceptual grouping of one or more predictors, and we will some examples below as well as in Sections \@ref(hierarchical-models-7) and \@ref(worked-example-7).
 The rationale for adding the blocks of predictors sequentially is to isolate the proportion of variance in the outcome (i.e., R-squared) attributable to each block.  
 
 Let's illustrate the difference between these two approaches with a hypothetical example. In the example, we seek to explain Reading Achievement using predictors that can be conceptually grouped into student and curriculum factors. 
@@ -287,10 +287,10 @@ What is better: more predictors or fewer? While there is no definitive answer to
 
 * The correlation among the predictors (AKA multicollinearity). 
 
-In order to understand the effect of these factors on multiple regression we need the formula for the standard error of a regression coefficient, which is presented  below: 
+In order to understand the effect of these factors on multiple regression, its helpful to refer to the formula for the standard error of a regression coefficient (from section \@ref(inference-for-slopes-4)), which is presented again below: 
 
 \[ 
-s_{b_k} = \frac{s_Y}{s_k} \sqrt{\frac{1 - R^2}{N - K - 1}} \times \sqrt{\frac{1}{1 - R_k^2}} 
+s_{b_k} = \frac{s_Y}{s_k} \sqrt{\frac{1 - R^2}{N - K - 1}} \times \sqrt{\frac{1}{1 - R_k^2}}.
 \]
 
 Also recall that the standard error is the inverse of the precision, and that $R_k^2$ is the R-squared from the regression of the $k$-th predictor on the remaining $K-1$ predictors. 
@@ -303,7 +303,7 @@ We can see from the equation for $s_{b_k}$ that increasing the number of predict
 
 will get larger (and hence the standard error will get larger) if the increase in the number of predictors is not compensated for by an increase in $R^2.$ In other words, predictors that do not add explanatory power to the model (i.e., do not increase R-squared) will lead to reduced precision for all of the regression coefficients. A similar story applies to the adjusted R-squared statistic discussed in Section \@ref(rsquared-4). 
 
-So long as N >> K, the effect of the number of predictors is negligible. But when the number of predictors gets close to the sample size, there is a problem. Many people seek "rules of thumb" for the ratio of observations to predictors. The only hard rule is $K > N - 1$, but if $N/K < 30$-ish you should start worrying about the number of predictors in your model. If you really want to know how large your sample size needs to be, do a power analysis (Section \@ref(power-2)). 
+So long as N >> K, the effect of the number of predictors is negligible. But when the number of predictors gets close to the sample size, the precision of the regression coefficients can become inflated.  Many people seek "rules of thumb" for the ratio of observations to predictors. This is just a complicated way of asking how large the sample size needs to be, and if you want to answer that question you should do a power analysis (Section \@ref(power-2)). That said, if $N/K < 30$-ish you should start probably worrying about the number of predictors in your model.
 
 ### Multicollinearity 
 

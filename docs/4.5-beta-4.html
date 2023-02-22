@@ -23,7 +23,7 @@
 <meta name="author" content="Peter Halpin" />
 
 
-<meta name="date" content="2023-02-02" />
+<meta name="date" content="2023-02-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -153,6 +153,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.4" data-path="2.4-rsquared-2.html"><a href="2.4-rsquared-2.html"><i class="fa fa-check"></i><b>2.4</b> R-squared</a>
 <ul>
 <li class="chapter" data-level="2.4.1" data-path="2.4-rsquared-2.html"><a href="2.4-rsquared-2.html#derivation"><i class="fa fa-check"></i><b>2.4.1</b> Derivation*</a></li>
+<li class="chapter" data-level="2.4.2" data-path="2.4-rsquared-2.html"><a href="2.4-rsquared-2.html#additional-details"><i class="fa fa-check"></i><b>2.4.2</b> Additional details*</a></li>
 </ul></li>
 <li class="chapter" data-level="2.5" data-path="2.5-population-model-2.html"><a href="2.5-population-model-2.html"><i class="fa fa-check"></i><b>2.5</b> The population model</a></li>
 <li class="chapter" data-level="2.6" data-path="2.6-notation-2.html"><a href="2.6-notation-2.html"><i class="fa fa-check"></i><b>2.6</b> Clarifying notation</a></li>
@@ -245,7 +246,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.3" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html"><i class="fa fa-check"></i><b>5.3</b> Binary predictors</a>
 <ul>
 <li class="chapter" data-level="5.3.1" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html#relation-with-t-tests"><i class="fa fa-check"></i><b>5.3.1</b> Relation with t-tests</a></li>
-<li class="chapter" data-level="5.3.2" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html#summary-1"><i class="fa fa-check"></i><b>5.3.2</b> Summary</a></li>
+<li class="chapter" data-level="5.3.2" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html#some-math"><i class="fa fa-check"></i><b>5.3.2</b> Some math*</a></li>
+<li class="chapter" data-level="5.3.3" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html#summary-1"><i class="fa fa-check"></i><b>5.3.3</b> Summary</a></li>
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="5.4-reference-group-coding-5.html"><a href="5.4-reference-group-coding-5.html"><i class="fa fa-check"></i><b>5.4</b> Reference-group coding</a>
 <ul>
@@ -537,14 +539,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The short answer is, “no.” ATL is on a scale of 1-4 whereas SES ranges from 30-72. In order to make the regression coefficients more comparable, we can standardize the <span class="math inline">\(X\)</span> variables so that they have the same variance.</p>
 <p>Many researchers go a step further and standardize all of the variables <span class="math inline">\(Y, X_1, X_2\)</span> to be z-scores with M = 0 and SD = 1. The resulting regression coefficients are often called <span class="math inline">\(\beta\)</span>-coefficients or <span class="math inline">\(\beta\)</span>-weights.</p>
 <p>The <span class="math inline">\(\beta\)</span>-weights are related to the regular regression coefficients from Section <a href="4.3-ols-4.html#ols-4">4.3</a>:</p>
-<p><span class="math display">\[ \beta_j = b_j \frac{s_Y}{s_j}. \]</span></p>
+<p><span class="math display">\[ \beta_j = b_j \frac{s_j}{s_Y}. \]</span></p>
 <p>However, the <code>lm</code> function in R does not provide an option to report standardized output. So, if you want to get the <span class="math inline">\(\beta\)</span>-coefficients in R, it’s easiest to just standardized the variables first and then do the regression with the standardized variables.</p>
 <p>However you compute them, the interpretation of the <span class="math inline">\(\beta\)</span>-coefficients is in terms of the standard deviation units of both the <span class="math inline">\(Y\)</span> variable and the <span class="math inline">\(X\)</span> variable – e.g., increasing <span class="math inline">\(X_j\)</span> by one standard deviation increases <span class="math inline">\(\hat Y\)</span> by <span class="math inline">\(\beta_j\)</span> standard deviations (holding the other predictor(s) constant).</p>
 <p>For the ECLS example, the <span class="math inline">\(\beta\)</span>-weights are reported below. Notice that standardizing the coefficients doesn’t change the t-tests or the p-values of the regression slopes. It just changes the scale of the regression slopes. It also doesn’t affect R-squared or its F-test. The intercept, however, is now equal to zero in the sample (see the equation for the intercept in Section <a href="4.3-ols-4.html#ols-4">4.3</a>)</p>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="4.5-beta-4.html#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Unlike other software, R doesn&#39;t have a convenience functions for beta coefficients. </span></span>
-<span id="cb67-2"><a href="4.5-beta-4.html#cb67-2" aria-hidden="true" tabindex="-1"></a>z_example_data <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">scale</span>(example_data))</span>
-<span id="cb67-3"><a href="4.5-beta-4.html#cb67-3" aria-hidden="true" tabindex="-1"></a>z_mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(Math <span class="sc">~</span> SES  <span class="sc">+</span> ATL, <span class="at">data =</span> z_example_data)</span>
-<span id="cb67-4"><a href="4.5-beta-4.html#cb67-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(z_mod)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="4.5-beta-4.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Unlike other software, R doesn&#39;t have a convenience functions for beta coefficients. </span></span>
+<span id="cb6-2"><a href="4.5-beta-4.html#cb6-2" aria-hidden="true" tabindex="-1"></a>z_example_data <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">scale</span>(example_data))</span>
+<span id="cb6-3"><a href="4.5-beta-4.html#cb6-3" aria-hidden="true" tabindex="-1"></a>z_mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(Math <span class="sc">~</span> SES  <span class="sc">+</span> ATL, <span class="at">data =</span> z_example_data)</span>
+<span id="cb6-4"><a href="4.5-beta-4.html#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(z_mod)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = Math ~ SES + ATL, data = z_example_data)

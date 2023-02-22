@@ -148,7 +148,7 @@ Before moving on to discuss what is missing from the regression model in Equatio
 
 To see this we can compare the output of the t-test in Section \@ref(example-6) with the regression output shown above. In the t-test, the group means for Math Achievement were 55.47 for Females and 58.63 for males, so the mean difference was
 
-\[58.63 - 55.47 58.63 - 55.47 = 3.16 \]
+\[58.63 - 55.47 = 3.16 \]
 
 However, the regression coefficient on gender in the multiple regression model above is equal to $3.50$. Why the difference? 
 

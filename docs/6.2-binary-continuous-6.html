@@ -23,7 +23,7 @@
 <meta name="author" content="Peter Halpin" />
 
 
-<meta name="date" content="2023-02-02" />
+<meta name="date" content="2023-02-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -153,6 +153,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.4" data-path="2.4-rsquared-2.html"><a href="2.4-rsquared-2.html"><i class="fa fa-check"></i><b>2.4</b> R-squared</a>
 <ul>
 <li class="chapter" data-level="2.4.1" data-path="2.4-rsquared-2.html"><a href="2.4-rsquared-2.html#derivation"><i class="fa fa-check"></i><b>2.4.1</b> Derivation*</a></li>
+<li class="chapter" data-level="2.4.2" data-path="2.4-rsquared-2.html"><a href="2.4-rsquared-2.html#additional-details"><i class="fa fa-check"></i><b>2.4.2</b> Additional details*</a></li>
 </ul></li>
 <li class="chapter" data-level="2.5" data-path="2.5-population-model-2.html"><a href="2.5-population-model-2.html"><i class="fa fa-check"></i><b>2.5</b> The population model</a></li>
 <li class="chapter" data-level="2.6" data-path="2.6-notation-2.html"><a href="2.6-notation-2.html"><i class="fa fa-check"></i><b>2.6</b> Clarifying notation</a></li>
@@ -209,33 +210,39 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.1.1" data-path="4.1-ecls-4.html"><a href="4.1-ecls-4.html#correlation-matrices"><i class="fa fa-check"></i><b>4.1.1</b> Correlation matrices</a></li>
 </ul></li>
 <li class="chapter" data-level="4.2" data-path="4.2-the-two-predictor-model.html"><a href="4.2-the-two-predictor-model.html"><i class="fa fa-check"></i><b>4.2</b> The two-predictor model</a></li>
-<li class="chapter" data-level="4.3" data-path="4.3-ols-4.html"><a href="4.3-ols-4.html"><i class="fa fa-check"></i><b>4.3</b> OLS with two predictors</a></li>
-<li class="chapter" data-level="4.4" data-path="4.4-interpretation-4.html"><a href="4.4-interpretation-4.html"><i class="fa fa-check"></i><b>4.4</b> Interpreting the coefficients</a>
+<li class="chapter" data-level="4.3" data-path="4.3-comparison-4.html"><a href="4.3-comparison-4.html"><i class="fa fa-check"></i><b>4.3</b> Multiple vs simple regression</a>
 <ul>
-<li class="chapter" data-level="4.4.1" data-path="4.4-interpretation-4.html"><a href="4.4-interpretation-4.html#holding-the-other-predictor-constant"><i class="fa fa-check"></i><b>4.4.1</b> “Holding the other predictor constant”</a></li>
-<li class="chapter" data-level="4.4.2" data-path="4.4-interpretation-4.html"><a href="4.4-interpretation-4.html#controlling-for-the-other-predictor"><i class="fa fa-check"></i><b>4.4.2</b> “Controlling for the other predictor”</a></li>
-<li class="chapter" data-level="4.4.3" data-path="4.4-interpretation-4.html"><a href="4.4-interpretation-4.html#the-ecls-example"><i class="fa fa-check"></i><b>4.4.3</b> The ECLS example</a></li>
+<li class="chapter" data-level="4.3.1" data-path="4.3-comparison-4.html"><a href="4.3-comparison-4.html#what-is-the-missing-ingredient"><i class="fa fa-check"></i><b>4.3.1</b> What is the missing ingredient?</a></li>
 </ul></li>
-<li class="chapter" data-level="4.5" data-path="4.5-beta-4.html"><a href="4.5-beta-4.html"><i class="fa fa-check"></i><b>4.5</b> Standardized coefficients</a></li>
-<li class="chapter" data-level="4.6" data-path="4.6-rsquared-4.html"><a href="4.6-rsquared-4.html"><i class="fa fa-check"></i><b>4.6</b> (Multiple) R-squared</a>
+<li class="chapter" data-level="4.4" data-path="4.4-ols-4.html"><a href="4.4-ols-4.html"><i class="fa fa-check"></i><b>4.4</b> OLS with two predictors</a></li>
+<li class="chapter" data-level="4.5" data-path="4.5-interpretation-4.html"><a href="4.5-interpretation-4.html"><i class="fa fa-check"></i><b>4.5</b> Interpreting the coefficients</a>
 <ul>
-<li class="chapter" data-level="4.6.1" data-path="4.6-rsquared-4.html"><a href="4.6-rsquared-4.html#relation-with-simple-regression"><i class="fa fa-check"></i><b>4.6.1</b> Relation with simple regression</a></li>
-<li class="chapter" data-level="4.6.2" data-path="4.6-rsquared-4.html"><a href="4.6-rsquared-4.html#adjusted-r-squared"><i class="fa fa-check"></i><b>4.6.2</b> Adjusted R-squared</a></li>
-<li class="chapter" data-level="4.6.3" data-path="4.6-rsquared-4.html"><a href="4.6-rsquared-4.html#the-multiple-correlation"><i class="fa fa-check"></i><b>4.6.3</b> The multiple correlation</a></li>
+<li class="chapter" data-level="4.5.1" data-path="4.5-interpretation-4.html"><a href="4.5-interpretation-4.html#holding-the-other-predictor-constant"><i class="fa fa-check"></i><b>4.5.1</b> “Holding the other predictor constant”</a></li>
+<li class="chapter" data-level="4.5.2" data-path="4.5-interpretation-4.html"><a href="4.5-interpretation-4.html#controlling-for-the-other-predictor"><i class="fa fa-check"></i><b>4.5.2</b> “Controlling for the other predictor”</a></li>
+<li class="chapter" data-level="4.5.3" data-path="4.5-interpretation-4.html"><a href="4.5-interpretation-4.html#the-ecls-example"><i class="fa fa-check"></i><b>4.5.3</b> The ECLS example</a></li>
+<li class="chapter" data-level="4.5.4" data-path="4.5-interpretation-4.html"><a href="4.5-interpretation-4.html#other-interpretations"><i class="fa fa-check"></i><b>4.5.4</b> Other interpretations</a></li>
 </ul></li>
-<li class="chapter" data-level="4.7" data-path="4.7-inference-for-slopes-4.html"><a href="4.7-inference-for-slopes-4.html"><i class="fa fa-check"></i><b>4.7</b> Inference for the slopes</a>
+<li class="chapter" data-level="4.6" data-path="4.6-beta-4.html"><a href="4.6-beta-4.html"><i class="fa fa-check"></i><b>4.6</b> Standardized coefficients</a></li>
+<li class="chapter" data-level="4.7" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html"><i class="fa fa-check"></i><b>4.7</b> (Multiple) R-squared</a>
 <ul>
-<li class="chapter" data-level="4.7.1" data-path="4.7-inference-for-slopes-4.html"><a href="4.7-inference-for-slopes-4.html#precision-of-hat-b"><i class="fa fa-check"></i><b>4.7.1</b> Precision of <span class="math inline">\(\hat b\)</span></a></li>
+<li class="chapter" data-level="4.7.1" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html#relation-with-simple-regression"><i class="fa fa-check"></i><b>4.7.1</b> Relation with simple regression</a></li>
+<li class="chapter" data-level="4.7.2" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html#relation-with-beta-weights"><i class="fa fa-check"></i><b>4.7.2</b> Relation with <span class="math inline">\(\beta\)</span>-weights</a></li>
+<li class="chapter" data-level="4.7.3" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html#adjusted-r-squared"><i class="fa fa-check"></i><b>4.7.3</b> Adjusted R-squared</a></li>
+<li class="chapter" data-level="4.7.4" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html#the-multiple-correlation"><i class="fa fa-check"></i><b>4.7.4</b> The multiple correlation</a></li>
 </ul></li>
-<li class="chapter" data-level="4.8" data-path="4.8-inference-for-rsquared-4.html"><a href="4.8-inference-for-rsquared-4.html"><i class="fa fa-check"></i><b>4.8</b> Inference for R-squared</a></li>
-<li class="chapter" data-level="4.9" data-path="4.9-workbook.html"><a href="4.9-workbook.html"><i class="fa fa-check"></i><b>4.9</b> Workbook</a></li>
-<li class="chapter" data-level="4.10" data-path="4.10-exercises.html"><a href="4.10-exercises.html"><i class="fa fa-check"></i><b>4.10</b> Exercises</a>
+<li class="chapter" data-level="4.8" data-path="4.8-inference-for-slopes-4.html"><a href="4.8-inference-for-slopes-4.html"><i class="fa fa-check"></i><b>4.8</b> Inference for the slopes</a>
 <ul>
-<li class="chapter" data-level="4.10.1" data-path="4.10-exercises.html"><a href="4.10-exercises.html#the-ecls250-data"><i class="fa fa-check"></i><b>4.10.1</b> The ECLS250 data</a></li>
-<li class="chapter" data-level="4.10.2" data-path="4.10-exercises.html"><a href="4.10-exercises.html#multiple-regression-with-lm"><i class="fa fa-check"></i><b>4.10.2</b> Multiple regression with <code>lm</code></a></li>
-<li class="chapter" data-level="4.10.3" data-path="4.10-exercises.html"><a href="4.10-exercises.html#relations-between-simple-and-multiple-regression"><i class="fa fa-check"></i><b>4.10.3</b> Relations between simple and multiple regression</a></li>
-<li class="chapter" data-level="4.10.4" data-path="4.10-exercises.html"><a href="4.10-exercises.html#inference-with-2-predictors"><i class="fa fa-check"></i><b>4.10.4</b> Inference with 2 predictors</a></li>
-<li class="chapter" data-level="4.10.5" data-path="4.10-exercises.html"><a href="4.10-exercises.html#apa-reporting-of-results"><i class="fa fa-check"></i><b>4.10.5</b> APA reporting of results</a></li>
+<li class="chapter" data-level="4.8.1" data-path="4.8-inference-for-slopes-4.html"><a href="4.8-inference-for-slopes-4.html#precision-of-hat-b"><i class="fa fa-check"></i><b>4.8.1</b> Precision of <span class="math inline">\(\hat b\)</span></a></li>
+</ul></li>
+<li class="chapter" data-level="4.9" data-path="4.9-inference-for-rsquared-4.html"><a href="4.9-inference-for-rsquared-4.html"><i class="fa fa-check"></i><b>4.9</b> Inference for R-squared</a></li>
+<li class="chapter" data-level="4.10" data-path="4.10-workbook.html"><a href="4.10-workbook.html"><i class="fa fa-check"></i><b>4.10</b> Workbook</a></li>
+<li class="chapter" data-level="4.11" data-path="4.11-exercises.html"><a href="4.11-exercises.html"><i class="fa fa-check"></i><b>4.11</b> Exercises</a>
+<ul>
+<li class="chapter" data-level="4.11.1" data-path="4.11-exercises.html"><a href="4.11-exercises.html#the-ecls250-data"><i class="fa fa-check"></i><b>4.11.1</b> The ECLS250 data</a></li>
+<li class="chapter" data-level="4.11.2" data-path="4.11-exercises.html"><a href="4.11-exercises.html#multiple-regression-with-lm"><i class="fa fa-check"></i><b>4.11.2</b> Multiple regression with <code>lm</code></a></li>
+<li class="chapter" data-level="4.11.3" data-path="4.11-exercises.html"><a href="4.11-exercises.html#relations-between-simple-and-multiple-regression"><i class="fa fa-check"></i><b>4.11.3</b> Relations between simple and multiple regression</a></li>
+<li class="chapter" data-level="4.11.4" data-path="4.11-exercises.html"><a href="4.11-exercises.html#inference-with-2-predictors"><i class="fa fa-check"></i><b>4.11.4</b> Inference with 2 predictors</a></li>
+<li class="chapter" data-level="4.11.5" data-path="4.11-exercises.html"><a href="4.11-exercises.html#apa-reporting-of-results"><i class="fa fa-check"></i><b>4.11.5</b> APA reporting of results</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="5-chapter-5.html"><a href="5-chapter-5.html"><i class="fa fa-check"></i><b>5</b> Categorical Predictors</a>
@@ -245,7 +252,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.3" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html"><i class="fa fa-check"></i><b>5.3</b> Binary predictors</a>
 <ul>
 <li class="chapter" data-level="5.3.1" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html#relation-with-t-tests"><i class="fa fa-check"></i><b>5.3.1</b> Relation with t-tests</a></li>
-<li class="chapter" data-level="5.3.2" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html#summary-1"><i class="fa fa-check"></i><b>5.3.2</b> Summary</a></li>
+<li class="chapter" data-level="5.3.2" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html#some-math"><i class="fa fa-check"></i><b>5.3.2</b> Some math*</a></li>
+<li class="chapter" data-level="5.3.3" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html#summary-1"><i class="fa fa-check"></i><b>5.3.3</b> Summary</a></li>
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="5.4-reference-group-coding-5.html"><a href="5.4-reference-group-coding-5.html"><i class="fa fa-check"></i><b>5.4</b> Reference-group coding</a>
 <ul>
@@ -544,23 +552,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><span class="math inline">\(X_2\)</span> is Gender (binary, with Female = 0 and Male = 1)</li>
 </ul>
 <p>Note that this model does <strong>not</strong> include an interaction between the two predictors – we are first going to consider what is “missing” from the usual regression model, and then use this to motivate inclusion of another predictor that represents the interaction. To get an initial sense of what is missing, the model in Equation <a href="6.2-binary-continuous-6.html#eq:yhat-6a">(6.1)</a> is plotted Figure <a href="6.2-binary-continuous-6.html#fig:math-reading-2">6.2</a> – can you spot the difference with Figure <a href="6.1-example-6.html#fig:math-reading-1">6.1</a>?</p>
-<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="6.2-binary-continuous-6.html#cb183-1" aria-hidden="true" tabindex="-1"></a>mod3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(achmat12 <span class="sc">~</span> achrdg12 <span class="sc">+</span> gender, <span class="at">data =</span> NELS)</span>
-<span id="cb183-2"><a href="6.2-binary-continuous-6.html#cb183-2" aria-hidden="true" tabindex="-1"></a>a_females <span class="ot">&lt;-</span> <span class="fu">coef</span>(mod3)[<span class="dv">1</span>]</span>
-<span id="cb183-3"><a href="6.2-binary-continuous-6.html#cb183-3" aria-hidden="true" tabindex="-1"></a>b_females <span class="ot">&lt;-</span> <span class="fu">coef</span>(mod3)[<span class="dv">2</span>]</span>
-<span id="cb183-4"><a href="6.2-binary-continuous-6.html#cb183-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb183-5"><a href="6.2-binary-continuous-6.html#cb183-5" aria-hidden="true" tabindex="-1"></a>a_males <span class="ot">&lt;-</span> a_females <span class="sc">+</span> <span class="fu">coef</span>(mod3)[<span class="dv">3</span>]</span>
-<span id="cb183-6"><a href="6.2-binary-continuous-6.html#cb183-6" aria-hidden="true" tabindex="-1"></a>b_males <span class="ot">&lt;-</span> b_females </span>
-<span id="cb183-7"><a href="6.2-binary-continuous-6.html#cb183-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb183-8"><a href="6.2-binary-continuous-6.html#cb183-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot reading and math for females</span></span>
-<span id="cb183-9"><a href="6.2-binary-continuous-6.html#cb183-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(achrdg12[females], achmat12[females], <span class="at">xlab =</span> <span class="st">&quot;reading&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;math&quot;</span>)</span>
-<span id="cb183-10"><a href="6.2-binary-continuous-6.html#cb183-10" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(a_females, b_females, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
-<span id="cb183-11"><a href="6.2-binary-continuous-6.html#cb183-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb183-12"><a href="6.2-binary-continuous-6.html#cb183-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Add points and line for males</span></span>
-<span id="cb183-13"><a href="6.2-binary-continuous-6.html#cb183-13" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(achrdg12[males], achmat12[males], <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>, <span class="at">pch =</span> <span class="dv">2</span>)</span>
-<span id="cb183-14"><a href="6.2-binary-continuous-6.html#cb183-14" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(a_males, b_males, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
-<span id="cb183-15"><a href="6.2-binary-continuous-6.html#cb183-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb183-16"><a href="6.2-binary-continuous-6.html#cb183-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a legend</span></span>
-<span id="cb183-17"><a href="6.2-binary-continuous-6.html#cb183-17" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="at">x =</span> <span class="st">&quot;topleft&quot;</span>, <span class="at">legend =</span> <span class="fu">levels</span>(gender), <span class="at">pch =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="at">col =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="st">&quot;#4B9CD3&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="6.2-binary-continuous-6.html#cb4-1" aria-hidden="true" tabindex="-1"></a>mod3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(achmat12 <span class="sc">~</span> achrdg12 <span class="sc">+</span> gender, <span class="at">data =</span> NELS)</span>
+<span id="cb4-2"><a href="6.2-binary-continuous-6.html#cb4-2" aria-hidden="true" tabindex="-1"></a>a_females <span class="ot">&lt;-</span> <span class="fu">coef</span>(mod3)[<span class="dv">1</span>]</span>
+<span id="cb4-3"><a href="6.2-binary-continuous-6.html#cb4-3" aria-hidden="true" tabindex="-1"></a>b_females <span class="ot">&lt;-</span> <span class="fu">coef</span>(mod3)[<span class="dv">2</span>]</span>
+<span id="cb4-4"><a href="6.2-binary-continuous-6.html#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="6.2-binary-continuous-6.html#cb4-5" aria-hidden="true" tabindex="-1"></a>a_males <span class="ot">&lt;-</span> a_females <span class="sc">+</span> <span class="fu">coef</span>(mod3)[<span class="dv">3</span>]</span>
+<span id="cb4-6"><a href="6.2-binary-continuous-6.html#cb4-6" aria-hidden="true" tabindex="-1"></a>b_males <span class="ot">&lt;-</span> b_females </span>
+<span id="cb4-7"><a href="6.2-binary-continuous-6.html#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="6.2-binary-continuous-6.html#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot reading and math for females</span></span>
+<span id="cb4-9"><a href="6.2-binary-continuous-6.html#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(achrdg12[females], achmat12[females], <span class="at">xlab =</span> <span class="st">&quot;reading&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;math&quot;</span>)</span>
+<span id="cb4-10"><a href="6.2-binary-continuous-6.html#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(a_females, b_females, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb4-11"><a href="6.2-binary-continuous-6.html#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="6.2-binary-continuous-6.html#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Add points and line for males</span></span>
+<span id="cb4-13"><a href="6.2-binary-continuous-6.html#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(achrdg12[males], achmat12[males], <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>, <span class="at">pch =</span> <span class="dv">2</span>)</span>
+<span id="cb4-14"><a href="6.2-binary-continuous-6.html#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(a_males, b_males, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb4-15"><a href="6.2-binary-continuous-6.html#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-16"><a href="6.2-binary-continuous-6.html#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a legend</span></span>
+<span id="cb4-17"><a href="6.2-binary-continuous-6.html#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="at">x =</span> <span class="st">&quot;topleft&quot;</span>, <span class="at">legend =</span> <span class="fu">levels</span>(gender), <span class="at">pch =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="at">col =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="st">&quot;#4B9CD3&quot;</span>))</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:math-reading-2"></span>
 <img src="_main_files/figure-html/math-reading-2-1.png" alt="Math Achievement, Reading Achievement, and Gender (No Interaction)." width="672" />
 <p class="caption">
@@ -582,14 +590,14 @@ Figure 6.2: Math Achievement, Reading Achievement, and Gender (No Interaction).
 <li>The difference between the predicted values (i.e., the predicted gender gap in Math Achievement) is a constant, and is equal to the regression coefficient for Gender (<span class="math inline">\(b_2\)</span>)</li>
 </ul>
 <p>The regression coefficients for the example data are shown below. <strong>Please use these numbers to provide an interpretation of the simple trends and the gender gap in Math Achievement for the NELS example</strong> (Don’t worry about statistical significance, just focus on the meaning of the coefficients.)</p>
-<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="6.2-binary-continuous-6.html#cb184-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(mod3)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="6.2-binary-continuous-6.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(mod3)</span></code></pre></div>
 <pre><code>## (Intercept)    achrdg12  genderMale 
 ##     19.9812      0.6355      3.5017</code></pre>
 <div id="marginal-means" class="section level3 hasAnchor" number="6.2.1">
 <h3><span class="header-section-number">6.2.1</span> Marginal means<a href="6.2-binary-continuous-6.html#marginal-means" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Before moving on to discuss what is missing from the regression model in Equation <a href="6.2-binary-continuous-6.html#eq:yhat-6a">(6.1)</a>, it is important to note that the interpretation of the regression coefficient on gender has changed from what we discussed in Chapter <a href="5-chapter-5.html#chapter-5">5</a>. In Chapter <a href="5-chapter-5.html#chapter-5">5</a>, we noted that the regression coefficient on a dummy variables can be interpreted as the mean of the group indicated by the dummy (e.g. the mean of Math Achievement for Males, or for Females). However, when additional predictors are included in the regression model, this relationship no longer holds in general.</p>
 <p>To see this we can compare the output of the t-test in Section <a href="6.1-example-6.html#example-6">6.1</a> with the regression output shown above. In the t-test, the group means for Math Achievement were 55.47 for Females and 58.63 for males, so the mean difference was</p>
-<p><span class="math display">\[58.63 - 55.47 58.63 - 55.47 = 3.16 \]</span></p>
+<p><span class="math display">\[58.63 - 55.47 = 3.16 \]</span></p>
 <p>However, the regression coefficient on gender in the multiple regression model above is equal to <span class="math inline">\(3.50\)</span>. Why the difference?</p>
 <p>Remember that in the multiple regression model, the regression coefficient on Gender controls for the relationship between Reading Achievement and Gender. So, the multiple regression coefficient represents the relationship between Gender and Math, after controlling for Reading. The t-test doesnt control for Reading.</p>
 <p>In order to emphasize the distinction between “raw” group means computed from the data and the predicted group means obtained from a multiple regression model, the latter are referred to as <em>marginal means</em>, or sometimes as <em>adjusted means</em> or <em>least squares means</em>.</p>

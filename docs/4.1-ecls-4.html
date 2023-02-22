@@ -23,7 +23,7 @@
 <meta name="author" content="Peter Halpin" />
 
 
-<meta name="date" content="2023-02-02" />
+<meta name="date" content="2023-02-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -153,6 +153,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.4" data-path="2.4-rsquared-2.html"><a href="2.4-rsquared-2.html"><i class="fa fa-check"></i><b>2.4</b> R-squared</a>
 <ul>
 <li class="chapter" data-level="2.4.1" data-path="2.4-rsquared-2.html"><a href="2.4-rsquared-2.html#derivation"><i class="fa fa-check"></i><b>2.4.1</b> Derivation*</a></li>
+<li class="chapter" data-level="2.4.2" data-path="2.4-rsquared-2.html"><a href="2.4-rsquared-2.html#additional-details"><i class="fa fa-check"></i><b>2.4.2</b> Additional details*</a></li>
 </ul></li>
 <li class="chapter" data-level="2.5" data-path="2.5-population-model-2.html"><a href="2.5-population-model-2.html"><i class="fa fa-check"></i><b>2.5</b> The population model</a></li>
 <li class="chapter" data-level="2.6" data-path="2.6-notation-2.html"><a href="2.6-notation-2.html"><i class="fa fa-check"></i><b>2.6</b> Clarifying notation</a></li>
@@ -245,7 +246,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.3" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html"><i class="fa fa-check"></i><b>5.3</b> Binary predictors</a>
 <ul>
 <li class="chapter" data-level="5.3.1" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html#relation-with-t-tests"><i class="fa fa-check"></i><b>5.3.1</b> Relation with t-tests</a></li>
-<li class="chapter" data-level="5.3.2" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html#summary-1"><i class="fa fa-check"></i><b>5.3.2</b> Summary</a></li>
+<li class="chapter" data-level="5.3.2" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html#some-math"><i class="fa fa-check"></i><b>5.3.2</b> Some math*</a></li>
+<li class="chapter" data-level="5.3.3" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html#summary-1"><i class="fa fa-check"></i><b>5.3.3</b> Summary</a></li>
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="5.4-reference-group-coding-5.html"><a href="5.4-reference-group-coding-5.html"><i class="fa fa-check"></i><b>5.4</b> Reference-group coding</a>
 <ul>
@@ -543,11 +545,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="correlation-matrices" class="section level3 hasAnchor" number="4.1.1">
 <h3><span class="header-section-number">4.1.1</span> Correlation matrices<a href="4.1-ecls-4.html#correlation-matrices" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>In the scatter plots below, the panels are arranged in matrix format. The variable named on the diagonal appears on the vertical (<span class="math inline">\(Y\)</span>) axis in its row and the horizontal (<span class="math inline">\(X\)</span>) axis in its column. For example, Math Achievement is on the vertical axis in the first row and the horizontal axis in the first column. Notice that plots below the diagonal are a mirror image of the plots above the diagonal.</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="4.1-ecls-4.html#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;ECLS250.RData&quot;</span>)</span>
-<span id="cb62-2"><a href="4.1-ecls-4.html#cb62-2" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(ecls)</span>
-<span id="cb62-3"><a href="4.1-ecls-4.html#cb62-3" aria-hidden="true" tabindex="-1"></a>example_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(c1rmscal, wksesl, t1learn)</span>
-<span id="cb62-4"><a href="4.1-ecls-4.html#cb62-4" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(example_data) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Math&quot;</span>, <span class="st">&quot;SES&quot;</span>, <span class="st">&quot;ATL&quot;</span>)</span>
-<span id="cb62-5"><a href="4.1-ecls-4.html#cb62-5" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(example_data , <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="4.1-ecls-4.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;ECLS250.RData&quot;</span>)</span>
+<span id="cb1-2"><a href="4.1-ecls-4.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(ecls)</span>
+<span id="cb1-3"><a href="4.1-ecls-4.html#cb1-3" aria-hidden="true" tabindex="-1"></a>example_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(c1rmscal, wksesl, t1learn)</span>
+<span id="cb1-4"><a href="4.1-ecls-4.html#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(example_data) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Math&quot;</span>, <span class="st">&quot;SES&quot;</span>, <span class="st">&quot;ATL&quot;</span>)</span>
+<span id="cb1-5"><a href="4.1-ecls-4.html#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(example_data , <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:pairs"></span>
 <img src="_main_files/figure-html/pairs-1.png" alt="ECLS Example Data." width="672" />
 <p class="caption">
@@ -555,8 +557,8 @@ Figure 4.1: ECLS Example Data.
 </p>
 </div>
 <p>The format of Figure <a href="4.1-ecls-4.html#fig:pairs">4.1</a> is the same as that of the correlation matrix among the variables:</p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="4.1-ecls-4.html#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">digits =</span> <span class="dv">2</span>)</span>
-<span id="cb63-2"><a href="4.1-ecls-4.html#cb63-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(example_data)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="4.1-ecls-4.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">digits =</span> <span class="dv">2</span>)</span>
+<span id="cb2-2"><a href="4.1-ecls-4.html#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(example_data)</span></code></pre></div>
 <pre><code>##      Math  SES  ATL
 ## Math 1.00 0.44 0.40
 ## SES  0.44 1.00 0.29
