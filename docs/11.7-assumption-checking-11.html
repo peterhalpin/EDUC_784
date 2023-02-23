@@ -527,23 +527,23 @@ Figure 11.12: The idea behind the HL test
 <li><code>exp</code> is the fitted values (predicted probabilities) from the logistic regression.</li>
 <li><code>g</code> is the number of groups / bins to use. For this example, 5 is a good number.</li>
 </ul>
-<div class="sourceCode" id="cb427"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb427-1"><a href="11.7-assumption-checking-11.html#cb427-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Note: Install package &quot;generalhoslem&quot; if you haven&#39;t do so already</span></span>
-<span id="cb427-2"><a href="11.7-assumption-checking-11.html#cb427-2" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;generalhoslem&quot;)</span></span>
-<span id="cb427-3"><a href="11.7-assumption-checking-11.html#cb427-3" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(chd.data)</span>
-<span id="cb427-4"><a href="11.7-assumption-checking-11.html#cb427-4" aria-hidden="true" tabindex="-1"></a>HLtest <span class="ot">&lt;-</span> generalhoslem<span class="sc">::</span><span class="fu">logitgof</span>(<span class="at">obs =</span> chd, <span class="at">exp =</span> <span class="fu">fitted</span>(mod2), <span class="at">g =</span> <span class="dv">5</span>)</span>
-<span id="cb427-5"><a href="11.7-assumption-checking-11.html#cb427-5" aria-hidden="true" tabindex="-1"></a>HLtest</span></code></pre></div>
+<div class="sourceCode" id="cb426"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb426-1"><a href="11.7-assumption-checking-11.html#cb426-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Note: Install package &quot;generalhoslem&quot; if you haven&#39;t do so already</span></span>
+<span id="cb426-2"><a href="11.7-assumption-checking-11.html#cb426-2" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;generalhoslem&quot;)</span></span>
+<span id="cb426-3"><a href="11.7-assumption-checking-11.html#cb426-3" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(chd.data)</span>
+<span id="cb426-4"><a href="11.7-assumption-checking-11.html#cb426-4" aria-hidden="true" tabindex="-1"></a>HLtest <span class="ot">&lt;-</span> generalhoslem<span class="sc">::</span><span class="fu">logitgof</span>(<span class="at">obs =</span> chd, <span class="at">exp =</span> <span class="fu">fitted</span>(mod2), <span class="at">g =</span> <span class="dv">5</span>)</span>
+<span id="cb426-5"><a href="11.7-assumption-checking-11.html#cb426-5" aria-hidden="true" tabindex="-1"></a>HLtest</span></code></pre></div>
 <pre><code>## 
 ##  Hosmer and Lemeshow test (binary model)
 ## 
 ## data:  chd, fitted(mod2)
 ## X-squared = 0.047, df = 3, p-value = 1</code></pre>
-<div class="sourceCode" id="cb429"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb429-1"><a href="11.7-assumption-checking-11.html#cb429-1" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(chd.data)</span></code></pre></div>
+<div class="sourceCode" id="cb428"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb428-1"><a href="11.7-assumption-checking-11.html#cb428-1" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(chd.data)</span></code></pre></div>
 <p><strong>Please write down your interpretation of the HL test and be prepared to share you answer in class.</strong></p>
 <div id="more-details-on-the-hl-test" class="section level3 hasAnchor" number="11.7.1">
 <h3><span class="header-section-number">11.7.1</span> More details on the HL test<a href="11.7-assumption-checking-11.html#more-details-on-the-hl-test" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The HL statistic is computed using the observed and expected (model-implied) counts in each of the 5 groups. Computational details are given below.</p>
-<div class="sourceCode" id="cb430"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb430-1"><a href="11.7-assumption-checking-11.html#cb430-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Observed and expected counts</span></span>
-<span id="cb430-2"><a href="11.7-assumption-checking-11.html#cb430-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(HLtest<span class="sc">$</span>observed, HLtest<span class="sc">$</span>expected)</span></code></pre></div>
+<div class="sourceCode" id="cb429"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb429-1"><a href="11.7-assumption-checking-11.html#cb429-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Observed and expected counts</span></span>
+<span id="cb429-2"><a href="11.7-assumption-checking-11.html#cb429-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(HLtest<span class="sc">$</span>observed, HLtest<span class="sc">$</span>expected)</span></code></pre></div>
 <pre><code>##                y0 y1  yhat0  yhat1
 ## [0.0435,0.174] 18  2 17.870  2.130
 ## (0.174,0.318]  16  5 16.131  4.869

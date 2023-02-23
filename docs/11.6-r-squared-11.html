@@ -552,16 +552,16 @@ The pseudo R-squareds are not proportions of variance, but they try to come clos
 <p>Because the McFadden’s R-squared is not about proportion of variance, we can’t interpret it the same way as OLS R-squared. Instead, it is usually interpreted in terms of model <em>fit</em>. Here “fit” means how much the model’s predictions improve, with zero meaning “not at all” and one meaning “perfect prediction”.</p>
 <p>The following output shows McFadden’s R-squared for the example data. <strong>Please write down an interpretation of the R-square value</strong> and we will discuss you interpretations in class. You can use the “show code” button to see an example interpretation.</p>
 <p>McFadden’s R-squared:</p>
-<div class="sourceCode" id="cb424"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb424-1"><a href="11.6-r-squared-11.html#cb424-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using the deviance of the models</span></span>
-<span id="cb424-2"><a href="11.6-r-squared-11.html#cb424-2" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> mod2<span class="sc">$</span>deviance<span class="sc">/</span>mod0<span class="sc">$</span>deviance</span></code></pre></div>
+<div class="sourceCode" id="cb423"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb423-1"><a href="11.6-r-squared-11.html#cb423-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using the deviance of the models</span></span>
+<span id="cb423-2"><a href="11.6-r-squared-11.html#cb423-2" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> mod2<span class="sc">$</span>deviance<span class="sc">/</span>mod0<span class="sc">$</span>deviance</span></code></pre></div>
 <pre><code>## [1] 0.2145</code></pre>
 <p>Interpretation (try it by yourself first!):</p>
-<div class="sourceCode" id="cb426"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb426-1"><a href="11.6-r-squared-11.html#cb426-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Interpretation: Relative a model with no predictors, </span></span>
-<span id="cb426-2"><a href="11.6-r-squared-11.html#cb426-2" aria-hidden="true" tabindex="-1"></a><span class="co"># the inclusion of age improved model fit by about 21.4% </span></span>
-<span id="cb426-3"><a href="11.6-r-squared-11.html#cb426-3" aria-hidden="true" tabindex="-1"></a><span class="co"># of that expected by a model with perfect predictions. </span></span>
-<span id="cb426-4"><a href="11.6-r-squared-11.html#cb426-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb426-5"><a href="11.6-r-squared-11.html#cb426-5" aria-hidden="true" tabindex="-1"></a><span class="co"># More elliptically: the inclusion of age improved model </span></span>
-<span id="cb426-6"><a href="11.6-r-squared-11.html#cb426-6" aria-hidden="true" tabindex="-1"></a><span class="co"># fit by about 21.4\%</span></span></code></pre></div>
+<div class="sourceCode" id="cb425"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb425-1"><a href="11.6-r-squared-11.html#cb425-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Interpretation: Relative a model with no predictors, </span></span>
+<span id="cb425-2"><a href="11.6-r-squared-11.html#cb425-2" aria-hidden="true" tabindex="-1"></a><span class="co"># the inclusion of age improved model fit by about 21.4% </span></span>
+<span id="cb425-3"><a href="11.6-r-squared-11.html#cb425-3" aria-hidden="true" tabindex="-1"></a><span class="co"># of that expected by a model with perfect predictions. </span></span>
+<span id="cb425-4"><a href="11.6-r-squared-11.html#cb425-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb425-5"><a href="11.6-r-squared-11.html#cb425-5" aria-hidden="true" tabindex="-1"></a><span class="co"># More elliptically: the inclusion of age improved model </span></span>
+<span id="cb425-6"><a href="11.6-r-squared-11.html#cb425-6" aria-hidden="true" tabindex="-1"></a><span class="co"># fit by about 21.4\%</span></span></code></pre></div>
 </div>
 </div>
             </section>

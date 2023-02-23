@@ -279,6 +279,10 @@ In summary, it was found that SES and Parental Education were significant predic
 
 ## Too many predictors? {#too-many-predictors-7}
 
+```{r, echo=FALSE, results='asis'}
+codefolder::bookdown(init = "hide", style = button)
+```
+
 What is better: more predictors or fewer? While there is no definitive answer to this question, there are two points that we should keep in mind when adding variables into a model:
 
 * The ratio of sample size to number of predictors: $N / K$. 
@@ -305,11 +309,6 @@ So long as N >> K, the effect of the number of predictors is negligible. But whe
 
 ### Multicollinearity 
 
-```{r, echo=FALSE, results='asis'}
-codefolder::bookdown(init = "hide", style = button)
-```
-
-
 Regardless of sample size, when a predictor is highly correlated with the other predictors, its precision is negatively affected via the term $R^2_k$. When $R^2_k = 1$ the situation is called multicollinearity. Note that multicollinearity can occur even if none of the pairwise correlations among the predictors is large -- 
 it has to do with the relation between predictor $k$ and *all* of the other predictors, which is why it is called *multi*collinearity. 
 
@@ -331,6 +330,7 @@ In general, it is a good practice to check VIF as part of model diagnostics, whi
 
 Model 3: 
 ```{r}
+# install.packages("car")
 car::vif(mod3)
 ```
 
@@ -338,6 +338,7 @@ Model 4
 ```{r}
 car::vif(mod4)
 ```
+
 It is apparent that including the interaction terms led to a high degree of multicollinearity for some regression coefficients in the model. Based on this information, as well as the non-singificant $\Delta R^2$ for the interaction block, it would be advisable to focus our interpretation on Model 3 rather than Model 4. 
 
 ## Workbook
@@ -375,9 +376,10 @@ The exercises reproduce the worked example in Section \@ref(worked-example-7). F
 First we set up the variables
 
 ```{r}
-rm(list = ls())
-load("ECLS2577.RData")
-attach(ecls)
+# Clean up env. and load data
+#rm(list = ls())
+#load("ECLS2577.RData")
+#attach(ecls)
 
 # Recode variables
 p1center <- 2 - p1center
@@ -411,11 +413,13 @@ knitr::include_graphics("images/stargazer.png")
 The above table reports the $R^2$ for each model but does not provide the $\Delta R^2$ statistics or the corresponding F-tests. The $\Delta R^2$ statistics were
 
 ```{r} 
+# Compute R-squared change
 R2_1 <- summary(mod1)$r.squared
 R2_2 <- summary(mod2)$r.squared
 R2_3 <- summary(mod3)$r.squared
 R2_4 <- summary(mod4)$r.squared
 
+# Organize and add names
 delta_rsquared <- c(R2_1, R2_2 - R2_1, R2_3 - R2_2, R2_4 - R2_3)
 Models <- paste0("Model ", 1:4)
 names(delta_rsquared) <- Models
@@ -432,10 +436,12 @@ knitr::kable(cbind(Models, anova(mod1, mod2, mod3, mod4)))
 The variance inflation factors for Model 3 and Model 4 are obtained use the `vif` function of the `car` package (you must install the package for this code to work)
 
 ```{r}
+# install.pacakges("car")
 car::vif(mod3)
 car::vif(mod4)
 ```
 
 ```{r, echo = F}
 rm(list = ls())
+detach(ecls)
 ```

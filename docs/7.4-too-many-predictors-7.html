@@ -506,25 +506,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="too-many-predictors-7" class="section level2 hasAnchor" number="7.4">
 <h2><span class="header-section-number">7.4</span> Too many predictors?<a href="7.4-too-many-predictors-7.html#too-many-predictors-7" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>What is better: more predictors or fewer? While there is no definitive answer to this question, there are two points that we should keep in mind when adding variables into a model:</p>
-<ul>
-<li><p>The ratio of sample size to number of predictors: <span class="math inline">\(N / K\)</span>.</p></li>
-<li><p>The correlation among the predictors (AKA multicollinearity).</p></li>
-</ul>
-<p>In order to understand the effect of these factors on multiple regression, its helpful to refer to the formula for the standard error of a regression coefficient (from section <a href="4.7-inference-for-slopes-4.html#inference-for-slopes-4">4.7</a>), which is presented again below:</p>
-<p><span class="math display">\[
-s_{b_k} = \frac{s_Y}{s_k} \sqrt{\frac{1 - R^2}{N - K - 1}} \times \sqrt{\frac{1}{1 - R_k^2}}.
-\]</span></p>
-<p>Also recall that the standard error is the inverse of the precision, and that <span class="math inline">\(R_k^2\)</span> is the R-squared from the regression of the <span class="math inline">\(k\)</span>-th predictor on the remaining <span class="math inline">\(K-1\)</span> predictors.</p>
-<div id="nk" class="section level3 hasAnchor" number="7.4.1">
-<h3><span class="header-section-number">7.4.1</span> <span class="math inline">\(N/K\)</span><a href="7.4-too-many-predictors-7.html#nk" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>We can see from the equation for <span class="math inline">\(s_{b_k}\)</span> that increasing the number of predictors leads the term <span class="math inline">\(N-K-1\)</span> to get smaller. Consequently, the ratio</p>
-<p><span class="math display">\[ {\frac{1 - R^2}{N - K - 1}} \]</span></p>
-<p>will get larger (and hence the standard error will get larger) if the increase in the number of predictors is not compensated for by an increase in <span class="math inline">\(R^2.\)</span> In other words, predictors that do not add explanatory power to the model (i.e., do not increase R-squared) will lead to reduced precision for all of the regression coefficients. A similar story applies to the adjusted R-squared statistic discussed in Section <a href="4.6-rsquared-4.html#rsquared-4">4.6</a>.</p>
-<p>So long as N &gt;&gt; K, the effect of the number of predictors is negligible. But when the number of predictors gets close to the sample size, the precision of the regression coefficients can become inflated. Many people seek “rules of thumb” for the ratio of observations to predictors. This is just a complicated way of asking how large the sample size needs to be, and if you want to answer that question you should do a power analysis (Section <a href="2.10-power-2.html#power-2">2.10</a>). That said, if <span class="math inline">\(N/K &lt; 30\)</span>-ish you should start probably worrying about the number of predictors in your model.</p>
-</div>
-<div id="multicollinearity" class="section level3 hasAnchor" number="7.4.2">
-<h3><span class="header-section-number">7.4.2</span> Multicollinearity<a href="7.4-too-many-predictors-7.html#multicollinearity" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <input onclick="codefolder(&#39;pre.sourceCode&#39;);" type="button" value="Hide Code" id="codefolder-button" style="position: relative; &#10;            top: -25px; &#10;            left: 85%;   &#10;            color: white;&#10;            font-weight: bold;&#10;            background: #4B9CD3;&#10;            border: 1px #3079ED solid;&#10;            box-shadow: inset 0 1px 0 #80B0FB"/>
 <script>
   function codefolder(query) {
@@ -552,6 +533,25 @@ s_{b_k} = \frac{s_Y}{s_k} \sqrt{\frac{1 - R^2}{N - K - 1}} \times \sqrt{\frac{1}
     codefolder('pre.sourceCode');
   });
 </script>
+<p>What is better: more predictors or fewer? While there is no definitive answer to this question, there are two points that we should keep in mind when adding variables into a model:</p>
+<ul>
+<li><p>The ratio of sample size to number of predictors: <span class="math inline">\(N / K\)</span>.</p></li>
+<li><p>The correlation among the predictors (AKA multicollinearity).</p></li>
+</ul>
+<p>In order to understand the effect of these factors on multiple regression, its helpful to refer to the formula for the standard error of a regression coefficient (from section <a href="4.7-inference-for-slopes-4.html#inference-for-slopes-4">4.7</a>), which is presented again below:</p>
+<p><span class="math display">\[
+s_{b_k} = \frac{s_Y}{s_k} \sqrt{\frac{1 - R^2}{N - K - 1}} \times \sqrt{\frac{1}{1 - R_k^2}}.
+\]</span></p>
+<p>Also recall that the standard error is the inverse of the precision, and that <span class="math inline">\(R_k^2\)</span> is the R-squared from the regression of the <span class="math inline">\(k\)</span>-th predictor on the remaining <span class="math inline">\(K-1\)</span> predictors.</p>
+<div id="nk" class="section level3 hasAnchor" number="7.4.1">
+<h3><span class="header-section-number">7.4.1</span> <span class="math inline">\(N/K\)</span><a href="7.4-too-many-predictors-7.html#nk" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We can see from the equation for <span class="math inline">\(s_{b_k}\)</span> that increasing the number of predictors leads the term <span class="math inline">\(N-K-1\)</span> to get smaller. Consequently, the ratio</p>
+<p><span class="math display">\[ {\frac{1 - R^2}{N - K - 1}} \]</span></p>
+<p>will get larger (and hence the standard error will get larger) if the increase in the number of predictors is not compensated for by an increase in <span class="math inline">\(R^2.\)</span> In other words, predictors that do not add explanatory power to the model (i.e., do not increase R-squared) will lead to reduced precision for all of the regression coefficients. A similar story applies to the adjusted R-squared statistic discussed in Section <a href="4.6-rsquared-4.html#rsquared-4">4.6</a>.</p>
+<p>So long as N &gt;&gt; K, the effect of the number of predictors is negligible. But when the number of predictors gets close to the sample size, the precision of the regression coefficients can become inflated. Many people seek “rules of thumb” for the ratio of observations to predictors. This is just a complicated way of asking how large the sample size needs to be, and if you want to answer that question you should do a power analysis (Section <a href="2.10-power-2.html#power-2">2.10</a>). That said, if <span class="math inline">\(N/K &lt; 30\)</span>-ish you should start probably worrying about the number of predictors in your model.</p>
+</div>
+<div id="multicollinearity" class="section level3 hasAnchor" number="7.4.2">
+<h3><span class="header-section-number">7.4.2</span> Multicollinearity<a href="7.4-too-many-predictors-7.html#multicollinearity" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Regardless of sample size, when a predictor is highly correlated with the other predictors, its precision is negatively affected via the term <span class="math inline">\(R^2_k\)</span>. When <span class="math inline">\(R^2_k = 1\)</span> the situation is called multicollinearity. Note that multicollinearity can occur even if none of the pairwise correlations among the predictors is large –
 it has to do with the relation between predictor <span class="math inline">\(k\)</span> and <em>all</em> of the other predictors, which is why it is called <em>multi</em>collinearity.</p>
 <p>The term <span class="math inline">\(1 - R_k^2\)</span> is called the <em>tolerance</em> and its reciprocal is called the variance inflation factor (VIF).</p>
@@ -565,7 +565,8 @@ it has to do with the relation between predictor <span class="math inline">\(k\)
 </ul>
 <p>In general, it is a good practice to check VIF as part of model diagnostics, which is the topic of the next chapter. For our example, the VIF statistics for Model 3 and Model 4 are reported below.</p>
 <p>Model 3:</p>
-<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb273-1"><a href="7.4-too-many-predictors-7.html#cb273-1" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">vif</span>(mod3)</span></code></pre></div>
+<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb273-1"><a href="7.4-too-many-predictors-7.html#cb273-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;car&quot;)</span></span>
+<span id="cb273-2"><a href="7.4-too-many-predictors-7.html#cb273-2" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">vif</span>(mod3)</span></code></pre></div>
 <pre><code>##    z_wksesl z_wksesl_sq   z_wkmomed   z_wkdaded    p1center 
 ##       6.290       1.206       2.950       3.377       1.054</code></pre>
 <p>Model 4</p>

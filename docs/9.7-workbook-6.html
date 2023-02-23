@@ -550,8 +550,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>What do you think about the example given in the Figure below. Is addressing the normality assumption “worth it”? Why or why not?</li>
 </ul>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-202"></span>
-<img src="_main_files/figure-html/unnamed-chunk-202-1.png" alt="Nonlinear vs non-normality when log transforming Y" width="672" />
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-205"></span>
+<img src="_main_files/figure-html/unnamed-chunk-205-1.png" alt="Nonlinear vs non-normality when log transforming Y" width="672" />
 <p class="caption">
 Figure 9.15: Nonlinear vs non-normality when log transforming Y
 </p>
@@ -571,12 +571,12 @@ Figure 9.15: Nonlinear vs non-normality when log transforming Y
 <ul>
 <li>Please take a moment to write down your interpretation of the regression coefficient for <code>educ</code> in the summary output below.</li>
 </ul>
-<div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb347-1"><a href="9.7-workbook-6.html#cb347-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(wages)</span>
-<span id="cb347-2"><a href="9.7-workbook-6.html#cb347-2" aria-hidden="true" tabindex="-1"></a>log_wage <span class="ot">&lt;-</span> <span class="fu">log</span>(wage <span class="sc">+</span> <span class="dv">1</span>)</span>
-<span id="cb347-3"><a href="9.7-workbook-6.html#cb347-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb347-4"><a href="9.7-workbook-6.html#cb347-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Regress it on educ</span></span>
-<span id="cb347-5"><a href="9.7-workbook-6.html#cb347-5" aria-hidden="true" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(log_wage <span class="sc">~</span> educ)</span>
-<span id="cb347-6"><a href="9.7-workbook-6.html#cb347-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod2)</span></code></pre></div>
+<div class="sourceCode" id="cb346"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb346-1"><a href="9.7-workbook-6.html#cb346-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(wages)</span>
+<span id="cb346-2"><a href="9.7-workbook-6.html#cb346-2" aria-hidden="true" tabindex="-1"></a>log_wage <span class="ot">&lt;-</span> <span class="fu">log</span>(wage <span class="sc">+</span> <span class="dv">1</span>)</span>
+<span id="cb346-3"><a href="9.7-workbook-6.html#cb346-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb346-4"><a href="9.7-workbook-6.html#cb346-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Regress it on educ</span></span>
+<span id="cb346-5"><a href="9.7-workbook-6.html#cb346-5" aria-hidden="true" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(log_wage <span class="sc">~</span> educ)</span>
+<span id="cb346-6"><a href="9.7-workbook-6.html#cb346-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod2)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = log_wage ~ educ)
@@ -595,14 +595,14 @@ Figure 9.15: Nonlinear vs non-normality when log transforming Y
 ## Residual standard error: 0.423 on 398 degrees of freedom
 ## Multiple R-squared:  0.21,   Adjusted R-squared:  0.208 
 ## F-statistic:  106 on 1 and 398 DF,  p-value: &lt;2e-16</code></pre>
-<div class="sourceCode" id="cb349"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb349-1"><a href="9.7-workbook-6.html#cb349-1" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(wages)</span></code></pre></div>
+<div class="sourceCode" id="cb348"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb348-1"><a href="9.7-workbook-6.html#cb348-1" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(wages)</span></code></pre></div>
 <ul>
 <li>Please write down your interpretation of the transformed regression coefficient for educ in the output below</li>
 </ul>
-<div class="sourceCode" id="cb350"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb350-1"><a href="9.7-workbook-6.html#cb350-1" aria-hidden="true" tabindex="-1"></a>conf.b <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="fu">coef</span>(mod2), <span class="fu">confint</span>(mod2))</span>
-<span id="cb350-2"><a href="9.7-workbook-6.html#cb350-2" aria-hidden="true" tabindex="-1"></a>exp.b <span class="ot">&lt;-</span> <span class="fu">exp</span>(conf.b) <span class="sc">-</span> <span class="dv">1</span></span>
-<span id="cb350-3"><a href="9.7-workbook-6.html#cb350-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(exp.b)[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;exp - 1&quot;</span>)</span>
-<span id="cb350-4"><a href="9.7-workbook-6.html#cb350-4" aria-hidden="true" tabindex="-1"></a>exp.b</span></code></pre></div>
+<div class="sourceCode" id="cb349"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb349-1"><a href="9.7-workbook-6.html#cb349-1" aria-hidden="true" tabindex="-1"></a>conf.b <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="fu">coef</span>(mod2), <span class="fu">confint</span>(mod2))</span>
+<span id="cb349-2"><a href="9.7-workbook-6.html#cb349-2" aria-hidden="true" tabindex="-1"></a>exp.b <span class="ot">&lt;-</span> <span class="fu">exp</span>(conf.b) <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb349-3"><a href="9.7-workbook-6.html#cb349-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(exp.b)[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;exp - 1&quot;</span>)</span>
+<span id="cb349-4"><a href="9.7-workbook-6.html#cb349-4" aria-hidden="true" tabindex="-1"></a>exp.b</span></code></pre></div>
 <pre><code>##             exp - 1   2.5 %  97.5 %
 ## (Intercept) 2.28291 1.68467 3.01445
 ## educ        0.07767 0.06239 0.09317</code></pre>

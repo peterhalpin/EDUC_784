@@ -538,7 +538,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>Please write down whether you think the linearity assumption is problematic for the example below, and be sure to explain why with reference to the figure.</li>
 </ul>
-<div class="sourceCode" id="cb328"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb328-1"><a href="8.7-workbook-5.html#cb328-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod2, <span class="at">which =</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb324-1"><a href="8.7-workbook-5.html#cb324-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod2, <span class="at">which =</span> <span class="dv">1</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-180"></span>
 <img src="_main_files/figure-html/unnamed-chunk-180-1.png" alt="An example from ECLS." width="768" />
 <p class="caption">
@@ -548,15 +548,15 @@ Figure 8.9: An example from ECLS.
 <ul>
 <li>For each of the four examples below, please write down whether you think the linearity assumption is problematic and explain why with reference to the plots. Hint: be careful not to over-interpret the lowess line in the tails of the plots, where only a few data points can have a big impact on the local trend. Focus your interpretation on the bulk of the data, and whether it shows a systemic trend away from the horizontal line at 0.</li>
 </ul>
-<div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb329-1"><a href="8.7-workbook-5.html#cb329-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example: regression c1rmscal on ses_orig and t1learn</span></span>
-<span id="cb329-2"><a href="8.7-workbook-5.html#cb329-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">101</span>)</span>
-<span id="cb329-3"><a href="8.7-workbook-5.html#cb329-3" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
-<span id="cb329-4"><a href="8.7-workbook-5.html#cb329-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>) {</span>
-<span id="cb329-5"><a href="8.7-workbook-5.html#cb329-5" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">200</span>)</span>
-<span id="cb329-6"><a href="8.7-workbook-5.html#cb329-6" aria-hidden="true" tabindex="-1"></a>  e <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">200</span>)</span>
-<span id="cb329-7"><a href="8.7-workbook-5.html#cb329-7" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> x <span class="sc">+</span> e </span>
-<span id="cb329-8"><a href="8.7-workbook-5.html#cb329-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="fu">lm</span>(y <span class="sc">~</span> x), <span class="at">which =</span> <span class="dv">1</span>)</span>
-<span id="cb329-9"><a href="8.7-workbook-5.html#cb329-9" aria-hidden="true" tabindex="-1"></a>}  </span></code></pre></div>
+<div class="sourceCode" id="cb325"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb325-1"><a href="8.7-workbook-5.html#cb325-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example: regression c1rmscal on ses_orig and t1learn</span></span>
+<span id="cb325-2"><a href="8.7-workbook-5.html#cb325-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">101</span>)</span>
+<span id="cb325-3"><a href="8.7-workbook-5.html#cb325-3" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb325-4"><a href="8.7-workbook-5.html#cb325-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>) {</span>
+<span id="cb325-5"><a href="8.7-workbook-5.html#cb325-5" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">200</span>)</span>
+<span id="cb325-6"><a href="8.7-workbook-5.html#cb325-6" aria-hidden="true" tabindex="-1"></a>  e <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">200</span>)</span>
+<span id="cb325-7"><a href="8.7-workbook-5.html#cb325-7" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> x <span class="sc">+</span> e </span>
+<span id="cb325-8"><a href="8.7-workbook-5.html#cb325-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="fu">lm</span>(y <span class="sc">~</span> x), <span class="at">which =</span> <span class="dv">1</span>)</span>
+<span id="cb325-9"><a href="8.7-workbook-5.html#cb325-9" aria-hidden="true" tabindex="-1"></a>}  </span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-181"></span>
 <img src="_main_files/figure-html/unnamed-chunk-181-1.png" alt="More examples." width="672" />
 <p class="caption">
@@ -565,16 +565,60 @@ Figure 8.10: More examples.
 </div>
 <p><strong>Section <a href="8.3-homoskedasticity-8.html#homoskedasticity-8">8.3</a></strong></p>
 <ul>
-<li>Let’s take another look at the four plots in the above figure. For each plot, please write down whether you think the homoskedasticity assumption is problematic and explain why with reference to the plot.</li>
+<li><p>Let’s take another look at the four plots in the above figure. For each plot, please write down whether you think the homoskedasticity assumption is problematic and explain why with reference to the plot.</p></li>
+<li><p>The following output shows the results for the heteroskedastic (cone-shaped) example data, using both the regular standard error and HC standard errors. Please note the differences between these two sets of output and write down any questions you have about their interpretation.</p></li>
 </ul>
+<p>Example:</p>
+<div class="sourceCode" id="cb326"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb326-1"><a href="8.7-workbook-5.html#cb326-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod4, <span class="at">which =</span> <span class="dv">1</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-182-1.png" width="672" /></p>
+<p>Regular SE:</p>
+<div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb327-1"><a href="8.7-workbook-5.html#cb327-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Make sure the required pacakges are installed</span></span>
+<span id="cb327-2"><a href="8.7-workbook-5.html#cb327-2" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;car&quot;)</span></span>
+<span id="cb327-3"><a href="8.7-workbook-5.html#cb327-3" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;lmtest&quot;)</span></span>
+<span id="cb327-4"><a href="8.7-workbook-5.html#cb327-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb327-5"><a href="8.7-workbook-5.html#cb327-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Regular SE: </span></span>
+<span id="cb327-6"><a href="8.7-workbook-5.html#cb327-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod4)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = y2 ~ x)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -8.999 -1.040 -0.050  0.925 11.500 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) -0.00271    0.15443   -0.02     0.99    
+## x            0.96804    0.16072    6.02  6.1e-09 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 2.44 on 248 degrees of freedom
+## Multiple R-squared:  0.128,  Adjusted R-squared:  0.124 
+## F-statistic: 36.3 on 1 and 248 DF,  p-value: 6.13e-09</code></pre>
+<p>HC SE:</p>
+<div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb329-1"><a href="8.7-workbook-5.html#cb329-1" aria-hidden="true" tabindex="-1"></a><span class="co"># HC SE</span></span>
+<span id="cb329-2"><a href="8.7-workbook-5.html#cb329-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 2. Use &quot;hccm&quot; to get the HC SEs for our piecewise model </span></span>
+<span id="cb329-3"><a href="8.7-workbook-5.html#cb329-3" aria-hidden="true" tabindex="-1"></a>hcse <span class="ot">&lt;-</span> car<span class="sc">::</span><span class="fu">hccm</span>(mod4)</span>
+<span id="cb329-4"><a href="8.7-workbook-5.html#cb329-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb329-5"><a href="8.7-workbook-5.html#cb329-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 3. Use &quot;coeftest&quot; to compute t-tests with the HC SEs</span></span>
+<span id="cb329-6"><a href="8.7-workbook-5.html#cb329-6" aria-hidden="true" tabindex="-1"></a>lmtest<span class="sc">::</span><span class="fu">coeftest</span>(mod4, hcse)</span></code></pre></div>
+<pre><code>## 
+## t test of coefficients:
+## 
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) -0.00271    0.15201   -0.02     0.99    
+## x            0.96804    0.19085    5.07  7.7e-07 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p><strong>Section <a href="8.4-normality-8.html#normality-8">8.4</a></strong></p>
 <ul>
 <li>Please write down whether you think the normality assumption is problematic for the data in the figure below, and be sure to explain why with reference to the plot. Hint: if you think the data are non-normal, you should be able to interpret the pattern of deviations (e.g. skew, kurtosis).</li>
 </ul>
-<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="8.7-workbook-5.html#cb330-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example: regression c1rmscal on ses_orig and t1learn</span></span>
-<span id="cb330-2"><a href="8.7-workbook-5.html#cb330-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod2, <span class="at">which =</span> <span class="dv">2</span>)</span></code></pre></div>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-182"></span>
-<img src="_main_files/figure-html/unnamed-chunk-182-1.png" alt="An example from ECLS." width="768" />
+<div class="sourceCode" id="cb331"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb331-1"><a href="8.7-workbook-5.html#cb331-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example: regression c1rmscal on ses_orig and t1learn</span></span>
+<span id="cb331-2"><a href="8.7-workbook-5.html#cb331-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod2, <span class="at">which =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-185"></span>
+<img src="_main_files/figure-html/unnamed-chunk-185-1.png" alt="An example from ECLS." width="768" />
 <p class="caption">
 Figure 8.11: An example from ECLS.
 </p>
@@ -582,17 +626,17 @@ Figure 8.11: An example from ECLS.
 <ul>
 <li>In each of the examples below, please write down whether you think the normality assumption is problematic and explain why with reference to the plots.</li>
 </ul>
-<div class="sourceCode" id="cb331"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb331-1"><a href="8.7-workbook-5.html#cb331-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example: regression c1rmscal on ses_orig and t1learn</span></span>
-<span id="cb331-2"><a href="8.7-workbook-5.html#cb331-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">101</span>)</span>
-<span id="cb331-3"><a href="8.7-workbook-5.html#cb331-3" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
-<span id="cb331-4"><a href="8.7-workbook-5.html#cb331-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>) {</span>
-<span id="cb331-5"><a href="8.7-workbook-5.html#cb331-5" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">200</span>)</span>
-<span id="cb331-6"><a href="8.7-workbook-5.html#cb331-6" aria-hidden="true" tabindex="-1"></a>  e <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">200</span>)</span>
-<span id="cb331-7"><a href="8.7-workbook-5.html#cb331-7" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> x <span class="sc">+</span> e </span>
-<span id="cb331-8"><a href="8.7-workbook-5.html#cb331-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="fu">lm</span>(y <span class="sc">~</span> x), <span class="at">which =</span> <span class="dv">2</span>)</span>
-<span id="cb331-9"><a href="8.7-workbook-5.html#cb331-9" aria-hidden="true" tabindex="-1"></a>}  </span></code></pre></div>
-<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-183"></span>
-<img src="_main_files/figure-html/unnamed-chunk-183-1.png" alt="More examples." width="672" />
+<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb332-1"><a href="8.7-workbook-5.html#cb332-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example: regression c1rmscal on ses_orig and t1learn</span></span>
+<span id="cb332-2"><a href="8.7-workbook-5.html#cb332-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">101</span>)</span>
+<span id="cb332-3"><a href="8.7-workbook-5.html#cb332-3" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb332-4"><a href="8.7-workbook-5.html#cb332-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>) {</span>
+<span id="cb332-5"><a href="8.7-workbook-5.html#cb332-5" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">200</span>)</span>
+<span id="cb332-6"><a href="8.7-workbook-5.html#cb332-6" aria-hidden="true" tabindex="-1"></a>  e <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">200</span>)</span>
+<span id="cb332-7"><a href="8.7-workbook-5.html#cb332-7" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> x <span class="sc">+</span> e </span>
+<span id="cb332-8"><a href="8.7-workbook-5.html#cb332-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="fu">lm</span>(y <span class="sc">~</span> x), <span class="at">which =</span> <span class="dv">2</span>)</span>
+<span id="cb332-9"><a href="8.7-workbook-5.html#cb332-9" aria-hidden="true" tabindex="-1"></a>}  </span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-186"></span>
+<img src="_main_files/figure-html/unnamed-chunk-186-1.png" alt="More examples." width="672" />
 <p class="caption">
 Figure 8.12: More examples.
 </p>
@@ -601,10 +645,10 @@ Figure 8.12: More examples.
 <ul>
 <li>For each of the three population assumptions of linear regression, please write down whether you think the assumption is problematic for the example shown below, and explain why with reference to the plots.</li>
 </ul>
-<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb332-1"><a href="8.7-workbook-5.html#cb332-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
-<span id="cb332-2"><a href="8.7-workbook-5.html#cb332-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod5, <span class="dv">1</span>)</span>
-<span id="cb332-3"><a href="8.7-workbook-5.html#cb332-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod5, <span class="dv">2</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-184-1.png" width="672" /></p>
+<div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb333-1"><a href="8.7-workbook-5.html#cb333-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb333-2"><a href="8.7-workbook-5.html#cb333-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod5, <span class="dv">1</span>)</span>
+<span id="cb333-3"><a href="8.7-workbook-5.html#cb333-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod5, <span class="dv">2</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-187-1.png" width="672" /></p>
 </div>
             </section>
 
