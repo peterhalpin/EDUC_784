@@ -1,6 +1,10 @@
 #  Regression with Two Predictors {#chapter-4}
 
-<!-- Move definition of R to chapter 2, show relation with r^2. -->
+<!-- Move definition of R to chapter 2, show relation with r^2. 
+
+\Use K not J to index predictors! it switches to K later
+
+-->
 
 ```{r, echo = F}
 rm(list = ls())

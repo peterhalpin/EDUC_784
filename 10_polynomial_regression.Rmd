@@ -568,3 +568,7 @@ with(subset(wages, educ > 12), lines(educ, fitted, col = "#4B9CD3"))
 with(subset(wages, educ <= 12), lines(educ, fitted))
 detach(wages)
 ```
+
+```{r, echo = F}
+rm(list = ls())
+```

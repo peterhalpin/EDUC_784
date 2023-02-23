@@ -1,9 +1,8 @@
 # Model Building {#chapter-7}
 
 ```{r, echo = F}
-# Clean up check
 rm(list = ls())
-# detach(NELS)
+options(digits = 4)
 
 button <-  "position: relative; 
             top: -25px; 
@@ -44,7 +43,7 @@ In a hierarchical model, we could instead proceed as follows.
 
   * After we run the regression model with this first block of predictors, we record the R-squared statistic. We don't care about the value of the regression coefficients at this point, since we know we have left out the curriculum factors. <br></br>
 
-* Next we run a regression model with student factors *and* the curriculum factors, so that our model now includes all of the predictors. By comparing the the R-squared of the model in this second step (curriculum and student factors) to the R-squared of the model in the first step (only student factors), we can determine how much additional variation in Reading Achievement was explained by the curriculum factors. If there is a substantial amount additional of variation explained by the curriculum factors, we can reason that intervening on the curriculum may be a good way to improve Reading Achievement. 
+* Next we run a regression model with student factors *and* the curriculum factors, so that our model now includes all of the predictors. By comparing the the R-squared of the model in this second step (curriculum and student factors) to the R-squared of the model in the first step (only student factors), we can determine how much additional variation in Reading Achievement was explained by the curriculum factors. If the additional of variation explained by the curriculum factors is substantial, we can reason that intervening on the curriculum may be a good way to improve Reading Achievement. 
 
 It is important to note the following points about this example: 
 
@@ -229,7 +228,6 @@ mod4 <- lm(log_c1rrscal ~  (z_wksesl + z_wksesl_sq + z_wkmomed + z_wkdaded)*p1ce
 
 # Regression Table
 #stargazer::stargazer(mod1, mod2, mod3, mod4, type = 'html', omit = "Constant")
-detach(ecls)
 ```
 
 ```{r, echo = F, fig.align = 'center'}
@@ -250,7 +248,7 @@ names(delta_rsquared) <- Models
 delta_rsquared
 ```
 
-The F-tests of the $\Delta R^2$s for each model are give are reported below. The rows of the table below the report the F-test of $\Delta R^2$ for each model. The test for Model 1 is omitted.  
+The F-tests of the $\Delta R^2$s for each model are give are reported below. The rows of the table report the F-test of $\Delta R^2$ for each model. The test for Model 1 is omitted.  
 
 ```{r}
 # Tests of R-square change
@@ -372,13 +370,12 @@ knitr::kable(anova(mod1, mod2, mod3, mod4))
 
 ## Exercises
 
-The exercises reproduce the worked example in Section \@ref(worked-example-7). For additional details on the interpretation of the output, please see that section. 
 
- 
+The exercises reproduce the worked example in Section \@ref(worked-example-7). For additional details on the interpretation of the output, please see that section. 
 First we set up the variables
 
 ```{r}
-rm(list = ls()) # clean up environment
+rm(list = ls())
 load("ECLS2577.RData")
 attach(ecls)
 
@@ -403,7 +400,6 @@ mod4 <- lm(log_c1rrscal ~  (z_wksesl + z_wksesl_sq + z_wkmomed + z_wkdaded)*p1ce
 
 # Regression Table
 #stargazer::stargazer(mod1, mod2, mod3, mod4, type = 'html', omit = "Constant")
-detach(ecls)
 ```
 
 The `stargazer` table doesn't format nicely in markdown, so I attach a screen shot instead. We will go through some different types of output with stargazer in class You must install the `stargazer` package for the function to work. 
@@ -440,3 +436,6 @@ car::vif(mod3)
 car::vif(mod4)
 ```
 
+```{r, echo = F}
+rm(list = ls())
+```

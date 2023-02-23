@@ -3,7 +3,6 @@
 ```{r, echo = F}
 # Clean up check
 rm(list = ls())
-# detach(ecls)
 
 button <-  "position: relative; 
             top: -25px; 
@@ -28,13 +27,6 @@ Whenever we transform a $Y$ variable in a regression model, it always has three 
 The big theme of this chapter is that we have to consider all three of these when transforming the $Y$ variable. So, addressing assumption violations using this approach is not always as straightforward as we might hope. In particular, we might find that addressing one problem (e.g., non-normality) can create other  problems (e.g., nonlinearity). 
 
 Another approach for dealing with assumption violations is to transform one or more of the $X$ variables instead of (or in addition to) the $Y$ variable. These approaches are discussed in the next chapter. 
-
-<!-- polynomial regression, which means raising $X$-variables to an exponent (e.g., $X^2$ and $X^3$), and 
-* piecewise or segmented regression, which involves using different regression lines over different ranges of a predictor. 
-
-Both polynomial and piecewise regression are very useful in practice and lead to advanced topics like splines and semi-parametric regression. They also turn out to be special cases of interactions, so we have already covered a lot of the technical details in Chapter \@ref(chapter-6) -- phew! -->
-
-<!-- Finally, we address heteroskedasticity. The short version is that heteroskedasticity does not affect the estimates of regression coefficients (i.e., the values reported in the first column of R's `summary` table), but it does affect their standard errors (the second column), and, consequently, the t- and p-values. There are lots of different ways to make standard errors robust to heteroskedasticity, and we will focus on one widely used procedure called heteroskedasticity-corrected (HC) standard errors.-->
 
 ## Math review {#math-review-9}
 
@@ -62,12 +54,14 @@ knitr::include_graphics("images/logx.png", dpi = 150)
 This "compression" of large values down to a smaller scale turns out to be useful for dealing with positive skew, as illustrated in Figure \@ref(fig:logdata). This is one reason that the log transform is widely used.
 
 ```{r logdata, echo = F, fig.cap = "Log transform and positive skew", fig.align = 'center'}
+# Clean up env. and load data
 load("ECLS2577.Rdata")
 attach(ecls)
+
+# Plots
 par(mfrow = c(1,2))
 hist(c1rmscal, col = "#4b9cd3")
 hist(log(c1rmscal + 1), col = "#4b9cd3")
-detach(ecls)
 ```
 
 Now that we have seen the basic interpretation and utility of logs, there are a few details to add. 
@@ -155,10 +149,13 @@ Below are some examples of the log transform applied to positively skewed data. 
 
 
 ```{r skew1, echo = F, fig.cap = "Example 1: Log transforming ECLS math", fig.align = 'center', fig.height=8}
-attach(ecls)
 par(mfrow = c(2,2))
+
+# histograms 
 hist(c1rmscal, col = "#4b9cd3")
 hist(log(c1rmscal + 1), col = "#4b9cd3")
+
+# qq plots
 qqnorm(c1rmscal, col = "#4b9cd3", main = "qq-plot of c1rmscal" )
 qqline(c1rmscal)
 qqnorm(log(c1rmscal + 1), col = "#4b9cd3",  main = "qq-plot of log(c1rmscal + 1)" )
@@ -167,21 +164,28 @@ qqline(log(c1rmscal + 1))
 
 ```{r skew2, echo = F, fig.cap = "Example 2: Log transforming ECLS reading", fig.align = 'center', fig.height=8}
 par(mfrow = c(2,2))
+
+# histograms
 hist(c1rrscal, col = "#4b9cd3")
 hist(log(c1rrscal + 1), col = "#4b9cd3")
+
+# qqplots
 qqnorm(c1rrscal, col = "#4b9cd3", main = "qq-plot of c1rrscal" )
 qqline(c1rrscal)
 qqnorm(log(c1rrscal + 1), col = "#4b9cd3",  main = "qq-plot of log(c1rrscal + 1)" )
 qqline(log(c1rrscal + 1))
-detach(ecls)
 ```
 
 ```{r skew3, echo = F, fig.cap = "Example 3: Log transforming hourly wages", fig.align = 'center', fig.height=8}
 load("Wages.RData")
 attach(wages)
+
+# histograms
 par(mfrow = c(2,2))
 hist(wage, col = "#4b9cd3")
 hist(log(wage + 1), col = "#4b9cd3")
+
+# qqplots
 qqnorm(wage, col = "#4b9cd3", main = "qq-plot of wage" )
 qqline(wage)
 qqnorm(log(wage + 1), col = "#4b9cd3",  main = "qq-plot of log(wage + 1)" )
@@ -205,14 +209,12 @@ The upshot is that, if your variable takes on values in the range $(0, 1)$, the 
 We can see this in Figure \@ref(fig:skew4) below. The top row of the Figure shows the same variable as Example 1 above (ECLS Math Achievement), and the bottom shows the variable transformed to a proportion. In the left hand panels we can see that the distribution of the proportions is qualitatively the same the as the distribution of the original variable. However, the log transform behaves much differently for these two cases. Why? Because logs are "weird" on the range $(0, 1)$. 
 
 ```{r skew4, echo = F, fig.cap = "Comparing Log transforms of ECLS math total score versus proportion correct", fig.align = 'center', fig.height=8}
-attach(ecls)
 par(mfrow = c(2,2))
 prop_c1rmscal <- (c1rmscal - min(c1rmscal))/100
 hist(c1rmscal, col = "#4b9cd3")
 hist(log(c1rmscal + 1), col = "#4b9cd3")
 hist(prop_c1rmscal, col = "#4b9cd3")
 hist(log(prop_c1rmscal), col = "#4b9cd3")
-detach(ecls)
 ```
 
 
@@ -297,8 +299,6 @@ then
 What this means in practice is that addressing positive skew using a log transform can sometimes create more problems than it solves. Figure \@ref(fig:nonlinear1) illustrates this situation. In the top row, we see  the residual versus fitted plot and qqplot of residuals for the regression of Math Achievement (`c1rmscal`) on SES (`wksesl`). The linear regression resulted in a clear violation of normality (positive skew). In the bottom row, we see same output after log transforming Math Achievement -- it fixed the issue with normality, but also made the nonlinearity more apparent.  
 
 ```{r nonlinear1, echo = F, fig.cap = "Nonlinear vs non-normality when log transforming Y", fig.align = 'center', fig.height=8}
-
-attach(ecls)
 mod1 <- lm(c1rmscal ~ wksesl)
 mod2 <- lm(log(c1rmscal + 1) ~ wksesl)
 par(mfrow = c(2,2))
@@ -306,7 +306,7 @@ plot(mod1, 1)
 plot(mod1, 2)
 plot(mod2, 1)
 plot(mod2, 2)
-detach(ecls)
+
 ```
 
 The take home message is that when we transform $Y$ (or $X$) we necessarily affect the relationship between the variables, as well as their individual distributions. It is often the case that when we try to “fix” the normality of the $Y$ variable, we can inadvertently make its relationship to $X$ more non-linear.
@@ -590,7 +590,6 @@ I'll ask some questions like the following to start class off. Please write down
 
 ```{r, echo = F, fig.cap = "Nonlinear vs non-normality when log transforming Y", fig.align = 'center', fig.height=8}
 
-attach(ecls)
 mod1 <- lm(c1rmscal ~ wksesl)
 mod2 <- lm(log(c1rmscal + 1) ~ wksesl)
 par(mfrow = c(2,2))
@@ -598,7 +597,6 @@ plot(mod1, 1)
 plot(mod1, 2)
 plot(mod2, 1)
 plot(mod2, 2)
-detach(ecls)
 ```
 
 
@@ -698,4 +696,6 @@ colnames(exp.b)[1] <- c("exp - 1")
 exp.b
 ```
 
-
+```{r, echo = F}
+rm(list = ls())
+```

@@ -3,7 +3,6 @@
 ```{r, echo = F}
 # Clean up check
 rm(list = ls())
-#detach(NELS)
 
 button <-  "position: relative; 
             top: -25px; 
@@ -31,11 +30,11 @@ Basically, all of the numbers we get in the regression output from R could be wr
 
 The philosophy of assumption checking is not to verify the assumptions or prove beyond doubt that they are true -- i.e., we are not *testing* assumptions, we are just checking them. Checking means we want to know if there are any problems with a regression model that might affect our conclusions (e.g., which predictors are significant). So, for example, we don’t really care if the residuals are normally distributed – we just care if there are any violations of this assumption that might be affecting the results our analysis. If there is no evidence that an assumption is problematic, we proceed with the main analysis as intended. 
 
-Assumption checking generally involves plotting the residuals from a regression model and trying to infer what the plots tell us about the population model. The focus of this chapter is to introduce you to these plots and how to interpret them. Sometimes assumption checking can feel a bit like reading tea leaves, because interpreting plots can be pretty subjective. Honing your interpretation of will happen gradually with experience. 
+Assumption checking generally involves plotting the residuals from a regression model and trying to infer what the plots tell us about the population model. The focus of this chapter is to introduce you to these plots and how to interpret them. Sometimes assumption checking can feel a bit like reading tea leaves, because interpreting plots can be pretty subjective. Honing your interpretation will happen gradually with experience. 
 
 This chapter focusses on checking assumptions, and the following two chapters talk about strategies for dealing with assumption violations. There is one exception -- in this chapter we address how to deal with heteroskedasticity. The short version is that heteroskedasticity affects the standard errors of regression coefficients (and, consequently, the t-values, p-values, and confidence intervals). However, there are corrections to the standard errors that can be used to address this. Since the solution to this assumption is relatively "plug-and-play", we cover it in this chapter. In particular, we will focus on one widely used procedure called heteroskedasticity-corrected (HC) standard errors. 
 
-*Regression diagnostics* are a related topic that we also introduced this chapter. These are procedures for detecting outliers. Unlike assumption checking, which focuses on the model *per se*, diagnostics focus on whether individual data points are having an undue influence on the model (e.g., the predicted values or the parameter estimates). We only cover the basics behind diagnostics in this chapter and the material is optional (i.e., it will not be assessed in this course, but you may find it useful for your research). 
+*Regression diagnostics* are a related topic that is also introduced in this chapter. These are procedures for detecting outliers. Unlike assumption checking, which focuses on the model *per se*, diagnostics focus on whether individual data points are having an undue influence on the model (e.g., the predicted values or the parameter estimates). We only cover the basics behind diagnostics in this chapter and the material is optional (i.e., it will not be assessed in this course, but you may find it useful for your research). 
 
 Outlier detection can be useful for identifying influential data points, but it is almost never the the case that data points should be omitted because they are outliers. Unless you can find something specifically wrong with a data point (e.g., a data entry error) you should not omit data. A better way to deal with outliers is by using statistical procedures that are specifically designed to deal with them, called *robust statistics*. Robust regression is an advanced topic that we won't get to in this course, but check out this resource if you are interested and feel free to ask questions in class: https://cran.r-project.org/web/views/Robust.html. 
 
@@ -51,7 +50,7 @@ to represent the predictor variables. For our purposes, the vector $\mathbf X$ i
 
 \[Y | \mathbf X \sim  N(\mu_{Y | \mathbf X} , \sigma_{Y | \mathbf X}) \]
 
-2. Homoskedasticity: The conditional distributions have equal variances (also called homegeneity of variance).
+2. Homoskedasticity: The conditional distributions have equal variances (also called homogeneity of variance).
 
 \[ \sigma_{Y| \mathbf X} = \sigma \]
 
@@ -63,7 +62,7 @@ These three assumptions can be summarized in term of the model residuals $\epsil
 
 \[ \epsilon \sim N(0, \sigma). \] 
 
-These assumptions about the residuals are presented graphically in Figure \@ref(fig:pop-model-e). It is instructive to compare this with Figure \@ref(fig:pop-model). In particular, note that the "X" axis is replaced by $\widehat Y$, which is an approach for plotting residuals used later in this chapter. 
+These assumptions about the residuals are presented graphically in Figure \@ref(fig:pop-model-e). This plot is similar to the one we saw in Section \@ref{population-model-2}, but is modified for the multiple regression setting by using predicted values and residuals as the axes (rather than X and Y). The plots we looks at in the following sections are sample analogues to this population model -- they plot residuals against predicted values.
 
 ```{r, pop-model-e, echo = F, fig.cap = "The Multiple Regression Population Model.", fig.align = 'center'}
 knitr::include_graphics("images/pop_model_e.png")
@@ -103,23 +102,28 @@ The right hand panel shows the residuals versus the predicted ("fitted") values 
 * The red line in the right hand panel is a locally weighted smoothed ("lowess") regression line -- it follows whatever trend is in the residuals without assuming the trend is linear. 
 
 * The overall interpretation of the residual vs fitted plot is as follows: 
-  * if the red line follows the horizontal line (Residuals = 0), we conclude that the the assumption of linearity is not problematic for the data. 
-  * If the red line deviates systematically from the horizontal line, this is evidence that the assumption of lineary is not met. 
+  * if the red line is roughly horizontal at Residuals = 0, we conclude that the the assumption of linearity is not problematic for the data. 
+  * If the red line deviates systematically from a horizontal line at Residuals = 0, this is evidence that the assumption of linearity is not met. 
   
-In this Figure \@ref(fig:linearity1), the assumption is clearly not met. In fact, this is so obvious that it doesn't require looking at the residual versus fitted plot at all. So, why do we use the residual versus plot? The answer is, when we have $K > 1$ predictors, the "raw" data are not so easy to interpret. In general, the assumption is much more easily checked using the residual versus fitted plot, even if the patterns are a bit harder to interpret. 
+In Figure \@ref(fig:linearity1), the assumption of linearity is clearly not met. In fact, this is so obvious that we could see it in the regular scatter plot. So, why do we need the residual vs fitted plot? Well, the regular scatter plot is only useful for diagnosing linearity with a single predictor, whereas the residual vs fitted plots works $K \geq 1$ predictors. So, in general, it is much easier to check the assumption using the residual versus fitted plot, even if the patterns are a bit harder to interpret in the case of a single predictor. 
 
-This situation is illustrated with reference to Figure \@ref(fig:linearity2). Note that in this example the regression model has 2 predictors. We could produce a 3-D plot in which $\widehat Y$ is represented by a plane, but the $Y$ versus $X$ approach will not extend beyond 2 predictors. On the other hand, the residual versus fitted plot can be used with any number of predictors. 
+Figure \@ref(fig:linearity2) illustrates the residual vs fitted plot using a model with 2 predictors. ** Please write down whether you think the linearity assumption is problematic for the example below, and be sure to explain why with reference to the figure.**
+
+ * Please write down whether you think the linearity assumption is problematic for the example below, and be sure to explain why with reference to the figure.
 
 ```{r linearity2, fig.width = 8, fig.cap = "An example from ECLS.", fig.align = 'center'}
-# Example: regression c1rmscal on ses_orig and t1learn
 load("ECLS250.RData")
+attach(ecls)
+
+# Rund model for example
 mod2 <- lm(c1rmscal ~ ses_orig + t1learn, data = ecls)
+
+# Plot resid vs fitted
 plot(mod2, which = 1)
 ```
 
-**Please write down whether you think the linearity assumption is problematic for this second example, and be sure to explain why with reference to Figure \@ref(fig:linearity2).**
-
-Before moving on, let's take a look at a few more examples. In each of these examples, **please write down whether you think the linearity assumption is problematic and  explain why with reference to the plots.**. Hint: be careful not to over-interpret the lowess line in the tails of the plots, where only a few data points can have a big impact on the local trend. Focus your interpretation on the bulk of the data, and whether it shows a systemic trend away from the horizontal line at 0. 
+Before moving on, let's take a look at a few more examples. For each of these examples, **please write down whether you think the linearity assumption is problematic and explain why with reference to the plots.**. 
+Hint: be careful not to over-interpret the lowess line in the tails of the plots, where only a few data points can have a big impact on the local trend. Focus your interpretation on the bulk of the data, and whether it shows a systemic trend away from a horizontal line at 0. 
 
 ```{r linearity3, fig.height = 10, fig.cap = "More examples.", fig.align = 'center'}
 # Example: regression c1rmscal on ses_orig and t1learn
@@ -135,16 +139,14 @@ for(i in 1:4) {
 
 ### Summary 
 
-To check the assumption of linearity, we can use a residual vs predicted (fitted)
-plot. 
+To check the assumption of linearity, we can use a residual vs predicted (fitted) plot. 
 
  * If the plot does not show a systematic trend other than a horizontal line at Residuals = 0, then there is no evidence against the assumption.
 
 * If the residuals do show a trend away from 0, then we should worry about the assumption.
 
 * Don't over interpret the tails of the lowess (red) lines in the R plots. 
-
-* If the assumption is violated: consider adding quadratic or other non-linear terms to the model (Chapter 9), or non-linear transformations of the $Y$ variable (Chapter 10). 
+* If the assumption is violated: consider a non-linear transformations of the $Y$ variable \@ref(chapter-9) or adding quadratic or other non-linear terms to the model \@ref(chapter-10). 
 
 ## Homoskedasticity {#homoskedasticity-8}
 
@@ -176,7 +178,7 @@ plot(mod4, which = 1)
 
 To make it clearer what aspect of these plots is relevant for evaluating the assumption of homoskedasticity, the same figures are replicated below, but this time with blue lines represented my own "eye-balling" of the range of the residuals. In the left plot, the two lines are parallel, meaning the range is constant. In the right plot, the two lines form a cone, meaning the the range of the residuals increases for larger values of $\widehat Y$. 
 
-Note that I didn't draw any lines in the tail ends of the plots -- this is because there are fewer observations in the tails, so it is harder to make a judgment about the range of values. To avoid "reading the tea leaves" I focus on the range of values of $\widehat Y$ for which there are sufficient observations to judge the range of the residuals. 
+Note that I didn't draw any lines in the tail ends of the plots -- this is because there are fewer observations in the tails, so it is harder to make a judgment about the range of values. To avoid "reading the tea leaves" I focus on the values of $\widehat Y$ for which there are sufficient observations to judge the range of the residuals. 
 
 To repeat, *the blue lines are just there for your reference*, to highlight the relevant information in the plot. You wouldn't generally include these lines in the plot. 
 
@@ -199,54 +201,67 @@ rm(y2)
 Let's take another look at the plots in Figure \@ref(fig:linearity3). **Please write down whether you think the homoskedasticity assumption is problematic and  explain why with reference to the plots**.  
 
 
-### Summary 
-To check the assumption of homoskedasticity, we can use a residual versus fitted plot (again). 
-
-* If the range of values on the vertical axis appears approximately constant over the horizontal axis, then there is no evidence against the assumption.
-
-* If the range does show a pattern (e.g., cone, bow-tie, ellipse), then we should worry about this assumption. 
-
-* If the assumption is violated, it will affect the standard errors of the regression coefficients as well as the resulting t-tests and confidence intervals. There are heteroskedasticity robust standard errors that can address this issue (Chapter 9). 
-
-
 ### Dealing with Heteroskedasticity {#heteroskedasticity-8}
 
-**Under construction** 
-
-As mentionend above, heteroskedasticity affects the standard errors of regression coefficients, and, consequently, the t-values, p-values, and confidence intervals. There are lots of ways to make standard errors robust to heteroskedasticity, and we will focus on one widely used procedure called heteroskedasticity-corrected (HC) standard errors. 
 Heteroskedasticity in linear regression, and corrections thereof, is a pretty big topic in the methodological literature (see Cite:fox).  In this section we are just going to discuss one widely used solution, and how to implement it in `R`. 
 
-In terms of our example, we can see in the residual versus fitted plot in Figure \@ref(fig:piecewise3) that the residuals are less spread out for lower ranges of the fitted values (i.e., for $<12$ years of educ). As mentioned previously, heteroskedasticity will affect the standard errors of the regression coefficients, and consequently the t-tests, p-values, and confidence intervals. What this means is that the p-values for the regression coefficients will be wrong (usually too small) if the data are heteroskedastic but we mistakenly assume they are homoskedastic. Note that heteroskedasticity won't affect the estimated values of the coefficients (i.e., the $\widehat{b}$'s, and also doesn't affect R-squared or its F-test. 
+As mentioned previously, heteroskedasticity affects the standard errors of the regression coefficients, and consequently the t-tests, p-values, and confidence intervals. This means that the p-values for the regression coefficients will be wrong (usually too small) if the data are heteroskedastic but we mistakenly assume they are homoskedastic. Note that heteroskedasticity won't affect the estimated values of the coefficients (i.e., the $\widehat{b}$'s, and also doesn't affect R-squared or its F-test.
 
+There are lots of ways to make standard errors robust to heteroskedasticity, and we will focus on one widely used procedure called heteroskedasticity-corrected (HC) standard errors. HC standard errors are also sometimes called heteroskedasticity-consistent, heteroskedasticity-robust, or just robust. 
 
-"Heteroskedasticity-corrected" (HC) standard errors do not assume the data homoskedastic. Technically, they can be used regardless of whether the homoskedasticity assumption is met. But, when the data are homoskedastic, the "regular" OLS standard errors are more efficient (i.e., precise). So, we usually don't want to make the correction unless there is evidence of heteroskedasticity in the data. HC standard errors are also sometimes called heteroskedasticity-consistent, heteroskedastcicity-robust, or just robust.  
+HC standard errors do not assume the data are homoskedastic. So, they can be used regardless of whether the homoskedasticity assumption is met. But, when the data are homoskedastic, the "regular" OLS standard errors are more efficient (i.e., precise). So, we usually don't want to make the correction unless there is evidence of heteroskedasticity in the data.   
 
-There are many different version of HC standard errors, but they are all equivalent with "large" samples. The simplest version is (see cite:Wooldridge)
+There are many different version of HC standard errors, but they are all equivalent with "large" samples. The simplest version is (see cite:Fox)
 
-\[ \text{HCSE}_{\hat{b}_j} = \sqrt{\frac{\sum_{i=1}^N (X_{ij} - \widehat{X}_{ij})^2 (Y_i-\widehat{Y}_i)^2} {\sum_{i=1}^N (X_{ij} - \bar X_j)^2 (1 - R^2_j)}}
+\[ \text{HCSE}_{\hat{b}_k} = \sqrt{\frac{\sum_{i=1}^N (X_{ik} - \widehat{X}_{ik})^2 (Y_i-\widehat{Y}_i)^2} {\sum_{i=1}^N (X_{ik} - \bar X_k)^2 (1 - R^2_k)}}
 (\#eq:se-10)
 \] 
 
-In this equation, $\widehat{X}_{ij}$ is the predicted value that results from regressing $X_j$ on the remaining $J-1$ predictors. Comparing this equation to Equation  \@ref(eq:se-4), the main difference is that the $(1 - R^2)$ term for the $Y$ variable is now replaced with a crossproduct of residuals for the $X_j$ and $Y$ variables. The equation is not very intuitive to look at, but the general idea is that it can be derived without assuming homoskedasticity. 
+In this equation, $\widehat{X}_{ij}$ is the predicted value that results from regressing $X_j$ on the remaining $J-1$ predictors. Comparing this equation to the "regular" standard errors (Equation  \@ref(eq:se-4)), the main difference is that the $(1 - R^2)$ term for the $Y$ variable is now replaced with a crossproduct of residuals for the $X_j$ and $Y$ variables. The equation is not very intuitive to look at, but the general idea is that it can be derived without assuming homoskedasticity. 
 
-The procedure for using HC standard errors in R has two steps. First, we estimate the HC standard errors. Then, we use the HC standard errors to compute the correct t-tests and p-values (or confidence intervals).  The following example shows how to implement HC standard errors in R, using the piecewise regression from Section \@ref(piecewise-10) wages example.
+The procedure for using HC standard errors in R has three steps. 
 
-The code is shown by default, because the main thing about this example is to see how it works in R -- you already know how to interpret SEs, t-tests, p-values, etc. Your will need two packages installed -- `car` and `lmtest` -- for this example to work. 
+* First, we estimate the model as usual using the `lm` function
+* Second, we compute the HC standard errors (e.g.,`hccm` function of the `car` package.)
+* Third, we use the HC standard errors to compute the correct t-tests / confidence intervals (e.g., using the `coeftest` function of the `lmtest` package. )
 
+The following output shows the results for the heteroskedastic (cone-shaped) example data, using both the regular standard error and HC standard errors. 
+
+
+Regular: 
 ```{r}
 ## Make sure the required pacakges are installed
 # install.packages("car")
 # install.packages("lmtest")
 
-# Step 1. Use "hccm" to get the HC SEs for our piecewise model 
+# Regular SE: 
+summary(mod4)
+```
+
+HC: 
+
+```{r}
+# HC SE
+# Step 2. Use "hccm" to get the HC SEs for our piecewise model 
 hcse <- car::hccm(mod4)
 
-# Step 2. Use "coeftest" to compute t-tests with the HC SEs
+# Step 3. Use "coeftest" to compute t-tests with the HC SEs
 lmtest::coeftest(mod4, hcse)
 ```
 
-This example is a bit unusual because the HC standard errors were actually a bit smaller than the regular OLS standard errors (see the output in Section \@ref(piecewise-10)) -- more often the opposite is true. Nonetheless, you should have no problems interpreting the output above.  
+As you can see, the regression coefficients are the same in both cases. However, the HC standard errors for the regression slope is quite a bit larger, with corresponding changes to the t-test and p-value. The HC standard error for the itnercept also changes, but not by very much. 
 
+### Summary 
+
+To check the assumption of homoskedasticity, we can use a residual versus fitted plot (again). 
+
+* If the range of values on the vertical axis (residuals) appears approximately constant over the horizontal axis (predicted), then there is no evidence against the assumption.
+
+* If the range does show a pattern (e.g., cone, bow-tie, ellipse), then we should worry about this assumption. 
+
+* If the assumption is violated, it will affect the standard errors of the regression coefficients as well as the resulting t-tests, p-values and confidence intervals (but it won't affect the estimates themselves). 
+
+* To deal with heteroskedasticity, there are number of different types of robust standard errors that can used. Above, we illustrated the use of the HC standard errors using the `car::hccm` function -- check out the documentation for the function to see what other options are out there!
 
 ## Normality {#normality-8}
 
@@ -255,11 +270,15 @@ codefolder::bookdown(init = "hide", style = button)
 ```
 
 
-There are many ways to check this normality of a set of data, but a widely applicable technique is a qq plot (short for quantile-quantile plot). A qq plot compares the quantiles (e.g., percentiles) of two different distributions.
+There are many ways to compare the empirical distribution of a variable (e.g., the residuals in a regression analysis) to a theoretical distribution (e.g., the normal). One general-purpose technique is a qq plot (short for quantile-quantile plot). A qq plot compares the quantiles (e.g., percentiles) of two different distributions. 
 
 For our assumption, we want to compare the quantiles of our standardized residuals to the quantiles of a standard normal distribution. Standardizing means the residuals should have variance equal to one, and, combined with the other population assumptions of linear regression, this implies that the residuals should have a standard normal distribution (see Section \@ref(recap-8)).
 
-Since qq plots might not be something you have seen before, we'll take a look at a few examples. Each figure below pairs a histogram and qq plot. In the qq plot, data points should fall on the diagonal line if the data are normally distributed. Focus on how the pattern in the histogram shows up as in deviations from the diagonal line the qq plot. We will discuss the interpretation of these patterns together in class. *Please write down any questions you have about the interpretation of the qq plots and we can address them together in class.**
+Since qq plots might not be something you have seen before, we'll take a look at a few examples. Each figure below pairs a histogram and qq plot. In the qq plot, data points should fall on the diagonal line if the data are normally distributed. 
+
+In the following examples, focus on how the pattern in the histogram shows up as deviations from the diagonal line in the qq plot. We will discuss the interpretation of these patterns together in class. 
+
+*Please write down any questions you have about the interpretation of the qq plots and we can address them together in class.**
 
 Also, it should be emphasized that the line in the normal qqplot is *not a regression line!* It is just the diagonal line $Y = X$, and the bulk of the data points should fall on that line if the data were drawn from a normal distribution. 
 
@@ -333,10 +352,11 @@ To check the assumption of normality, we can use a qq plot of the standardized r
 * If the residuals do show a trend off of the diagonal line, then we should worry about the assumption
 
 * If the assumption is violated, the central limit theorem implies that significance tests used in OLS regression will be robust to violations of normality when sample sizes are large.  
+ 
   * Practically this means N / K > 30 (but other guidelines are used too)
-  * For some specific types of violations, notably positive skew, it is also common to transform the Y variable (Chapter 10)
+  * For some specific types of violations, notably positive skew, it is also common to transform the Y variable (see Chapter \@ref(chapter-10)). 
   
-* (The line in a normal qqplot is *not a regression line!*) 
+* The line in a qqplot is *not a regression line!*
 
 ## A worked example {#worked-example-8}
 
@@ -348,13 +368,17 @@ To illustrate these assumption checking procedures, let's revisit the example fr
 
 For this example, we will use the ECLS data to regress reading achievement at the beginning of Kindergarten (`c1rrscal`) on SES (`wksesl`), parental (mother's and father's) education (`wkmomed` and `wkdaded`, respectively), and attendance in center-based care before K (`p1center`). This is model 3 from Section \@ref(worked-example-7) (we don't consider the model with the interactions). 
 
-The workflow for assumption checking requires first running the model and then producing the residual vs fitted plot and a qqplot of the residuals. If the plots look OK, we go ahead and interpret the model results. If the plots don't look OK, we give up and wonder why we ever bothered with regression in the first place. Just kidding :)  -- the next two chapters of these notes address how to deal with violations of the assumptions. 
+The workflow for assumption checking requires first running the model and then producing the residual vs fitted plot and a qqplot of the residuals. If the plots look OK, we go ahead and interpret the model results. If the plots don't look OK, we give up and wonder why we ever bothered with regression in the first place. Just kidding :)  -- the next two chapters of these notes address how to deal with violations of the linearity and normality assumptions, and we already know how to deal with heteroskedasticity. 
 
 After running the model, we obtain the following two plots from the regression output. **For each of the three population assumptions of linear regression, please write down whether you think the assumption is problematic and explain why with reference to the plots.**
 
 ```{r}
+# Clean up and load data
+#rm(list = ls())
+#load("ECLS2577.RData")
+#attach(ecls)
+
 # Run model
-load("ECLS2577.RData")
 mod5 <- lm(c1rrscal ~ factor(p1center) + wksesl + wkmomed + wkdaded, data = ecls)
 
 # Check assumptions
@@ -363,11 +387,10 @@ plot(mod5, 1)
 plot(mod5, 2)
 ```
 
-To foreshadow the next couple of chapters, here is what the plots looked like after dealing with the problematic assumptions. The data still exhibit heteroskedasticity, but we can address that using heteroskedasticity consistent standard errors (Chapter 9).  
+To foreshadow the next couple of chapters, here is what the plots looked like after dealing with the problematic assumptions. Note that the data still exhibit heteroskedasticity (as apparent in the diagonal lines at the bottom of the residual vs fitted plot), and we can address that using HC standard errors.  
 
 ```{r}
 # Run model
-attach(ecls)
 log_c1rrscal <- log(c1rrscal - min(c1rrscal) + 1)
 wksesl_sq <- wksesl^2
 mod6 <- lm(log_c1rrscal ~ factor(p1center) + wksesl + wksesl_sq + wkmomed + wkdaded)
@@ -627,8 +650,11 @@ There isn't much new in terms of R code in this chapter. Once we run a model wit
 
 
 ```{r}
-# Run model
+# Clearn up env and load data 
+rm(list = ls())
 load("ECLS2577.RData")
+
+# Run model
 mod5 <- lm(c1rrscal ~ factor(p1center) + wksesl + wkmomed + wkdaded, data = ecls)
 
 # Puts both plots in one figure
@@ -637,4 +663,8 @@ par(mfrow = c(1,2))
 # Check assumptions
 plot(mod5, 1)
 plot(mod5, 2)
+```
+
+```{r, echo = F}
+rm(list = ls())
 ```

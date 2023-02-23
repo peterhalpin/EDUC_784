@@ -8,7 +8,6 @@ output:
 
 ```{r, echo = F}
 # Clean up check
-# detach(NELS)
 rm(list = ls())
 options(digits = 4)
 button <-  "position: relative; 
@@ -586,6 +585,7 @@ In this analysis, our focus will be whether the "effect" of Pre-K on Math Achiev
 The relationship among the three variables is summarized in the `visreg` plot below. We can see that the effect of Pre-K on Math Achievement appears to differ as a function of SES -- i.e., it appears that there is an interaction between Pre-K and SES. Our goal in this section is to produce an analysis corresponding to the figure. **Before moving on, please take a moment to write down your interpretation of  Figure \@ref(fig:prek-by-ses), focussing on how it illustrates an interaction between SES and Pre-K. Additionally, please describe how the figure would be different if there was no interaction between Pre-K and SES**. 
 
 ```{r, prek-by-ses, fig.cap = 'Math Achievement, Pre-K Attendence, and SES', fig.align = 'center'}
+# 
 load("ECLS2577.Rdata")
 ecls$prek <- factor(2 - ecls$p1center)
 ecls$wksesq5 <- factor(ecls$wksesq5)
@@ -1097,6 +1097,7 @@ effectsize::eta_squared(mod, partial = F)
 ```
 
 ```{r, echo = F}
-#detach(NELS)
+rm(list = ls())
+detach(NELS)
 ```
 

@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 9 Log-linear regression | EDUC 784: Regression</title>
+  <title>Chapter 9 Log-linear Regression | EDUC 784: Regression</title>
   <meta name="description" content="Course notes for EDUC 784" />
   <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 9 Log-linear regression | EDUC 784: Regression" />
+  <meta property="og:title" content="Chapter 9 Log-linear Regression | EDUC 784: Regression" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="/images/image1.png" />
   <meta property="og:description" content="Course notes for EDUC 784" />
   <meta name="github-repo" content="peterhalpin/EDUC_784" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 9 Log-linear regression | EDUC 784: Regression" />
+  <meta name="twitter:title" content="Chapter 9 Log-linear Regression | EDUC 784: Regression" />
   
   <meta name="twitter:description" content="Course notes for EDUC 784" />
   <meta name="twitter:image" content="/images/image1.png" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Peter Halpin" />
 
 
-<meta name="date" content="2023-02-02" />
+<meta name="date" content="2023-02-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -355,7 +355,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.5" data-path="7.5-workbook-4.html"><a href="7.5-workbook-4.html"><i class="fa fa-check"></i><b>7.5</b> Workbook</a></li>
 <li class="chapter" data-level="7.6" data-path="7.6-exercises-3.html"><a href="7.6-exercises-3.html"><i class="fa fa-check"></i><b>7.6</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="8-chapter-8.html"><a href="8-chapter-8.html"><i class="fa fa-check"></i><b>8</b> Assumption checking</a>
+<li class="chapter" data-level="8" data-path="8-chapter-8.html"><a href="8-chapter-8.html"><i class="fa fa-check"></i><b>8</b> Assumption Checking</a>
 <ul>
 <li class="chapter" data-level="8.1" data-path="8.1-recap-8.html"><a href="8.1-recap-8.html"><i class="fa fa-check"></i><b>8.1</b> Recap of population model</a></li>
 <li class="chapter" data-level="8.2" data-path="8.2-linearity-8.html"><a href="8.2-linearity-8.html"><i class="fa fa-check"></i><b>8.2</b> Linearity</a>
@@ -364,7 +364,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="8.3" data-path="8.3-homoskedasticity-8.html"><a href="8.3-homoskedasticity-8.html"><i class="fa fa-check"></i><b>8.3</b> Homoskedasticity</a>
 <ul>
-<li class="chapter" data-level="8.3.1" data-path="8.3-homoskedasticity-8.html"><a href="8.3-homoskedasticity-8.html#summary-9"><i class="fa fa-check"></i><b>8.3.1</b> Summary</a></li>
+<li class="chapter" data-level="8.3.1" data-path="8.3-homoskedasticity-8.html"><a href="8.3-homoskedasticity-8.html#heteroskedasticity-8"><i class="fa fa-check"></i><b>8.3.1</b> Dealing with Heteroskedasticity</a></li>
+<li class="chapter" data-level="8.3.2" data-path="8.3-homoskedasticity-8.html"><a href="8.3-homoskedasticity-8.html#summary-9"><i class="fa fa-check"></i><b>8.3.2</b> Summary</a></li>
 </ul></li>
 <li class="chapter" data-level="8.4" data-path="8.4-normality-8.html"><a href="8.4-normality-8.html"><i class="fa fa-check"></i><b>8.4</b> Normality</a>
 <ul>
@@ -381,7 +382,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.7" data-path="8.7-workbook-5.html"><a href="8.7-workbook-5.html"><i class="fa fa-check"></i><b>8.7</b> Workbook</a></li>
 <li class="chapter" data-level="8.8" data-path="8.8-exercises-4.html"><a href="8.8-exercises-4.html"><i class="fa fa-check"></i><b>8.8</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="9-chapter-9.html"><a href="9-chapter-9.html"><i class="fa fa-check"></i><b>9</b> Log-linear regression</a>
+<li class="chapter" data-level="9" data-path="9-chapter-9.html"><a href="9-chapter-9.html"><i class="fa fa-check"></i><b>9</b> Log-linear Regression</a>
 <ul>
 <li class="chapter" data-level="9.1" data-path="9.1-math-review-9.html"><a href="9.1-math-review-9.html"><i class="fa fa-check"></i><b>9.1</b> Math review</a>
 <ul>
@@ -418,7 +419,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.8.2" data-path="9.8-exercises-5.html"><a href="9.8-exercises-5.html#log-linear-regression-of-wages-on-education-1"><i class="fa fa-check"></i><b>9.8.2</b> Log-linear regression of Wages on Education</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="10-chapter-10.html"><a href="10-chapter-10.html"><i class="fa fa-check"></i><b>10</b> Polynomial regression, etc</a>
+<li class="chapter" data-level="10" data-path="10-chapter-10.html"><a href="10-chapter-10.html"><i class="fa fa-check"></i><b>10</b> Polynomial Regression, etc</a>
 <ul>
 <li class="chapter" data-level="10.1" data-path="10.1-polynomial-10.html"><a href="10.1-polynomial-10.html"><i class="fa fa-check"></i><b>10.1</b> Polynomial regression</a>
 <ul>
@@ -433,9 +434,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.3.1" data-path="10.3-piecewise-10.html"><a href="10.3-piecewise-10.html#the-piecewise-model"><i class="fa fa-check"></i><b>10.3.1</b> The piecewise model</a></li>
 <li class="chapter" data-level="10.3.2" data-path="10.3-piecewise-10.html"><a href="10.3-piecewise-10.html#back-to-the-example-2"><i class="fa fa-check"></i><b>10.3.2</b> Back to the example</a></li>
 </ul></li>
-<li class="chapter" data-level="10.4" data-path="10.4-heteroskedasticity-10.html"><a href="10.4-heteroskedasticity-10.html"><i class="fa fa-check"></i><b>10.4</b> Heteroskedasticity</a></li>
-<li class="chapter" data-level="10.5" data-path="10.5-workbook-7.html"><a href="10.5-workbook-7.html"><i class="fa fa-check"></i><b>10.5</b> Workbook</a></li>
-<li class="chapter" data-level="10.6" data-path="10.6-exercises-7.html"><a href="10.6-exercises-7.html"><i class="fa fa-check"></i><b>10.6</b> Exercises</a></li>
+<li class="chapter" data-level="10.4" data-path="10.4-workbook-7.html"><a href="10.4-workbook-7.html"><i class="fa fa-check"></i><b>10.4</b> Workbook</a></li>
+<li class="chapter" data-level="10.5" data-path="10.5-exercises-7.html"><a href="10.5-exercises-7.html"><i class="fa fa-check"></i><b>10.5</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="11-chapter-11.html"><a href="11-chapter-11.html"><i class="fa fa-check"></i><b>11</b> Logistic Regression</a>
 <ul>
@@ -505,7 +505,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="chapter-9" class="section level1 hasAnchor" number="9">
-<h1><span class="header-section-number">Chapter 9</span> Log-linear regression<a href="9-chapter-9.html#chapter-9" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<h1><span class="header-section-number">Chapter 9</span> Log-linear Regression<a href="9-chapter-9.html#chapter-9" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>In the previous chapter we considered how to check whether the population assumptions of linear regression are problematic for a given data set. In this chapter we discuss one way to deal with assumption violations – by “transforming” the <span class="math inline">\(Y\)</span> variable. In general, a transformation is just a function we apply to a variable to change it into another variable that we would rather work with. We have already seen some examples of transformations: the z-transformation (z-scores) and percentiles.</p>
 <p>In this chapter we will focus on the use and interpretation of the log-transform, <span class="math inline">\(\log(Y)\)</span>, which results in the log-linear regression model. This serves to illustrate the overall approach of transforming the <span class="math inline">\(Y\)</span> variable to address assumption violations, and also leads into a later topic – logistic regression – which also involves logarithms.</p>
 <p>Whenever we transform a <span class="math inline">\(Y\)</span> variable in a regression model, it always has three types of consequences. It affects:</p>
@@ -516,11 +516,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>The big theme of this chapter is that we have to consider all three of these when transforming the <span class="math inline">\(Y\)</span> variable. So, addressing assumption violations using this approach is not always as straightforward as we might hope. In particular, we might find that addressing one problem (e.g., non-normality) can create other problems (e.g., nonlinearity).</p>
 <p>Another approach for dealing with assumption violations is to transform one or more of the <span class="math inline">\(X\)</span> variables instead of (or in addition to) the <span class="math inline">\(Y\)</span> variable. These approaches are discussed in the next chapter.</p>
-<!-- polynomial regression, which means raising $X$-variables to an exponent (e.g., $X^2$ and $X^3$), and 
-* piecewise or segmented regression, which involves using different regression lines over different ranges of a predictor. 
-
-Both polynomial and piecewise regression are very useful in practice and lead to advanced topics like splines and semi-parametric regression. They also turn out to be special cases of interactions, so we have already covered a lot of the technical details in Chapter \@ref(chapter-6) -- phew! -->
-<!-- Finally, we address heteroskedasticity. The short version is that heteroskedasticity does not affect the estimates of regression coefficients (i.e., the values reported in the first column of R's `summary` table), but it does affect their standard errors (the second column), and, consequently, the t- and p-values. There are lots of different ways to make standard errors robust to heteroskedasticity, and we will focus on one widely used procedure called heteroskedasticity-corrected (HC) standard errors.-->
 </div>
             </section>
 
