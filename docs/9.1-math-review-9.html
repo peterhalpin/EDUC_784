@@ -23,7 +23,7 @@
 <meta name="author" content="Peter Halpin" />
 
 
-<meta name="date" content="2023-02-23" />
+<meta name="date" content="2023-03-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -585,14 +585,18 @@ Figure 9.3: Log base 10 vs log base e
 </div>
 <div id="log-and-exp" class="section level3 hasAnchor" number="9.1.2">
 <h3><span class="header-section-number">9.1.2</span> log and exp<a href="9.1-math-review-9.html#log-and-exp" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Logarithms have the property that they can always be undone. For example, if we start with the number <span class="math inline">\(x= 100\)</span>, we can take the log (base <span class="math inline">\(e\)</span>) of that number as above</p>
+<p>If we apply the log-transformation to variable, we can always “undo” the transformation to get back to the original variable. This is important because we often want to interpret the results of an analysis in terms of the original variable, not the transformed one. We will see this trick a lot in what follows – apply a transform to the data, run the model, then undo the transform to interpret the results.</p>
+<p>The way to undo the log transform is using exponentiation, which is abbreviated “<span class="math inline">\(\exp\)</span>”.</p>
+<p>The mathematical terminology here is that <span class="math inline">\(\exp\)</span> is the <em>inverse</em> of <span class="math inline">\(\log\)</span>, and vice versa. The relationship is a bit slippery to grasp, but the overall idea is that we once we log transform a variable, we can use the inverse transformation (<span class="math inline">\(\exp\)</span>) to get back to the original variable. So, <span class="math inline">\(\log\)</span> and <span class="math inline">\(\exp\)</span> are like best buddies – whenever we see one of them, the other is bound to show up also.</p>
+<p>For example, if we start with the number <span class="math inline">\(x= 100\)</span>, we can take the log (base <span class="math inline">\(e\)</span>) of that number as above</p>
 <p><span class="math display">\[\log(100) =  4.60517 \]</span></p>
 <p>Remember that by definition, this just tells us that <span class="math inline">\(4.60517\)</span> is the power to which we have to raise <span class="math inline">\(e\)</span> in order get <span class="math inline">\(100\)</span>, i.e.,</p>
 <p><span class="math display">\[e^{4.60517} = 100 \]</span></p>
 <p>Putting these two equations together, we can see that</p>
 <p><span class="math display">\[ e^{\log(100)} = 100. \]</span></p>
-<p>So, taking the log of <span class="math inline">\(100\)</span> gives us <span class="math inline">\(4.60517\)</span>, and taking the exponent of <span class="math inline">\(4.60517\)</span> gets us back to the original input, <span class="math inline">\(100\)</span>. In general, <span class="math inline">\(e^{\log(x)} = x\)</span>. So, exponentiation (i.e., raising something to a power) undoes the logarithm. This undoing is called “inversion” in mathematics.</p>
-<p>From a statistical perspective, the important thing about logs and exponents is that we can always use one to undo the effects of the other. So, if we log transform our <span class="math inline">\(Y\)</span> variable in a regression analysis to make the data more compatible with the model assumptions, we can always undo the log transform afterwards by taking exponents. We will see this trick a lot in what follows – apply a transform to the data, run the model, then undo the transform to interpret the results.</p>
+<p>So, taking the log of <span class="math inline">\(100\)</span> gives us <span class="math inline">\(4.60517\)</span>, and then taking the exponent of <span class="math inline">\(4.60517\)</span> gets us back to the original input, <span class="math inline">\(100\)</span>. In general, <span class="math inline">\(e^{\log(x)} = x\)</span>.</p>
+<p>This is what it means for <span class="math inline">\(\exp\)</span> to undo or invert the <span class="math inline">\(\log\)</span> function. Exponentiation (i.e., raising something to a power) undoes the logarithm.</p>
+<p>As mentioned, the important thing about logs and exponents is that we can always use one to undo the effects of the other. So, if we log transform our <span class="math inline">\(Y\)</span> variable in a regression analysis to make the data more compatible with the model assumptions, we can always undo the log transform afterwards by taking exponents.</p>
 <p>A final note about notation. The mathematical symbol <span class="math inline">\(\exp(y)\)</span> is used instead of <span class="math inline">\(e^y\)</span> to avoid having to write complicated expressions in the superscript. The idea is that the left hand side of the following equation is easier to read than the right hand side</p>
 <p><span class="math display">\[ \exp(17 - choclate + banna ) = e^{17 - choclate + banna} \]</span></p>
 </div>
@@ -610,7 +614,7 @@ Figure 9.3: Log base 10 vs log base e
 <h3><span class="header-section-number">9.1.4</span> Rules for log and exp*<a href="9.1-math-review-9.html#rules-for-log-and-exp" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>There are some rules for working with logs and exponents that we will use later on to derive some results about the interpretation of log-linear regression. You don’t need to know these but you might find them useful if you like to follow derivations.</p>
 <ul>
-<li><p>Addition with logs”:
+<li><p>Addition with logs:
 <span class="math display">\[ \log(m) + \log(n) = \log(mn) \]</span></p></li>
 <li><p>Multiplication with exponents:<br />
 <span class="math display">\[\exp(m) \times \exp(n) = \exp(m + n) \]</span></p></li>

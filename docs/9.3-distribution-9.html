@@ -23,7 +23,7 @@
 <meta name="author" content="Peter Halpin" />
 
 
-<meta name="date" content="2023-02-23" />
+<meta name="date" content="2023-03-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -571,7 +571,7 @@ Figure 9.8: Logs for small values of X
 Figure 9.9: Comparing Log transforms of ECLS math total score versus proportion correct
 </p>
 </div>
-<p>To avoid this situation I always add 1 to a variable before taking its log, that what I know that there are no values less than 1 in the data. Technically, there is no reason to do this if the variable does not take on values in the range 0 to 1, but I always apply the “add 1” rule just so I don’t have to worry about it.</p>
+<p>To avoid this situation I always add 1 to a variable before taking its log, that way I know that there are no values less than 1 in the data. Technically, there is no reason to do this if the variable does not take on values in the range 0 to 1, but I always apply the “add 1” rule just so I don’t have to worry about it.</p>
 </div>
 <div id="what-about-negative-values-of-x" class="section level3 hasAnchor" number="9.3.2">
 <h3><span class="header-section-number">9.3.2</span> What about negative values of <span class="math inline">\(x\)</span>?<a href="9.3-distribution-9.html#what-about-negative-values-of-x" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -580,7 +580,7 @@ Figure 9.9: Comparing Log transforms of ECLS math total score versus proportion 
 <p><span class="math display">\[ \log(x - \text{min}(x) + 1). \]</span></p>
 <p>The following table shows how this transformation works. The first column shows the original data, the second column shows how subtracting the minimum makes all of the negative numbers positive, and the third column shows how adding 1 makes all of the numbers less than 1 equal to or greater than 1.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:log-min"></span>
-<img src="images/log_min.png" alt="Dealing with negative values of x in log transforms" width="691" />
+<img src="images/log_min.png" alt="Dealing with negative values of x in log transforms" width="598" />
 <p class="caption">
 Figure 9.10: Dealing with negative values of x in log transforms
 </p>
@@ -590,7 +590,6 @@ Figure 9.10: Dealing with negative values of x in log transforms
 <li>Step 1. “Add” the minimum value of <span class="math inline">\(x\)</span> to prevent undefined values of log</li>
 <li>Step 2. Add 1 to make sure no values are less than 1</li>
 </ul>
-<p>Like the “add 1” rule, you can use this procedure all the time, not just when <span class="math inline">\(x\)</span> takes on negative values.</p>
 <p><strong>Can you think of a log transformation that would work to address data that were negatively skewed, rather than positively skewed? Hint: the trick is similar to the one in this section</strong></p>
 </div>
 <div id="skew-versus-censoring" class="section level3 hasAnchor" number="9.3.3">
@@ -609,7 +608,7 @@ Figure 9.11: A floor effect is not the same as positive skew
 <h3><span class="header-section-number">9.3.4</span> Final comments on dealing with skew<a href="9.3-distribution-9.html#final-comments-on-dealing-with-skew" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Recall that the assumptions of linear regression are about the residuals, not about the <span class="math inline">\(Y\)</span> variable itself (see Section <a href="8.1-recap-8.html#recap-8">8.1</a>). So, a skewed outcome variable is not necessarily a problem. In particular, it is entirely possible that <span class="math inline">\(Y\)</span> is positively skewed but its residuals are not, especially if one of the <span class="math inline">\(X\)</span> variables has a similar distribution to <span class="math inline">\(Y\)</span>. So, don’t worry about non-normality of <span class="math inline">\(Y\)</span>, its non-normality of the residuals that matters.</p>
 <p>Second, even if the residuals are non-normal, this still doesn’t matter very much with very large samples. The central limit theorem assures us that, as the sample size gets larger, the sampling distribution of the regression coefficients converges to a normal distribution, regardless of the distribution of the residuals. This is illustrated in Figure <a href="9.3-distribution-9.html#fig:clt">9.12</a> below.</p>
-<p>The left panel shows the qq-plot of the residuals when Math Achievement (<code>c1rmscal</code>) is regressed on SES (<code>wksesl</code>) using the ECLS dataset. The right panel shows the bootstrapped sampling distribution of the regression coefficient, with samples of size <span class="math inline">\(N = 100\)</span>. It is apparent that the skewness of the <span class="math inline">\(Y\)</span> variable does not affect the normality of the sampling distribution of the b-weight when the sample size is <span class="math inline">\(100\)</span>. This is why we can often ignore skew in <span class="math inline">\(Y\)</span> with “large” samples (<span class="math inline">\(N = 100\)</span> in this case.</p>
+<p>The left panel shows the qq-plot of the residuals when Math Achievement (<code>c1rmscal</code>) is regressed on SES (<code>wksesl</code>) using the ECLS dataset. The right panel shows the bootstrapped sampling distribution of the regression coefficient, with samples of size <span class="math inline">\(N = 100\)</span>. It is apparent that the skewness of the <span class="math inline">\(Y\)</span> variable does not affect the normality of the sampling distribution of the b-weight when the sample size is <span class="math inline">\(100\)</span>. This is why we can often ignore skew in <span class="math inline">\(Y\)</span> with “large” samples (<span class="math inline">\(N = 100\)</span> in this case).</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:clt"></span>
 <img src="images/clt.png" alt="The sampling distribution of a regression coefficient when residuals have positive skew" width="521" />
 <p class="caption">

@@ -23,7 +23,7 @@
 <meta name="author" content="Peter Halpin" />
 
 
-<meta name="date" content="2023-02-23" />
+<meta name="date" content="2023-03-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -545,7 +545,7 @@ In general, the Wald test should only be used when you have a large sample size.
 <h3><span class="header-section-number">11.5.1</span> Wald test<a href="11.5-inference-11.html#wald-test" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>MLEs have the property that they obey the central limit theorem. This means that the sampling distribution of an MLE becomes more and more like a normal distribution as the sample size gets large. We say that the MLEs are “approximately” or “asymptotically” normal.</p>
 <p>So, if we divide the MLE by its standard error, we get an approximate z-test of statistical significance. This test is called a Wald test, and it is what R reports in the summary table below. You should have no problem interpreting these tests at this point in the course.</p>
-<div class="sourceCode" id="cb415"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb415-1"><a href="11.5-inference-11.html#cb415-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod2)</span></code></pre></div>
+<div class="sourceCode" id="cb416"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb416-1"><a href="11.5-inference-11.html#cb416-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod2)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = chd ~ age, family = binomial, data = chd.data)
@@ -593,10 +593,10 @@ In general, the Wald test should only be used when you have a large sample size.
 </ul>
 <p><span class="math display">\[ [\exp(b_{\text{lower}}) ,\exp(b_{\text{upper}})]. \]</span></p>
 <p>Below is the result of this procedure for our example.</p>
-<div class="sourceCode" id="cb417"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb417-1"><a href="11.5-inference-11.html#cb417-1" aria-hidden="true" tabindex="-1"></a>ci.b <span class="ot">&lt;-</span> <span class="fu">confint</span>(mod2)</span></code></pre></div>
+<div class="sourceCode" id="cb418"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb418-1"><a href="11.5-inference-11.html#cb418-1" aria-hidden="true" tabindex="-1"></a>ci.b <span class="ot">&lt;-</span> <span class="fu">confint</span>(mod2)</span></code></pre></div>
 <pre><code>## Waiting for profiling to be done...</code></pre>
-<div class="sourceCode" id="cb419"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb419-1"><a href="11.5-inference-11.html#cb419-1" aria-hidden="true" tabindex="-1"></a>ci.table <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="at">coefs =</span> <span class="fu">coef</span>(mod2), ci.b)</span>
-<span id="cb419-2"><a href="11.5-inference-11.html#cb419-2" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(ci.table)</span></code></pre></div>
+<div class="sourceCode" id="cb420"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb420-1"><a href="11.5-inference-11.html#cb420-1" aria-hidden="true" tabindex="-1"></a>ci.table <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="at">coefs =</span> <span class="fu">coef</span>(mod2), ci.b)</span>
+<span id="cb420-2"><a href="11.5-inference-11.html#cb420-2" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(ci.table)</span></code></pre></div>
 <pre><code>##                coefs     2.5 %  97.5 %
 ## (Intercept) 0.004945 0.0004413 0.03892
 ## age         1.117307 1.0692223 1.17587</code></pre>
@@ -624,11 +624,11 @@ In general, the Wald test should only be used when you have a large sample size.
 <p class="caption">Chi-square distributions (Source: <a href="https://en.wikipedia.org/wiki/Chi-squared_distribution" class="uri">https://en.wikipedia.org/wiki/Chi-squared_distribution</a>)</p>
 </div>
 <p>To conduct an LR test of the model with age as a predictor against a model without this predictor (i.e., the model with only the intercept), we can use the <code>lrtest</code> function of the <code>lmtest</code> package:</p>
-<div class="sourceCode" id="cb421"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb421-1"><a href="11.5-inference-11.html#cb421-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The model with no predictors</span></span>
-<span id="cb421-2"><a href="11.5-inference-11.html#cb421-2" aria-hidden="true" tabindex="-1"></a>mod0 <span class="ot">&lt;-</span> <span class="fu">glm</span>(chd <span class="sc">~</span> <span class="dv">1</span>, <span class="at">family =</span> <span class="st">&quot;binomial&quot;</span>, <span class="at">data =</span> chd.data)</span>
-<span id="cb421-3"><a href="11.5-inference-11.html#cb421-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb421-4"><a href="11.5-inference-11.html#cb421-4" aria-hidden="true" tabindex="-1"></a><span class="co"># The LR test (enter the smaller model first)</span></span>
-<span id="cb421-5"><a href="11.5-inference-11.html#cb421-5" aria-hidden="true" tabindex="-1"></a>lmtest<span class="sc">::</span><span class="fu">lrtest</span>(mod0, mod2)</span></code></pre></div>
+<div class="sourceCode" id="cb422"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb422-1"><a href="11.5-inference-11.html#cb422-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The model with no predictors</span></span>
+<span id="cb422-2"><a href="11.5-inference-11.html#cb422-2" aria-hidden="true" tabindex="-1"></a>mod0 <span class="ot">&lt;-</span> <span class="fu">glm</span>(chd <span class="sc">~</span> <span class="dv">1</span>, <span class="at">family =</span> <span class="st">&quot;binomial&quot;</span>, <span class="at">data =</span> chd.data)</span>
+<span id="cb422-3"><a href="11.5-inference-11.html#cb422-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb422-4"><a href="11.5-inference-11.html#cb422-4" aria-hidden="true" tabindex="-1"></a><span class="co"># The LR test (enter the smaller model first)</span></span>
+<span id="cb422-5"><a href="11.5-inference-11.html#cb422-5" aria-hidden="true" tabindex="-1"></a>lmtest<span class="sc">::</span><span class="fu">lrtest</span>(mod0, mod2)</span></code></pre></div>
 <pre><code>## Likelihood ratio test
 ## 
 ## Model 1: chd ~ 1

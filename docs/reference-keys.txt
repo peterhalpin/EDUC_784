@@ -78,7 +78,7 @@ fig:nonlinear1
 eq:logy
 eq:expb
 fig:expb
-fig:unnamed-chunk-205
+fig:unnamed-chunk-206
 fig:poly
 fig:overfit
 fig:overfit2
@@ -86,10 +86,10 @@ fig:YD
 fig:piecewise1
 fig:piecewise2
 fig:piecewise3
-fig:unnamed-chunk-222
 fig:unnamed-chunk-223
-fig:unnamed-chunk-229
-tab:unnamed-chunk-235
+fig:unnamed-chunk-224
+fig:unnamed-chunk-230
+tab:unnamed-chunk-236
 fig:lpm
 fig:props
 eq:prob
@@ -112,9 +112,9 @@ eq:Li
 eq:L
 eq:ell
 fig:HLtest
-fig:unnamed-chunk-261
 fig:unnamed-chunk-262
 fig:unnamed-chunk-263
+fig:unnamed-chunk-264
 about-this-book
 why-this-format
 tips-for-using-the-notes

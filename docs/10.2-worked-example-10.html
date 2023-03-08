@@ -23,7 +23,7 @@
 <meta name="author" content="Peter Halpin" />
 
 
-<meta name="date" content="2023-02-23" />
+<meta name="date" content="2023-03-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -534,38 +534,38 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   });
 </script>
 <p>In Section <a href="9.6-worked-example-9.html#worked-example-9">9.6</a> we saw that applying a log-transform to the <code>Wages.Rdata</code> example addressed non-normality of the residuals but did not do much to address nonlinearity. The diagnostic plots for the log-linear regression of wages on education are presented below.</p>
-<div class="sourceCode" id="cb360"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb360-1"><a href="10.2-worked-example-10.html#cb360-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the data and take a look</span></span>
-<span id="cb360-2"><a href="10.2-worked-example-10.html#cb360-2" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;Wages.RData&quot;</span>)</span>
-<span id="cb360-3"><a href="10.2-worked-example-10.html#cb360-3" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(wages)</span>
-<span id="cb360-4"><a href="10.2-worked-example-10.html#cb360-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb360-5"><a href="10.2-worked-example-10.html#cb360-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Create log transform of wage</span></span>
-<span id="cb360-6"><a href="10.2-worked-example-10.html#cb360-6" aria-hidden="true" tabindex="-1"></a>log_wage <span class="ot">&lt;-</span> <span class="fu">log</span>(wage <span class="sc">+</span> <span class="dv">1</span>)</span>
-<span id="cb360-7"><a href="10.2-worked-example-10.html#cb360-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb360-8"><a href="10.2-worked-example-10.html#cb360-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Regress it on educ</span></span>
-<span id="cb360-9"><a href="10.2-worked-example-10.html#cb360-9" aria-hidden="true" tabindex="-1"></a>mod1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(log_wage <span class="sc">~</span> educ)</span>
-<span id="cb360-10"><a href="10.2-worked-example-10.html#cb360-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb360-11"><a href="10.2-worked-example-10.html#cb360-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Check out model fit</span></span>
-<span id="cb360-12"><a href="10.2-worked-example-10.html#cb360-12" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
-<span id="cb360-13"><a href="10.2-worked-example-10.html#cb360-13" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(educ, log_wage, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span>
-<span id="cb360-14"><a href="10.2-worked-example-10.html#cb360-14" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(mod1)</span>
-<span id="cb360-15"><a href="10.2-worked-example-10.html#cb360-15" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod1, <span class="dv">1</span>, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-217-1.png" width="672" /></p>
-<div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb361-1"><a href="10.2-worked-example-10.html#cb361-1" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(wages)</span></code></pre></div>
+<div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb361-1"><a href="10.2-worked-example-10.html#cb361-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the data and take a look</span></span>
+<span id="cb361-2"><a href="10.2-worked-example-10.html#cb361-2" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;Wages.RData&quot;</span>)</span>
+<span id="cb361-3"><a href="10.2-worked-example-10.html#cb361-3" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(wages)</span>
+<span id="cb361-4"><a href="10.2-worked-example-10.html#cb361-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb361-5"><a href="10.2-worked-example-10.html#cb361-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Create log transform of wage</span></span>
+<span id="cb361-6"><a href="10.2-worked-example-10.html#cb361-6" aria-hidden="true" tabindex="-1"></a>log_wage <span class="ot">&lt;-</span> <span class="fu">log</span>(wage <span class="sc">+</span> <span class="dv">1</span>)</span>
+<span id="cb361-7"><a href="10.2-worked-example-10.html#cb361-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb361-8"><a href="10.2-worked-example-10.html#cb361-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Regress it on educ</span></span>
+<span id="cb361-9"><a href="10.2-worked-example-10.html#cb361-9" aria-hidden="true" tabindex="-1"></a>mod1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(log_wage <span class="sc">~</span> educ)</span>
+<span id="cb361-10"><a href="10.2-worked-example-10.html#cb361-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb361-11"><a href="10.2-worked-example-10.html#cb361-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Check out model fit</span></span>
+<span id="cb361-12"><a href="10.2-worked-example-10.html#cb361-12" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb361-13"><a href="10.2-worked-example-10.html#cb361-13" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(educ, log_wage, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span>
+<span id="cb361-14"><a href="10.2-worked-example-10.html#cb361-14" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(mod1)</span>
+<span id="cb361-15"><a href="10.2-worked-example-10.html#cb361-15" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod1, <span class="dv">1</span>, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-218-1.png" width="672" /></p>
+<div class="sourceCode" id="cb362"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb362-1"><a href="10.2-worked-example-10.html#cb362-1" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(wages)</span></code></pre></div>
 <p>Because there is one prominent bend in our residual vs fitted plot of the log-linear model (at <span class="math inline">\(\hat Y \approx 2.1\)</span>), let’s see if adding a quadratic term to the model can improve the model fit.</p>
 <p>The <code>poly</code> function in <code>R</code> makes it easy to do polynomial regression, without having to hard-code new variables like <code>educ^2</code> into our dataset. This function automatically uses orthogonal (uncorrelated) polynomials, so we don’t have to worry about centering, either. The basic interpretation of the model coefficients in an orthogonal polynomial regression is the same as discussed in Section <a href="10.1-polynomial-10.html#polynomial-10">10.1</a>, but the “more complicated” interpretation of the model parameters is not straightforward. To find out more, use <code>help(poly)</code>.</p>
 <p>The diagnostic plots for the log-linear model with a quadratic term included for education is shown below, along with the model summary. In the output, <code>poly(educ, 2)n</code> is the <span class="math inline">\(n\)</span>-th degree term in the polynomial.</p>
-<div class="sourceCode" id="cb362"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb362-1"><a href="10.2-worked-example-10.html#cb362-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(wages)</span>
-<span id="cb362-2"><a href="10.2-worked-example-10.html#cb362-2" aria-hidden="true" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(log_wage <span class="sc">~</span> <span class="fu">poly</span>(educ, <span class="dv">2</span>))</span>
-<span id="cb362-3"><a href="10.2-worked-example-10.html#cb362-3" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
-<span id="cb362-4"><a href="10.2-worked-example-10.html#cb362-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(educ, log_wage, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span>
-<span id="cb362-5"><a href="10.2-worked-example-10.html#cb362-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb362-6"><a href="10.2-worked-example-10.html#cb362-6" aria-hidden="true" tabindex="-1"></a><span class="co"># To plot the trend we need to we first need to order the data and the predicted values ... </span></span>
-<span id="cb362-7"><a href="10.2-worked-example-10.html#cb362-7" aria-hidden="true" tabindex="-1"></a>sort_educ <span class="ot">&lt;-</span> educ[<span class="fu">order</span>(educ)]</span>
-<span id="cb362-8"><a href="10.2-worked-example-10.html#cb362-8" aria-hidden="true" tabindex="-1"></a>sort_fitted<span class="ot">&lt;-</span> <span class="fu">fitted</span>(mod2)[<span class="fu">order</span>(educ)]</span>
-<span id="cb362-9"><a href="10.2-worked-example-10.html#cb362-9" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(sort_educ, sort_fitted, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>)</span>
-<span id="cb362-10"><a href="10.2-worked-example-10.html#cb362-10" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod2, <span class="dv">1</span>, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-218-1.png" width="672" /></p>
-<div class="sourceCode" id="cb363"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb363-1"><a href="10.2-worked-example-10.html#cb363-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod2)</span></code></pre></div>
+<div class="sourceCode" id="cb363"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb363-1"><a href="10.2-worked-example-10.html#cb363-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(wages)</span>
+<span id="cb363-2"><a href="10.2-worked-example-10.html#cb363-2" aria-hidden="true" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(log_wage <span class="sc">~</span> <span class="fu">poly</span>(educ, <span class="dv">2</span>))</span>
+<span id="cb363-3"><a href="10.2-worked-example-10.html#cb363-3" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb363-4"><a href="10.2-worked-example-10.html#cb363-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(educ, log_wage, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span>
+<span id="cb363-5"><a href="10.2-worked-example-10.html#cb363-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb363-6"><a href="10.2-worked-example-10.html#cb363-6" aria-hidden="true" tabindex="-1"></a><span class="co"># To plot the trend we need to we first need to order the data and the predicted values ... </span></span>
+<span id="cb363-7"><a href="10.2-worked-example-10.html#cb363-7" aria-hidden="true" tabindex="-1"></a>sort_educ <span class="ot">&lt;-</span> educ[<span class="fu">order</span>(educ)]</span>
+<span id="cb363-8"><a href="10.2-worked-example-10.html#cb363-8" aria-hidden="true" tabindex="-1"></a>sort_fitted<span class="ot">&lt;-</span> <span class="fu">fitted</span>(mod2)[<span class="fu">order</span>(educ)]</span>
+<span id="cb363-9"><a href="10.2-worked-example-10.html#cb363-9" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(sort_educ, sort_fitted, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>)</span>
+<span id="cb363-10"><a href="10.2-worked-example-10.html#cb363-10" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod2, <span class="dv">1</span>, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-219-1.png" width="672" /></p>
+<div class="sourceCode" id="cb364"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb364-1"><a href="10.2-worked-example-10.html#cb364-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod2)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = log_wage ~ poly(educ, 2))
@@ -585,20 +585,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Residual standard error: 0.422 on 397 degrees of freedom
 ## Multiple R-squared:  0.216,  Adjusted R-squared:  0.212 
 ## F-statistic: 54.8 on 2 and 397 DF,  p-value: &lt;2e-16</code></pre>
-<div class="sourceCode" id="cb365"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb365-1"><a href="10.2-worked-example-10.html#cb365-1" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(wages)</span></code></pre></div>
+<div class="sourceCode" id="cb366"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb366-1"><a href="10.2-worked-example-10.html#cb366-1" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(wages)</span></code></pre></div>
 <p><strong>What is your interpretation of the log-linear model with the quadratic term for education included? Does this address the non-linear relationship observed in the log-linear model? What would you do next? For your reference, the model with a cubic term for education is reported below.</strong></p>
-<div class="sourceCode" id="cb366"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb366-1"><a href="10.2-worked-example-10.html#cb366-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(wages)</span>
-<span id="cb366-2"><a href="10.2-worked-example-10.html#cb366-2" aria-hidden="true" tabindex="-1"></a>mod3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(log_wage <span class="sc">~</span> <span class="fu">poly</span>(educ, <span class="dv">3</span>))</span>
-<span id="cb366-3"><a href="10.2-worked-example-10.html#cb366-3" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
-<span id="cb366-4"><a href="10.2-worked-example-10.html#cb366-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(educ, log_wage, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span>
-<span id="cb366-5"><a href="10.2-worked-example-10.html#cb366-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb366-6"><a href="10.2-worked-example-10.html#cb366-6" aria-hidden="true" tabindex="-1"></a><span class="co"># To plot the trend we need to we first need to order the data and the predicted values ... </span></span>
-<span id="cb366-7"><a href="10.2-worked-example-10.html#cb366-7" aria-hidden="true" tabindex="-1"></a>sort_educ <span class="ot">&lt;-</span> educ[<span class="fu">order</span>(educ)]</span>
-<span id="cb366-8"><a href="10.2-worked-example-10.html#cb366-8" aria-hidden="true" tabindex="-1"></a>sort_fitted<span class="ot">&lt;-</span> <span class="fu">fitted</span>(mod3)[<span class="fu">order</span>(educ)]</span>
-<span id="cb366-9"><a href="10.2-worked-example-10.html#cb366-9" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(sort_educ, sort_fitted, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>)</span>
-<span id="cb366-10"><a href="10.2-worked-example-10.html#cb366-10" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod3, <span class="dv">1</span>, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-219-1.png" width="672" /></p>
-<div class="sourceCode" id="cb367"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb367-1"><a href="10.2-worked-example-10.html#cb367-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod3)</span></code></pre></div>
+<div class="sourceCode" id="cb367"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb367-1"><a href="10.2-worked-example-10.html#cb367-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(wages)</span>
+<span id="cb367-2"><a href="10.2-worked-example-10.html#cb367-2" aria-hidden="true" tabindex="-1"></a>mod3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(log_wage <span class="sc">~</span> <span class="fu">poly</span>(educ, <span class="dv">3</span>))</span>
+<span id="cb367-3"><a href="10.2-worked-example-10.html#cb367-3" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb367-4"><a href="10.2-worked-example-10.html#cb367-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(educ, log_wage, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span>
+<span id="cb367-5"><a href="10.2-worked-example-10.html#cb367-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb367-6"><a href="10.2-worked-example-10.html#cb367-6" aria-hidden="true" tabindex="-1"></a><span class="co"># To plot the trend we need to we first need to order the data and the predicted values ... </span></span>
+<span id="cb367-7"><a href="10.2-worked-example-10.html#cb367-7" aria-hidden="true" tabindex="-1"></a>sort_educ <span class="ot">&lt;-</span> educ[<span class="fu">order</span>(educ)]</span>
+<span id="cb367-8"><a href="10.2-worked-example-10.html#cb367-8" aria-hidden="true" tabindex="-1"></a>sort_fitted<span class="ot">&lt;-</span> <span class="fu">fitted</span>(mod3)[<span class="fu">order</span>(educ)]</span>
+<span id="cb367-9"><a href="10.2-worked-example-10.html#cb367-9" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(sort_educ, sort_fitted, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>)</span>
+<span id="cb367-10"><a href="10.2-worked-example-10.html#cb367-10" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod3, <span class="dv">1</span>, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-220-1.png" width="672" /></p>
+<div class="sourceCode" id="cb368"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb368-1"><a href="10.2-worked-example-10.html#cb368-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod3)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = log_wage ~ poly(educ, 3))
@@ -619,7 +619,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Residual standard error: 0.422 on 396 degrees of freedom
 ## Multiple R-squared:  0.22,   Adjusted R-squared:  0.214 
 ## F-statistic: 37.2 on 3 and 396 DF,  p-value: &lt;2e-16</code></pre>
-<div class="sourceCode" id="cb369"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb369-1"><a href="10.2-worked-example-10.html#cb369-1" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(wages)</span></code></pre></div>
+<div class="sourceCode" id="cb370"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb370-1"><a href="10.2-worked-example-10.html#cb370-1" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(wages)</span></code></pre></div>
 </div>
             </section>
 

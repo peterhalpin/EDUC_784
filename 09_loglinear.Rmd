@@ -1,5 +1,7 @@
 # Log-linear Regression {#chapter-9}
 
+<!-- In this chapter, make sure to review the math in section 1 and then do the worked example in class. --> 
+
 ```{r, echo = F}
 # Clean up check
 rm(list = ls())
@@ -16,7 +18,7 @@ button <-  "position: relative;
 
 In the previous chapter we considered how to check whether the population assumptions of linear regression are problematic for a given data set. In this chapter we discuss one way to deal with assumption violations --  by "transforming" the $Y$ variable. In general, a transformation is just a function we apply to a variable to change it into another variable that we would rather work with. We have already seen some examples of transformations: the z-transformation (z-scores) and percentiles. 
 
-In this chapter we will focus on the use and interpretation of the log-transform, $\log(Y)$, which results in the log-linear regression model. This serves to illustrate the overall approach of transforming the $Y$ variable to address assumption violations, and also leads into a later topic -- logistic regression -- which also involves logarithms. 
+In this chapter we will focus on the use and interpretation of the log-transform, $\log(Y)$, which results in the log-linear regression model. This serves to illustrate the overall approach to transforming the $Y$ variable, and also leads into a later topic -- logistic regression -- which also involves logarithms. 
 
 Whenever we transform a $Y$ variable in a regression model, it always has three types of consequences. It affects: 
 
@@ -79,7 +81,13 @@ Log base $e$, or $\log_e$,  is called the natural logarithm and often denoted "$
 
 ### log and exp
 
-Logarithms have the property that they can always be undone. For example, if we start with the number $x= 100$, we can take the log (base $e$) of that number as above
+If we apply the log-transformation to variable, we can always "undo" the transformation to get back to the original variable. This is important because we often want to interpret the results of an analysis in terms of the original variable, not the transformed one. We will see this trick a lot in what follows -- apply a transform to the data, run the model, then undo the transform to interpret the results. 
+
+The way to undo the log transform is using exponentiation, which is abbreviated "$\exp$".  
+
+The mathematical terminology here is that $\exp$ is the *inverse* of $\log$, and vice versa. The relationship is a bit slippery to grasp, but the overall idea is that we once we log transform a variable, we can use the inverse transformation ($\exp$) to get back to the original variable. So, $\log$ and $\exp$ are like best buddies -- whenever we see one of them, the other is bound to show up also. 
+
+For example, if we start with the number $x= 100$, we can take the log (base $e$) of that number as above
 
 \[\log(100) =  4.60517 \]
 
@@ -91,9 +99,11 @@ Putting these two equations together, we can see that
 
 \[ e^{\log(100)} = 100. \]
 
-So, taking the log of $100$ gives us $4.60517$, and taking the exponent of $4.60517$ gets us back to the original input, $100$. In general, $e^{\log(x)} = x$. So, exponentiation (i.e., raising something to a power) undoes the logarithm. This undoing is called "inversion" in mathematics.   
+So, taking the log of $100$ gives us $4.60517$, and then taking the exponent of $4.60517$ gets us back to the original input, $100$. In general, $e^{\log(x)} = x$. 
 
-From a statistical perspective, the important thing about logs and exponents is that we can always use one to undo the effects of the other. So, if we log transform our $Y$ variable in a regression analysis to make the data more compatible with the model assumptions, we can always undo the log transform afterwards by taking exponents. We will see this trick a lot in what follows -- apply a transform to the data, run the model, then undo the transform to interpret the results. 
+This is what it means for $\exp$ to undo or invert the $\log$ function. Exponentiation (i.e., raising something to a power) undoes the logarithm. 
+
+As mentioned, the important thing about logs and exponents is that we can always use one to undo the effects of the other. So, if we log transform our $Y$ variable in a regression analysis to make the data more compatible with the model assumptions, we can always undo the log transform afterwards by taking exponents. 
 
 A final note about notation. The mathematical symbol $\exp(y)$ is used instead of $e^y$ to avoid having to write complicated expressions in the superscript. The idea is that the left hand side of the following equation is easier to read than the right hand side 
 
@@ -113,7 +123,7 @@ I'll ask some questions like the following to start class off. **Please write do
 
 There are some rules for working with logs and exponents that we will use later on to derive some results about the interpretation of log-linear regression. You don't need to know these but you might find them useful if you like to follow derivations. 
 
-* Addition with logs":
+* Addition with logs:
 \[ \log(m) + \log(n) = \log(mn) \] 
 
 * Multiplication with exponents:  
@@ -219,7 +229,7 @@ hist(log(prop_c1rmscal), col = "#4b9cd3")
 
 
 
-To avoid this situation I always add 1 to a variable before taking its log, that what I know that there are no values less than 1 in the data. Technically, there is no reason to do this if the variable does not take on values in the range 0 to 1, but I always apply the "add 1" rule just so I don't have to worry about it. 
+To avoid this situation I always add 1 to a variable before taking its log, that way I know that there are no values less than 1 in the data. Technically, there is no reason to do this if the variable does not take on values in the range 0 to 1, but I always apply the "add 1" rule just so I don't have to worry about it. 
 
 ### What about negative values of $x$?
 
@@ -239,8 +249,6 @@ The take home message: If we have negative values of $x$, before we apply the lo
 
 * Step 1. “Add” the minimum value of $x$ to prevent undefined values of log
 * Step 2. Add 1 to make sure no values are less than 1
-
-Like the "add 1" rule, you can use this procedure all the time, not just when $x$ takes on negative values. 
 
 **Can you think of a log transformation that would work to address data that were negatively skewed, rather than positively skewed? Hint: the trick is similar to the one in this section** 
 
@@ -262,7 +270,7 @@ Recall that the assumptions of linear regression are about the residuals, not ab
 
 Second, even if the residuals are non-normal, this still doesn't matter very much with very large samples. The central limit theorem assures us that, as the sample size gets larger, the sampling distribution of the regression coefficients converges to a normal distribution, regardless of the distribution of the residuals. This is illustrated in Figure \@ref(fig:clt) below. 
 
-The left panel shows the qq-plot of the residuals when Math Achievement (`c1rmscal`) is regressed on SES (`wksesl`) using the ECLS dataset. The right panel shows the bootstrapped sampling distribution of the regression coefficient, with samples of size $N = 100$. It is apparent that the skewness of the $Y$ variable does not affect the normality of the sampling distribution of the b-weight when the sample size is $100$. This is why we can often ignore skew in $Y$ with “large” samples ($N = 100$ in this case.
+The left panel shows the qq-plot of the residuals when Math Achievement (`c1rmscal`) is regressed on SES (`wksesl`) using the ECLS dataset. The right panel shows the bootstrapped sampling distribution of the regression coefficient, with samples of size $N = 100$. It is apparent that the skewness of the $Y$ variable does not affect the normality of the sampling distribution of the b-weight when the sample size is $100$. This is why we can often ignore skew in $Y$ with “large” samples ($N = 100$ in this case).
 
 ```{r, clt, echo = F, fig.cap = "The sampling distribution of a regression coefficient when residuals have positive skew", fig.align = 'center'}
 knitr::include_graphics("images/clt.png")
@@ -340,38 +348,63 @@ In a log-linear model, the regression coefficients can be interpreted as the *ap
 
 we can interpret $b$ as the approximate proportion change in $Y$  associated with one unit change in $X$. This should seem surprising. $Y$ is not the outcome variable -- $\log(Y)$ is. But, we can still interpret the model with respect to $Y$! 
 
-It is important to note that this interpretation is approximate and it only applies when $|b| < 1$. When $b$ takes on larger values, we will either need to rescale $X$ or use the exact interpretation in the next section. 
+It is important to note that this interpretation is approximate and it only applies when $|b| < 1$. When $b$ takes on larger values, we will either need to rescale $X$ or use the exact interpretation in the next section. The mathematical rationale for these interpretations is presented in Section \@ref(derivation-9)
 
-Let's get clear on what proportion change means. For any two values $Y$ and $Y'$, the difference ("change") $Y' - Y$ as a proportion of $Y$ is 
+Before moving on, let's get clear on what proportion change means. For any two values $Y$ and $Y'$, the difference ("change") $Y' - Y$ as a proportion of $Y$ is
 
 \[ \text{proportion change} = \frac{Y' - Y}{Y} = Y'/Y - 1.\]
 
-Multiplying this by 100 gives us the percentage change. 
+Multiplying this by 100 gives us the percentage change, which is usually easier to talk about. If we want to talk about the change without specifying the units (e.g, proportion, percentage), we just say relative change. 
 
-For example, if $Y = 100$ and $Y' = 150$ then, 
+Note that relative change is not the same as relative magnitude. $Y'/Y$ is the magnitude of $Y'$ relative to $Y$. To get relative change, we subtract 1 from relative magnitude. 
 
-\[ \text{proportion change} = \frac{150 - 100}{100} = .5, \]
+For example, say I loan $Y = 100$ dollars to a friend and they pay me back $Y' = 150$ dollars. The amount my friend paid me back is 1.5 times larger, or 150% larger, than what I initially lent them:
 
-so $Y'$ is 50% *larger* than $Y$. If $Y' = 40$ and $Y = 100$, then $Y'$ is 40% *as large as* $Y$, or, equivalently, 60% smaller than $Y$. 
+$$ Y'/Y = 150/100 = 1.5. $$
+This is the relative *magnitude* of the two amounts.
+
+Equivalently, we could say that I have *gained* 50%, or 1/2, of the initial amount:
+
+$$ Y'/Y - 1 = 150/100 - 1 = .5 $$
+This is relative *change*. 
+
+In more financial terms, I charged my friend 50% interest on the loan, and so they had to paid me back 150% of the principal (some friend!). My gains are 50%, so the final amount of I have is 150% larger than what I initially had. 
+
+As another example, if $Y' = 40$ and $Y = 100$, then $Y'$ is 40% *as large as* $Y$ (relative magnitude) and the relative decrease from 100 to 40 is 60%. In the context of our example, my friend  paid me back 40% of what I lent them, so I lost 60% of my initial amount. 
 
 Here are some more examples. **Please write down your answers and be prepared to share them in class**
 
-* What is the percent increase from $Y = 2$ to $Y' = 6$?  
-* What is the percent increase from $Y = 200$ to $Y' = 600$?
-* What is the percent decrease from $Y = 600$ to $Y' = 200$?
-* What is the percent change from $Y = 1$ to $Y' = 1$?
+1. How many times larger is $Y' = 6$ than $Y = 2$?   
+2. What is the relative increase from $Y = 2$ to $Y' = 6$?  
 
-Now that we know what proportion and percentage change are, let's use these concepts to interpret the regression coefficient in Equation \@ref(eq:logy). Recall that this interpretation is approximate and only applies when $|b| < 1$. 
+3. What is the percent increase from $Y = 200$ to $Y' = 600$?
+
+4. What is the percent decrease from $Y = 600$ to $Y' = 200$?
+
+5. What is the percent change from $Y = 1$ to $Y' = 1$?
+
+The answers are hidden below, but please try the questions before viewing (use the "Show Code" button).
+
+```{r}
+# 1. 6 is 3 times larger than 2, or 300% percent larger than 2 (6/2 = 3)
+# 2. 6 is a 200% increase from 2 (6/2 - 1 = 2)
+# 3. 600 is a 200% increase from 200 
+# 4. 200 is a 66% decrease from 600
+# 5. 1 is a zero percent increase from 1 (but 100% as large as 1!)
+#5. 
+```
+
+Now that we know about proportion/percentage/relative change, let's use these concepts to interpret the regression coefficient in Equation \@ref(eq:logy). Recall that this interpretation is approximate and only applies when $|b| < 1$. 
 
 Some numerical examples: 
 
-* if $b = .25$, then $Y$ is expected to be 25% larger when $X$ increases by 1 unit. 
+* if $b = .25$, then $Y$ is expected to increase by 25% when $X$ increases by 1 unit. 
 * if $b = 0$, then $Y$ is expected to be the same when $X$ increases by 1 unit (i.e., no relationship)
-* if $b = -.55$, then $Y$ is expected to be 55% as large (45% smaller) when $X$ increases by 1 unit
+* if $b = -.55$, then $Y$ is expected to decrease by 55% when $X$ increases by 1 unit. 
 
 ### A hypothetical example
 
-To get a better idea of how to interpret log-linear regression, let's use a hypothetical example in which we contrast it with linear regression. We will use the followin variables:
+Let's use a hypothetical example to get a better idea of how the interpretation of log-linear regression differs from the interpretation of linear regression. We will use the following variables:
 
 * $Y$ is wages (dollars per week) 
 * $X$ is hours worked per week
@@ -396,7 +429,7 @@ Again, the following questions should be pretty easy:
 
 4.  What about for someone who was expected to earn $1000/week? 
 
-The answers to questions 1-4 are hidden below, and you can use the "Show Code" button to see them.
+**Please write down your answers to these four questions and be prepared to share your responses in class**. The answers are hidden below, you can use the "Show Code" button to see them, but please try to answer on your own first. 
 
 ```{r, results = F}
 # 1. 120 dollars per week
@@ -411,6 +444,7 @@ For example, a \$20 increase in weekly wages means different things to some one 
 \$1000/week.
 
 * At \$100/week, \$20 for an additional hour is equivalent to a 20% increase in wages for only a 2.5% (1/40) increase in hours worked.
+
 * At \$1000/week, \$20 is a 2% increase in wages, which is less than the 2.5% increase in hours worked.
 
 On the other hand, a 20% increase for both people might be considered as having “equal subjective value.” 
@@ -424,7 +458,7 @@ https://ronclarkacademy.com/tuition-and-financial-aid
 
 ### Exact interpretation {#exact-9}
 
-The exact interpretation of the regression coefficients in the log-linear model is a bit involved. The main result is 
+The exact interpretation of the regression coefficients in the log-linear model is a bit involved. The main result is about the relative magnitude of $\hat Y$ corresponding to a one-unit change in $X$
 
 \[ \frac{\widehat Y(X + 1)}{\widehat Y(X)} = \exp(b) 
 (#eq:expb)
@@ -432,7 +466,7 @@ The exact interpretation of the regression coefficients in the log-linear model 
 
 where $\widehat Y(X)$ is the predicted value of $Y$ for a given value of $X$. This is result derived in Section \@ref(derivation-9) below (optional).
 
-From Equation \@ref(eq:expb) and the definition of proportion change in the  Section \@ref(approximate-9), it follows that the proportion of change in $\widehat Y$ for a 1 unit increase in $X$ is *exactly* equal to $\exp(b) - 1$. So, if we want an exact interpretation of the regression coefficients in a log-linear model, we need to do some "follow up math". In the hypothetical example above, the exact proportion change in the log-linear model is
+From Equation \@ref(eq:expb) and the definition of proportion change in the  Section \@ref(approximate-9), it follows that the proportion of change in $\widehat Y$ for a 1 unit increase in $X$ is *exactly* equal to $\exp(b) - 1$. So, if we want an exact interpretation of the regression coefficients in a log-linear model, we need to do some "follow up math". In the hypothetical example above (wages and hours worked), the exact proportion change in the log-linear model is
 
 \[ \exp(.2) - 1 = 1.2214 - 1= .2214 \]
 
@@ -446,8 +480,9 @@ for $|b| < 1$. This is illustrated in the graph below, where the blue line is $\
 
 ```{r expb, echo = F, fig.cap = "exp(x) - 1 (blue) versus x (black)", fig.align = 'center'}
 x <- seq(-3, 3, by = .1)
-plot(x, x, type = "l")
-points(x, exp(x)-1, type = "l", col = "#4b9cd3", ylab = "y")
+plot(x, x, type = "l", ylab = "exact vs approx proportion change", xlab = "value of regression coefficient")
+points(x, exp(x)-1, type = "l", col = "#4b9cd3")
+#abline(h = 0, col = "grey", lty = 2)
 ```
 
 ### Summary
@@ -456,11 +491,11 @@ While there are many transformations that can be used to address skew in the $Y$
 
 * The approximate interpretation of the regression coefficients in the log-linear model: a one unit of change in $X$ is expected to yield a $(b \times 100)\%$ change in $Y$. This interpretation only applies with $b$ is small (less than 1 in absolute value).
 
-* The exact interpretation: a one unit of change in $X$ is expected to yield a $((\exp(b) - 1)  \times 100)\%$ change in $Y$, and this applies for any value of $b$. 
+* The exact interpretation: a one unit of change in $X$ is expected to yield a $(\exp(b) - 1)  \times 100\%$ change in $Y$, and this applies for any value of $b$. 
 
 ### Derivation of Equation \@ref(eq:expb) {#derivation-9}
 
-Start with the log-linear model and then exponentiate both sides:
+Start with the log-linear model and then exponentiate both sides and then use the multiplication rule for exponents:
 
 \begin{align}
 \log(\widehat Y) & = a + bX \\
@@ -599,15 +634,22 @@ plot(mod2, 1)
 plot(mod2, 2)
 ```
 
-
 **Section \@ref(interpretation-9)**
 
 * Please write down your answers to the questions below and be prepared to share them in class
 
-  * What is the percent increase from $Y = 2$ to $Y' = 6$?  
-  * What is the percent increase from $Y = 200$ to $Y' = 600$?
-  * What is the percent decrease from $Y = 600$ to $Y' = 200$?
-  * What is the percent change from $Y = 1$ to $Y' = 1$?
+1. How many times larger is $Y' = 6$ than $Y = 2$?   
+2. What is the relative increase from $Y = 2$ to $Y' = 6$?  
+
+3. What is the percent increase from $Y = 200$ to $Y' = 600$?
+
+4. What is the percent decrease from $Y = 600$ to $Y' = 200$?
+
+5. What is the percent change from $Y = 1$ to $Y' = 1$?
+
+  
+* Please write down your answers to the four questions about the hypothetical example and be prepared to share your responses in class*
+  
 
 **Section \@ref(worked-example-9)**
 
