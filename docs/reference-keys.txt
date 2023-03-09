@@ -313,6 +313,7 @@ polynomial-10
 recap-of-polynomials
 polynomials-and-curve-fitting
 interpreting-the-model
+deriviation-10
 model-building
 worked-example-10
 piecewise-10

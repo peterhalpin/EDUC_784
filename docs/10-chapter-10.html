@@ -23,7 +23,7 @@
 <meta name="author" content="Peter Halpin" />
 
 
-<meta name="date" content="2023-03-08" />
+<meta name="date" content="2023-03-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -426,7 +426,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.1.1" data-path="10.1-polynomial-10.html"><a href="10.1-polynomial-10.html#recap-of-polynomials"><i class="fa fa-check"></i><b>10.1.1</b> Recap of polynomials</a></li>
 <li class="chapter" data-level="10.1.2" data-path="10.1-polynomial-10.html"><a href="10.1-polynomial-10.html#polynomials-and-curve-fitting"><i class="fa fa-check"></i><b>10.1.2</b> Polynomials and curve fitting</a></li>
 <li class="chapter" data-level="10.1.3" data-path="10.1-polynomial-10.html"><a href="10.1-polynomial-10.html#interpreting-the-model"><i class="fa fa-check"></i><b>10.1.3</b> Interpreting the model</a></li>
-<li class="chapter" data-level="10.1.4" data-path="10.1-polynomial-10.html"><a href="10.1-polynomial-10.html#model-building"><i class="fa fa-check"></i><b>10.1.4</b> Model building</a></li>
+<li class="chapter" data-level="10.1.4" data-path="10.1-polynomial-10.html"><a href="10.1-polynomial-10.html#deriviation-10"><i class="fa fa-check"></i><b>10.1.4</b> Derivation*</a></li>
+<li class="chapter" data-level="10.1.5" data-path="10.1-polynomial-10.html"><a href="10.1-polynomial-10.html#model-building"><i class="fa fa-check"></i><b>10.1.5</b> Model building</a></li>
 </ul></li>
 <li class="chapter" data-level="10.2" data-path="10.2-worked-example-10.html"><a href="10.2-worked-example-10.html"><i class="fa fa-check"></i><b>10.2</b> A worked example</a></li>
 <li class="chapter" data-level="10.3" data-path="10.3-piecewise-10.html"><a href="10.3-piecewise-10.html"><i class="fa fa-check"></i><b>10.3</b> Piecewise regression</a>
@@ -506,12 +507,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="chapter-10" class="section level1 hasAnchor" number="10">
 <h1><span class="header-section-number">Chapter 10</span> Polynomial Regression, etc<a href="10-chapter-10.html#chapter-10" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>This chapter collects some other useful techniques for addressing assumption violations in linear regression.</p>
-<p>One approach involves transforming the <span class="math inline">\(X\)</span>-variable(s), which can be done in addition to (or instead of) transforming the <span class="math inline">\(Y\)</span> variable. This approach is used to address violations of the assumption of linearity, and this chapter will cover two widely-used techniques</p>
+<p>This chapter will cover two widely-used techniques for addressing violations of the assumption of linearity:</p>
 <ul>
 <li>Polynomial regression, which means raising <span class="math inline">\(X\)</span>-variables to a power (e.g., <span class="math inline">\(X^2\)</span> and <span class="math inline">\(X^3\)</span>), and</li>
 <li>Piecewise or segmented regression, which involves using different regression lines over different ranges of a predictor.</li>
 </ul>
+<p>These techniques involves transforming the <span class="math inline">\(X\)</span>-variable(s), which can be done in addition to (or instead of) transforming the <span class="math inline">\(Y\)</span> variable.</p>
 <p>Both polynomial and piecewise regression are very useful in practice and lead to advanced topics like splines and semi-parametric regression. They also turn out to be special cases of interactions, so we have already covered a lot of the technical details in Chapter <a href="6-chapter-6.html#chapter-6">6</a> – phew!</p>
 </div>
             </section>

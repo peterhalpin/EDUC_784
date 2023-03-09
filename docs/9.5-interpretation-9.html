@@ -23,7 +23,7 @@
 <meta name="author" content="Peter Halpin" />
 
 
-<meta name="date" content="2023-03-08" />
+<meta name="date" content="2023-03-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -426,7 +426,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.1.1" data-path="10.1-polynomial-10.html"><a href="10.1-polynomial-10.html#recap-of-polynomials"><i class="fa fa-check"></i><b>10.1.1</b> Recap of polynomials</a></li>
 <li class="chapter" data-level="10.1.2" data-path="10.1-polynomial-10.html"><a href="10.1-polynomial-10.html#polynomials-and-curve-fitting"><i class="fa fa-check"></i><b>10.1.2</b> Polynomials and curve fitting</a></li>
 <li class="chapter" data-level="10.1.3" data-path="10.1-polynomial-10.html"><a href="10.1-polynomial-10.html#interpreting-the-model"><i class="fa fa-check"></i><b>10.1.3</b> Interpreting the model</a></li>
-<li class="chapter" data-level="10.1.4" data-path="10.1-polynomial-10.html"><a href="10.1-polynomial-10.html#model-building"><i class="fa fa-check"></i><b>10.1.4</b> Model building</a></li>
+<li class="chapter" data-level="10.1.4" data-path="10.1-polynomial-10.html"><a href="10.1-polynomial-10.html#deriviation-10"><i class="fa fa-check"></i><b>10.1.4</b> Derivation*</a></li>
+<li class="chapter" data-level="10.1.5" data-path="10.1-polynomial-10.html"><a href="10.1-polynomial-10.html#model-building"><i class="fa fa-check"></i><b>10.1.5</b> Model building</a></li>
 </ul></li>
 <li class="chapter" data-level="10.2" data-path="10.2-worked-example-10.html"><a href="10.2-worked-example-10.html"><i class="fa fa-check"></i><b>10.2</b> A worked example</a></li>
 <li class="chapter" data-level="10.3" data-path="10.3-piecewise-10.html"><a href="10.3-piecewise-10.html"><i class="fa fa-check"></i><b>10.3</b> Piecewise regression</a>
@@ -548,14 +549,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><span class="math display">\[ \text{proportion change} = \frac{Y&#39; - Y}{Y} = Y&#39;/Y - 1.\]</span></p>
 <p>Multiplying this by 100 gives us the percentage change, which is usually easier to talk about. If we want to talk about the change without specifying the units (e.g, proportion, percentage), we just say relative change.</p>
 <p>Note that relative change is not the same as relative magnitude. <span class="math inline">\(Y&#39;/Y\)</span> is the magnitude of <span class="math inline">\(Y&#39;\)</span> relative to <span class="math inline">\(Y\)</span>. To get relative change, we subtract 1 from relative magnitude.</p>
-<p>For example, say I loan <span class="math inline">\(Y = 100\)</span> dollars to a friend and they pay me back <span class="math inline">\(Y&#39; = 150\)</span> dollars. The amount my friend paid me back is 1.5 times larger, or 150% larger, than what I initially lent them:</p>
-<p><span class="math display">\[ Y&#39;/Y = 150/100 = 1.5. \]</span>
+<p>For example, say I loan <span class="math inline">\(Y = 100\)</span> dollars to a friend and they pay me back <span class="math inline">\(Y&#39; = 150\)</span> dollars. The amount my friend paid me back is 1.5 times, or 150%, of what I initially lent them:</p>
+<p><span class="math display">\[ Y&#39;/Y = 150/100 = 1.5 \]</span>
 This is the relative <em>magnitude</em> of the two amounts.</p>
 <p>Equivalently, we could say that I have <em>gained</em> 50%, or 1/2, of the initial amount:</p>
 <p><span class="math display">\[ Y&#39;/Y - 1 = 150/100 - 1 = .5 \]</span>
 This is relative <em>change</em>.</p>
-<p>In more financial terms, I charged my friend 50% interest on the loan, and so they had to paid me back 150% of the principal (some friend!). My gains are 50%, so the final amount of I have is 150% larger than what I initially had.</p>
-<p>As another example, if <span class="math inline">\(Y&#39; = 40\)</span> and <span class="math inline">\(Y = 100\)</span>, then <span class="math inline">\(Y&#39;\)</span> is 40% <em>as large as</em> <span class="math inline">\(Y\)</span> (relative magnitude) and the relative decrease from 100 to 40 is 60%. In the context of our example, my friend paid me back 40% of what I lent them, so I lost 60% of my initial amount.</p>
+<p>In more financial terms, I charged my friend 50% interest on the loan, and so they had to pay me back 150% of the principal (some friend!). My gains are 50%, so the final amount I have is 150% of what I initially had.</p>
+<p>As another example, if <span class="math inline">\(Y&#39; = 40\)</span> and <span class="math inline">\(Y = 100\)</span>, then <span class="math inline">\(Y&#39;\)</span> is 40% of <span class="math inline">\(Y\)</span> (relative magnitude) and the relative decrease from 100 to 40 is 60%. In the context of our example, my friend paid me back 40% of what I lent them, so I lost 60% of my initial amount.</p>
 <p>Here are some more examples. <strong>Please write down your answers and be prepared to share them in class</strong></p>
 <ol style="list-style-type: decimal">
 <li><p>How many times larger is <span class="math inline">\(Y&#39; = 6\)</span> than <span class="math inline">\(Y = 2\)</span>?<br />
@@ -572,7 +573,7 @@ This is relative <em>change</em>.</p>
 <span id="cb336-4"><a href="9.5-interpretation-9.html#cb336-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. 200 is a 66% decrease from 600</span></span>
 <span id="cb336-5"><a href="9.5-interpretation-9.html#cb336-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. 1 is a zero percent increase from 1 (but 100% as large as 1!)</span></span>
 <span id="cb336-6"><a href="9.5-interpretation-9.html#cb336-6" aria-hidden="true" tabindex="-1"></a><span class="co">#5. </span></span></code></pre></div>
-<p>Now that we know about proportion/percentage/relative change, let’s use these concepts to interpret the regression coefficient in Equation <a href="9.5-interpretation-9.html#eq:logy">(9.1)</a>. Recall that this interpretation is approximate and only applies when <span class="math inline">\(|b| &lt; 1\)</span>.</p>
+<p>Now that we know about relative change, let’s use these concepts to interpret the regression coefficient in Equation <a href="9.5-interpretation-9.html#eq:logy">(9.1)</a>. Recall that this interpretation is approximate and only applies when <span class="math inline">\(|b| &lt; 1\)</span>.</p>
 <p>Some numerical examples:</p>
 <ul>
 <li>if <span class="math inline">\(b = .25\)</span>, then <span class="math inline">\(Y\)</span> is expected to increase by 25% when <span class="math inline">\(X\)</span> increases by 1 unit.</li>
@@ -651,7 +652,7 @@ Figure 9.14: exp(x) - 1 (blue) versus x (black)
 </div>
 <div id="derivation-9" class="section level3 hasAnchor" number="9.5.5">
 <h3><span class="header-section-number">9.5.5</span> Derivation of Equation <a href="9.5-interpretation-9.html#eq:expb">(9.2)</a><a href="9.5-interpretation-9.html#derivation-9" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Start with the log-linear model and then exponentiate both sides and then use the multiplication rule for exponents:</p>
+<p>Start with the log-linear model, exponentiate both sides, and then use the multiplication rule for exponents:</p>
 <p><span class="math display">\[\begin{align}
 \log(\widehat Y) &amp; = a + bX \\
 \implies &amp; \\
@@ -665,8 +666,8 @@ Figure 9.14: exp(x) - 1 (blue) versus x (black)
 \implies &amp; \\
 \widehat Y^*&amp; = \exp(a)\exp(bX)\exp(b) \\
 \end{align}\]</span></p>
-<p>Then take the ratio of <span class="math inline">\(\widehat Y^*\)</span> to <span class="math inline">\(\widehat Y\)</span>:</p>
-<p><span class="math display">\[ \frac{\widehat Y^*}{\widehat Y} = \exp(b) \]</span></p>
+<p>Finally, take the ratio of <span class="math inline">\(\widehat Y^*\)</span> to <span class="math inline">\(\widehat Y\)</span>:</p>
+<p><span class="math display">\[ \frac{\widehat Y^*}{\widehat Y} = \frac{\exp(a)\exp(bX)\exp(b)}{\exp(a)\exp(bX)} = \exp(b) \]</span></p>
 </div>
 </div>
             </section>

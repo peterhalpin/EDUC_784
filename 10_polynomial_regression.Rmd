@@ -16,12 +16,12 @@ button <-  "position: relative;
             box-shadow: inset 0 1px 0 #80B0FB"
 ```
 
-This chapter collects some other useful techniques for addressing assumption violations in linear regression.  
-
-One approach involves transforming the $X$-variable(s), which can be done in addition to (or instead of) transforming the $Y$ variable. This approach is used to address violations of the assumption of linearity, and this chapter will cover two widely-used techniques 
+This chapter will cover two widely-used techniques for addressing violations of the assumption of linearity: 
 
 * Polynomial regression, which means raising $X$-variables to a power (e.g., $X^2$ and $X^3$), and 
 * Piecewise or segmented regression, which involves using different regression lines over different ranges of a predictor. 
+
+These techniques involves transforming the $X$-variable(s), which can be done in addition to (or instead of) transforming the $Y$ variable. 
 
 Both polynomial and piecewise regression are very useful in practice and lead to advanced topics like splines and semi-parametric regression. They also turn out to be special cases of interactions, so we have already covered a lot of the technical details in Chapter \@ref(chapter-6) -- phew! 
 
@@ -42,9 +42,9 @@ As with regular linear regression, the polynomial model is linear in the coeffic
 
 Polynomial regression does use nonlinear functions of the predictor(s), but the model is agnostic to what you do with your data. The situation here is a lot like when we worked with interactions in Chapter \@ref(chapter-6). In order to model interactions, we computed the product of two predictors and entered the product into the model as a third predictor. Well, $X^2$ is the product of a predictor with itself, so, in this sense, the quadratic term in a polynomial regression is just a special case of an interaction between two variables. 
 
-Although we did not cover interactions among more than two variables in this course, they are computed in the same way -- e.g., a "three-way" interaction is just the product of 3 predictors. Similarly, $X^3$ is just the three-fold product of a variable with itself. In general, interactions and polynomial regression are related in the same way as multiplication and exponentiation. 
+Although we did not cover interactions among more than two variables in this course, they are computed in the same way -- e.g., a "three-way" interaction is just the product of 3 predictors. Similarly, $X^3$ is just the three-fold product of a variable with itself. 
 
-Although polynomial regression is formally similar to interactions, it is used for a different purpose. Interactions address how the relationship between two variables changes as a function of a third. Their inclusion in a model is  usually motivated by a specific research question that is formulated before doing the data analysis (see Chapter \@ref(chapter-6)). 
+While polynomial regression is formally similar to interactions, it is used for a different purpose. Interactions address how the relationship between two variables changes as a function of a third. Their inclusion in a model is usually motivated by a specific research question that is formulated before doing the data analysis (see Chapter \@ref(chapter-6)). 
 
 By contrast, polynomial regression is used to address a non-linear relationship between $Y$ and $X$, and is usually motivated by a preliminary examination of data that indicates the presence of such a relationship (e.g., a scatter plot of $Y$ versus $X$; a residual versus fitted plot). While it is possible to formulate research questions about polynomial terms in a regression model, this is not necessarily or even usually the case when polynomial regression is used -- often its just used to address violations of the linearity assumption. 
 
@@ -102,7 +102,7 @@ plot(X, Y, col = "#4B9CD3", pch = 10, lwd = 5, main = title3)
 points(X, fitted(mod3), col = 3, type = "l", lwd = 2)
 ```
 
-To help formulate your intuitions, you might find it useful to consider the plots below. In these plots a second sample was drawn from the same population model, and the regression lines from Figure \@ref(fig:overfit) were added to the plots. Note that the regression parameters were not re-estimated using the second data set. The model parameters from the first data set were used to produce the regression lines for the second data set. 
+To help formulate your intuitions, you might find it useful to consider the plots below. In these plots, a second sample was drawn from the same population, and the regression lines from Figure \@ref(fig:overfit) were added to the plots. Note that the regression parameters were not re-estimated using the second data set. The model parameters from the first data set were used to produce the regression lines for the second data set. 
 
 ```{r, overfit2, echo = F, fig.cap = "Polynomial Regression Examples (With New Data)", fig.align = 'center', fig.width = 12}
 # Generate data
@@ -133,20 +133,22 @@ points(X, fitted(mod3), col = 3, type = "l", lwd = 2)
 
 As mentioned, polynomial terms are often added into a model as a way to address nonlinearity. When this is the case, the polynomial terms themselves are not of much substantive interest, and are just added to "patch up" the model after assumption checking. 
 
-We saw an example of this in Section \@ref(worked-example-7). In that example, a linear term and quadratic term were entered into the model in the same block of predictors. The R-squared was interpreted for the entire block, but the interpretation of the regression coefficient for the quadratic term was not addressed. This is a pretty common way of using polynomial regression -- the polynomial terms are included so that the model assumptions (linearity) are met, but they are not necessarily interpreted beyond this.  
+We saw an example of this in Section \@ref(worked-example-7). In that example, linear term and quadratic terms for SES were entered into the model in the same block. The R-squared was interpreted for the entire block, but the interpretation of the regression coefficient for the quadratic term was not addressed. This is a pretty common way of using polynomial regression -- the polynomial terms are included so that the model assumptions (linearity) are met, but they are not necessarily interpreted beyond this.  
 
 However, we can interpret the terms in a polynomial regression if we want to. This section addresses the interpretation of a quadratic regression, but a similar approach applies to models with higher-order terms. 
 
-A classic example of a substantively interesting quadratic relationship is the Yerkes-Dodson law relating physiological arousal (i.e., stress) to task performance, represented in Figure \@ref(fig:YD). One way to interpret the law is in terms of the overall shape of the relationship. As stress goes up, so does performance -- but only up to a point, after which more stress leads to a deterioration in performance. 
-
-This exemplifies the basic interpretation of a quadratic relationship: 
-
-* A U-shaped curve corresponds to a *positive* regression coefficient on $X^2$. 
-* An inverted-U-shaped curve corresponds to a *negative* regression coefficient on $X^2$.
+Let's consider a classic example of a quadratic relationship: the Yerkes-Dodson law relating physiological arousal (i.e., stress) to task performance, represented in Figure \@ref(fig:YD). One way to interpret the law is in terms of the overall shape of the relationship. As stress goes up, so does performance -- but only up to a point, after which more stress leads to a deterioration in performance. 
 
 ```{r, YD, echo = F, fig.cap = "Yerkes-Dodson Law (Source: Wikipedia)", fig.align = 'center'}
 knitr::include_graphics("images/YerkesDodson.png", dpi = 75)
 ```
+
+The Yerkes-Dodson law exemplifies the *basic* interpretation of a quadratic relationship: 
+
+* A U-shaped curve corresponds to a *positive* regression coefficient on $X^2$. 
+* An inverted-U-shaped curve corresponds to a *negative* regression coefficient on $X^2$.
+
+Using this interpretation, you should be able to tell whether the Yerkes-Dodson law implies a positive or a negative quadratic relationship between stress and performance (Spoiler: its negative - i.e., the curve is an inverted-U-shape)
 
 Beyond the overall shape of the relationship, we might also want to know what level of stress corresponds to the optimal level of performance -- i.e., where the maximum of the curve is. This exemplifies a more complicated interpretation of a quadratic relationship, and it requires some calculus (see Section \@ref(deriviation-10), which is optional). The main result is that for the quadratic regression model
 
@@ -156,9 +158,26 @@ the value of $X$ that corresponds to the maximum (or minumum) of the quadratic c
 
 \[ X = \frac{-b_1}{2 b_2} \]
 
-Here is a hint for the following question: In the Yerkes-Dodson law, when the $X$ variable is centered, the regression coefficient for the linear term is not statistically significant. 
+The image above doesn't provide numerical values for the stress variable the Yerkes-Dodson law. So, let's assume the linear term is not statistically significant (i.e., $b_1 = 0$). 
 
-**Based on this  discussion, please use both the "basic" and "more complicated" interpretation of a quadratic relationship to describe the Yerkes-Dodson Law.** 
+**Based on this discussion, please use the "more complicated" interpretation of a quadratic relationship to describe the Yerkes-Dodson Law.** 
+
+### Derivation* {#deriviation-10}
+
+Recall from calculus that the extrema (i.e., minima and maxima) of a function occur when the derivative of the function is equal to zero. The derivative of the quadratic regression equation is
+$$
+\frac{d}{dX} \hat Y = \frac{d}{dX} (b_0 + b_1X + b_2X^2) = b_1 + 2b_2X.
+$$
+
+Setting the derivative to zero
+$$
+b_1 + 2b_2X = 0
+$$
+
+and solving for $X$ 
+
+$$ X = -\frac{b_1}{2b_2} $$
+gives the value of $X$ at which the $\hat Y$ reaches its minimum or maximum value. 
 
 ### Model building
 
@@ -168,7 +187,7 @@ Up to this point we have discussed the interpretation of polynomials. Now we con
 
 2. If there is evidence of non-linearity, look at the scatter plots between the outcome variable and each individual predictor to sort out which predictors are potentially causing the non-linearity. 
 
-3. Add a quadratic term for a predictor of interest and examine whether there is a statistically significant increase in R-squared (See Section \@ref(delta-rsquared-7)). If not, the quadratic term is not improving the model fit, so remove it from the model and try again. If so, re-check the residual versus fitted plot to see whether the linearity assumption is still problematic. 
+3. Add a quadratic term for a predictor of interest and examine whether there is a statistically significant increase in R-squared (See Section \@ref(delta-rsquared-7)). If it is, re-check the residual versus fitted plot to see whether the linearity assumption is still problematic. If it isn't, the quadratic term is not improving the model fit, so remove it from the model and try again. 
 
 4. Keep adding polynomial terms one at a time until the model assumptions looks reasonable.  
 
@@ -182,9 +201,9 @@ This overall approach is illustrated in the next section. However, there are a c
     * Use "orthogonal polynomials" which ensure the different polynomial terms are uncorrelated. This is the default approach in `R`, but it definitely leans more towards curve-fitting than substantive interpretations of the polynomial terms.
 
 
-* We can't conclude that there is a quadratic relationship between two variables unless we have controlled for their linear relationship. As we just discussed, higher-order terms can be highly correlated with lower-order terms. Thus, higher-order terms will reflect their specific degree of curvature (e.g., quadratic) only if all lower-order (e.g., linear) terms are partialled out. In practice, this means that all lower-order terms should be included in the model in order for the higher-order terms to have a clear interpretation. 
+* We can't conclude that there is a quadratic relationship between two variables unless we have controlled for their linear relationship. As we just discussed, higher-order terms can be highly correlated with lower-order terms. Thus, higher-order terms will reflect their specific degree of curvature (e.g., quadratic) only if all lower-order (e.g., linear) terms are included in the model as well. In practice, this means that all lower-order terms should be included in the model in order for the higher-order terms to have a clear interpretation. 
 
-* Finally, a warning: Making good use of polynomial regression requires walking a fine line between curve fitting and parsimony (see Figure \@ref(fig:overfit)). Sometimes, adding polynomial terms can provide an elegant and intuitive interpretation of the relationship between two variables. But, if you find yourself adding more than a couple of polynomial terms into a model and still have unresolved issues with nonlinearity, it is probably best to consider another approach (such as piece-wise regression, see Section \@ref(piecewise-10)) 
+* Finally, a warning: Making good use of polynomial regression requires walking a fine line between curve fitting and theory based modeling (see Figure \@ref(fig:overfit)). Sometimes, adding polynomial terms can provide an elegant and intuitive interpretation of the relationship between two variables. But, if you find yourself adding more than a couple of polynomial terms into a model and still have unresolved issues with nonlinearity, it is probably best to consider another approach (such as piece-wise regression, see Section \@ref(piecewise-10)) 
 
 ## A worked example {#worked-example-10}
 
@@ -269,7 +288,6 @@ detach(wages)
 ```
 
 Consider the following reasoning about the example: 
-
 * For people with 12 or less years of education (i.e., who did not obtain post-secondary education) the apparent relationship with wage is quite weak. This seems plausible, because if a job doesn't require a college degree, education probably isn’t a big factor in determining wages.
 
 * For people with more than 12 years of education, the relationship with wage seems to be stronger. This also seems plausible: for jobs that require post secondary education, more education is usually associated with higher wages. 
@@ -310,7 +328,7 @@ detach(wages)
 
 We have reasoned that the relationship between wages and education might change as depending on whether people have a post-secondary education. We also noted that this sounds a lot like an interaction (because it is!), which is the basic approach we can use to create piecewise models. 
 
-In order to run our basic piecewise regression, we need to create a dummy coded version of education that indicates whether the participant had more than 12 years education: 
+In order to run our piecewise regression, first we need to create a dummy-coded version of education that indicates whether the person had more than 12 years education: 
 
 \[ \text{educ12} = \left\{ \begin{matrix}  
                      1 & \text{if educ } > 12\\ 
@@ -318,7 +336,7 @@ In order to run our basic piecewise regression, we need to create a dummy coded 
                 \end{matrix} \right.
 \]
 
-The we just create an interaction model for `educ` and the dummy-coded indicator
+Then, we enter both the dummy-coded indicator and its interaction with `educ` into the model: 
 
 \[ \widehat Y = b_0 + b_1\text{educ} + b_2\text{educ12} + b_3 (\text{educ} \times \text{educ12}) \]
 
@@ -333,7 +351,7 @@ Below is the summary output for the piecewise model, as well as the diagnostic p
 
   * What you know about interactions between a binary and continuous variable (Section \@ref(binary-continuous-interaction-6) and above) 
   
-  * What you know about the interpretation of regression coefficient log-linear models (Section \@ref(interpretation-9)) 
+  * What you know about the interpretation of regression coefficients in log-linear models (Section \@ref(interpretation-9)) 
   
 You can also use the  `emtrends` functions to test the simple slopes (Section \@ref(inference-for-interactions-6)). Note that the intercept and main effect of the binary variable `educ12` are not of much interest in this application. 
 

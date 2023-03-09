@@ -358,9 +358,9 @@ Multiplying this by 100 gives us the percentage change, which is usually easier 
 
 Note that relative change is not the same as relative magnitude. $Y'/Y$ is the magnitude of $Y'$ relative to $Y$. To get relative change, we subtract 1 from relative magnitude. 
 
-For example, say I loan $Y = 100$ dollars to a friend and they pay me back $Y' = 150$ dollars. The amount my friend paid me back is 1.5 times larger, or 150% larger, than what I initially lent them:
+For example, say I loan $Y = 100$ dollars to a friend and they pay me back $Y' = 150$ dollars. The amount my friend paid me back is 1.5 times, or 150%, of what I initially lent them:
 
-$$ Y'/Y = 150/100 = 1.5. $$
+$$ Y'/Y = 150/100 = 1.5 $$
 This is the relative *magnitude* of the two amounts.
 
 Equivalently, we could say that I have *gained* 50%, or 1/2, of the initial amount:
@@ -368,9 +368,9 @@ Equivalently, we could say that I have *gained* 50%, or 1/2, of the initial amou
 $$ Y'/Y - 1 = 150/100 - 1 = .5 $$
 This is relative *change*. 
 
-In more financial terms, I charged my friend 50% interest on the loan, and so they had to paid me back 150% of the principal (some friend!). My gains are 50%, so the final amount of I have is 150% larger than what I initially had. 
+In more financial terms, I charged my friend 50% interest on the loan, and so they had to pay me back 150% of the principal (some friend!). My gains are 50%, so the final amount I have is 150% of what I initially had. 
 
-As another example, if $Y' = 40$ and $Y = 100$, then $Y'$ is 40% *as large as* $Y$ (relative magnitude) and the relative decrease from 100 to 40 is 60%. In the context of our example, my friend  paid me back 40% of what I lent them, so I lost 60% of my initial amount. 
+As another example, if $Y' = 40$ and $Y = 100$, then $Y'$ is 40% of $Y$ (relative magnitude) and the relative decrease from 100 to 40 is 60%. In the context of our example, my friend  paid me back 40% of what I lent them, so I lost 60% of my initial amount. 
 
 Here are some more examples. **Please write down your answers and be prepared to share them in class**
 
@@ -394,7 +394,7 @@ The answers are hidden below, but please try the questions before viewing (use t
 #5. 
 ```
 
-Now that we know about proportion/percentage/relative change, let's use these concepts to interpret the regression coefficient in Equation \@ref(eq:logy). Recall that this interpretation is approximate and only applies when $|b| < 1$. 
+Now that we know about relative change, let's use these concepts to interpret the regression coefficient in Equation \@ref(eq:logy). Recall that this interpretation is approximate and only applies when $|b| < 1$. 
 
 Some numerical examples: 
 
@@ -495,7 +495,7 @@ While there are many transformations that can be used to address skew in the $Y$
 
 ### Derivation of Equation \@ref(eq:expb) {#derivation-9}
 
-Start with the log-linear model and then exponentiate both sides and then use the multiplication rule for exponents:
+Start with the log-linear model, exponentiate both sides, and then use the multiplication rule for exponents:
 
 \begin{align}
 \log(\widehat Y) & = a + bX \\
@@ -513,9 +513,9 @@ Then do the same thing for $X+1$ in place of $X$:
 \widehat Y^*& = \exp(a)\exp(bX)\exp(b) \\
 \end{align}
 
-Then take the ratio of $\widehat Y^*$ to $\widehat Y$: 
+Finally, take the ratio of $\widehat Y^*$ to $\widehat Y$: 
 
-\[ \frac{\widehat Y^*}{\widehat Y} = \exp(b) \]
+\[ \frac{\widehat Y^*}{\widehat Y} = \frac{\exp(a)\exp(bX)\exp(b)}{\exp(a)\exp(bX)} = \exp(b) \]
 
 ## Worked example {#worked-example-9} 
 

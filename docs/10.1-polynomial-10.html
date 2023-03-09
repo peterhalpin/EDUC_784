@@ -23,7 +23,7 @@
 <meta name="author" content="Peter Halpin" />
 
 
-<meta name="date" content="2023-03-08" />
+<meta name="date" content="2023-03-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -426,7 +426,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.1.1" data-path="10.1-polynomial-10.html"><a href="10.1-polynomial-10.html#recap-of-polynomials"><i class="fa fa-check"></i><b>10.1.1</b> Recap of polynomials</a></li>
 <li class="chapter" data-level="10.1.2" data-path="10.1-polynomial-10.html"><a href="10.1-polynomial-10.html#polynomials-and-curve-fitting"><i class="fa fa-check"></i><b>10.1.2</b> Polynomials and curve fitting</a></li>
 <li class="chapter" data-level="10.1.3" data-path="10.1-polynomial-10.html"><a href="10.1-polynomial-10.html#interpreting-the-model"><i class="fa fa-check"></i><b>10.1.3</b> Interpreting the model</a></li>
-<li class="chapter" data-level="10.1.4" data-path="10.1-polynomial-10.html"><a href="10.1-polynomial-10.html#model-building"><i class="fa fa-check"></i><b>10.1.4</b> Model building</a></li>
+<li class="chapter" data-level="10.1.4" data-path="10.1-polynomial-10.html"><a href="10.1-polynomial-10.html#deriviation-10"><i class="fa fa-check"></i><b>10.1.4</b> Derivation*</a></li>
+<li class="chapter" data-level="10.1.5" data-path="10.1-polynomial-10.html"><a href="10.1-polynomial-10.html#model-building"><i class="fa fa-check"></i><b>10.1.5</b> Model building</a></li>
 </ul></li>
 <li class="chapter" data-level="10.2" data-path="10.2-worked-example-10.html"><a href="10.2-worked-example-10.html"><i class="fa fa-check"></i><b>10.2</b> A worked example</a></li>
 <li class="chapter" data-level="10.3" data-path="10.3-piecewise-10.html"><a href="10.3-piecewise-10.html"><i class="fa fa-check"></i><b>10.3</b> Piecewise regression</a>
@@ -538,8 +539,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Your first thought might be, “doesn’t this contradict the assumption that regression is linear?” The answer here is a bit subtle.</p>
 <p>As with regular linear regression, the polynomial model is linear in the coefficients – we don’t raise the regression coefficients to a power (e.g., <span class="math inline">\(b_1^2\)</span>), or multiply coefficients together (e.g, <span class="math inline">\(b_1 \times b_2\)</span>). This is the technical sense in which polynomial regression is still just linear regression, despite its name.</p>
 <p>Polynomial regression does use nonlinear functions of the predictor(s), but the model is agnostic to what you do with your data. The situation here is a lot like when we worked with interactions in Chapter <a href="6-chapter-6.html#chapter-6">6</a>. In order to model interactions, we computed the product of two predictors and entered the product into the model as a third predictor. Well, <span class="math inline">\(X^2\)</span> is the product of a predictor with itself, so, in this sense, the quadratic term in a polynomial regression is just a special case of an interaction between two variables.</p>
-<p>Although we did not cover interactions among more than two variables in this course, they are computed in the same way – e.g., a “three-way” interaction is just the product of 3 predictors. Similarly, <span class="math inline">\(X^3\)</span> is just the three-fold product of a variable with itself. In general, interactions and polynomial regression are related in the same way as multiplication and exponentiation.</p>
-<p>Although polynomial regression is formally similar to interactions, it is used for a different purpose. Interactions address how the relationship between two variables changes as a function of a third. Their inclusion in a model is usually motivated by a specific research question that is formulated before doing the data analysis (see Chapter <a href="6-chapter-6.html#chapter-6">6</a>).</p>
+<p>Although we did not cover interactions among more than two variables in this course, they are computed in the same way – e.g., a “three-way” interaction is just the product of 3 predictors. Similarly, <span class="math inline">\(X^3\)</span> is just the three-fold product of a variable with itself.</p>
+<p>While polynomial regression is formally similar to interactions, it is used for a different purpose. Interactions address how the relationship between two variables changes as a function of a third. Their inclusion in a model is usually motivated by a specific research question that is formulated before doing the data analysis (see Chapter <a href="6-chapter-6.html#chapter-6">6</a>).</p>
 <p>By contrast, polynomial regression is used to address a non-linear relationship between <span class="math inline">\(Y\)</span> and <span class="math inline">\(X\)</span>, and is usually motivated by a preliminary examination of data that indicates the presence of such a relationship (e.g., a scatter plot of <span class="math inline">\(Y\)</span> versus <span class="math inline">\(X\)</span>; a residual versus fitted plot). While it is possible to formulate research questions about polynomial terms in a regression model, this is not necessarily or even usually the case when polynomial regression is used – often its just used to address violations of the linearity assumption.</p>
 <div id="recap-of-polynomials" class="section level3 hasAnchor" number="10.1.1">
 <h3><span class="header-section-number">10.1.1</span> Recap of polynomials<a href="10.1-polynomial-10.html#recap-of-polynomials" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -572,7 +573,7 @@ Figure 10.1: Examples of Polynomials
 Figure 10.2: Polynomial Regression Examples
 </p>
 </div>
-<p>To help formulate your intuitions, you might find it useful to consider the plots below. In these plots a second sample was drawn from the same population model, and the regression lines from Figure <a href="10.1-polynomial-10.html#fig:overfit">10.2</a> were added to the plots. Note that the regression parameters were not re-estimated using the second data set. The model parameters from the first data set were used to produce the regression lines for the second data set.</p>
+<p>To help formulate your intuitions, you might find it useful to consider the plots below. In these plots, a second sample was drawn from the same population, and the regression lines from Figure <a href="10.1-polynomial-10.html#fig:overfit">10.2</a> were added to the plots. Note that the regression parameters were not re-estimated using the second data set. The model parameters from the first data set were used to produce the regression lines for the second data set.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:overfit2"></span>
 <img src="_main_files/figure-html/overfit2-1.png" alt="Polynomial Regression Examples (With New Data)" width="1152" />
 <p class="caption">
@@ -583,34 +584,49 @@ Figure 10.3: Polynomial Regression Examples (With New Data)
 <div id="interpreting-the-model" class="section level3 hasAnchor" number="10.1.3">
 <h3><span class="header-section-number">10.1.3</span> Interpreting the model<a href="10.1-polynomial-10.html#interpreting-the-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>As mentioned, polynomial terms are often added into a model as a way to address nonlinearity. When this is the case, the polynomial terms themselves are not of much substantive interest, and are just added to “patch up” the model after assumption checking.</p>
-<p>We saw an example of this in Section <a href="7.3-worked-example-7.html#worked-example-7">7.3</a>. In that example, a linear term and quadratic term were entered into the model in the same block of predictors. The R-squared was interpreted for the entire block, but the interpretation of the regression coefficient for the quadratic term was not addressed. This is a pretty common way of using polynomial regression – the polynomial terms are included so that the model assumptions (linearity) are met, but they are not necessarily interpreted beyond this.</p>
+<p>We saw an example of this in Section <a href="7.3-worked-example-7.html#worked-example-7">7.3</a>. In that example, linear term and quadratic terms for SES were entered into the model in the same block. The R-squared was interpreted for the entire block, but the interpretation of the regression coefficient for the quadratic term was not addressed. This is a pretty common way of using polynomial regression – the polynomial terms are included so that the model assumptions (linearity) are met, but they are not necessarily interpreted beyond this.</p>
 <p>However, we can interpret the terms in a polynomial regression if we want to. This section addresses the interpretation of a quadratic regression, but a similar approach applies to models with higher-order terms.</p>
-<p>A classic example of a substantively interesting quadratic relationship is the Yerkes-Dodson law relating physiological arousal (i.e., stress) to task performance, represented in Figure <a href="10.1-polynomial-10.html#fig:YD">10.4</a>. One way to interpret the law is in terms of the overall shape of the relationship. As stress goes up, so does performance – but only up to a point, after which more stress leads to a deterioration in performance.</p>
-<p>This exemplifies the basic interpretation of a quadratic relationship:</p>
-<ul>
-<li>A U-shaped curve corresponds to a <em>positive</em> regression coefficient on <span class="math inline">\(X^2\)</span>.</li>
-<li>An inverted-U-shaped curve corresponds to a <em>negative</em> regression coefficient on <span class="math inline">\(X^2\)</span>.</li>
-</ul>
+<p>Let’s consider a classic example of a quadratic relationship: the Yerkes-Dodson law relating physiological arousal (i.e., stress) to task performance, represented in Figure <a href="10.1-polynomial-10.html#fig:YD">10.4</a>. One way to interpret the law is in terms of the overall shape of the relationship. As stress goes up, so does performance – but only up to a point, after which more stress leads to a deterioration in performance.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:YD"></span>
 <img src="images/YerkesDodson.png" alt="Yerkes-Dodson Law (Source: Wikipedia)" width="563" />
 <p class="caption">
 Figure 10.4: Yerkes-Dodson Law (Source: Wikipedia)
 </p>
 </div>
-<p>Beyond the overall shape of the relationship, we might also want to know what level of stress corresponds to the optimal level of performance – i.e., where the maximum of the curve is. This exemplifies a more complicated interpretation of a quadratic relationship, and it requires some calculus (see Section <a href="#deriviation-10"><strong>??</strong></a>, which is optional). The main result is that for the quadratic regression model</p>
+<p>The Yerkes-Dodson law exemplifies the <em>basic</em> interpretation of a quadratic relationship:</p>
+<ul>
+<li>A U-shaped curve corresponds to a <em>positive</em> regression coefficient on <span class="math inline">\(X^2\)</span>.</li>
+<li>An inverted-U-shaped curve corresponds to a <em>negative</em> regression coefficient on <span class="math inline">\(X^2\)</span>.</li>
+</ul>
+<p>Using this interpretation, you should be able to tell whether the Yerkes-Dodson law implies a positive or a negative quadratic relationship between stress and performance (Spoiler: its negative - i.e., the curve is an inverted-U-shape)</p>
+<p>Beyond the overall shape of the relationship, we might also want to know what level of stress corresponds to the optimal level of performance – i.e., where the maximum of the curve is. This exemplifies a more complicated interpretation of a quadratic relationship, and it requires some calculus (see Section <a href="10.1-polynomial-10.html#deriviation-10">10.1.4</a>, which is optional). The main result is that for the quadratic regression model</p>
 <p><span class="math display">\[ \widehat Y = b_0 +b_1X + b_2X^2, \]</span></p>
 <p>the value of <span class="math inline">\(X\)</span> that corresponds to the maximum (or minumum) of the quadratic curve is</p>
 <p><span class="math display">\[ X = \frac{-b_1}{2 b_2} \]</span></p>
-<p>Here is a hint for the following question: In the Yerkes-Dodson law, when the <span class="math inline">\(X\)</span> variable is centered, the regression coefficient for the linear term is not statistically significant.</p>
-<p><strong>Based on this discussion, please use both the “basic” and “more complicated” interpretation of a quadratic relationship to describe the Yerkes-Dodson Law.</strong></p>
+<p>The image above doesn’t provide numerical values for the stress variable the Yerkes-Dodson law. So, let’s assume the linear term is not statistically significant (i.e., <span class="math inline">\(b_1 = 0\)</span>).</p>
+<p><strong>Based on this discussion, please use the “more complicated” interpretation of a quadratic relationship to describe the Yerkes-Dodson Law.</strong></p>
 </div>
-<div id="model-building" class="section level3 hasAnchor" number="10.1.4">
-<h3><span class="header-section-number">10.1.4</span> Model building<a href="10.1-polynomial-10.html#model-building" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="deriviation-10" class="section level3 hasAnchor" number="10.1.4">
+<h3><span class="header-section-number">10.1.4</span> Derivation*<a href="10.1-polynomial-10.html#deriviation-10" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Recall from calculus that the extrema (i.e., minima and maxima) of a function occur when the derivative of the function is equal to zero. The derivative of the quadratic regression equation is
+<span class="math display">\[
+\frac{d}{dX} \hat Y = \frac{d}{dX} (b_0 + b_1X + b_2X^2) = b_1 + 2b_2X.
+\]</span></p>
+<p>Setting the derivative to zero
+<span class="math display">\[
+b_1 + 2b_2X = 0
+\]</span></p>
+<p>and solving for <span class="math inline">\(X\)</span></p>
+<p><span class="math display">\[ X = -\frac{b_1}{2b_2} \]</span>
+gives the value of <span class="math inline">\(X\)</span> at which the <span class="math inline">\(\hat Y\)</span> reaches its minimum or maximum value.</p>
+</div>
+<div id="model-building" class="section level3 hasAnchor" number="10.1.5">
+<h3><span class="header-section-number">10.1.5</span> Model building<a href="10.1-polynomial-10.html#model-building" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Up to this point we have discussed the interpretation of polynomials. Now we consider how to build polynomial regression models in practice. A typical model-building process for polynomial regression might proceed as follows.</p>
 <ol style="list-style-type: decimal">
 <li><p>Enter the linear terms into the model and then examine a residual versus fitted plot.</p></li>
 <li><p>If there is evidence of non-linearity, look at the scatter plots between the outcome variable and each individual predictor to sort out which predictors are potentially causing the non-linearity.</p></li>
-<li><p>Add a quadratic term for a predictor of interest and examine whether there is a statistically significant increase in R-squared (See Section <a href="7.2-delta-rsquared-7.html#delta-rsquared-7">7.2</a>). If not, the quadratic term is not improving the model fit, so remove it from the model and try again. If so, re-check the residual versus fitted plot to see whether the linearity assumption is still problematic.</p></li>
+<li><p>Add a quadratic term for a predictor of interest and examine whether there is a statistically significant increase in R-squared (See Section <a href="7.2-delta-rsquared-7.html#delta-rsquared-7">7.2</a>). If it is, re-check the residual versus fitted plot to see whether the linearity assumption is still problematic. If it isn’t, the quadratic term is not improving the model fit, so remove it from the model and try again.</p></li>
 <li><p>Keep adding polynomial terms one at a time until the model assumptions looks reasonable.</p></li>
 </ol>
 <p>This overall approach is illustrated in the next section. However, there are a couple of important details to point out first.</p>
@@ -621,8 +637,8 @@ Figure 10.4: Yerkes-Dodson Law (Source: Wikipedia)
 <li>Center the predictors before computing higher order terms. This is the same approach we discussed for interactions (Section <a href="6.3-binary-continuous-interaction-6.html#binary-continuous-interaction-6">6.3</a>).</li>
 <li>Use “orthogonal polynomials” which ensure the different polynomial terms are uncorrelated. This is the default approach in <code>R</code>, but it definitely leans more towards curve-fitting than substantive interpretations of the polynomial terms.</li>
 </ul></li>
-<li><p>We can’t conclude that there is a quadratic relationship between two variables unless we have controlled for their linear relationship. As we just discussed, higher-order terms can be highly correlated with lower-order terms. Thus, higher-order terms will reflect their specific degree of curvature (e.g., quadratic) only if all lower-order (e.g., linear) terms are partialled out. In practice, this means that all lower-order terms should be included in the model in order for the higher-order terms to have a clear interpretation.</p></li>
-<li><p>Finally, a warning: Making good use of polynomial regression requires walking a fine line between curve fitting and parsimony (see Figure <a href="10.1-polynomial-10.html#fig:overfit">10.2</a>). Sometimes, adding polynomial terms can provide an elegant and intuitive interpretation of the relationship between two variables. But, if you find yourself adding more than a couple of polynomial terms into a model and still have unresolved issues with nonlinearity, it is probably best to consider another approach (such as piece-wise regression, see Section <a href="10.3-piecewise-10.html#piecewise-10">10.3</a>)</p></li>
+<li><p>We can’t conclude that there is a quadratic relationship between two variables unless we have controlled for their linear relationship. As we just discussed, higher-order terms can be highly correlated with lower-order terms. Thus, higher-order terms will reflect their specific degree of curvature (e.g., quadratic) only if all lower-order (e.g., linear) terms are included in the model as well. In practice, this means that all lower-order terms should be included in the model in order for the higher-order terms to have a clear interpretation.</p></li>
+<li><p>Finally, a warning: Making good use of polynomial regression requires walking a fine line between curve fitting and theory based modeling (see Figure <a href="10.1-polynomial-10.html#fig:overfit">10.2</a>). Sometimes, adding polynomial terms can provide an elegant and intuitive interpretation of the relationship between two variables. But, if you find yourself adding more than a couple of polynomial terms into a model and still have unresolved issues with nonlinearity, it is probably best to consider another approach (such as piece-wise regression, see Section <a href="10.3-piecewise-10.html#piecewise-10">10.3</a>)</p></li>
 </ul>
 </div>
 </div>
