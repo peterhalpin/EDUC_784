@@ -23,7 +23,7 @@
 <meta name="author" content="Peter Halpin" />
 
 
-<meta name="date" content="2023-03-09" />
+<meta name="date" content="2023-03-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -153,6 +153,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.4" data-path="2.4-rsquared-2.html"><a href="2.4-rsquared-2.html"><i class="fa fa-check"></i><b>2.4</b> R-squared</a>
 <ul>
 <li class="chapter" data-level="2.4.1" data-path="2.4-rsquared-2.html"><a href="2.4-rsquared-2.html#derivation"><i class="fa fa-check"></i><b>2.4.1</b> Derivation*</a></li>
+<li class="chapter" data-level="2.4.2" data-path="2.4-rsquared-2.html"><a href="2.4-rsquared-2.html#additional-details"><i class="fa fa-check"></i><b>2.4.2</b> Additional details*</a></li>
 </ul></li>
 <li class="chapter" data-level="2.5" data-path="2.5-population-model-2.html"><a href="2.5-population-model-2.html"><i class="fa fa-check"></i><b>2.5</b> The population model</a></li>
 <li class="chapter" data-level="2.6" data-path="2.6-notation-2.html"><a href="2.6-notation-2.html"><i class="fa fa-check"></i><b>2.6</b> Clarifying notation</a></li>
@@ -209,33 +210,39 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.1.1" data-path="4.1-ecls-4.html"><a href="4.1-ecls-4.html#correlation-matrices"><i class="fa fa-check"></i><b>4.1.1</b> Correlation matrices</a></li>
 </ul></li>
 <li class="chapter" data-level="4.2" data-path="4.2-the-two-predictor-model.html"><a href="4.2-the-two-predictor-model.html"><i class="fa fa-check"></i><b>4.2</b> The two-predictor model</a></li>
-<li class="chapter" data-level="4.3" data-path="4.3-ols-4.html"><a href="4.3-ols-4.html"><i class="fa fa-check"></i><b>4.3</b> OLS with two predictors</a></li>
-<li class="chapter" data-level="4.4" data-path="4.4-interpretation-4.html"><a href="4.4-interpretation-4.html"><i class="fa fa-check"></i><b>4.4</b> Interpreting the coefficients</a>
+<li class="chapter" data-level="4.3" data-path="4.3-comparison-4.html"><a href="4.3-comparison-4.html"><i class="fa fa-check"></i><b>4.3</b> Multiple vs simple regression</a>
 <ul>
-<li class="chapter" data-level="4.4.1" data-path="4.4-interpretation-4.html"><a href="4.4-interpretation-4.html#holding-the-other-predictor-constant"><i class="fa fa-check"></i><b>4.4.1</b> “Holding the other predictor constant”</a></li>
-<li class="chapter" data-level="4.4.2" data-path="4.4-interpretation-4.html"><a href="4.4-interpretation-4.html#controlling-for-the-other-predictor"><i class="fa fa-check"></i><b>4.4.2</b> “Controlling for the other predictor”</a></li>
-<li class="chapter" data-level="4.4.3" data-path="4.4-interpretation-4.html"><a href="4.4-interpretation-4.html#the-ecls-example"><i class="fa fa-check"></i><b>4.4.3</b> The ECLS example</a></li>
+<li class="chapter" data-level="4.3.1" data-path="4.3-comparison-4.html"><a href="4.3-comparison-4.html#what-is-the-missing-ingredient"><i class="fa fa-check"></i><b>4.3.1</b> What is the missing ingredient?</a></li>
 </ul></li>
-<li class="chapter" data-level="4.5" data-path="4.5-beta-4.html"><a href="4.5-beta-4.html"><i class="fa fa-check"></i><b>4.5</b> Standardized coefficients</a></li>
-<li class="chapter" data-level="4.6" data-path="4.6-rsquared-4.html"><a href="4.6-rsquared-4.html"><i class="fa fa-check"></i><b>4.6</b> (Multiple) R-squared</a>
+<li class="chapter" data-level="4.4" data-path="4.4-ols-4.html"><a href="4.4-ols-4.html"><i class="fa fa-check"></i><b>4.4</b> OLS with two predictors</a></li>
+<li class="chapter" data-level="4.5" data-path="4.5-interpretation-4.html"><a href="4.5-interpretation-4.html"><i class="fa fa-check"></i><b>4.5</b> Interpreting the coefficients</a>
 <ul>
-<li class="chapter" data-level="4.6.1" data-path="4.6-rsquared-4.html"><a href="4.6-rsquared-4.html#relation-with-simple-regression"><i class="fa fa-check"></i><b>4.6.1</b> Relation with simple regression</a></li>
-<li class="chapter" data-level="4.6.2" data-path="4.6-rsquared-4.html"><a href="4.6-rsquared-4.html#adjusted-r-squared"><i class="fa fa-check"></i><b>4.6.2</b> Adjusted R-squared</a></li>
-<li class="chapter" data-level="4.6.3" data-path="4.6-rsquared-4.html"><a href="4.6-rsquared-4.html#the-multiple-correlation"><i class="fa fa-check"></i><b>4.6.3</b> The multiple correlation</a></li>
+<li class="chapter" data-level="4.5.1" data-path="4.5-interpretation-4.html"><a href="4.5-interpretation-4.html#holding-the-other-predictor-constant"><i class="fa fa-check"></i><b>4.5.1</b> “Holding the other predictor constant”</a></li>
+<li class="chapter" data-level="4.5.2" data-path="4.5-interpretation-4.html"><a href="4.5-interpretation-4.html#controlling-for-the-other-predictor"><i class="fa fa-check"></i><b>4.5.2</b> “Controlling for the other predictor”</a></li>
+<li class="chapter" data-level="4.5.3" data-path="4.5-interpretation-4.html"><a href="4.5-interpretation-4.html#the-ecls-example"><i class="fa fa-check"></i><b>4.5.3</b> The ECLS example</a></li>
+<li class="chapter" data-level="4.5.4" data-path="4.5-interpretation-4.html"><a href="4.5-interpretation-4.html#other-interpretations"><i class="fa fa-check"></i><b>4.5.4</b> Other interpretations</a></li>
 </ul></li>
-<li class="chapter" data-level="4.7" data-path="4.7-inference-for-slopes-4.html"><a href="4.7-inference-for-slopes-4.html"><i class="fa fa-check"></i><b>4.7</b> Inference for the slopes</a>
+<li class="chapter" data-level="4.6" data-path="4.6-beta-4.html"><a href="4.6-beta-4.html"><i class="fa fa-check"></i><b>4.6</b> Standardized coefficients</a></li>
+<li class="chapter" data-level="4.7" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html"><i class="fa fa-check"></i><b>4.7</b> (Multiple) R-squared</a>
 <ul>
-<li class="chapter" data-level="4.7.1" data-path="4.7-inference-for-slopes-4.html"><a href="4.7-inference-for-slopes-4.html#precision-of-hat-b"><i class="fa fa-check"></i><b>4.7.1</b> Precision of <span class="math inline">\(\hat b\)</span></a></li>
+<li class="chapter" data-level="4.7.1" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html#relation-with-simple-regression"><i class="fa fa-check"></i><b>4.7.1</b> Relation with simple regression</a></li>
+<li class="chapter" data-level="4.7.2" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html#relation-with-beta-weights"><i class="fa fa-check"></i><b>4.7.2</b> Relation with <span class="math inline">\(\beta\)</span>-weights</a></li>
+<li class="chapter" data-level="4.7.3" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html#adjusted-r-squared"><i class="fa fa-check"></i><b>4.7.3</b> Adjusted R-squared</a></li>
+<li class="chapter" data-level="4.7.4" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html#the-multiple-correlation"><i class="fa fa-check"></i><b>4.7.4</b> The multiple correlation</a></li>
 </ul></li>
-<li class="chapter" data-level="4.8" data-path="4.8-inference-for-rsquared-4.html"><a href="4.8-inference-for-rsquared-4.html"><i class="fa fa-check"></i><b>4.8</b> Inference for R-squared</a></li>
-<li class="chapter" data-level="4.9" data-path="4.9-workbook.html"><a href="4.9-workbook.html"><i class="fa fa-check"></i><b>4.9</b> Workbook</a></li>
-<li class="chapter" data-level="4.10" data-path="4.10-exercises.html"><a href="4.10-exercises.html"><i class="fa fa-check"></i><b>4.10</b> Exercises</a>
+<li class="chapter" data-level="4.8" data-path="4.8-inference-for-slopes-4.html"><a href="4.8-inference-for-slopes-4.html"><i class="fa fa-check"></i><b>4.8</b> Inference for the slopes</a>
 <ul>
-<li class="chapter" data-level="4.10.1" data-path="4.10-exercises.html"><a href="4.10-exercises.html#the-ecls250-data"><i class="fa fa-check"></i><b>4.10.1</b> The ECLS250 data</a></li>
-<li class="chapter" data-level="4.10.2" data-path="4.10-exercises.html"><a href="4.10-exercises.html#multiple-regression-with-lm"><i class="fa fa-check"></i><b>4.10.2</b> Multiple regression with <code>lm</code></a></li>
-<li class="chapter" data-level="4.10.3" data-path="4.10-exercises.html"><a href="4.10-exercises.html#relations-between-simple-and-multiple-regression"><i class="fa fa-check"></i><b>4.10.3</b> Relations between simple and multiple regression</a></li>
-<li class="chapter" data-level="4.10.4" data-path="4.10-exercises.html"><a href="4.10-exercises.html#inference-with-2-predictors"><i class="fa fa-check"></i><b>4.10.4</b> Inference with 2 predictors</a></li>
-<li class="chapter" data-level="4.10.5" data-path="4.10-exercises.html"><a href="4.10-exercises.html#apa-reporting-of-results"><i class="fa fa-check"></i><b>4.10.5</b> APA reporting of results</a></li>
+<li class="chapter" data-level="4.8.1" data-path="4.8-inference-for-slopes-4.html"><a href="4.8-inference-for-slopes-4.html#precision-of-hat-b"><i class="fa fa-check"></i><b>4.8.1</b> Precision of <span class="math inline">\(\hat b\)</span></a></li>
+</ul></li>
+<li class="chapter" data-level="4.9" data-path="4.9-inference-for-rsquared-4.html"><a href="4.9-inference-for-rsquared-4.html"><i class="fa fa-check"></i><b>4.9</b> Inference for R-squared</a></li>
+<li class="chapter" data-level="4.10" data-path="4.10-workbook.html"><a href="4.10-workbook.html"><i class="fa fa-check"></i><b>4.10</b> Workbook</a></li>
+<li class="chapter" data-level="4.11" data-path="4.11-exercises.html"><a href="4.11-exercises.html"><i class="fa fa-check"></i><b>4.11</b> Exercises</a>
+<ul>
+<li class="chapter" data-level="4.11.1" data-path="4.11-exercises.html"><a href="4.11-exercises.html#the-ecls250-data"><i class="fa fa-check"></i><b>4.11.1</b> The ECLS250 data</a></li>
+<li class="chapter" data-level="4.11.2" data-path="4.11-exercises.html"><a href="4.11-exercises.html#multiple-regression-with-lm"><i class="fa fa-check"></i><b>4.11.2</b> Multiple regression with <code>lm</code></a></li>
+<li class="chapter" data-level="4.11.3" data-path="4.11-exercises.html"><a href="4.11-exercises.html#relations-between-simple-and-multiple-regression"><i class="fa fa-check"></i><b>4.11.3</b> Relations between simple and multiple regression</a></li>
+<li class="chapter" data-level="4.11.4" data-path="4.11-exercises.html"><a href="4.11-exercises.html#inference-with-2-predictors"><i class="fa fa-check"></i><b>4.11.4</b> Inference with 2 predictors</a></li>
+<li class="chapter" data-level="4.11.5" data-path="4.11-exercises.html"><a href="4.11-exercises.html#apa-reporting-of-results"><i class="fa fa-check"></i><b>4.11.5</b> APA reporting of results</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="5-chapter-5.html"><a href="5-chapter-5.html"><i class="fa fa-check"></i><b>5</b> Categorical Predictors</a>
@@ -245,7 +252,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.3" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html"><i class="fa fa-check"></i><b>5.3</b> Binary predictors</a>
 <ul>
 <li class="chapter" data-level="5.3.1" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html#relation-with-t-tests"><i class="fa fa-check"></i><b>5.3.1</b> Relation with t-tests</a></li>
-<li class="chapter" data-level="5.3.2" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html#summary-1"><i class="fa fa-check"></i><b>5.3.2</b> Summary</a></li>
+<li class="chapter" data-level="5.3.2" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html#some-math"><i class="fa fa-check"></i><b>5.3.2</b> Some math*</a></li>
+<li class="chapter" data-level="5.3.3" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html#summary-1"><i class="fa fa-check"></i><b>5.3.3</b> Summary</a></li>
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="5.4-reference-group-coding-5.html"><a href="5.4-reference-group-coding-5.html"><i class="fa fa-check"></i><b>5.4</b> Reference-group coding</a>
 <ul>
@@ -508,9 +516,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="exercises-5" class="section level2 hasAnchor" number="9.8">
 <h2><span class="header-section-number">9.8</span> Exercises<a href="9.8-exercises-5.html#exercises-5" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Again there isn’t much new in terms of R code in this chapter. The code for the worked example is presented below, but please refer to Section <a href="9.6-worked-example-9.html#worked-example-9">9.6</a> for the interpretation.</p>
-<div class="sourceCode" id="cb352"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb352-1"><a href="9.8-exercises-5.html#cb352-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the data and take a look</span></span>
-<span id="cb352-2"><a href="9.8-exercises-5.html#cb352-2" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;Wages.RData&quot;</span>)</span>
-<span id="cb352-3"><a href="9.8-exercises-5.html#cb352-3" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(wages))</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="9.8-exercises-5.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the data and take a look</span></span>
+<span id="cb17-2"><a href="9.8-exercises-5.html#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;Wages.RData&quot;</span>)</span>
+<span id="cb17-3"><a href="9.8-exercises-5.html#cb17-3" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(wages))</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -595,64 +603,64 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tbody>
 </table>
 <p>We will focus on regressing hourly wage (<code>wage</code>) on years of education (<code>educ</code>). The distribution of the outcome variable and its relationship with the predictor are depicted below.</p>
-<div class="sourceCode" id="cb353"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb353-1"><a href="9.8-exercises-5.html#cb353-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(wages)</span>
-<span id="cb353-2"><a href="9.8-exercises-5.html#cb353-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
-<span id="cb353-3"><a href="9.8-exercises-5.html#cb353-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(wage,  <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span>
-<span id="cb353-4"><a href="9.8-exercises-5.html#cb353-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(educ, wage, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-210-1.png" width="672" /></p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="9.8-exercises-5.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(wages)</span>
+<span id="cb18-2"><a href="9.8-exercises-5.html#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb18-3"><a href="9.8-exercises-5.html#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(wage,  <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span>
+<span id="cb18-4"><a href="9.8-exercises-5.html#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(educ, wage, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
 <div id="linear-regression-of-wages-on-education" class="section level3 hasAnchor" number="9.8.1">
 <h3><span class="header-section-number">9.8.1</span> Linear regression of Wages on Education<a href="9.8-exercises-5.html#linear-regression-of-wages-on-education" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Working with linear model, we can see that <em>all</em> of the assumptions of the model are violated – we are going to need to try another approach!</p>
-<div class="sourceCode" id="cb354"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb354-1"><a href="9.8-exercises-5.html#cb354-1" aria-hidden="true" tabindex="-1"></a>mod1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(wage <span class="sc">~</span> educ)</span>
-<span id="cb354-2"><a href="9.8-exercises-5.html#cb354-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb354-3"><a href="9.8-exercises-5.html#cb354-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Check out model fit</span></span>
-<span id="cb354-4"><a href="9.8-exercises-5.html#cb354-4" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
-<span id="cb354-5"><a href="9.8-exercises-5.html#cb354-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod1, <span class="dv">1</span>, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span>
-<span id="cb354-6"><a href="9.8-exercises-5.html#cb354-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod1, <span class="dv">2</span>, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-211-1.png" width="672" /></p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="9.8-exercises-5.html#cb19-1" aria-hidden="true" tabindex="-1"></a>mod1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(wage <span class="sc">~</span> educ)</span>
+<span id="cb19-2"><a href="9.8-exercises-5.html#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="9.8-exercises-5.html#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Check out model fit</span></span>
+<span id="cb19-4"><a href="9.8-exercises-5.html#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb19-5"><a href="9.8-exercises-5.html#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod1, <span class="dv">1</span>, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span>
+<span id="cb19-6"><a href="9.8-exercises-5.html#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod1, <span class="dv">2</span>, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
 </div>
 <div id="log-linear-regression-of-wages-on-education-1" class="section level3 hasAnchor" number="9.8.2">
 <h3><span class="header-section-number">9.8.2</span> Log-linear regression of Wages on Education<a href="9.8-exercises-5.html#log-linear-regression-of-wages-on-education-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>To run a log-linear model, we can transform the Y-variable using the <code>log</code> function, and then run the model as usual.</p>
-<div class="sourceCode" id="cb355"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb355-1"><a href="9.8-exercises-5.html#cb355-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create log transform of wage</span></span>
-<span id="cb355-2"><a href="9.8-exercises-5.html#cb355-2" aria-hidden="true" tabindex="-1"></a>log_wage <span class="ot">&lt;-</span> <span class="fu">log</span>(wage <span class="sc">+</span> <span class="dv">1</span>)</span>
-<span id="cb355-3"><a href="9.8-exercises-5.html#cb355-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb355-4"><a href="9.8-exercises-5.html#cb355-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Regress it on educ</span></span>
-<span id="cb355-5"><a href="9.8-exercises-5.html#cb355-5" aria-hidden="true" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(log_wage <span class="sc">~</span> educ)</span>
-<span id="cb355-6"><a href="9.8-exercises-5.html#cb355-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb355-7"><a href="9.8-exercises-5.html#cb355-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Check out model fit</span></span>
-<span id="cb355-8"><a href="9.8-exercises-5.html#cb355-8" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
-<span id="cb355-9"><a href="9.8-exercises-5.html#cb355-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod2, <span class="dv">1</span>, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span>
-<span id="cb355-10"><a href="9.8-exercises-5.html#cb355-10" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod2, <span class="dv">2</span>, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-212-1.png" width="672" /></p>
-<div class="sourceCode" id="cb356"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb356-1"><a href="9.8-exercises-5.html#cb356-1" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(wages)</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="9.8-exercises-5.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create log transform of wage</span></span>
+<span id="cb20-2"><a href="9.8-exercises-5.html#cb20-2" aria-hidden="true" tabindex="-1"></a>log_wage <span class="ot">&lt;-</span> <span class="fu">log</span>(wage <span class="sc">+</span> <span class="dv">1</span>)</span>
+<span id="cb20-3"><a href="9.8-exercises-5.html#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="9.8-exercises-5.html#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Regress it on educ</span></span>
+<span id="cb20-5"><a href="9.8-exercises-5.html#cb20-5" aria-hidden="true" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(log_wage <span class="sc">~</span> educ)</span>
+<span id="cb20-6"><a href="9.8-exercises-5.html#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-7"><a href="9.8-exercises-5.html#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Check out model fit</span></span>
+<span id="cb20-8"><a href="9.8-exercises-5.html#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb20-9"><a href="9.8-exercises-5.html#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod2, <span class="dv">1</span>, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span>
+<span id="cb20-10"><a href="9.8-exercises-5.html#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod2, <span class="dv">2</span>, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="9.8-exercises-5.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(wages)</span></code></pre></div>
 <p>Before moving on to address non-linearity, make sure you have a good understanding of the output below</p>
-<div class="sourceCode" id="cb357"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb357-1"><a href="9.8-exercises-5.html#cb357-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod2)</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="9.8-exercises-5.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod2)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = log_wage ~ educ)
 ## 
 ## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -1.0747 -0.3596  0.0261  0.3124  1.1816 
+##         Min          1Q      Median          3Q         Max 
+## -1.07474852 -0.35961142  0.02613957  0.31244286  1.18162502 
 ## 
 ## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)  1.18873    0.10233    11.6   &lt;2e-16 ***
-## educ         0.07480    0.00726    10.3   &lt;2e-16 ***
+##                Estimate  Std. Error  t value   Pr(&gt;|t|)    
+## (Intercept) 1.188730030 0.102328189 11.61684 &lt; 2.22e-16 ***
+## educ        0.074801617 0.007262526 10.29967 &lt; 2.22e-16 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 0.423 on 398 degrees of freedom
-## Multiple R-squared:  0.21,   Adjusted R-squared:  0.208 
-## F-statistic:  106 on 1 and 398 DF,  p-value: &lt;2e-16</code></pre>
-<div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb359-1"><a href="9.8-exercises-5.html#cb359-1" aria-hidden="true" tabindex="-1"></a>conf.b <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="fu">coef</span>(mod2), <span class="fu">confint</span>(mod2))</span>
-<span id="cb359-2"><a href="9.8-exercises-5.html#cb359-2" aria-hidden="true" tabindex="-1"></a>exp.b <span class="ot">&lt;-</span> <span class="fu">exp</span>(conf.b) <span class="sc">-</span> <span class="dv">1</span></span>
-<span id="cb359-3"><a href="9.8-exercises-5.html#cb359-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(exp.b)[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;exp - 1&quot;</span>)</span>
-<span id="cb359-4"><a href="9.8-exercises-5.html#cb359-4" aria-hidden="true" tabindex="-1"></a>exp.b</span></code></pre></div>
-<pre><code>##             exp - 1   2.5 %  97.5 %
-## (Intercept) 2.28291 1.68467 3.01445
-## educ        0.07767 0.06239 0.09317</code></pre>
+## Residual standard error: 0.4234439 on 398 degrees of freedom
+## Multiple R-squared:  0.2104478,  Adjusted R-squared:  0.208464 
+## F-statistic: 106.0832 on 1 and 398 DF,  p-value: &lt; 2.2204e-16</code></pre>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="9.8-exercises-5.html#cb24-1" aria-hidden="true" tabindex="-1"></a>conf.b <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="fu">coef</span>(mod2), <span class="fu">confint</span>(mod2))</span>
+<span id="cb24-2"><a href="9.8-exercises-5.html#cb24-2" aria-hidden="true" tabindex="-1"></a>exp.b <span class="ot">&lt;-</span> <span class="fu">exp</span>(conf.b) <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb24-3"><a href="9.8-exercises-5.html#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(exp.b)[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;exp - 1&quot;</span>)</span>
+<span id="cb24-4"><a href="9.8-exercises-5.html#cb24-4" aria-hidden="true" tabindex="-1"></a>exp.b</span></code></pre></div>
+<pre><code>##                   exp - 1        2.5 %        97.5 %
+## (Intercept) 2.28290936372 1.6846724096 3.01445399882
+## educ        0.07767033825 0.0623929994 0.09316736707</code></pre>
 
 </div>
 </div>

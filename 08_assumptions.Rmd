@@ -694,4 +694,5 @@ plot(mod5, 2)
 
 ```{r, echo = F}
 rm(list = ls())
+detach(ecls)
 ```

@@ -23,7 +23,7 @@
 <meta name="author" content="Peter Halpin" />
 
 
-<meta name="date" content="2023-03-09" />
+<meta name="date" content="2023-03-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -413,10 +413,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.6.1" data-path="9.6-worked-example-9.html"><a href="9.6-worked-example-9.html#log-linear-regression-of-wages-on-education"><i class="fa fa-check"></i><b>9.6.1</b> Log-linear regression of Wages on Education</a></li>
 </ul></li>
 <li class="chapter" data-level="9.7" data-path="9.7-workbook-6.html"><a href="9.7-workbook-6.html"><i class="fa fa-check"></i><b>9.7</b> Workbook</a></li>
-<li class="chapter" data-level="9.8" data-path="9.8-exercises-5.html"><a href="9.8-exercises-5.html"><i class="fa fa-check"></i><b>9.8</b> Exercises</a>
+<li class="chapter" data-level="9.8" data-path="9.8-exercises-9.html"><a href="9.8-exercises-9.html"><i class="fa fa-check"></i><b>9.8</b> Exercises</a>
 <ul>
-<li class="chapter" data-level="9.8.1" data-path="9.8-exercises-5.html"><a href="9.8-exercises-5.html#linear-regression-of-wages-on-education"><i class="fa fa-check"></i><b>9.8.1</b> Linear regression of Wages on Education</a></li>
-<li class="chapter" data-level="9.8.2" data-path="9.8-exercises-5.html"><a href="9.8-exercises-5.html#log-linear-regression-of-wages-on-education-1"><i class="fa fa-check"></i><b>9.8.2</b> Log-linear regression of Wages on Education</a></li>
+<li class="chapter" data-level="9.8.1" data-path="9.8-exercises-9.html"><a href="9.8-exercises-9.html#linear-regression-of-wages-on-education"><i class="fa fa-check"></i><b>9.8.1</b> Linear regression of Wages on Education</a></li>
+<li class="chapter" data-level="9.8.2" data-path="9.8-exercises-9.html"><a href="9.8-exercises-9.html#log-linear-regression-of-wages-on-education-1"><i class="fa fa-check"></i><b>9.8.2</b> Log-linear regression of Wages on Education</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="10-chapter-10.html"><a href="10-chapter-10.html"><i class="fa fa-check"></i><b>10</b> Polynomial Regression, etc</a>
@@ -429,14 +429,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.1.4" data-path="10.1-polynomial-10.html"><a href="10.1-polynomial-10.html#deriviation-10"><i class="fa fa-check"></i><b>10.1.4</b> Derivation*</a></li>
 <li class="chapter" data-level="10.1.5" data-path="10.1-polynomial-10.html"><a href="10.1-polynomial-10.html#model-building"><i class="fa fa-check"></i><b>10.1.5</b> Model building</a></li>
 </ul></li>
-<li class="chapter" data-level="10.2" data-path="10.2-worked-example-10.html"><a href="10.2-worked-example-10.html"><i class="fa fa-check"></i><b>10.2</b> A worked example</a></li>
+<li class="chapter" data-level="10.2" data-path="10.2-worked-example-10.html"><a href="10.2-worked-example-10.html"><i class="fa fa-check"></i><b>10.2</b> Worked Example</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="10.2-worked-example-10.html"><a href="10.2-worked-example-10.html#note-on-orthogonal-polynomails"><i class="fa fa-check"></i><b>10.2.1</b> Note on orthogonal polynomails*</a></li>
+</ul></li>
 <li class="chapter" data-level="10.3" data-path="10.3-piecewise-10.html"><a href="10.3-piecewise-10.html"><i class="fa fa-check"></i><b>10.3</b> Piecewise regression</a>
 <ul>
 <li class="chapter" data-level="10.3.1" data-path="10.3-piecewise-10.html"><a href="10.3-piecewise-10.html#the-piecewise-model"><i class="fa fa-check"></i><b>10.3.1</b> The piecewise model</a></li>
 <li class="chapter" data-level="10.3.2" data-path="10.3-piecewise-10.html"><a href="10.3-piecewise-10.html#back-to-the-example-2"><i class="fa fa-check"></i><b>10.3.2</b> Back to the example</a></li>
 </ul></li>
 <li class="chapter" data-level="10.4" data-path="10.4-workbook-7.html"><a href="10.4-workbook-7.html"><i class="fa fa-check"></i><b>10.4</b> Workbook</a></li>
-<li class="chapter" data-level="10.5" data-path="10.5-exercises-7.html"><a href="10.5-exercises-7.html"><i class="fa fa-check"></i><b>10.5</b> Exercises</a></li>
+<li class="chapter" data-level="10.5" data-path="10.5-exercises-5.html"><a href="10.5-exercises-5.html"><i class="fa fa-check"></i><b>10.5</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="11-chapter-11.html"><a href="11-chapter-11.html"><i class="fa fa-check"></i><b>11</b> Logistic Regression</a>
 <ul>
@@ -551,30 +554,16 @@ Figure 9.1: Log base 10
 </p>
 </div>
 <p>This “compression” of large values down to a smaller scale turns out to be useful for dealing with positive skew, as illustrated in Figure <a href="9.1-math-review-9.html#fig:logdata">9.2</a>. This is one reason that the log transform is widely used.</p>
-<pre><code>## The following objects are masked from ecls (pos = 4):
-## 
-##     c1fmotor, c1gmotor, c1rgscal, c1rgtsco, c1rmscal, c1rmtsco,
-##     c1rrscal, c2rgscal, c2rgtsco, c2rmscal, c2rmtsco, c2rrscal,
-##     c2rrtsco, c3rgscal, c3rgtsco, c3rmscal, c3rmtsco, c3rrscal,
-##     c3rrtsco, c4rgscal, c4rgtsco, c4rmscal, c4rmtsco, c4rrscal,
-##     c4rrtsco, caseid, gender, p1build, p1center, p1chlboo, p1chores,
-##     p1chsesa, p1contro, p1count, p1disabl, p1expect, p1firkdg, p1games,
-##     p1helpar, p1hfamil, p1hrsprk, p1htotal, p1learn, p1letter,
-##     p1nature, p1pencil, p1readbo, p1singso, p1social, p1sport, p1still,
-##     p1tellst, p1verbal, p2bktog, p2burglr, p2drug, p2garbag, p2librar,
-##     p2safepl, p2vacant, p2violen, race, s2kpupri, t1contro, t1extern,
-##     t1intern, t1interp, t1learn, wkdaded, wklangst, wkmomed, wksesl,
-##     wksesq5</code></pre>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:logdata"></span>
 <img src="_main_files/figure-html/logdata-1.png" alt="Log transform and positive skew" width="672" />
 <p class="caption">
 Figure 9.2: Log transform and positive skew
 </p>
 </div>
-<p>Now that we have seen the basic interpretation and utility of logs, there are a few details to add.</p>
+<p>This section has covered the basic interpretation logs and their utility in addressing skewness of an outcome variable. The following sections add some details.</p>
 <div id="natural-logarithm" class="section level3 hasAnchor" number="9.1.1">
 <h3><span class="header-section-number">9.1.1</span> Natural logarithm<a href="9.1-math-review-9.html#natural-logarithm" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The symbol <span class="math inline">\(\log_{10}\)</span> is read “log base 10”. In statistics, we almost never use log base 10. Instead we use log base <span class="math inline">\(e\)</span> where <span class="math inline">\(e = 2.7182...\)</span> is called Euler’s number. Think of <span class="math inline">\(e\)</span> as a relative of <span class="math inline">\(\pi\)</span> (the ratio of circle’s circumference to its diameter). It is an irrational number (i.e., cannot be represented as a ratio) and shows up all over the place. We will see later on that using <span class="math inline">\(\log_e\)</span> makes the interpretation of log-linear regression simpler. Note that in this context, <span class="math inline">\(e\)</span> is not the residual from a regression model – the interpretation should be clear from context, but just ask a question in class if you are unsure.</p>
+<p>The symbol <span class="math inline">\(\log_{10}\)</span> is read “log base 10”. In statistics, we usually use a different base – log base <span class="math inline">\(e\)</span>. Here <span class="math inline">\(e = 2.7182...\)</span> is an irrational number called <em>Euler’s number</em>. We will see later on that using <span class="math inline">\(\log_e\)</span> makes the interpretation of log-linear regression simpler. Note that in this context, <span class="math inline">\(e\)</span> is not the residual from a regression model – the interpretation should be clear from context, but just ask a question in class if you are unsure.</p>
 <p>Regardless of which base we use, logs have the same overall compression effect, as shown in Figure <a href="9.1-math-review-9.html#fig:loge">9.3</a>. For example, <span class="math inline">\(\log_{10}(1000) = 3\)</span> and <span class="math inline">\(\log_{e}(1000) \approx 7\)</span> – both numbers are much smaller than <span class="math inline">\(1000\)</span>! The same is true when applied to real data – in fact, the right hand panel in Figure <a href="9.1-math-review-9.html#fig:logdata">9.2</a> was computed using <span class="math inline">\(\log_e\)</span>.</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:loge"></span>
 <img src="images/loge.png" alt="Log base 10 vs log base e" width="750" />
@@ -582,31 +571,39 @@ Figure 9.2: Log transform and positive skew
 Figure 9.3: Log base 10 vs log base e
 </p>
 </div>
-<p>Log base <span class="math inline">\(e\)</span>, or <span class="math inline">\(\log_e\)</span>, is called the natural logarithm and often denoted “<span class="math inline">\(\ln\)</span>”. But <span class="math inline">\(\ln\)</span> can be hard to read so we will just stick with <span class="math inline">\(\log\)</span> and omit the base symbol when we mean <span class="math inline">\(\log_e\)</span>. This is consistent with what R’s <code>log</code> function does – its default base is <span class="math inline">\(e\)</span>.</p>
+<p>Log base <span class="math inline">\(e\)</span>, or <span class="math inline">\(\log_e\)</span>,is called the <em>natural logarithm</em> and often denoted “<span class="math inline">\(\ln\)</span>”. But <span class="math inline">\(\ln\)</span> can be hard to read so we will just stick with <span class="math inline">\(\log\)</span> and omit the base symbol when we mean <span class="math inline">\(\log_e\)</span>. This is consistent with what R’s <code>log</code> function does – its default base is <span class="math inline">\(e\)</span>.</p>
 </div>
 <div id="log-and-exp" class="section level3 hasAnchor" number="9.1.2">
 <h3><span class="header-section-number">9.1.2</span> log and exp<a href="9.1-math-review-9.html#log-and-exp" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>If we apply the log-transformation to variable, we can always “undo” the transformation to get back to the original variable. This is important because we often want to interpret the results of an analysis in terms of the original variable, not the transformed one. We will see this trick a lot in what follows – apply a transform to the data, run the model, then undo the transform to interpret the results.</p>
-<p>The way to undo the log transform is using exponentiation, which is abbreviated “<span class="math inline">\(\exp\)</span>”.</p>
-<p>The mathematical terminology here is that <span class="math inline">\(\exp\)</span> is the <em>inverse</em> of <span class="math inline">\(\log\)</span>, and vice versa. The relationship is a bit slippery to grasp, but the overall idea is that we once we log transform a variable, we can use the inverse transformation (<span class="math inline">\(\exp\)</span>) to get back to the original variable. So, <span class="math inline">\(\log\)</span> and <span class="math inline">\(\exp\)</span> are like best buddies – whenever we see one of them, the other is bound to show up also.</p>
+<p>Recall that our overall modeling strategy in log-linear regression is “transform<span class="math inline">\(\rightarrow\)</span>analyze<span class="math inline">\(\rightarrow\)</span>reverse- transform”. In mathematics, the reverse transform is called the <em>inverse</em> of the original function, and the inverse of the logarithm is exponentiation. So, if we start by log-transforming our <span class="math inline">\(Y\)</span>-variable, we are going to end up doing exponents later on. This section reviews exponents and their relation to logs.</p>
+<p>Exponentiation means raising a base number to a power. As with logs, we will assume that the base is <span class="math inline">\(e\)</span>. So, in our context, exponentiation means</p>
+<p><span class="math display">\[ e^x \]</span>
+where <span class="math inline">\(x\)</span> is the variable and <span class="math inline">\(e\)</span> is the base.</p>
+<p>The mathematical symbol <span class="math inline">\(\exp(x)\)</span> is often used instead of <span class="math inline">\(e^x\)</span> to avoid having to write complicated expressions in the superscript. The idea is that the left-hand side of the following equation is easier to read than the right-hand side</p>
+<p><span class="math display">\[ \exp(17 - choclate + banna ) = e^{17 - choclate + banna} \]</span></p>
+<p>As mentioned, <span class="math inline">\(\exp\)</span> is the <em>inverse</em> of <span class="math inline">\(\log\)</span>, and vice versa. The relationship is a bit slippery to grasp, but the overall idea is that we once we log-transform a variable, we can use the inverse transformation (<span class="math inline">\(\exp\)</span>) to get back to the original variable.</p>
 <p>For example, if we start with the number <span class="math inline">\(x= 100\)</span>, we can take the log (base <span class="math inline">\(e\)</span>) of that number as above</p>
 <p><span class="math display">\[\log(100) =  4.60517 \]</span></p>
-<p>Remember that by definition, this just tells us that <span class="math inline">\(4.60517\)</span> is the power to which we have to raise <span class="math inline">\(e\)</span> in order get <span class="math inline">\(100\)</span>, i.e.,</p>
-<p><span class="math display">\[e^{4.60517} = 100 \]</span></p>
-<p>Putting these two equations together, we can see that</p>
+<p>In this equation, we can think of <span class="math inline">\(100\)</span> as our original value and <span class="math inline">\(4.60517\)</span> as our transformed value. The overall idea of inversion is that we want to get from the transformed value back to the original value. (Why would we do this? Recall our overall strategy: first we transform the variable, then we run the analysis, then we reverse transform (invert) the results.)</p>
+<p>To invert the log-transform, we use exponents. Remember that, by definition, the logarithm tells us what power we have to raise <span class="math inline">\(e\)</span> to, in order to get <span class="math inline">\(100\)</span>. In other words, the above equation tells us that</p>
+<p><span class="math display">\[e^{4.60517} = 100. \]</span></p>
+<p>In this equation, we can see that we take our transformed value (<span class="math inline">\(4.60517\)</span>) as input and return the original value (<span class="math inline">\(100\)</span>) as output. This is what it means for <span class="math inline">\(\exp\)</span> to undo or invert the <span class="math inline">\(\log\)</span> function.</p>
+<p>Putting the two equations together, we can see that</p>
 <p><span class="math display">\[ e^{\log(100)} = 100. \]</span></p>
-<p>So, taking the log of <span class="math inline">\(100\)</span> gives us <span class="math inline">\(4.60517\)</span>, and then taking the exponent of <span class="math inline">\(4.60517\)</span> gets us back to the original input, <span class="math inline">\(100\)</span>. In general, <span class="math inline">\(e^{\log(x)} = x\)</span>.</p>
-<p>This is what it means for <span class="math inline">\(\exp\)</span> to undo or invert the <span class="math inline">\(\log\)</span> function. Exponentiation (i.e., raising something to a power) undoes the logarithm.</p>
-<p>As mentioned, the important thing about logs and exponents is that we can always use one to undo the effects of the other. So, if we log transform our <span class="math inline">\(Y\)</span> variable in a regression analysis to make the data more compatible with the model assumptions, we can always undo the log transform afterwards by taking exponents.</p>
-<p>A final note about notation. The mathematical symbol <span class="math inline">\(\exp(y)\)</span> is used instead of <span class="math inline">\(e^y\)</span> to avoid having to write complicated expressions in the superscript. The idea is that the left hand side of the following equation is easier to read than the right hand side</p>
-<p><span class="math display">\[ \exp(17 - choclate + banna ) = e^{17 - choclate + banna} \]</span></p>
+<p>On the left-hand side we input the our original value (100) and on the right-hand size we get back our original value (100). In general, we can write</p>
+<p><span class="math display">\[ \exp(\log(x)) = x. \]</span></p>
 </div>
 <div id="pop-quiz" class="section level3 hasAnchor" number="9.1.3">
 <h3><span class="header-section-number">9.1.3</span> Pop quiz<a href="9.1-math-review-9.html#pop-quiz" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>I’ll ask some questions like the following to start class off. <strong>Please write down your answers and be prepared to share them in class</strong>.</p>
+<p>I’ll ask some questions like the following to start class off. <strong>Please write down your answers and be prepared to share them in class</strong>. Note: some of these are “trick questions” in the sense that the answer is not defined.</p>
 <ul>
-<li><span class="math inline">\(\log_2(8) = ?\)</span></li>
-<li><span class="math inline">\(\exp(2.7182) = ?\)</span></li>
+<li><span class="math inline">\(\log(2.7182) = ?\)</span></li>
+<li><span class="math inline">\(\log(1) = ?\)</span></li>
+<li><span class="math inline">\(\log(0) = ?\)</span></li>
+<li><span class="math inline">\(\log(-1) = ?\)</span></li>
+<li><span class="math inline">\(\exp(1) = ?\)</span></li>
+<li><span class="math inline">\(\exp(0) = ?\)</span></li>
+<li><span class="math inline">\(\exp(-1) = ?\)</span></li>
 <li>What is larger, <span class="math inline">\(\log(10)\)</span> or <span class="math inline">\(\exp(10)\)</span>?</li>
 <li><span class="math inline">\(\log(\exp(x)) = ?\)</span></li>
 </ul>

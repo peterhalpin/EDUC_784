@@ -23,7 +23,7 @@
 <meta name="author" content="Peter Halpin" />
 
 
-<meta name="date" content="2023-03-09" />
+<meta name="date" content="2023-03-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -413,10 +413,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.6.1" data-path="9.6-worked-example-9.html"><a href="9.6-worked-example-9.html#log-linear-regression-of-wages-on-education"><i class="fa fa-check"></i><b>9.6.1</b> Log-linear regression of Wages on Education</a></li>
 </ul></li>
 <li class="chapter" data-level="9.7" data-path="9.7-workbook-6.html"><a href="9.7-workbook-6.html"><i class="fa fa-check"></i><b>9.7</b> Workbook</a></li>
-<li class="chapter" data-level="9.8" data-path="9.8-exercises-5.html"><a href="9.8-exercises-5.html"><i class="fa fa-check"></i><b>9.8</b> Exercises</a>
+<li class="chapter" data-level="9.8" data-path="9.8-exercises-9.html"><a href="9.8-exercises-9.html"><i class="fa fa-check"></i><b>9.8</b> Exercises</a>
 <ul>
-<li class="chapter" data-level="9.8.1" data-path="9.8-exercises-5.html"><a href="9.8-exercises-5.html#linear-regression-of-wages-on-education"><i class="fa fa-check"></i><b>9.8.1</b> Linear regression of Wages on Education</a></li>
-<li class="chapter" data-level="9.8.2" data-path="9.8-exercises-5.html"><a href="9.8-exercises-5.html#log-linear-regression-of-wages-on-education-1"><i class="fa fa-check"></i><b>9.8.2</b> Log-linear regression of Wages on Education</a></li>
+<li class="chapter" data-level="9.8.1" data-path="9.8-exercises-9.html"><a href="9.8-exercises-9.html#linear-regression-of-wages-on-education"><i class="fa fa-check"></i><b>9.8.1</b> Linear regression of Wages on Education</a></li>
+<li class="chapter" data-level="9.8.2" data-path="9.8-exercises-9.html"><a href="9.8-exercises-9.html#log-linear-regression-of-wages-on-education-1"><i class="fa fa-check"></i><b>9.8.2</b> Log-linear regression of Wages on Education</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="10-chapter-10.html"><a href="10-chapter-10.html"><i class="fa fa-check"></i><b>10</b> Polynomial Regression, etc</a>
@@ -429,14 +429,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.1.4" data-path="10.1-polynomial-10.html"><a href="10.1-polynomial-10.html#deriviation-10"><i class="fa fa-check"></i><b>10.1.4</b> Derivation*</a></li>
 <li class="chapter" data-level="10.1.5" data-path="10.1-polynomial-10.html"><a href="10.1-polynomial-10.html#model-building"><i class="fa fa-check"></i><b>10.1.5</b> Model building</a></li>
 </ul></li>
-<li class="chapter" data-level="10.2" data-path="10.2-worked-example-10.html"><a href="10.2-worked-example-10.html"><i class="fa fa-check"></i><b>10.2</b> A worked example</a></li>
+<li class="chapter" data-level="10.2" data-path="10.2-worked-example-10.html"><a href="10.2-worked-example-10.html"><i class="fa fa-check"></i><b>10.2</b> Worked Example</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="10.2-worked-example-10.html"><a href="10.2-worked-example-10.html#note-on-orthogonal-polynomails"><i class="fa fa-check"></i><b>10.2.1</b> Note on orthogonal polynomails*</a></li>
+</ul></li>
 <li class="chapter" data-level="10.3" data-path="10.3-piecewise-10.html"><a href="10.3-piecewise-10.html"><i class="fa fa-check"></i><b>10.3</b> Piecewise regression</a>
 <ul>
 <li class="chapter" data-level="10.3.1" data-path="10.3-piecewise-10.html"><a href="10.3-piecewise-10.html#the-piecewise-model"><i class="fa fa-check"></i><b>10.3.1</b> The piecewise model</a></li>
 <li class="chapter" data-level="10.3.2" data-path="10.3-piecewise-10.html"><a href="10.3-piecewise-10.html#back-to-the-example-2"><i class="fa fa-check"></i><b>10.3.2</b> Back to the example</a></li>
 </ul></li>
 <li class="chapter" data-level="10.4" data-path="10.4-workbook-7.html"><a href="10.4-workbook-7.html"><i class="fa fa-check"></i><b>10.4</b> Workbook</a></li>
-<li class="chapter" data-level="10.5" data-path="10.5-exercises-7.html"><a href="10.5-exercises-7.html"><i class="fa fa-check"></i><b>10.5</b> Exercises</a></li>
+<li class="chapter" data-level="10.5" data-path="10.5-exercises-5.html"><a href="10.5-exercises-5.html"><i class="fa fa-check"></i><b>10.5</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="11-chapter-11.html"><a href="11-chapter-11.html"><i class="fa fa-check"></i><b>11</b> Logistic Regression</a>
 <ul>
@@ -534,9 +537,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     codefolder('pre.sourceCode');
   });
 </script>
-<p>The final point about the log-linear model is how it affects the interpretation of the model parameters. For example, in linear regression we know what a <span class="math inline">\(b\)</span>-unit increase in <span class="math inline">\(Y\)</span> means – but how to we interpret a <span class="math inline">\(b\)</span>-unit increase in <span class="math inline">\(\log(Y)\)</span>? This is definitely the most important point about the log transformation, which is why we saved it for last.</p>
+<p>The final point about the log-linear model is how it affects the interpretation of the model parameters. For example, in linear regression we know what a <span class="math inline">\(b\)</span>-unit increase in <span class="math inline">\(Y\)</span> means – but how to we interpret a <span class="math inline">\(b\)</span>-unit increase in <span class="math inline">\(\log(Y)\)</span>? This is definitely the most important point about the log transformation, which is why we saved it for last. In terms of three-step “transform<span class="math inline">\(\rightarrow\)</span>analyze<span class="math inline">\(\rightarrow\)</span>reverse- transform” strategy, this section addresses the final step.</p>
 <p>In general, one of the main shortcomings of “transforming your data” is that it can lead to uninformative or unclear interpretations of model parameters. If the results don’t make sense, its not much of a consolation to know that the assumptions looked OK!</p>
 <p>However, it turns out that there is very nice interpretation of the log-linear model. It is because of this interpretation that we often use the log transform to address skew in <span class="math inline">\(Y\)</span>, rather than some other transformation.</p>
+<p>In terms of our three</p>
 <div id="approximate-9" class="section level3 hasAnchor" number="9.5.1">
 <h3><span class="header-section-number">9.5.1</span> Approximate interpretation<a href="9.5-interpretation-9.html#approximate-9" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>In a log-linear model, the regression coefficients can be interpreted as the <em>approximate</em> proportion change in <span class="math inline">\(Y\)</span>, in the original units. So, in this equation,</p>
@@ -567,12 +571,12 @@ This is relative <em>change</em>.</p>
 <li><p>What is the percent change from <span class="math inline">\(Y = 1\)</span> to <span class="math inline">\(Y&#39; = 1\)</span>?</p></li>
 </ol>
 <p>The answers are hidden below, but please try the questions before viewing (use the “Show Code” button).</p>
-<div class="sourceCode" id="cb336"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb336-1"><a href="9.5-interpretation-9.html#cb336-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. 6 is 3 times larger than 2, or 300% percent larger than 2 (6/2 = 3)</span></span>
-<span id="cb336-2"><a href="9.5-interpretation-9.html#cb336-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. 6 is a 200% increase from 2 (6/2 - 1 = 2)</span></span>
-<span id="cb336-3"><a href="9.5-interpretation-9.html#cb336-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. 600 is a 200% increase from 200 </span></span>
-<span id="cb336-4"><a href="9.5-interpretation-9.html#cb336-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. 200 is a 66% decrease from 600</span></span>
-<span id="cb336-5"><a href="9.5-interpretation-9.html#cb336-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. 1 is a zero percent increase from 1 (but 100% as large as 1!)</span></span>
-<span id="cb336-6"><a href="9.5-interpretation-9.html#cb336-6" aria-hidden="true" tabindex="-1"></a><span class="co">#5. </span></span></code></pre></div>
+<div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb335-1"><a href="9.5-interpretation-9.html#cb335-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. 6 is 3 times larger than 2, or 300% percent larger than 2 (6/2 = 3)</span></span>
+<span id="cb335-2"><a href="9.5-interpretation-9.html#cb335-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. 6 is a 200% increase from 2 (6/2 - 1 = 2)</span></span>
+<span id="cb335-3"><a href="9.5-interpretation-9.html#cb335-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. 600 is a 200% increase from 200 </span></span>
+<span id="cb335-4"><a href="9.5-interpretation-9.html#cb335-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. 200 is a 66% decrease from 600</span></span>
+<span id="cb335-5"><a href="9.5-interpretation-9.html#cb335-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. 1 is a zero percent increase from 1 (but 100% as large as 1!)</span></span>
+<span id="cb335-6"><a href="9.5-interpretation-9.html#cb335-6" aria-hidden="true" tabindex="-1"></a><span class="co">#5. </span></span></code></pre></div>
 <p>Now that we know about relative change, let’s use these concepts to interpret the regression coefficient in Equation <a href="9.5-interpretation-9.html#eq:logy">(9.1)</a>. Recall that this interpretation is approximate and only applies when <span class="math inline">\(|b| &lt; 1\)</span>.</p>
 <p>Some numerical examples:</p>
 <ul>
@@ -603,10 +607,10 @@ This is relative <em>change</em>.</p>
 <li><p>What about for someone who was expected to earn $1000/week?</p></li>
 </ol>
 <p><strong>Please write down your answers to these four questions and be prepared to share your responses in class</strong>. The answers are hidden below, you can use the “Show Code” button to see them, but please try to answer on your own first.</p>
-<div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb337-1"><a href="9.5-interpretation-9.html#cb337-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. 120 dollars per week</span></span>
-<span id="cb337-2"><a href="9.5-interpretation-9.html#cb337-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. 1020 dollars per week</span></span>
-<span id="cb337-3"><a href="9.5-interpretation-9.html#cb337-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. 120 dollars per week</span></span>
-<span id="cb337-4"><a href="9.5-interpretation-9.html#cb337-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. 1200 dollars per week</span></span></code></pre></div>
+<div class="sourceCode" id="cb336"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb336-1"><a href="9.5-interpretation-9.html#cb336-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. 120 dollars per week</span></span>
+<span id="cb336-2"><a href="9.5-interpretation-9.html#cb336-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. 1020 dollars per week</span></span>
+<span id="cb336-3"><a href="9.5-interpretation-9.html#cb336-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. 120 dollars per week</span></span>
+<span id="cb336-4"><a href="9.5-interpretation-9.html#cb336-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. 1200 dollars per week</span></span></code></pre></div>
 <p>This example shows that, while the linear model represents change in fixed units (e.g., dollars), the log-linear model represents change that is proportional to the magnitude of <span class="math inline">\(Y\)</span>. This is particularly useful in applications involving monetary outcomes, where it has been argued that people’s “subjective evaluation” of money is more like the latter than the former.</p>
 <p>For example, a $20 increase in weekly wages means different things to some one who makes $100/week as opposed to someone who makes
 $1000/week.</p>

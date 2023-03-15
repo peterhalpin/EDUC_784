@@ -1,6 +1,6 @@
 # Log-linear Regression {#chapter-9}
 
-<!-- In this chapter, make sure to review the math in section 1 and then do the worked example in class. --> 
+<!-- 9.1 and 9.5  need review! Consider starting with the exact interpretation in 9.5. Make sure to have answers for numerical question prepared. The lesson is short, so also plan to do the worked example in class. --> 
 
 ```{r, echo = F}
 # Clean up check
@@ -26,9 +26,19 @@ Whenever we transform a $Y$ variable in a regression model, it always has three 
 * The (non-)linearity of its relationship with predictor variables.
 * The interpretation of the coefficients the model.  
 
-The big theme of this chapter is that we have to consider all three of these when transforming the $Y$ variable. So, addressing assumption violations using this approach is not always as straightforward as we might hope. In particular, we might find that addressing one problem (e.g., non-normality) can create other  problems (e.g., nonlinearity). 
+One big theme of this chapter is that we have to consider all three of these when transforming the $Y$ variable. So, addressing assumption violations using this approach is not always as straightforward as we might hope. In particular, we might find that addressing one problem (e.g., non-normality) can create other  problems (e.g., nonlinearity). 
 
-Another approach for dealing with assumption violations is to transform one or more of the $X$ variables instead of (or in addition to) the $Y$ variable. These approaches are discussed in the next chapter. 
+Another big theme of this chapter is the overall strategy for extending what we have learned about linear regression to other settings. In particular, when we are faced with data that are not compatible with the assumptions of regression modeling, we often proceed using the following 3-step approach: 
+
+1. Transform the data to make them compatible with linear regression (or some other model we know how to use).
+
+2. Run the analysis on the transformed data.
+
+3. "Reverse-transform" the results of the analysis so that they are interpretable in terms of the original variable(s).
+
+We will see this "transform$\rightarrow$analyze$\rightarrow$reverse- transform" strategy in this chapter on log-linear regression, and again when we cover logistic regression in Chapter \@ref(chapter-11). Both of these approaches are exemplars of *generalized linear modeling*, which is an advanced regression topic that formalizes the intuitive idea behind this approach.  
+
+Before getting started, one last note about organization: This chapter addresses transformations of the Y-variable. Another approach for dealing with assumption violations in linear regression is to transform one or more of the $X$ variables instead of (or in addition to) the $Y$ variable. These approaches are discussed in the next chapter. 
 
 ## Math review {#math-review-9}
 
@@ -56,7 +66,6 @@ knitr::include_graphics("images/logx.png", dpi = 150)
 This "compression" of large values down to a smaller scale turns out to be useful for dealing with positive skew, as illustrated in Figure \@ref(fig:logdata). This is one reason that the log transform is widely used.
 
 ```{r logdata, echo = F, fig.cap = "Log transform and positive skew", fig.align = 'center'}
-# Clean up env. and load data
 load("ECLS2577.Rdata")
 attach(ecls)
 
@@ -66,10 +75,10 @@ hist(c1rmscal, col = "#4b9cd3")
 hist(log(c1rmscal + 1), col = "#4b9cd3")
 ```
 
-Now that we have seen the basic interpretation and utility of logs, there are a few details to add. 
+This section has covered the basic interpretation logs and their utility in addressing skewness of an outcome variable. The following sections add some details. 
 
 ### Natural logarithm
-The symbol $\log_{10}$ is read "log base 10". In statistics, we almost never use log base 10. Instead we use log base $e$ where $e = 2.7182...$ is called Euler's number. Think of $e$ as a relative of $\pi$ (the ratio of circle's circumference to its diameter). It is an irrational number (i.e., cannot be represented as a ratio) and shows up all over the place. We will see later on that using $\log_e$ makes the interpretation of log-linear regression simpler. Note that in this context, $e$ is not the residual from a regression model -- the interpretation should be clear from context, but just ask a question in class if you are unsure. 
+The symbol $\log_{10}$ is read "log base 10". In statistics, we usually use a different base -- log base $e$. Here $e = 2.7182...$ is an irrational number called *Euler's number*. We will see later on that using $\log_e$ makes the interpretation of log-linear regression simpler. Note that in this context, $e$ is not the residual from a regression model -- the interpretation should be clear from context, but just ask a question in class if you are unsure. 
 
 Regardless of which base we use, logs have the same overall compression effect, as shown in Figure \@ref(fig:loge). For example, $\log_{10}(1000) = 3$ and $\log_{e}(1000) \approx 7$ -- both numbers are much smaller than $1000$! The same is true when applied to real data -- in fact, the right hand panel in Figure \@ref(fig:logdata) was computed using $\log_e$. 
 
@@ -77,44 +86,55 @@ Regardless of which base we use, logs have the same overall compression effect, 
 knitr::include_graphics("images/loge.png", dpi = 150)
 ```
 
-Log base $e$, or $\log_e$,  is called the natural logarithm and often denoted "$\ln$". But $\ln$ can be hard to read so we will just stick with $\log$ and omit the base symbol when we mean $\log_e$. This is consistent with what R's `log` function does -- its default base is $e$.
+Log base $e$, or $\log_e$,is called the *natural logarithm* and often denoted "$\ln$". But $\ln$ can be hard to read so we will just stick with $\log$ and omit the base symbol when we mean $\log_e$. This is consistent with what R's `log` function does -- its default base is $e$.
 
 ### log and exp
 
-If we apply the log-transformation to variable, we can always "undo" the transformation to get back to the original variable. This is important because we often want to interpret the results of an analysis in terms of the original variable, not the transformed one. We will see this trick a lot in what follows -- apply a transform to the data, run the model, then undo the transform to interpret the results. 
+Recall that our overall modeling strategy in log-linear regression is "transform$\rightarrow$analyze$\rightarrow$reverse- transform". In mathematics, the reverse transform is called the *inverse* of the original function, and the inverse of the logarithm is exponentiation. So, if we start by log-transforming our $Y$-variable, we are going to end up doing exponents later on. This section reviews exponents and their relation to logs. 
 
-The way to undo the log transform is using exponentiation, which is abbreviated "$\exp$".  
+Exponentiation means raising a base number to a power. As with logs, we will assume that the base is $e$. So, in our context, exponentiation means
 
-The mathematical terminology here is that $\exp$ is the *inverse* of $\log$, and vice versa. The relationship is a bit slippery to grasp, but the overall idea is that we once we log transform a variable, we can use the inverse transformation ($\exp$) to get back to the original variable. So, $\log$ and $\exp$ are like best buddies -- whenever we see one of them, the other is bound to show up also. 
+$$ e^x $$
+where $x$ is the variable and $e$ is the base. 
+
+The mathematical symbol $\exp(x)$ is often used instead of $e^x$ to avoid having to write complicated expressions in the superscript. The idea is that the left-hand side of the following equation is easier to read than the right-hand side
+
+$$ \exp(17 - choclate + banna ) = e^{17 - choclate + banna} $$ 
+
+As mentioned, $\exp$ is the *inverse* of $\log$, and vice versa. The relationship is a bit slippery to grasp, but the overall idea is that we once we log-transform a variable, we can use the inverse transformation ($\exp$) to get back to the original variable. 
 
 For example, if we start with the number $x= 100$, we can take the log (base $e$) of that number as above
 
 \[\log(100) =  4.60517 \]
 
-Remember that by definition, this just tells us that $4.60517$ is the power to which we have to raise $e$ in order get $100$, i.e., 
+In this equation, we can think of $100$ as our original value and $4.60517$ as our transformed value. The overall idea of inversion is that we want to get from the transformed value back to the original value. (Why would we do this? Recall our overall strategy: first we transform the variable, then we run the analysis, then we reverse transform (invert) the results.)  
 
-\[e^{4.60517} = 100 \]
+To invert the log-transform, we use exponents. Remember that, by definition, the logarithm tells us what power we have to raise $e$ to, in order to get $100$. In other words, the above equation tells us that 
 
-Putting these two equations together, we can see that 
+\[e^{4.60517} = 100. \]
+
+In this equation, we can see that we take our transformed value ($4.60517$) as input and return the original value ($100$) as output. This is what it means for $\exp$ to undo or invert the $\log$ function. 
+
+Putting the two equations together, we can see that
 
 \[ e^{\log(100)} = 100. \]
 
-So, taking the log of $100$ gives us $4.60517$, and then taking the exponent of $4.60517$ gets us back to the original input, $100$. In general, $e^{\log(x)} = x$. 
+On the left-hand side we input the our original value (100) and on the right-hand size we get back our original value (100). In general, we can write
 
-This is what it means for $\exp$ to undo or invert the $\log$ function. Exponentiation (i.e., raising something to a power) undoes the logarithm. 
+\[ \exp(\log(x)) = x. \]
 
-As mentioned, the important thing about logs and exponents is that we can always use one to undo the effects of the other. So, if we log transform our $Y$ variable in a regression analysis to make the data more compatible with the model assumptions, we can always undo the log transform afterwards by taking exponents. 
-
-A final note about notation. The mathematical symbol $\exp(y)$ is used instead of $e^y$ to avoid having to write complicated expressions in the superscript. The idea is that the left hand side of the following equation is easier to read than the right hand side 
-
-\[ \exp(17 - choclate + banna ) = e^{17 - choclate + banna} \]
 
 ### Pop quiz
 
-I'll ask some questions like the following to start class off. **Please write down your answers and be prepared to share them in class**. 
+I'll ask some questions like the following to start class off.  **Please write down your answers and be prepared to share them in class**. Note: some of these are "trick questions" in the sense that the answer is not defined.
 
-* $\log_2(8) = ?$
-* $\exp(2.7182) = ?$
+* $\log(2.7182) = ?$
+* $\log(1) = ?$
+* $\log(0) = ?$ 
+* $\log(-1) = ?$ 
+* $\exp(1) = ?$
+* $\exp(0) = ?$
+* $\exp(-1) = ?$
 * What is larger, $\log(10)$ or $\exp(10)$? 
 * $\log(\exp(x)) = ?$ 
 
@@ -135,11 +155,13 @@ There are some rules for working with logs and exponents that we will use later 
 codefolder::bookdown(init = "hide", style = button)
 ```
 
-There are a number of ways to apply logs in regression analysis, which are outlined in the following table and discussed in more detail in the supplemental readings for this week. The focus of this section is log-linear models. Note that the term "log-linear" is also the name of a family of models for contingency table data -- that is not what we are talking about here. 
+There are a number of ways to apply logs in regression analysis, which are outlined in the following table and discussed in more detail in (cite:fox). The focus of this section is log-linear models. Note that the term "log-linear" is also the name of a family of models for contingency table data -- that is not what we are talking about here. 
 
 ```{r, log-table, echo = F, fig.cap = "Logs in regression analysis", fig.align = 'center'}
 knitr::include_graphics("images/log_table.png")
 ```
+
+In terms of data analysis, the overall approach to each of these models is to apply the log-transformation to the indicated variable(s) and then run the linear regression analysis as usual. So, for log-linear regression in `R`, we use the `log` function to transform the $Y$-variable, then we just do regression as usual (i.e., using the `lm` function). A worked example is provided in Section \@ref(worked-example-9).
 
 As mentioned, whenever we transform the $Y$ variable we are doing three interrelated things: 
 
@@ -147,7 +169,7 @@ As mentioned, whenever we transform the $Y$ variable we are doing three interrel
 * Changing the (non-)linearity of its relationship with other variables
 * Changing interpretation of the regression coefficients
 
-Since log-linear regression is often used to address positive skew in the outcome variable, we will tackle these 3 points in order. However, the last point is perhaps the most important aspect of log-linear regression. 
+Before getting into the worked example, we will review each of these in more detail. 
 
 ## Distribution of $\log(Y)$ {#distribution-9}
 
@@ -216,7 +238,7 @@ We can see that $\log(1) = 0$, which is true regardless of the base (i.e., $b^0 
 
 The upshot is that, if your variable takes on values in the range $(0, 1)$, the log transform is going to change those values into large negative numbers. This can result in negative skew, rather fixing your positive skew. 
 
-We can see this in Figure \@ref(fig:skew4) below. The top row of the Figure shows the same variable as Example 1 above (ECLS Math Achievement), and the bottom shows the variable transformed to a proportion. In the left hand panels we can see that the distribution of the proportions is qualitatively the same the as the distribution of the original variable. However, the log transform behaves much differently for these two cases. Why? Because logs are "weird" on the range $(0, 1)$. 
+We can see this in Figure \@ref(fig:skew4) below. The top row of the Figure shows the same variable as Example 1 above (ECLS Math Achievement), and the bottom shows the variable transformed to proportion correct. In the left-hand panels we can see that the distribution of the proportions is qualitatively the same the as the distribution of the original variable. However, the log transform behaves much differently for these two cases. Why? Because logs are "weird" on the range $(0, 1)$. 
 
 ```{r skew4, echo = F, fig.cap = "Comparing Log transforms of ECLS math total score versus proportion correct", fig.align = 'center', fig.height=8}
 par(mfrow = c(2,2))
@@ -229,13 +251,13 @@ hist(log(prop_c1rmscal), col = "#4b9cd3")
 
 
 
-To avoid this situation I always add 1 to a variable before taking its log, that way I know that there are no values less than 1 in the data. Technically, there is no reason to do this if the variable does not take on values in the range 0 to 1, but I always apply the "add 1" rule just so I don't have to worry about it. 
+To avoid this situation we can add 1 to a variable before taking its log. Technically, there is no reason to do this if the variable does not take on values in the range 0 to 1, but I always apply the "add 1" rule just so I don't have to worry about it. 
 
 ### What about negative values of $x$?
 
-You may have noted that the "add 1" rule doesn't cover cases where the variable can take on negative values. And you would be right! The problem here is that there is no way to turn a positive base $b$ into a negative number through exponentiation - i.e., $\log(x)$ is undefined whenever $x < 0$. 
+You may have noted that the "add 1" rule doesn't cover cases where the variable can take on negative values. The problem here is that there is no way to turn a positive base $b$ into a negative number through exponentiation - i.e., $\log(x)$ is undefined whenever $x < 0$. 
 
-To address situations where you want to log transform a variable that can take on negative values, you can use 
+To address situations where you want to log transform a variable that can take on negative values, we can use 
 
 \[ \log(x - \text{min}(x) + 1). \]
 
@@ -276,13 +298,13 @@ The left panel shows the qq-plot of the residuals when Math Achievement (`c1rmsc
 knitr::include_graphics("images/clt.png")
 ```
 
-The moral of this section is that, if you are considering log transforming an outcome variable due to positive skew, you should keep in mind:
+The moral of this section is that, if you are considering log-transforming an outcome variable due to positive skew, you should keep in mind:
 
 1. The problem may not really need to be fixed: 
     * Check the residuals! 
     * If you have sufficient sample size, mild to moderate violations of normality are not really an issue.
 
-2. The log transformation has other important implications for you model ... 
+2. The log-transformation has other important implications for you model ... 
 
 ## Relationship with $X$ {#relationship-9}
 
@@ -332,11 +354,13 @@ As we discuss in the next chapter, we can address non-linearity of regression by
 codefolder::bookdown(init = "hide", style = button)
 ```
 
-The final point about the log-linear model is how it affects the interpretation of the model parameters. For example, in linear regression we know what a $b$-unit increase in $Y$ means -- but how to we interpret a $b$-unit increase in $\log(Y)$? This is definitely the most important point about the log transformation, which is why we saved it for last. 
+The final point about the log-linear model is how it affects the interpretation of the model parameters. For example, in linear regression we know what a $b$-unit increase in $Y$ means -- but how to we interpret a $b$-unit increase in $\log(Y)$? This is definitely the most important point about the log transformation, which is why we saved it for last. In terms of three-step "transform$\rightarrow$analyze$\rightarrow$reverse- transform" strategy, this section addresses the final step. 
 
 In general, one of the main shortcomings of "transforming your data" is that it can lead to uninformative or unclear interpretations of model parameters. If the results don't make sense, its not much of a consolation to know that the assumptions looked OK! 
 
 However, it turns out that there is very nice interpretation of the log-linear model. It is because of this interpretation that we often use the log transform to address skew in $Y$, rather than some other transformation. 
+
+In terms of our three 
 
 ### Approximate interpretation {#approximate-9}
 
@@ -523,7 +547,7 @@ Finally, take the ratio of $\widehat Y^*$ to $\widehat Y$:
 codefolder::bookdown(init = "hide", style = button)
 ```
 
-This section works through log-linear regression using the `Wages.Rdata` example data set (source: Weinberg & Abramowitz (2017) Statistics using Stata: An integrative approach. Cambridge University Press). The dataset was collected from 400 individuals in 1985 and contains the following variables.   
+This section works through log-linear regression using the `Wages.Rdata` example data set (source: Weinberg & Abramowitz (2017) Statistics using Stata: An integrative approach. Cambridge University Press). The dataset was collected in 1985 from $N = 400$ respondents and contains the following variables.   
 
 ```{r}
 # Load the data and take a look
@@ -573,20 +597,17 @@ mod2 <- lm(log_wage ~ educ)
 par(mfrow = c(1,2))
 plot(mod2, 1, col = "#4B9CD3")
 plot(mod2, 2, col = "#4B9CD3")
-detach(wages)
 ```
 
 In the qq-plot, we can see that the log transformation helped with positive skew, although didn't do much for the negative tail. It also reduced the apparent heteroskedasticity. However, the relationship still appears non-linear, perhaps more so than in the original linear model. 
 
-Before moving on to address non-linearity in the following chapter, let's make sure we have a good understanding of what the regression coefficients for the log-linear model mean. 
+Before moving on to address non-linearity in the following chapter, let's make sure we have a good understanding of what the regression coefficients for the log-linear model mean. The model output is reported below. **Please take a moment to write down your interpretation of the regression coefficient for `educ` in the summary output.**
 
 ```{r}
 summary(mod2)
 ```
 
-**Please take a moment to write down your interpretation of the regression coefficient for educ in the summary output.**
-
-We can also obtain the transformed model coefficients $\exp(b) - 1$ and their confidence intervals:  
+We can also obtain the "reverse-transformed" model coefficients $\exp(b) - 1$ and their confidence intervals:  
 
 ```{r}
 conf.b <- cbind(coef(mod2), confint(mod2))
@@ -594,7 +615,12 @@ exp.b <- exp(conf.b) - 1
 colnames(exp.b)[1] <- c("exp - 1")
 exp.b
 ```
-**Please write down your interpretation of the transformed regression coefficient for educ in the output above.**
+
+**Please write down your interpretation of the output above for the `educ` variable.**
+
+```{r, echo = F}
+detach(wages)
+```
 
 ## Workbook
 ```{r, echo=FALSE, results='asis'}
@@ -609,8 +635,13 @@ This section collects the questions asked in this chapter. We will discuss these
 
 I'll ask some questions like the following to start class off. Please write down your answers and be prepared to share them in class. 
 
-* $\log_2(8) = ?$
-* $\exp(2.7182) = ?$
+* $\log(2.7182) = ?$
+* $\log(1) = ?$
+* $\log(0) = ?$ 
+* $\log(-1) = ?$ 
+* $\exp(1) = ?$
+* $\exp(0) = ?$
+* $\exp(-1) = ?$
 * What is larger, $\log(10)$ or $\exp(10)$? 
 * $\log(\exp(x)) = ?$ 
 
@@ -665,8 +696,7 @@ summary(mod2)
 detach(wages)
 ```
 
- 
-* Please write down your interpretation of the transformed regression coefficient for educ in the output below
+* Please write down your interpretation of the following output for the `educ` variable:
 
 ```{r}
 conf.b <- cbind(coef(mod2), confint(mod2))
@@ -676,7 +706,7 @@ exp.b
 ```
 
 
-## Exercises 
+## Exercises {#exercises-9}
 
 Again there isn't much new in terms of R code in this chapter. The code for the worked example is presented below, but please refer to Section \@ref(worked-example-9) for the interpretation.
 

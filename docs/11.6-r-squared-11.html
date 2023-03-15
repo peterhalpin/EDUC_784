@@ -23,7 +23,7 @@
 <meta name="author" content="Peter Halpin" />
 
 
-<meta name="date" content="2023-03-09" />
+<meta name="date" content="2023-03-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -413,10 +413,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.6.1" data-path="9.6-worked-example-9.html"><a href="9.6-worked-example-9.html#log-linear-regression-of-wages-on-education"><i class="fa fa-check"></i><b>9.6.1</b> Log-linear regression of Wages on Education</a></li>
 </ul></li>
 <li class="chapter" data-level="9.7" data-path="9.7-workbook-6.html"><a href="9.7-workbook-6.html"><i class="fa fa-check"></i><b>9.7</b> Workbook</a></li>
-<li class="chapter" data-level="9.8" data-path="9.8-exercises-5.html"><a href="9.8-exercises-5.html"><i class="fa fa-check"></i><b>9.8</b> Exercises</a>
+<li class="chapter" data-level="9.8" data-path="9.8-exercises-9.html"><a href="9.8-exercises-9.html"><i class="fa fa-check"></i><b>9.8</b> Exercises</a>
 <ul>
-<li class="chapter" data-level="9.8.1" data-path="9.8-exercises-5.html"><a href="9.8-exercises-5.html#linear-regression-of-wages-on-education"><i class="fa fa-check"></i><b>9.8.1</b> Linear regression of Wages on Education</a></li>
-<li class="chapter" data-level="9.8.2" data-path="9.8-exercises-5.html"><a href="9.8-exercises-5.html#log-linear-regression-of-wages-on-education-1"><i class="fa fa-check"></i><b>9.8.2</b> Log-linear regression of Wages on Education</a></li>
+<li class="chapter" data-level="9.8.1" data-path="9.8-exercises-9.html"><a href="9.8-exercises-9.html#linear-regression-of-wages-on-education"><i class="fa fa-check"></i><b>9.8.1</b> Linear regression of Wages on Education</a></li>
+<li class="chapter" data-level="9.8.2" data-path="9.8-exercises-9.html"><a href="9.8-exercises-9.html#log-linear-regression-of-wages-on-education-1"><i class="fa fa-check"></i><b>9.8.2</b> Log-linear regression of Wages on Education</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="10-chapter-10.html"><a href="10-chapter-10.html"><i class="fa fa-check"></i><b>10</b> Polynomial Regression, etc</a>
@@ -429,14 +429,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.1.4" data-path="10.1-polynomial-10.html"><a href="10.1-polynomial-10.html#deriviation-10"><i class="fa fa-check"></i><b>10.1.4</b> Derivation*</a></li>
 <li class="chapter" data-level="10.1.5" data-path="10.1-polynomial-10.html"><a href="10.1-polynomial-10.html#model-building"><i class="fa fa-check"></i><b>10.1.5</b> Model building</a></li>
 </ul></li>
-<li class="chapter" data-level="10.2" data-path="10.2-worked-example-10.html"><a href="10.2-worked-example-10.html"><i class="fa fa-check"></i><b>10.2</b> A worked example</a></li>
+<li class="chapter" data-level="10.2" data-path="10.2-worked-example-10.html"><a href="10.2-worked-example-10.html"><i class="fa fa-check"></i><b>10.2</b> Worked Example</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="10.2-worked-example-10.html"><a href="10.2-worked-example-10.html#note-on-orthogonal-polynomails"><i class="fa fa-check"></i><b>10.2.1</b> Note on orthogonal polynomails*</a></li>
+</ul></li>
 <li class="chapter" data-level="10.3" data-path="10.3-piecewise-10.html"><a href="10.3-piecewise-10.html"><i class="fa fa-check"></i><b>10.3</b> Piecewise regression</a>
 <ul>
 <li class="chapter" data-level="10.3.1" data-path="10.3-piecewise-10.html"><a href="10.3-piecewise-10.html#the-piecewise-model"><i class="fa fa-check"></i><b>10.3.1</b> The piecewise model</a></li>
 <li class="chapter" data-level="10.3.2" data-path="10.3-piecewise-10.html"><a href="10.3-piecewise-10.html#back-to-the-example-2"><i class="fa fa-check"></i><b>10.3.2</b> Back to the example</a></li>
 </ul></li>
 <li class="chapter" data-level="10.4" data-path="10.4-workbook-7.html"><a href="10.4-workbook-7.html"><i class="fa fa-check"></i><b>10.4</b> Workbook</a></li>
-<li class="chapter" data-level="10.5" data-path="10.5-exercises-7.html"><a href="10.5-exercises-7.html"><i class="fa fa-check"></i><b>10.5</b> Exercises</a></li>
+<li class="chapter" data-level="10.5" data-path="10.5-exercises-5.html"><a href="10.5-exercises-5.html"><i class="fa fa-check"></i><b>10.5</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="11-chapter-11.html"><a href="11-chapter-11.html"><i class="fa fa-check"></i><b>11</b> Logistic Regression</a>
 <ul>
@@ -553,16 +556,16 @@ The pseudo R-squareds are not proportions of variance, but they try to come clos
 <p>Because the McFadden’s R-squared is not about proportion of variance, we can’t interpret it the same way as OLS R-squared. Instead, it is usually interpreted in terms of model <em>fit</em>. Here “fit” means how much the model’s predictions improve, with zero meaning “not at all” and one meaning “perfect prediction”.</p>
 <p>The following output shows McFadden’s R-squared for the example data. <strong>Please write down an interpretation of the R-square value</strong> and we will discuss you interpretations in class. You can use the “show code” button to see an example interpretation.</p>
 <p>McFadden’s R-squared:</p>
-<div class="sourceCode" id="cb424"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb424-1"><a href="11.6-r-squared-11.html#cb424-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using the deviance of the models</span></span>
-<span id="cb424-2"><a href="11.6-r-squared-11.html#cb424-2" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> mod2<span class="sc">$</span>deviance<span class="sc">/</span>mod0<span class="sc">$</span>deviance</span></code></pre></div>
+<div class="sourceCode" id="cb420"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb420-1"><a href="11.6-r-squared-11.html#cb420-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using the deviance of the models</span></span>
+<span id="cb420-2"><a href="11.6-r-squared-11.html#cb420-2" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> mod2<span class="sc">$</span>deviance<span class="sc">/</span>mod0<span class="sc">$</span>deviance</span></code></pre></div>
 <pre><code>## [1] 0.2145</code></pre>
 <p>Interpretation (try it by yourself first!):</p>
-<div class="sourceCode" id="cb426"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb426-1"><a href="11.6-r-squared-11.html#cb426-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Interpretation: Relative a model with no predictors, </span></span>
-<span id="cb426-2"><a href="11.6-r-squared-11.html#cb426-2" aria-hidden="true" tabindex="-1"></a><span class="co"># the inclusion of age improved model fit by about 21.4% </span></span>
-<span id="cb426-3"><a href="11.6-r-squared-11.html#cb426-3" aria-hidden="true" tabindex="-1"></a><span class="co"># of that expected by a model with perfect predictions. </span></span>
-<span id="cb426-4"><a href="11.6-r-squared-11.html#cb426-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb426-5"><a href="11.6-r-squared-11.html#cb426-5" aria-hidden="true" tabindex="-1"></a><span class="co"># More elliptically: the inclusion of age improved model </span></span>
-<span id="cb426-6"><a href="11.6-r-squared-11.html#cb426-6" aria-hidden="true" tabindex="-1"></a><span class="co"># fit by about 21.4\%</span></span></code></pre></div>
+<div class="sourceCode" id="cb422"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb422-1"><a href="11.6-r-squared-11.html#cb422-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Interpretation: Relative a model with no predictors, </span></span>
+<span id="cb422-2"><a href="11.6-r-squared-11.html#cb422-2" aria-hidden="true" tabindex="-1"></a><span class="co"># the inclusion of age improved model fit by about 21.4% </span></span>
+<span id="cb422-3"><a href="11.6-r-squared-11.html#cb422-3" aria-hidden="true" tabindex="-1"></a><span class="co"># of that expected by a model with perfect predictions. </span></span>
+<span id="cb422-4"><a href="11.6-r-squared-11.html#cb422-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb422-5"><a href="11.6-r-squared-11.html#cb422-5" aria-hidden="true" tabindex="-1"></a><span class="co"># More elliptically: the inclusion of age improved model </span></span>
+<span id="cb422-6"><a href="11.6-r-squared-11.html#cb422-6" aria-hidden="true" tabindex="-1"></a><span class="co"># fit by about 21.4\%</span></span></code></pre></div>
 </div>
 </div>
             </section>

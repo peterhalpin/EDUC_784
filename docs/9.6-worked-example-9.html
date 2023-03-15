@@ -23,7 +23,7 @@
 <meta name="author" content="Peter Halpin" />
 
 
-<meta name="date" content="2023-03-09" />
+<meta name="date" content="2023-03-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -413,10 +413,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.6.1" data-path="9.6-worked-example-9.html"><a href="9.6-worked-example-9.html#log-linear-regression-of-wages-on-education"><i class="fa fa-check"></i><b>9.6.1</b> Log-linear regression of Wages on Education</a></li>
 </ul></li>
 <li class="chapter" data-level="9.7" data-path="9.7-workbook-6.html"><a href="9.7-workbook-6.html"><i class="fa fa-check"></i><b>9.7</b> Workbook</a></li>
-<li class="chapter" data-level="9.8" data-path="9.8-exercises-5.html"><a href="9.8-exercises-5.html"><i class="fa fa-check"></i><b>9.8</b> Exercises</a>
+<li class="chapter" data-level="9.8" data-path="9.8-exercises-9.html"><a href="9.8-exercises-9.html"><i class="fa fa-check"></i><b>9.8</b> Exercises</a>
 <ul>
-<li class="chapter" data-level="9.8.1" data-path="9.8-exercises-5.html"><a href="9.8-exercises-5.html#linear-regression-of-wages-on-education"><i class="fa fa-check"></i><b>9.8.1</b> Linear regression of Wages on Education</a></li>
-<li class="chapter" data-level="9.8.2" data-path="9.8-exercises-5.html"><a href="9.8-exercises-5.html#log-linear-regression-of-wages-on-education-1"><i class="fa fa-check"></i><b>9.8.2</b> Log-linear regression of Wages on Education</a></li>
+<li class="chapter" data-level="9.8.1" data-path="9.8-exercises-9.html"><a href="9.8-exercises-9.html#linear-regression-of-wages-on-education"><i class="fa fa-check"></i><b>9.8.1</b> Linear regression of Wages on Education</a></li>
+<li class="chapter" data-level="9.8.2" data-path="9.8-exercises-9.html"><a href="9.8-exercises-9.html#log-linear-regression-of-wages-on-education-1"><i class="fa fa-check"></i><b>9.8.2</b> Log-linear regression of Wages on Education</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="10-chapter-10.html"><a href="10-chapter-10.html"><i class="fa fa-check"></i><b>10</b> Polynomial Regression, etc</a>
@@ -429,14 +429,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="10.1.4" data-path="10.1-polynomial-10.html"><a href="10.1-polynomial-10.html#deriviation-10"><i class="fa fa-check"></i><b>10.1.4</b> Derivation*</a></li>
 <li class="chapter" data-level="10.1.5" data-path="10.1-polynomial-10.html"><a href="10.1-polynomial-10.html#model-building"><i class="fa fa-check"></i><b>10.1.5</b> Model building</a></li>
 </ul></li>
-<li class="chapter" data-level="10.2" data-path="10.2-worked-example-10.html"><a href="10.2-worked-example-10.html"><i class="fa fa-check"></i><b>10.2</b> A worked example</a></li>
+<li class="chapter" data-level="10.2" data-path="10.2-worked-example-10.html"><a href="10.2-worked-example-10.html"><i class="fa fa-check"></i><b>10.2</b> Worked Example</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="10.2-worked-example-10.html"><a href="10.2-worked-example-10.html#note-on-orthogonal-polynomails"><i class="fa fa-check"></i><b>10.2.1</b> Note on orthogonal polynomails*</a></li>
+</ul></li>
 <li class="chapter" data-level="10.3" data-path="10.3-piecewise-10.html"><a href="10.3-piecewise-10.html"><i class="fa fa-check"></i><b>10.3</b> Piecewise regression</a>
 <ul>
 <li class="chapter" data-level="10.3.1" data-path="10.3-piecewise-10.html"><a href="10.3-piecewise-10.html#the-piecewise-model"><i class="fa fa-check"></i><b>10.3.1</b> The piecewise model</a></li>
 <li class="chapter" data-level="10.3.2" data-path="10.3-piecewise-10.html"><a href="10.3-piecewise-10.html#back-to-the-example-2"><i class="fa fa-check"></i><b>10.3.2</b> Back to the example</a></li>
 </ul></li>
 <li class="chapter" data-level="10.4" data-path="10.4-workbook-7.html"><a href="10.4-workbook-7.html"><i class="fa fa-check"></i><b>10.4</b> Workbook</a></li>
-<li class="chapter" data-level="10.5" data-path="10.5-exercises-7.html"><a href="10.5-exercises-7.html"><i class="fa fa-check"></i><b>10.5</b> Exercises</a></li>
+<li class="chapter" data-level="10.5" data-path="10.5-exercises-5.html"><a href="10.5-exercises-5.html"><i class="fa fa-check"></i><b>10.5</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="11-chapter-11.html"><a href="11-chapter-11.html"><i class="fa fa-check"></i><b>11</b> Logistic Regression</a>
 <ul>
@@ -534,14 +537,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     codefolder('pre.sourceCode');
   });
 </script>
-<p>This section works through log-linear regression using the <code>Wages.Rdata</code> example data set (source: Weinberg &amp; Abramowitz (2017) Statistics using Stata: An integrative approach. Cambridge University Press). The dataset was collected from 400 individuals in 1985 and contains the following variables.</p>
-<div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb338-1"><a href="9.6-worked-example-9.html#cb338-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the data and take a look</span></span>
-<span id="cb338-2"><a href="9.6-worked-example-9.html#cb338-2" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;Wages.RData&quot;</span>)</span>
-<span id="cb338-3"><a href="9.6-worked-example-9.html#cb338-3" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(wages))</span></code></pre></div>
+<p>This section works through log-linear regression using the <code>Wages.Rdata</code> example data set (source: Weinberg &amp; Abramowitz (2017) Statistics using Stata: An integrative approach. Cambridge University Press). The dataset was collected in 1985 from <span class="math inline">\(N = 400\)</span> respondents and contains the following variables.</p>
+<div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb337-1"><a href="9.6-worked-example-9.html#cb337-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the data and take a look</span></span>
+<span id="cb337-2"><a href="9.6-worked-example-9.html#cb337-2" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;Wages.RData&quot;</span>)</span>
+<span id="cb337-3"><a href="9.6-worked-example-9.html#cb337-3" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(wages))</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
-<th align="right">id</th>
 <th align="right">educ</th>
 <th align="right">south</th>
 <th align="right">sex</th>
@@ -554,7 +556,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </thead>
 <tbody>
 <tr class="odd">
-<td align="right">3</td>
 <td align="right">12</td>
 <td align="right">0</td>
 <td align="right">0</td>
@@ -565,7 +566,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <td align="right">2</td>
 </tr>
 <tr class="even">
-<td align="right">4</td>
 <td align="right">13</td>
 <td align="right">0</td>
 <td align="right">0</td>
@@ -576,7 +576,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <td align="right">3</td>
 </tr>
 <tr class="odd">
-<td align="right">5</td>
 <td align="right">10</td>
 <td align="right">1</td>
 <td align="right">0</td>
@@ -587,7 +586,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <td align="right">1</td>
 </tr>
 <tr class="even">
-<td align="right">12</td>
 <td align="right">9</td>
 <td align="right">1</td>
 <td align="right">0</td>
@@ -598,7 +596,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <td align="right">1</td>
 </tr>
 <tr class="odd">
-<td align="right">13</td>
 <td align="right">9</td>
 <td align="right">1</td>
 <td align="right">0</td>
@@ -609,7 +606,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <td align="right">1</td>
 </tr>
 <tr class="even">
-<td align="right">14</td>
 <td align="right">12</td>
 <td align="right">0</td>
 <td align="right">0</td>
@@ -622,10 +618,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tbody>
 </table>
 <p>We will focus on regressing hourly wage (<code>wage</code>) on years of education (<code>educ</code>). The distribution of the outcome variable and its relationship with the predictor are depicted below.</p>
-<div class="sourceCode" id="cb339"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb339-1"><a href="9.6-worked-example-9.html#cb339-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(wages)</span>
-<span id="cb339-2"><a href="9.6-worked-example-9.html#cb339-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
-<span id="cb339-3"><a href="9.6-worked-example-9.html#cb339-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(wage,  <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span>
-<span id="cb339-4"><a href="9.6-worked-example-9.html#cb339-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(educ, wage, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb338"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb338-1"><a href="9.6-worked-example-9.html#cb338-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(wages)</span>
+<span id="cb338-2"><a href="9.6-worked-example-9.html#cb338-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb338-3"><a href="9.6-worked-example-9.html#cb338-3" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(wage,  <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span>
+<span id="cb338-4"><a href="9.6-worked-example-9.html#cb338-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(educ, wage, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-200-1.png" width="672" /></p>
 <p>This example is a good candidate for log-linear regression because</p>
 <ul>
@@ -634,31 +630,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>The log-transform provides a suitable interpretation when the outcome is monetary</li>
 </ul>
 <p>Moreover, a quick a look at the linear model (below) shows that <em>all</em> of the assumptions of the model are violated – we are going to need to try another approach!</p>
-<div class="sourceCode" id="cb340"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb340-1"><a href="9.6-worked-example-9.html#cb340-1" aria-hidden="true" tabindex="-1"></a>mod1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(wage <span class="sc">~</span> educ)</span>
-<span id="cb340-2"><a href="9.6-worked-example-9.html#cb340-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb340-3"><a href="9.6-worked-example-9.html#cb340-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Check out model fit</span></span>
-<span id="cb340-4"><a href="9.6-worked-example-9.html#cb340-4" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
-<span id="cb340-5"><a href="9.6-worked-example-9.html#cb340-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod1, <span class="dv">1</span>, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span>
-<span id="cb340-6"><a href="9.6-worked-example-9.html#cb340-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod1, <span class="dv">2</span>, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb339"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb339-1"><a href="9.6-worked-example-9.html#cb339-1" aria-hidden="true" tabindex="-1"></a>mod1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(wage <span class="sc">~</span> educ)</span>
+<span id="cb339-2"><a href="9.6-worked-example-9.html#cb339-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb339-3"><a href="9.6-worked-example-9.html#cb339-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Check out model fit</span></span>
+<span id="cb339-4"><a href="9.6-worked-example-9.html#cb339-4" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb339-5"><a href="9.6-worked-example-9.html#cb339-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod1, <span class="dv">1</span>, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span>
+<span id="cb339-6"><a href="9.6-worked-example-9.html#cb339-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod1, <span class="dv">2</span>, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-201-1.png" width="672" /></p>
 <div id="log-linear-regression-of-wages-on-education" class="section level3 hasAnchor" number="9.6.1">
 <h3><span class="header-section-number">9.6.1</span> Log-linear regression of Wages on Education<a href="9.6-worked-example-9.html#log-linear-regression-of-wages-on-education" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>To run a log-linear model, we can transform the Y-variable using the <code>log</code> function, and then run the model as usual. The diagnostic plots are shown below.</p>
-<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb341-1"><a href="9.6-worked-example-9.html#cb341-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create log transform of wage</span></span>
-<span id="cb341-2"><a href="9.6-worked-example-9.html#cb341-2" aria-hidden="true" tabindex="-1"></a>log_wage <span class="ot">&lt;-</span> <span class="fu">log</span>(wage <span class="sc">+</span> <span class="dv">1</span>)</span>
-<span id="cb341-3"><a href="9.6-worked-example-9.html#cb341-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb341-4"><a href="9.6-worked-example-9.html#cb341-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Regress it on educ</span></span>
-<span id="cb341-5"><a href="9.6-worked-example-9.html#cb341-5" aria-hidden="true" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(log_wage <span class="sc">~</span> educ)</span>
-<span id="cb341-6"><a href="9.6-worked-example-9.html#cb341-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb341-7"><a href="9.6-worked-example-9.html#cb341-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Check out model fit</span></span>
-<span id="cb341-8"><a href="9.6-worked-example-9.html#cb341-8" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
-<span id="cb341-9"><a href="9.6-worked-example-9.html#cb341-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod2, <span class="dv">1</span>, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span>
-<span id="cb341-10"><a href="9.6-worked-example-9.html#cb341-10" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod2, <span class="dv">2</span>, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb340"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb340-1"><a href="9.6-worked-example-9.html#cb340-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create log transform of wage</span></span>
+<span id="cb340-2"><a href="9.6-worked-example-9.html#cb340-2" aria-hidden="true" tabindex="-1"></a>log_wage <span class="ot">&lt;-</span> <span class="fu">log</span>(wage <span class="sc">+</span> <span class="dv">1</span>)</span>
+<span id="cb340-3"><a href="9.6-worked-example-9.html#cb340-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb340-4"><a href="9.6-worked-example-9.html#cb340-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Regress it on educ</span></span>
+<span id="cb340-5"><a href="9.6-worked-example-9.html#cb340-5" aria-hidden="true" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(log_wage <span class="sc">~</span> educ)</span>
+<span id="cb340-6"><a href="9.6-worked-example-9.html#cb340-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb340-7"><a href="9.6-worked-example-9.html#cb340-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Check out model fit</span></span>
+<span id="cb340-8"><a href="9.6-worked-example-9.html#cb340-8" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb340-9"><a href="9.6-worked-example-9.html#cb340-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod2, <span class="dv">1</span>, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span>
+<span id="cb340-10"><a href="9.6-worked-example-9.html#cb340-10" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod2, <span class="dv">2</span>, <span class="at">col =</span> <span class="st">&quot;#4B9CD3&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-202-1.png" width="672" /></p>
-<div class="sourceCode" id="cb342"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb342-1"><a href="9.6-worked-example-9.html#cb342-1" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(wages)</span></code></pre></div>
 <p>In the qq-plot, we can see that the log transformation helped with positive skew, although didn’t do much for the negative tail. It also reduced the apparent heteroskedasticity. However, the relationship still appears non-linear, perhaps more so than in the original linear model.</p>
-<p>Before moving on to address non-linearity in the following chapter, let’s make sure we have a good understanding of what the regression coefficients for the log-linear model mean.</p>
-<div class="sourceCode" id="cb343"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb343-1"><a href="9.6-worked-example-9.html#cb343-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod2)</span></code></pre></div>
+<p>Before moving on to address non-linearity in the following chapter, let’s make sure we have a good understanding of what the regression coefficients for the log-linear model mean. The model output is reported below. <strong>Please take a moment to write down your interpretation of the regression coefficient for <code>educ</code> in the summary output.</strong></p>
+<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb341-1"><a href="9.6-worked-example-9.html#cb341-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod2)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = log_wage ~ educ)
@@ -677,16 +672,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Residual standard error: 0.423 on 398 degrees of freedom
 ## Multiple R-squared:  0.21,   Adjusted R-squared:  0.208 
 ## F-statistic:  106 on 1 and 398 DF,  p-value: &lt;2e-16</code></pre>
-<p><strong>Please take a moment to write down your interpretation of the regression coefficient for educ in the summary output.</strong></p>
-<p>We can also obtain the transformed model coefficients <span class="math inline">\(\exp(b) - 1\)</span> and their confidence intervals:</p>
-<div class="sourceCode" id="cb345"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb345-1"><a href="9.6-worked-example-9.html#cb345-1" aria-hidden="true" tabindex="-1"></a>conf.b <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="fu">coef</span>(mod2), <span class="fu">confint</span>(mod2))</span>
-<span id="cb345-2"><a href="9.6-worked-example-9.html#cb345-2" aria-hidden="true" tabindex="-1"></a>exp.b <span class="ot">&lt;-</span> <span class="fu">exp</span>(conf.b) <span class="sc">-</span> <span class="dv">1</span></span>
-<span id="cb345-3"><a href="9.6-worked-example-9.html#cb345-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(exp.b)[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;exp - 1&quot;</span>)</span>
-<span id="cb345-4"><a href="9.6-worked-example-9.html#cb345-4" aria-hidden="true" tabindex="-1"></a>exp.b</span></code></pre></div>
+<p>We can also obtain the “reverse-transformed” model coefficients <span class="math inline">\(\exp(b) - 1\)</span> and their confidence intervals:</p>
+<div class="sourceCode" id="cb343"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb343-1"><a href="9.6-worked-example-9.html#cb343-1" aria-hidden="true" tabindex="-1"></a>conf.b <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="fu">coef</span>(mod2), <span class="fu">confint</span>(mod2))</span>
+<span id="cb343-2"><a href="9.6-worked-example-9.html#cb343-2" aria-hidden="true" tabindex="-1"></a>exp.b <span class="ot">&lt;-</span> <span class="fu">exp</span>(conf.b) <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb343-3"><a href="9.6-worked-example-9.html#cb343-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(exp.b)[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;exp - 1&quot;</span>)</span>
+<span id="cb343-4"><a href="9.6-worked-example-9.html#cb343-4" aria-hidden="true" tabindex="-1"></a>exp.b</span></code></pre></div>
 <pre><code>##             exp - 1   2.5 %  97.5 %
 ## (Intercept) 2.28291 1.68467 3.01445
 ## educ        0.07767 0.06239 0.09317</code></pre>
-<p><strong>Please write down your interpretation of the transformed regression coefficient for educ in the output above.</strong></p>
+<p><strong>Please write down your interpretation of the output above for the <code>educ</code> variable.</strong></p>
 </div>
 </div>
             </section>
