@@ -353,3 +353,17 @@ multiple-11
 predicted-probabilities
 interactions
 workbook-8
+tab:unnamed-chunk-3
+fig:unnamed-chunk-21
+fig:unnamed-chunk-22
+fig:unnamed-chunk-24
+fig:unnamed-chunk-26
+additional-details
+comparison-4
+what-is-the-missing-ingredient
+other-interpretations
+relation-with-beta-weights
+some-math
+fig:unnamed-chunk-23
+fig:unnamed-chunk-25
+fig:unnamed-chunk-27

@@ -23,7 +23,7 @@
 <meta name="author" content="Peter Halpin" />
 
 
-<meta name="date" content="2023-03-15" />
+<meta name="date" content="2023-03-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -153,6 +153,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.4" data-path="2.4-rsquared-2.html"><a href="2.4-rsquared-2.html"><i class="fa fa-check"></i><b>2.4</b> R-squared</a>
 <ul>
 <li class="chapter" data-level="2.4.1" data-path="2.4-rsquared-2.html"><a href="2.4-rsquared-2.html#derivation"><i class="fa fa-check"></i><b>2.4.1</b> Derivation*</a></li>
+<li class="chapter" data-level="2.4.2" data-path="2.4-rsquared-2.html"><a href="2.4-rsquared-2.html#additional-details"><i class="fa fa-check"></i><b>2.4.2</b> Additional details*</a></li>
 </ul></li>
 <li class="chapter" data-level="2.5" data-path="2.5-population-model-2.html"><a href="2.5-population-model-2.html"><i class="fa fa-check"></i><b>2.5</b> The population model</a></li>
 <li class="chapter" data-level="2.6" data-path="2.6-notation-2.html"><a href="2.6-notation-2.html"><i class="fa fa-check"></i><b>2.6</b> Clarifying notation</a></li>
@@ -209,33 +210,39 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.1.1" data-path="4.1-ecls-4.html"><a href="4.1-ecls-4.html#correlation-matrices"><i class="fa fa-check"></i><b>4.1.1</b> Correlation matrices</a></li>
 </ul></li>
 <li class="chapter" data-level="4.2" data-path="4.2-the-two-predictor-model.html"><a href="4.2-the-two-predictor-model.html"><i class="fa fa-check"></i><b>4.2</b> The two-predictor model</a></li>
-<li class="chapter" data-level="4.3" data-path="4.3-ols-4.html"><a href="4.3-ols-4.html"><i class="fa fa-check"></i><b>4.3</b> OLS with two predictors</a></li>
-<li class="chapter" data-level="4.4" data-path="4.4-interpretation-4.html"><a href="4.4-interpretation-4.html"><i class="fa fa-check"></i><b>4.4</b> Interpreting the coefficients</a>
+<li class="chapter" data-level="4.3" data-path="4.3-comparison-4.html"><a href="4.3-comparison-4.html"><i class="fa fa-check"></i><b>4.3</b> Multiple vs simple regression</a>
 <ul>
-<li class="chapter" data-level="4.4.1" data-path="4.4-interpretation-4.html"><a href="4.4-interpretation-4.html#holding-the-other-predictor-constant"><i class="fa fa-check"></i><b>4.4.1</b> “Holding the other predictor constant”</a></li>
-<li class="chapter" data-level="4.4.2" data-path="4.4-interpretation-4.html"><a href="4.4-interpretation-4.html#controlling-for-the-other-predictor"><i class="fa fa-check"></i><b>4.4.2</b> “Controlling for the other predictor”</a></li>
-<li class="chapter" data-level="4.4.3" data-path="4.4-interpretation-4.html"><a href="4.4-interpretation-4.html#the-ecls-example"><i class="fa fa-check"></i><b>4.4.3</b> The ECLS example</a></li>
+<li class="chapter" data-level="4.3.1" data-path="4.3-comparison-4.html"><a href="4.3-comparison-4.html#what-is-the-missing-ingredient"><i class="fa fa-check"></i><b>4.3.1</b> What is the missing ingredient?</a></li>
 </ul></li>
-<li class="chapter" data-level="4.5" data-path="4.5-beta-4.html"><a href="4.5-beta-4.html"><i class="fa fa-check"></i><b>4.5</b> Standardized coefficients</a></li>
-<li class="chapter" data-level="4.6" data-path="4.6-rsquared-4.html"><a href="4.6-rsquared-4.html"><i class="fa fa-check"></i><b>4.6</b> (Multiple) R-squared</a>
+<li class="chapter" data-level="4.4" data-path="4.4-ols-4.html"><a href="4.4-ols-4.html"><i class="fa fa-check"></i><b>4.4</b> OLS with two predictors</a></li>
+<li class="chapter" data-level="4.5" data-path="4.5-interpretation-4.html"><a href="4.5-interpretation-4.html"><i class="fa fa-check"></i><b>4.5</b> Interpreting the coefficients</a>
 <ul>
-<li class="chapter" data-level="4.6.1" data-path="4.6-rsquared-4.html"><a href="4.6-rsquared-4.html#relation-with-simple-regression"><i class="fa fa-check"></i><b>4.6.1</b> Relation with simple regression</a></li>
-<li class="chapter" data-level="4.6.2" data-path="4.6-rsquared-4.html"><a href="4.6-rsquared-4.html#adjusted-r-squared"><i class="fa fa-check"></i><b>4.6.2</b> Adjusted R-squared</a></li>
-<li class="chapter" data-level="4.6.3" data-path="4.6-rsquared-4.html"><a href="4.6-rsquared-4.html#the-multiple-correlation"><i class="fa fa-check"></i><b>4.6.3</b> The multiple correlation</a></li>
+<li class="chapter" data-level="4.5.1" data-path="4.5-interpretation-4.html"><a href="4.5-interpretation-4.html#holding-the-other-predictor-constant"><i class="fa fa-check"></i><b>4.5.1</b> “Holding the other predictor constant”</a></li>
+<li class="chapter" data-level="4.5.2" data-path="4.5-interpretation-4.html"><a href="4.5-interpretation-4.html#controlling-for-the-other-predictor"><i class="fa fa-check"></i><b>4.5.2</b> “Controlling for the other predictor”</a></li>
+<li class="chapter" data-level="4.5.3" data-path="4.5-interpretation-4.html"><a href="4.5-interpretation-4.html#the-ecls-example"><i class="fa fa-check"></i><b>4.5.3</b> The ECLS example</a></li>
+<li class="chapter" data-level="4.5.4" data-path="4.5-interpretation-4.html"><a href="4.5-interpretation-4.html#other-interpretations"><i class="fa fa-check"></i><b>4.5.4</b> Other interpretations</a></li>
 </ul></li>
-<li class="chapter" data-level="4.7" data-path="4.7-inference-for-slopes-4.html"><a href="4.7-inference-for-slopes-4.html"><i class="fa fa-check"></i><b>4.7</b> Inference for the slopes</a>
+<li class="chapter" data-level="4.6" data-path="4.6-beta-4.html"><a href="4.6-beta-4.html"><i class="fa fa-check"></i><b>4.6</b> Standardized coefficients</a></li>
+<li class="chapter" data-level="4.7" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html"><i class="fa fa-check"></i><b>4.7</b> (Multiple) R-squared</a>
 <ul>
-<li class="chapter" data-level="4.7.1" data-path="4.7-inference-for-slopes-4.html"><a href="4.7-inference-for-slopes-4.html#precision-of-hat-b"><i class="fa fa-check"></i><b>4.7.1</b> Precision of <span class="math inline">\(\hat b\)</span></a></li>
+<li class="chapter" data-level="4.7.1" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html#relation-with-simple-regression"><i class="fa fa-check"></i><b>4.7.1</b> Relation with simple regression</a></li>
+<li class="chapter" data-level="4.7.2" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html#relation-with-beta-weights"><i class="fa fa-check"></i><b>4.7.2</b> Relation with <span class="math inline">\(\beta\)</span>-weights</a></li>
+<li class="chapter" data-level="4.7.3" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html#adjusted-r-squared"><i class="fa fa-check"></i><b>4.7.3</b> Adjusted R-squared</a></li>
+<li class="chapter" data-level="4.7.4" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html#the-multiple-correlation"><i class="fa fa-check"></i><b>4.7.4</b> The multiple correlation</a></li>
 </ul></li>
-<li class="chapter" data-level="4.8" data-path="4.8-inference-for-rsquared-4.html"><a href="4.8-inference-for-rsquared-4.html"><i class="fa fa-check"></i><b>4.8</b> Inference for R-squared</a></li>
-<li class="chapter" data-level="4.9" data-path="4.9-workbook.html"><a href="4.9-workbook.html"><i class="fa fa-check"></i><b>4.9</b> Workbook</a></li>
-<li class="chapter" data-level="4.10" data-path="4.10-exercises.html"><a href="4.10-exercises.html"><i class="fa fa-check"></i><b>4.10</b> Exercises</a>
+<li class="chapter" data-level="4.8" data-path="4.8-inference-for-slopes-4.html"><a href="4.8-inference-for-slopes-4.html"><i class="fa fa-check"></i><b>4.8</b> Inference for the slopes</a>
 <ul>
-<li class="chapter" data-level="4.10.1" data-path="4.10-exercises.html"><a href="4.10-exercises.html#the-ecls250-data"><i class="fa fa-check"></i><b>4.10.1</b> The ECLS250 data</a></li>
-<li class="chapter" data-level="4.10.2" data-path="4.10-exercises.html"><a href="4.10-exercises.html#multiple-regression-with-lm"><i class="fa fa-check"></i><b>4.10.2</b> Multiple regression with <code>lm</code></a></li>
-<li class="chapter" data-level="4.10.3" data-path="4.10-exercises.html"><a href="4.10-exercises.html#relations-between-simple-and-multiple-regression"><i class="fa fa-check"></i><b>4.10.3</b> Relations between simple and multiple regression</a></li>
-<li class="chapter" data-level="4.10.4" data-path="4.10-exercises.html"><a href="4.10-exercises.html#inference-with-2-predictors"><i class="fa fa-check"></i><b>4.10.4</b> Inference with 2 predictors</a></li>
-<li class="chapter" data-level="4.10.5" data-path="4.10-exercises.html"><a href="4.10-exercises.html#apa-reporting-of-results"><i class="fa fa-check"></i><b>4.10.5</b> APA reporting of results</a></li>
+<li class="chapter" data-level="4.8.1" data-path="4.8-inference-for-slopes-4.html"><a href="4.8-inference-for-slopes-4.html#precision-of-hat-b"><i class="fa fa-check"></i><b>4.8.1</b> Precision of <span class="math inline">\(\hat b\)</span></a></li>
+</ul></li>
+<li class="chapter" data-level="4.9" data-path="4.9-inference-for-rsquared-4.html"><a href="4.9-inference-for-rsquared-4.html"><i class="fa fa-check"></i><b>4.9</b> Inference for R-squared</a></li>
+<li class="chapter" data-level="4.10" data-path="4.10-workbook.html"><a href="4.10-workbook.html"><i class="fa fa-check"></i><b>4.10</b> Workbook</a></li>
+<li class="chapter" data-level="4.11" data-path="4.11-exercises.html"><a href="4.11-exercises.html"><i class="fa fa-check"></i><b>4.11</b> Exercises</a>
+<ul>
+<li class="chapter" data-level="4.11.1" data-path="4.11-exercises.html"><a href="4.11-exercises.html#the-ecls250-data"><i class="fa fa-check"></i><b>4.11.1</b> The ECLS250 data</a></li>
+<li class="chapter" data-level="4.11.2" data-path="4.11-exercises.html"><a href="4.11-exercises.html#multiple-regression-with-lm"><i class="fa fa-check"></i><b>4.11.2</b> Multiple regression with <code>lm</code></a></li>
+<li class="chapter" data-level="4.11.3" data-path="4.11-exercises.html"><a href="4.11-exercises.html#relations-between-simple-and-multiple-regression"><i class="fa fa-check"></i><b>4.11.3</b> Relations between simple and multiple regression</a></li>
+<li class="chapter" data-level="4.11.4" data-path="4.11-exercises.html"><a href="4.11-exercises.html#inference-with-2-predictors"><i class="fa fa-check"></i><b>4.11.4</b> Inference with 2 predictors</a></li>
+<li class="chapter" data-level="4.11.5" data-path="4.11-exercises.html"><a href="4.11-exercises.html#apa-reporting-of-results"><i class="fa fa-check"></i><b>4.11.5</b> APA reporting of results</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="5-chapter-5.html"><a href="5-chapter-5.html"><i class="fa fa-check"></i><b>5</b> Categorical Predictors</a>
@@ -245,7 +252,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.3" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html"><i class="fa fa-check"></i><b>5.3</b> Binary predictors</a>
 <ul>
 <li class="chapter" data-level="5.3.1" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html#relation-with-t-tests"><i class="fa fa-check"></i><b>5.3.1</b> Relation with t-tests</a></li>
-<li class="chapter" data-level="5.3.2" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html#summary-1"><i class="fa fa-check"></i><b>5.3.2</b> Summary</a></li>
+<li class="chapter" data-level="5.3.2" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html#some-math"><i class="fa fa-check"></i><b>5.3.2</b> Some math*</a></li>
+<li class="chapter" data-level="5.3.3" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html#summary-1"><i class="fa fa-check"></i><b>5.3.3</b> Summary</a></li>
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="5.4-reference-group-coding-5.html"><a href="5.4-reference-group-coding-5.html"><i class="fa fa-check"></i><b>5.4</b> Reference-group coding</a>
 <ul>
@@ -480,12 +488,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="11.7.1" data-path="11.7-assumption-checking-11.html"><a href="11.7-assumption-checking-11.html#more-details-on-the-hl-test"><i class="fa fa-check"></i><b>11.7.1</b> More details on the HL test</a></li>
 </ul></li>
-<li class="chapter" data-level="11.8" data-path="11.8-multiple-11.html"><a href="11.8-multiple-11.html"><i class="fa fa-check"></i><b>11.8</b> Exercise: Multiple logistic regression</a>
+<li class="chapter" data-level="11.8" data-path="11.8-workbook-8.html"><a href="11.8-workbook-8.html"><i class="fa fa-check"></i><b>11.8</b> Workbook</a></li>
+<li class="chapter" data-level="11.9" data-path="11.9-multiple-11.html"><a href="11.9-multiple-11.html"><i class="fa fa-check"></i><b>11.9</b> Exercise: Multiple logistic regression</a>
 <ul>
-<li class="chapter" data-level="11.8.1" data-path="11.8-multiple-11.html"><a href="11.8-multiple-11.html#predicted-probabilities"><i class="fa fa-check"></i><b>11.8.1</b> Predicted probabilities</a></li>
-<li class="chapter" data-level="11.8.2" data-path="11.8-multiple-11.html"><a href="11.8-multiple-11.html#interactions"><i class="fa fa-check"></i><b>11.8.2</b> Interactions</a></li>
+<li class="chapter" data-level="11.9.1" data-path="11.9-multiple-11.html"><a href="11.9-multiple-11.html#predicted-probabilities"><i class="fa fa-check"></i><b>11.9.1</b> Predicted probabilities</a></li>
+<li class="chapter" data-level="11.9.2" data-path="11.9-multiple-11.html"><a href="11.9-multiple-11.html#interactions"><i class="fa fa-check"></i><b>11.9.2</b> Interactions</a></li>
 </ul></li>
-<li class="chapter" data-level="11.9" data-path="11.9-workbook-8.html"><a href="11.9-workbook-8.html"><i class="fa fa-check"></i><b>11.9</b> Workbook</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -538,11 +546,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   });
 </script>
 <p>As a working example, we will use data contained in the file <code>CHD.RData</code> to explore the relationship between age in years (“age”) and evidence (absence or presence) of coronary heart disease (“chd”). The data set contains 100 cases. Respondents’ ages range from 20 to 69, while evidence of CHD is coded 0 when it is absent and 1 when it is present. A sample of 20 cases is shown below. (Source: Applied Logistic Regression by David W. Hosmer and Stanley Lemeshow, 1989, John Wiley and Sons.)</p>
-<div class="sourceCode" id="cb394"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb394-1"><a href="11.1-chd-example-11.html#cb394-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;CHD.RData&quot;</span>)</span>
-<span id="cb394-2"><a href="11.1-chd-example-11.html#cb394-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">list</span>(chd.data[<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, <span class="dv">10</span>),<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>], chd.data[<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, <span class="dv">10</span>),<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>]), <span class="at">row.names =</span> F, <span class="at">caption =</span> <span class="st">&quot;The CHD example&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="11.1-chd-example-11.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">&quot;CHD.RData&quot;</span>)</span>
+<span id="cb1-2"><a href="11.1-chd-example-11.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(chd.data)</span>
+<span id="cb1-3"><a href="11.1-chd-example-11.html#cb1-3" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">list</span>(chd.data[<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, <span class="dv">10</span>),<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>], chd.data[<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>, <span class="dv">10</span>),<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>]), <span class="at">row.names =</span> F, <span class="at">caption =</span> <span class="st">&quot;The CHD example&quot;</span>)</span></code></pre></div>
 <table class="kable_wrapper">
 <caption>
-<span id="tab:unnamed-chunk-241">Table 11.1: </span>The CHD example
+<span id="tab:unnamed-chunk-3">Table 11.1: </span>The CHD example
 </caption>
 <tbody>
 <tr>
@@ -557,31 +566,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <tbody>
 <tr class="odd">
 <td align="right">0</td>
-<td align="right">30</td>
-</tr>
-<tr class="even">
-<td align="right">0</td>
-<td align="right">40</td>
-</tr>
-<tr class="odd">
-<td align="right">0</td>
-<td align="right">42</td>
+<td align="right">20</td>
 </tr>
 <tr class="even">
 <td align="right">1</td>
+<td align="right">58</td>
+</tr>
+<tr class="odd">
+<td align="right">1</td>
+<td align="right">56</td>
+</tr>
+<tr class="even">
+<td align="right">0</td>
+<td align="right">48</td>
+</tr>
+<tr class="odd">
+<td align="right">1</td>
+<td align="right">59</td>
+</tr>
+<tr class="even">
+<td align="right">0</td>
 <td align="right">47</td>
 </tr>
 <tr class="odd">
 <td align="right">1</td>
-<td align="right">53</td>
-</tr>
-<tr class="even">
-<td align="right">0</td>
-<td align="right">29</td>
-</tr>
-<tr class="odd">
-<td align="right">0</td>
-<td align="right">34</td>
+<td align="right">58</td>
 </tr>
 <tr class="even">
 <td align="right">0</td>
@@ -589,11 +598,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tr>
 <tr class="odd">
 <td align="right">1</td>
-<td align="right">55</td>
+<td align="right">53</td>
 </tr>
 <tr class="even">
 <td align="right">0</td>
-<td align="right">32</td>
+<td align="right">30</td>
 </tr>
 </tbody>
 </table>
@@ -608,44 +617,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </thead>
 <tbody>
 <tr class="odd">
-<td align="right">1</td>
-<td align="right">58</td>
+<td align="right">0</td>
+<td align="right">52</td>
 </tr>
 <tr class="even">
-<td align="right">1</td>
-<td align="right">46</td>
+<td align="right">0</td>
+<td align="right">43</td>
 </tr>
 <tr class="odd">
 <td align="right">0</td>
-<td align="right">44</td>
+<td align="right">43</td>
 </tr>
 <tr class="even">
 <td align="right">0</td>
-<td align="right">33</td>
+<td align="right">23</td>
 </tr>
 <tr class="odd">
 <td align="right">0</td>
-<td align="right">41</td>
+<td align="right">40</td>
 </tr>
 <tr class="even">
 <td align="right">1</td>
-<td align="right">57</td>
+<td align="right">34</td>
 </tr>
 <tr class="odd">
 <td align="right">0</td>
-<td align="right">33</td>
+<td align="right">34</td>
 </tr>
 <tr class="even">
-<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">30</td>
+</tr>
+<tr class="odd">
+<td align="right">0</td>
+<td align="right">30</td>
+</tr>
+<tr class="even">
+<td align="right">0</td>
 <td align="right">37</td>
-</tr>
-<tr class="odd">
-<td align="right">0</td>
-<td align="right">28</td>
-</tr>
-<tr class="even">
-<td align="right">0</td>
-<td align="right">29</td>
 </tr>
 </tbody>
 </table>
@@ -653,7 +662,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tr>
 </tbody>
 </table>
-<p>If we regress CHD on age using linear regression (i.e., the linear probability model), our diagnostic plots and output look like this:</p>
+<p>If we regress CHD on age using linear regression (i.e., the “linear probability model”), our diagnostic plots and summary output look like this:</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:lpm"></span>
 <img src="_main_files/figure-html/lpm-1.png" alt="Linear probability model with CHD example" width="1152" />
 <p class="caption">
@@ -665,20 +674,21 @@ Figure 11.1: Linear probability model with CHD example
 ## lm(formula = chd ~ age, data = chd.data)
 ## 
 ## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -0.8579 -0.3399 -0.0727  0.3166  0.9927 
+##         Min          1Q      Median          3Q         Max 
+## -0.85792659 -0.33992167 -0.07274019  0.31655928  0.99269201 
 ## 
 ## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept) -0.53796    0.16881   -3.19   0.0019 ** 
-## age          0.02181    0.00368    5.93  4.6e-08 ***
+##                 Estimate   Std. Error  t value   Pr(&gt;|t|)    
+## (Intercept) -0.537960352  0.168808505 -3.18681  0.0019305 ** 
+## age          0.021810733  0.003678802  5.92876 4.5749e-08 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 0.429 on 98 degrees of freedom
-## Multiple R-squared:  0.264,  Adjusted R-squared:  0.256 
-## F-statistic: 35.2 on 1 and 98 DF,  p-value: 4.57e-08</code></pre>
-<p><strong>Please take a moment to write down you conclusions about whether the assumptions of linear regression are met for these data, and any other details you may notice about the linear probability model.</strong></p>
+## Residual standard error: 0.4290429 on 98 degrees of freedom
+## Multiple R-squared:  0.2639891,  Adjusted R-squared:  0.2564788 
+## F-statistic:  35.1502 on 1 and 98 DF,  p-value: 4.574871e-08</code></pre>
+<p><strong>Before moving on, please take a moment to write down you conclusions (and rationle) about whether the assumptions of linear regression are met for these data.</strong></p>
+<p>I’ll note that researchers who have a strong preference for OLS methods (AKA economists) often approach binary data using the linear probability model. As we can see, this approach violates all of the assumptions of linear regression, can lead to predicted probabilities outside of the range [0,1], produces incorrect standard errors for model parameters, and is, in a word, wrong. Yet, despite all this, it works pretty well in some situations and has the benefit of being easier to interpret than logistic regression. We will consider the situations in which the linear probability model is “close enough” at the end of the next section.</p>
 </div>
             </section>
 

@@ -23,7 +23,7 @@
 <meta name="author" content="Peter Halpin" />
 
 
-<meta name="date" content="2023-03-15" />
+<meta name="date" content="2023-03-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="11.6-r-squared-11.html"/>
-<link rel="next" href="11.8-multiple-11.html"/>
+<link rel="next" href="11.8-workbook-8.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -153,6 +153,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.4" data-path="2.4-rsquared-2.html"><a href="2.4-rsquared-2.html"><i class="fa fa-check"></i><b>2.4</b> R-squared</a>
 <ul>
 <li class="chapter" data-level="2.4.1" data-path="2.4-rsquared-2.html"><a href="2.4-rsquared-2.html#derivation"><i class="fa fa-check"></i><b>2.4.1</b> Derivation*</a></li>
+<li class="chapter" data-level="2.4.2" data-path="2.4-rsquared-2.html"><a href="2.4-rsquared-2.html#additional-details"><i class="fa fa-check"></i><b>2.4.2</b> Additional details*</a></li>
 </ul></li>
 <li class="chapter" data-level="2.5" data-path="2.5-population-model-2.html"><a href="2.5-population-model-2.html"><i class="fa fa-check"></i><b>2.5</b> The population model</a></li>
 <li class="chapter" data-level="2.6" data-path="2.6-notation-2.html"><a href="2.6-notation-2.html"><i class="fa fa-check"></i><b>2.6</b> Clarifying notation</a></li>
@@ -209,33 +210,39 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.1.1" data-path="4.1-ecls-4.html"><a href="4.1-ecls-4.html#correlation-matrices"><i class="fa fa-check"></i><b>4.1.1</b> Correlation matrices</a></li>
 </ul></li>
 <li class="chapter" data-level="4.2" data-path="4.2-the-two-predictor-model.html"><a href="4.2-the-two-predictor-model.html"><i class="fa fa-check"></i><b>4.2</b> The two-predictor model</a></li>
-<li class="chapter" data-level="4.3" data-path="4.3-ols-4.html"><a href="4.3-ols-4.html"><i class="fa fa-check"></i><b>4.3</b> OLS with two predictors</a></li>
-<li class="chapter" data-level="4.4" data-path="4.4-interpretation-4.html"><a href="4.4-interpretation-4.html"><i class="fa fa-check"></i><b>4.4</b> Interpreting the coefficients</a>
+<li class="chapter" data-level="4.3" data-path="4.3-comparison-4.html"><a href="4.3-comparison-4.html"><i class="fa fa-check"></i><b>4.3</b> Multiple vs simple regression</a>
 <ul>
-<li class="chapter" data-level="4.4.1" data-path="4.4-interpretation-4.html"><a href="4.4-interpretation-4.html#holding-the-other-predictor-constant"><i class="fa fa-check"></i><b>4.4.1</b> “Holding the other predictor constant”</a></li>
-<li class="chapter" data-level="4.4.2" data-path="4.4-interpretation-4.html"><a href="4.4-interpretation-4.html#controlling-for-the-other-predictor"><i class="fa fa-check"></i><b>4.4.2</b> “Controlling for the other predictor”</a></li>
-<li class="chapter" data-level="4.4.3" data-path="4.4-interpretation-4.html"><a href="4.4-interpretation-4.html#the-ecls-example"><i class="fa fa-check"></i><b>4.4.3</b> The ECLS example</a></li>
+<li class="chapter" data-level="4.3.1" data-path="4.3-comparison-4.html"><a href="4.3-comparison-4.html#what-is-the-missing-ingredient"><i class="fa fa-check"></i><b>4.3.1</b> What is the missing ingredient?</a></li>
 </ul></li>
-<li class="chapter" data-level="4.5" data-path="4.5-beta-4.html"><a href="4.5-beta-4.html"><i class="fa fa-check"></i><b>4.5</b> Standardized coefficients</a></li>
-<li class="chapter" data-level="4.6" data-path="4.6-rsquared-4.html"><a href="4.6-rsquared-4.html"><i class="fa fa-check"></i><b>4.6</b> (Multiple) R-squared</a>
+<li class="chapter" data-level="4.4" data-path="4.4-ols-4.html"><a href="4.4-ols-4.html"><i class="fa fa-check"></i><b>4.4</b> OLS with two predictors</a></li>
+<li class="chapter" data-level="4.5" data-path="4.5-interpretation-4.html"><a href="4.5-interpretation-4.html"><i class="fa fa-check"></i><b>4.5</b> Interpreting the coefficients</a>
 <ul>
-<li class="chapter" data-level="4.6.1" data-path="4.6-rsquared-4.html"><a href="4.6-rsquared-4.html#relation-with-simple-regression"><i class="fa fa-check"></i><b>4.6.1</b> Relation with simple regression</a></li>
-<li class="chapter" data-level="4.6.2" data-path="4.6-rsquared-4.html"><a href="4.6-rsquared-4.html#adjusted-r-squared"><i class="fa fa-check"></i><b>4.6.2</b> Adjusted R-squared</a></li>
-<li class="chapter" data-level="4.6.3" data-path="4.6-rsquared-4.html"><a href="4.6-rsquared-4.html#the-multiple-correlation"><i class="fa fa-check"></i><b>4.6.3</b> The multiple correlation</a></li>
+<li class="chapter" data-level="4.5.1" data-path="4.5-interpretation-4.html"><a href="4.5-interpretation-4.html#holding-the-other-predictor-constant"><i class="fa fa-check"></i><b>4.5.1</b> “Holding the other predictor constant”</a></li>
+<li class="chapter" data-level="4.5.2" data-path="4.5-interpretation-4.html"><a href="4.5-interpretation-4.html#controlling-for-the-other-predictor"><i class="fa fa-check"></i><b>4.5.2</b> “Controlling for the other predictor”</a></li>
+<li class="chapter" data-level="4.5.3" data-path="4.5-interpretation-4.html"><a href="4.5-interpretation-4.html#the-ecls-example"><i class="fa fa-check"></i><b>4.5.3</b> The ECLS example</a></li>
+<li class="chapter" data-level="4.5.4" data-path="4.5-interpretation-4.html"><a href="4.5-interpretation-4.html#other-interpretations"><i class="fa fa-check"></i><b>4.5.4</b> Other interpretations</a></li>
 </ul></li>
-<li class="chapter" data-level="4.7" data-path="4.7-inference-for-slopes-4.html"><a href="4.7-inference-for-slopes-4.html"><i class="fa fa-check"></i><b>4.7</b> Inference for the slopes</a>
+<li class="chapter" data-level="4.6" data-path="4.6-beta-4.html"><a href="4.6-beta-4.html"><i class="fa fa-check"></i><b>4.6</b> Standardized coefficients</a></li>
+<li class="chapter" data-level="4.7" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html"><i class="fa fa-check"></i><b>4.7</b> (Multiple) R-squared</a>
 <ul>
-<li class="chapter" data-level="4.7.1" data-path="4.7-inference-for-slopes-4.html"><a href="4.7-inference-for-slopes-4.html#precision-of-hat-b"><i class="fa fa-check"></i><b>4.7.1</b> Precision of <span class="math inline">\(\hat b\)</span></a></li>
+<li class="chapter" data-level="4.7.1" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html#relation-with-simple-regression"><i class="fa fa-check"></i><b>4.7.1</b> Relation with simple regression</a></li>
+<li class="chapter" data-level="4.7.2" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html#relation-with-beta-weights"><i class="fa fa-check"></i><b>4.7.2</b> Relation with <span class="math inline">\(\beta\)</span>-weights</a></li>
+<li class="chapter" data-level="4.7.3" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html#adjusted-r-squared"><i class="fa fa-check"></i><b>4.7.3</b> Adjusted R-squared</a></li>
+<li class="chapter" data-level="4.7.4" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html#the-multiple-correlation"><i class="fa fa-check"></i><b>4.7.4</b> The multiple correlation</a></li>
 </ul></li>
-<li class="chapter" data-level="4.8" data-path="4.8-inference-for-rsquared-4.html"><a href="4.8-inference-for-rsquared-4.html"><i class="fa fa-check"></i><b>4.8</b> Inference for R-squared</a></li>
-<li class="chapter" data-level="4.9" data-path="4.9-workbook.html"><a href="4.9-workbook.html"><i class="fa fa-check"></i><b>4.9</b> Workbook</a></li>
-<li class="chapter" data-level="4.10" data-path="4.10-exercises.html"><a href="4.10-exercises.html"><i class="fa fa-check"></i><b>4.10</b> Exercises</a>
+<li class="chapter" data-level="4.8" data-path="4.8-inference-for-slopes-4.html"><a href="4.8-inference-for-slopes-4.html"><i class="fa fa-check"></i><b>4.8</b> Inference for the slopes</a>
 <ul>
-<li class="chapter" data-level="4.10.1" data-path="4.10-exercises.html"><a href="4.10-exercises.html#the-ecls250-data"><i class="fa fa-check"></i><b>4.10.1</b> The ECLS250 data</a></li>
-<li class="chapter" data-level="4.10.2" data-path="4.10-exercises.html"><a href="4.10-exercises.html#multiple-regression-with-lm"><i class="fa fa-check"></i><b>4.10.2</b> Multiple regression with <code>lm</code></a></li>
-<li class="chapter" data-level="4.10.3" data-path="4.10-exercises.html"><a href="4.10-exercises.html#relations-between-simple-and-multiple-regression"><i class="fa fa-check"></i><b>4.10.3</b> Relations between simple and multiple regression</a></li>
-<li class="chapter" data-level="4.10.4" data-path="4.10-exercises.html"><a href="4.10-exercises.html#inference-with-2-predictors"><i class="fa fa-check"></i><b>4.10.4</b> Inference with 2 predictors</a></li>
-<li class="chapter" data-level="4.10.5" data-path="4.10-exercises.html"><a href="4.10-exercises.html#apa-reporting-of-results"><i class="fa fa-check"></i><b>4.10.5</b> APA reporting of results</a></li>
+<li class="chapter" data-level="4.8.1" data-path="4.8-inference-for-slopes-4.html"><a href="4.8-inference-for-slopes-4.html#precision-of-hat-b"><i class="fa fa-check"></i><b>4.8.1</b> Precision of <span class="math inline">\(\hat b\)</span></a></li>
+</ul></li>
+<li class="chapter" data-level="4.9" data-path="4.9-inference-for-rsquared-4.html"><a href="4.9-inference-for-rsquared-4.html"><i class="fa fa-check"></i><b>4.9</b> Inference for R-squared</a></li>
+<li class="chapter" data-level="4.10" data-path="4.10-workbook.html"><a href="4.10-workbook.html"><i class="fa fa-check"></i><b>4.10</b> Workbook</a></li>
+<li class="chapter" data-level="4.11" data-path="4.11-exercises.html"><a href="4.11-exercises.html"><i class="fa fa-check"></i><b>4.11</b> Exercises</a>
+<ul>
+<li class="chapter" data-level="4.11.1" data-path="4.11-exercises.html"><a href="4.11-exercises.html#the-ecls250-data"><i class="fa fa-check"></i><b>4.11.1</b> The ECLS250 data</a></li>
+<li class="chapter" data-level="4.11.2" data-path="4.11-exercises.html"><a href="4.11-exercises.html#multiple-regression-with-lm"><i class="fa fa-check"></i><b>4.11.2</b> Multiple regression with <code>lm</code></a></li>
+<li class="chapter" data-level="4.11.3" data-path="4.11-exercises.html"><a href="4.11-exercises.html#relations-between-simple-and-multiple-regression"><i class="fa fa-check"></i><b>4.11.3</b> Relations between simple and multiple regression</a></li>
+<li class="chapter" data-level="4.11.4" data-path="4.11-exercises.html"><a href="4.11-exercises.html#inference-with-2-predictors"><i class="fa fa-check"></i><b>4.11.4</b> Inference with 2 predictors</a></li>
+<li class="chapter" data-level="4.11.5" data-path="4.11-exercises.html"><a href="4.11-exercises.html#apa-reporting-of-results"><i class="fa fa-check"></i><b>4.11.5</b> APA reporting of results</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="5-chapter-5.html"><a href="5-chapter-5.html"><i class="fa fa-check"></i><b>5</b> Categorical Predictors</a>
@@ -245,7 +252,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.3" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html"><i class="fa fa-check"></i><b>5.3</b> Binary predictors</a>
 <ul>
 <li class="chapter" data-level="5.3.1" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html#relation-with-t-tests"><i class="fa fa-check"></i><b>5.3.1</b> Relation with t-tests</a></li>
-<li class="chapter" data-level="5.3.2" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html#summary-1"><i class="fa fa-check"></i><b>5.3.2</b> Summary</a></li>
+<li class="chapter" data-level="5.3.2" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html#some-math"><i class="fa fa-check"></i><b>5.3.2</b> Some math*</a></li>
+<li class="chapter" data-level="5.3.3" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html#summary-1"><i class="fa fa-check"></i><b>5.3.3</b> Summary</a></li>
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="5.4-reference-group-coding-5.html"><a href="5.4-reference-group-coding-5.html"><i class="fa fa-check"></i><b>5.4</b> Reference-group coding</a>
 <ul>
@@ -480,12 +488,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="11.7.1" data-path="11.7-assumption-checking-11.html"><a href="11.7-assumption-checking-11.html#more-details-on-the-hl-test"><i class="fa fa-check"></i><b>11.7.1</b> More details on the HL test</a></li>
 </ul></li>
-<li class="chapter" data-level="11.8" data-path="11.8-multiple-11.html"><a href="11.8-multiple-11.html"><i class="fa fa-check"></i><b>11.8</b> Exercise: Multiple logistic regression</a>
+<li class="chapter" data-level="11.8" data-path="11.8-workbook-8.html"><a href="11.8-workbook-8.html"><i class="fa fa-check"></i><b>11.8</b> Workbook</a></li>
+<li class="chapter" data-level="11.9" data-path="11.9-multiple-11.html"><a href="11.9-multiple-11.html"><i class="fa fa-check"></i><b>11.9</b> Exercise: Multiple logistic regression</a>
 <ul>
-<li class="chapter" data-level="11.8.1" data-path="11.8-multiple-11.html"><a href="11.8-multiple-11.html#predicted-probabilities"><i class="fa fa-check"></i><b>11.8.1</b> Predicted probabilities</a></li>
-<li class="chapter" data-level="11.8.2" data-path="11.8-multiple-11.html"><a href="11.8-multiple-11.html#interactions"><i class="fa fa-check"></i><b>11.8.2</b> Interactions</a></li>
+<li class="chapter" data-level="11.9.1" data-path="11.9-multiple-11.html"><a href="11.9-multiple-11.html#predicted-probabilities"><i class="fa fa-check"></i><b>11.9.1</b> Predicted probabilities</a></li>
+<li class="chapter" data-level="11.9.2" data-path="11.9-multiple-11.html"><a href="11.9-multiple-11.html#interactions"><i class="fa fa-check"></i><b>11.9.2</b> Interactions</a></li>
 </ul></li>
-<li class="chapter" data-level="11.9" data-path="11.9-workbook-8.html"><a href="11.9-workbook-8.html"><i class="fa fa-check"></i><b>11.9</b> Workbook</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -531,29 +539,27 @@ Figure 11.12: The idea behind the HL test
 <li><code>exp</code> is the fitted values (predicted probabilities) from the logistic regression.</li>
 <li><code>g</code> is the number of groups / bins to use. For this example, 5 is a good number.</li>
 </ul>
-<div class="sourceCode" id="cb423"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb423-1"><a href="11.7-assumption-checking-11.html#cb423-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Note: Install package &quot;generalhoslem&quot; if you haven&#39;t do so already</span></span>
-<span id="cb423-2"><a href="11.7-assumption-checking-11.html#cb423-2" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;generalhoslem&quot;)</span></span>
-<span id="cb423-3"><a href="11.7-assumption-checking-11.html#cb423-3" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(chd.data)</span>
-<span id="cb423-4"><a href="11.7-assumption-checking-11.html#cb423-4" aria-hidden="true" tabindex="-1"></a>HLtest <span class="ot">&lt;-</span> generalhoslem<span class="sc">::</span><span class="fu">logitgof</span>(<span class="at">obs =</span> chd, <span class="at">exp =</span> <span class="fu">fitted</span>(mod2), <span class="at">g =</span> <span class="dv">5</span>)</span>
-<span id="cb423-5"><a href="11.7-assumption-checking-11.html#cb423-5" aria-hidden="true" tabindex="-1"></a>HLtest</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="11.7-assumption-checking-11.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Note: Install package &quot;generalhoslem&quot; if you haven&#39;t do so already</span></span>
+<span id="cb31-2"><a href="11.7-assumption-checking-11.html#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;generalhoslem&quot;)</span></span>
+<span id="cb31-3"><a href="11.7-assumption-checking-11.html#cb31-3" aria-hidden="true" tabindex="-1"></a>HLtest <span class="ot">&lt;-</span> generalhoslem<span class="sc">::</span><span class="fu">logitgof</span>(<span class="at">obs =</span> chd, <span class="at">exp =</span> <span class="fu">fitted</span>(mod2), <span class="at">g =</span> <span class="dv">5</span>)</span>
+<span id="cb31-4"><a href="11.7-assumption-checking-11.html#cb31-4" aria-hidden="true" tabindex="-1"></a>HLtest</span></code></pre></div>
 <pre><code>## 
 ##  Hosmer and Lemeshow test (binary model)
 ## 
 ## data:  chd, fitted(mod2)
-## X-squared = 0.047, df = 3, p-value = 1</code></pre>
-<div class="sourceCode" id="cb425"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb425-1"><a href="11.7-assumption-checking-11.html#cb425-1" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(chd.data)</span></code></pre></div>
+## X-squared = 0.046892748, df = 3, p-value = 0.997337</code></pre>
 <p><strong>Please write down your interpretation of the HL test and be prepared to share you answer in class.</strong></p>
 <div id="more-details-on-the-hl-test" class="section level3 hasAnchor" number="11.7.1">
 <h3><span class="header-section-number">11.7.1</span> More details on the HL test<a href="11.7-assumption-checking-11.html#more-details-on-the-hl-test" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The HL statistic is computed using the observed and expected (model-implied) counts in each of the 5 groups. Computational details are given below.</p>
-<div class="sourceCode" id="cb426"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb426-1"><a href="11.7-assumption-checking-11.html#cb426-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Observed and expected counts</span></span>
-<span id="cb426-2"><a href="11.7-assumption-checking-11.html#cb426-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(HLtest<span class="sc">$</span>observed, HLtest<span class="sc">$</span>expected)</span></code></pre></div>
-<pre><code>##                y0 y1  yhat0  yhat1
-## [0.0435,0.174] 18  2 17.870  2.130
-## (0.174,0.318]  16  5 16.131  4.869
-## (0.318,0.504]  12  9 12.268  8.732
-## (0.504,0.734]   8 15  7.936 15.064
-## (0.734,0.912]   3 12  2.795 12.205</code></pre>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="11.7-assumption-checking-11.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Observed and expected counts</span></span>
+<span id="cb33-2"><a href="11.7-assumption-checking-11.html#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(HLtest<span class="sc">$</span>observed, HLtest<span class="sc">$</span>expected)</span></code></pre></div>
+<pre><code>##                y0 y1        yhat0        yhat1
+## [0.0435,0.174] 18  2 17.870103661  2.129896339
+## (0.174,0.318]  16  5 16.131098431  4.868901569
+## (0.318,0.504]  12  9 12.268366045  8.731633955
+## (0.504,0.734]   8 15  7.935627366 15.064372634
+## (0.734,0.912]   3 12  2.794804496 12.205195504</code></pre>
 <p>The test statistic is the built up using the differences between the observed and expected values:</p>
 <p><span class="math display">\[HL = \sum_{g = 1}^5 \left(\frac{(\text{y0}_g - \text{yhat0}_g)^2}{\text{yhat0}_g} + \frac{(\text{y1}_g - \text{yhat1}_g)^2}{\text{yhat1}_g}\right)\]</span></p>
 <p>Hosmer and Lemeshow showed that this statistic has a chi-square distribution on <span class="math inline">\(df = N_\text{groups} - 2\)</span> when the null hypothesis is true (i.e., when the model fits the data).</p>
@@ -565,7 +571,7 @@ Figure 11.12: The idea behind the HL test
         </div>
       </div>
 <a href="11.6-r-squared-11.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="11.8-multiple-11.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="11.8-workbook-8.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

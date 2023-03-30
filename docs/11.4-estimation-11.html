@@ -23,7 +23,7 @@
 <meta name="author" content="Peter Halpin" />
 
 
-<meta name="date" content="2023-03-15" />
+<meta name="date" content="2023-03-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -153,6 +153,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.4" data-path="2.4-rsquared-2.html"><a href="2.4-rsquared-2.html"><i class="fa fa-check"></i><b>2.4</b> R-squared</a>
 <ul>
 <li class="chapter" data-level="2.4.1" data-path="2.4-rsquared-2.html"><a href="2.4-rsquared-2.html#derivation"><i class="fa fa-check"></i><b>2.4.1</b> Derivation*</a></li>
+<li class="chapter" data-level="2.4.2" data-path="2.4-rsquared-2.html"><a href="2.4-rsquared-2.html#additional-details"><i class="fa fa-check"></i><b>2.4.2</b> Additional details*</a></li>
 </ul></li>
 <li class="chapter" data-level="2.5" data-path="2.5-population-model-2.html"><a href="2.5-population-model-2.html"><i class="fa fa-check"></i><b>2.5</b> The population model</a></li>
 <li class="chapter" data-level="2.6" data-path="2.6-notation-2.html"><a href="2.6-notation-2.html"><i class="fa fa-check"></i><b>2.6</b> Clarifying notation</a></li>
@@ -209,33 +210,39 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.1.1" data-path="4.1-ecls-4.html"><a href="4.1-ecls-4.html#correlation-matrices"><i class="fa fa-check"></i><b>4.1.1</b> Correlation matrices</a></li>
 </ul></li>
 <li class="chapter" data-level="4.2" data-path="4.2-the-two-predictor-model.html"><a href="4.2-the-two-predictor-model.html"><i class="fa fa-check"></i><b>4.2</b> The two-predictor model</a></li>
-<li class="chapter" data-level="4.3" data-path="4.3-ols-4.html"><a href="4.3-ols-4.html"><i class="fa fa-check"></i><b>4.3</b> OLS with two predictors</a></li>
-<li class="chapter" data-level="4.4" data-path="4.4-interpretation-4.html"><a href="4.4-interpretation-4.html"><i class="fa fa-check"></i><b>4.4</b> Interpreting the coefficients</a>
+<li class="chapter" data-level="4.3" data-path="4.3-comparison-4.html"><a href="4.3-comparison-4.html"><i class="fa fa-check"></i><b>4.3</b> Multiple vs simple regression</a>
 <ul>
-<li class="chapter" data-level="4.4.1" data-path="4.4-interpretation-4.html"><a href="4.4-interpretation-4.html#holding-the-other-predictor-constant"><i class="fa fa-check"></i><b>4.4.1</b> “Holding the other predictor constant”</a></li>
-<li class="chapter" data-level="4.4.2" data-path="4.4-interpretation-4.html"><a href="4.4-interpretation-4.html#controlling-for-the-other-predictor"><i class="fa fa-check"></i><b>4.4.2</b> “Controlling for the other predictor”</a></li>
-<li class="chapter" data-level="4.4.3" data-path="4.4-interpretation-4.html"><a href="4.4-interpretation-4.html#the-ecls-example"><i class="fa fa-check"></i><b>4.4.3</b> The ECLS example</a></li>
+<li class="chapter" data-level="4.3.1" data-path="4.3-comparison-4.html"><a href="4.3-comparison-4.html#what-is-the-missing-ingredient"><i class="fa fa-check"></i><b>4.3.1</b> What is the missing ingredient?</a></li>
 </ul></li>
-<li class="chapter" data-level="4.5" data-path="4.5-beta-4.html"><a href="4.5-beta-4.html"><i class="fa fa-check"></i><b>4.5</b> Standardized coefficients</a></li>
-<li class="chapter" data-level="4.6" data-path="4.6-rsquared-4.html"><a href="4.6-rsquared-4.html"><i class="fa fa-check"></i><b>4.6</b> (Multiple) R-squared</a>
+<li class="chapter" data-level="4.4" data-path="4.4-ols-4.html"><a href="4.4-ols-4.html"><i class="fa fa-check"></i><b>4.4</b> OLS with two predictors</a></li>
+<li class="chapter" data-level="4.5" data-path="4.5-interpretation-4.html"><a href="4.5-interpretation-4.html"><i class="fa fa-check"></i><b>4.5</b> Interpreting the coefficients</a>
 <ul>
-<li class="chapter" data-level="4.6.1" data-path="4.6-rsquared-4.html"><a href="4.6-rsquared-4.html#relation-with-simple-regression"><i class="fa fa-check"></i><b>4.6.1</b> Relation with simple regression</a></li>
-<li class="chapter" data-level="4.6.2" data-path="4.6-rsquared-4.html"><a href="4.6-rsquared-4.html#adjusted-r-squared"><i class="fa fa-check"></i><b>4.6.2</b> Adjusted R-squared</a></li>
-<li class="chapter" data-level="4.6.3" data-path="4.6-rsquared-4.html"><a href="4.6-rsquared-4.html#the-multiple-correlation"><i class="fa fa-check"></i><b>4.6.3</b> The multiple correlation</a></li>
+<li class="chapter" data-level="4.5.1" data-path="4.5-interpretation-4.html"><a href="4.5-interpretation-4.html#holding-the-other-predictor-constant"><i class="fa fa-check"></i><b>4.5.1</b> “Holding the other predictor constant”</a></li>
+<li class="chapter" data-level="4.5.2" data-path="4.5-interpretation-4.html"><a href="4.5-interpretation-4.html#controlling-for-the-other-predictor"><i class="fa fa-check"></i><b>4.5.2</b> “Controlling for the other predictor”</a></li>
+<li class="chapter" data-level="4.5.3" data-path="4.5-interpretation-4.html"><a href="4.5-interpretation-4.html#the-ecls-example"><i class="fa fa-check"></i><b>4.5.3</b> The ECLS example</a></li>
+<li class="chapter" data-level="4.5.4" data-path="4.5-interpretation-4.html"><a href="4.5-interpretation-4.html#other-interpretations"><i class="fa fa-check"></i><b>4.5.4</b> Other interpretations</a></li>
 </ul></li>
-<li class="chapter" data-level="4.7" data-path="4.7-inference-for-slopes-4.html"><a href="4.7-inference-for-slopes-4.html"><i class="fa fa-check"></i><b>4.7</b> Inference for the slopes</a>
+<li class="chapter" data-level="4.6" data-path="4.6-beta-4.html"><a href="4.6-beta-4.html"><i class="fa fa-check"></i><b>4.6</b> Standardized coefficients</a></li>
+<li class="chapter" data-level="4.7" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html"><i class="fa fa-check"></i><b>4.7</b> (Multiple) R-squared</a>
 <ul>
-<li class="chapter" data-level="4.7.1" data-path="4.7-inference-for-slopes-4.html"><a href="4.7-inference-for-slopes-4.html#precision-of-hat-b"><i class="fa fa-check"></i><b>4.7.1</b> Precision of <span class="math inline">\(\hat b\)</span></a></li>
+<li class="chapter" data-level="4.7.1" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html#relation-with-simple-regression"><i class="fa fa-check"></i><b>4.7.1</b> Relation with simple regression</a></li>
+<li class="chapter" data-level="4.7.2" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html#relation-with-beta-weights"><i class="fa fa-check"></i><b>4.7.2</b> Relation with <span class="math inline">\(\beta\)</span>-weights</a></li>
+<li class="chapter" data-level="4.7.3" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html#adjusted-r-squared"><i class="fa fa-check"></i><b>4.7.3</b> Adjusted R-squared</a></li>
+<li class="chapter" data-level="4.7.4" data-path="4.7-rsquared-4.html"><a href="4.7-rsquared-4.html#the-multiple-correlation"><i class="fa fa-check"></i><b>4.7.4</b> The multiple correlation</a></li>
 </ul></li>
-<li class="chapter" data-level="4.8" data-path="4.8-inference-for-rsquared-4.html"><a href="4.8-inference-for-rsquared-4.html"><i class="fa fa-check"></i><b>4.8</b> Inference for R-squared</a></li>
-<li class="chapter" data-level="4.9" data-path="4.9-workbook.html"><a href="4.9-workbook.html"><i class="fa fa-check"></i><b>4.9</b> Workbook</a></li>
-<li class="chapter" data-level="4.10" data-path="4.10-exercises.html"><a href="4.10-exercises.html"><i class="fa fa-check"></i><b>4.10</b> Exercises</a>
+<li class="chapter" data-level="4.8" data-path="4.8-inference-for-slopes-4.html"><a href="4.8-inference-for-slopes-4.html"><i class="fa fa-check"></i><b>4.8</b> Inference for the slopes</a>
 <ul>
-<li class="chapter" data-level="4.10.1" data-path="4.10-exercises.html"><a href="4.10-exercises.html#the-ecls250-data"><i class="fa fa-check"></i><b>4.10.1</b> The ECLS250 data</a></li>
-<li class="chapter" data-level="4.10.2" data-path="4.10-exercises.html"><a href="4.10-exercises.html#multiple-regression-with-lm"><i class="fa fa-check"></i><b>4.10.2</b> Multiple regression with <code>lm</code></a></li>
-<li class="chapter" data-level="4.10.3" data-path="4.10-exercises.html"><a href="4.10-exercises.html#relations-between-simple-and-multiple-regression"><i class="fa fa-check"></i><b>4.10.3</b> Relations between simple and multiple regression</a></li>
-<li class="chapter" data-level="4.10.4" data-path="4.10-exercises.html"><a href="4.10-exercises.html#inference-with-2-predictors"><i class="fa fa-check"></i><b>4.10.4</b> Inference with 2 predictors</a></li>
-<li class="chapter" data-level="4.10.5" data-path="4.10-exercises.html"><a href="4.10-exercises.html#apa-reporting-of-results"><i class="fa fa-check"></i><b>4.10.5</b> APA reporting of results</a></li>
+<li class="chapter" data-level="4.8.1" data-path="4.8-inference-for-slopes-4.html"><a href="4.8-inference-for-slopes-4.html#precision-of-hat-b"><i class="fa fa-check"></i><b>4.8.1</b> Precision of <span class="math inline">\(\hat b\)</span></a></li>
+</ul></li>
+<li class="chapter" data-level="4.9" data-path="4.9-inference-for-rsquared-4.html"><a href="4.9-inference-for-rsquared-4.html"><i class="fa fa-check"></i><b>4.9</b> Inference for R-squared</a></li>
+<li class="chapter" data-level="4.10" data-path="4.10-workbook.html"><a href="4.10-workbook.html"><i class="fa fa-check"></i><b>4.10</b> Workbook</a></li>
+<li class="chapter" data-level="4.11" data-path="4.11-exercises.html"><a href="4.11-exercises.html"><i class="fa fa-check"></i><b>4.11</b> Exercises</a>
+<ul>
+<li class="chapter" data-level="4.11.1" data-path="4.11-exercises.html"><a href="4.11-exercises.html#the-ecls250-data"><i class="fa fa-check"></i><b>4.11.1</b> The ECLS250 data</a></li>
+<li class="chapter" data-level="4.11.2" data-path="4.11-exercises.html"><a href="4.11-exercises.html#multiple-regression-with-lm"><i class="fa fa-check"></i><b>4.11.2</b> Multiple regression with <code>lm</code></a></li>
+<li class="chapter" data-level="4.11.3" data-path="4.11-exercises.html"><a href="4.11-exercises.html#relations-between-simple-and-multiple-regression"><i class="fa fa-check"></i><b>4.11.3</b> Relations between simple and multiple regression</a></li>
+<li class="chapter" data-level="4.11.4" data-path="4.11-exercises.html"><a href="4.11-exercises.html#inference-with-2-predictors"><i class="fa fa-check"></i><b>4.11.4</b> Inference with 2 predictors</a></li>
+<li class="chapter" data-level="4.11.5" data-path="4.11-exercises.html"><a href="4.11-exercises.html#apa-reporting-of-results"><i class="fa fa-check"></i><b>4.11.5</b> APA reporting of results</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="5-chapter-5.html"><a href="5-chapter-5.html"><i class="fa fa-check"></i><b>5</b> Categorical Predictors</a>
@@ -245,7 +252,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.3" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html"><i class="fa fa-check"></i><b>5.3</b> Binary predictors</a>
 <ul>
 <li class="chapter" data-level="5.3.1" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html#relation-with-t-tests"><i class="fa fa-check"></i><b>5.3.1</b> Relation with t-tests</a></li>
-<li class="chapter" data-level="5.3.2" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html#summary-1"><i class="fa fa-check"></i><b>5.3.2</b> Summary</a></li>
+<li class="chapter" data-level="5.3.2" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html#some-math"><i class="fa fa-check"></i><b>5.3.2</b> Some math*</a></li>
+<li class="chapter" data-level="5.3.3" data-path="5.3-binary-predictors-5.html"><a href="5.3-binary-predictors-5.html#summary-1"><i class="fa fa-check"></i><b>5.3.3</b> Summary</a></li>
 </ul></li>
 <li class="chapter" data-level="5.4" data-path="5.4-reference-group-coding-5.html"><a href="5.4-reference-group-coding-5.html"><i class="fa fa-check"></i><b>5.4</b> Reference-group coding</a>
 <ul>
@@ -480,12 +488,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="11.7.1" data-path="11.7-assumption-checking-11.html"><a href="11.7-assumption-checking-11.html#more-details-on-the-hl-test"><i class="fa fa-check"></i><b>11.7.1</b> More details on the HL test</a></li>
 </ul></li>
-<li class="chapter" data-level="11.8" data-path="11.8-multiple-11.html"><a href="11.8-multiple-11.html"><i class="fa fa-check"></i><b>11.8</b> Exercise: Multiple logistic regression</a>
+<li class="chapter" data-level="11.8" data-path="11.8-workbook-8.html"><a href="11.8-workbook-8.html"><i class="fa fa-check"></i><b>11.8</b> Workbook</a></li>
+<li class="chapter" data-level="11.9" data-path="11.9-multiple-11.html"><a href="11.9-multiple-11.html"><i class="fa fa-check"></i><b>11.9</b> Exercise: Multiple logistic regression</a>
 <ul>
-<li class="chapter" data-level="11.8.1" data-path="11.8-multiple-11.html"><a href="11.8-multiple-11.html#predicted-probabilities"><i class="fa fa-check"></i><b>11.8.1</b> Predicted probabilities</a></li>
-<li class="chapter" data-level="11.8.2" data-path="11.8-multiple-11.html"><a href="11.8-multiple-11.html#interactions"><i class="fa fa-check"></i><b>11.8.2</b> Interactions</a></li>
+<li class="chapter" data-level="11.9.1" data-path="11.9-multiple-11.html"><a href="11.9-multiple-11.html#predicted-probabilities"><i class="fa fa-check"></i><b>11.9.1</b> Predicted probabilities</a></li>
+<li class="chapter" data-level="11.9.2" data-path="11.9-multiple-11.html"><a href="11.9-multiple-11.html#interactions"><i class="fa fa-check"></i><b>11.9.2</b> Interactions</a></li>
 </ul></li>
-<li class="chapter" data-level="11.9" data-path="11.9-workbook-8.html"><a href="11.9-workbook-8.html"><i class="fa fa-check"></i><b>11.9</b> Workbook</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
@@ -541,12 +549,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The sort version: In logistic regression, we use maximum likelihood (ML) rather than OLS to estimate the model parameters. The resulting estimates are called the maximum likelihood estimates (MLEs).</p>
 <p>By understanding ML estimation, we will also be able to address</p>
 <ul>
-<li>Testing model parameters for significance, confidence intervals, etc <!-- (Section \@ref(inference-11)) --></li>
-<li>The assumptions of logistic regression, and how to check them &lt; !– (Section <a href="11.7-assumption-checking-11.html#assumption-checking-11">11.7</a>) –&gt;</li>
+<li>Testing model parameters for significance, confidence intervals, etc (Section <a href="11.5-inference-11.html#inference-11">11.5</a>)</li>
+<li>The assumptions of logistic regression, and how to check them (Section <a href="11.7-assumption-checking-11.html#assumption-checking-11">11.7</a>)</li>
 </ul>
 <div id="ml-vs-ols" class="section level3 hasAnchor" number="11.4.1">
 <h3><span class="header-section-number">11.4.1</span> ML vs OLS<a href="11.4-estimation-11.html#ml-vs-ols" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Let’s first contrast ML with OLS. In linear regression, OLS regression leads to “closed form” expressions for the regression coefficients (e.g., Section <a href="#ols"><strong>??</strong></a>. This means we can write down an explicit algebraic equation for the regression coefficients, e.g.,</p>
+<p>Let’s first contrast ML with OLS. In linear regression, OLS regression leads to “closed form” expressions for the regression coefficients (e.g., Section <a href="2.3-ols-2.html#ols-2">2.3</a>. This means we can write down an explicit algebraic equation for the regression coefficients, e.g.,</p>
 <p><span class="math display">\[ b = \text{cov}(Y, X) / s^2_X \]</span></p>
 <p>As we discussed in the introduction, these estimates usually aren’t very good when the outcome is binary. So, instead we use ML.</p>
 <p>The first thing to know about ML with logistic regression is that it does not lead to closed form expression for the regression coefficients. In other words, using algebra we can never write down the other side of the equation <span class="math inline">\(b = ?\)</span>. Instead, we define the regression parameters <em>algorithmically</em> – whatever value results from maximizing the likelihood is the value we choose for <span class="math inline">\(b\)</span>. We discussed the difference between algebraic and algorithmic definitions when we compared the mean and median last semester. For now, the take home message is</p>
@@ -594,27 +602,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="summary-14" class="section level3 hasAnchor" number="11.4.3">
 <h3><span class="header-section-number">11.4.3</span> Summary<a href="11.4-estimation-11.html#summary-14" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Lets take a look at our summary output for the example data again:</p>
-<div class="sourceCode" id="cb410"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb410-1"><a href="11.4-estimation-11.html#cb410-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod2)</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="11.4-estimation-11.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod2)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = chd ~ age, family = binomial, data = chd.data)
 ## 
 ## Deviance Residuals: 
-##    Min      1Q  Median      3Q     Max  
-## -1.972  -0.846  -0.458   0.825   2.286  
+##        Min          1Q      Median          3Q         Max  
+## -1.9717878  -0.8455743  -0.4576433   0.8252739   2.2858685  
 ## 
 ## Coefficients:
-##             Estimate Std. Error z value Pr(&gt;|z|)    
-## (Intercept)  -5.3095     1.1337   -4.68  2.8e-06 ***
-## age           0.1109     0.0241    4.61  4.0e-06 ***
+##                Estimate  Std. Error  z value   Pr(&gt;|z|)    
+## (Intercept) -5.30945337  1.13365365 -4.68349 2.8203e-06 ***
+## age          0.11092114  0.02405982  4.61022 4.0224e-06 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## (Dispersion parameter for binomial family taken to be 1)
 ## 
-##     Null deviance: 136.66  on 99  degrees of freedom
-## Residual deviance: 107.35  on 98  degrees of freedom
-## AIC: 111.4
+##     Null deviance: 136.66298  on 99  degrees of freedom
+## Residual deviance: 107.35309  on 98  degrees of freedom
+## AIC: 111.35309
 ## 
 ## Number of Fisher Scoring iterations: 4</code></pre>
 <p>This section has addressed the question: how do we get the numbers under the “Estimate” column? The answer is maximum likelihood (ML). In short:</p>

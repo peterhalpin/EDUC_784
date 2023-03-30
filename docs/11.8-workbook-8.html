@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 11 Logistic Regression | EDUC 784: Regression</title>
+  <title>11.8 Workbook | EDUC 784: Regression</title>
   <meta name="description" content="Course notes for EDUC 784" />
   <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 11 Logistic Regression | EDUC 784: Regression" />
+  <meta property="og:title" content="11.8 Workbook | EDUC 784: Regression" />
   <meta property="og:type" content="book" />
   <meta property="og:image" content="/images/image1.png" />
   <meta property="og:description" content="Course notes for EDUC 784" />
   <meta name="github-repo" content="peterhalpin/EDUC_784" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 11 Logistic Regression | EDUC 784: Regression" />
+  <meta name="twitter:title" content="11.8 Workbook | EDUC 784: Regression" />
   
   <meta name="twitter:description" content="Course notes for EDUC 784" />
   <meta name="twitter:image" content="/images/image1.png" />
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="10.5-exercises-5.html"/>
-<link rel="next" href="11.1-chd-example-11.html"/>
+<link rel="prev" href="11.7-assumption-checking-11.html"/>
+<link rel="next" href="11.9-multiple-11.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -516,38 +516,210 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="chapter-11" class="section level1 hasAnchor" number="11">
-<h1><span class="header-section-number">Chapter 11</span> Logistic Regression<a href="11-chapter-11.html#chapter-11" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<!-- baaaaaah! you need to review ALL of the workbook stuff before first lesson so you remember the numerical values for the examples. And you need to review ALL of the exercise stuff for the second lesson, so you can get through the example in order. -->
-<p>The topic we address in this chapter is logistic regression. Like the previous two chapters, logistic regression is an extension of multiple linear regression to situations in which the “standard” model does not directly apply. This time, the extension is to binary <em>outcome</em> variables.</p>
-<p>There are many situations in which the outcome of interest can be thought of as a binary or “yes / no” or “true / false” outcome:</p>
+<div id="workbook-8" class="section level2 hasAnchor" number="11.8">
+<h2><span class="header-section-number">11.8</span> Workbook<a href="11.8-workbook-8.html#workbook-8" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<input onclick="codefolder(&#39;pre.sourceCode&#39;);" type="button" value="Hide Code" id="codefolder-button" style="position: relative; &#10;            top: -25px; &#10;            left: 85%;   &#10;            color: white;&#10;            font-weight: bold;&#10;            background: #4B9CD3;&#10;            border: 1px #3079ED solid;&#10;            box-shadow: inset 0 1px 0 #80B0FB"/>
+<script>
+  function codefolder(query) {
+
+    var x = document.querySelectorAll(query);
+    if (x.length === 0) return;
+
+    function toggle_vis(o) {
+      var d = o.style.display;
+      o.style.display = (d === 'block' || d === '') ? 'none':'block';
+    }
+
+    for (i = 0; i < x.length; i++) {
+      var y = x[i];
+      toggle_vis(y);
+    }
+
+    var elem = document.getElementById("codefolder-button");
+    if (elem.value === "Hide Code") elem.value = "Show Code";
+    else elem.value = "Hide Code";
+  }
+</script>
+<script>
+  window.addEventListener('load', function () {
+    codefolder('pre.sourceCode');
+  });
+</script>
+<p>This section collects the questions asked in this chapter. We will discuss these questions in class. If you haven’t written down / thought about the answers to these questions before class, the lesson will not be very useful for you! So, please engage with each question by writing down one or more answers, asking clarifying questions, posing follow up questions, etc.</p>
+<p><strong>Section <a href="11.1-chd-example-11.html#chd-example-11">11.1</a></strong></p>
 <ul>
-<li>Death (the original logistic outcome; <a href="https://doi.org/10.2307%2F2280041">Berkson, 1944</a>)</li>
-<li>Onset of disease or condition</li>
-<li>Employment status</li>
-<li>College enrollment</li>
-<li>Passing a course or completing a credential</li>
-<li>Provide a correct response to a test question</li>
-<li>…</li>
+<li>Please take a moment to write down you conclusions about whether the assumptions of linear regression are met for these data, and any other details you may notice about the linear probability model.</li>
 </ul>
-<p>Just like with linear regression, we often we want to relate these types of binary variables to predictors, such as medical history, family background, personal characteristics, etc. That is what logistic regression does.</p>
-<p>The main theme of this chapter is also an extension of the previous two chapters. We have seen a general strategy for how to deal with data that do not “fit” the assumptions of linear regression:</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-22"></span>
+<img src="_main_files/figure-html/unnamed-chunk-22-1.png" alt="Linear probability model with CHD example" width="1152" />
+<p class="caption">
+Figure 11.13: Linear probability model with CHD example
+</p>
+</div>
+<pre><code>## 
+## Call:
+## lm(formula = chd ~ age, data = chd.data)
+## 
+## Residuals:
+##         Min          1Q      Median          3Q         Max 
+## -0.85792659 -0.33992167 -0.07274019  0.31655928  0.99269201 
+## 
+## Coefficients:
+##                 Estimate   Std. Error  t value   Pr(&gt;|t|)    
+## (Intercept) -0.537960352  0.168808505 -3.18681  0.0019305 ** 
+## age          0.021810733  0.003678802  5.92876 4.5749e-08 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.4290429 on 98 degrees of freedom
+## Multiple R-squared:  0.2639891,  Adjusted R-squared:  0.2564788 
+## F-statistic:  35.1502 on 1 and 98 DF,  p-value: 4.574871e-08</code></pre>
+<p><strong>Section <a href="11.2-logit-11.html#logit-11">11.2</a></strong></p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="11.8-workbook-8.html#cb36-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">&quot;images/odds.png&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-23"></span>
+<img src="images/odds.png" alt="Proportions and odds" width="858" />
+<p class="caption">
+Figure 11.14: Proportions and odds
+</p>
+</div>
+<ul>
+<li><p>Please write down your answers to the following questions using the above table, and be prepared to share them in class. For each question provide both a verbal interpretation of the numerical answer (e.g, odds of 2 to 1 means that for every two people with a trait, there is one without.) The answers hidden below (use Show Code button), but please try out the questions yourself first!</p>
 <ol style="list-style-type: decimal">
-<li>Transform one or more variables so that the data <em>do</em> fit the assumptions linear regression.</li>
-<li>Run the analysis as usual.</li>
-<li>Then work out the interpretation of results in terms of the original variable(s).</li>
-</ol>
-<p>We will see this basic approach again in this chapter. In fact, its kind of a general-purpose hack for quantitative research – when you are faced with a problem you don’t know how to deal with, turn it into something you do know how to deal with. Certainly this is not the most creative approach, but it has the advantage of letting us “port over” many of the tools we have developed in one context (regression with a continuous outcome) into a new context (regression with a binary outcome).</p>
-<p>In terms of statistical modeling, the move to binary outcome variables is a pretty big deal. Everything we have done up until now has focused on OLS regression, using the same basic principles we discussed in Chapters <a href="2-chapter-2.html#chapter-2">2</a> and <a href="4-chapter-4.html#chapter-4">4</a>. However, logistic regression takes us into the wider framework of <em>generalized linear models</em> (GLMs), which are estimated using maximum likelihood (ML) rather than OLS. Thus we will need to start at the “ground floor” to build up our knowledge of logistic regression, which then provides a stepping stone to GLMs, which can additionally handle other types of outcome variables (e.g., count data, ordered categorical data).</p>
-<p>Since we are starting with a new modeling approach, let’s kick things off with a new example.</p>
+<li>What is the probability of a person in their 40s having CHD?</li>
+<li>What are the odds of a person in their 40s having CHD?</li>
+<li>What is the probability of someone in their 50s <strong>not</strong> having CHD?</li>
+<li>What are the odds of someone in their 50s <strong>not</strong> having CHD?</li>
+<li>What is probability of having CHD in your 40s, compared to your 30s? (e.g., is 3 times higher? 4 times higher?)</li>
+<li>What are the odds of having CHD in your 40s, compared to your 30s?</li>
+</ol></li>
+</ul>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="11.8-workbook-8.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. .39, so about 40% of people</span></span>
+<span id="cb37-2"><a href="11.8-workbook-8.html#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. 11/17, so for 11 people with CHD there are 17 without</span></span>
+<span id="cb37-3"><a href="11.8-workbook-8.html#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. 1 - .72 = .28, so about 28% of people </span></span>
+<span id="cb37-4"><a href="11.8-workbook-8.html#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. (18/7)^-1 = 7/18, so 7 out ever 18 people</span></span>
+<span id="cb37-5"><a href="11.8-workbook-8.html#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. .39 / .19 ~= 2, so the probability of having CHD in your 40s is about 2 times higher than the probability of having CHD in your 30s. This is called a relative risk, or a risk ratio. </span></span>
+<span id="cb37-6"><a href="11.8-workbook-8.html#cb37-6" aria-hidden="true" tabindex="-1"></a><span class="co">#6. (11/17)/(5/22) ~= 2.8, so the odds of having CHD in your 40s is about 2.8 times higher than the ods of having CHD in your 30s. This is called an odds ratio. </span></span></code></pre></div>
+<ul>
+<li><p>I will asks some questions along the following lines in class (use the following table).</p>
+<ul>
+<li>If logit &lt; 0 then probability &lt; ? and odds &lt; ?</li>
+<li>What has a larger logit value: probability of .9 or odds of .9?<br />
+</li>
+<li>Let’s assume that a probability of <span class="math inline">\(p\)</span> corresponds to a <span class="math inline">\(\text{logit}\)</span> of <span class="math inline">\(x\)</span>. What is the logit corresponding to <span class="math inline">\(1-p\)</span>? (Hint, try some numerical examples from the table).</li>
+</ul></li>
+</ul>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-25"></span>
+<img src="images/logit-table.png" alt="Logistic, odds, and logit" width="455" />
+<p class="caption">
+Figure 11.15: Logistic, odds, and logit
+</p>
+</div>
+<p><strong>Section <a href="11.3-simple-11.html#simple-11">11.3</a></strong></p>
+<ul>
+<li>Please practice your interpretation of the OR in simple logistic regression using the following examples. Answers hidden below (use Show Code button), but please try out the questions yourself first!
+<span class="math display">\[ \text{logit}(Y) = a + b X. \]</span>
+<ol style="list-style-type: decimal">
+<li>If <span class="math inline">\(b=0\)</span> what is the OR equal to? What is the percent change in the odds for a one unit increase in <span class="math inline">\(X\)</span>?</li>
+<li>If <span class="math inline">\(b=.25\)</span> what is the OR equal to? What is the percent change in the odds for a one unit increase in <span class="math inline">\(X\)</span>?</li>
+<li>If <span class="math inline">\(b=-.025\)</span> what is the OR equal to? What is the percent change in the odds for a 10 unit increase in <span class="math inline">\(X\)</span>?</li>
+<li>If the odds increase 100% for a one unit increase in <span class="math inline">\(X\)</span>, what <span class="math inline">\(b\)</span> equal to?</li>
+</ol></li>
+</ul>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="11.8-workbook-8.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. OR = exp(0) = 1 and percent change equals (exp(0) - 1) X 100 = 0%. So, &quot;no relationship&quot; means OR = 1. </span></span>
+<span id="cb38-2"><a href="11.8-workbook-8.html#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. OR = exp(.25) = 1.28 and percent change equals (exp(.25) - 1) X 100 = 28% increase</span></span>
+<span id="cb38-3"><a href="11.8-workbook-8.html#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. OR = exp(-.025) = 0.97 and percent change for one unit equals (exp(-.025) - 1) X 100 = -2.47%. For 10 units of change, multiply by 10, which gives 24.69% decrease (negative sign is decrease). </span></span>
+<span id="cb38-4"><a href="11.8-workbook-8.html#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. exp(b) - 1) X 100 = 100 --&gt; exp(b) = 2 --&gt; b = log(2) = .69</span></span></code></pre></div>
+<ul>
+<li>Please write down the numerical values all of the following summaries of the simple logistic regression model, using the CHD example. You can select any values of age to report the predicted probabilities and risk ratios, and you can “eye ball” the probabilities using the figure. Answers hidden below (use Show Code button), but please try out the questions yourself first!
+<span class="math display">\[ \text{logit}(CHD) = -5.03  + .11 (\text{age}). \]</span>
+<ol style="list-style-type: decimal">
+<li>In terms of the logit:
+<ul>
+<li>The intercept (<span class="math inline">\(a\)</span>) is the predicted value of the log-odds of CHD when age = 0.</li>
+<li>The slope (<span class="math inline">\(b\)</span>) is how much the predicted log-odds of CHD changes for one unit (year) of increase in age.</li>
+</ul></li>
+<li>In terms of the odds:
+<ul>
+<li>The exponent of the regression parameter, <span class="math inline">\(\exp(b)\)</span>, is odds ratio for one unit of increase in age.</li>
+<li><span class="math inline">\((\exp(b) - 1) \times 100\)</span> is the percentage change in the odds of CHD for a one unit increase in age.</li>
+</ul></li>
+<li>In terms of predicted probabilities
+<ul>
+<li>Predicted probabilities can be reported for specific values of age (MERVs).</li>
+<li>Risk ratios can be computed comparing the predicted probabilities at different ages.</li>
+<li><span class="math inline">\(–a / b\)</span> corresponds the age at which the probability of having CHD is “50-50”</li>
+<li><span class="math inline">\(b / 4\)</span> is the approximate rate of increase (slope) of the probability of having CHD for people close to the “50-50” point.</li>
+</ul></li>
+</ol></li>
+</ul>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="11.8-workbook-8.html#cb39-1" aria-hidden="true" tabindex="-1"></a>visreg<span class="sc">::</span><span class="fu">visreg</span>(mod2, <span class="at">xvar =</span> <span class="st">&quot;age&quot;</span>, <span class="at">scale =</span> <span class="st">&quot;response&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:unnamed-chunk-27"></span>
+<img src="_main_files/figure-html/unnamed-chunk-27-1.png" alt="Predicted probabilities" width="672" />
+<p class="caption">
+Figure 11.16: Predicted probabilities
+</p>
+</div>
+<p><strong>Section <a href="11.4-estimation-11.html#estimation-11">11.4</a></strong></p>
+<ul>
+<li>In a sentence or two, describe how the model parameters in logistic regression are estimated and how this compares to OLS regression</li>
+</ul>
+<p><strong>Section <a href="11.5-inference-11.html#inference-11">11.5</a></strong></p>
+<ul>
+<li>Please write down your interpretation of the OR and its confidence interval for the example below</li>
+</ul>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="11.8-workbook-8.html#cb40-1" aria-hidden="true" tabindex="-1"></a>ci.b <span class="ot">&lt;-</span> <span class="fu">confint</span>(mod2)</span></code></pre></div>
+<pre><code>## Waiting for profiling to be done...</code></pre>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="11.8-workbook-8.html#cb42-1" aria-hidden="true" tabindex="-1"></a>ci.table <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="at">coefs =</span> <span class="fu">coef</span>(mod2), ci.b)</span>
+<span id="cb42-2"><a href="11.8-workbook-8.html#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(ci.table)</span></code></pre></div>
+<pre><code>##                      coefs           2.5 %        97.5 %
+## (Intercept) 0.004944628842 0.0004412620605 0.03892359506
+## age         1.117306795032 1.0692223156170 1.17586814070</code></pre>
+<ul>
+<li>Please write down your interpretation of the LR test given below</li>
+</ul>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="11.8-workbook-8.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The model with no predictors</span></span>
+<span id="cb44-2"><a href="11.8-workbook-8.html#cb44-2" aria-hidden="true" tabindex="-1"></a>mod0 <span class="ot">&lt;-</span> <span class="fu">glm</span>(chd <span class="sc">~</span> <span class="dv">1</span>, <span class="at">family =</span> <span class="st">&quot;binomial&quot;</span>, <span class="at">data =</span> chd.data)</span>
+<span id="cb44-3"><a href="11.8-workbook-8.html#cb44-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-4"><a href="11.8-workbook-8.html#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="co"># The LR test (enter the smaller model first)</span></span>
+<span id="cb44-5"><a href="11.8-workbook-8.html#cb44-5" aria-hidden="true" tabindex="-1"></a>lmtest<span class="sc">::</span><span class="fu">lrtest</span>(mod0, mod2)</span></code></pre></div>
+<pre><code>## Likelihood ratio test
+## 
+## Model 1: chd ~ 1
+## Model 2: chd ~ age
+##   #Df     LogLik Df    Chisq Pr(&gt;Chisq)    
+## 1   1 -68.331491                           
+## 2   2 -53.676546  1 29.30989  6.168e-08 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p><strong>Section <a href="11.6-r-squared-11.html#r-squared-11">11.6</a></strong></p>
+<ul>
+<li>Please write down an interpretation of McFadden’s R-squared for the example and we will discuss you interpretations in class.</li>
+</ul>
+<p>McFadden’s R-squared:</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="11.8-workbook-8.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Using the deviance of the models</span></span>
+<span id="cb46-2"><a href="11.8-workbook-8.html#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> mod2<span class="sc">$</span>deviance<span class="sc">/</span>mod0<span class="sc">$</span>deviance</span></code></pre></div>
+<pre><code>## [1] 0.2144683911</code></pre>
+<p><strong>Section <a href="11.7-assumption-checking-11.html#assumption-checking-11">11.7</a></strong></p>
+<ul>
+<li>Please write down your interpretation of the HL test and be prepared to share you answer in class</li>
+</ul>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="11.8-workbook-8.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Note: Install package &quot;generalhoslem&quot; if you haven&#39;t do so already</span></span>
+<span id="cb48-2"><a href="11.8-workbook-8.html#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;generalhoslem&quot;)</span></span>
+<span id="cb48-3"><a href="11.8-workbook-8.html#cb48-3" aria-hidden="true" tabindex="-1"></a>HLtest <span class="ot">&lt;-</span> generalhoslem<span class="sc">::</span><span class="fu">logitgof</span>(<span class="at">obs =</span> chd, <span class="at">exp =</span> <span class="fu">fitted</span>(mod2), <span class="at">g =</span> <span class="dv">5</span>)</span>
+<span id="cb48-4"><a href="11.8-workbook-8.html#cb48-4" aria-hidden="true" tabindex="-1"></a>HLtest</span></code></pre></div>
+<pre><code>## 
+##  Hosmer and Lemeshow test (binary model)
+## 
+## data:  chd, fitted(mod2)
+## X-squared = 0.046892748, df = 3, p-value = 0.997337</code></pre>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="10.5-exercises-5.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="11.1-chd-example-11.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="11.7-assumption-checking-11.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="11.9-multiple-11.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
