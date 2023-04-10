@@ -306,7 +306,7 @@ The moral of this section is that, if you are considering log-transforming an ou
 
 2. The log-transformation has other important implications for you model ... 
 
-## Relationship with $X$ {#relationship-9}
+s## Relationship with $X$ {#relationship-9}
 
 ```{r, echo=FALSE, results='asis'}
 codefolder::bookdown(init = "hide", style = button)
