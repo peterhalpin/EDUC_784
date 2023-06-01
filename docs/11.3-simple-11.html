@@ -6,10 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>11.3 Simple logistic regression | EDUC 784: Regression</title>
   <meta name="description" content="Course notes for EDUC 784" />
-  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="11.3 Simple logistic regression | EDUC 784: Regression" />
   <meta property="og:type" content="book" />
+  
   <meta property="og:image" content="/images/image1.png" />
   <meta property="og:description" content="Course notes for EDUC 784" />
   <meta name="github-repo" content="peterhalpin/EDUC_784" />
@@ -23,16 +24,17 @@
 <meta name="author" content="Peter Halpin" />
 
 
-<meta name="date" content="2023-03-29" />
+<meta name="date" content="2023-04-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
-  
+  <link rel="shortcut icon" href="null" type="image/x-icon" />
 <link rel="prev" href="11.2-logit-11.html"/>
 <link rel="next" href="11.4-estimation-11.html"/>
-<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.5.1/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -49,9 +51,8 @@
 
 
 
-<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
-<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -92,7 +93,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
+code span.bu { } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -105,7 +106,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.im { } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -516,8 +517,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="simple-11" class="section level2 hasAnchor" number="11.3">
-<h2><span class="header-section-number">11.3</span> Simple logistic regression<a href="11.3-simple-11.html#simple-11" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="simple-11" class="section level2" number="11.3">
+<h2><span class="header-section-number">11.3</span> Simple logistic regression</h2>
 <input onclick="codefolder(&#39;pre.sourceCode&#39;);" type="button" value="Hide Code" id="codefolder-button" style="position: relative; &#10;            top: -25px; &#10;            left: 85%;   &#10;            color: white;&#10;            font-weight: bold;&#10;            background: #4B9CD3;&#10;            border: 1px #3079ED solid;&#10;            box-shadow: inset 0 1px 0 #80B0FB"/>
 <script>
   function codefolder(query) {
@@ -556,44 +557,42 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## glm(formula = chd ~ age, family = binomial, data = chd.data)
 ## 
 ## Deviance Residuals: 
-##        Min          1Q      Median          3Q         Max  
-## -1.9717878  -0.8455743  -0.4576433   0.8252739   2.2858685  
+##     Min       1Q   Median       3Q      Max  
+## -1.9718  -0.8456  -0.4576   0.8253   2.2859  
 ## 
 ## Coefficients:
-##                Estimate  Std. Error  z value   Pr(&gt;|z|)    
-## (Intercept) -5.30945337  1.13365365 -4.68349 2.8203e-06 ***
-## age          0.11092114  0.02405982  4.61022 4.0224e-06 ***
+##             Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept) -5.30945    1.13365  -4.683 2.82e-06 ***
+## age          0.11092    0.02406   4.610 4.02e-06 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## (Dispersion parameter for binomial family taken to be 1)
 ## 
-##     Null deviance: 136.66298  on 99  degrees of freedom
-## Residual deviance: 107.35309  on 98  degrees of freedom
-## AIC: 111.35309
+##     Null deviance: 136.66  on 99  degrees of freedom
+## Residual deviance: 107.35  on 98  degrees of freedom
+## AIC: 111.35
 ## 
 ## Number of Fisher Scoring iterations: 4</code></pre>
 <p>Plugging the estimates into our logit model, we have the following equation</p>
-<p><span class="math display">\[ \text{logit}(CHD) = -5.03  + .11 (\text{age}). \]</span></p>
+<p><span class="math display">\[ \text{logit}(CHD) = -5.31  + .11 (\text{age}). \]</span></p>
 <p>The “literal” interpretation of this equation is:</p>
 <ul>
-<li>When <span class="math inline">\(\text{age} = 0\)</span>, <span class="math inline">\(\text{logit}(CHD) = -5.03\)</span>.</li>
-<li>Each unit of increase in age (i.e., each additional year), is associated with a .11 unit increase in <span class="math inline">\(\text{logit}(CHD)\)</span>.</li>
+<li>When <span class="math inline">\(\text{age} = 0\)</span>, <span class="math inline">\(\text{logit}(CHD) = -5.31\)</span>.</li>
+<li>Each unit of increase in age (i.e., each additional year) is associated with a .11 unit increase in <span class="math inline">\(\text{logit}(CHD)\)</span>.</li>
 </ul>
 <p>While this interpretation is perfectly correct, most applied audiences are not going to know how to interpret <span class="math inline">\(\text{logit}(CHD)\)</span>. So, instead, we often work with the odds. In particular, the logistic regression model implies</p>
 <p><span class="math display" id="eq:OR">\[ \frac{\text{odds} (X+1)}{\text{odds}(X)} = \exp(b)
 \tag{11.7}
 \]</span></p>
 <p>where <span class="math inline">\(\text{odds}(X)\)</span> are the odds of the outcome associated with a given value of the predictor <span class="math inline">\(X\)</span>. Equation <a href="11.3-simple-11.html#eq:OR">(11.7)</a> is called the <em>odds ratio</em> (abbreviated OR) associated with a one-unit increase in <span class="math inline">\(X\)</span>. If you refer back to section <a href="9.5-interpretation-9.html#derivation-9">9.5.5</a>, you can see we are using the exact same approach from log-linear regression, but in Equation <a href="11.3-simple-11.html#eq:OR">(11.7)</a> we interpret the regression coefficient in term of the odds rather than the <span class="math inline">\(Y\)</span> variable itself. Specifically, we interpret the exponentiated regression coefficient as the predicted odds ratio corresponding to a one unit change in <span class="math inline">\(X\)</span>.</p>
-<p>For the CHD example, the OR is</p>
-<p><span class="math display">\[ \exp(b) = \exp(.11) = 1.116278 \]</span></p>
+<p>For the CHD example, the OR is:</p>
+<p><span class="math display">\[ \exp(b) = \exp(.11) = 1.1163 \]</span></p>
 <p>This means that each additional year a person ages is associated with an OR of 1.11.</p>
 <p>Just like the log-linear model, we can also report the results of our analysis in terms of proportional (or percentage) change in the odds of CHD associated with each additional year of age:</p>
-<ul>
-<li><span class="math inline">\((\exp(.11) - 1) \times 100 = 11.67\%\)</span></li>
-</ul>
-<p>This means that the predicted odds of CHD increase 11.67% for each additional year of age.</p>
-<p>Whether you use relative size (i.e.,odds ratio) or relative change (percent change) to report the results of logistic regression is up to you. In many fields, it is conventional to reports the odds ratios in tables, but to use percent change when writing about results in a sentence.</p>
+<p><span class="math display">\[(\exp(.11) - 1) \times 100 = 11.63\% \]</span></p>
+<p>This means that the predicted odds of CHD increase 11.63% for each additional year of age.</p>
+<p>Whether you use relative size (i.e., odds ratio) or relative change (i.e., percent change) to report the results of logistic regression is up to you. In many fields, it is conventional to reports the odds ratios in tables, but to use percent change when writing about results in a sentence.</p>
 <p>Before moving, <strong>please practice your interpretation of the OR in simple logistic regression using the following examples</strong></p>
 <ul>
 <li>If <span class="math inline">\(b=0\)</span> what is the OR equal to? What is the percent change in the odds for a one unit increase in <span class="math inline">\(X\)</span>?</li>
@@ -603,11 +602,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>Answers hidden below (use Show Code button), but please try out the questions yourself first!</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="11.3-simple-11.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. OR = exp(0) = 1 and percent change equals (exp(0) - 1) X 100 = 0%. So, &quot;no relationship&quot; means OR = 1. </span></span>
-<span id="cb12-2"><a href="11.3-simple-11.html#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. OR = exp(.25) = 1.28 and percent change equals (exp(.25) - 1) X 100 = 28% increase</span></span>
-<span id="cb12-3"><a href="11.3-simple-11.html#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. OR = exp(-.025) = 0.97 and percent change for one unit equals (exp(-.025) - 1) X 100 = -2.47%. For 10 units of change, multiply by 10, which gives 24.69% decrease (negative sign is decrease). </span></span>
-<span id="cb12-4"><a href="11.3-simple-11.html#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. exp(b) - 1) X 100 = 100 --&gt; exp(b) = 2 --&gt; b = log(2) = .69</span></span></code></pre></div>
-<div id="other-interpretations-predicted-probabilities" class="section level3 hasAnchor" number="11.3.1">
-<h3><span class="header-section-number">11.3.1</span> Other interpretations: Predicted probabilities<a href="11.3-simple-11.html#other-interpretations-predicted-probabilities" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<span id="cb12-2"><a href="11.3-simple-11.html#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. OR = exp(.25) = 1.2840 and percent change equals (exp(.25) - 1) X 100 = 28.40% increase</span></span>
+<span id="cb12-3"><a href="11.3-simple-11.html#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. OR = exp(-.025) = 0.9753 and percent change for one unit equals (exp(-.025) - 1) X 100 = (-.02469 X 100 -2.469%. For 10 units of change, multiply by 10, which gives 24.69% decrease (negative sign is decrease). </span></span>
+<span id="cb12-4"><a href="11.3-simple-11.html#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. (exp(b) - 1) X 100 = 100 --&gt; exp(b) = 2 --&gt; b = log(2) = .6931</span></span></code></pre></div>
+<div id="other-interpretations-predicted-probabilities" class="section level3" number="11.3.1">
+<h3><span class="header-section-number">11.3.1</span> Other interpretations: Predicted probabilities</h3>
 <p>Another way to interpret the logistic model is in terms of the predicted probabilities, which are plotted below for the example data.</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="11.3-simple-11.html#cb13-1" aria-hidden="true" tabindex="-1"></a>visreg<span class="sc">::</span><span class="fu">visreg</span>(mod2, <span class="at">xvar =</span> <span class="st">&quot;age&quot;</span>, <span class="at">scale =</span> <span class="st">&quot;response&quot;</span>)</span></code></pre></div>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:pred-prob"></span>
@@ -627,8 +626,8 @@ Figure 11.9: Predicted probabilities
 ## Intervals are back-transformed from the logit scale</code></pre>
 <p>The ratio of two probabilities is often called the <em>risk ratio</em> or the <em>relative risk</em>. So, we could also say that the risk ratio of CHD for someone who in their 40s as compared to someone who is 20 is .2947 / .0435 = 6.77. Otherwise stated, the risk of having CHD in you are 40s is almost 7 times higher than in your 20s (for this sample)</p>
 </div>
-<div id="other-interpretations-equal-odds" class="section level3 hasAnchor" number="11.3.2">
-<h3><span class="header-section-number">11.3.2</span> Other interpretations: Equal odds<a href="11.3-simple-11.html#other-interpretations-equal-odds" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="other-interpretations-equal-odds" class="section level3" number="11.3.2">
+<h3><span class="header-section-number">11.3.2</span> Other interpretations: Equal odds</h3>
 <p>Another interpretation of logistic regression is to report the value of <span class="math inline">\(X\)</span> at which the <span class="math inline">\(\text{odds}\)</span> of the outcome are equal to 1 (equivalently, the probability of the outcome is equal to .5). This idea is illustrated in Figure <a href="11.3-simple-11.html#fig:equal-odds">11.10</a>.</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="11.3-simple-11.html#cb16-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">age =</span> <span class="dv">20</span><span class="sc">:</span><span class="dv">70</span>)</span>
 <span id="cb16-2"><a href="11.3-simple-11.html#cb16-2" aria-hidden="true" tabindex="-1"></a>prob <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod2, <span class="at">newdata =</span> x, <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)</span>
@@ -641,7 +640,7 @@ Figure 11.9: Predicted probabilities
 Figure 11.10: The Equal Odds Interpretation
 </p>
 </div>
-<p>First we find the probability of .5 on the <span class="math inline">\(Y\)</span> axis and then follow the horizontal dashed line to the logistic curve. Then we follow the vertical dashed line down to the value of <span class="math inline">\(X\)</span>. This gives use the age at which the probability of CHD is “50-50”. Based on the plot we can say that, after your 48th birthday, your chances of having CHD are above 50%.</p>
+<p>First we find the probability of .5 on the <span class="math inline">\(Y\)</span> axis and then follow the horizontal dashed line to the logistic curve. Then we follow the vertical dashed line down to the value of <span class="math inline">\(X\)</span>. This gives use the age at which the probability of CHD is “50-50.” Based on the plot we can say that, after your 48th birthday, your chances of having CHD are above 50%.</p>
 <p>The math behind this interpretation is below. Since</p>
 <p><span class="math display">\[ \log(.5/.5) = \log(1) = 0 \]</span></p>
 <p>we can solve</p>
@@ -649,13 +648,13 @@ Figure 11.10: The Equal Odds Interpretation
 <p>to find the age at which someone has equal odds of CHD, leading to</p>
 <p><span class="math display">\[ \text{age} = - a/b. \]</span></p>
 <p>For the example data</p>
-<p><span class="math display">\[ \text{age} = - a/b = - (-5.30) / .11 = 48.18, \]</span></p>
+<p><span class="math display">\[ \text{age} = - a/b = - (-5.31) / .11 = 48.27, \]</span></p>
 <p>which confirms the conclusion we made looking at the plot.</p>
 <p>In summary, another way of interpreting regression coefficients in simple logistic regression is to compute <span class="math inline">\(-a / b\)</span>, which gives the value of <span class="math inline">\(X\)</span> at which <span class="math inline">\(p(Y = 1) = .5\)</span>.</p>
 </div>
-<div id="other-interpretations-rate-of-change" class="section level3 hasAnchor" number="11.3.3">
-<h3><span class="header-section-number">11.3.3</span> Other interpretations: Rate of change<a href="11.3-simple-11.html#other-interpretations-rate-of-change" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Yet another interpretation is in terms of the slope of the straight line (tangent) through the point <span class="math inline">\(p(CHD) = .5\)</span>. The slope of this line describes the approximate rate of change in the probability of CHD for people who are “close to” the age of equal odds.</p>
+<div id="other-interpretations-rate-of-change" class="section level3" number="11.3.3">
+<h3><span class="header-section-number">11.3.3</span> Other interpretations: Rate of change</h3>
+<p>Yet another interpretation is in terms of the slope of the straight line (tangent) through the point <span class="math inline">\(p(CHD) = .5\)</span>. The slope of this line describes the rate of change in the probability of CHD for people who are “close to” the age of equal odds.</p>
 <p>It turns out that the slope of the tangent line is equal to <span class="math inline">\(b/4\)</span>. The derivation requires calculus and is omitted, but the line for our example is shown in Figure <a href="11.3-simple-11.html#fig:tangent">11.11</a>.</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="11.3-simple-11.html#cb17-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">age =</span> <span class="dv">20</span><span class="sc">:</span><span class="dv">70</span>)</span>
 <span id="cb17-2"><a href="11.3-simple-11.html#cb17-2" aria-hidden="true" tabindex="-1"></a>prob <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod2, <span class="at">newdata =</span> x, <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)</span>
@@ -667,11 +666,12 @@ Figure 11.10: The Equal Odds Interpretation
 Figure 11.11: The Rate of Change Interpretation
 </p>
 </div>
-<p>For the example data <span class="math inline">\(b / 4 = .11 / 4 = .0275\)</span>. So, for every additional year, the predicted probability of CHD increases by .0275. However, this interpretation only applies to people who “around” the age of equal odds (48 years old in this example). Looking at the plot, we can see that the approximation is pretty good for people between the ages of 40 and 60.</p>
-<p>Before moving on, notice that the logistic function is roughly linear for probabilities in the range <span class="math inline">\([.2, .8]\)</span>. As mentioned in the introduction of this chapter, this is the situation in which using linear regression with a binary outcome works “well enough”. So, if you run a linear regression on your binary outcome, and none of the fitted / predicted values are outside the range <span class="math inline">\([.2, .8]\)</span>, you are in a situation where you might prefer to use linear regression (despite it being technically wrong).</p>
+<p>For the example data <span class="math inline">\(b / 4 = .11 / 4 = .0275\)</span>. So, for every additional year, the predicted probability of CHD increases by .0275. However, this interpretation only applies to people who “around” the age of equal odds (48 years old in this example). Looking at the plot, we can see that this approximation is pretty good for people between the ages of 40 and 60.</p>
+<p>Before moving on, notice that in this example the logistic function is roughly linear for probabilities in the range <span class="math inline">\([.2, .8]\)</span>. As mentioned in the introduction of this chapter, this is the situation in which using linear regression with a binary outcome (i.e., the linear probability model) works “well enough.” Also note that the regression coefficient from the linear probability model in Section <a href="11.1-chd-example-11.html#chd-example-11">11.1</a> (<span class="math inline">\(b_{OLS} = .0218\)</span>) is in the ballpark of the coefficient computed above (<span class="math inline">\(b_{logistic} / 4 = .0275\)</span>). These numbers are both describing how the probability of CHD is related to a person’s age.</p>
+<p>The logistic model also provides us with a way “diagnosing” whether the linear probability model is a good approximation. As noted, the logistic function is roughly linear for probabilities in the range <span class="math inline">\([.2, .8]\)</span>. If we ran a linear regression on CHD and none of the fitted / predicted values are outside the range <span class="math inline">\([.2, .8]\)</span>, we would be in the situation where we might prefer to use linear regression (despite it being technically wrong). Referring back to residual vs. plotted in Section <a href="11.1-chd-example-11.html#chd-example-11">11.1</a>, we can see that the predicted values were outside of this range, so the logistic model is the better way to approach these data.</p>
 </div>
-<div id="summary-13" class="section level3 hasAnchor" number="11.3.4">
-<h3><span class="header-section-number">11.3.4</span> Summary<a href="11.3-simple-11.html#summary-13" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="summary-13" class="section level3" number="11.3.4">
+<h3><span class="header-section-number">11.3.4</span> Summary</h3>
 <p>The simple logistic regression model</p>
 <p><span class="math display">\[ \text{logit}(CHD) = a + b (\text{age}) \]</span></p>
 <p>has the following interpretations.</p>
@@ -685,7 +685,7 @@ Figure 11.11: The Rate of Change Interpretation
 <ul>
 <li>The exponent of the regression parameter, <span class="math inline">\(\exp(b)\)</span>, is odds ratio associated with a one unit of increase in age.</li>
 <li><span class="math inline">\((\exp(b) - 1) \times 100\)</span> is the percentage change in the odds of CHD for a one unit increase in age.</li>
-<li>Also note that <span class="math inline">\(exp(a)\)</span> is the predicted odds of having CHD when <span class="math inline">\(age = 0\)</span>. This isn’t very useful number in our example, but it can be useful when the predictor(s) are centered.</li>
+<li>Also note that <span class="math inline">\(\exp(a)\)</span> is the predicted odds of having CHD when <span class="math inline">\(age = 0\)</span>. This isn’t a very useful number in our example, but it can be useful when the predictor(s) are centered.</li>
 </ul></li>
 <li>In terms of predicted probabilities
 <ul>
@@ -695,7 +695,19 @@ Figure 11.11: The Rate of Change Interpretation
 <li><span class="math inline">\(b / 4\)</span> is the approximate rate of increase (slope) of the probability of having CHD for people close to the “50-50” point.</li>
 </ul></li>
 </ul>
-<p><strong>Please write down the numerical values of each of the above summaries for the CHD example (except the predicted probability plot). You can select any values of age to report the predicted probabilities and risk ratios, and you can “eye ball” the probabilities using Figure <a href="11.3-simple-11.html#fig:pred-prob">11.9</a>.</strong></p>
+<p><strong>Please write down the numerical values of each of the above summaries for the CHD example (except the predicted probability plot). You can select any values of age to report the predicted probabilities and risk ratios, and you can “eye ball” the probabilities using Figure <a href="11.3-simple-11.html#fig:pred-prob">11.9</a>.</strong> Answers are hidden below (use the Show Code button), but please try them yourself first.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="11.3-simple-11.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Logit: </span></span>
+<span id="cb18-2"><a href="11.3-simple-11.html#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co"># predicted logit when age = 0: a = -5.31;</span></span>
+<span id="cb18-3"><a href="11.3-simple-11.html#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># expected increase in logit when age increases by one year: b = .11</span></span>
+<span id="cb18-4"><a href="11.3-simple-11.html#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="11.3-simple-11.html#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Odds:</span></span>
+<span id="cb18-6"><a href="11.3-simple-11.html#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co"># OR = exp(b) = exp(.11) = 1.1163</span></span>
+<span id="cb18-7"><a href="11.3-simple-11.html#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co"># % change in Odds = (exp(b) - 1) X 100 = 11.63%</span></span>
+<span id="cb18-8"><a href="11.3-simple-11.html#cb18-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-9"><a href="11.3-simple-11.html#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Probability</span></span>
+<span id="cb18-10"><a href="11.3-simple-11.html#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="co"># In the example, used risk for Age = 40 relative to Age = 20: .2947/.0435 = 6.77</span></span>
+<span id="cb18-11"><a href="11.3-simple-11.html#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="co"># &quot;50-50&quot; age: -a/b = 5.31 / .11 = 48.27 </span></span>
+<span id="cb18-12"><a href="11.3-simple-11.html#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Rate of change at &quot;50-50&quot; age: b/4 = .11/4 = .0275</span></span></code></pre></div>
 </div>
 </div>
             </section>
@@ -755,7 +767,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

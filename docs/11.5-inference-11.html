@@ -6,10 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>11.5 Inference | EDUC 784: Regression</title>
   <meta name="description" content="Course notes for EDUC 784" />
-  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="11.5 Inference | EDUC 784: Regression" />
   <meta property="og:type" content="book" />
+  
   <meta property="og:image" content="/images/image1.png" />
   <meta property="og:description" content="Course notes for EDUC 784" />
   <meta name="github-repo" content="peterhalpin/EDUC_784" />
@@ -23,16 +24,17 @@
 <meta name="author" content="Peter Halpin" />
 
 
-<meta name="date" content="2023-03-29" />
+<meta name="date" content="2023-04-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
-  
+  <link rel="shortcut icon" href="null" type="image/x-icon" />
 <link rel="prev" href="11.4-estimation-11.html"/>
 <link rel="next" href="11.6-r-squared-11.html"/>
-<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.5.1/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -49,9 +51,8 @@
 
 
 
-<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
-<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -92,7 +93,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
+code span.bu { } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -105,7 +106,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.im { } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -516,8 +517,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="inference-11" class="section level2 hasAnchor" number="11.5">
-<h2><span class="header-section-number">11.5</span> Inference<a href="11.5-inference-11.html#inference-11" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="inference-11" class="section level2" number="11.5">
+<h2><span class="header-section-number">11.5</span> Inference</h2>
 <input onclick="codefolder(&#39;pre.sourceCode&#39;);" type="button" value="Hide Code" id="codefolder-button" style="position: relative; &#10;            top: -25px; &#10;            left: 85%;   &#10;            color: white;&#10;            font-weight: bold;&#10;            background: #4B9CD3;&#10;            border: 1px #3079ED solid;&#10;            box-shadow: inset 0 1px 0 #80B0FB"/>
 <script>
   function codefolder(query) {
@@ -553,31 +554,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>In general, the Wald test should only be used when you have a large sample size. The Wald test is just like a z-test, and so it requires an estimate of the standard error of the coefficient being tests. In logistic regression, the standard errors can be too large in small samples, especially if the coefficient is large in value. So, when you have fewer than 100 cases, it is good practice to use (likelihood-based) confidence intervals on the odds ratio, or the likelihood-ratio test for nested models.</p>
 <p>The rest this section briefly illustrates each of these three methods with our example data.</p>
-<div id="wald-test" class="section level3 hasAnchor" number="11.5.1">
-<h3><span class="header-section-number">11.5.1</span> Wald test<a href="11.5-inference-11.html#wald-test" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="wald-test" class="section level3" number="11.5.1">
+<h3><span class="header-section-number">11.5.1</span> Wald test</h3>
 <p>MLEs have the property that they obey the central limit theorem. This means that the sampling distribution of an MLE becomes more and more like a normal distribution as the sample size gets large. We say that the MLEs are “approximately” or “asymptotically” normal.</p>
 <p>So, if we divide the MLE by its standard error, we get an approximate z-test of statistical significance. This test is called a Wald test, and it is what R reports in the summary table below. You should have no problem interpreting these tests at this point in the course.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="11.5-inference-11.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod2)</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="11.5-inference-11.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod2)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = chd ~ age, family = binomial, data = chd.data)
 ## 
 ## Deviance Residuals: 
-##        Min          1Q      Median          3Q         Max  
-## -1.9717878  -0.8455743  -0.4576433   0.8252739   2.2858685  
+##     Min       1Q   Median       3Q      Max  
+## -1.9718  -0.8456  -0.4576   0.8253   2.2859  
 ## 
 ## Coefficients:
-##                Estimate  Std. Error  z value   Pr(&gt;|z|)    
-## (Intercept) -5.30945337  1.13365365 -4.68349 2.8203e-06 ***
-## age          0.11092114  0.02405982  4.61022 4.0224e-06 ***
+##             Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept) -5.30945    1.13365  -4.683 2.82e-06 ***
+## age          0.11092    0.02406   4.610 4.02e-06 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## (Dispersion parameter for binomial family taken to be 1)
 ## 
-##     Null deviance: 136.66298  on 99  degrees of freedom
-## Residual deviance: 107.35309  on 98  degrees of freedom
-## AIC: 111.35309
+##     Null deviance: 136.66  on 99  degrees of freedom
+## Residual deviance: 107.35  on 98  degrees of freedom
+## AIC: 111.35
 ## 
 ## Number of Fisher Scoring iterations: 4</code></pre>
 <p>In summary: The hypotheses pair <span class="math inline">\(H_0: b = b_0\)</span> versus <span class="math inline">\(H_A: b \neq b_0\)</span> can be tested using the statistic</p>
@@ -589,8 +590,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>The same test applies to the intercept, or any other MLE.</p>
 </div>
-<div id="odds-ratio-or" class="section level3 hasAnchor" number="11.5.2">
-<h3><span class="header-section-number">11.5.2</span> Odds ratio (OR)<a href="11.5-inference-11.html#odds-ratio-or" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="odds-ratio-or" class="section level3" number="11.5.2">
+<h3><span class="header-section-number">11.5.2</span> Odds ratio (OR)</h3>
 <p>Recall that the OR was introduced as a more intuitive way of interpreting logistic regression. But how do we make inferences about this more interpretable quantity? The answer is to use confidence intervals. The reason we use confidence intervals instead of tests of significance is because the <span class="math inline">\(b = 0\)</span> corresponds to</p>
 <p><span class="math display">\[ OR = \exp(b) = \exp(0) = 1. \]</span></p>
 <p>So, if the regression coefficient is zero (i.e., no relationship), this means the OR is one. In terms of percent change, <span class="math inline">\(OR = 1\)</span> means 0% percent change:</p>
@@ -605,18 +606,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p><span class="math display">\[ [\exp(b_{\text{lower}}) ,\exp(b_{\text{upper}})]. \]</span></p>
 <p>Below is the result of this procedure for our example.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="11.5-inference-11.html#cb22-1" aria-hidden="true" tabindex="-1"></a>ci.b <span class="ot">&lt;-</span> <span class="fu">confint</span>(mod2)</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="11.5-inference-11.html#cb23-1" aria-hidden="true" tabindex="-1"></a>ci.b <span class="ot">&lt;-</span> <span class="fu">confint</span>(mod2)</span></code></pre></div>
 <pre><code>## Waiting for profiling to be done...</code></pre>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="11.5-inference-11.html#cb24-1" aria-hidden="true" tabindex="-1"></a>ci.table <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="at">coefs =</span> <span class="fu">coef</span>(mod2), ci.b)</span>
-<span id="cb24-2"><a href="11.5-inference-11.html#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(ci.table)</span></code></pre></div>
-<pre><code>##                      coefs           2.5 %        97.5 %
-## (Intercept) 0.004944628842 0.0004412620605 0.03892359506
-## age         1.117306795032 1.0692223156170 1.17586814070</code></pre>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="11.5-inference-11.html#cb25-1" aria-hidden="true" tabindex="-1"></a>ci.table <span class="ot">&lt;-</span> <span class="fu">cbind</span>(<span class="at">coefs =</span> <span class="fu">coef</span>(mod2), ci.b)</span>
+<span id="cb25-2"><a href="11.5-inference-11.html#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(ci.table)</span></code></pre></div>
+<pre><code>##                   coefs        2.5 %    97.5 %
+## (Intercept) 0.004944629 0.0004412621 0.0389236
+## age         1.117306795 1.0692223156 1.1758681</code></pre>
 <p><strong>Please write down your interpretation of the OR and its confidence interval for the example</strong></p>
 <p>Note that the confidence intervals produced by <span class="math inline">\(R\)</span> use the (profile) likelihood rather than the Wald test. So, the problems we discussed with the Wald test don’t apply to these confidence intervals. (You can get Waldian confidence intervals form the <code>confint</code> function, but this is not the default.)</p>
 </div>
-<div id="likelihood-ratio-test" class="section level3 hasAnchor" number="11.5.3">
-<h3><span class="header-section-number">11.5.3</span> Likelihood ratio test<a href="11.5-inference-11.html#likelihood-ratio-test" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="likelihood-ratio-test" class="section level3" number="11.5.3">
+<h3><span class="header-section-number">11.5.3</span> Likelihood ratio test</h3>
 <p>The likelihood ratio tests is analogous to the F-test of R-squared change in OLS regression. If you test a model without any predictors versus a model with one predictor, it can be used to replace the Wald test in simple logistic regression. The LR test is also asymptotic, but it does not require estimating the problematic quantity of the Wald test – i.e., the standard error – so it is often preferred when the sample size is smaller (&lt; 100).</p>
 <p>Like the F-test of R-squared change, the likelihood ratio tests can also be used to compare any two nested models. So, it used quite a lot, not just to replace the Wald test in simple logistic regression.</p>
 <p>The tests works as follows:</p>
@@ -636,18 +637,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p class="caption">Chi-square distributions (Source: <a href="https://en.wikipedia.org/wiki/Chi-squared_distribution" class="uri">https://en.wikipedia.org/wiki/Chi-squared_distribution</a>)</p>
 </div>
 <p>To conduct an LR test of the model with age as a predictor against a model without this predictor (i.e., the model with only the intercept), we can use the <code>lrtest</code> function of the <code>lmtest</code> package:</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="11.5-inference-11.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The model with no predictors</span></span>
-<span id="cb26-2"><a href="11.5-inference-11.html#cb26-2" aria-hidden="true" tabindex="-1"></a>mod0 <span class="ot">&lt;-</span> <span class="fu">glm</span>(chd <span class="sc">~</span> <span class="dv">1</span>, <span class="at">family =</span> <span class="st">&quot;binomial&quot;</span>, <span class="at">data =</span> chd.data)</span>
-<span id="cb26-3"><a href="11.5-inference-11.html#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-4"><a href="11.5-inference-11.html#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co"># The LR test (enter the smaller model first)</span></span>
-<span id="cb26-5"><a href="11.5-inference-11.html#cb26-5" aria-hidden="true" tabindex="-1"></a>lmtest<span class="sc">::</span><span class="fu">lrtest</span>(mod0, mod2)</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="11.5-inference-11.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The model with no predictors</span></span>
+<span id="cb27-2"><a href="11.5-inference-11.html#cb27-2" aria-hidden="true" tabindex="-1"></a>mod0 <span class="ot">&lt;-</span> <span class="fu">glm</span>(chd <span class="sc">~</span> <span class="dv">1</span>, <span class="at">family =</span> <span class="st">&quot;binomial&quot;</span>, <span class="at">data =</span> chd.data)</span>
+<span id="cb27-3"><a href="11.5-inference-11.html#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="11.5-inference-11.html#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co"># The LR test (enter the smaller model first)</span></span>
+<span id="cb27-5"><a href="11.5-inference-11.html#cb27-5" aria-hidden="true" tabindex="-1"></a>lmtest<span class="sc">::</span><span class="fu">lrtest</span>(mod0, mod2)</span></code></pre></div>
 <pre><code>## Likelihood ratio test
 ## 
 ## Model 1: chd ~ 1
 ## Model 2: chd ~ age
-##   #Df     LogLik Df    Chisq Pr(&gt;Chisq)    
-## 1   1 -68.331491                           
-## 2   2 -53.676546  1 29.30989  6.168e-08 ***
+##   #Df  LogLik Df Chisq Pr(&gt;Chisq)    
+## 1   1 -68.331                        
+## 2   2 -53.677  1 29.31  6.168e-08 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p><strong>Please write down your interpretation of the LR test for the example give above.</strong></p>
@@ -710,7 +711,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

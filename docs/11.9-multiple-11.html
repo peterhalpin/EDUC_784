@@ -6,10 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>11.9 Exercise: Multiple logistic regression | EDUC 784: Regression</title>
   <meta name="description" content="Course notes for EDUC 784" />
-  <meta name="generator" content="bookdown 0.31 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="11.9 Exercise: Multiple logistic regression | EDUC 784: Regression" />
   <meta property="og:type" content="book" />
+  
   <meta property="og:image" content="/images/image1.png" />
   <meta property="og:description" content="Course notes for EDUC 784" />
   <meta name="github-repo" content="peterhalpin/EDUC_784" />
@@ -23,16 +24,17 @@
 <meta name="author" content="Peter Halpin" />
 
 
-<meta name="date" content="2023-03-29" />
+<meta name="date" content="2023-04-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
-  
+  <link rel="shortcut icon" href="null" type="image/x-icon" />
 <link rel="prev" href="11.8-workbook-8.html"/>
 <link rel="next" href="references.html"/>
-<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.5.1/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -49,9 +51,8 @@
 
 
 
-<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
-<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
@@ -92,7 +93,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
+code span.bu { } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -105,7 +106,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.im { } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -516,8 +517,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="multiple-11" class="section level2 hasAnchor" number="11.9">
-<h2><span class="header-section-number">11.9</span> Exercise: Multiple logistic regression<a href="11.9-multiple-11.html#multiple-11" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="multiple-11" class="section level2" number="11.9">
+<h2><span class="header-section-number">11.9</span> Exercise: Multiple logistic regression</h2>
 <input onclick="codefolder(&#39;pre.sourceCode&#39;);" type="button" value="Hide Code" id="codefolder-button" style="position: relative; &#10;            top: -25px; &#10;            left: 85%;   &#10;            color: white;&#10;            font-weight: bold;&#10;            background: #4B9CD3;&#10;            border: 1px #3079ED solid;&#10;            box-shadow: inset 0 1px 0 #80B0FB"/>
 <script>
   function codefolder(query) {
@@ -541,10 +542,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   }
 </script>
 <p>This section works through multiple logistic regression with interactions using the Coronary Heart Disease (<code>chd</code>; 1 = yes, 0 = no), and indicator for whether a person has ever (or currently) smokes (<code>smokes</code>: 1 = yes, 0 = no) and age in years (<code>age</code>). The R code is shown by default for these exercises.</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="11.9-multiple-11.html#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the data, take a look</span></span>
-<span id="cb50-2"><a href="11.9-multiple-11.html#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="co">#load(&quot;CHD.RData&quot;)</span></span>
-<span id="cb50-3"><a href="11.9-multiple-11.html#cb50-3" aria-hidden="true" tabindex="-1"></a><span class="co">#attach(chd.data)</span></span>
-<span id="cb50-4"><a href="11.9-multiple-11.html#cb50-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">cbind</span>(chd, age, smokes))</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="11.9-multiple-11.html#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the data, take a look</span></span>
+<span id="cb52-2"><a href="11.9-multiple-11.html#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="co">#load(&quot;CHD.RData&quot;)</span></span>
+<span id="cb52-3"><a href="11.9-multiple-11.html#cb52-3" aria-hidden="true" tabindex="-1"></a><span class="co">#attach(chd.data)</span></span>
+<span id="cb52-4"><a href="11.9-multiple-11.html#cb52-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">cbind</span>(chd, age, smokes))</span></code></pre></div>
 <pre><code>##       chd            age            smokes    
 ##  Min.   :0.00   Min.   :20.00   Min.   :0.00  
 ##  1st Qu.:0.00   1st Qu.:34.75   1st Qu.:0.00  
@@ -553,79 +554,79 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  3rd Qu.:1.00   3rd Qu.:55.00   3rd Qu.:1.00  
 ##  Max.   :1.00   Max.   :69.00   Max.   :1.00</code></pre>
 <p>Let’s start by regressing CHD on smokes and age, and refreshing our interpretations of the parameter estimates and tests. The regression coefficients are interpreted analogously to multiple regression (e.g., as holding constant, controlling for, incremental to, the other predictors).</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="11.9-multiple-11.html#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Regress CHD on smokes and age</span></span>
-<span id="cb52-2"><a href="11.9-multiple-11.html#cb52-2" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">glm</span>(chd <span class="sc">~</span> age <span class="sc">+</span> smokes, <span class="at">family =</span> binomial)</span>
-<span id="cb52-3"><a href="11.9-multiple-11.html#cb52-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod)</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="11.9-multiple-11.html#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Regress CHD on smokes and age</span></span>
+<span id="cb54-2"><a href="11.9-multiple-11.html#cb54-2" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">glm</span>(chd <span class="sc">~</span> age <span class="sc">+</span> smokes, <span class="at">family =</span> binomial)</span>
+<span id="cb54-3"><a href="11.9-multiple-11.html#cb54-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = chd ~ age + smokes, family = binomial)
 ## 
 ## Deviance Residuals: 
-##        Min          1Q      Median          3Q         Max  
-## -2.6243432  -0.6074351  -0.3049262   0.6347204   2.2044135  
+##     Min       1Q   Median       3Q      Max  
+## -2.6243  -0.6074  -0.3049   0.6347   2.2044  
 ## 
 ## Coefficients:
-##                Estimate  Std. Error  z value   Pr(&gt;|z|)    
-## (Intercept) -6.72151815  1.33395618 -5.03878 4.6850e-07 ***
-## age          0.11848598  0.02639472  4.48900 7.1557e-06 ***
-## smokes       2.54953249  0.59260428  4.30225 1.6907e-05 ***
+##             Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept) -6.72152    1.33396  -5.039 4.68e-07 ***
+## age          0.11849    0.02639   4.489 7.16e-06 ***
+## smokes       2.54953    0.59260   4.302 1.69e-05 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## (Dispersion parameter for binomial family taken to be 1)
 ## 
-##     Null deviance: 136.662983  on 99  degrees of freedom
-## Residual deviance:  84.004469  on 97  degrees of freedom
-## AIC: 90.004469
+##     Null deviance: 136.663  on 99  degrees of freedom
+## Residual deviance:  84.004  on 97  degrees of freedom
+## AIC: 90.004
 ## 
 ## Number of Fisher Scoring iterations: 5</code></pre>
 <p>For illustrative purposes, let’s double check that smoking predicts CHD over and above age using the LR test. Recall that this test is analogous to the F-test of R-squared change in OLS regression</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="11.9-multiple-11.html#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co"># LR test coefficient on age, and age + smokes </span></span>
-<span id="cb54-2"><a href="11.9-multiple-11.html#cb54-2" aria-hidden="true" tabindex="-1"></a>mod1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(chd <span class="sc">~</span> age, <span class="at">family =</span> binomial)</span>
-<span id="cb54-3"><a href="11.9-multiple-11.html#cb54-3" aria-hidden="true" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">glm</span>(chd <span class="sc">~</span> age <span class="sc">+</span> smokes, <span class="at">family =</span> binomial)</span>
-<span id="cb54-4"><a href="11.9-multiple-11.html#cb54-4" aria-hidden="true" tabindex="-1"></a>lmtest<span class="sc">::</span><span class="fu">lrtest</span>(mod1, mod2)</span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="11.9-multiple-11.html#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co"># LR test coefficient on age, and age + smokes </span></span>
+<span id="cb56-2"><a href="11.9-multiple-11.html#cb56-2" aria-hidden="true" tabindex="-1"></a>mod1 <span class="ot">&lt;-</span> <span class="fu">glm</span>(chd <span class="sc">~</span> age, <span class="at">family =</span> binomial)</span>
+<span id="cb56-3"><a href="11.9-multiple-11.html#cb56-3" aria-hidden="true" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">glm</span>(chd <span class="sc">~</span> age <span class="sc">+</span> smokes, <span class="at">family =</span> binomial)</span>
+<span id="cb56-4"><a href="11.9-multiple-11.html#cb56-4" aria-hidden="true" tabindex="-1"></a>lmtest<span class="sc">::</span><span class="fu">lrtest</span>(mod1, mod2)</span></code></pre></div>
 <pre><code>## Likelihood ratio test
 ## 
 ## Model 1: chd ~ age
 ## Model 2: chd ~ age + smokes
-##   #Df     LogLik Df    Chisq Pr(&gt;Chisq)    
-## 1   2 -53.676546                           
-## 2   3 -42.002234  1 23.34862 1.3514e-06 ***
+##   #Df  LogLik Df  Chisq Pr(&gt;Chisq)    
+## 1   2 -53.677                         
+## 2   3 -42.002  1 23.349  1.351e-06 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>Both the Wald test and LR test lead to the same interpretation for smoking (this shouldn’t be surprising).</p>
-<p>How should we compute R-squared? Two different approaches are shown below. Both of these are defensible, but note the difference in interpretation, as we are changing the “baseline model”.</p>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="11.9-multiple-11.html#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare against model 1</span></span>
-<span id="cb56-2"><a href="11.9-multiple-11.html#cb56-2" aria-hidden="true" tabindex="-1"></a>(R_21 <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> mod2<span class="sc">$</span>deviance<span class="sc">/</span>mod1<span class="sc">$</span>deviance)</span></code></pre></div>
-<pre><code>## [1] 0.2174937242</code></pre>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="11.9-multiple-11.html#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare against model with only the intercept</span></span>
-<span id="cb58-2"><a href="11.9-multiple-11.html#cb58-2" aria-hidden="true" tabindex="-1"></a>mod0 <span class="ot">&lt;-</span> <span class="fu">glm</span>(chd <span class="sc">~</span> <span class="dv">1</span>, <span class="at">family =</span> binomial)</span>
-<span id="cb58-3"><a href="11.9-multiple-11.html#cb58-3" aria-hidden="true" tabindex="-1"></a>(R_20 <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> mod2<span class="sc">$</span>deviance<span class="sc">/</span>mod0<span class="sc">$</span>deviance)</span></code></pre></div>
-<pre><code>## [1] 0.3853165862</code></pre>
+<p>How should we compute R-squared? Two different approaches are shown below. Both of these are defensible, but note the difference in interpretation, as we are changing the “baseline model.”</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="11.9-multiple-11.html#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare against model 1</span></span>
+<span id="cb58-2"><a href="11.9-multiple-11.html#cb58-2" aria-hidden="true" tabindex="-1"></a>(R_21 <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> mod2<span class="sc">$</span>deviance<span class="sc">/</span>mod1<span class="sc">$</span>deviance)</span></code></pre></div>
+<pre><code>## [1] 0.2174937</code></pre>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="11.9-multiple-11.html#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare against model with only the intercept</span></span>
+<span id="cb60-2"><a href="11.9-multiple-11.html#cb60-2" aria-hidden="true" tabindex="-1"></a>mod0 <span class="ot">&lt;-</span> <span class="fu">glm</span>(chd <span class="sc">~</span> <span class="dv">1</span>, <span class="at">family =</span> binomial)</span>
+<span id="cb60-3"><a href="11.9-multiple-11.html#cb60-3" aria-hidden="true" tabindex="-1"></a>(R_20 <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> mod2<span class="sc">$</span>deviance<span class="sc">/</span>mod0<span class="sc">$</span>deviance)</span></code></pre></div>
+<pre><code>## [1] 0.3853166</code></pre>
 <p>Recall that it is common to report the output using odds ratios rather than logits. Make sure to check your interpretation of the ORs.</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="11.9-multiple-11.html#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fu">cbind</span>(<span class="at">OR =</span> <span class="fu">coef</span>(mod2), <span class="fu">confint</span>(mod2)))</span></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="11.9-multiple-11.html#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fu">cbind</span>(<span class="at">OR =</span> <span class="fu">coef</span>(mod2), <span class="fu">confint</span>(mod2)))</span></code></pre></div>
 <pre><code>## Waiting for profiling to be done...</code></pre>
-<pre><code>##                          OR           2.5 %         97.5 %
-## (Intercept)  0.001204707903 6.635861145e-05  0.01314642626
-## age          1.125791093252 1.073105428e+00  1.19145227741
-## smokes      12.801117760276 4.292056725e+00 45.11382912286</code></pre>
-<div id="predicted-probabilities" class="section level3 hasAnchor" number="11.9.1">
-<h3><span class="header-section-number">11.9.1</span> Predicted probabilities<a href="11.9-multiple-11.html#predicted-probabilities" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<pre><code>##                       OR        2.5 %      97.5 %
+## (Intercept)  0.001204708 6.635861e-05  0.01314643
+## age          1.125791093 1.073105e+00  1.19145228
+## smokes      12.801117760 4.292057e+00 45.11382912</code></pre>
+<div id="predicted-probabilities" class="section level3" number="11.9.1">
+<h3><span class="header-section-number">11.9.1</span> Predicted probabilities</h3>
 <p>We can plot the regression lines for smokers and non-smokers using the same techniques as for linear regression.</p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="11.9-multiple-11.html#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plots of the regression lines in logit scale</span></span>
-<span id="cb63-2"><a href="11.9-multiple-11.html#cb63-2" aria-hidden="true" tabindex="-1"></a>visreg<span class="sc">::</span><span class="fu">visreg</span>(mod2, <span class="st">&quot;age&quot;</span>, <span class="st">&quot;smokes&quot;</span>, <span class="at">scale =</span> <span class="st">&quot;linear&quot;</span>, <span class="at">overlay =</span> T)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="11.9-multiple-11.html#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plots of the regression lines in probability scale</span></span>
-<span id="cb64-2"><a href="11.9-multiple-11.html#cb64-2" aria-hidden="true" tabindex="-1"></a>visreg<span class="sc">::</span><span class="fu">visreg</span>(mod2, <span class="st">&quot;age&quot;</span>, <span class="st">&quot;smokes&quot;</span>, <span class="at">scale =</span> <span class="st">&quot;response&quot;</span>, <span class="at">overlay =</span> T)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-38-2.png" width="672" /></p>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="11.9-multiple-11.html#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plots of the regression lines in logit scale</span></span>
+<span id="cb65-2"><a href="11.9-multiple-11.html#cb65-2" aria-hidden="true" tabindex="-1"></a>visreg<span class="sc">::</span><span class="fu">visreg</span>(mod2, <span class="st">&quot;age&quot;</span>, <span class="st">&quot;smokes&quot;</span>, <span class="at">scale =</span> <span class="st">&quot;linear&quot;</span>, <span class="at">overlay =</span> T)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-40-1.png" width="672" /></p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="11.9-multiple-11.html#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plots of the regression lines in probability scale</span></span>
+<span id="cb66-2"><a href="11.9-multiple-11.html#cb66-2" aria-hidden="true" tabindex="-1"></a>visreg<span class="sc">::</span><span class="fu">visreg</span>(mod2, <span class="st">&quot;age&quot;</span>, <span class="st">&quot;smokes&quot;</span>, <span class="at">scale =</span> <span class="st">&quot;response&quot;</span>, <span class="at">overlay =</span> T)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-40-2.png" width="672" /></p>
 <p>We can also test for differences between smokers and non-smokers at specific ages, just like we did for the OLS regression. Below is an example of using <code>emmeans</code> to test the difference between smokers and non-smokers, +/- 1SD on age.</p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="11.9-multiple-11.html#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 1. Make a function to compute +/- SD on age</span></span>
-<span id="cb65-2"><a href="11.9-multiple-11.html#cb65-2" aria-hidden="true" tabindex="-1"></a>sd_function <span class="ot">&lt;-</span> <span class="cf">function</span>(x) { <span class="fu">c</span>(<span class="fu">mean</span>(x) <span class="sc">-</span> <span class="fu">sd</span>(x), <span class="fu">mean</span>(x) <span class="sc">+</span> <span class="fu">sd</span>(x)) }</span>
-<span id="cb65-3"><a href="11.9-multiple-11.html#cb65-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-4"><a href="11.9-multiple-11.html#cb65-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 2. Compute and test the values on the probability scale</span></span>
-<span id="cb65-5"><a href="11.9-multiple-11.html#cb65-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span>
-<span id="cb65-6"><a href="11.9-multiple-11.html#cb65-6" aria-hidden="true" tabindex="-1"></a>gap_prob <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(mod2, <span class="at">specs =</span> <span class="st">&quot;smokes&quot;</span>, <span class="at">by =</span> <span class="st">&quot;age&quot;</span>, <span class="at">cov.reduce =</span> sd_function, <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)</span>
-<span id="cb65-7"><a href="11.9-multiple-11.html#cb65-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(gap_prob)</span></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="11.9-multiple-11.html#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 1. Make a function to compute +/- SD on age</span></span>
+<span id="cb67-2"><a href="11.9-multiple-11.html#cb67-2" aria-hidden="true" tabindex="-1"></a>sd_function <span class="ot">&lt;-</span> <span class="cf">function</span>(x) { <span class="fu">c</span>(<span class="fu">mean</span>(x) <span class="sc">-</span> <span class="fu">sd</span>(x), <span class="fu">mean</span>(x) <span class="sc">+</span> <span class="fu">sd</span>(x)) }</span>
+<span id="cb67-3"><a href="11.9-multiple-11.html#cb67-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb67-4"><a href="11.9-multiple-11.html#cb67-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 2. Compute and test the values on the probability scale</span></span>
+<span id="cb67-5"><a href="11.9-multiple-11.html#cb67-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span>
+<span id="cb67-6"><a href="11.9-multiple-11.html#cb67-6" aria-hidden="true" tabindex="-1"></a>gap_prob <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(mod2, <span class="at">specs =</span> <span class="st">&quot;smokes&quot;</span>, <span class="at">by =</span> <span class="st">&quot;age&quot;</span>, <span class="at">cov.reduce =</span> sd_function, <span class="at">type =</span> <span class="st">&quot;response&quot;</span>)</span>
+<span id="cb67-7"><a href="11.9-multiple-11.html#cb67-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(gap_prob)</span></code></pre></div>
 <pre><code>## age = 32.7:
 ##  smokes   prob     SE  df asymp.LCL asymp.UCL
 ##       0 0.0546 0.0286 Inf    0.0191     0.146
@@ -639,22 +640,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Confidence level used: 0.95 
 ## Intervals are back-transformed from the logit scale</code></pre>
 </div>
-<div id="interactions" class="section level3 hasAnchor" number="11.9.2">
-<h3><span class="header-section-number">11.9.2</span> Interactions<a href="11.9-multiple-11.html#interactions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="interactions" class="section level3" number="11.9.2">
+<h3><span class="header-section-number">11.9.2</span> Interactions</h3>
 <p>Let’s consider the interaction between age (centered) and smoking. This interaction addresses whether the relationship between age and CHD changes as a function of smoking status.</p>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="11.9-multiple-11.html#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Interacting smoking with age (centered)</span></span>
-<span id="cb67-2"><a href="11.9-multiple-11.html#cb67-2" aria-hidden="true" tabindex="-1"></a>age_centered <span class="ot">&lt;-</span> age <span class="sc">-</span> <span class="fu">mean</span>(age)</span>
-<span id="cb67-3"><a href="11.9-multiple-11.html#cb67-3" aria-hidden="true" tabindex="-1"></a>mod4 <span class="ot">&lt;-</span> <span class="fu">glm</span>(chd <span class="sc">~</span> age_centered<span class="sc">*</span>smokes, <span class="at">family =</span> binomial)</span>
-<span id="cb67-4"><a href="11.9-multiple-11.html#cb67-4" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fu">cbind</span>(<span class="at">OR =</span> <span class="fu">coef</span>(mod4), <span class="fu">confint</span>(mod4)))</span></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="11.9-multiple-11.html#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Interacting smoking with age (centered)</span></span>
+<span id="cb69-2"><a href="11.9-multiple-11.html#cb69-2" aria-hidden="true" tabindex="-1"></a>age_centered <span class="ot">&lt;-</span> age <span class="sc">-</span> <span class="fu">mean</span>(age)</span>
+<span id="cb69-3"><a href="11.9-multiple-11.html#cb69-3" aria-hidden="true" tabindex="-1"></a>mod4 <span class="ot">&lt;-</span> <span class="fu">glm</span>(chd <span class="sc">~</span> age_centered<span class="sc">*</span>smokes, <span class="at">family =</span> binomial)</span>
+<span id="cb69-4"><a href="11.9-multiple-11.html#cb69-4" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fu">cbind</span>(<span class="at">OR =</span> <span class="fu">coef</span>(mod4), <span class="fu">confint</span>(mod4)))</span></code></pre></div>
 <pre><code>## Waiting for profiling to be done...</code></pre>
-<pre><code>##                                OR         2.5 %        97.5 %
-## (Intercept)          0.1686539972 0.05274623419  0.3977168754
-## age_centered         1.1984690053 1.10011853277  1.3473794928
-## smokes              15.6504935080 4.96230835697 62.2339765949
-## age_centered:smokes  0.9046719035 0.79508392858  1.0087163973</code></pre>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="11.9-multiple-11.html#cb70-1" aria-hidden="true" tabindex="-1"></a>visreg<span class="sc">::</span><span class="fu">visreg</span>(mod4, <span class="st">&quot;age_centered&quot;</span>, <span class="st">&quot;smokes&quot;</span>, <span class="at">scale =</span> <span class="st">&quot;response&quot;</span>, <span class="at">overlay =</span> T)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-40-1.png" width="672" /></p>
-<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="11.9-multiple-11.html#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(chd.data)</span></code></pre></div>
+<pre><code>##                             OR      2.5 %     97.5 %
+## (Intercept)          0.1686540 0.05274623  0.3977169
+## age_centered         1.1984690 1.10011853  1.3473795
+## smokes              15.6504935 4.96230836 62.2339766
+## age_centered:smokes  0.9046719 0.79508393  1.0087164</code></pre>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="11.9-multiple-11.html#cb72-1" aria-hidden="true" tabindex="-1"></a>visreg<span class="sc">::</span><span class="fu">visreg</span>(mod4, <span class="st">&quot;age_centered&quot;</span>, <span class="st">&quot;smokes&quot;</span>, <span class="at">scale =</span> <span class="st">&quot;response&quot;</span>, <span class="at">overlay =</span> T)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-42-1.png" width="672" /></p>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="11.9-multiple-11.html#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(chd.data)</span></code></pre></div>
 <p>We will talk about the interpretation of the output in class.</p>
 
 </div>
@@ -717,7 +718,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:")
       if (/^https?:/.test(src))
         src = src.replace(/^https?:/, '');

@@ -367,3 +367,4 @@ some-math
 fig:unnamed-chunk-23
 fig:unnamed-chunk-25
 fig:unnamed-chunk-27
+fig:unnamed-chunk-28

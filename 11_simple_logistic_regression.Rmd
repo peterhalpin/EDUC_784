@@ -166,7 +166,7 @@ The answers hidden below (use Show Code button), but please try out the question
 # 3. 1 - .72 = .28, so about 28% of people 
 # 4. (18/7)^-1 = 7/18, so 7 out ever 18 people
 # 5. .39 / .19 ~= 2, so the probability of having CHD in your 40s is about 2 times higher than the probability of having CHD in your 30s. This is called a relative risk, or a risk ratio. 
-#6. (11/17)/(5/22) ~= 2.8, so the odds of having CHD in your 40s is about 2.8 times higher than the ods of having CHD in your 30s. This is called an odds ratio. 
+#6. (11/17)/(5/22) ~= 2.8, so the odds of having CHD in your 40s is about 2.8 times higher than the odds of having CHD in your 30s. This is called an odds ratio. 
 ```
 
 ### From probability to logistic 
@@ -274,10 +274,9 @@ knitr::include_graphics("images/logit-table.png")
 **I will asks some questions along the following lines in class.**
 
   * If logit < 0 then probability <  ? and odds < ? 
-  * What has a larger logit value: probability of .9 or odds of .9?  
+  * What has a larger logit value: probability of .9 or odds of .9? What about probability = .05 or odds = .05? 
   * Let's assume that a probability of $p$ corresponds to a  $\text{logit}$ of $x$.  What is the logit corresponding to $1-p$? (Hint, try some numerical examples from the table). 
   
-
 
 ### Summary
 
@@ -311,12 +310,12 @@ summary(mod2)
 
 Plugging the estimates into our logit model, we have the following equation
 
-\[ \text{logit}(CHD) = -5.03  + .11 (\text{age}). \]
+\[ \text{logit}(CHD) = -5.31  + .11 (\text{age}). \]
 
 The "literal" interpretation of this equation is: 
 
-* When $\text{age} = 0$, $\text{logit}(CHD) = -5.03$.
-* Each unit of increase in age (i.e., each additional year), is associated with a .11 unit increase in $\text{logit}(CHD)$. 
+* When $\text{age} = 0$, $\text{logit}(CHD) = -5.31$.
+* Each unit of increase in age (i.e., each additional year) is associated with a .11 unit increase in $\text{logit}(CHD)$. 
 
 While this interpretation is perfectly correct, most applied audiences are not going to know how to interpret   $\text{logit}(CHD)$. So, instead, we often work with the odds. In particular, the logistic regression model implies
 
@@ -326,19 +325,19 @@ While this interpretation is perfectly correct, most applied audiences are not g
 
 where $\text{odds}(X)$ are the odds of the outcome associated with a given value of the predictor $X$. Equation \@ref(eq:OR) is called the *odds ratio* (abbreviated OR) associated with a one-unit increase in $X$. If you refer back to section \@ref(derivation-9), you can see we are using the exact same approach from log-linear regression, but in Equation \@ref(eq:OR) we interpret the regression coefficient in term of the odds rather than the $Y$ variable itself. Specifically, we interpret the exponentiated regression coefficient as the predicted odds ratio corresponding to a one unit change in $X$. 
 
-For the CHD example, the OR is
+For the CHD example, the OR is:
 
-\[ \exp(b) = \exp(.11) = 1.116278 \] 
+\[ \exp(b) = \exp(.11) = 1.1163 \] 
 
 This means that each additional year a person ages is associated with an OR of 1.11. 
 
 Just like the log-linear model, we can also report the results of our analysis in terms of proportional (or percentage) change in the odds of CHD associated with each additional year of age: 
 
-* $(\exp(.11) - 1) \times 100 = 11.67\%$ 
+\[(\exp(.11) - 1) \times 100 = 11.63\% \]
 
-This means that the predicted odds of CHD increase 11.67% for each additional year of age. 
+This means that the predicted odds of CHD increase 11.63% for each additional year of age. 
 
-Whether you use relative size (i.e.,odds ratio) or relative change (percent change) to report the results of logistic regression is up to you. In many fields, it is conventional to reports the odds ratios in tables, but to use percent change when writing about results in a sentence.
+Whether you use relative size (i.e., odds ratio) or relative change (i.e., percent change) to report the results of logistic regression is up to you. In many fields, it is conventional to reports the odds ratios in tables, but to use percent change when writing about results in a sentence.
 
 Before moving, **please practice your interpretation of the OR in simple logistic regression using the following examples**
 
@@ -351,9 +350,9 @@ Answers hidden below (use Show Code button), but please try out the questions yo
 
 ```{r}
 # 1. OR = exp(0) = 1 and percent change equals (exp(0) - 1) X 100 = 0%. So, "no relationship" means OR = 1. 
-# 2. OR = exp(.25) = 1.28 and percent change equals (exp(.25) - 1) X 100 = 28% increase
-# 3. OR = exp(-.025) = 0.97 and percent change for one unit equals (exp(-.025) - 1) X 100 = -2.47%. For 10 units of change, multiply by 10, which gives 24.69% decrease (negative sign is decrease). 
-# 4. exp(b) - 1) X 100 = 100 --> exp(b) = 2 --> b = log(2) = .69
+# 2. OR = exp(.25) = 1.2840 and percent change equals (exp(.25) - 1) X 100 = 28.40% increase
+# 3. OR = exp(-.025) = 0.9753 and percent change for one unit equals (exp(-.025) - 1) X 100 = (-.02469 X 100 -2.469%. For 10 units of change, multiply by 10, which gives 24.69% decrease (negative sign is decrease). 
+# 4. (exp(b) - 1) X 100 = 100 --> exp(b) = 2 --> b = log(2) = .6931
 ```
 
 
@@ -401,7 +400,7 @@ to find the age at which someone has equal odds of CHD, leading to
 
 For the example data
 
-\[ \text{age} = - a/b = - (-5.30) / .11 = 48.18, \]
+\[ \text{age} = - a/b = - (-5.31) / .11 = 48.27, \]
 
 which confirms the conclusion we made looking at the plot. 
 
@@ -409,7 +408,7 @@ In summary, another way of interpreting regression coefficients in simple logist
 
 ### Other interpretations: Rate of change
 
-Yet another interpretation is in terms of the slope of the straight line (tangent) through the point $p(CHD) = .5$. The slope of this line describes the approximate rate of change in the probability of CHD for people who are "close to" the age of equal odds.  
+Yet another interpretation is in terms of the slope of the straight line (tangent) through the point $p(CHD) = .5$. The slope of this line describes the rate of change in the probability of CHD for people who are "close to" the age of equal odds.  
 
 It turns out that the slope of the tangent line is equal to $b/4$. The derivation requires calculus and is omitted, but the line for our example is shown in Figure \@ref(fig:tangent). 
 
@@ -420,9 +419,11 @@ plot(x$age, prob, xlab = "age", ylab = "p(CHD)", type = "l", col = "#4B9CD3")
 abline(a = -.815, b = .11/4, lty = 2, lwd = 2)
 ```
 
-For the example data $b / 4 = .11 / 4 = .0275$. So, for every additional year, the predicted probability of CHD increases by .0275. However, this interpretation only applies to people who "around" the age of equal odds  (48 years old in this example). Looking at the plot, we can see that the approximation is pretty good for people between the ages of 40 and 60. 
+For the example data $b / 4 = .11 / 4 = .0275$. So, for every additional year, the predicted probability of CHD increases by .0275. However, this interpretation only applies to people who "around" the age of equal odds  (48 years old in this example). Looking at the plot, we can see that this approximation is pretty good for people between the ages of 40 and 60. 
 
-Before moving on, notice that the logistic function is roughly linear for probabilities in the range $[.2, .8]$. As mentioned in the introduction of this chapter, this is the situation in which using linear regression with a binary outcome works "well enough". So, if you run a linear regression on your binary outcome, and none of the fitted / predicted values are outside the range $[.2, .8]$, you are in a situation where you might prefer to use linear regression (despite it being technically wrong). 
+Before moving on, notice that in this example the logistic function is roughly linear for probabilities in the range $[.2, .8]$. As mentioned in the introduction of this chapter, this is the situation in which using linear regression with a binary outcome (i.e., the linear probability model) works "well enough". Also note that the regression coefficient from the linear probability model in Section \@ref(chd-example-11) ($b_{OLS} = .0218$) is in the ballpark of the coefficient computed above ($b_{logistic} / 4 = .0275$). These numbers are both describing how the probability of CHD is related to a person's age. 
+
+The logistic model also provides us with a way "diagnosing" whether the linear probability model is a good approximation. As noted, the logistic function is roughly linear for probabilities in the range $[.2, .8]$. If we ran a linear regression on CHD and none of the fitted / predicted values are outside the range $[.2, .8]$, we would be in the situation where we might prefer to use linear regression (despite it being technically wrong). Referring back to residual vs. plotted in Section \@ref(chd-example-11), we can see that the predicted values were outside of this range, so the logistic model is the better way to approach these data. 
 
 
 ### Summary 
@@ -440,7 +441,7 @@ has the following interpretations.
 * In terms of the odds: 
     * The exponent of the regression parameter, $\exp(b)$, is odds ratio associated with a one unit of increase in age.
     * $(\exp(b) - 1) \times 100$ is the percentage change in the odds of CHD for a one unit increase in age. 
-    * Also note that $exp(a)$ is the predicted odds of having CHD when $age = 0$. This isn't very useful number in our example, but it can be useful when the predictor(s) are centered.  
+    * Also note that $\exp(a)$ is the predicted odds of having CHD when $age = 0$. This isn't a very useful number in our example, but it can be useful when the predictor(s) are centered.  
 
 * In terms of predicted probabilities
     * The logistic plot provides a visual summary of how the probability of CHD changes as a function of age -- if you are wanting to report in terms of probabilities, this plot is usually a good choice! 
@@ -448,7 +449,22 @@ has the following interpretations.
     * $–a / b$ corresponds the age at which the probability of having CHD is "50-50"
     * $b / 4$ is the approximate rate of increase (slope) of the probability of having CHD for people close to the "50-50" point.  
 
-**Please write down the numerical values of each of the above summaries for the CHD example (except the predicted probability plot). You can select any values of age to report the predicted probabilities and risk ratios, and you can "eye ball" the probabilities using Figure \@ref(fig:pred-prob).**  
+**Please write down the numerical values of each of the above summaries for the CHD example (except the predicted probability plot). You can select any values of age to report the predicted probabilities and risk ratios, and you can "eye ball" the probabilities using Figure \@ref(fig:pred-prob).** Answers are hidden below (use the Show Code button), but please try them yourself first. 
+
+```{r}
+# Logit: 
+# predicted logit when age = 0: a = -5.31;
+# expected increase in logit when age increases by one year: b = .11
+
+# Odds:
+# OR = exp(b) = exp(.11) = 1.1163
+# % change in Odds = (exp(b) - 1) X 100 = 11.63%
+
+# Probability
+# In the example, used risk for Age = 40 relative to Age = 20: .2947/.0435 = 6.77
+# "50-50" age: -a/b = 5.31 / .11 = 48.27 
+# Rate of change at "50-50" age: b/4 = .11/4 = .0275
+```
 
 ## Estimation {#estimation-11} 
 
@@ -458,7 +474,7 @@ codefolder::bookdown(init = "hide", style = button)
 
 The previous section discussed the interpretation of the simple logistic regression model. In this section we discuss how to get the numbers in the “Estimate” column of the R summary table. 
 
-The sort version: In logistic regression, we use maximum likelihood (ML) rather than OLS to estimate the model parameters. The resulting estimates are called the maximum likelihood estimates (MLEs). 
+The short version: In logistic regression, we use maximum likelihood (ML) rather than OLS to estimate the model parameters. The resulting estimates are called the maximum likelihood estimates (MLEs). 
 
 By understanding ML estimation, we will also be able to address 
 
@@ -467,36 +483,36 @@ By understanding ML estimation, we will also be able to address
 
 ### ML vs OLS
 
-Let's first contrast ML with OLS. In linear regression, OLS regression leads to "closed form" expressions for the regression coefficients (e.g., Section \@ref(ols-2). This means we can write down an explicit algebraic equation for the regression coefficients, e.g., 
+Let's first contrast ML with OLS. In linear regression, OLS regression leads to "closed form" expressions for the regression coefficients (see Section \@ref(ols-2)). This means we can write down an explicit algebraic equation for the regression coefficients, e.g., 
 
 \[ b = \text{cov}(Y, X) / s^2_X \] 
 
 As we discussed in the introduction, these estimates usually aren't very good when the outcome is binary. So, instead we use ML. 
 
-The first thing to know about ML with logistic regression is that it does not lead to closed form expression for the regression coefficients. In other words, using algebra we can never write down the other side of the equation $b = ?$. Instead, we define the regression parameters *algorithmically* -- whatever value results from maximizing the likelihood is the value we choose for $b$. We discussed the difference between algebraic and algorithmic definitions when we compared the mean and median last semester. For now, the take home message is
+However, ML with logistic regression does not lead to closed-form expressions for the regression coefficients. In other words, using algebra we can never write down the other side of the equation $b = ?$ Instead, we define the regression parameters *algorithmically* -- whatever value results from maximizing the likelihood is the value we choose for $b$. We discussed the difference between algebraic and algorithmic definitions when we compared the mean and median last semester. The take home message is:
 
-* In OLS, we didn’t really have to know much about least squares per se, because we could just work with the formulas for the regression coefficients.  
+* In OLS, we didn’t really have to know much about least squares *per se*, because we could just work with the formulas for the regression coefficients.  
 * In ML, we really do need to know about likelihood, because we don’t get any other formulas for the coefficients.
 
 ### The likelihood 
 
 The likelihood is a function that tells us the probability of sample being drawn from a population. For our example data, we have $N = 100$ cases in which there are 43 people with CHD and 57 people without CHD. The likelihood tell us the probability of this sample being drawn from the population. In particular, when the variable of interest is binary, it is called the *binomial* likelihood. 
 
-The building block of the binomial likelihood is the probability of a person having CHD. For person $i$, we use the shorthand notation
+The building block of the binomial likelihood is the probability of a person having CHD. For person $i = 1 \dots N$, we use the shorthand notation
 
 \[ p_i = p(CHD_i = 1) \] 
 
 to denote the probability of having CHD. You might be thinking -- don’t we already know if person $i$ has CHD or not? Isn't that is what our data tell us!?
 
-That is true, but recall that we are imaging that person $i$ is sampled from a population, and in that population there are people who are exactly like person $i$ with respect to the predictors we have collected (e.g., of exactly the same age). Some proportion of those people will have CHD, and that is the probability we are interested in -- e.g., the probability of a person of age 48 having CHD in the population.
+That is true, but recall that we are imaging that person $i$ is sampled from a population, and in that population there are people who are exactly like person $i$ with respect to the predictors we have collected (e.g., of exactly the same age). Some proportion of those people will have CHD, and that is the probability we are interested in -- for example the probability of a person of age 48 having CHD in the population.
 
-The likelihood of CHD for person $i$ is 
+The likelihood of CHD for person $i$ is given by the following formula:
 
 \[ L_i = p_i \times CHD_i + (1 - p_i) \times (1 - CHD_i) 
 (#eq:Li)
 \] 
 
-This might look complicated but its just a way of writing the population probability of having CHD, or not having CHD, in one formula. All it says is: 
+This looks complicated, but its just a way of writing the population probability of having CHD, or not having CHD, in one equation. All it says is: 
 
 * The probability of sampling someone with CHD is $p_i$.
     * i.e., plug in $CHD_i = 1$ into Equation \@ref(eq:Li) and the answer is $p_i$.
@@ -510,11 +526,20 @@ For a sample of $N$ **independent** persons (i.e., a simple random sample), the 
 (#eq:L)
 \] 
 
-The symbol $\Pi$ is shorthand for multiplication, just like $\Sigma$ is used for addition. If we plug into Equation \@ref(eq:L) using $CHD = 1$ for 43 people and $CHD = 0$ for 57 people, this will give us the likelihood for example data set. 
+The symbol $\Pi$ is shorthand for multiplication, just like $\Sigma$ is used for addition. If we plug into Equation \@ref(eq:L) using the values of $CHD$ in our sample, this gives us the likelihood of observing the sample. For example, the values of CHD for the first four cases in the example are (1, 1, 0, 1). So, the first four terms in the likelihood are: 
 
-Of course, the trick is that we need to know $p_i$. This is where the logistic regression model comes in -- it provides a probability of CHD for each person in our sample. In maximum likelihood estimation, we select the coefficients of the logistic regression model so that the likelihood in Equation \@ref(eq:L) is maximized. This is called the principal of maximum likelihood -- it says "chose the model parameters that make the observed data most likely."
+\[ L = \Pi_{i = 1}^N L_i =p_1 \times  p_2 \times (1-p_3) \times p_4 \cdots 
+\]
 
-Maximizing the likelihood is complicated stuff, but that is what `R` is for. One complication that we should be aware of is that the likelihood can cause "underflow" issues in computing, because we are multiplying together lots of numbers less than 1, which can lead to very, very small values -- too small for a computer represent. To address this issue, we usually work with the log-likelihood, rather than the likelihood: 
+Up until now we have addressed the general form of the likelihood for a binary variable,  but we haven't talked about how to get the numbers $p_i$. This is where the logistic regression comes in -- as discussed in Section \@ref(logit-11), the purpose of logistic regression is to model the probability of CHD for the people in our sample. So, in order to turn the above equation in the likelihood for logistic regression, we plug-in for $p_i$ using Equation \@ref(eq:logistic). 
+
+This is about as much math as we need to state the overall idea behind maximum likelihood estimation: 
+
+* In maximum likelihood estimation, we select the coefficients of the logistic regression model so that the likelihood in Equation \@ref(eq:L) is maximized. This is called the principal of maximum likelihood -- it says "choose the model parameters that make the observed data most likely."
+
+The principal of maximum likelihood might seem a bit flimsy. But, it often leads to precise and unbiased parameter estimates, which is why it gets used a lot. 
+
+Doing the computations that maximize the likelihood can be quite complicated, but that is what we use R for. however, there is one issue that we should be aware of: the likelihood can cause "underflow" issues in computing, because we are multiplying together lots of numbers less than 1, which can lead to very, very small values -- too small for a computer represent. To address this issue, we usually work with the log-likelihood, rather than the likelihood: 
 
 \[ \ell = \log(L) = \log \prod_{i = 1}^N L_i = \sum_{i = 1}^N \log(L_i) 
 (#eq:ell)
@@ -522,7 +547,7 @@ Maximizing the likelihood is complicated stuff, but that is what `R` is for. One
 
 The last equality uses the "addition with logs" rule from Section \@ref(math-review-9). For our purposes here, we just need to know that taking the log of the likelihood changes a very small number (the likelihood) into a large negative number (the log-likelihood), which prevents your computer from breaking when doing computations. 
 
-The log-likelihood $ell$ shows up a lot in what follows. In particular, when the log-likelihood is evaluated at the MLEs, $-2 \times \ell$ is called the *deviance.* 
+The log-likelihood $ell$ shows up a lot in what follows. In particular, when the log-likelihood is evaluated at the MLEs, $-2 \times \ell$ is called the *deviance.* -- you will see that number in the R example below. 
 
 ### Summary 
 
@@ -802,8 +827,8 @@ knitr::include_graphics("images/odds.png")
 # 2. 11/17, so for 11 people with CHD there are 17 without
 # 3. 1 - .72 = .28, so about 28% of people 
 # 4. (18/7)^-1 = 7/18, so 7 out ever 18 people
-# 5. .39 / .19 ~= 2, so the probability of having CHD in your 40s is about 2 times higher than the probability of having CHD in your 30s. This is called a relative risk, or a risk ratio. 
-#6. (11/17)/(5/22) ~= 2.8, so the odds of having CHD in your 40s is about 2.8 times higher than the ods of having CHD in your 30s. This is called an odds ratio. 
+# 5. .39 / .19 ~= 2, so the probability of having CHD in your 40s is about 2 times higher than the probability of having CHD in your 30s. This is called relative risk, or a risk ratio. 
+#6. (11/17)/(5/22) ~= 2.8, so the odds of having CHD in your 40s is about 2.8 times higher than the odds of having CHD in your 30s. This is called an odds ratio. 
 ```
 
 * I will asks some questions along the following lines in class (use the following table). 
@@ -826,16 +851,19 @@ knitr::include_graphics("images/logit-table.png")
   3. If $b=-.025$ what is the OR equal to? What is the percent change in the odds for a 10 unit increase in $X$? 
   4. If the odds increase 100% for a one unit increase in $X$, what $b$ equal to? 
 
+
 ```{r}
 # 1. OR = exp(0) = 1 and percent change equals (exp(0) - 1) X 100 = 0%. So, "no relationship" means OR = 1. 
-# 2. OR = exp(.25) = 1.28 and percent change equals (exp(.25) - 1) X 100 = 28% increase
-# 3. OR = exp(-.025) = 0.97 and percent change for one unit equals (exp(-.025) - 1) X 100 = -2.47%. For 10 units of change, multiply by 10, which gives 24.69% decrease (negative sign is decrease). 
-# 4. exp(b) - 1) X 100 = 100 --> exp(b) = 2 --> b = log(2) = .69
+# 2. OR = exp(.25) = 1.2840 and percent change equals (exp(.25) - 1) X 100 = 28.40% increase
+# 3. OR = exp(-.025) = 0.9753 and percent change for one unit equals (exp(-.025) - 1) X 100 = (-.02469 X 100 -2.469%. For 10 units of change, multiply by 10, which gives 24.69% decrease (negative sign is decrease). 
+# 4. (exp(b) - 1) X 100 = 100 --> exp(b) = 2 --> b = log(2) = .6931
 ```
 
-
 * Please write down the numerical values all of the following summaries of the simple logistic regression model, using the CHD example. You can select any values of age to report the predicted probabilities and risk ratios, and you can "eye ball" the probabilities using the figure. Answers hidden below (use Show Code button), but please try out the questions yourself first! 
-\[ \text{logit}(CHD) = -5.03  + .11 (\text{age}). \]
+
+
+\[ \text{logit}(CHD) = a  + b (\text{age})= -5.03  + .11 (\text{age}) \]
+
   1. In terms of the logit: 
       * The intercept ($a$) is the predicted value of the log-odds of CHD when age = 0. 
       * The slope ($b$) is how much the predicted log-odds of CHD changes for one unit (year) of increase in age.
@@ -850,9 +878,27 @@ knitr::include_graphics("images/logit-table.png")
       * $–a / b$ corresponds the age at which the probability of having CHD is "50-50"
       * $b / 4$ is the approximate rate of increase (slope) of the probability of having CHD for people close to the "50-50" point.  
 
+
 ```{r, echo = T, fig.cap = "Predicted probabilities", fig.align = 'center'}
 visreg::visreg(mod2, xvar = "age", scale = "response")
 ```
+
+
+```{r}
+# Logit: 
+# predicted logit when age = 0: a = -5.31;
+# expected increase in logit when age increases by one year: b = .11
+
+# Odds:
+# OR = exp(b) = exp(.11) = 1.1163
+# % change in Odds = (exp(b) - 1) X 100 = 11.63%
+
+# Probability
+# In the example, used risk for Age = 40 relative to Age = 20: .2947/.0435 = 6.77
+# "50-50" age: -a/b = 5.31 / .11 = 48.27 
+# Rate of change at "50-50" age: b/4 = .11/4 = .0275
+```
+
 
 
 **Section \@ref(estimation-11)**
