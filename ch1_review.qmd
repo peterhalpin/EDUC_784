@@ -5,7 +5,7 @@ editor:
     wrap: 72
 ---
 
-# Review {#sec-review-1}
+# Review {#sec-chap-1}
 
 This chapter is an exception to the overall format described in the
 Preface. It reviews some foundational material from EDUC 710 (Stat 1)

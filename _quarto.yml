@@ -8,7 +8,8 @@ book:
   cover-image: files/images/interaction.jpg 
   chapters:
     - index.qmd
-    - review.qmd
+    - ch1_review.qmd
+    - ch2_simple_regression.qmd
 
   
 
