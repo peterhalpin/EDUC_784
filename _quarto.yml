@@ -22,8 +22,6 @@ format:
     code-fold: true
     code-tools: true
 
-  pdf:
-    documentclass: scrreprt
 
 
 
