@@ -11,9 +11,9 @@ book:
     - ch1_review.qmd
     - ch2_simple_regression.qmd
 
-  
-
 bibliography: references.bib
+
+css: style.css
 
 format:
   html:
