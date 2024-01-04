@@ -1,0 +1,687 @@
+#  Regression with Two Predictors {#chapter-4}
+
+<!-- Move definition of R to chapter 2, show relation with r^2. 
+
+\Use K not J to index predictors! it switches to K later
+
+-->
+
+```{r, echo = F}
+rm(list = ls())
+
+button <-  "position: relative; 
+            top: -25px; 
+            left: 85%;   
+            color: white;
+            font-weight: bold;
+            background: #4B9CD3;
+            border: 1px #3079ED solid;
+            box-shadow: inset 0 1px 0 #80B0FB"
+```
+
+## An example from ECLS {#ecls-4}
+
+```{r, echo=FALSE, results='asis'}
+codefolder::bookdown(init = "hide", style = button)
+```
+
+This section considers a subset of data from the 1998 Early Childhood Longitudinal Study (ECLS; https://nces.ed.gov/ecls/). We focus on the following three variables. 
+
+* Math Achievement in the first semester of Kindergarten. This variable can be interpreted as the number of questions (out of 61) answered correctly on a math test. Don't worry -- the respondents in this study did not have to write a 61-question math test in the first semester of K! Students only answered a few of the questions and their scores were re-scaled to be out a total of 61 questions afterwards. 
+
+* Socioecomonic Status (SES), which is a composite of household factors (e.g., parental education, household income) ranging from 30-72. 
+
+* Approaches to Learning (ATL), which is a teacher-reported measure of behaviors that affect the ease with which children can benefit from the learning environment. It includes six items that rate the child’s attentiveness, task persistence, eagerness to learn, learning independence, flexibility, and organization. The items have 4 response categories (1-4), coded so that higher values represent more positive responses, and the scale is an unweighted average the six items.
+
+More details about these variables  are available in the ECLS user manual: https://nces.ed.gov/ecls/data/ECLSK_K8_Manual_part1.pdf.
+
+### Correlation matrices
+
+In the scatter plots below, the panels are arranged in matrix format. The variable named on the diagonal appears on the vertical ($Y$) axis in its row and the horizontal ($X$) axis in its column. For example, Math Achievement is on the vertical axis in the first row and the horizontal axis in the first column. Notice that plots below the diagonal are a mirror image of the plots above the diagonal. 
+
+```{r, pairs, fig.cap = 'ECLS Example Data.', fig.align = 'center'}
+load("ECLS250.RData")
+attach(ecls)
+example_data <- data.frame(c1rmscal, wksesl, t1learn)
+names(example_data) <- c("Math", "SES", "ATL")
+pairs(example_data , col = "#4B9CD3")
+```
+
+
+The format of Figure \@ref(fig:pairs) is the same as that of the correlation matrix among the variables: 
+```{r}
+options(digits = 2)
+cor(example_data)
+```
+
+Again, notice that the entries below the diagonal are mirrored by the entries above the diagonal. We can see that all three variables are positively correlated. SES and ATL have similar correlations with Math Achievement (.44 and .40, respectively), and are also moderately correlated with each other (.29). 
+
+In order to represent the correlation matrix among a single outcome variable ($Y$) and two predictors ($X_1$ and $X_2$) we will use the following notation. 
+
+\[
+\begin{array}{c}
+\text{var } Y \\ \text{var } X_1 \\ \text{var } X_2
+\end{array}
+\quad
+\left[ 
+\begin{array}{ccc}
+ 1       & r_{Y1}  & r_{Y2}  \\
+ r_{1Y}  & 1       & r_{12}  \\
+ r_{2Y}  & r_{21}  & 1
+\end{array}
+ \right]
+\]
+
+<!-- \[ -->
+<!-- \begin{array}{c} -->
+<!-- \text{var 1} \\ \text{var 2} \\ \text{var 3}  -->
+<!-- \end{array} -->
+<!-- \quad -->
+<!-- \left[  -->
+<!-- \begin{array}{ccc} -->
+<!--  1       & r_{12}  & r_{13}  \\ -->
+<!--  r_{21}  & 1       & r_{23}  \\ -->
+<!--  r_{31}  & r_{32}  & 1 -->
+<!-- \end{array} -->
+<!--  \right] -->
+<!-- \] -->
+
+
+
+This notation is a bit tricky to understand, but the basic idea is that each correlation coefficient has two subscripts. The subscripts tell us which two variables are being correlated. For the outcome variable we use the subscript $Y$, and for the two predictors we use the subscripts $1$ and $2$. As with the numerical examples, the values below the diagonal mirror the values above the diagonal. So,  we really just need the three correlations shown in the matrix below. 
+
+\[
+\begin{array}{c}
+\text{var } Y \\ \text{var } X_1 \\ \text{var } X_2
+\end{array}
+\quad
+\left[ 
+\begin{array}{ccc}
+ -       & r_{Y1}  & r_{Y2}  \\
+ -  & -       & r_{12}  \\
+ -  & -  & -
+\end{array}
+ \right]
+\]
+
+The three correlations are interpreted as follows: 
+
+* $r_{Y1}$ - the correlation between the outcome ($Y$) and the first predictor ($X_1$). 
+
+* $r_{Y2}$ - the correlation between the outcome ($Y$) and the second predictor  ($X_2$). 
+
+* $r_{12}$ - the correlation between the two predictors.
+
+**If you have questions about how these plots and correlations are presented, please write them down now and share them class.**
+
+
+## The two-predictor model
+
+In the ECLS example, we can think of Kindergarteners' Math Achievement as the outcome variable, with SES and Approaches to Learning as potential predictors / explanatory variables. The multiple regression model for this example can be written as 
+
+\[ 
+\widehat Y = b_0 + b_1 X_1 + b_2 X_2 
+(\#eq:yhat-4)
+\]
+
+where 
+
+* $\widehat Y$ denotes the predicted Math Achievement scores.
+* $X_1 = \;$ SES and $X_2 = \;$ ATL (it doesn't matter which predictor we denote as $1$ or $2$).
+* $b_1$ and $b_2$ are the regression slopes.
+* The intercept is denoted by $b_0$ (rather than $a$).
+
+Just like simple regression, the residual for Equation \@ref(eq:yhat-4) is defined as $e = Y - \widehat Y$ and the model can be equivalently written as $Y = \widehat Y + e$. Also, remember that you can write out the model using the variable names in place of $Y$ and $X$ if that helps keep track of all the notation.   
+
+The correlations reported in Section \@ref(ecls-4) address how the three variables are (linearly) related in the ECLS data. Multiple regression lets us additionally address the following types of questions: 
+
+* Does ATL "add anything" to our understanding of Math Achievement, beyond SES alone?
+* What is the relative importance of the two predictors? 
+* How much of the variance in Math Achievement do both predictors explain together? 
+
+<!--
+
+## Multiple vs simple regression {#comparison-4}
+
+```{r, echo=FALSE, results='asis'}
+codefolder::bookdown(init = "hide", style = button)
+```
+
+At first glance, it might appear that simple regression and multiple regression are essentially the same thing. However, there is an important ingredient in multiple regression that is missing from simple regression. This section illustrates how the two approaches differ and asks you to think about what the missing ingredient might be. 
+
+Table \@ref(tab:compare) compares the output of three regression models using the ECLS example. 
+
+* "Multiple" is a two-predictor model that regresses Math Achievement on SES and ATL.
+* "Simple (SES)" regresses Math Achievement on SES only. 
+* "Simple (ATL)" regresses Math Achievement on ATL only.  
+  
+
+```{r compare}
+# Run models
+mod1 <- lm(Math ~ SES  + ATL, data = example_data)
+mod2a <- lm(Math  ~ SES, data = example_data)
+mod2b <- lm(Math  ~ ATL, data = example_data)
+
+# Collect output
+out1 <- c(coef(mod1), summary(mod1)$r.squared)
+out2a <- c(coef(mod2a), NA, summary(mod2a)$r.squared)
+out2b <- c(coef(mod2b), NA, summary(mod2b)$r.squared)[c(1,3,2,4)]
+out <- data.frame(rbind(out1, out2a, out2b))
+
+# Clean up names
+names(out) <- c(names(coef(mod1)), "R-squared")
+out$Model <- c("Multiple", "Simple (SES)", "Simple (ATL)")
+out <- out[c(5, 1:4)]
+row.names(out) <- NULL
+
+# Table 
+options(knitr.kable.NA = '---')
+knitr::kable(out, caption = "Regression Coefficients and R-squared From the Three Models")
+```
+
+There are two main things to notice about the table: 
+
+* The regression coefficients in the multiple regression model do not equal the regression coefficients in the two simple regressions. This is an illustration of omitted variable bias, which we discussed in Section \@ref(causation).
+
+* The proportion of variance explained (R-squared) in the two-predictor model is less than the sum of the proportion of variance explained in the two simple models. Why is this weird? Well, we know that total variance of Math Achievement isn't changing -- i.e., $SS_\text{total}$ is the same in all of the models. Therefore the R-squared values are all fractions with the same denominator, so they should be additive (e.g., $a/c + b/c = (a + b)/ c$). But the values in the table don't follow this pattern. 
+
+In summary, the regression coefficients and R-squared in the multiple regression model are different than what we would expect by extending simple regression in a naive way (i.e., by doing simple regression multiple times). 
+
+### What is the missing ingredient? 
+
+Recall that in simple regression, the regression slope is just a repackaging of the correlation between the outcome and predictor (see Section \@ref(ols)). So, 
+
+* the "Simple (SES)" model considers the correlation between Math Achievement and SES, and 
+* the "Simple ATL" model considers the correlation between Math Achievement and ATL. 
+
+These two models leave out one of the correlations from Section \@ref(ecls-4) -- which one? Bonus: Explain why this constitutes a case of omitted variable bias. 
+
+**Please write down your answers and be prepared to share them in class!**
+
+--> 
+
+## OLS with two predictors {#ols-4}
+
+We can estimate the parameters of the two-predictor regression model in Equation \@ref(eq:yhat-4) model using same approach as for simple regression. We do this by choosing the values of $b_0, b_1, b_2$ that minimize 
+
+\[SS_\text{res} = \sum_i e_i^2.\]
+
+Solving the minization problem (setting derivatives to zero) leads to the following equations for the regression coefficients (remember, the subscript $1$ denotes the first predictor and the subscript $2$ denotes the second predictor)
+
+\begin{align}
+b_0 & = \bar Y - b_1 \bar X_1 - b_2 \bar X_2 \\ \\ 
+b_1 & = \frac{r_{Y1} - r_{Y2} r_{12}}{1 - r^2_{12}} \frac{s_Y}{s_1} \\ \\
+b_2 & = \frac{r_{Y2} - r_{Y1} r_{12}}{1 - r^2_{12}} \frac{s_Y}{s_2}
+(\#eq:2pred)
+\end{align}
+
+
+As promised, these equations are more complicated than for simple regression :) The next section addresses the interpretation of the regression coefficients. 
+
+<!-- The simple regression model was a line in two dimensions, which was easy to visualize. The two-predictor models is technically a plane in 3 dimensions. This makes it harder to visual the model, especially as the number of predictors increases. But we can use various work arounds. For example, rather than plotting Y against X, we can plot the residuals against the fitted values as in Figure \@ref(fig:fig1-4). The pink lines in Figure \@ref(fig:fig1-4) have the same interpretation as in Figure \@ref(fig:fig2): they show how far the data points are form the predicted values. 
+
+```{r fig1-4, fig.cap = 'Residuals for a Subsample of the Example.', fig.align = 'center'}
+# Get predicted values from regression model
+yhat <- mod1$fitted.values
+res <- mod1$residuals
+
+plot(x = yhat, y = res, ylab = "e", xlab = "Y-hat")
+abline(h = 0)
+
+# Add pink lines
+segments(x0 = yhat, y0 = 0 , x1 = yhat, y1 = res, col = 6, lty = 2)
+
+# Overwrite dots to make it look at bit better
+points(x = yhat, y = res, col = "#4B9CD3", pch = 16)
+```
+-->
+
+## Interpreting the coefficients {#interpretation-4}
+
+```{r, echo=FALSE, results='asis'}
+codefolder::bookdown(init = "hide", style = button)
+```
+
+An important part of using multiple regression is getting the correct interpretation of the regression coefficients. The basic interpretation is that the slope for SES represents how much predicted Math Achievement changes for a one unit increase of SES, *while holding ATL constant.* (The same interpretation holds when switching the predictors.) The important difference with simple regression is the "holding the other predictor constant" part, so let's dig into it. 
+
+### "Holding the other predictor constant"
+
+We can start by revisitng the regression model in Equation \@ref(eq:yhat-4): 
+ 
+\[ \widehat {MATH} = b_0 + b_1 (SES) + b_2 (ATL). \] 
+
+If we increase $SES$ by one unit and hold $ATL$  constant, we get
+
+\[ \widehat {MATH^*} = b_0 + b_1 (SES + 1) + b_2 (ATL). \]
+
+The difference between $\widehat{MATH^*}$ and $\widehat{MATH}$ is how much the predicted value changes for a one unit increase in SES, while holding ATL constant: 
+
+\[ \widehat{MATH^*} - \widehat{MATH}  = b_1.\]
+
+So, this why we interpret the regression coefficients in multiple regression differently than simple regression. In multiple regression, we interpret the "effect" of each predictor while holding the other predictor(s) constant. 
+
+
+### "Controlling for the other predictor"
+
+Another interpretation of the regression coefficients is in terms of the equations in for $b_1$ and $b_2$ presented in Section \@ref(ols-4).  For example, the equation for $b_1$ is
+
+\begin{equation}
+b_1 = \frac{r_{Y1} - r_{Y2} \color{red}{r_{12}}} {1 - \color{red}{r^2_{12}}} \frac{s_1}{s_Y}. 
+\end{equation} 
+
+This is the same equation as from Section \@ref(ols-4), but the correlation between the predictors is shown in red. Note that if the predictors are uncorrelated (i.e., $\color{red}{r^2_{12}} = 0$) then
+
+\[ b_1 = r_{Y1} \frac{s_1}{s_Y}, \]
+
+which is just the regression coefficient from simple regression (Section \@ref(ols-2)). 
+
+In general, the formulas for the regression coefficients in the two-predictor model are more complicated because they "control for" or "account for" the relationship between the predictors. In simple regression, we only had one predictor, so we didn't need to account for how the predictors were related. 
+
+Another way of saying this is that, if your predictors are uncorrelated, then multiple regression is just the same thing as doing simple regression multiple times. However, most of the time our predictors will be correlated, which is why multiple regression is more complicated than simple regression. In particular, the regression coefficients "control for" or "adjust for" the correlation between the predictors. 
+
+### The ECLS example
+
+Below, the R output from the ECLS example is reported. **Please provide a written explanation of the regression coefficients for SES and ATL, using the interpretations above and / or any other interpretations you want to talk about. If you have questions about how to interpret the coefficients, also note them now. And, please be prepared to share your thoughts in class!**
+
+
+```{r}
+summary(mod1)
+```
+
+<!--- 
+### Other interpretations 
+
+There are other interpretation of the regression coefficients, and if time permits we will address them in class (e.g., the correlations among residuals from different models). Also, we can see in the equation for $\widehat Y$ above that the interpretation of the regression intercept is basically the same as for simple regression: it is the value of $\widehat Y$ when $X_1 = 0$ and $X_2 = 0$ (i.e., still not very interesting). 
+-->
+
+## Standardized coefficients {#beta-4}
+
+```{r, echo=FALSE, results='asis'}
+codefolder::bookdown(init = "hide", style = button)
+```
+
+One question that arises in the interpretation of the example is the relative contribution of the two predictors to Kindergartener's Math Achievement. In particular, the regression coefficient for ATL is 10 times larger than the regression coefficient for SES -- does this mean that ATL is 10 times more important than SES? 
+
+The short answer is, "no." ATL is on a scale of 1-4 whereas SES ranges from 30-72. In order to make the regression coefficients more comparable, we can standardize the $X$ variables so that they have the same variance. 
+
+Many researchers go a step further and standardize all of the variables $Y, X_1, X_2$ to be z-scores with M = 0 and SD = 1. The resulting regression coefficients are often called $\beta$-coefficients or $\beta$-weights.
+
+The $\beta$-weights are related to the regular regression coefficients from Section \@ref(ols-4):
+
+\[ \beta_j = b_j \frac{s_j}{s_Y}. \] 
+
+However, the `lm` function in R does not provide an option to report standardized output. So, if you want to get the $\beta$-coefficients in R, it's easiest to just standardized the variables first and then do the regression with the standardized variables. 
+
+However you compute them, the interpretation of the $\beta$-coefficients is in terms of the standard deviation units of both the $Y$ variable and the $X$ variable -- e.g., increasing $X_j$ by one standard deviation increases $\hat Y$ by $\beta_j$ standard deviations (holding the other predictor(s) constant). 
+
+For the ECLS example, the $\beta$-weights are reported below. Notice that standardizing the coefficients doesn't change the t-tests or the p-values of the regression slopes. It just changes the scale of the regression slopes. It also doesn't affect R-squared or its F-test. The intercept, however, is now equal to zero in the sample (see the equation for the intercept in Section \@ref(ols-4))
+
+```{r}
+# Unlike other software, R doesn't have a convenience functions for beta coefficients. 
+z_example_data <- as.data.frame(scale(example_data))
+z_mod <- lm(Math ~ SES  + ATL, data = z_example_data)
+summary(z_mod)
+```
+
+You should be careful when using $\Beta$-coefficients to "ease" the comparison of regression predictors. In the context of our example, we might wonder whether the overall cost of raising a child's Approaches to Learning by 1 SD is comparable to the overall cost of raising their family's SES by 1 SD. In general, putting variables on the same scale is only a superficial way of making comparisons among their regression coefficients. 
+
+**Please write down an interpretation of the of beta coefficients in the above output. Is one predictor more important than the other? Your interpretation should include reference to the fact that the variables have been standardized. Please be prepared to share your interpretation / questions in class!** 
+
+## (Multiple) R-squared {#rsquared-4}
+R-squared in multiple regression has the same general formula and interpretation as in simple regression: 
+
+\[ R^2 = \frac{SS_{\text{reg}}} {SS_{\text{total}}}. \]
+
+As shown in the previous sections, the R-squared for the ECLS example is equal to .273. **Please write down your interpretation of this value and be prepared to share your answer in class.** 
+
+As discussed below, we can also say a bit more about R-squared in multiple regression. 
+
+### Relation with simple regression
+
+Like the regression coefficients in Equation \@ref(eq:2pred), the equation for R-squared can also be written in terms of the correlations among the three variables: 
+
+\[ R^2 = \frac{r^2_{Y1} + r^2_{Y2} - 2 r_{12}r_{Y1}r_{Y2}}{1 - r^2_{12}} \]
+
+If the correlation between the predictors is zero, then this equation simplifies to
+
+\[ R^2 = r^2_{Y1} + r^2_{Y2}. \]
+
+But, when the predictors are correlated, either positively or negatively, it can be show that 
+
+\[ R^2 < r^2_{Y1} + r^2_{Y2}. \]
+
+In other words, correlated predictors will jointly explain less variance in the outcome than when considering each predictor separately. Again, the reason is the correlation between the two predictors -- if the predictors are correlated, then they share some variation with each other. If we considered the predictors one at a time, we double-count their shared variation. 
+
+
+The conceptual relationships between R-squared for one versus two predictors can be represented in terms of the following Venn diagram. 
+
+```{r, venn-diagram, echo = F, fig.cap = "Shared Variance Among $Y$, $X_1$, and $X_2$.", fig.align = 'center'}
+knitr::include_graphics("images/venn_diagram.png")
+```
+
+The circles represent the variance of each variable and the overlap between circles represents their shared variance. If we do two simple regression and then add up the R-squared values, we would double count the area labelled "B". When we compute R-squared in multiple regression, we only count that area once. 
+
+<!--
+\begin{align}
+R^2_{Y.12} & = \frac{A + B + C}{A + B + C + D} \\ \\
+R^2_{Y.1} & = \frac{A + B}{A + B + C + D} \\ \\
+R^2_{Y.2} & = \frac{B + C}{A + B + C + D} \\ \\
+\end{align}
+
+These equations imply 
+
+\[ R^2_{Y.1} + R^2_{Y.2} = \frac{A + 2B + C}{A + B + C + D} \geq R^2_{Y.12} \] 
+
+This explains the relationship among the R-squared values in Table \@ref(tab:compare). The reason that the sum of the R-squared values in the simple models is greater than the R-squared value in the two-predictor model is because the sum double counts the shared variation among the predictors (area B in the diagram). 
+
+### Relation with $\beta$-weights
+
+The squared standardized coefficients in Section \@ref(standardized-coefficients) are closely related to a quantity called the squared semi-partial correlation: 
+
+\[ r^2_{Y1 \mid 2} = \beta_1^2 * (1 - r^2_{12}) \]
+
+In this notation, the subscript $Y1 \mid 2$ denotes the correlation between $Y$ and $X_1$ after removing the (linear) association between $X_1$ and $X_2$. Similarly for $Y2 \mid 1$. 
+
+The squared semi-partial correspond to the areas in the Venn diagrams as follows
+
+\begin{align}
+r^2_{Y1 \mid 2} & = \frac{A}{A + B + C + D} \\ \\
+r^2_{Y2 \mid 1} & = \frac{B}{A + B + C + D} 
+\end{align}
+
+Using this relationship, we can see that squared semi partials (and hence the \beta-weights) 
+\end{align} \]
+
+-->
+
+
+### Adjusted R-squared
+
+The sample R-squared is an upwardly biased estimate of the population R-squared.
+This bias is illustrated in the figure below. In the example, we are considering simple regression (one predictor), and we assume that the population correlation between the predictor and the outcome is zero (i.e., $\rho = 0$). 
+
+```{r, adjusted, echo = F, fig.cap = "Sampling Distribution of $r$ and $r^2$ when $\rho = 0$.", fig.align = 'center'}
+knitr::include_graphics("images/adjusted_rsquared.png")
+```
+
+In the left panel, we can see that "un-squared" correlation, $r$, has a sampling distribution that is centered at the true value $\rho = 0$. This means that $r$ is an unbiased estimate of $\rho$. 
+
+But in the right panel, we can see that the sampling distribution of the squared correlation  $r^2$, has a  mean that is slightly above zero. This is because all of the random sample-to-sample deviations in left panel are now positive (because they have been squared). Since the average value of $r^2$ is greater than the population value ($\rho = 0$),  we say that $r^2$ is an upwardly biased estimate of $\rho^2$.  (i.e., it's too large). 
+
+The adjusted R-squared corrects this bias. The formula for the adjustment is: 
+
+\[ \tilde R^2 = 1 - (1 - R^2) \frac{N-1}{N - J - 1} \]
+
+where $J$ is the number of predictors in the model. It can be seen that the adjustment is larger when the number of predictors $J$ is large relative to the sample size $N$. So, roughly speaking, the adjustment will be more severe when there are a lot of predictors in the model. This situation is sometimes called "overfitting" the data. 
+
+There is no established cut-off for when you should reported R-squared or adjusted R-squared. I recommend that you report both whenever the two values would lead to different substantive conclusions. We can discuss this more in class. 
+
+### The multiple correlation  
+
+$R$, the square-root of $R^2$, is called the *multiple correlation* because
+
+\[R = \text{Cor}(Y, \widehat Y). \]
+
+It is the correlation between the observed $Y$ values and the predicted $\widehat Y$ values. In simple regression, the multiple correlation is just the same the regular correlation coefficient $r_{XY}$. But in multiple regression, it is the correlation between the observed $Y$ values and a linear combination of the $X$ values (i.e., $\widehat Y$), so it gets a special name, the "multiple correlation." 
+
+(This should go in Chapter 2!)
+
+## Inference for the slopes {#inference-for-slopes-4}
+
+```{r, echo=FALSE, results='asis'}
+codefolder::bookdown(init = "hide", style = button)
+```
+
+There isn't really any thing new that about inference with multiple regression, except the formula for the standard errors (cite:fox): 
+
+\[ 
+s_{\widehat b_j} = \frac{s_y}{s_x} \sqrt{\frac{1 - R^2}{N - J - 1}} \times \sqrt{\frac{1}{1 - R_j^2}} 
+(\#eq:se-4)
+\]
+
+In this formula, $J$ denotes the number of predictors and $R^2_j$ is the R-squared that results from regressing predictor $j$ on the other $J-1$ predictors (without the $Y$ variable). 
+
+Notice that the first part of the standard error (before the "$\times$") is the same as simple regression (see Section \@ref(inference-for-slope-2)). The last part, which includes $R^2_j$, is different and we talk about it more below.
+
+The standard errors can be used to construct t-tests and confidence intervals using the same approach as simple regression (see Section \@ref(inference-for-slope-2)). The degrees of freedom for the t-distribution is $N - J -1$ (this applies to simple regression too, where J = 1). 
+
+The R output for the ECLS example is presented (again) below. **Please write down your conclusions about the statistical significance of the predictors and be prepared to share your answer in class.**
+
+```{r}
+summary(mod1)
+```
+
+### Precision of $\hat b$
+We can use Equation \@ref(eq:se-4) to understand the factors that influence the size of the standard errors of the regression coefficients. Recall that standard errors describe the sample-to-sample variability of a statistic. If there is a lot sample-to-sample variability, the statistic is said to be imprecise. Equation \@ref(eq:se-4) shows us what factors make $\hat b$ more or less precise. 
+
+* The standard errors *decrease* with 
+  * The sample size, $N$ 
+  * The proportion of variance in the outcome explained by the predictors, $R^2$
+
+* The standard errors *increase* with
+  * The number of predictors, $J$
+  * The proportion of variance in the predictor that is explained by the other predictors, $R^2_j$
+
+So, large sample sizes and a large proportion of variance explained lead to high precision in multiple regression. On the other hand, including many predictors that are highly correlated with each other leads to less precision. In particular, the situation where $R^2_j$ approaches the value of $1$ is called *multicollinearity* (or just *collinearity* with 2 predictors). We will talk about multicollinearity in more detail in Chapter \@ref(chapter-6). 
+
+## Inference for R-squared{#inference-for-rsquared-4}
+
+The R-squared statistic in multiple regression tells us how much variation in the outcome is explained by all of the predictors together. If the predictors do not explain any variation, then the population R-squared is equal to zero. 
+
+Notice that $R^2 = 0$ implies $b_1 = b_2 = ... = b_J = 0$ (in the population). So, testing the significance of R-squared is equivalent to testing whether any of the regression parameters are non-zero. When we addressed ANOVA last semester, we called this the omnibus hypothesis. But in regression analysis, it is usually just referred to as a test of R-squared. 
+
+The null hypothesis $H_0 : R^2 = 0$ can be tested using the statistic
+
+\[ F = \frac{\widehat R^2 / J}{(1 - \widehat R^2) / (N - J - 1)}, \]
+
+which has an F-distribution on $J$ and $N - J -1$ degrees of freedom when the null hypothesis is true. 
+
+**Using the R output reported in the previous section, please write down your conclusion about the statistical significance of the R-squared statistic in the ECLS example.** 
+
+## Workbook
+
+This section collects the questions asked in this chapter. We will discuss these questions in class. If you haven't written down / thought about the answers to these questions  before class, the lesson will not be very useful for you! So, please attempt to engage with each question by writing down one or more answers, asking clarifying questions, posing follow up questions, etc. 
+
+**Section \@ref(ecls-4)**
+
+* If you have questions about the interpretation of a correlation matrix (below) or pairwise plots (see Section \@ref(ecls-4)), please write them down now and share them class.
+
+```{r}
+cor(example_data)
+```
+
+\[
+\begin{array}{c}
+\text{var } Y \\ \text{var } X_1 \\ \text{var } X_2
+\end{array}
+\quad
+\left[ 
+\begin{array}{ccc}
+ 1       & r_{Y1}  & r_{Y2}  \\
+ r_{1Y}  & 1       & r_{12}  \\
+ r_{2Y}  & r_{21}  & 1
+\end{array}
+ \right]
+\]
+
+**Section \@ref(interpretation-4)**
+
+* Below, the R output from the ECLS example is reported. Please provide a written explanation of the regression coefficients for SES and ATL, using the interpretations from Section \@ref(interpretation-4) and / or any other interpretations you want to talk about. If you have questions about how to interpret the coefficients, also note them now. And, please be prepared to share your thoughts in class!
+
+```{r}
+summary(mod1)
+```
+
+**Section \@ref(beta-4)**
+
+* Please write down an interpretation of the $\beta$-coefficients reported the output below. Your interpretation should include reference to the fact that the variables have been standardized. Please be prepared to share your interpretation / questions in class!
+
+```{r}
+summary(z_mod)
+```
+
+**Section \@ref(rsquared-4)**
+
+* The R-squared for the ECLS example is equal to .273. Please write down your interpretation of this value and be prepared to share your answer in class.
+
+
+**Section \@ref(inference-for-slopes-4)**
+
+* Look at the R output for the ECLS example above again (either one). Please write down your conclusions about the statistical significance of the predictors and be prepared to share your answer in class.
+
+**Section \@ref(inference-for-rsquared-4)**
+
+* Look at the R output for the ECLS example above again (either one). Please write down your conclusion about the statistical significance of the R-squared statistic in the ECLS example.
+
+
+## Exercises
+
+These notes provide an overview of regression with two variables in R. They also walk through some details of the ECLS data. 
+
+### The ECLS250 data  
+
+Let's start by getting our example data loaded into R. We will be using a subset of $N = 250$ cases from the Early Childhood Longitudinal Survey 1998-1998 (ECLS-K). Here is a description of the data from the official NCES codebook (page 1-1 of  https://nces.ed.gov/ecls/data/ECLSK_K8_Manual_part1.pdf): 
+
+*The ECLS-K focuses on children’s early school experiences beginning with kindergarten and ending with eighth grade. It is a multisource, multimethod study that includes interviews with parents, the collection of data from principals and teachers, and student records abstracts, as well as direct child assessments. In the eighth-grade data collection, a student paper-and-pencil questionnaire was added. The ECLS-K was developed under the sponsorship of the U.S. Department of Education, Institute of Education Sciences, National Center for Education Statistics (NCES). Westat conducted this study with assistance provided by Educational Testing Service (ETS) in Princeton, New Jersey.*
+
+*The ECLS-K followed a nationally representative cohort of children from kindergarten into middle school. The base-year data were collected in the fall and spring of the 1998–99 school year when the sampled children were in kindergarten. A total of 21,260 kindergartners throughout the nation participated*.
+
+The subset of the ECLS-K data used in this class was obtained from the link below. The codebook for these data is available in our Resources folder. Note that we will be  using only a small subset of the full ECLS2577 data for this example
+
+<http://routledgetextbooks.com/textbooks/_author/ware-9780415996006/data.php>
+
+Let's load ECLS-K data into R. Make sure to download the file `ECLS250.RData` from this week's resources folder and save the file in your working directory -- check out the R exercises from our first lesson for a refresher of how to do this. 
+
+```{r echo = F}
+detach(ecls)
+```
+
+```{r}
+load("ECLS250.RData") # load new example
+attach(ecls) # attach 
+
+# knitr and kable are just used to print nicely -- you can just use head(ecls[, 1:5]) 
+knitr::kable(head(ecls[, 1:5]))
+```
+
+The naming conventions for these data are bit challenging. 
+
+* Variable names begin with `c`, `p`, or `t` depending on whether the respondent was the child, parent, or teacher. Variables that start with `wk` were created by the ECLS using other data sources available in during the kindergarten year of the study. 
+
+* The time points (1-4 denoting fall and spring of K and Gr 1) appear as the second character.
+
+* The rest of the name describes the variable.
+
+The variables we will use for this illustration are:
+
+  * `c1rmscal`: Child's score on a math assessment, in first semester of Kindergarten . The scores can be interpreted as  number of correct responses out of a total of approximately 80 math exam questions.  
+  
+  * `wksesl`: An SES composite of household factors (e.g., parental education, household income) ranging from 30-72. 
+  
+  * `t1learn`: Approaches to Learning Scale (ATLS), teacher reported in first semester of kindergarten. This scale measures behaviors that affect the ease with which children can benefit from the learning environment. It includes six items that rate the child’s attentiveness, task persistence, eagerness to learn, learning independence, flexibility, and organization. The items have 4 response categories (1-4), coded so that higher values represent more positive responses, and the scale is an unweighted average the six items. 
+  
+To get started lets produce the simple regression of Math with SES. This is another look at the relationship between Academic Achievement and SES that we discussed in Chapter \@ref(chapter-2). If you do not feel comfortable running this analysis or interpreting the output, take another look at Section \@ref(exercises-2). 
+
+```{r}
+plot(x = wksesl, y = c1rmscal, col = "#4B9CD3")
+mod <- lm(c1rmscal ~ wksesl)
+abline(mod)
+summary(mod)
+cor(wksesl, c1rmscal)
+```
+
+### Multiple regression with `lm`
+
+First, let's tale a look at the "zero-order" relationship among the three variables. This type of descriptive, two-way analysis is a good way to get familiar with your data before getting into multiple regression. We can see that the variables are all moderately correlated and their relationships appear reasonably linear.
+
+
+```{r}
+# Use cbind to create a data.frame with just the 3 variables we want to examine
+data <- cbind(c1rmscal, wksesl, t1learn)
+
+# Correlations
+cor(data)
+
+# Scatterplots
+pairs(data, col = "#4B9CD3") 
+```
+
+ 
+In terms of input, multiple regression with `lm` is similar to simple regression. The only difference is the model formula. To include more predictors in a formula, just include them on the right hand side, separated by at `+` sign. 
+
+* e.g, `Y ~ Χ1 + Χ2` 
+
+For our example, let's consider the regression of math achievement on SES and Approaches to Learning. We'll save our result as `mod1` which is short for "model one".
+
+```{r}
+mod1 <- lm(c1rmscal ~ wksesl + t1learn)
+summary(mod1)
+```
+
+We can see from the output that regression coefficient for `t1learn` is about 3.5. This means that, as the predictor increases by a single unit, children's predicted math scores increase by 3.5 points (out of 80), after controlling for the SES. You should be able to provide a similar interpretation of the regression coefficient for `wksesl`. Together, both predictors accounted for about 27% of the variation in students' math scores. In education, this would be considered a pretty large effect".  
+
+We will talk about the statistical tests later on. For now let's consider the relationship with simple regression. 
+
+### Relations between simple and multiple regression
+
+First let's consider how the two simple regression compare to the multiple regression with two variables. Here is the relevant output:  
+
+```{r}
+# Compare the multiple regression output to the simple regressions
+mod2a <- lm(c1rmscal ~ wksesl)
+summary(mod2a)
+
+mod2b <- lm(c1rmscal ~ t1learn)
+summary(mod2b)
+```
+
+The important things to note here are 
+
+  * The regression coefficients from the simple models ($b_{ses} = 4.38$ and $b_{t1learn} = 4.73$) are larger than the regression coefficients from the two-predictor model. Can you explain why? (Hint: see Section \@ref(interpretation-4).) 
+  
+  * The R-squared terms in the two simple models (.194 + .158 = .352) add up to more than the R-squared in the two-predictor model (.274). Again, take a moment to think about why before reading on. (Hint: see Section \@ref(rsquared-4).) 
+
+### Inference with 2 predictors
+
+Let's move on now to consider the statistical tests and confidence intervals provided with the `lm` summary output. 
+
+For regression with more than one predictor, both the t-tests and F-tests have a very similar construction and interpretation as with simple regression. The main differences are (see Sections \@ref(inference-for-slopes-4) and \@ref(inference-for-rsquared-4)):
+
+* The degrees of freedom for both tests now involve $J$, the number of predictors. 
+
+* The standard error of the b-weight is more complicated, because it involves the inter-correlation among the predictors. 
+
+We can see for `mod1` that both b-weights are significant at the .05 level, and so is the R-square. As mentioned previously, it is not usual to interpret or report results on the regression intercept unless you have a special reason to do so (e.g., see Chapter \@ref(chapter-5)). 
+
+```{r}
+# Revisting the output of mod1
+summary(mod1)
+```
+
+### APA reporting of results
+
+In terms of writing out the results, there are many formatting styles used in social sciences. As one example, the convention for APA style is to write the coefficient, followed by the test statistic (with its degrees of freedom) and then the p-value. It is also conventional to use 2 decimal places, unless more decimal places are needed to address rounding error.  
+
+Here is how we might write out the results of our regression using APA format:
+
+  * The regression of Math Achievement on SES was positive and statistically significant at the .05 level ($b = 3.53, t(247) = 6.27, p < .001$).
+
+  * The regression of Math Achievement on Approaches to Learning was also positive and statistically significant at the .05 level ($b = 3.50, t(247) = 5.20, p < .001$).
+
+  * Together both predictors accounted for about 27\% of the variation in Math Achievement ($R^2$ = .274, adjusted $R^2$ = .268), which was also statistically significant at the .05 level ($F(2, 247) = 45.54, p < .001$). 
+  
+Instead of, or in addition to, the statistical tests, we could include the confidence intervals for the regression coefficients. It is not usual to report confidence intervals on R-squared. 
+
+```{r}
+confint(mod1)
+```
+
+* The 95% confidence interval on the regression coefficient of Math achievement on SES was $[2.42 , 4.64]$. For Approaches to Learning, the 95% confidence interval was $[2.18, 4.83]$.
+  
+When we have a regression model with many predictors, or are comparing among different models, it is more usual to put all the relevant statistics in a table rather than writing them out one by one. We will see how to do that later on in the course.
+
+For more info on APA format, see the APA publications manual (https://www.apastyle.org/manual). 
+
+```{r echo = F}
+detach(ecls)
+```

@@ -1,0 +1,684 @@
+# Polynomial Regression, etc {#chapter-10}
+
+
+```{r, echo = F}
+# Clean up check
+rm(list = ls())
+
+
+button <-  "position: relative; 
+            top: -25px; 
+            left: 85%;   
+            color: white;
+            font-weight: bold;
+            background: #4B9CD3;
+            border: 1px #3079ED solid;
+            box-shadow: inset 0 1px 0 #80B0FB"
+```
+
+This chapter will cover two widely-used techniques for addressing violations of the assumption of linearity: 
+
+* Polynomial regression, which means raising $X$-variables to a power (e.g., $X^2$ and $X^3$), and 
+* Piecewise or segmented regression, which involves using different regression lines over different ranges of a predictor. 
+
+These techniques involve transforming the $X$-variable(s), which can be done in addition to (or instead of) transforming the $Y$ variable (see Chapter \@ref(chapter-9)). 
+
+Both polynomial and piecewise regression are very useful in practice and lead to advanced topics like splines and semi-parametric regression. They also turn out to be special cases of interactions, so we have already covered a lot of the technical details in Chapter \@ref(chapter-6) -- phew! 
+
+
+## Polynomial regression {#polynomial-10}
+
+```{r, echo=FALSE, results='asis'}
+codefolder::bookdown(init = "hide", style = button)
+```
+
+Polynomial regression means that we regress $Y$ on a polynomial function of $X$:
+
+\[ \widehat Y = b_0 + b_1 X + b_2 X^2 + b_3 X^3 + ....\]
+
+Your first thought might be, "doesn’t this contradict the assumption that regression is linear?" The answer here is a bit subtle. 
+
+As with regular linear regression, the polynomial model is linear in the coefficients -- we don’t raise the regression coefficients to a power (e.g., $b_1^2$), or multiply coefficients together (e.g, $b_1 \times b_2$). This is the technical sense in which polynomial regression is still just linear regression, despite its name. 
+
+Polynomial regression does use nonlinear functions of the predictor(s), but the model is agnostic to what you do with your data. The situation here is a lot like when we worked with interactions in Chapter \@ref(chapter-6). In order to model interactions, we computed the product of two predictors and entered the product into the model as a third predictor. Well, $X^2$ is the product of a predictor with itself, so, in this sense, the quadratic term in a polynomial regression is just a special case of an interaction between two variables. 
+
+Although we did not cover interactions among more than two variables in this course, they are computed in the same way -- e.g., a "three-way" interaction is just the product of 3 predictors. Similarly, $X^3$ is just the three-fold product of a variable with itself. 
+
+While polynomial regression is formally similar to interactions, it is used for a different purpose. Interactions address how the relationship between two variables changes as a function of a third. Their inclusion in a model is usually motivated by a specific research question that is formulated before doing the data analysis (see Chapter \@ref(chapter-6)). 
+
+By contrast, polynomial regression is used to address a non-linear relationship between $Y$ and $X$, and is usually motivated by a preliminary examination of data that indicates the presence of such a relationship (e.g., a scatter plot of $Y$ versus $X$; a residual versus fitted plot). While it is possible to formulate research questions about polynomial terms in a regression model, this is not necessarily or even usually the case when polynomial regression is used -- often its just used to address violations of the linearity assumption. 
+
+### Recap of polynomials
+
+In general, a polynomial of degree $n$ (i.e., highest power of $n$) produces a curve that can have up to $n-1$ bends (minima and maxima). Some examples are illustrated in Figure \@ref(fig:poly) below.
+
+* The (orange) linear function of $X$ is a polynomial of degree 1 and has zero bends.
+* The (green) quadratic function of $X$ is a polynomial of degree 2 and has 1 bend (a minimum at $X = 0$; this is also called a parabola).
+* etc.
+
+```{r, poly, echo = F, fig.cap = "Examples of Polynomials", fig.align = 'center'}
+knitr::include_graphics("images/poly.png", dpi = 150)
+```
+
+As we can see, this is a very flexible approach to capturing non-linear relationships between two variables. In fact, it can be too flexible! This is the topic of the next section. 
+
+### Polynomials and curve fitting
+
+Figure \@ref(fig:overfit) shows three different regression models fitted to the same (simulated) bivariate data. 
+
+* In the left panel, a standard linear regression model is used, and we can see that the model does not capture the nonlinear (quadratic) trend in the data. 
+
+* The middle panel uses a quadratic model (i.e., includes $X^2$ as a predictor, as well as $X$), and fits the data quite well. 
+
+* The right panel uses a 16-degree polynomial to fit the data. We can see that is has a higher R-squared than the quadratic model. But there is also something fishy about this model, don't you agree? 
+
+```{r, overfit, echo = F, fig.cap = "Polynomial Regression Examples", fig.align = 'center', fig.width = 12}
+# Generate data
+set.seed(1)
+X <- sort(runif(20, -2, 2))
+e <- rnorm(20, 0, .5)
+Y <- 2 + X - X^2 + e
+
+# Three regression models
+mod1 <- lm(Y ~ X)
+mod2 <- lm(Y ~ poly(X, 2))
+mod3 <- lm(Y ~ poly(X, 16))
+
+# Plots
+par(mfrow = c(1, 3)) 
+
+title1 <- paste0("R-squared = ", round(summary(mod1)$r.square, 3))
+plot(X, Y, col = "#4B9CD3", pch = 10, lwd = 5, main = title1)
+points(X, fitted(mod1), col = 1, type = "l", lwd = 2)
+
+title2 <- paste0("R-squared = ", round(summary(mod2)$r.square, 3))
+plot(X, Y, col = "#4B9CD3", pch = 10, lwd = 5, main = title2)
+points(X, fitted(mod2), col = 2, type = "l", lwd = 2)
+
+title3 <- paste0("R-squared = ", round(summary(mod3)$r.square, 3))
+plot(X, Y, col = "#4B9CD3", pch = 10, lwd = 5, main = title3)
+points(X, fitted(mod3), col = 3, type = "l", lwd = 2)
+```
+
+To help compare these three models, let's simulate a second sample from the same population. In the plots below, the regression lines from Figure \@ref(fig:overfit) were added to the plots from a second sample. Note that the regression parameters were not re-estimated using the second data set. The model parameters from the first data set were used to produce the regression lines for the second data set. 
+
+
+```{r, overfit2, echo = F, fig.cap = "Polynomial Regression Examples (With New Data)", fig.align = 'center', fig.width = 12}
+# Generate data
+set.seed(4)
+e <- rnorm(20, 0, .5)
+Y1 <- 2 + X - X^2 + e
+
+# Three R-squared values
+R.squared1 <- 1 - sum((Y1 - fitted(mod1))^2) / var(Y1) / 19
+R.squared2 <- 1 - sum((Y1 - fitted(mod2))^2) / var(Y1) / 19
+R.squared3 <- 1 - sum((Y1 - fitted(mod3))^2) / var(Y1) / 19
+# Plots
+
+par(mfrow = c(1, 3)) 
+title1 <- paste0("R-squared = ", round(R.squared1, 3))
+plot(X, Y1, col = "#4B9CD3", pch = 10, lwd = 5, main = title1)
+points(X, fitted(mod1), col = 1, type = "l", lwd = 2)
+
+title2 <- paste0("R-squared = ", round(R.squared2, 3))
+plot(X, Y1, col = "#4B9CD3", pch = 10, lwd = 5, main = title2)
+points(X, fitted(mod2), col = 2, type = "l", lwd = 2)
+
+title3 <- paste0("R-squared = ", round(R.squared3, 3))
+plot(X, Y1, col = "#4B9CD3", pch = 10, lwd = 5, main = title3)
+points(X, fitted(mod3), col = 3, type = "l", lwd = 2)
+```
+
+The technical term for this procedure is out-of-sample-prediction or cross-validation. It is one widely used method for comparing the quality of predictions from different models. In particular, note the R-squared values of the different models in the second sample. 
+
+**Before moving on please take a moment to write down your intuitions about what is going in  Figures \@ref(fig:overfit) and \@ref(fig:overfit2). In particular, consider whether the model in the right-hand panel is better than the one in the middle panel. I will ask you to share your thoughts in class.**
+
+### Interpreting the model
+
+As mentioned, polynomial terms are often added into a model as a way to address nonlinearity. When this is the case, the polynomial terms themselves are not of much substantive interest, and are just added to "patch up" the model after assumption checking. 
+
+We saw an example of this in Section \@ref(worked-example-7). In that example, linear and quadratic terms for SES were entered into the model in the first block. The R-squared was interpreted for the entire block, but the interpretation of the regression coefficient for the quadratic term was not addressed. This is a pretty common way of using polynomial regression -- the polynomial terms are included so that the model assumptions (linearity) are met, but they are not necessarily interpreted beyond this.  
+
+However, we can interpret the terms in a polynomial regression if we want to. This section addresses the interpretation of quadratic polynomials, but a similar approach applies to models with higher-order terms. 
+
+Let's consider a classic example of a quadratic relationship: the Yerkes-Dodson law relating physiological arousal (i.e., stress) to task performance, represented in Figure \@ref(fig:YD). One way to interpret the law is in terms of the overall shape of the relationship. As stress goes up, so does performance -- but only up to a point, after which more stress leads to a deterioration in performance. 
+
+```{r, YD, echo = F, fig.cap = "Yerkes-Dodson Law (Source: Wikipedia)", fig.align = 'center'}
+knitr::include_graphics("images/YerkesDodson.png", dpi = 75)
+```
+
+In general: 
+
+* A U-shaped curve corresponds to a *positive* regression coefficient on $X^2$ (think of a parabola from high school math). 
+* An inverted-U-shaped curve corresponds to a *negative* regression coefficient on $X^2$.
+
+Using this information, you should be able to tell whether the Yerkes-Dodson law implies a positive or a negative quadratic relationship between stress and performance. 
+
+Beyond the overall shape of the relationship, we might also want to know what level of stress corresponds to the optimal level of performance -- i.e., where the maximum of the curve is. This exemplifies a more complicated interpretation of a quadratic relationship, and it requires some calculus (see Section \@ref(deriviation-10), which is optional). The main result is that for the quadratic regression model
+
+\[ \widehat Y = b_0 +b_1X + b_2X^2, \]
+
+the value of $X$ that corresponds to the maximum (or minumum) of the quadratic curve is
+
+\[ X = \frac{-b_1}{2 b_2}. \]
+
+**Based on this discussion, please answer the following questions bout the Yerkes-Dodson Law.** 
+
+* **What is the sign of the regression co-efficient of the quadratic term relating performance to stress?** 
+
+* **What is the value of stress at which performance reaches a maximum? (Note: the image above doesn't provide numerical values for the stress variable the Yerkes-Dodson law. So, for this question, let's assume the linear term is not statistically significant -- i.e., $b_1 = 0$).** 
+
+### Derivation* {#deriviation-10}
+
+Recall from calculus that the extrema (i.e., minima and maxima) of a function occur when the derivative of the function is equal to zero. The derivative of the quadratic regression equation is
+
+$$
+\frac{d}{dX} \hat Y = \frac{d}{dX} (b_0 + b_1X + b_2X^2) = b_1 + 2b_2X.
+$$
+
+Setting the derivative to zero
+$$
+b_1 + 2b_2X = 0
+$$
+
+and solving for $X$ 
+
+$$ X = -\frac{b_1}{2b_2} $$
+gives the value of $X$ at which the $\hat Y$ reaches its minimum (or maximum) value. Let's call this value of $X^*$. Plugging $X^*$ into the original equation tells us the minimum (or maximum) of $\hat Y$.
+
+We can use the second derivative rule to determine whether $X^*$ is a minimum or maximum of $\hat Y$. 
+
+$$
+\frac{d^2}{dX^2} \hat Y = \frac{d}{dX} (b_1 + 2b_2X) = 2b_2
+$$
+If this value is positive (i.e., if $b_2 >0$), then the second derivative rule tells that $X^*$ is minimum, hence the curve is "U-shaped". If the value is negative (i.e., if $b_2 < 0$) then its a maximum, and hence the curve is "inverted-U-shaped". 
+
+
+### Model building
+
+Up to this point, we have discussed the interpretation of polynomials. In this section we consider how to build polynomial regression models in practice. 
+
+A typical model-building process for polynomial regression might proceed as follows. 
+
+1. Enter just the linear terms into the model and examine a residual versus fitted plot. 
+
+2. If there is evidence of non-linearity, look at the scatter plots between the outcome variable and each individual predictor to make a guess about which predictor(s) may be causing the non-linearity. 
+
+3. Add a quadratic term for a predictor of interest and examine whether there is a statistically significant increase in R-squared (See Section \@ref(delta-rsquared-7)). If there is, you have found a source of non-linearity! If not, the quadratic term is not explaining variance in the outcome variable, so you can remove it from the model. 
+
+4. Keep adding polynomial terms (quadratic terms for other predictors; higher-order terms for the same predictor) one at a time until the model assumptions looks reasonable. This might take a bit of trial and error. 
+
+This overall approach is illustrated in the next section. However, there are a couple of important points to mention first. 
+
+*  Making good use of polynomial regression requires walking a fine line between curve-fitting and theory-based modeling (see Figure \@ref(fig:overfit)). Sometimes, adding polynomial terms can provide an elegant and intuitive interpretation of the relationship between two variables. But, if you find yourself adding more than a couple of polynomial terms into a model and still have unresolved issues with nonlinearity, it is probably best to consider another approach (such as piecewise regression, see Section \@ref(piecewise-10)) 
+
+* Just like with interactions, higher-order polynomial terms are often highly correlated with lower-order terms (e.g., if $X$ takes on strictly positive values, $X$ and $X^2$ will be highly correlated). Recall that if two predictors are highly correlated, this can affect their regression coefficients (see Section \@ref(ols-4)) as well as their standard errors (see Section \@ref(too-many-predictors-7)). In the context of polynomial regression, there are a couple of things that can be done about this.
+
+    * Interpret $\Delta R^2$ values rather than the individual regression coefficients and their $p$-values. This is the easiest thing to do, conceptually. 
+
+    * Use "orthogonal polynomials", which are designed to ensure the different polynomial terms for the same predictor are uncorrelated. The result of this approach is that numerical values of the regression coefficients are not directly interpretable beyond their sign, but the t-tests of the regression coefficients can be interpreted as testing the $\Delta R^2$ for each term in the polynomial. This is conceptually more complicated than first option, but leads to the same overall conclusions. 
+    
+Both approaches are illustrated in the next section. 
+    
+
+
+## Worked Example {#worked-example-10}
+
+```{r, echo=FALSE, results='asis'}
+codefolder::bookdown(init = "hide", style = button)
+```
+
+In Section \@ref(worked-example-9) we saw that applying a log-transform to the `Wages.Rdata` example addressed non-normality of the residuals but did not do much to address nonlinearity. The summary output and diagnostic plots for the log-linear regression of wages on education are presented below.    
+
+```{r}
+# Load the data and take a look
+load("Wages.RData")
+attach(wages)
+
+# Create log transform of wage
+log_wage <- log(wage + 1)
+
+# Regress log_wages on educ
+mod1 <- lm(log_wage ~ educ)
+
+# Check out model fit
+par(mfrow = c(1,2))
+plot(educ, log_wage, col = "#4B9CD3")
+abline(mod1)
+plot(mod1, 1, col = "#4B9CD3")
+
+summary(mod1)
+```
+
+Because there is one prominent bend in our residual vs fitted plot (at $\hat Y \approx 2.1$), let's see if adding a quadratic term to the model can improve the model fit. 
+
+The `poly` function in `R` makes it  easy to do polynomial regression, without having to hard-code new variables like `educ^2` into our dataset. In the summary output below, `poly(...)n` denote's the $n$-th term in the polynomial. The diagnostic plots for the log-linear model with a quadratic term are also shown below.
+
+```{r}
+mod2 <- lm(log_wage ~ poly(educ, 2, raw = T))
+par(mfrow = c(1,2))
+plot(educ, log_wage, col = "#4B9CD3")
+
+# To plot the trend we need to we first need to order the data and the predicted values ... 
+sort_educ <- educ[order(educ)]
+sort_fitted<- fitted(mod2)[order(educ)]
+points(sort_educ, sort_fitted, type = "l")
+plot(mod2, 1, col = "#4B9CD3")
+summary(mod2)
+```
+
+Let's start with the plots. Based on the left-hand panel, it looks like a quadratic relationship provides a reasonable representation of the data. Based on the right-hand panel, I would conclude that the apparent non-linearity in the residual vs fitted plot has been reduced 
+
+Turning to the summary output, there are three main take-aways: 
+
+1.  Compared to `mod1` above, we can see the linear term (`poly(educ, 2)1`) is no longer statistically significant. This is because the linear and quadratic terms are highly correlated (the correlation is over .99 in the example). Consequently, the focus here should be on what the quadratic term adds to the model. 
+
+2. The test of the quadratic term (`poly(educ, 2)2`) tells us that, controlling for the linear relationship between log-wages and education, the quadratic term is statistically significant at the .1 level (it is not statistically significant at the .05 level). Recall from Chapter \@ref(chapter-7) that this same information could be obtained by testing the change in R-squared that results when adding the quadratic term into the model (e.g., use `anova(mod1, mod2)` in R). 
+
+3. As discussed in the previous section, interpreting the numerical values of the regression coefficients in a polynomial regression is no easy feat (especially with a log-transformed outcome variable!). The sign of the quadratic term does tell us something specific about the relationship (do you remember what that is?), but the interpretation of the numerical values is not straight forward. Therefore, as suggested above, it is often sufficient to focus on whether the two predictors (i.e., `educ` and `educ^2`) together explained a significant proportion of variation in the outcome variable. This information is provided by the F-test of R-squared. For simple models like this one, scatter plots with fitted lines (as above) can also be helpful for interpreting the relationship between the variables.
+
+**What is your interpretation of the log-linear model with the quadratic term for education included? Was the assumption of linearity problematic? Does the model with a quadratic term fit the data better than a model with only a linear term? What would you do next? Please list any other questions you have about polynomial regression and I'll be happy to address them in class!** 
+
+For your reference, a model with the cubic term added is shown below. 
+
+```{r}
+mod3 <- lm(log_wage ~ poly(educ, 3, raw = T))
+summary(mod3)
+
+# Same plots as above, reusing variable names here
+par(mfrow = c(1,2))
+plot(educ, log_wage, col = "#4B9CD3")
+sort_fitted <- fitted(mod3)[order(educ)]
+points(sort_educ, sort_fitted, type = "l")
+plot(mod3, 1, col = "#4B9CD3")
+```
+
+### Note on orthogonal polynomails*
+
+Before moving on, a quick (and optional) note on orthogonal vs. raw polynomials in `R`. The main thing to know is that both approaches yield the same total variance explained, so if we use the techniques for model building (as illustrated above), it doesn't matter which approach we use. 
+
+When using orthogonal polynomials, the different polynomial terms (e.g., $X, X^2, X^3$) are uncorrelated. This means that the $t$-test of each regression coefficient can be interpreted as testing the proportion of variance associated uniquely with that term of the polynomial. So, using orthogonal polynomials means that we don't really need to do the model building stuff (e.g., sequential blocks)-- it's already built into the coefficients. 
+
+The downside of orthogonal polynomials is that, beyond their sign, the regression coefficients are complicated to interpret. But, these coefficients aren't easy to interpret anyway, and we often don't care much about their exact values. 
+
+In summary, it's often simpler to use orthogonal polynomials in practice, even though the math underlying these polynomials is quite complicated and beyond the scope of the course. 
+
+This use of orthogonal polynomials is illustrated below. You'll see that most of the output is the same, except the numerical value and associated tests of the regression coefficients on the polynomial terms. In particular, the linear trend is statistically significant in the output below, because it is no longer correlated with the quadratic trend. 
+
+
+```{r}
+mod2a <- lm(log_wage ~ poly(educ, 2, raw = F))
+par(mfrow = c(1,2))
+plot(educ, log_wage, col = "#4B9CD3")
+
+# To plot the trend we need to we first need to order the data and the predicted values ... 
+sort_educ <- educ[order(educ)]
+sort_fitted <- fitted(mod2a)[order(educ)]
+points(sort_educ, sort_fitted, type = "l")
+plot(mod2a, 1, col = "#4B9CD3")
+summary(mod2a)
+```
+
+To find out more, use `help(poly)`. Additionally, a good discussion of this point is available on StatExchange: 
+
+https://stats.stackexchange.com/questions/258307/raw-or-orthogonal-polynomial-regression?r=SearchResults&s=2%7C87.5473
+
+## Piecewise regression {#piecewise-10}
+
+```{r, echo=FALSE, results='asis'}
+codefolder::bookdown(init = "hide", style = button)
+```
+
+Piecewise or segmented regression is another approach to dealing with nonlinearity. Like polynomial regression, it is  mathematically similar to interaction. Also like polynomial regression, it has a special interpretation and application that makes it practically distinct from interaction. 
+
+In the simplest case, piecewise regression involves interacting a predictor variable with a binary re-coding of itself. To illustrate how the approach works, let’s again consider our wages and education example. The scatter plot of log-wages versus education is presented again below for reference. 
+
+```{r, piecewise1, echo = F, fig.cap = "The Wages Example", fig.align = 'center'}
+plot(educ, log_wage, col = "#4B9CD3")
+```
+
+Consider the following reasoning about the example: 
+
+* For people with 12 or less years of education (i.e., who did not obtain post-secondary education) the apparent relationship with wage is quite weak. This seems plausible, because if a job doesn't require a college degree, education probably isn’t a big factor in determining wages.
+
+* For people with more than 12 years of education, the relationship with wage seems to be stronger. This also seems plausible: for jobs that require post secondary education, more education is usually associated with higher wages. 
+
+* To restate this as an interaction: the relationship between wage and education appears different for people who have a post-secondary education versus those who do not. 
+
+To represent this reasoning visually we can modify Figure \@ref(fig:piecewise1) as shown in Figure \@ref(fig:piecewise2). This captures the basic idea behind piecewise regression -- we have different regression lines over different ranges of the predictor, and the overall regression is piecewise or segmented. 
+
+```{r, piecewise2, echo = F, fig.cap = "The wages example", fig.align = 'center'}
+
+# Create a dummy variable indicating if education is at least 12 years or more
+educ12 <- (educ > 12)*1
+
+# Interact the dummy with educ
+mod4 <- lm(log_wage ~ educ*educ12) 
+
+# Add fitted values to dataset
+wages$fitted <- fitted(mod4)
+
+# Sort data on educ
+wages <- wages[order(educ), ]
+
+# Plot
+plot(educ, log_wage, col = "#4B9CD3")
+
+# Change color for the points with educ ≤ 12
+with(subset(wages, educ <= 12), points(educ, log(wage + 1)))
+
+# Plot the predicted values for educ > 12
+with(subset(wages, educ > 12), lines(educ, fitted, col = "#4B9CD3"))
+
+# Plot the predicted values for educ ≤ 12
+with(subset(wages, educ <= 12), lines(educ, fitted))
+```
+
+### The piecewise model
+
+We have reasoned that the relationship between wages and education might depend on whether people have a post-secondary education. We also noted that this sounds a lot like an interaction (because it is!), which is the basic approach we can use to create piecewise models. 
+
+In order to run our piecewise regression, first we need to create a dummy-coded version of education that indicates whether a person had more than 12 years education: 
+
+\[ \text{educ12} = \left\{ \begin{matrix}  
+                     1 & \text{if educ } > 12\\ 
+                    0 & \text{if educ } \leq 12 
+                \end{matrix} \right.
+\]
+
+Then, we enter the original variable, the dummy-coded indicator, and their interaction into the model: 
+
+\[ \widehat Y = b_0 + b_1\text{educ} + b_2\text{educ12} + b_3 (\text{educ} \times \text{educ12}) \]
+
+As we can see, the resulting model is a special case of an interaction between a continuous predictor (`educ`) and binary predictor (`educ12`).
+
+**Please take a moment to work out the interpretation of $b_1$ and $b_3$ in the model above, using the same approach as Section \@ref(binary-continuous-interaction-6). (The interpretation of $b_0$ and $b_2$ is not very interesting but you can work them out too if you like.)**
+
+While the above model conveys the overall idea of piecewise regression, there are also more complex approaches that will search for breakpoints, smoothly connect the lines at the breakpoints, use nonlinear functions (e.g., polynomials) for the segments, etc. We won't cover these more complex approaches here, but check out the following resource if you are interested and feel free to ask questions in class: https://rpubs.com/MarkusLoew/12164
+
+### Back to the example
+
+Below are diagnostic plots and the summary output for the piecewise model. The output also includes a test of whether the simple simple slopes are statistically different from zero (see Section \@ref(inference-for-interactions-6), specifically the use of the `emtrends` function).
+
+Based on this output, you should be able to come up with a viable interpretation of the model by using
+
+  * What you know about interactions between a binary and continuous variable (Section \@ref(binary-continuous-interaction-6) and the exercise above) 
+  
+  * What you know about the interpretation of regression coefficients in log-linear models (Section \@ref(interpretation-9)) 
+  
+Note that the intercept and main effect of the binary variable `educ12` are not of much interest in this application. 
+
+```{r, piecewise3, echo = F, fig.cap = "The Wages Example", fig.align = 'center'}
+par(mfrow = c(1, 2))
+plot(mod4, 1, col = "#4B9CD3")
+plot(mod4, 2, col = "#4B9CD3")
+summary(mod4)
+emmeans::emtrends(mod4, specs = "educ12", var = "educ")
+```
+
+**Please take a moment to write down your interpretation of the results of the piecewise regression, addressing the diagnostic plots, the parameter estimates, and the simple slopes.**
+
+```{r, echo = F}
+detach(wages)
+```
+
+## Workbook
+
+```{r, echo=FALSE, results='asis'}
+codefolder::bookdown(init = "hide", style = button)
+```
+
+This section collects the questions asked in this chapter. We will discuss these questions in class. If you haven't written down / thought about the answers to these questions  before class, the lesson will not be very useful for you! So, please engage with each question by writing down one or more answers, asking clarifying questions, posing follow up questions, etc. 
+
+**Section \@ref(polynomial-10)**
+
+* Please take a moment to write down your intuitions about what is going in the  figures below. In particular, consider whether the model in the right-hand panel is better than the one in the middle panel. I will ask you to share your thoughts in class.
+
+```{r, echo = F, fig.cap = "Polynomial Regression Examples", fig.align = 'center', fig.width = 12}
+
+# First Figure: Generate data
+set.seed(1)
+X <- sort(runif(20, -2, 2))
+e <- rnorm(20, 0, .5)
+Y <- 2 + X - X^2 + e
+
+# Three regression models
+mod1 <- lm(Y ~ X)
+mod2 <- lm(Y ~ poly(X, 2))
+mod3 <- lm(Y ~ poly(X, 16))
+
+# Plots
+par(mfrow = c(1, 3)) 
+
+title1 <- paste0("R-squared = ", round(summary(mod1)$r.square, 3))
+plot(X, Y, col = "#4B9CD3", pch = 10, lwd = 5, main = title1)
+points(X, fitted(mod1), col = 1, type = "l", lwd = 2)
+
+title2 <- paste0("R-squared = ", round(summary(mod2)$r.square, 3))
+plot(X, Y, col = "#4B9CD3", pch = 10, lwd = 5, main = title2)
+points(X, fitted(mod2), col = 2, type = "l", lwd = 2)
+
+title3 <- paste0("R-squared = ", round(summary(mod3)$r.square, 3))
+plot(X, Y, col = "#4B9CD3", pch = 10, lwd = 5, main = title3)
+points(X, fitted(mod3), col = 3, type = "l", lwd = 2)
+```
+
+
+```{r, echo = F, fig.cap = "Polynomial Regression Examples (With New Data)", fig.align = 'center', fig.width = 12}
+# Generate data
+set.seed(4)
+e <- rnorm(20, 0, .5)
+Y1 <- 2 + X - X^2 + e
+
+# Three R-squared values
+R.squared1 <- 1 - sum((Y1 - fitted(mod1))^2) / var(Y1) / 19
+R.squared2 <- 1 - sum((Y1 - fitted(mod2))^2) / var(Y1) / 19
+R.squared3 <- 1 - sum((Y1 - fitted(mod3))^2) / var(Y1) / 19
+# Plots
+
+par(mfrow = c(1, 3)) 
+title1 <- paste0("R-squared = ", round(R.squared1, 3))
+plot(X, Y1, col = "#4B9CD3", pch = 10, lwd = 5, main = title1)
+points(X, fitted(mod1), col = 1, type = "l", lwd = 2)
+
+title2 <- paste0("R-squared = ", round(R.squared2, 3))
+plot(X, Y1, col = "#4B9CD3", pch = 10, lwd = 5, main = title2)
+points(X, fitted(mod2), col = 2, type = "l", lwd = 2)
+
+title3 <- paste0("R-squared = ", round(R.squared3, 3))
+plot(X, Y1, col = "#4B9CD3", pch = 10, lwd = 5, main = title3)
+points(X, fitted(mod3), col = 3, type = "l", lwd = 2)
+```
+
+* Please answer the following questions about the Yerkes-Dodson Law (depicted below).
+
+  * What is the sign of the regression co-efficient of the quadratic term relating performance to stress?
+
+  * What is the value of stress at which performance reaches a maximum? (Note: the image above doesn't provide numerical values for the stress variable the Yerkes-Dodson law. So, for this question, let's assume the linear term is not statistically significant -- i.e., $b_1 = 0$). 
+
+```{r, echo = F, fig.cap = "Yerkes-Dodson Law (Source: Wikipedia)", fig.align = 'center'}
+knitr::include_graphics("images/YerkesDodson.png", dpi = 75)
+```
+
+**Section \@ref(worked-example-10)**
+
+  * What is your interpretation of the log-linear model with the quadratic term included? Was the assumption of linearity problematic? Does the model with a quadratic term fit the data better than a model with only a linear term? What would you do next? Please list any other questions you have about polynomial regression and I'll be happy to address them in class! 
+
+```{r}
+attach(wages)
+log_wage <- log(wage + 1)
+mod2 <- lm(log_wage ~ poly(educ, 2))
+par(mfrow = c(1,2))
+plot(educ, log_wage, col = "#4B9CD3")
+
+# To plot the trend we need to we first need to order the data and the predicted values ... 
+sort_educ <- educ[order(educ)]
+sort_fitted<- fitted(mod2)[order(educ)]
+points(sort_educ, sort_fitted, type = "l")
+
+plot(mod2, 1, col = "#4B9CD3")
+summary(mod2)
+```
+
+**Section \@ref(piecewise-10)**
+
+* Please take a moment to work out the interpretation of $b_1$ and $b_3$ in the model below, using the same approach as Section \@ref(binary-continuous-interaction-6). (The interpretation of $b_0$ and $b_2$ is not very interesting but you can work them out too if you like.)
+
+\[ \text{educ12} = \left\{ \begin{matrix}  
+                     1 & \text{if educ } > 12\\ 
+                    0 & \text{if educ } \leq 12 
+                \end{matrix} \right.
+\]
+
+\[ \widehat Y = b_0 + b_1\text{educ} + b_2\text{educ12} + b_3 (\text{educ} \times \text{educ12}) \]
+
+
+* The diagnostics plots, parameter estimates, and simple trends for the piecewise model are presented below. Please provide an overall interpretation of the results and be prepared to share your answers in class. 
+
+```{r}
+
+summary(mod4)
+#emmeans::emtrends(mod4, specs = "educ12", var = "educ")
+par(mfrow = c(1, 2))
+plot(mod4, 1, col = "#4B9CD3")
+plot(mod4, 2, col = "#4B9CD3")
+```
+
+```{r, echo = F}
+detach(wages)
+```
+
+
+## Exercises
+
+This section collects the code from Section \@ref(worked-example-10) and Section \@ref(piecewise-10) and your can refer to those sections for more details on interpretation. 
+
+You'll see that some of the plots below require a lot of fiddling about, especially for the piecewise regression model. We will cover some tricks and shortcuts for producing these types plots during the open lab sessions for Assignment 4. So don't worry too much about the complicated-looking coded for the plots at this point! 
+
+Let's start with the "Vanella" log-linear model for the wages examples 
+
+```{r}
+# Load the data and take a look
+load("Wages.RData")
+attach(wages)
+
+# Create log transform of wage
+log_wage <- log(wage + 1)
+
+# Regress it on educ
+mod1 <- lm(log_wage ~ educ)
+
+# Check out model fit
+par(mfrow = c(1,2))
+plot(educ, log_wage, col = "#4B9CD3")
+abline(mod1)
+plot(mod1, 1, col = "#4B9CD3")
+```
+
+Because there is one prominent bend in our residual vs fitted plot of the log-linear model (at $\hat Y \approx 2.1$), let's see if adding a quadratic term to the model can improve the model fit. 
+
+The `poly` function in `R` makes it  easy to do polynomial regression, without having to hard-code new variables like `educ^2` into our dataset. This function automatically uses orthogonal (uncorrelated) polynomials, so we don't have to worry about centering, either. The basic interpretation of the model coefficients in an orthogonal polynomial regression is the same as discussed in Section \@ref(polynomial-10), but the "more complicated" interpretation of the model parameters is not straightforward. To find out more, use `help(poly)`.
+
+The diagnostic plots for the log-linear model with a quadratic term included for education is shown below, along with the model summary. In the output, `poly(educ, 2)n` is the $n$-th degree term in the polynomial. 
+
+```{r}
+# Regress log_wage on a quadratic function of eduction 
+mod2 <- lm(log_wage ~ poly(educ, 2))
+
+# Model output
+summary(mod2)
+
+# Diagnostic plots
+par(mfrow = c(1,2))
+
+# scatter plot with trend
+plot(educ, log_wage, col = "#4B9CD3")
+# order the data and the predicted values ... 
+sort_educ <- educ[order(educ)]
+sort_fitted <- fitted(mod2)[order(educ)]
+points(sort_educ, sort_fitted, type = "l")
+
+# residual versus fitted
+plot(mod2, 1, col = "#4B9CD3")
+```
+
+Using the same approach for the cubic model: 
+
+
+```{r}
+mod3 <- lm(log_wage ~ poly(educ, 3))
+summary(mod3)
+
+# Same plots as above, reusing variable names here
+par(mfrow = c(1,2))
+plot(educ, log_wage, col = "#4B9CD3")
+sort_fitted <- fitted(mod3)[order(educ)]
+points(sort_educ, sort_fitted, type = "l")
+plot(mod3, 1, col = "#4B9CD3")
+```
+
+Moving on, let's consider the piecewise model from Section \@ref(piecewise-10)
+
+
+```{r, fig.cap = "The wages example", fig.align = 'center'}
+# Create a dummy variable indicating if education is at least 12 years or more
+educ12 <- (educ > 12)*1
+
+# Interact the dummy with educ
+mod4 <- lm(log(wage + 1) ~ educ*educ12) 
+
+# The model output
+summary(mod4)
+
+# The simple trends
+emmeans::emtrends(mod4, specs = "educ12", var = "educ")
+
+# The diagnostic plots
+par(mfrow = c(1, 2))
+plot(mod4, 1, col = "#4B9CD3")
+plot(mod4, 2, col = "#4B9CD3")
+```
+
+We can still see some evidence of heteroskedasticity in the residual versus fitted plot, so the last step is to use heteroskedasticity-corrected standard errors to ensure we are making the right conclusions about statistical significance
+
+```{r}
+## Make sure the required pacakges are installed
+# install.packages("car")
+# install.packages("lmtest")
+
+# Step 1. Use "hccm" to get the HC SEs for our piecewise model 
+hcse <- car::hccm(mod4)
+
+# Step 2. Use "coeftest" to compute t-tests with the HC SEs
+lmtest::coeftest(mod4, hcse)
+```
+
+The next bit is optional. It shows how to produce the piecewise regression plot, which takes quite a bit of messing about with R...Let me know if you find an easier way to do this (in base R). 
+
+```{r}
+# Building the piecewise regression plot -- yeeesh
+
+# Add fitted values to dataset
+wages$fitted <- fitted(mod4)
+
+# Sort data on educ
+wages <- wages[order(educ), ]
+
+# Plot
+par(mfrow = c(1, 1))
+plot(educ, log(wage + 1), col = "#4B9CD3")
+
+# Change color for the points with educ ≤ 12
+with(subset(wages, educ <= 12), points(educ, log(wage + 1)))
+
+# Plot the predicted values for educ > 12
+with(subset(wages, educ > 12), lines(educ, fitted, col = "#4B9CD3"))
+
+# Plot the predicted values for educ ≤ 12
+with(subset(wages, educ <= 12), lines(educ, fitted))
+```
+
+```{r, echo = F}
+rm(list = ls())
+detach(wages)
+```

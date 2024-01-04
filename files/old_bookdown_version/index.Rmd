@@ -1,0 +1,81 @@
+--- 
+title: "EDUC 784: Regression"
+author: "Peter Halpin"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib, packages.bib]
+description: |
+  Course notes for EDUC 784
+link-citations: yes
+github-repo: peterhalpin/EDUC_784
+cover-image: images/image1.png
+favicon: null
+---
+
+# About This Book
+
+```{r, echo = F}
+button_css <-  "position: relative; 
+                top: -25px; 
+                left: 85%;   
+                color: white;
+                font-weight: bold;
+                background: #4B9CD3;
+                border: 1px #3079ED solid;
+                box-shadow: inset 0 1px 0 #80B0FB"
+```
+
+
+This "book" provides the course notes for EDUC 784. It is currently under development, so any feedback is appreciated (e.g., during class,  via email, or via github). In particular, R Studio does not do a great job catching typos, so let me apologize in advance for the many that you will find scattered through these "pages." 
+
+This first chapter is just about how to use the book -- the course content starts in Chapter \@ref(chapter-2).   
+
+## Why this format? 
+
+These notes serve a few related purposes: 
+
+* To integrate course content (slides, readings, code, examples, and exercises) into one format, rather than having multiple files to sort through.
+
+* To address the perennial problem of choosing a textbook for this course -- rather than having a required text, the goal is for these notes to be used as the official course text. We discuss supplementary texts during our first class. 
+
+* Most importantly, having a course text that is tightly aligned with the course content lets me assign readings as homework *before class*, so we can spend less class time in lecture and more time discussing any questions you have about the readings, going through the examples together in R, and working on assignments.  
+
+* As a bonus, this book is another example of cool things you can do with R. It's written in R (https://bookdown.org) -- that is crazy, right??
+
+## Tips for using the notes
+
+```{r codefolder, echo=FALSE, results='asis'}
+codefolder::bookdown(init = "hide", 
+                     style = button_css)
+```
+
+In my experience, students often prefer to have a conceptual overview of the material before getting into the coding. To facilitate this, these notes uses "code folding". An example of code folding is given on this page. A histogram is presented below. By clicking on the button called "Show Code" on the top of the page, the R code that produced the histogram will become visible. Notice that you may need to scroll horizontally to see all of the text in the code window. Also notice that when you hover your mouse over the code window, an icon appears in the top right corner -- this lets you copy the block of code with one click. (I don't recommend always copy-pasting code, but it's a good way to get started.) 
+
+
+```{r}
+# Here is some R code. You don't have to look at it when reading the book, but it is here when you need it
+x <- rnorm(200)
+hist(x, col = "#4B9CD3")
+```
+
+The overall idea is that you will read the notes for conceptual understanding before class, and then we will review the concepts and do the coding together during class. Note that sections denoted with an asterisk (*) are optional!
+
+Two other important points: 
+
+* The readings contain questions that are written in **bold font**. The questions are also collected in the section of each chapter called "Workbook". During class time,  we will discuss the Workbook questions, your answers, any additional question you have, etc. So, it really is important for you to do the readings, and write down your responses to the questions, before class. You won't get much out of the lessons if you haven't done this preparation. 
+
+* Some chapters contain a section called "Exercises" that collect all the R code in the chapter into a single overall workflow. **You don't need to do the exercises before class**, but you can if you want to. The main advantage of doing the readings and questions ahead of time is that it will free up more class time for us to work on exercises together.  Coding is very much a "hands on" activity and it is easy to get frustrated or discouraged when the software doesn't do what you want it to. So, having others there to help you along while coding (e.g., the instructor, TA, your fellow students) is a big advantage! If the chapter doesn't have an Exercises section, that means we will be working on an assignment together instead.
+
+## Summary 
+
+In summary, the basic workflow of this book / course is as follows. 
+
+1. Before class, go through the assigned readings for conceptual understanding. You can skip all the code during your first reading if you like, but make sure to write down answers to the questions contained in the readings before class. Also write down any questions or anything else you want to discuss. You can optionally use the online Forum to post any questions, and I will address them at the beginning of each class. 
+
+2. We will go through the Workbook questions in class together, with the goal of having a more of a class discussion than a lecture. You will need to read the assigned material and think about the Workbook questions beforehand in order to meaningfully participate in and learn from the class discussion. 
+
+3. Either as part of the discussion or afterwards, we will work on the coding Exercises in each chapter. You don't need to do the Exercises before class, but you can if you want to. If there are no Exercises in the assigned readings, that means we will be working on an assignment together instead. 
+
+Alright, let's get to it! 
+

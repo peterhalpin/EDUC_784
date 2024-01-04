@@ -3,3 +3,5 @@
 .Ruserdata
 .DS_Store
 .Rproj.user
+/.quarto/
+/_book/
