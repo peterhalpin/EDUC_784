@@ -22,6 +22,7 @@ format:
     code-fold: true
     code-tools: true
 
-
-
-
+  docx:
+    toc: true
+    number-sections: true
+    highlight-style: github

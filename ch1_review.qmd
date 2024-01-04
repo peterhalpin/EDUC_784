@@ -14,7 +14,7 @@ about the review material in the first class and second class, but there
 will not be time to review everything. So, if this review feels too
 short, you may also want to review your notes from EDUC 710.
 
-Please review up to the Exercises in @sec-exercizes-1 before the first
+Please read up to the Exercises in @sec-exercizes-1 before the first
 class. We will address any questions about this material in the first
 class and then begin the Exercises together.
 
@@ -39,9 +39,9 @@ to add the second and third values of $X$, we write
 
 $$ \sum_{i=2}^{3} X_i = X_2 + X_3. $$
 
-When the start and end evalues are clear from context, we can use a
+When the start and end values are clear from context, we can use a
 shorthand notation that omits them. In the following, it is implicit
-that the sum is over the all available values of $X$ (i.e., from $1$ to
+that the sum is over all available values of $X$ (i.e., from $1$ to
 $N$):
 
 $$ \sum_i X_i. $$
@@ -124,17 +124,16 @@ $$\text{cor}(X, Y) = \frac{\text{cov}(X, Y)}{\sqrt{\text{var}(X)} \sqrt{\text{va
 
 For numerical examples see @sec-computing-stats-1.
 
-## Some properties of sample statistics {#sec-properties-1}
+## Properties of sample statistics {#sec-properties-1}
 
 The following are some useful properties of the sample statistics
-reviewed above. You can derive these properties using the rules of
-summation. For each property, the beginning of the derivation is shown.
-You should know the properties but completing the derivations is
-optional.
+reviewed above. The properties tell us what happens to means, variances, covariances, and correlations when a variable is linearly transformed. We often linearly transform data (e.g., to compute percentages, proportions, z-scores, and in linear regression), so these rules turn out to be quite handy.
+
+You can derive the properties using the rules of summation. For each property, the beginning of the derivation is shown. You should know the properties but completing the derivations is optional.
 
 **Sum of deviations from the mean**. If we subtract the mean from each
 data point, we have what is called a deviation (or deviation score):
-$d_i = X_i - \bar X$. It is always the case that $\sum_i d_i = 0$
+$d_i = X_i - \bar X$. Deviation scores sum to zero: $\sum_i d_i = 0$.
 
 -   Derivation
 
@@ -180,13 +179,17 @@ affected by linear transformations.
 
 ## Bias and precision
 
-In this section we consider two more important properties of a
-statistic. These properties are defined in terms of the *sampling
-distribution* of a statistic. Recall that a sampling distribution arise
-from the following thought experiment: 1. Take a random sample of size
-$N$ from a population of interest. 2. Compute a statistic using the
-sample data. It can be any statistic, but let's say the mean, $\bar X$,
-for concreteness. 3. Write down the value of the mean, and then return
+In this section we consider two more important properties of
+sample statistics. These properties are defined in terms of the *sampling
+distribution* of a statistic. Recall that a sampling distribution arises
+from the following thought experiment: 
+
+1. Take a random sample of size $N$ from a population of interest. 
+
+2. Compute a statistic using the sample data. It can be any statistic, but let's say the mean, $\bar X$,
+for concreteness. 
+
+3. Write down the value of the mean, and then return
 the sample to the population.
 
 After doing these 3 steps many times, you will have many values the
@@ -199,21 +202,19 @@ distribution (of the mean).
 
 A sampling distribution is just like any other distribution -- so it has
 its own mean, and its own variance, etc. These statistics, when computed
-for a sampling distribution, have special names. We are espeically
+for a sampling distribution, have special names. We are especially
 interested in the following two statistics.
 
 -   **The expected value** of the mean, denoted $E(\bar X)$, is the mean
     of the sampling distribution of the mean. That is a mouthful! That
-    is why we say the expected value of a statistic rather than the mean
-    of a statistic. It's called the expected value because it's the
-    average value over many samples.
+    is why we say the "expected value" or "expectation" of a statistic rather       than the mean of a statistic. It's called the expected value because it's       the average value over many samples.
 
 -   **The standard error** of the mean, denoted $SE(\bar X)$, is the
     standard deviation of the sampling distribution of the mean. It
     describes the sample-to-sample variation of the mean around its
     expected value.
 
-Now for the two additional properties of a statistic:
+Now for the two additional properties of sample statistics:
 
 -   **Bias**: If the expected value of a statistic is equal to a
     population parameter, we say that the statistic is an unbiased
@@ -249,7 +250,7 @@ conceptual formula for a $t$-test is
 $$ t = \frac{\text{unbiased estimate} - \text{hypothesized value }}{\text{standard error}} $$
 
 When we conduct a $t$-test, the basic rationale is as follows: "if the
-estimate statistic is close the hypothesized value of the parameter,
+estimate is close the hypothesized value of the parameter,
 then the numerator should be small relative to the standard error, and
 so $t$ should be close to zero."
 
@@ -285,7 +286,7 @@ denoted as $t_{\text{obs}}$, to a "critical value", denoted as $t^*$.
 The critical value is chosen so that the "significance level", defined
 as $\alpha = \text{Prob}(|t| \geq t^*)$, is sufficiently small.
 
-This significance level is chosen by the researcher. It represents our
+The significance level is chosen by the researcher. It represents our
 tolerance for false positives or Type I Errors -- i.e., incorrectly
 rejecting the null hypothesis, or incorrectly concluding there is an
 effect when there isn't one. When we set $\alpha$ to a small number, we
@@ -297,7 +298,7 @@ under the null hypothesis.
 There are two equivalent ways of "formally" conducting a $t$-test.
 
 1.  Compare the observed value of $t$ to the critical value.
-    Specifically: if $t_{\text{obs}} > t^*$, reject the null hypothesis.
+    Specifically: if $|t_{\text{obs}}| > t^*$, reject the null hypothesis.
 
 2.  Compare the significance level chosen by the research, $\alpha$, to
     the "p-value" of the test, computed as
@@ -313,7 +314,7 @@ parameter called its "degrees of freedom", which is denoted as $\nu$ in
 @fig-tdist. The degrees of freedom are always an increasing function of
 the sample size, with larger samples leading to more degrees of freedom.
 When the degrees of freedom approach $\infty$, the $t$-distribution
-approaches a normal distribution. This means that that the differences
+approaches a normal distribution. This means that the difference
 between a $t$-test and a $z$-test is pretty minor in large samples (say
 $N \geq 100$).
 
@@ -335,7 +336,7 @@ some degree of "confidence."
 
 Confidence intervals have the general formula:
 
-$$\text{Interval} = \text{sample value} \pm t \times {\text{standard error}}. $$
+$$\text{Interval} = \text{unbiased estimate} \pm t \times {\text{standard error}}. $$
 We get the value of $t$ from the $t$-distribution. In particular, if we
 want the interval to include the true population parameter
 $(1-\alpha) \times 100\%$ of the time, then we choose $t$ to be the
@@ -350,8 +351,7 @@ the same as retaining the null hypothesis that the parameter is equal to
 $0$. This should make intuitive sense. If the confidence interval
 includes $0$, we are saying that it is a reasonable value of the
 population parameter, so we should not reject that value. This
-relationship assumes we use the same level of $\alpha$ for both the test
-and confidence interval.
+equivalence between tests and confidence intervals assumes we use the same level of $\alpha$ for both of them.
 
 In summary, if the confidence interval includes zero, we retain the null
 hypothesis at the stated level of $\alpha$. If the confidence interval
@@ -376,11 +376,11 @@ $$F = \frac{SS_A / df_A}{SS_B / df_B}, $$
 
 where $SS$ denotes sums-of-squares and $df$ denotes degrees of freedom.
 
-Just the like t-test, the $F$-test is called by the letter "F" because
+Just the like $t$-test, the $F$-test is called by the letter "F" because
 it has an $F$-distribution when the null hypothesis is true (i.e., when
 the variances have the same expected value). The plot below shows some
 examples of $F$- distributions. These distributions tell us the values
-of $F$ that are likely, if the null hypothesis is true
+of $F$ that are likely, if the null hypothesis is true.
 
 ![F-distribution (source:
 https://en.wikipedia.org/wiki/F-distribution)](https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/F-distribution_pdf.svg/1920px-F-distribution_pdf.svg.png){#fig-fdistribution
@@ -399,14 +399,14 @@ significance level and use this level to determine how large the value
 of $F$ needs to be for us to reject the null hypothesis. The main
 difference is that $F$ is non-negative, because it is the ratio of
 squared numbers. We don't usually compute confidence intervals for
-statistics with an $F$ distribution.
+statistics with an $F$-distribution.
 
 ## APA reporting
 
-It is important to be able to write up the results of statistical
+It is important to write up the results of statistical
 analyses in a way that other people will understand. For this reason,
 there are conventions about how to report statistical results. In this
-class, we will mainly use Table and Figures (formatted in R) rather than
+class, we will mainly use tables and figures (formatted in R) rather than
 inline text. But sometimes reporting statistics using inline text
 unavoidable, in which case this course will use APA formatting. You
 don't need to use APA in this class, but you should be familiar with
@@ -456,7 +456,7 @@ Some things to know about R before getting started:
 -   Unlike many other programming languages, R commands do **not** need
     to end with punctuation (e.g., `;` or `.`).
 
--   R uses the hashtag symbol (`#`) for comments. Comments are ignored
+-   R uses the hash tag symbol (`#`) for comments. Comments are ignored
     by R but can be helpful for yourself and others to understand what
     your code does. An example is below.
 
@@ -634,7 +634,7 @@ A few other side notes:
 -   R has some names that are reserved for built-in stuff, like `log`
     and `exp` and `pi`. You can override those names, but R will give a
     warning. If you override the name, this means you can't use the
-    built-in until you delete that name (e.g., `rm(x)`).
+    built-in functions until you delete that name (e.g., `rm(x)`).
 
 ### Pop-quiz
 
@@ -654,9 +654,7 @@ A few other side notes:
 
 ### Vectors
 
-Often we want to work with multiple numbers or other objects at once. R
-has many data types or "objects" for doing this, for example, vectors,
-matrices, arrays, data.frames, and lists. We will start by looking at
+In research settings, we often want to work with multiple numbers at once (surprise!). R has many data types or "objects" for doing this, for example, vectors, matrices, arrays, data.frames, and lists. We will start by looking at
 vectors.
 
 Here is an example vector, containing the sequence of integers from 15
@@ -728,7 +726,7 @@ vectors of numbers. These examples follow closely to @sec-summation-1 to
 # Making a vector with the "c" command (combine) 
 x <- c(10, 9, 15, 15, 20, 17)
 
-# Find out how long a vector is (i.e.. the sample size)
+# Find out how long a vector is (i.e., the sample size)
 length(x)
 
 # Add up the elements of a vector
@@ -747,12 +745,16 @@ sum(x) + sum(y) == sum(x + y)
 # Compute the mean
 mean(x)
 
-# Compute the variance and sd
+# Compute the variance
 var(x)
+
+# Compute the standard deviation
 sd(x)
 
-# Compute the covariance and correlation
+# Compute the covariance
 cov(x, y)
+
+# Compute the correlation
 cor(x, y)
 ```
 
@@ -760,16 +762,16 @@ cor(x, y)
 
 Most of the time, we will be reading-in data from an external source.
 The easiest way to do this is if the data is in the `.RData` file
-format. Then we can just double click the `.Rdata` file and Rstudio will
+format. Then we can just double-click the `.Rdata` file and Rstudio will
 open the file, or we can use the `load` command in the console -- both
 do the same thing.
 
-To get started, lets load the `NELS` data. The data are a subsample of
+To get started, let's load the `NELS` data. The data are a subsample of
 the 1988 National Educational Longitudinal Survey (NELS; see
 <https://nces.ed.gov/surveys/nels88/>).
 
-This data and codebook are available on Canvas site of the course under
-"Files/Data/NELS" and are linked in the "Module" for Week 1." You need
+This data and codebook are available on the Canvas site of the course under
+"Files/Data/NELS" and are linked in the "Module" for Week 1. You need
 to download the data onto your machine and then open the data file
 (e.g., by clicking it, or double-clicking, or whatever you do to open
 files on your computer). That will do the same thing as the following
@@ -789,8 +791,8 @@ dim(NELS)
 
 If you want to look at the data in a spreadsheet, use the following
 command. It won't render anything in this book, but you can see what it
-does in R. (You may need to install XQuartz from www.xquartz.org if you
-are using a Mac.)
+does in R. (You may need to install XQuartz from https://www.xquartz.org
+if you are using a Mac.)
 
 ```{r, eval = F}
 View(NELS)
@@ -802,13 +804,13 @@ want to edit data in spreadsheet format, use Excel or something.
 
 Working with data is often made easier by "attaching"" the dataset. When
 a dataset it attached, this means that we can refer to the columns of
-the datasetby their names directly
+the dataset by their names.
 
 ```{r}
 # Attach the data set
 attach(NELS)
 
-# Print the first 10 values of the gender variable
+# Print the first 10 values of the NELS gender variable
 gender[1:10]
 ```
 
@@ -850,11 +852,9 @@ plot(x = ses,
 mod <- lm(achmat08 ~ ses)
 
 # Add the regression line to the plot
-abline(mod) 
-```
+abline(mod)
 
-
-
-```{r, echo = F}
+# Detach the data set
 detach(NELS)
 ```
+
