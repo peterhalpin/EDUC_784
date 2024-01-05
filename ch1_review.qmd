@@ -49,17 +49,12 @@ $$ \sum_i X_i. $$
 ## Rules of summation {#sec-rules-1}
 
 There are rules for manipulating summation notation that are useful for
-deriving results in statistics. These rules are things you learned about
-addition in grade school, but they are presented using summation
-notation. You don't need to do mathematical proofs or derivations in
-this class, but you will occasionally see some derivations in these
-notes (mainly in the optional sections).
+deriving results in statistics. You don't need to do mathematical proofs or derivations in this class, but you will occasionally see some derivations in these notes (mainly in the optional sections).
 
 Here are the rules:
 
-**Rule 1: Sum of a constant (multiplication)**. Summing the values of a
-constant $c$ is the same as multiplication. Specifically, if you add a
-constant $c$ to itself $N$ times, this just $N$ times the constant:
+**Rule 1: Sum of a constant (multiplication)**. Adding a
+constant to itself is equivalent to multiplication. 
 
 ```{=tex}
 \begin{align}
@@ -67,8 +62,7 @@ constant $c$ to itself $N$ times, this just $N$ times the constant:
 & = Nc 
 \end{align}
 ```
-**Rule 2: Distributive property**. The sum of a variable $X_i$ times a
-constant $c$ is equal to the constant times the sum.
+**Rule 2: Distributive property**. Multiplying each term of a sum by a constant is the same as multiplying the sum by a constant. 
 
 ```{=tex}
 \begin{align}
@@ -78,7 +72,7 @@ constant $c$ is equal to the constant times the sum.
 \end{align}
 ```
 **Rule 3: Associative property**. It doesn't matter what order we do
-addition in:
+addition in.
 
 ```{=tex}
 \begin{align}
@@ -176,12 +170,11 @@ affected by linear transformations.
 -   Derivation: use the rules for variances and covariances of linear
     transformation and the formula for correlation.
 
-
 ## Bias and precision
 
 In this section we consider two more important properties of
-sample statistics. These properties are defined in terms of the *sampling
-distribution* of a statistic. Recall that a sampling distribution arises
+sample statistics. These properties are defined in terms of *sampling
+distributions*.  Recall that a sampling distribution arises
 from the following thought experiment: 
 
 1. Take a random sample of size $N$ from a population of interest. 
@@ -198,12 +191,9 @@ sample mean,
 $$ \bar{X}_1, \bar{X}_2, \bar{X}_3, \bar{X}_4, \bar{X}_5, ... $$
 
 The distribution of these sample means is called a sampling
-distribution.
-
-A sampling distribution is just like any other distribution -- so it has
-its own mean, and its own variance, etc. These statistics, when computed
-for a sampling distribution, have special names. We are especially
-interested in:
+distribution (i.e., the sampling distribution of the mean). A sampling distribution is just like any other distribution -- so it has
+its own mean, and its own variance, etc. These quantities, when computed
+for a sampling distribution, have special names. 
 
 -   **The expected value** of the mean, denoted $E(\bar X)$, is the mean
     of the sampling distribution of the mean. That is a mouthful! That
@@ -244,86 +234,47 @@ width="400"}
 
 The $t$-test is used to make an inference about the value of an unknown
 population parameter. The test compares the value of an unbiased
-estimate of the parameter to a hypothesized value of the parameter. The
-conceptual formula for a $t$-test is
+estimate of the parameter to a hypothesized value of the parameter. It is assumed that the sampling distribution of the estimate is a normal distribution, so the $t$-test applies to statistics like means and regression coefficients. 
+
+The conceptual formula for a $t$-test is
 
 $$ t = \frac{\text{unbiased estimate} - \text{hypothesized value }}{\text{standard error}} $$
-
-When we conduct a $t$-test, the basic rationale is as follows: "if the
-estimate is close the hypothesized value of the parameter,
-then the numerator should be small relative to the standard error, and
-so $t$ should be close to zero."
-
-Typically, the hypothesized value of the population parameter is equal
-to zero, in which case it is called a null hypothesis. The null
-hypothesis usually translates into a research hypothesis of "no effect"
-or "no relationship." So, if $t$ is close to zero, it means there was no
-effect.
+When we conduct a $t$-test, the basic rationale is as follows: If the "true" population parameter is equal to the hypothesized value, then the estimate should be close to the hypothesized value, and so $t$ should be close to zero.  
 
 In order to determine what values of $t$ are "close to zero", we refer
 to its sampling distribution, which is called the $t$-distribution. The
-$t$-distribution tells what values of $t$ are typical if the null
-hypothesis is true. (More specifically: if the sample statistic is
-normally distributed and its expected value is equal to the hypothesized
-value of the parameter, then $t$ has a "central" $t$-distribution.)
-
-Some examples of the $t$-distribution are shown below. The x-axis
-denotes values of the statistic $t$ shown above, and $\nu$ is a
-parameter called the "degrees of freedom" (more on this below). You can
-see that the $t$-distribution looks like a normal distribution centered
-a zero. So, when the null hypothesis is true, the expected value of $t$
-is zero. Informally, we could say that values greater than $\pm 2$ are
-pretty unlikely, and values greater than $\pm 4$ are very unlikely. Keep
-in the mind that these are the values of $t$ we are expecting if the
-null hypothesis is true.
+$t$-distribution tells what values of $t$ are typical if the
+hypothesis is true. Some examples of the $t$-distribution are shown in the figure below. The x-axis denotes values of the statistic $t$ shown above, and $\nu$ is parameter called the "degrees of freedom" (more on this soon). 
 
 ![t-distribution (source:
 https://en.wikipedia.org/wiki/Student%27s_t-distribution)](https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Student_t_pdf.svg/1920px-Student_t_pdf.svg.png){#fig-tdist
 width="400"}
 
-More formally, we can compare the value of $t$ computed in a sample,
-denoted as $t_{\text{obs}}$, to a "critical value", denoted as $t^*$.
-The critical value is chosen so that the "significance level", defined
-as $\alpha = \text{Prob}(|t| \geq t^*)$, is sufficiently small.
+You can see that the $t$-distribution looks like a normal distribution centered
+a zero. So, when the hypothesis is true, the expected value of $t$
+is zero. Informally, we could say that, if the hypothesis is true, values  of $t$ greater than $\pm 2$ are pretty unlikely, and values greater than $\pm 4$ are very unlikely. 
 
-The significance level is chosen by the researcher. It represents our
-tolerance for false positives or Type I Errors -- i.e., incorrectly
-rejecting the null hypothesis, or incorrectly concluding there is an
-effect when there isn't one. When we set $\alpha$ to a small number, we
-are saying that we want the probability of a false positive to be small.
-This means we are going to need strong evidence before we reject the
-null hypothesis -- i.e., the value of $t$ would need to be very unlikely
-under the null hypothesis.
+More formally, we can make an inference about whether the population parameter is equal to the hypothesized value by comparing the value of $t$ computed in our sample, denoted as $t_{\text{obs}}$, to a "critical value", denoted as $t^*$. The critical value is chosen so that the "significance level", defined as $\alpha = \text{Prob}(|t| \geq t^*)$, is sufficiently small. The significance level is chosen by the researcher. Often it is set to $.05$ or $.01.$ 
 
 There are two equivalent ways of "formally" conducting a $t$-test.
 
 1.  Compare the observed value of $t$ to the critical value.
-    Specifically: if $|t_{\text{obs}}| > t^*$, reject the null hypothesis.
+    Specifically: if $|t_{\text{obs}}| > t^*$, reject the hypothesis.
 
 2.  Compare the significance level chosen by the researcher, $\alpha$, to
     the "p-value" of the test, computed as
     $p = \text{Prob}(|t| \geq |t_{\text{obs}}|)$. Specifically: if
-    $p < \alpha$, reject the null hypothesis.
+    $p < \alpha$, reject the hypothesis.
 
 Informally, both of these just mean that the absolute value of $t$
 should be pretty big (i.e., greater than $t^*$) before we reject the
-null hypothesis.
+hypothesis.
 
-One last thing before moving on: the t-distribution has a single
-parameter called its "degrees of freedom", which is denoted as $\nu$ in
-@fig-tdist. The degrees of freedom are always an increasing function of
-the sample size, with larger samples leading to more degrees of freedom.
-When the degrees of freedom approach $\infty$, the $t$-distribution
-approaches a normal distribution. This means that the difference
-between a $t$-test and a $z$-test is pretty minor in large samples (say
-$N \geq 100$).
+A couple more things before moving on. 
 
-However, when the degrees of freedom are small, the $t$-distribution has
-wider tails than the normal distribution. This is also shown in
-@fig-tdist. The tails of the distribution are important when doing
-statistical tests, because we are interested knowing about large /
-unlikely values of $t$. So, in small samples (say $N < 100$), it is
-important to use the $t$-distribution rather than the normal distribution.
+First, the hypothesized value of the population parameter is often zero, in which case it is called a null hypothesis. The null hypothesis usually translates into a research hypothesis of "no effect" or "no relationship." So, if we reject the null hypothesis, we conclude that there was an effect.  
+
+Second,  the t-distribution has a single parameter called its "degrees of freedom", which is denoted as $\nu$ in @fig-tdist. The degrees of freedom are always an increasing function of the sample size, with larger samples leading to more degrees of freedom. When the degrees of freedom approach $\infty$, the $t$-distribution approaches a normal distribution. This means that the difference between a $t$-test and a $z$-test is pretty minor in large samples (say $N \geq 100$).
 
 ## Confidence intervals
 
