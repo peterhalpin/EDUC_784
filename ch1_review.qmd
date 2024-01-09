@@ -274,7 +274,7 @@ A couple more things before moving on.
 
 First, the hypothesized value of the population parameter is often zero, in which case it is called a null hypothesis. The null hypothesis usually translates into a research hypothesis of "no effect" or "no relationship." So, if we reject the null hypothesis, we conclude that there was an effect.  
 
-Second,  the t-distribution has a single parameter called its "degrees of freedom", which is denoted as $\nu$ in @fig-tdist. The degrees of freedom are always an increasing function of the sample size, with larger samples leading to more degrees of freedom. When the degrees of freedom approach $\infty$, the $t$-distribution approaches a normal distribution. This means that the difference between a $t$-test and a $z$-test is pretty minor in large samples (say $N \geq 100$).
+Second,  the t-distribution has a single parameter called its "degrees of freedom", which is denoted as $\nu$ in @fig-tdist. The degrees of freedom are  an increasing function of the sample size, with larger samples leading to more degrees of freedom. When the degrees of freedom approach $\infty$, the $t$-distribution approaches a normal distribution. This means that the difference between a $t$-test and a $z$-test is pretty minor in large samples (say $N \geq 100$).
 
 ## Confidence intervals
 
