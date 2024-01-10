@@ -6,5 +6,7 @@ The notes contain **questions that are written in bold font**. The questions are
 
 Some chapters contain a section called "Exercises" that collects all of the R code from that chapter into a single overall workflow. **You don't need to do the Exercises before class**, but you can if you want to. If a chapter doesn't have an Exercises section, that means we will be working on an assignment together instead.
 
+Image credit: Daniela Rodriguez-Mincey, Spring 2023
+
 
 
