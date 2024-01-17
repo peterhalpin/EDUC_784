@@ -64,6 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./ch3_two_predictors.html" rel="next">
 <link href="./ch1_review.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -151,6 +152,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="./ch2_simple_regression.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Simple Regression</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch3_two_predictors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Two predictors</span></span></a>
   </div>
 </li>
     </ul>
@@ -278,7 +285,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><span class="math inline">\(b\)</span> represents the regression slope (how much <span class="math inline">\(\widehat Y\)</span> changes for each unit of increase in <span class="math inline">\(X\)</span>)</li>
 </ul>
 <p>In this equation, the symbol <span class="math inline">\(\widehat Y\)</span> represents the “predicted value” of Math Achievement for a given value of SES. In <a href="#fig-nels-2">Figure&nbsp;<span>2.1</span></a>, the predicted values are represented by the regression line. The “observed values” of Math Achievement are denoted as <span class="math inline">\(Y\)</span>. In <a href="#fig-nels-2">Figure&nbsp;<span>2.1</span></a>, these values are represented by the points in the scatter plot.</p>
-<p>Some more terminology: the <span class="math inline">\(Y\)</span> variable is often referred to as the “outcome” or the “dependent variable.” The <span class="math inline">\(X\)</span> variable is often referred to as the “predictor”, “independent variable”, “explanatory variable”, or “covariate.” Different areas of research have different conventions about terminology for regression. We talk more about “big picture” interpretations of regression in <span class="quarto-unresolved-ref">?sec-chap-3</span>.</p>
+<p>Some more terminology: the <span class="math inline">\(Y\)</span> variable is often referred to as the “outcome” or the “dependent variable.” The <span class="math inline">\(X\)</span> variable is often referred to as the “predictor”, “independent variable”, “explanatory variable”, or “covariate.” Different areas of research have different conventions about terminology for regression. We talk more about “big picture” interpretations of regression in <a href="ch3_two_predictors.html"><span>Chapter&nbsp;3</span></a>.</p>
 <p>The difference between an observed value <span class="math inline">\(Y\)</span> and its predicted value <span class="math inline">\(\widehat Y\)</span> is called a <em>residual</em>. Residuals are denoted as <span class="math inline">\(e = Y - \widehat Y\)</span>. The residuals for a subset of the data points in <a href="#fig-nels-2">Figure&nbsp;<span>2.1</span></a> are shown in pink in <a href="#fig-resid-2">Figure&nbsp;<span>2.2</span></a></p>
 <div class="cell" data-layout-align="center">
 <details>
@@ -1386,6 +1393,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./ch3_two_predictors.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Two predictors</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="sourceCode" id="cb51" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
