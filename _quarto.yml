@@ -10,6 +10,7 @@ book:
     - index.qmd
     - ch1_review.qmd
     - ch2_simple_regression.qmd
+    - ch3_two_predictors.qmd
 
 bibliography: references.bib
 
