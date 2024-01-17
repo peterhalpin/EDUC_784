@@ -32,7 +32,7 @@ mod <- lm(achmat08 ~ ses)
 abline(mod) 
 ```
 
-The strength and direction of the linear relationship between the two variables is summarized by their correlation. In this sample, the value of correlation is:
+The strength and direction of the linear relationship between the two variables is summarized by their correlation. In this sample, the value of the correlation is:
 
 ```{r}
 cor(achmat08, ses)
@@ -40,7 +40,7 @@ cor(achmat08, ses)
 
 This is a moderate, positive correlation between Math Achievement and SES. This correlation means that eighth graders from more well-off families (higher SES) also tended to do better in math (higher Math Achievement).
 
-This relationship between SES and academic achievement has been widely documented and discussed in education research (e.g., <https://www.apa.org/pi/ses/resources/publications/education>). **Please look over this web page and be prepared to share your thoughts/questions about the relationship between SES and academic achievement and its relevance for education research.**  
+The relationship between SES and academic achievement has been widely documented and discussed in education research (e.g., <https://www.apa.org/pi/ses/resources/publications/education>). **Please look over this web page and be prepared to share your thoughts/questions about the relationship between SES and academic achievement and its relevance for education research.**  
 
 ## The regression line {#sec-regression-line-2}
 
@@ -135,13 +135,13 @@ $$
 a = \bar Y - b \bar X \quad \quad \quad \quad b = \frac{\text{cov}(X, Y)}{s^2_X} = \text{cor}(X, Y) \frac{s_Y}{s_X}
 $$ {#eq-reg-coeffs}
 
-(If you aren't familiar with the symbols in these equations, check out the review materials in @sec-chap-1) for a refresher.)
+(If you aren't familiar with the symbols in these equations, check out the review materials in @sec-chap-1 for a refresher.)
 
 The formulas in @eq-reg-coeffs tell us how to *compute* the regression coefficients using our sample data. However, on face value, these formulas don't tell us much about how to *interpret* the regression coefficients. For interpreting the regression coefficients, it is more straightforward to refer to @eq-yhat. 
 
 To clarify: 
 
-* To *interpret* the regression intercept, use @eq-yhat: It is the value of $\hat Y$ when $X = 0$. Similarly, the regression slope is how much $\hat Y$ changes for a one-unit change in $X$. 
+* To *interpret* the regression intercept, use @eq-yhat: It is the value of $\hat Y$ when $X = 0$. Similarly, the regression slope is how much $\hat Y$ changes for a one-unit increase in $X$. 
 
 * To *compute* the regression coefficients, use @eq-reg-coeffs. These formulas are not very intuitive -- they are just what we get when we fit a line to the data using OLS. 
 
