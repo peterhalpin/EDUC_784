@@ -257,7 +257,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>The strength and direction of the linear relationship between the two variables is summarized by their correlation. In this sample, the value of correlation is:</p>
+<p>The strength and direction of the linear relationship between the two variables is summarized by their correlation. In this sample, the value of the correlation is:</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -268,7 +268,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>This is a moderate, positive correlation between Math Achievement and SES. This correlation means that eighth graders from more well-off families (higher SES) also tended to do better in math (higher Math Achievement).</p>
-<p>This relationship between SES and academic achievement has been widely documented and discussed in education research (e.g., <a href="https://www.apa.org/pi/ses/resources/publications/education" class="uri">https://www.apa.org/pi/ses/resources/publications/education</a>). <strong>Please look over this web page and be prepared to share your thoughts/questions about the relationship between SES and academic achievement and its relevance for education research.</strong></p>
+<p>The relationship between SES and academic achievement has been widely documented and discussed in education research (e.g., <a href="https://www.apa.org/pi/ses/resources/publications/education" class="uri">https://www.apa.org/pi/ses/resources/publications/education</a>). <strong>Please look over this web page and be prepared to share your thoughts/questions about the relationship between SES and academic achievement and its relevance for education research.</strong></p>
 </section>
 <section id="sec-regression-line-2" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="sec-regression-line-2"><span class="header-section-number">2.2</span> The regression line</h2>
@@ -353,11 +353,11 @@ SS_{\text{res}} = \sum_{i=1}^{N} e_i^2 = \sum_{i=1}^{N} (Y_i - a - b X_i)^2
 <p><span id="eq-reg-coeffs"><span class="math display">\[
 a = \bar Y - b \bar X \quad \quad \quad \quad b = \frac{\text{cov}(X, Y)}{s^2_X} = \text{cor}(X, Y) \frac{s_Y}{s_X}
 \tag{2.4}\]</span></span></p>
-<p>(If you aren’t familiar with the symbols in these equations, check out the review materials in <a href="ch1_review.html"><span>Chapter&nbsp;1</span></a>) for a refresher.)</p>
+<p>(If you aren’t familiar with the symbols in these equations, check out the review materials in <a href="ch1_review.html"><span>Chapter&nbsp;1</span></a> for a refresher.)</p>
 <p>The formulas in <a href="#eq-reg-coeffs">Equation&nbsp;<span>2.4</span></a> tell us how to <em>compute</em> the regression coefficients using our sample data. However, on face value, these formulas don’t tell us much about how to <em>interpret</em> the regression coefficients. For interpreting the regression coefficients, it is more straightforward to refer to <a href="#eq-yhat">Equation&nbsp;<span>2.1</span></a>.</p>
 <p>To clarify:</p>
 <ul>
-<li><p>To <em>interpret</em> the regression intercept, use <a href="#eq-yhat">Equation&nbsp;<span>2.1</span></a>: It is the value of <span class="math inline">\(\hat Y\)</span> when <span class="math inline">\(X = 0\)</span>. Similarly, the regression slope is how much <span class="math inline">\(\hat Y\)</span> changes for a one-unit change in <span class="math inline">\(X\)</span>.</p></li>
+<li><p>To <em>interpret</em> the regression intercept, use <a href="#eq-yhat">Equation&nbsp;<span>2.1</span></a>: It is the value of <span class="math inline">\(\hat Y\)</span> when <span class="math inline">\(X = 0\)</span>. Similarly, the regression slope is how much <span class="math inline">\(\hat Y\)</span> changes for a one-unit increase in <span class="math inline">\(X\)</span>.</p></li>
 <li><p>To <em>compute</em> the regression coefficients, use <a href="#eq-reg-coeffs">Equation&nbsp;<span>2.4</span></a>. These formulas are not very intuitive – they are just what we get when we fit a line to the data using OLS.</p></li>
 </ul>
 <p>It is important to emphasize that the formulas in <a href="#eq-reg-coeffs">Equation&nbsp;<span>2.4</span></a> <em>do</em> lead to some useful mathematical results about regression. <a href="#sec-properties-2"><span>Section&nbsp;2.9</span></a>, which is optional, derives some of the main results. If you want a deeper mathematical understanding of regression, make sure to check out this section. If you prefer to just learn about the results as they become relevant and skip the math, that is OK too.</p>
@@ -1432,7 +1432,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb51-32"><a href="#cb51-32" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(mod) </span>
 <span id="cb51-33"><a href="#cb51-33" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb51-34"><a href="#cb51-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb51-35"><a href="#cb51-35" aria-hidden="true" tabindex="-1"></a>The strength and direction of the linear relationship between the two variables is summarized by their correlation. In this sample, the value of correlation is:</span>
+<span id="cb51-35"><a href="#cb51-35" aria-hidden="true" tabindex="-1"></a>The strength and direction of the linear relationship between the two variables is summarized by their correlation. In this sample, the value of the correlation is:</span>
 <span id="cb51-36"><a href="#cb51-36" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb51-39"><a href="#cb51-39" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb51-40"><a href="#cb51-40" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(achmat08, ses)</span>
@@ -1440,7 +1440,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb51-42"><a href="#cb51-42" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb51-43"><a href="#cb51-43" aria-hidden="true" tabindex="-1"></a>This is a moderate, positive correlation between Math Achievement and SES. This correlation means that eighth graders from more well-off families (higher SES) also tended to do better in math (higher Math Achievement).</span>
 <span id="cb51-44"><a href="#cb51-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb51-45"><a href="#cb51-45" aria-hidden="true" tabindex="-1"></a>This relationship between SES and academic achievement has been widely documented and discussed in education research (e.g., <span class="ot">&lt;https://www.apa.org/pi/ses/resources/publications/education&gt;</span>). **Please look over this web page and be prepared to share your thoughts/questions about the relationship between SES and academic achievement and its relevance for education research.**  </span>
+<span id="cb51-45"><a href="#cb51-45" aria-hidden="true" tabindex="-1"></a>The relationship between SES and academic achievement has been widely documented and discussed in education research (e.g., <span class="ot">&lt;https://www.apa.org/pi/ses/resources/publications/education&gt;</span>). **Please look over this web page and be prepared to share your thoughts/questions about the relationship between SES and academic achievement and its relevance for education research.**  </span>
 <span id="cb51-46"><a href="#cb51-46" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb51-47"><a href="#cb51-47" aria-hidden="true" tabindex="-1"></a><span class="fu">## The regression line {#sec-regression-line-2}</span></span>
 <span id="cb51-48"><a href="#cb51-48" aria-hidden="true" tabindex="-1"></a></span>
@@ -1535,13 +1535,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb51-137"><a href="#cb51-137" aria-hidden="true" tabindex="-1"></a>a = \bar Y - b \bar X \quad \quad \quad \quad b = \frac{\text{cov}(X, Y)}{s^2_X} = \text{cor}(X, Y) \frac{s_Y}{s_X}</span>
 <span id="cb51-138"><a href="#cb51-138" aria-hidden="true" tabindex="-1"></a>$$ {#eq-reg-coeffs}</span>
 <span id="cb51-139"><a href="#cb51-139" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb51-140"><a href="#cb51-140" aria-hidden="true" tabindex="-1"></a>(If you aren't familiar with the symbols in these equations, check out the review materials in @sec-chap-1) for a refresher.)</span>
+<span id="cb51-140"><a href="#cb51-140" aria-hidden="true" tabindex="-1"></a>(If you aren't familiar with the symbols in these equations, check out the review materials in @sec-chap-1 for a refresher.)</span>
 <span id="cb51-141"><a href="#cb51-141" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb51-142"><a href="#cb51-142" aria-hidden="true" tabindex="-1"></a>The formulas in @eq-reg-coeffs tell us how to *compute* the regression coefficients using our sample data. However, on face value, these formulas don't tell us much about how to *interpret* the regression coefficients. For interpreting the regression coefficients, it is more straightforward to refer to @eq-yhat. </span>
 <span id="cb51-143"><a href="#cb51-143" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb51-144"><a href="#cb51-144" aria-hidden="true" tabindex="-1"></a>To clarify: </span>
 <span id="cb51-145"><a href="#cb51-145" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb51-146"><a href="#cb51-146" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>To *interpret* the regression intercept, use @eq-yhat: It is the value of $\hat Y$ when $X = 0$. Similarly, the regression slope is how much $\hat Y$ changes for a one-unit change in $X$. </span>
+<span id="cb51-146"><a href="#cb51-146" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>To *interpret* the regression intercept, use @eq-yhat: It is the value of $\hat Y$ when $X = 0$. Similarly, the regression slope is how much $\hat Y$ changes for a one-unit increase in $X$. </span>
 <span id="cb51-147"><a href="#cb51-147" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb51-148"><a href="#cb51-148" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>To *compute* the regression coefficients, use @eq-reg-coeffs. These formulas are not very intuitive -- they are just what we get when we fit a line to the data using OLS. </span>
 <span id="cb51-149"><a href="#cb51-149" aria-hidden="true" tabindex="-1"></a></span>
