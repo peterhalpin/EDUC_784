@@ -11,6 +11,7 @@ book:
     - ch1_review.qmd
     - ch2_simple_regression.qmd
     - ch3_two_predictors.qmd
+    - ch4_categorical_predictors.qmd
 
 bibliography: references.bib
 
@@ -23,7 +24,7 @@ format:
     code-fold: true
     code-tools: true
 
-  docx:
-    toc: true
-    number-sections: true
-    highlight-style: github
+  # docx:
+  #   toc: true
+  #   number-sections: true
+  #   highlight-style: github

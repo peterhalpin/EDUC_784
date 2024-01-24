@@ -546,7 +546,7 @@ mod <- lm(achmat08 ~ ses)
 abline(mod) 
 ```
 
-The strength and direction of the linear relationship between the two variables is summarized by their correlation. In this sample, the value of correlation is:
+The strength and direction of the linear relationship between the two variables is summarized by their correlation. In this sample, the value of the correlation is:
 
 ```{r}
 cor(achmat08, ses)
