@@ -160,6 +160,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Two predictors</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch4_categorical_predictors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Categorical predictors</span></span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -519,7 +525,7 @@ SS_{\text{total}} = \sum_{i = 1}^N (Y_i - \widehat Y_i)^2 + \sum_{i = 1}^N (\wid
 </tr>
 </tbody>
 </table>
-<p>The “hats” always denote sample quantities, and the Greek letters always denote population quantities, but there is some lack of consistency. For example, why not use <span class="math inline">\(\beta\)</span> instead of <span class="math inline">\(b\)</span> for the population slope? Well, <span class="math inline">\(\beta\)</span> is conventionally used to denote standardized regression coefficients in the <em>sample</em>, so its already taken (more on this in <span class="quarto-unresolved-ref">?sec-chap-4</span>).</p>
+<p>The “hats” always denote sample quantities, and the Greek letters always denote population quantities, but there is some lack of consistency. For example, why not use <span class="math inline">\(\beta\)</span> instead of <span class="math inline">\(b\)</span> for the population slope? Well, <span class="math inline">\(\beta\)</span> is conventionally used to denote standardized regression coefficients in the <em>sample</em>, so its already taken (more on this in <a href="ch4_categorical_predictors.html"><span>Chapter&nbsp;4</span></a>).</p>
 <p>If it is clear from context that we are talking about the sample rather than the population, then the hats are usually omitted from the statistics <span class="math inline">\(\widehat a\)</span>, <span class="math inline">\(\widehat b\)</span>, and <span class="math inline">\(\widehat R^2\)</span>. This doesn’t apply to <span class="math inline">\(\widehat Y\)</span>, because the hat is required to distinguish the predicted values from the data points.</p>
 <p>Another thing to note is that while <span class="math inline">\(\widehat Y\)</span> is often called a predicted value, <span class="math inline">\(E(Y|X)\)</span> is not usually referred to this way. It is called the conditional mean function or the conditional expectation function. Using this language, we can say that regression is about estimating the conditional mean function.</p>
 <p><strong>Please be prepared for a pop quiz on notation during class!</strong></p>
@@ -751,7 +757,7 @@ R^2 &amp; = [\text{cor}(Y, \hat Y)]^2 \\
 </div>
 </div>
 </div>
-<p>The strength and direction of the linear relationship between the two variables is summarized by their correlation. In this sample, the value of correlation is:</p>
+<p>The strength and direction of the linear relationship between the two variables is summarized by their correlation. In this sample, the value of the correlation is:</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -1059,7 +1065,7 @@ F-statistic: 56.12 on 1 and 498 DF,  p-value: 3.127e-13</code></pre>
 </div>
 </div>
 <p>In the table, the t-test and p-values are for the null hypothesis that the corresponding coefficient is zero in the population. We can see that the intercept and slope are both significantly different from zero at the .05 level. However, the test of the intercept is not very meaningful (why?).</p>
-<p>The text below the table summarizes the output for R-squared, including its F-test, it’s degrees of freedom, and the p-value. (We will talk about adjusted R-square in <span class="quarto-unresolved-ref">?sec-chap-4</span>)</p>
+<p>The text below the table summarizes the output for R-squared, including its F-test, it’s degrees of freedom, and the p-value. (We will talk about adjusted R-square in <a href="ch4_categorical_predictors.html"><span>Chapter&nbsp;4</span></a>)</p>
 <p>We can also use the <code>confint</code> function to obtain confidence intervals for the regression coefficients. Use <code>help</code> to find out more about the <code>confint</code> function.</p>
 <div class="cell">
 <details>
@@ -1946,7 +1952,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb51-560"><a href="#cb51-560" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(mod) </span>
 <span id="cb51-561"><a href="#cb51-561" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb51-562"><a href="#cb51-562" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb51-563"><a href="#cb51-563" aria-hidden="true" tabindex="-1"></a>The strength and direction of the linear relationship between the two variables is summarized by their correlation. In this sample, the value of correlation is:</span>
+<span id="cb51-563"><a href="#cb51-563" aria-hidden="true" tabindex="-1"></a>The strength and direction of the linear relationship between the two variables is summarized by their correlation. In this sample, the value of the correlation is:</span>
 <span id="cb51-564"><a href="#cb51-564" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb51-567"><a href="#cb51-567" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb51-568"><a href="#cb51-568" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(achmat08, ses)</span>
