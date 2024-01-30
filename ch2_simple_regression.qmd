@@ -44,7 +44,7 @@ The relationship between SES and academic achievement has been widely documented
 
 ## The regression line {#sec-regression-line-2}
 
-The section presents three interchangeable ways of writing the regression line in @fig-nels-2. You should be familiar with all 3 ways of presenting regression equations and you are welcome to use whichever approach you like best in your writing for this class.
+The section presents three interchangeable ways of writing the regression line in @fig-nels-2. You should be familiar with all three ways of presenting regression equations and you are welcome to use whichever approach you like best in your writing for this class.
 
 The regression line in @fig-nels-2 can be represented mathematically as
 
@@ -59,9 +59,9 @@ where
 -   $a$ represents the regression intercept (the value of $\widehat Y$ when $X = 0$)
 -   $b$ represents the regression slope (how much $\widehat Y$ changes for each unit of increase in $X$)
 
-In this equation, the symbol $\widehat Y$ represents the "predicted value" of Math Achievement for a given value of SES. In @fig-nels-2, the predicted values are represented by the regression line. The "observed values" of Math Achievement are denoted as $Y$. In @fig-nels-2, these values are represented by the points in the scatter plot.  
+In this equation, the symbol $\widehat Y$ represents the *predicted value* of Math Achievement for a given value of SES. In @fig-nels-2, the predicted values are represented by the regression line. The *observed values* of Math Achievement are denoted as $Y$. In @fig-nels-2, these values are represented by the points in the scatter plot.  
 
-Some more terminology: the $Y$ variable is often referred to as the "outcome" or the "dependent variable." The $X$ variable is often referred to as the "predictor", "independent variable", "explanatory variable", or "covariate." Different areas of research have different conventions about terminology for regression. We talk more about "big picture" interpretations of regression in @sec-chap-3. 
+Some more terminology: the $Y$ variable is often referred to as the *outcome* or the *dependent variable.* The $X$ variable is often referred to as the *predictor*, *independent variable*, *explanatory variable*, or *covariate.* Different areas of research have different conventions about terminology for regression. We talk more about "big picture" interpretations of regression in @sec-chap-3. 
 
 The difference between an observed value $Y$ and its predicted value $\widehat Y$ is called a *residual*. Residuals are denoted as $e = Y - \widehat Y$. The residuals for a subset of the data points in @fig-nels-2 are shown in pink in @fig-resid-2 
 
@@ -115,13 +115,13 @@ $$MATH = a + b(SES) + e$$ {#eq-math}
 
 This notation is useful when talking about a specific example, because we don't have to remember what $Y$ and $X$ stand for. But this notation is more clunky and doesn't lend itself talking about regression in general or writing other mathematical expressions related to regression. 
 
-You should be familiar with all 3 ways of presenting regression equations (@eq-yhat, @eq-y, and @eq-math) and you are welcome to use whichever approach you like best in this class.
+You should be familiar with all three ways of presenting regression equations (@eq-yhat, @eq-y, and @eq-math) and you are welcome to use whichever approach you like best in this class.
 
 ## OLS {#sec-ols-2}
 
-This section talks about how to estimate the regression intercept (denoted as $a$ in @eq-yhat) and the regression slope (denoted as $b$ in @eq-yhat). The intercept and slope are collectively referred to as the "parameters" of the regression line. They are also referred to as "regression coefficients." 
+This section talks about how to estimate the regression intercept (denoted as $a$ in @eq-yhat) and the regression slope (denoted as $b$ in @eq-yhat). The intercept and slope are collectively referred to as the *parameters* of the regression line. They are also referred to as *regression coefficients.* 
 
-Our overall goal in this section is to  "fit a line to the data" -- i.e., we want to select the values of the regression coefficients that best represent our data. An intuitive way to approach this problem is by minimizing the residuals -- i.e., minimizing the total amount of "pink" in @fig-resid-2. We can operationalize this intuitive idea by minimizing the sum of squared residuals:
+Our overall goal in this section is to  "fit a line to the data" -- i.e., we want to select the values of the regression coefficients that best represent our data. An intuitive way to approach this problem is by minimizing the residuals -- i.e., minimizing the total amount of pink in @fig-resid-2. We can operationalize this intuitive idea by minimizing the sum of squared residuals:
 
 $$
 SS_{\text{res}} = \sum_{i=1}^{N} e_i^2 = \sum_{i=1}^{N} (Y_i - a - b X_i)^2 
@@ -137,7 +137,7 @@ $$ {#eq-reg-coeffs}
 
 (If you aren't familiar with the symbols in these equations, check out the review materials in @sec-chap-1 for a refresher.)
 
-The formulas in @eq-reg-coeffs tell us how to *compute* the regression coefficients using our sample data. However, on face value, these formulas don't tell us much about how to *interpret* the regression coefficients. For interpreting the regression coefficients, it is more straightforward to refer to @eq-yhat. 
+The formulas in @eq-reg-coeffs tell us how to compute the regression coefficients using our sample data. However, on face value, these formulas don't tell us much about how to interpret the regression coefficients. For interpreting the regression coefficients, it is more straightforward to refer to @eq-yhat. 
 
 To clarify: 
 
@@ -145,7 +145,7 @@ To clarify:
 
 * To *compute* the regression coefficients, use @eq-reg-coeffs. These formulas are not very intuitive -- they are just what we get when we fit a line to the data using OLS. 
 
-It is important to emphasize that the formulas in @eq-reg-coeffs *do* lead to some useful mathematical results about regression. @sec-properties-2, which is optional, derives some of the main results. If you want a deeper mathematical understanding of regression, make sure to check out this section. If you prefer to just learn about the results as they become relevant and skip the math, that is OK too.
+It is important to emphasize that the formulas in @eq-reg-coeffs do lead to some useful mathematical results about regression. @sec-properties-2, which is optional, derives some of the main results. If you want a deeper mathematical understanding of regression, make sure to check out this section. If you prefer to skip the math and just learn about the results as they become relevant, that is OK too.
 
 ### Correlation and regression
 
@@ -172,9 +172,9 @@ coef(mod)
 
 In this section we introduce another statistic that is commonly used in regression, called "R-squared" (in symbols: $R^2$). First we will talk about its interpretation, then we will show how it is computed. 
 
-R-squared is the proportion of variance in the outcome variable that is associated with, or "explained by", the predictor variable. In terms of the NELS example, the variance of the outcome can be interpreted in terms of individual differences in Math Achievement -- i.e., how students "deviate" from, or vary around, the mean level of Math Achievement. R-squared tells us the extent to which these individual differences in Math Achievement are associated with, or explained by, individual differences in SES.  
+R-squared is the proportion of variance in the outcome variable that is associated with, or "explained by", the predictor variable. In terms of the NELS example, the variance of the outcome can be interpreted in terms of individual differences in Math Achievement -- i.e., how students deviate from, or vary around, the mean level of Math Achievement. R-squared tells us the extent to which these individual differences in Math Achievement are associated with, or explained by, individual differences in SES.  
 
-As mentioned, R-squared is a proportion. Because R-squared is a proportion, it takes on values between $0$ and $1$. If $R^2 = 0$ then a student's SES doesn't tell us anything about their Math Achievement -- this is the same as saying the two variables aren't correlated, or that there is no (linear) relationship between Math Achievement and SES. If $R^2 = 1$, then all of the data points fall exactly on the regression line, and we can perfectly predict each student's Math Achievement from their SES. 
+As mentioned, R-squared is a proportion. Because it is a proportion, it takes on values between $0$ and $1$. If $R^2 = 0$ then a student's SES doesn't tell us anything about their Math Achievement -- this is the same as saying the two variables aren't correlated, or that there is no (linear) relationship between Math Achievement and SES. If $R^2 = 1$, then all of the data points fall exactly on the regression line, and we can perfectly predict each student's Math Achievement from their SES. 
 
 You might be asking -- why do we need R-squared? We already have the regression coefficient (which is just a repackaging of the correlation), so why do we need yet another way of describing the relationship between Math Achievement and SES? This is very true for simple regression! However, when we move on to multiple regression, we will see that R-squared lets us talk about the relationship between the outcome and *all* of the predictors, or any subset of the predictors, whereas the regression coefficient only lets us talk about the relationship with one predictor at a time. 
 

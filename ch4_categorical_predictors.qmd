@@ -21,24 +21,22 @@ In an experimental context, the canonical example of a categorical predictor is 
 * Individualized learning plan status
 * ...
 
-
-This chapter will focus on the topic of "contrast coding" (also called "effect coding" or "dummy coding"). In this context, the term "contrast" means that we want to compare two (or more) groups of respondents in terms of their average levels on the outcome variable. For example, do urban students and rural students differ in their average levels of academic achievement? 
-
-In particular, we will address: 
+In regression, we deal with these types of predictors using an approach called *contrast coding* (also called *effect coding* or *dummy coding*). 
+In particular, we will address three types of contrast coding: 
 
 * The special case of a single binary predictor
 * Reference-group coding (called "treatment" contrasts in R)
 * Deviation coding (called "sum" contrasts in R)
 
-There are other types of contrast coding out there. We do not attempt an exhaustive review. However, the techniques we use in this chapter can be applied to other types of contrast coding. 
+There are other types of contrast coding out there. We do not attempt an exhaustive review. However, the techniques we use in this chapter can be used with other types of contrast coding. 
 
 Along the way we will see that regression with a categorical predictor encompasses the independent samples t-tests of means and one-way ANOVA, both of which we discussed last semester. In the next chapter we will address how to combine categorical and continuous predictors in the same model. 
  
 ## Focus on interpretation  {#sec-interpretations-4}
 
-Categorical predictors can challenging to understand because, depending on the contrast coding used, the model results can appear quite different.
+Categorical predictors can be challenging to understand because, depending on the contrast coding used, the model results can appear quite different.
 
-For example, the two models below uses the same data and the same variables (Math Achievement regressed on Urbanicity), but their regression coefficients have different values. Why? Because the models used different contrast coding for  Urbanicity. In the first model, Urban and Suburban students are compared to Rural students. In the second model, Rural and Suburban students are compared to the unweighted average across all three groups. 
+For example, the two models below use the same data and the same variables (Math Achievement regressed on Urbanicity), but their regression coefficients have different values. Why? Because the models used different contrast coding for  Urbanicity. In the first model, Urban and Suburban students are compared to Rural students. In the second model, Rural and Suburban students are compared to the unweighted average across all three groups. We talk in more detail about these interpretations in the following sections. For now, the main thing to notice is just that "different contrast coding = different results". 
 
 
 
@@ -60,7 +58,7 @@ summary(egB)
 ```
 
 
-Note that the `lm` output doesn’t explicitly tell us what kind of coding was used. So, we need to know what is going on “under the hood” in order to interpret the output correctly. Also note that the while the *Coefficients* tables of the two models are different, they both explain the same amount of variance in the outcome. So we could say that both models "fit" the data equally well, but they provide different interpretations of the relationship between Math Achievement and Urbanicity. 
+Note that the `lm` output doesn’t explicitly tell us what kind of coding was used. So, we need to know what is going on “under the hood” in order to interpret the output correctly. Also note that the while the *Coefficients* tables of the two models are different, they both explain the same amount of variance in the outcome. So, we could say that both models "fit" the data equally well, but they provide different interpretations of the relationship between Math Achievement and Urbanicity. 
 
 The choice of which contrast to use is up to the researcher. This choice should reflect the research questions you want to address. For example, if we wanted to know how Urban and Suburban students differ from Rural students, that is what the first output shows us. If we wanted to know how Suburban and Rural students differ from the overall average, that is what the second output shows us. As we will discuss below, we can't make all possible comparisons among groups in a single model, so we have to make some compromises when choosing contrasts. Understanding how to align our research questions with the choice of contrasts is a big part of what this chapter is about!
 
@@ -73,9 +71,9 @@ First, some terminology. *Binary* means the a variable can take on only two valu
 
 Note that encoding a variable as dichotomous does not imply that the underlying social construct is dichotomous. For example, we can encode educational attainment as a dichotomous variable indicating whether or not a person has graduated high school. This does not imply that educational attainment has only two values "irl", or even that educational attainment is best conceptualized in terms of years of formal education. Nonetheless, for many outcomes of interest it can be meaningful to consider whether individuals have completed high school (e.g., [https://www.ssa.gov/policy/docs/research-summaries/education-earnings.html](https://www.ssa.gov/policy/docs/research-summaries/education-earnings.html)).
 
-In general, the way that a variable is encoded in a dataset is not a statement about reality -- it reflects a choice made by researchers about how to represent social constructs. When conducting quantitative research, we are often faced with less-than-ideal encodings of so-called demographic variables. For example, both NELS and ECLS conceptualize gender as dichotomous and use a limited set of mutually exclusive categories for race. These representations are not well aligned with current literature on gender and racial identity. Some recent perspectives on how these issues play into quantitative research are available here: [https://www.sree.org/critical-perspectives](https://www.sree.org/critical-perspectives). 
+In general, the way that a variable is encoded in a dataset is not a statement about reality -- it reflects a choice made by researchers about how to represent social constructs. When conducting quantitative research, we are often faced with less-than-ideal encodings of social constructs, especially demographic variables. For example, both NELS and ECLS conceptualize gender as dichotomous and use a limited set of mutually exclusive categories for race. These representations are not well aligned with current literature on gender and racial identity. Some recent perspectives on how these issues play into quantitative research are available here: [https://www.sree.org/critical-perspectives](https://www.sree.org/critical-perspectives). 
 
-In general, I would argue that categorical variables often have utility, *especially* in the study of social inequality. Here is an example of why I think gender qua "male/female" is a flawed but important consideration in global education: [https://www.unicef.org/education/girls-education](https://www.unicef.org/education/girls-education).
+Despite the conceptual issues inherent in categorizing social constructs,  I would argue that categorical variables often have utility, *especially* in the study of social inequality. Here is an example of why I think gender qua "male/female" is a flawed but important consideration in global education: [https://www.unicef.org/education/girls-education](https://www.unicef.org/education/girls-education).
 
 **Please take a moment to write down your thoughts on the tensions that arise when conceptualizing social constructs such as gender or race as categorical, and I will invite you to share you thoughts in class.**
 
@@ -83,7 +81,7 @@ In general, I would argue that categorical variables often have utility, *especi
 
 Let's start our interpretation of categorical predictors with the simplest case: a single binary predictor. 
 
-Figure @fig-reading-on-gender-4 uses the NELS data to illustrate the regression of Reading Achievement in Grade 8 (`achrdg08`) on a binary encoding of Gender (female = 0, male = 1). There isn't a lot going on the plot! However, we can see the conditional distributions of Reading Achievement for each value of Gender, and the means of the two groups are indicated. 
+@fig-reading-on-gender-4 uses the NELS data to illustrate the regression of Reading Achievement in Grade 8 (`achrdg08`) on a binary encoding of Gender (female = 0, male = 1). There isn't a lot going on the plot! However, we can see the conditional distributions of Reading Achievement for each value of Gender, and the means of the two groups are indicated. 
 
 ```{r fig-reading-on-gender-4, fig.cap = 'Reading Achievement on Binary Gender.', fig.align = 'center', fig.width=5}
 
@@ -101,11 +99,11 @@ text(x = c(.1, .9), y = means, labels = labels, cex = 1.5)
 text(x = c(0, 1), y = means, labels = c("_", "_"), cex = 2) 
 ```
 
-In this situation, the simple regression equation from Section \@ref(regression-line-2) still holds
+We can represent the relationship between Reading Achievement and Gender using the same simple regression equation from @sec-regression-line-2
 
 $$\widehat Y = b_0 + b_1 X, $$
 
-and we can still interpret the regression slope in terms of a one-unit increase in $X$. However, since $X$ can only take on two values (0 or 1), there are also interpretations of the regression coefficients that apply in this situation. In this section we are interested in the this "more specific" interpretation of regression cofficients when $X$ is dichotomous. 
+and we can still interpret the regression slope in terms of a one-unit increase in $X$. However, since $X$ can only take on two values (0 or 1), there are also other interpretations of the regression coefficients. In this section we are interested in the these "more specific" interpretations of regression coefficients when $X$ is binary. 
 
 The general strategy for approaching the interpretation of regression coefficients with categorical predictors has two steps:
 
@@ -124,14 +122,14 @@ $$ {#eq-binary-2}
 
 Looking at @eq-binary-1 we can see that intercept ($b_0$) is equal to the predicted value of Reading Achievement for Females, and @eq-binary-2 shows that the regression slope ($b_1$) is equal to the difference between predicted Reading Achievement for Males and Females. 
 
-There is one last detail that is important for interpreting these equations: for a single categorical predictor, the predicted values for each category are just the group means on the $Y$ variable. This details, as we as some other interesting results on categorical variables, are shown in @sec-categorical-results-4
+There is one last detail that is important for interpreting these equations: for a single categorical predictor, the predicted values for each category are just the group means on the $Y$ variable (see @sec-categorical-results-4, which is optional). 
 
 So, using the notation of @fig-reading-on-gender-4, we can re-write @eq-binary-1 and @eq-binary-2 as
 
 $$b_0 = \bar Y_0  $$ {#eq-binary-3}  
 $$ b_1 = \bar Y_1 - \bar Y_0 $${#eq-binary-3}  
 
-We will use the equivalence between the predicted values and group means throughout this chapter. However, it is important to note this equivalence holds only when there is single categorical predictor in the model, and no other predictors. Additional predictors are discussed in the next chapter. 
+We will use the equivalence between the predicted values and group means on the outcome variable throughout this chapter. However, it is important to note this equivalence holds only when there is single categorical predictor in the model, and no other predictors. Additional predictors are discussed in the next chapter. 
 
 
 For the example data, regression coefficients are: 
@@ -179,17 +177,17 @@ When doing regression with a binary predictor:
 
 ## Reference-group coding {#sec-reference-group-coding-4}
 
-Now that we know how to do regression with a binary predictor works, let's consider how to extend this approach to categorical predictors with $C ≥ 2$ categories. There are many ways to do this, and the general topic is variously called "contrast coding", "effect coding", or "dummy coding".
+Now that we know about regression with a binary predictor, let's consider how to extend this approach to contrast coding of categorical predictors with $C ≥ 2$ categories. 
 
-The basic idea is to represent the $C$ categories of a predictor in terms of $C – 1$ dummy variables. Binary coding of a dichotomous predictor is one example of this: We represented a categorical variable with $C = 2$ categories using $1$ binary predictor. 
+The basic idea is to represent the $C$ categories of the predictor in terms of $C – 1$ "dummy variables." Binary coding of a dichotomous predictor is one example of this: We represented a categorical variable with $C = 2$ categories using $1$ binary predictor. 
 
-The most common approach to contrast coding is called *reference-group* coding. In R, the approach is called *treatment contrasts* and is the default coding for categorical predictors. 
+For predictors with $C ≥ 2$ categories, the most common approach to contrast coding is called *reference-group* coding. In R, the approach is called *treatment contrasts* and is the default coding for categorical predictors. 
 
 It is called reference-group coding because:
 
 * The researcher chooses a reference-group.
 * The intercept is interpreted as the mean of the reference-group. 
-* The $C – 1$ regression coefficients are interpreted as the mean differences between the $C – 1$ other groups and the reference-group.
+* The $C – 1$ regression slopes are interpreted as the mean differences between the $C – 1$ other groups and the reference-group.
 
 Note that reference-group coding is a generalization of binary coding. In the example from Section @sec-binary-predictors-4:
 
@@ -200,8 +198,8 @@ Note that reference-group coding is a generalization of binary coding. In the ex
 The rest of this section considers how to generalize this approach to greater than 2 groups.
 
 ### A hypothetical example
- 
-Figure @fig-martital-status1 presents a toy example. The data show the Age and marital status (Mstatus) of 16 hypothetical individuals. Marital status is encoded as 
+
+@fig-martital-status1 presents a toy example. The data show the Age and marital status (Mstatus) of 16 hypothetical individuals. Marital status is encoded as 
 
 * Single (never married)
 * Married
@@ -237,7 +235,7 @@ This notation is an abbreviated version of the data matrix in @fig-martital-stat
 
 Regressing Age on the dummies we have: 
 
-$$ \widehat Y = b_0 + b_1 X_1 + b_2 X_2 $$
+$$ \widehat Y = b_0 + b_1 X_1 + b_2 X_2. $$
 
 In order to interpret the regression coefficients we can use the same two steps as in @sec-binary-predictors-4
 
@@ -275,14 +273,14 @@ $$\widehat Y = b_0 + b_1 X_1 + b_2 X_2 + b_3 X_3$$
 
 * **How should $X_3$ be coded so that "single" is the reference-group?** 
 * **Write down the contrast matrix for the example.**
-* **Using the two-step approach illustrated above, write out the interpretation of the model parameters in the following regression equation:**
-* **What happens if we include an additional dummy variable for "Single" in the model. In this case we would have $C = 4$ dummies in the model rather than $C-1 = 3$ dummies. Please take a moment to write down what you think will happen (Hint: something goes wrong)**
+* **Using the two-step approach illustrated above, write out the interpretation of the regression coefficients.**
+* **Let's imagine that we included an additional dummy variable for "Single" in the model. In this case we would have $C = 4$ dummies in the model rather than $C-1 = 3$ dummies. Please take a moment to write down what you think will happen (Hint: something goes wrong)**
 
 ### Summary 
 
 In reference-group coding with a single categorical variable: 
 
-* The reference is group is chosen by the analyst – it is the group that is coded zero on all dummies, or the one that has its dummy left out of the $C-1$ dummies used in the model.  
+* The reference is group is chosen by the analyst – it is the group that is coded zero on all dummies, or the one that has its indicator omitted from the model.  
 
 * The intercept is interpreted as the mean of the reference group.
 
@@ -290,13 +288,13 @@ In reference-group coding with a single categorical variable:
 
 ## Deviation coding {#sec-deviation-coding-4}
 
-In some research scenarios, there is a clear reference group (e.g., in experimental conditions, comparisons are made to the control group). But in other cases, it is less clear what the reference group should be. In both of the examples we have considered so far, the choice of reference group was arbitrary. 
+In some research scenarios, there is a clear reference group. For example, in an experiment, all treatment groups are can be compared to the control group. But in other cases, it is less clear what the reference group should be. In both of the examples we have considered so far (gender and marital status), the choice of reference group was arbitrary. 
 
 When there is not a clear reference group, it can be preferable to use other types of contrast coding than reference-group coding. One such approach is called *deviation coding*. In R, this is called *sum-to-zero constrasts*, or *sum* contrasts for short. 
 
-The main difference between deviation coding and reference-group coding is the interpretation of the intercept. In deviation coding, it is no longer an (arbitrarily chosen) reference-group, but instead represents the mean of the predicted values. When the groups have equal sample size, the deviation-coded intercept is also equal to overall mean on $Y$. 
+The main difference between deviation coding and reference-group coding is the interpretation of the intercept. In deviation coding, it is no longer the mean of the  reference-group, but instead represents the mean of all groups' predicted values. When the groups have equal sample size, the deviation-coded intercept is also equal to overall mean on $Y$. 
 
-To summarize deviation coding: 
+More specifically, in deviation coding: 
 
 * The intercept is equal to the mean of the predicted values for each category i.e., 
 
@@ -312,11 +310,11 @@ b_0 = \frac{\sum_{c=1}^C \widehat Y_c} {C}
  = \frac{\sum_{c=1}^C \bar Y_c}{C} = \frac{\sum_{c=1}^C \left(\frac{\sum_{i=1}^n Y_{ic}}{n}\right)} {C} =  \frac{\sum_{c=1}^C \sum_{i=1}^n Y_{ic}}{nC} = \bar Y 
 \end{equation}
 
-* The regression slopes compare the indicated group to the intercept. Consequently, when the groups have equal sample sizes, the regression slopes are interpreted as the deviation of each group mean from the overall mean, which is why it is called deviation coding. 
+The regression slopes compare the each group to the intercept. Consequently, when the groups have equal sample sizes, the regression slopes are interpreted as the deviation of each group mean from the overall mean, which is why it is called deviation coding. 
 
 When the groups have unequal sample size, the situation is a bit more complicated. In particular, we have to weight the predicted values in  @eq-unweighted-mean by the group sample sizes. This is addressed in  @sec-extra1-4 (optional). To clarify that intercept in deviation coding is not always equal to $\bar Y$, we refer to it as an "unweighted mean" of group means / predicted scores. 
 
-It is important to note that there are still only $C-1$ regression slopes So, one group gets left out of the analysis, and the researcher has to chose which one. This is a shortcoming of deviation coding, which is addressed in the Section @sec-extra2-4 (optional).  
+It is important to note that there are still only $C-1$ regression slopes So, one group gets left out of the analysis, and the researcher has to chose which one. This is a shortcoming of deviation coding, which is addressed in @sec-extra2-4 (optional).  
 
 ### A hypothetical example {#sec-idela-4}
 
@@ -327,7 +325,7 @@ The International Development and Early Learning Assessment (IDELA) is an assess
 knitr::include_graphics("files/images/idela_map.png")
 ```
 
-If our goal was to compare countries' IDELA scores, agreeing on which country should serve as the reference grou would politically fraught. Therefore, it would be preferable to avoid the problem of choosing a reference group altogether. In particular, deviation coding let's us compare each country’s mean IDELA score to the (unweighted) mean over all of the countries. 
+If our goal was to compare countries' IDELA scores, agreeing on which country should serve as the reference group would politically fraught. Therefore, it would be preferable to avoid the problem of choosing a reference group altogether. In particular, deviation coding let's us compare each country’s mean IDELA score to the (unweighted) mean over all of the countries. 
 
 @fig-idela2 presents a toy example. The data show the IDELA scores and Country for 16 hypothetical individuals. The countries considered in this example are 
 
@@ -345,7 +343,7 @@ These 3 countries are represented by two binary variables, denoted $X_1$ and $X_
 knitr::include_graphics("files/images/idela1.png")
 ```
 
-Note that the dummy variables are different than for the case of reference-group coding discussed @sec-reference-group-coding-4. In deviation coding, the dummies always take on values $1, 0, -1$. The same group must receive the code $-1$ for all dummies. The group with the value $-1$ is the group that gets left out of the analysis. 
+Note that the dummy variables are different than for the case of reference-group coding discussed in @sec-reference-group-coding-4. In deviation coding, the dummies always take on values $1, 0, -1$. The same group must receive the code $-1$ for all dummies. The group with the value $-1$ is the group that gets left out of the analysis. 
 
 **Please take a moment to write down the contrast matrix for the IDELA example.**
 
@@ -400,7 +398,7 @@ In deviation coding with a single categorical variable:
 
 ### Extra: Deviation coding with unequal sample sizes* {#sec-extra1-4}
 
-When groups have unequal sample size, the unweighted mean of the group means is not the overall mean of the $Y$ variable. This is not always a problem. For example, in the IDELA example, it is reasonable that each country should receive equal weight, even if the size of the samples in each country differ.
+When groups have unequal sample size, the unweighted mean of the group means is not equial the overall mean of the $Y$ variable. This is not always a problem. In particular, in the IDELA example, it is reasonable that each country should receive equal weight, even if the size of the samples in each country differed.
 
 However, if you want to compare each groups' mean to the overall mean on $Y$, deviation coding can be adjusted by replacing the dummy-coded value $-1$ with the ratio of indicated group's sample size to the omitted group's sample size. An example for 3 groups is shown below. 
 
@@ -418,30 +416,32 @@ You can use the 2-step procedure to show that this coding, called *weighted devi
 b_0 = \frac{n_1 \widehat Y( \text{Group 1}) + n_2 \widehat Y( \text{Group 2}) + n_3 \widehat Y( \text{Group 3})}{n_1 + n_2 + n_3}
 \end{equation}
 
-Replacing $\widehat Y( \text{Group }c )$ with $\bar Y_c$ you can also show that $b_0 = \bar Y$, using the rules of summation algebra. So, unlike the case for the deviation coding, the intercept in *weighted deviation coding*  is always equal to the overall mean on the outcome variance, regardless of the sample sizes of the groups. In R, you can use the package `wec` for weighted effect coding. 
+Replacing $\widehat Y( \text{Group }c )$ with $\bar Y_c$ you can also show that $b_0 = \bar Y$, using the rules of summation algebra. 
 
-### Extra: Deviation coding all groups included* {#sec-extra2-4}
+The punchline: unlike the case for the deviation coding, the intercept in *weighted deviation coding*  is always equal to the overall mean on the outcome variance, regardless of the sample sizes of the groups. In R, you can use the package `wec` for weighted effect coding. 
 
-Another issue with deviation coding is that it requires leaving one group out of the model. This is a shortcoming of the approach. As a work around, one can instead use the following approach. Note that this approach will affect the statistical significance of R-squared, so you should only use it if you aren't interested in reporting R-squared. 
+### Extra: Deviation coding with all groups included* {#sec-extra2-4}
 
-* Step A: Standardize the $Y$ variable to have $M = 0$. 
-* Step B: Compute binary dummy variables (reference-group coding) for all $C$ groups, $X_1, X_2, \dots, X_C$ 
-* Step C: Regress $Y$ on the dummy variables, without the intercept in the model: 
+Another shortcoming of deviation coding is that it requires leaving one group out of the model. As a work around, one can instead use the following approach. Note that this approach will affect the statistical significance of R-squared, so you should only use it if you aren't interested in reporting R-squared (or are willing to do some more fiddling around with R). 
+
+* Step 1: Center the $Y$ variable so that $\bar Y = 0$. 
+* Step 2: Compute binary dummy variables (reference-group coding) for all $C$ groups, $X_1, X_2, \dots, X_C$ 
+* Step 3: Regress $Y$ on the all $C$ dummy variables, without the intercept in the model: 
 
 $$\hat Y = b_1X_1 +  b_2 X_2 + \dots + b_cX_C.$$
 
-Using the two step approach, it is easy to show that the regression coefficients are just the means of the indicated group. Since the overall mean of $Y$ is zero (because of Step A), the group means can be interpreted as deviations from the overall mean on $Y$. 
+Using the two step approach, it is easy to show that the regression coefficients are just the means of the indicated group. Since the overall mean of $Y$ is zero (because of Step 1), the group means can be interpreted as deviations from the overall mean on $Y$. 
 
-Note that to omit the intercept in R, you can use the formula syntax 
+Using the `lm` function in R, you can remove the intercept from the model using `-1` in the formula syntax: 
 
 `Y ~ -1 + X1 + ...` 
 
-in the `lm` function (the `-1` removes the intercept from the model).
-
-Again, keep in mind that this will affect the statistical significance of R-squared, as reported in `summary(lm)`. So, you shouldn't use this approach when you want to report R-squared. The next paragraph explains why, but it requires some material we won't discuss until @sec-chap-6. 
+As noted, this will affect the statistical significance of R-squared, as reported in `summary(lm)`. So, you shouldn't use this approach when you want to report R-squared. The next two paragraphs explain why, but the explanation requires some material we won't discuss until @sec-chap-6. 
 
 
-The F-test of R-squared can be computed by comparing two different models, a reference model with no predictors and a focal model with the predictors. In the present context, the focal models fit the data the same, regardless of whether we use the intercept and $C-1$ predictors or omit the intercept and use $C$ predictors. However, the reference model used by `lm` depends on whether the intercept is included in the model. In the model with the intercept, the reference model also has an intercept. In the model that omits the intercept, the reference also omits the intercept.  Consequently, the F-statistic for the test of R-squared (as reported by `summary(lm)`) is different for the two approaches. You can get the "correct" R-squared from R, but it takes a bit of fiddling around. If you are interested, just ask in class. 
+The F-test of R-squared can be computed by comparing two different models, a reference model with no predictors and a focal model with the predictors. The reference model used by `lm` depends on whether the intercept is included in the focal model. If the focal model has an intercept, the reference model also has an intercept. In the focal model omits the intercept, the reference also omits the intercept.  
+
+In the present context, the focal model omits the intercept and use $C$ dummies This model has the same R-squared as if we had used the intercept and $C-1$ dummies. However, the F-statistic for the test of R-squared (as reported by `summary(lm)`) is different for the two approaches, because of the choice of reference model. You can change the reference model, but it takes a bit of fiddling around. If you are interested, just ask in class. 
 
 ## Relation with ANOVA
 
@@ -457,13 +457,13 @@ $$H_0: b_1 = b_2 = \cdots = b_{C-1} = 0$$
 We have see above that the regression slopes can be interpreted in terms of group-mean differences. For example, under reference-group coding, we can re-write the null hypothesis above as: 
 
 $$H_0: \bar Y_1 - \bar Y_C = \bar Y_2 - \bar Y_C  = \cdots = \bar Y_{C-1} - \bar Y_C  = 0$$ 
-In this notation, we let $\bar Y_C$ denote the reference group. If we add $\bar Y_C$ to each equality in the null hypothesis, we have 
+In this notation, we let $C$ denote the reference group. If we add $\bar Y_C$ to each equality in the null hypothesis, we have 
 
 
 $$H_0: \bar Y_1 = \bar Y_2  = \cdots = \bar Y_{C-1}  =  \bar Y_C $$ 
-Note that this is the same null hypothesis as one-way ANOVA -- i.e., all the group means are equal. Consequently, the F-test of R-squared using a categorical predictor is equivalent to the F-test of the omnibus hypothesis in one-way ANOVA (assuming homoskedasticity). In the @sec-exercises-4, we show how the two approaches produce the same numerical values. 
+Note that this is the same null hypothesis as one-way ANOVA -- i.e., all the group means are equal. Consequently, the F-test of R-squared using a categorical predictor is equivalent to the F-test of the omnibus hypothesis in one-way ANOVA (assuming homoskedasticity). In @sec-exercises-4, we show how the two approaches produce the same numerical values. 
 
-Although regression with a categorical predictor is mathematically equivalent to one-way ANOVA, you may have noticed that the two approahces are not used in the same way. In ANOVA, we first conduct an F-test of the omnibus hypothesis, and, if the test is significant, we follow-up by comparing the groups using procedures that control for familywise error rate. In regression, we use contrast coding and just report the F-test along with the test of the individual effects, without any discussion of familywise error rate control. Which approach is correct? Depends who you ask.... 
+Although regression with a categorical predictor is mathematically equivalent to one-way ANOVA, you may have noticed that the two approahces are not used in the same way. In ANOVA, we first conduct an F-test of the omnibus hypothesis, and, if the test is significant, we follow-up by comparing the groups using procedures that control for familywise error rate. In regression, we just report the F-test along with the test of the individual contrasts, without any discussion of familywise error rate control. Which approach is correct? Depends who you ask.... 
 
 
 ## Some details about categorical data* {#sec-categorical-results-4}
@@ -475,7 +475,7 @@ Check back later for:
 
 ## Workbook{#sec-workbook-4}
 
-This section collects the questions asked in this chapter. The lesson for this chapter will focus on discussing these questions and then working on the exercises in @sec-exercises-2. The lesson will **not** be a lecture that reviews all of the material in the chapter! So, if you haven't written down / thought about the answers to these questions before class, the lesson will not be very useful for you. Please engage with each question by writing down one or more answers, asking clarifying questions about related material, posing follow up questions, etc. 
+This section collects the questions asked in this chapter. The lesson for this chapter will focus on discussing these questions and then working on the exercises in @sec-exercises-4. The lesson will **not** be a lecture that reviews all of the material in the chapter! So, if you haven't written down / thought about the answers to these questions before class, the lesson will not be very useful for you. Please engage with each question by writing down one or more answers, asking clarifying questions about related material, posing follow up questions, etc. 
 
 @sec-social-constructs-4
 
@@ -567,8 +567,8 @@ Please work through the following questions and be prepared to share your answer
 
 * How should $X_3$ be coded so that "single" is the reference-group? 
 * Write down the contrast matrix for the example.
-* Using the two-step approach illustrated above, write out the interpretation of the model parameters in the following regression equation:
-* What happens if we include an additional dummy variable for "Single" in the model. In this case we would have $C = 4$ dummies in the model rather than $C-1 = 3$ dummies. Please take a moment to write down what you think will happen (Hint: something goes wrong)
+* Using the two-step approach illustrated above, write out the interpretation of the regression coefficients.
+* Let's imagine that we included an additional dummy variable for "Single" in the model. In this case we would have $C = 4$ dummies in the model rather than $C-1 = 3$ dummies. Please take a moment to write down what you think will happen (Hint: something goes wrong).
 
 @sec-idela-4
 
@@ -620,11 +620,13 @@ Using the above equations, please write down an interpretation of the regression
 
 ## Exercises {#sec-exercises-4}
 
-These exercises provide an overview of contrast coding with categorical predictors in R. Two preliminary topics are also discussed: linear regression with a binary predictor, and the `factor` data class in R.  
+These exercises provide an overview of contrast coding with categorical predictors in R. Two preliminary topics are also discussed: linear regression with a binary predictor, and the `factor` data class in R.  We will go through this material in class together, so you don't need to work on it before class (but you can if you want.) 
+
+Before staring this section, you may find it useful to scroll to the top of the page, click on the "</> Code" menu, and select "Show All Code."
 
 ### A single binary predictor
 
-Regression with a single binary predictor is equivalent to an independent groups t-test of a difference between means. Let's illustrate this using  reading achievement in grade 8 (`achrdg08`) and `gender` in the NELS dataset. Note that, although the construct gender need not be conceptualized as dichotomous or even categorical, the variable `gender` reported in NELS data is dichotomous, with values "Female" and "Male". 
+Regression with a single binary predictor is equivalent to the independent samples t-test of group means. Let's illustrate this using the NELS dataset with Reading achievement in grade 8 (`achrdg08`) as the outcome and `gender` as the predictor. Although gender need not be conceptualized as dichotomous or even categorical, the variable `gender` reported in NELS data is dichotomous, with values "Female" and "Male". 
 
 R treats variables like `gender` as "factors". Factors have special properties that we are going to work with later on, but for now let's recode `gender` to `binary_gender` by setting `Female = 0` and `Male = 1`
 
@@ -645,11 +647,11 @@ binary_gender <- (gender == "Male") * 1
 table(gender, binary_gender)
 ```
 
-It is often hassle to get from factor to numeric or vice versa. Above we used the trick of first creating from the factor a logical vector (`gender == "Male"`) and then coercing the logical vector to binary by multiplying it by 1. Other strategies can be used. See `help(factor)` for more information. 
+It is often hassle to get from factor to numeric or vice versa. Above we used a hack by of first creating a logical vector (`gender == "Male"`) and then coercing the logical vector to binary by multiplying it by 1. Other strategies can be used. See `help(factor)` for more information. 
 
 ### Binary predictors and independent samples t-tests
 
-Now let's get back to regressing reading achievement (`achrdg08`) on `binary_gender`, and comparing this to an independent groups t-test using the same two variables.
+Now let's get back to regressing Reading Achievement (`achrdg08`) on `binary_gender`, and comparing this to an independent samples t-test using the same two variables.
 
 ```{r}
 # Regression with a binary variable

@@ -327,7 +327,7 @@ As promised, these equations are more complicated than for simple regression :) 
 
 ## Interpreting the coefficients {#sec-interpretation-3}
 
-An important part of using multiple regression is getting the interpretation of the regression coefficients correct. The basic interpretation is that the slope for SES represents how much predicted Math Achievement changes for a one unit increase of SES, *while holding ATL constant.* (The same interpretation holds when switching the predictors.) The important difference with simple regression is the "holding the other predictor constant" part, so let's dig into it. 
+An important part of using multiple regression is getting the correct interpretation of the regression coefficients. The basic interpretation is that the slope for SES represents how much predicted Math Achievement changes for a one unit increase of SES, *while holding ATL constant.* (The same interpretation holds when switching the predictors.) The important difference with simple regression is the "holding the other predictor constant" part, so let's dig into it. 
 
 ### "Holding the other predictor constant"
 
@@ -342,26 +342,27 @@ $$\widehat {MATH^*} = b_0 + b_1 (SES + 1) + b_2 ATL$$
 The difference between $\widehat{MATH^*}$ and $\widehat{MATH}$ is how much the predicted value changes for a one unit increase in SES, while holding ATL constant: 
 
 $$\widehat{MATH^*} - \widehat{MATH}  = b_1$$
+In words: the multiple regression coefficient tells us how the much the predicted value changes for a one unit increase in the predictor, while holding the other predictor(s) constant. 
 
 This why we interpret the regression coefficients in multiple regression differently than simple regression. In simple regression, the slope is just a re-scaled version of the correlation.  In multiple regression, the slope of each predictor is interpreted in terms of the "effect" of that predictor, while holding the other predictor(s) constant. This is sometimes referred to as "ceteris paribus," which is Latin for "with other conditions remaining the same." So, we could say that multiple regression is a statistical way of making ceteris paribus arguments. 
 
-Also note that we can see in the equations for $\widehat {MATH}$ that the interpretation of the regression intercept is basically the same as for simple regression: it is the value of $\widehat Y$ when $X_1 = 0$ and $X_2 = 0$ (i.e., still not very interesting). 
+Note that the interpretation of the regression intercept is basically the same as for simple regression: it is the value of $\widehat Y$ when $X_1 = 0$ and $X_2 = 0$ (i.e., still not very interesting). 
 
 ### "Controlling for the other predictor"
 
 Another interpretation of the regression coefficients is in terms of the equations for $b_1$ and $b_2$ presented in @sec-ols-3. For example, the equation for $b_1$ is
 
 \begin{equation}
-b_1  = \frac{r_{Y1} - r_{Y2} r_{12}}{1 - r^2_{12}}\frac{s_Y}{s_1}
+b_1  = \frac{r_{Y1} - r_{Y2} \color{red}{r^2_{12}}}{1 -\color{red}{r^2_{12}}}\frac{s_Y}{s_1}
 \end{equation} 
 
-This is the same equation as from @sec-ols-3, but the correlation between the predictors is shown in red. Note that if the predictors are uncorrelated (i.e., $\color{red}{r^2_{12}} = 0$) then
+This is the same equation as from @sec-ols-3, but the correlation between the predictors is shown in red. Note that if the predictors are uncorrelated (i.e., $\color{red}{r^2_{12}}$ = 0) then
 
 $$b_1 = r_{Y1} \frac{s_Y}{s_1},$$
 
 which is just the regression coefficient from simple regression (@sec-ols-2). 
 
-In general, the formulas for the regression coefficients in the two-predictor model are more complicated because they "control for" or "account for" the relationship between the predictors. In simple regression, we only had one predictor, so we didn't need to account for how the predictors were related to each other. 
+In general, the formulas for the regression slopes in the two-predictor model are more complicated because they "control for" or "account for" the relationship between the predictors. In simple regression, we only had one predictor, so we didn't need to account for how the predictors were related to each other. 
 
 The equations for the regression coefficients show that, if the predictors are uncorrelated, then doing a multiple regression is just the same thing as doing simple regression multiple times. However, most of the time our predictors will be correlated, and multiple regression "controls for" the relationship between the predictors when examining the relationship between each predictor and the outcome. 
 
@@ -551,7 +552,7 @@ So, large sample sizes and a large proportion of variance explained lead to prec
 
 The R-squared statistic in multiple regression tells us how much variation in the outcome is explained by all of the predictors together. If the predictors do not explain any variation, then the population R-squared is equal to zero. 
 
-Notice that $R^2 = 0$ implies $b_1 = b_2 = ... = b_k = 0$ (in the population). So, testing the significance of R-squared is equivalent to testing whether any of the regression parameters are non-zero. When we addressed ANOVA last semester, we called this the omnibus hypothesis. But in regression analysis, it is usually just referred to as a test of R-squared. 
+Notice that $R^2 = 0$ implies $b_1 = b_2 = ... = b_K = 0$ (in the population). So, testing the significance of R-squared is equivalent to testing whether any of the regression parameters are non-zero. When we addressed ANOVA last semester, we called this the omnibus hypothesis. But in regression analysis, it is usually just referred to as a test of R-squared. 
 
 The null hypothesis $H_0 : R^2 = 0$ can be tested using the statistic
 
@@ -650,7 +651,7 @@ The R output for the ECLS example is presented (again) below. Please write down 
 summary(mod1)
 ```
 
-## Exercises
+## Exercises {#sec-exercises-3}
 
 These exercises collect all of the R input used in this chapter into a single step-by-step analysis. It explains how the R input works, and provides some additional exercises. We will go through this material in class together, so you don't need to work on it before class (but you can if you want.) 
 
