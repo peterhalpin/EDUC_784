@@ -209,7 +209,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#the-ecls-example-2" id="toc-the-ecls-example-2" class="nav-link" data-scroll-target="#the-ecls-example-2"><span class="header-section-number">3.7.4</span> The ECLS example</a></li>
   </ul></li>
   <li><a href="#workbook" id="toc-workbook" class="nav-link" data-scroll-target="#workbook"><span class="header-section-number">3.8</span> Workbook</a></li>
-  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">3.9</span> Exercises</a>
+  <li><a href="#sec-exercises-3" id="toc-sec-exercises-3" class="nav-link" data-scroll-target="#sec-exercises-3"><span class="header-section-number">3.9</span> Exercises</a>
   <ul class="collapse">
   <li><a href="#the-ecls250-data" id="toc-the-ecls250-data" class="nav-link" data-scroll-target="#the-ecls250-data"><span class="header-section-number">3.9.1</span> The ECLS250 data</a></li>
   <li><a href="#multiple-regression-with-lm" id="toc-multiple-regression-with-lm" class="nav-link" data-scroll-target="#multiple-regression-with-lm"><span class="header-section-number">3.9.2</span> Multiple regression with <code>lm</code></a></li>
@@ -531,7 +531,7 @@ b_2 &amp; = \frac{r_{Y2} - r_{Y1} r_{12}}{1 - r^2_{12}} \frac{s_Y}{s_2}
 </section>
 <section id="sec-interpretation-3" class="level2" data-number="3.5">
 <h2 data-number="3.5" class="anchored" data-anchor-id="sec-interpretation-3"><span class="header-section-number">3.5</span> Interpreting the coefficients</h2>
-<p>An important part of using multiple regression is getting the interpretation of the regression coefficients correct. The basic interpretation is that the slope for SES represents how much predicted Math Achievement changes for a one unit increase of SES, <em>while holding ATL constant.</em> (The same interpretation holds when switching the predictors.) The important difference with simple regression is the “holding the other predictor constant” part, so let’s dig into it.</p>
+<p>An important part of using multiple regression is getting the correct interpretation of the regression coefficients. The basic interpretation is that the slope for SES represents how much predicted Math Achievement changes for a one unit increase of SES, <em>while holding ATL constant.</em> (The same interpretation holds when switching the predictors.) The important difference with simple regression is the “holding the other predictor constant” part, so let’s dig into it.</p>
 <section id="holding-the-other-predictor-constant" class="level3" data-number="3.5.1">
 <h3 data-number="3.5.1" class="anchored" data-anchor-id="holding-the-other-predictor-constant"><span class="header-section-number">3.5.1</span> “Holding the other predictor constant”</h3>
 <p>Let’s start with the regression model for the predicted values:</p>
@@ -539,20 +539,20 @@ b_2 &amp; = \frac{r_{Y2} - r_{Y1} r_{12}}{1 - r^2_{12}} \frac{s_Y}{s_2}
 <p>If we increase <span class="math inline">\(SES\)</span> by one unit and hold <span class="math inline">\(ATL\)</span> constant, we get new predicted value (denoted with an asterisk):</p>
 <p><span class="math display">\[\widehat {MATH^*} = b_0 + b_1 (SES + 1) + b_2 ATL\]</span></p>
 <p>The difference between <span class="math inline">\(\widehat{MATH^*}\)</span> and <span class="math inline">\(\widehat{MATH}\)</span> is how much the predicted value changes for a one unit increase in SES, while holding ATL constant:</p>
-<p><span class="math display">\[\widehat{MATH^*} - \widehat{MATH}  = b_1\]</span></p>
+<p><span class="math display">\[\widehat{MATH^*} - \widehat{MATH}  = b_1\]</span> In words: the multiple regression coefficient tells us how the much the predicted value changes for a one unit increase in the predictor, while holding the other predictor(s) constant.</p>
 <p>This why we interpret the regression coefficients in multiple regression differently than simple regression. In simple regression, the slope is just a re-scaled version of the correlation. In multiple regression, the slope of each predictor is interpreted in terms of the “effect” of that predictor, while holding the other predictor(s) constant. This is sometimes referred to as “ceteris paribus,” which is Latin for “with other conditions remaining the same.” So, we could say that multiple regression is a statistical way of making ceteris paribus arguments.</p>
-<p>Also note that we can see in the equations for <span class="math inline">\(\widehat {MATH}\)</span> that the interpretation of the regression intercept is basically the same as for simple regression: it is the value of <span class="math inline">\(\widehat Y\)</span> when <span class="math inline">\(X_1 = 0\)</span> and <span class="math inline">\(X_2 = 0\)</span> (i.e., still not very interesting).</p>
+<p>Note that the interpretation of the regression intercept is basically the same as for simple regression: it is the value of <span class="math inline">\(\widehat Y\)</span> when <span class="math inline">\(X_1 = 0\)</span> and <span class="math inline">\(X_2 = 0\)</span> (i.e., still not very interesting).</p>
 </section>
 <section id="controlling-for-the-other-predictor" class="level3" data-number="3.5.2">
 <h3 data-number="3.5.2" class="anchored" data-anchor-id="controlling-for-the-other-predictor"><span class="header-section-number">3.5.2</span> “Controlling for the other predictor”</h3>
 <p>Another interpretation of the regression coefficients is in terms of the equations for <span class="math inline">\(b_1\)</span> and <span class="math inline">\(b_2\)</span> presented in <a href="#sec-ols-3"><span>Section&nbsp;3.4</span></a>. For example, the equation for <span class="math inline">\(b_1\)</span> is</p>
 <p><span class="math display">\[\begin{equation}
-b_1  = \frac{r_{Y1} - r_{Y2} r_{12}}{1 - r^2_{12}}\frac{s_Y}{s_1}
+b_1  = \frac{r_{Y1} - r_{Y2} \color{red}{r^2_{12}}}{1 -\color{red}{r^2_{12}}}\frac{s_Y}{s_1}
 \end{equation}\]</span></p>
-<p>This is the same equation as from <a href="#sec-ols-3"><span>Section&nbsp;3.4</span></a>, but the correlation between the predictors is shown in red. Note that if the predictors are uncorrelated (i.e., <span class="math inline">\(\color{red}{r^2_{12}} = 0\)</span>) then</p>
+<p>This is the same equation as from <a href="#sec-ols-3"><span>Section&nbsp;3.4</span></a>, but the correlation between the predictors is shown in red. Note that if the predictors are uncorrelated (i.e., <span class="math inline">\(\color{red}{r^2_{12}}\)</span> = 0) then</p>
 <p><span class="math display">\[b_1 = r_{Y1} \frac{s_Y}{s_1},\]</span></p>
 <p>which is just the regression coefficient from simple regression (<a href="ch2_simple_regression.html#sec-ols-2"><span>Section&nbsp;2.3</span></a>).</p>
-<p>In general, the formulas for the regression coefficients in the two-predictor model are more complicated because they “control for” or “account for” the relationship between the predictors. In simple regression, we only had one predictor, so we didn’t need to account for how the predictors were related to each other.</p>
+<p>In general, the formulas for the regression slopes in the two-predictor model are more complicated because they “control for” or “account for” the relationship between the predictors. In simple regression, we only had one predictor, so we didn’t need to account for how the predictors were related to each other.</p>
 <p>The equations for the regression coefficients show that, if the predictors are uncorrelated, then doing a multiple regression is just the same thing as doing simple regression multiple times. However, most of the time our predictors will be correlated, and multiple regression “controls for” the relationship between the predictors when examining the relationship between each predictor and the outcome.</p>
 </section>
 <section id="the-ecls-example" class="level3" data-number="3.5.3">
@@ -759,7 +759,7 @@ Using this relationship, we can see that squared semi partials (and hence the \b
 <section id="inference-for-rsquared-4" class="level3" data-number="3.7.3">
 <h3 data-number="3.7.3" class="anchored" data-anchor-id="inference-for-rsquared-4"><span class="header-section-number">3.7.3</span> Inference for R-squared</h3>
 <p>The R-squared statistic in multiple regression tells us how much variation in the outcome is explained by all of the predictors together. If the predictors do not explain any variation, then the population R-squared is equal to zero.</p>
-<p>Notice that <span class="math inline">\(R^2 = 0\)</span> implies <span class="math inline">\(b_1 = b_2 = ... = b_k = 0\)</span> (in the population). So, testing the significance of R-squared is equivalent to testing whether any of the regression parameters are non-zero. When we addressed ANOVA last semester, we called this the omnibus hypothesis. But in regression analysis, it is usually just referred to as a test of R-squared.</p>
+<p>Notice that <span class="math inline">\(R^2 = 0\)</span> implies <span class="math inline">\(b_1 = b_2 = ... = b_K = 0\)</span> (in the population). So, testing the significance of R-squared is equivalent to testing whether any of the regression parameters are non-zero. When we addressed ANOVA last semester, we called this the omnibus hypothesis. But in regression analysis, it is usually just referred to as a test of R-squared.</p>
 <p>The null hypothesis <span class="math inline">\(H_0 : R^2 = 0\)</span> can be tested using the statistic</p>
 <p><span class="math display">\[F = \frac{\widehat R^2 / K}{(1 - \widehat R^2) / (N - K - 1)},\]</span></p>
 <p>which has an F-distribution on <span class="math inline">\(K\)</span> and <span class="math inline">\(N - K -1\)</span> degrees of freedom when the null hypothesis is true.</p>
@@ -798,7 +798,7 @@ F-statistic: 46.29 on 2 and 247 DF,  p-value: &lt; 2.2e-16</code></pre>
 </section>
 <section id="workbook" class="level2" data-number="3.8">
 <h2 data-number="3.8" class="anchored" data-anchor-id="workbook"><span class="header-section-number">3.8</span> Workbook</h2>
-<p>This section collects the questions asked in this chapter. The lesson for this chapter will focus on discussing these questions and then working on the exercises in <span class="quarto-unresolved-ref">?sec-exercises-3</span>. The lesson will <strong>not</strong> be a lecture that reviews all of the material in the chapter! So, if you haven’t written down / thought about the answers to these questions before class, the lesson will not be very useful for you. Please engage with each question by writing down one or more answers, asking clarifying questions about related material, posing follow up questions, etc.</p>
+<p>This section collects the questions asked in this chapter. The lesson for this chapter will focus on discussing these questions and then working on the exercises in <a href="#sec-exercises-3"><span>Section&nbsp;3.9</span></a>. The lesson will <strong>not</strong> be a lecture that reviews all of the material in the chapter! So, if you haven’t written down / thought about the answers to these questions before class, the lesson will not be very useful for you. Please engage with each question by writing down one or more answers, asking clarifying questions about related material, posing follow up questions, etc.</p>
 <p><a href="#sec-ecls-3"><span>Section&nbsp;3.2</span></a></p>
 <p>If you have questions about the interpretation of a correlation matrix (below) or pairwise plots (see <a href="#sec-ecls-3"><span>Section&nbsp;3.2</span></a>), please write them down now and share them class.</p>
 <p>Numerical output for the ECLS example:</p>
@@ -943,8 +943,8 @@ F-statistic: 46.29 on 2 and 247 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 </section>
-<section id="exercises" class="level2" data-number="3.9">
-<h2 data-number="3.9" class="anchored" data-anchor-id="exercises"><span class="header-section-number">3.9</span> Exercises</h2>
+<section id="sec-exercises-3" class="level2" data-number="3.9">
+<h2 data-number="3.9" class="anchored" data-anchor-id="sec-exercises-3"><span class="header-section-number">3.9</span> Exercises</h2>
 <p>These exercises collect all of the R input used in this chapter into a single step-by-step analysis. It explains how the R input works, and provides some additional exercises. We will go through this material in class together, so you don’t need to work on it before class (but you can if you want.)</p>
 <p>Before staring this section, you may find it useful to scroll to the top of the page, click on the “&lt;/&gt; Code” menu, and select “Show All Code.”</p>
 <section id="the-ecls250-data" class="level3" data-number="3.9.1">
@@ -1881,7 +1881,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb36-329"><a href="#cb36-329" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb36-330"><a href="#cb36-330" aria-hidden="true" tabindex="-1"></a><span class="fu">## Interpreting the coefficients {#sec-interpretation-3}</span></span>
 <span id="cb36-331"><a href="#cb36-331" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-332"><a href="#cb36-332" aria-hidden="true" tabindex="-1"></a>An important part of using multiple regression is getting the interpretation of the regression coefficients correct. The basic interpretation is that the slope for SES represents how much predicted Math Achievement changes for a one unit increase of SES, *while holding ATL constant.* (The same interpretation holds when switching the predictors.) The important difference with simple regression is the "holding the other predictor constant" part, so let's dig into it. </span>
+<span id="cb36-332"><a href="#cb36-332" aria-hidden="true" tabindex="-1"></a>An important part of using multiple regression is getting the correct interpretation of the regression coefficients. The basic interpretation is that the slope for SES represents how much predicted Math Achievement changes for a one unit increase of SES, *while holding ATL constant.* (The same interpretation holds when switching the predictors.) The important difference with simple regression is the "holding the other predictor constant" part, so let's dig into it. </span>
 <span id="cb36-333"><a href="#cb36-333" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb36-334"><a href="#cb36-334" aria-hidden="true" tabindex="-1"></a><span class="fu">### "Holding the other predictor constant"</span></span>
 <span id="cb36-335"><a href="#cb36-335" aria-hidden="true" tabindex="-1"></a></span>
@@ -1896,448 +1896,449 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb36-344"><a href="#cb36-344" aria-hidden="true" tabindex="-1"></a>The difference between $\widehat{MATH^*}$ and $\widehat{MATH}$ is how much the predicted value changes for a one unit increase in SES, while holding ATL constant: </span>
 <span id="cb36-345"><a href="#cb36-345" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb36-346"><a href="#cb36-346" aria-hidden="true" tabindex="-1"></a>$$\widehat{MATH^*} - \widehat{MATH}  = b_1$$</span>
-<span id="cb36-347"><a href="#cb36-347" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-348"><a href="#cb36-348" aria-hidden="true" tabindex="-1"></a>This why we interpret the regression coefficients in multiple regression differently than simple regression. In simple regression, the slope is just a re-scaled version of the correlation.  In multiple regression, the slope of each predictor is interpreted in terms of the "effect" of that predictor, while holding the other predictor(s) constant. This is sometimes referred to as "ceteris paribus," which is Latin for "with other conditions remaining the same." So, we could say that multiple regression is a statistical way of making ceteris paribus arguments. </span>
-<span id="cb36-349"><a href="#cb36-349" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-350"><a href="#cb36-350" aria-hidden="true" tabindex="-1"></a>Also note that we can see in the equations for $\widehat {MATH}$ that the interpretation of the regression intercept is basically the same as for simple regression: it is the value of $\widehat Y$ when $X_1 = 0$ and $X_2 = 0$ (i.e., still not very interesting). </span>
-<span id="cb36-351"><a href="#cb36-351" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-352"><a href="#cb36-352" aria-hidden="true" tabindex="-1"></a><span class="fu">### "Controlling for the other predictor"</span></span>
-<span id="cb36-353"><a href="#cb36-353" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-354"><a href="#cb36-354" aria-hidden="true" tabindex="-1"></a>Another interpretation of the regression coefficients is in terms of the equations for $b_1$ and $b_2$ presented in @sec-ols-3. For example, the equation for $b_1$ is</span>
-<span id="cb36-355"><a href="#cb36-355" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-356"><a href="#cb36-356" aria-hidden="true" tabindex="-1"></a>\begin{equation}</span>
-<span id="cb36-357"><a href="#cb36-357" aria-hidden="true" tabindex="-1"></a>b_1  = \frac{r_{Y1} - r_{Y2} r_{12}}{1 - r^2_{12}}\frac{s_Y}{s_1}</span>
-<span id="cb36-358"><a href="#cb36-358" aria-hidden="true" tabindex="-1"></a>\end{equation} </span>
-<span id="cb36-359"><a href="#cb36-359" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-360"><a href="#cb36-360" aria-hidden="true" tabindex="-1"></a>This is the same equation as from @sec-ols-3, but the correlation between the predictors is shown in red. Note that if the predictors are uncorrelated (i.e., $\color{red}{r^2_{12}} = 0$) then</span>
-<span id="cb36-361"><a href="#cb36-361" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-362"><a href="#cb36-362" aria-hidden="true" tabindex="-1"></a>$$b_1 = r_{Y1} \frac{s_Y}{s_1},$$</span>
-<span id="cb36-363"><a href="#cb36-363" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-364"><a href="#cb36-364" aria-hidden="true" tabindex="-1"></a>which is just the regression coefficient from simple regression (@sec-ols-2). </span>
-<span id="cb36-365"><a href="#cb36-365" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-366"><a href="#cb36-366" aria-hidden="true" tabindex="-1"></a>In general, the formulas for the regression coefficients in the two-predictor model are more complicated because they "control for" or "account for" the relationship between the predictors. In simple regression, we only had one predictor, so we didn't need to account for how the predictors were related to each other. </span>
-<span id="cb36-367"><a href="#cb36-367" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-368"><a href="#cb36-368" aria-hidden="true" tabindex="-1"></a>The equations for the regression coefficients show that, if the predictors are uncorrelated, then doing a multiple regression is just the same thing as doing simple regression multiple times. However, most of the time our predictors will be correlated, and multiple regression "controls for" the relationship between the predictors when examining the relationship between each predictor and the outcome. </span>
-<span id="cb36-369"><a href="#cb36-369" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-370"><a href="#cb36-370" aria-hidden="true" tabindex="-1"></a><span class="fu">### The ECLS example</span></span>
-<span id="cb36-371"><a href="#cb36-371" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-372"><a href="#cb36-372" aria-hidden="true" tabindex="-1"></a>Below, the R output from the ECLS example is reported. **Please provide a written explanation of the regression coefficients for SES and ATL. If you have questions about how to interpret the coefficients, please also note them now and be prepared to share them in class. Note that this question is not asking about whether the coefficients are significant -- it is asking what the numbers in the first column of the Coefficients table mean.**</span>
-<span id="cb36-373"><a href="#cb36-373" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-347"><a href="#cb36-347" aria-hidden="true" tabindex="-1"></a>In words: the multiple regression coefficient tells us how the much the predicted value changes for a one unit increase in the predictor, while holding the other predictor(s) constant. </span>
+<span id="cb36-348"><a href="#cb36-348" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-349"><a href="#cb36-349" aria-hidden="true" tabindex="-1"></a>This why we interpret the regression coefficients in multiple regression differently than simple regression. In simple regression, the slope is just a re-scaled version of the correlation.  In multiple regression, the slope of each predictor is interpreted in terms of the "effect" of that predictor, while holding the other predictor(s) constant. This is sometimes referred to as "ceteris paribus," which is Latin for "with other conditions remaining the same." So, we could say that multiple regression is a statistical way of making ceteris paribus arguments. </span>
+<span id="cb36-350"><a href="#cb36-350" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-351"><a href="#cb36-351" aria-hidden="true" tabindex="-1"></a>Note that the interpretation of the regression intercept is basically the same as for simple regression: it is the value of $\widehat Y$ when $X_1 = 0$ and $X_2 = 0$ (i.e., still not very interesting). </span>
+<span id="cb36-352"><a href="#cb36-352" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-353"><a href="#cb36-353" aria-hidden="true" tabindex="-1"></a><span class="fu">### "Controlling for the other predictor"</span></span>
+<span id="cb36-354"><a href="#cb36-354" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-355"><a href="#cb36-355" aria-hidden="true" tabindex="-1"></a>Another interpretation of the regression coefficients is in terms of the equations for $b_1$ and $b_2$ presented in @sec-ols-3. For example, the equation for $b_1$ is</span>
+<span id="cb36-356"><a href="#cb36-356" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-357"><a href="#cb36-357" aria-hidden="true" tabindex="-1"></a>\begin{equation}</span>
+<span id="cb36-358"><a href="#cb36-358" aria-hidden="true" tabindex="-1"></a>b_1  = \frac{r_{Y1} - r_{Y2} \color{red}{r^2_{12}}}{1 -\color{red}{r^2_{12}}}\frac{s_Y}{s_1}</span>
+<span id="cb36-359"><a href="#cb36-359" aria-hidden="true" tabindex="-1"></a>\end{equation} </span>
+<span id="cb36-360"><a href="#cb36-360" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-361"><a href="#cb36-361" aria-hidden="true" tabindex="-1"></a>This is the same equation as from @sec-ols-3, but the correlation between the predictors is shown in red. Note that if the predictors are uncorrelated (i.e., $\color{red}{r^2_{12}}$ = 0) then</span>
+<span id="cb36-362"><a href="#cb36-362" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-363"><a href="#cb36-363" aria-hidden="true" tabindex="-1"></a>$$b_1 = r_{Y1} \frac{s_Y}{s_1},$$</span>
+<span id="cb36-364"><a href="#cb36-364" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-365"><a href="#cb36-365" aria-hidden="true" tabindex="-1"></a>which is just the regression coefficient from simple regression (@sec-ols-2). </span>
+<span id="cb36-366"><a href="#cb36-366" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-367"><a href="#cb36-367" aria-hidden="true" tabindex="-1"></a>In general, the formulas for the regression slopes in the two-predictor model are more complicated because they "control for" or "account for" the relationship between the predictors. In simple regression, we only had one predictor, so we didn't need to account for how the predictors were related to each other. </span>
+<span id="cb36-368"><a href="#cb36-368" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-369"><a href="#cb36-369" aria-hidden="true" tabindex="-1"></a>The equations for the regression coefficients show that, if the predictors are uncorrelated, then doing a multiple regression is just the same thing as doing simple regression multiple times. However, most of the time our predictors will be correlated, and multiple regression "controls for" the relationship between the predictors when examining the relationship between each predictor and the outcome. </span>
+<span id="cb36-370"><a href="#cb36-370" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-371"><a href="#cb36-371" aria-hidden="true" tabindex="-1"></a><span class="fu">### The ECLS example</span></span>
+<span id="cb36-372"><a href="#cb36-372" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-373"><a href="#cb36-373" aria-hidden="true" tabindex="-1"></a>Below, the R output from the ECLS example is reported. **Please provide a written explanation of the regression coefficients for SES and ATL. If you have questions about how to interpret the coefficients, please also note them now and be prepared to share them in class. Note that this question is not asking about whether the coefficients are significant -- it is asking what the numbers in the first column of the Coefficients table mean.**</span>
 <span id="cb36-374"><a href="#cb36-374" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-377"><a href="#cb36-377" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb36-378"><a href="#cb36-378" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the regression model and print output</span></span>
-<span id="cb36-379"><a href="#cb36-379" aria-hidden="true" tabindex="-1"></a>mod1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(c1rmscal <span class="sc">~</span> wksesl <span class="sc">+</span> t1learn)</span>
-<span id="cb36-380"><a href="#cb36-380" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod1)</span>
-<span id="cb36-381"><a href="#cb36-381" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb36-382"><a href="#cb36-382" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-383"><a href="#cb36-383" aria-hidden="true" tabindex="-1"></a><span class="fu">### Standardized coefficients {#sec-beta-3}</span></span>
-<span id="cb36-384"><a href="#cb36-384" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-385"><a href="#cb36-385" aria-hidden="true" tabindex="-1"></a>One question that arises in the interpretation of the example is the relative contribution of the two predictors to Kindergartener's Math Achievement. In particular, the regression coefficient for ATL is 10 times larger than the regression coefficient for SES -- does this mean that ATL is 10 times more important than SES? </span>
-<span id="cb36-386"><a href="#cb36-386" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-387"><a href="#cb36-387" aria-hidden="true" tabindex="-1"></a>The short answer is, "no." ATL is on a scale of 1-4 whereas SES ranges from 30-72. In order to make the regression coefficients more comparable, we can standardize the $X$ variables so that they have the same variance. Many researchers go a step further and standardize all of the variables $Y, X_1, X_2$ to be z-scores with M = 0 and SD = 1. The resulting regression coefficients are often called $\beta$-coefficients or $\beta$-weights ($\beta$ is pronounced "beta"). </span>
-<span id="cb36-388"><a href="#cb36-388" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-389"><a href="#cb36-389" aria-hidden="true" tabindex="-1"></a>The $\beta$-weights are related to the regular regression coefficients from @sec-ols-3:</span>
-<span id="cb36-390"><a href="#cb36-390" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-391"><a href="#cb36-391" aria-hidden="true" tabindex="-1"></a>$$\beta_1 = b_1 \frac{s_1}{s_Y} = \frac{r_{Y1} - r_{Y2} r_{12}}{1 - r^2_{12}}$$ </span>
-<span id="cb36-392"><a href="#cb36-392" aria-hidden="true" tabindex="-1"></a>A similar expression holds for $\beta_2$.</span>
-<span id="cb36-393"><a href="#cb36-393" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-394"><a href="#cb36-394" aria-hidden="true" tabindex="-1"></a>Note that the <span class="in">`lm`</span> function in R does not provide an option to report standardized output. So, if you want to get the $\beta$-coefficients in R, it's easiest to just standardized the variables first and then do the regression with the standardized variables. </span>
-<span id="cb36-395"><a href="#cb36-395" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-396"><a href="#cb36-396" aria-hidden="true" tabindex="-1"></a>Regardless of how you compute them, the interpretation of the $\beta$-coefficients is in terms of the standard deviation units of both the $Y$ variable and the $X$ variable -- e.g., increasing $X_1$ by one standard deviation changes $\hat Y$ by $\beta_1$ standard deviations (holding the other predictors constant). </span>
-<span id="cb36-397"><a href="#cb36-397" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-375"><a href="#cb36-375" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-378"><a href="#cb36-378" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb36-379"><a href="#cb36-379" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the regression model and print output</span></span>
+<span id="cb36-380"><a href="#cb36-380" aria-hidden="true" tabindex="-1"></a>mod1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(c1rmscal <span class="sc">~</span> wksesl <span class="sc">+</span> t1learn)</span>
+<span id="cb36-381"><a href="#cb36-381" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod1)</span>
+<span id="cb36-382"><a href="#cb36-382" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb36-383"><a href="#cb36-383" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-384"><a href="#cb36-384" aria-hidden="true" tabindex="-1"></a><span class="fu">### Standardized coefficients {#sec-beta-3}</span></span>
+<span id="cb36-385"><a href="#cb36-385" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-386"><a href="#cb36-386" aria-hidden="true" tabindex="-1"></a>One question that arises in the interpretation of the example is the relative contribution of the two predictors to Kindergartener's Math Achievement. In particular, the regression coefficient for ATL is 10 times larger than the regression coefficient for SES -- does this mean that ATL is 10 times more important than SES? </span>
+<span id="cb36-387"><a href="#cb36-387" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-388"><a href="#cb36-388" aria-hidden="true" tabindex="-1"></a>The short answer is, "no." ATL is on a scale of 1-4 whereas SES ranges from 30-72. In order to make the regression coefficients more comparable, we can standardize the $X$ variables so that they have the same variance. Many researchers go a step further and standardize all of the variables $Y, X_1, X_2$ to be z-scores with M = 0 and SD = 1. The resulting regression coefficients are often called $\beta$-coefficients or $\beta$-weights ($\beta$ is pronounced "beta"). </span>
+<span id="cb36-389"><a href="#cb36-389" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-390"><a href="#cb36-390" aria-hidden="true" tabindex="-1"></a>The $\beta$-weights are related to the regular regression coefficients from @sec-ols-3:</span>
+<span id="cb36-391"><a href="#cb36-391" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-392"><a href="#cb36-392" aria-hidden="true" tabindex="-1"></a>$$\beta_1 = b_1 \frac{s_1}{s_Y} = \frac{r_{Y1} - r_{Y2} r_{12}}{1 - r^2_{12}}$$ </span>
+<span id="cb36-393"><a href="#cb36-393" aria-hidden="true" tabindex="-1"></a>A similar expression holds for $\beta_2$.</span>
+<span id="cb36-394"><a href="#cb36-394" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-395"><a href="#cb36-395" aria-hidden="true" tabindex="-1"></a>Note that the <span class="in">`lm`</span> function in R does not provide an option to report standardized output. So, if you want to get the $\beta$-coefficients in R, it's easiest to just standardized the variables first and then do the regression with the standardized variables. </span>
+<span id="cb36-396"><a href="#cb36-396" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-397"><a href="#cb36-397" aria-hidden="true" tabindex="-1"></a>Regardless of how you compute them, the interpretation of the $\beta$-coefficients is in terms of the standard deviation units of both the $Y$ variable and the $X$ variable -- e.g., increasing $X_1$ by one standard deviation changes $\hat Y$ by $\beta_1$ standard deviations (holding the other predictors constant). </span>
 <span id="cb36-398"><a href="#cb36-398" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-401"><a href="#cb36-401" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb36-402"><a href="#cb36-402" aria-hidden="true" tabindex="-1"></a><span class="co"># Unlike other software, R doesn't have a convenience functions for beta coefficients. </span></span>
-<span id="cb36-403"><a href="#cb36-403" aria-hidden="true" tabindex="-1"></a>z_example_data <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">scale</span>(example_data))</span>
-<span id="cb36-404"><a href="#cb36-404" aria-hidden="true" tabindex="-1"></a>z_mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(Math <span class="sc">~</span> SES  <span class="sc">+</span> ATL, <span class="at">data =</span> z_example_data)</span>
-<span id="cb36-405"><a href="#cb36-405" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(z_mod)</span>
-<span id="cb36-406"><a href="#cb36-406" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb36-407"><a href="#cb36-407" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-408"><a href="#cb36-408" aria-hidden="true" tabindex="-1"></a>We should be careful when using beta-coefficients to "ease" the comparison of predictors. In the context of our example, we might wonder whether the overall cost of raising a child's Approaches to Learning by 1 SD is comparable to the overall cost of raising their family's SES by 1 SD. In general, putting variables on the same scale is only a superficial way of making comparisons among their regression coefficients. </span>
-<span id="cb36-409"><a href="#cb36-409" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-410"><a href="#cb36-410" aria-hidden="true" tabindex="-1"></a>**Please write down an interpretation of the of beta (standardized) regression coefficients in the above output. Your interpretation should include reference to the fact that the variables have been standardized. Based on this analysis, do you think one predictor is more important than the other? Why or why not? Please be prepared to share your interpretations / questions in class!** </span>
-<span id="cb36-411"><a href="#cb36-411" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-412"><a href="#cb36-412" aria-hidden="true" tabindex="-1"></a><span class="fu">## (Multiple) R-squared {#sec-rsquared-3}</span></span>
-<span id="cb36-413"><a href="#cb36-413" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-414"><a href="#cb36-414" aria-hidden="true" tabindex="-1"></a>R-squared in multiple regression has the same general formula and interpretation as in simple regression. The formula is</span>
-<span id="cb36-415"><a href="#cb36-415" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-416"><a href="#cb36-416" aria-hidden="true" tabindex="-1"></a>$$R^2 = \frac{SS_{\text{reg}}} {SS_{\text{total}}} $$</span>
-<span id="cb36-417"><a href="#cb36-417" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-418"><a href="#cb36-418" aria-hidden="true" tabindex="-1"></a>and it is interpreted as the proportion of variance in the outcome variable that is "associated with" or "explained by" its linear relationship with the predictor variables.</span>
-<span id="cb36-419"><a href="#cb36-419" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-420"><a href="#cb36-420" aria-hidden="true" tabindex="-1"></a>As discussed below, we can also say a bit more about R-squared in multiple regression. </span>
-<span id="cb36-421"><a href="#cb36-421" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-422"><a href="#cb36-422" aria-hidden="true" tabindex="-1"></a><span class="fu">### Relation with simple regression</span></span>
-<span id="cb36-423"><a href="#cb36-423" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-424"><a href="#cb36-424" aria-hidden="true" tabindex="-1"></a>Like the regression coefficients in @sec-ols-3, the equation for R-squared can also be written in terms of the correlations among the three variables: </span>
-<span id="cb36-425"><a href="#cb36-425" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-426"><a href="#cb36-426" aria-hidden="true" tabindex="-1"></a>$$R^2 = \frac{r^2_{Y1} + r^2_{Y2} - 2 r_{12}r_{Y1}r_{Y2}}{1 - r^2_{12}}.$$</span>
-<span id="cb36-427"><a href="#cb36-427" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-428"><a href="#cb36-428" aria-hidden="true" tabindex="-1"></a>If the correlation between the predictors is zero, then this equation simplifies to</span>
-<span id="cb36-429"><a href="#cb36-429" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-430"><a href="#cb36-430" aria-hidden="true" tabindex="-1"></a>$$R^2 = r^2_{Y1} + r^2_{Y2}.$$</span>
-<span id="cb36-431"><a href="#cb36-431" aria-hidden="true" tabindex="-1"></a>In words: When the predictors are uncorrelated, their total contribution to variance explained is just the sum of their individual contributions. </span>
-<span id="cb36-432"><a href="#cb36-432" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-433"><a href="#cb36-433" aria-hidden="true" tabindex="-1"></a>However, when the predictors are correlated, either positively or negatively, it can be show that </span>
-<span id="cb36-434"><a href="#cb36-434" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-435"><a href="#cb36-435" aria-hidden="true" tabindex="-1"></a>$$ R^2 &lt; r^2_{Y1} + r^2_{Y2}.$$</span>
-<span id="cb36-436"><a href="#cb36-436" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-437"><a href="#cb36-437" aria-hidden="true" tabindex="-1"></a>In other words: correlated predictors jointly explain less variance than if we added the contributions of each predictor considered separately. Intuitively, this is because correlated predictors share some variation with each other. If we considered the predictors one at a time, we double-count their shared variation. </span>
-<span id="cb36-438"><a href="#cb36-438" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-439"><a href="#cb36-439" aria-hidden="true" tabindex="-1"></a>The interpretation of R-squared for one versus two predictors can be explained in terms of the following Venn diagram. </span>
-<span id="cb36-440"><a href="#cb36-440" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-441"><a href="#cb36-441" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, fig-venn-diagram, echo = F, fig.cap = "Shared Variance Among $Y$, $X_1$, and $X_2$.", fig.align = 'center'}</span></span>
-<span id="cb36-442"><a href="#cb36-442" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"files/images/venn_diagram.png"</span>)</span>
-<span id="cb36-443"><a href="#cb36-443" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb36-444"><a href="#cb36-444" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-445"><a href="#cb36-445" aria-hidden="true" tabindex="-1"></a>In the diagram, the circles represent the variance of each variable and the overlap between circles represents their shared variance (i.e., the R-squared for each pair of variables). When we conduct a multiple regression, the variance in the outcome explained by both predictors is equal to the sum of the areas A + B + C. If we instead conduct two simple regressions and then add up the R-squared values, we would double count the area labelled "B". </span>
-<span id="cb36-446"><a href="#cb36-446" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-447"><a href="#cb36-447" aria-hidden="true" tabindex="-1"></a>The Venn diagram in @fig-venn-diagram is also useful for understanding other aspects of multiple regression. **In the lesson we will discuss the following questions. Please write down your answers now so you are prepared to contribute to the discussion:** </span>
-<span id="cb36-448"><a href="#cb36-448" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-449"><a href="#cb36-449" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Which area represents the correlation between the predictors? **</span>
-<span id="cb36-450"><a href="#cb36-450" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-451"><a href="#cb36-451" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Which areas represent the regression coefficients from multiple regression?** </span>
-<span id="cb36-452"><a href="#cb36-452" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-453"><a href="#cb36-453" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Which areas represent the regression coefficients from simple regression?**</span>
-<span id="cb36-454"><a href="#cb36-454" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-399"><a href="#cb36-399" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-402"><a href="#cb36-402" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb36-403"><a href="#cb36-403" aria-hidden="true" tabindex="-1"></a><span class="co"># Unlike other software, R doesn't have a convenience functions for beta coefficients. </span></span>
+<span id="cb36-404"><a href="#cb36-404" aria-hidden="true" tabindex="-1"></a>z_example_data <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">scale</span>(example_data))</span>
+<span id="cb36-405"><a href="#cb36-405" aria-hidden="true" tabindex="-1"></a>z_mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(Math <span class="sc">~</span> SES  <span class="sc">+</span> ATL, <span class="at">data =</span> z_example_data)</span>
+<span id="cb36-406"><a href="#cb36-406" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(z_mod)</span>
+<span id="cb36-407"><a href="#cb36-407" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb36-408"><a href="#cb36-408" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-409"><a href="#cb36-409" aria-hidden="true" tabindex="-1"></a>We should be careful when using beta-coefficients to "ease" the comparison of predictors. In the context of our example, we might wonder whether the overall cost of raising a child's Approaches to Learning by 1 SD is comparable to the overall cost of raising their family's SES by 1 SD. In general, putting variables on the same scale is only a superficial way of making comparisons among their regression coefficients. </span>
+<span id="cb36-410"><a href="#cb36-410" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-411"><a href="#cb36-411" aria-hidden="true" tabindex="-1"></a>**Please write down an interpretation of the of beta (standardized) regression coefficients in the above output. Your interpretation should include reference to the fact that the variables have been standardized. Based on this analysis, do you think one predictor is more important than the other? Why or why not? Please be prepared to share your interpretations / questions in class!** </span>
+<span id="cb36-412"><a href="#cb36-412" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-413"><a href="#cb36-413" aria-hidden="true" tabindex="-1"></a><span class="fu">## (Multiple) R-squared {#sec-rsquared-3}</span></span>
+<span id="cb36-414"><a href="#cb36-414" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-415"><a href="#cb36-415" aria-hidden="true" tabindex="-1"></a>R-squared in multiple regression has the same general formula and interpretation as in simple regression. The formula is</span>
+<span id="cb36-416"><a href="#cb36-416" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-417"><a href="#cb36-417" aria-hidden="true" tabindex="-1"></a>$$R^2 = \frac{SS_{\text{reg}}} {SS_{\text{total}}} $$</span>
+<span id="cb36-418"><a href="#cb36-418" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-419"><a href="#cb36-419" aria-hidden="true" tabindex="-1"></a>and it is interpreted as the proportion of variance in the outcome variable that is "associated with" or "explained by" its linear relationship with the predictor variables.</span>
+<span id="cb36-420"><a href="#cb36-420" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-421"><a href="#cb36-421" aria-hidden="true" tabindex="-1"></a>As discussed below, we can also say a bit more about R-squared in multiple regression. </span>
+<span id="cb36-422"><a href="#cb36-422" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-423"><a href="#cb36-423" aria-hidden="true" tabindex="-1"></a><span class="fu">### Relation with simple regression</span></span>
+<span id="cb36-424"><a href="#cb36-424" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-425"><a href="#cb36-425" aria-hidden="true" tabindex="-1"></a>Like the regression coefficients in @sec-ols-3, the equation for R-squared can also be written in terms of the correlations among the three variables: </span>
+<span id="cb36-426"><a href="#cb36-426" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-427"><a href="#cb36-427" aria-hidden="true" tabindex="-1"></a>$$R^2 = \frac{r^2_{Y1} + r^2_{Y2} - 2 r_{12}r_{Y1}r_{Y2}}{1 - r^2_{12}}.$$</span>
+<span id="cb36-428"><a href="#cb36-428" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-429"><a href="#cb36-429" aria-hidden="true" tabindex="-1"></a>If the correlation between the predictors is zero, then this equation simplifies to</span>
+<span id="cb36-430"><a href="#cb36-430" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-431"><a href="#cb36-431" aria-hidden="true" tabindex="-1"></a>$$R^2 = r^2_{Y1} + r^2_{Y2}.$$</span>
+<span id="cb36-432"><a href="#cb36-432" aria-hidden="true" tabindex="-1"></a>In words: When the predictors are uncorrelated, their total contribution to variance explained is just the sum of their individual contributions. </span>
+<span id="cb36-433"><a href="#cb36-433" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-434"><a href="#cb36-434" aria-hidden="true" tabindex="-1"></a>However, when the predictors are correlated, either positively or negatively, it can be show that </span>
+<span id="cb36-435"><a href="#cb36-435" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-436"><a href="#cb36-436" aria-hidden="true" tabindex="-1"></a>$$ R^2 &lt; r^2_{Y1} + r^2_{Y2}.$$</span>
+<span id="cb36-437"><a href="#cb36-437" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-438"><a href="#cb36-438" aria-hidden="true" tabindex="-1"></a>In other words: correlated predictors jointly explain less variance than if we added the contributions of each predictor considered separately. Intuitively, this is because correlated predictors share some variation with each other. If we considered the predictors one at a time, we double-count their shared variation. </span>
+<span id="cb36-439"><a href="#cb36-439" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-440"><a href="#cb36-440" aria-hidden="true" tabindex="-1"></a>The interpretation of R-squared for one versus two predictors can be explained in terms of the following Venn diagram. </span>
+<span id="cb36-441"><a href="#cb36-441" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-442"><a href="#cb36-442" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, fig-venn-diagram, echo = F, fig.cap = "Shared Variance Among $Y$, $X_1$, and $X_2$.", fig.align = 'center'}</span></span>
+<span id="cb36-443"><a href="#cb36-443" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"files/images/venn_diagram.png"</span>)</span>
+<span id="cb36-444"><a href="#cb36-444" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb36-445"><a href="#cb36-445" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-446"><a href="#cb36-446" aria-hidden="true" tabindex="-1"></a>In the diagram, the circles represent the variance of each variable and the overlap between circles represents their shared variance (i.e., the R-squared for each pair of variables). When we conduct a multiple regression, the variance in the outcome explained by both predictors is equal to the sum of the areas A + B + C. If we instead conduct two simple regressions and then add up the R-squared values, we would double count the area labelled "B". </span>
+<span id="cb36-447"><a href="#cb36-447" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-448"><a href="#cb36-448" aria-hidden="true" tabindex="-1"></a>The Venn diagram in @fig-venn-diagram is also useful for understanding other aspects of multiple regression. **In the lesson we will discuss the following questions. Please write down your answers now so you are prepared to contribute to the discussion:** </span>
+<span id="cb36-449"><a href="#cb36-449" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-450"><a href="#cb36-450" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Which area represents the correlation between the predictors? **</span>
+<span id="cb36-451"><a href="#cb36-451" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-452"><a href="#cb36-452" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Which areas represent the regression coefficients from multiple regression?** </span>
+<span id="cb36-453"><a href="#cb36-453" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-454"><a href="#cb36-454" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Which areas represent the regression coefficients from simple regression?**</span>
 <span id="cb36-455"><a href="#cb36-455" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb36-456"><a href="#cb36-456" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-457"><a href="#cb36-457" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!--</span></span>
-<span id="cb36-458"><a href="#cb36-458" aria-hidden="true" tabindex="-1"></a><span class="co">\begin{align}</span></span>
-<span id="cb36-459"><a href="#cb36-459" aria-hidden="true" tabindex="-1"></a><span class="co">R^2_{Y.12} &amp; = \frac{A + B + C}{A + B + C + D} \\ \\</span></span>
-<span id="cb36-460"><a href="#cb36-460" aria-hidden="true" tabindex="-1"></a><span class="co">R^2_{Y.1} &amp; = \frac{A + B}{A + B + C + D} \\ \\</span></span>
-<span id="cb36-461"><a href="#cb36-461" aria-hidden="true" tabindex="-1"></a><span class="co">R^2_{Y.2} &amp; = \frac{B + C}{A + B + C + D} \\ \\</span></span>
-<span id="cb36-462"><a href="#cb36-462" aria-hidden="true" tabindex="-1"></a><span class="co">\end{align}</span></span>
-<span id="cb36-463"><a href="#cb36-463" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-464"><a href="#cb36-464" aria-hidden="true" tabindex="-1"></a><span class="co">These equations imply </span></span>
-<span id="cb36-465"><a href="#cb36-465" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-466"><a href="#cb36-466" aria-hidden="true" tabindex="-1"></a><span class="co">\[ R^2_{Y.1} + R^2_{Y.2} = \frac{A + 2B + C}{A + B + C + D} \geq R^2_{Y.12} \] </span></span>
-<span id="cb36-467"><a href="#cb36-467" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-468"><a href="#cb36-468" aria-hidden="true" tabindex="-1"></a><span class="co">This explains the relationship among the R-squared values in Table \@ref(tab:compare). The reason that the sum of the R-squared values in the simple models is greater than the R-squared value in the two-predictor model is because the sum double counts the shared variation among the predictors (area B in the diagram). </span></span>
-<span id="cb36-469"><a href="#cb36-469" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-470"><a href="#cb36-470" aria-hidden="true" tabindex="-1"></a><span class="al">###</span><span class="co"> Relation with $\beta$-weights</span></span>
-<span id="cb36-471"><a href="#cb36-471" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-472"><a href="#cb36-472" aria-hidden="true" tabindex="-1"></a><span class="co">The squared standardized coefficients in Section \@ref(standardized-coefficients) are closely related to a quantity called the squared semi-partial correlation: </span></span>
-<span id="cb36-473"><a href="#cb36-473" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-474"><a href="#cb36-474" aria-hidden="true" tabindex="-1"></a><span class="co">\[ r^2_{Y1 \mid 2} = \beta_1^2 * (1 - r^2_{12}) \]</span></span>
-<span id="cb36-475"><a href="#cb36-475" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-476"><a href="#cb36-476" aria-hidden="true" tabindex="-1"></a><span class="co">In this notation, the subscript $Y1 \mid 2$ denotes the correlation between $Y$ and $X_1$ after removing the (linear) association between $X_1$ and $X_2$. Similarly for $Y2 \mid 1$. </span></span>
-<span id="cb36-477"><a href="#cb36-477" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-478"><a href="#cb36-478" aria-hidden="true" tabindex="-1"></a><span class="co">The squared semi-partial correspond to the areas in the Venn diagrams as follows</span></span>
-<span id="cb36-479"><a href="#cb36-479" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-480"><a href="#cb36-480" aria-hidden="true" tabindex="-1"></a><span class="co">\begin{align}</span></span>
-<span id="cb36-481"><a href="#cb36-481" aria-hidden="true" tabindex="-1"></a><span class="co">r^2_{Y1 \mid 2} &amp; = \frac{A}{A + B + C + D} \\ \\</span></span>
-<span id="cb36-482"><a href="#cb36-482" aria-hidden="true" tabindex="-1"></a><span class="co">r^2_{Y2 \mid 1} &amp; = \frac{B}{A + B + C + D} </span></span>
-<span id="cb36-483"><a href="#cb36-483" aria-hidden="true" tabindex="-1"></a><span class="co">\end{align}</span></span>
-<span id="cb36-484"><a href="#cb36-484" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-485"><a href="#cb36-485" aria-hidden="true" tabindex="-1"></a><span class="co">Using this relationship, we can see that squared semi partials (and hence the \beta-weights) </span></span>
-<span id="cb36-486"><a href="#cb36-486" aria-hidden="true" tabindex="-1"></a><span class="co">\end{align} \]</span></span>
-<span id="cb36-487"><a href="#cb36-487" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-488"><a href="#cb36-488" aria-hidden="true" tabindex="-1"></a><span class="co">--&gt;</span></span>
-<span id="cb36-489"><a href="#cb36-489" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-490"><a href="#cb36-490" aria-hidden="true" tabindex="-1"></a><span class="fu">### Adjusted R-squared</span></span>
-<span id="cb36-491"><a href="#cb36-491" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-492"><a href="#cb36-492" aria-hidden="true" tabindex="-1"></a>The sample R-squared is an upwardly biased estimate of the population R-squared. The adjusted R-squared corrects this bias. This section explains the main ideas. </span>
-<span id="cb36-493"><a href="#cb36-493" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-494"><a href="#cb36-494" aria-hidden="true" tabindex="-1"></a>The bias of R-squared is illustrated in the figure below. In the example, we are considering simple regression (one predictor), and we assume that the population correlation between the predictor and the outcome is zero (i.e., $\rho = 0$). </span>
-<span id="cb36-495"><a href="#cb36-495" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-496"><a href="#cb36-496" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, fig-adjusted, echo = F, fig.cap = "Sampling Distribution of $r$ and $r^2$ when $\rho = 0$.", fig.align = 'center'}</span></span>
-<span id="cb36-497"><a href="#cb36-497" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"files/images/adjusted_rsquared.png"</span>)</span>
-<span id="cb36-498"><a href="#cb36-498" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb36-499"><a href="#cb36-499" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-500"><a href="#cb36-500" aria-hidden="true" tabindex="-1"></a>In the left panel, we can see that "un-squared" correlation, $r$, has a sampling distribution that is centered at the true value $\rho = 0$. This means that $r$ is an unbiased estimate of $\rho$. </span>
-<span id="cb36-501"><a href="#cb36-501" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-502"><a href="#cb36-502" aria-hidden="true" tabindex="-1"></a>But in the right panel, we can see that the sampling distribution of the squared correlation,  $r^2$, must have a mean greater than zero. This is because all of the sample-to-sample deviations in left panel are now positive (because they have been squared). Since the average value of $r^2$ is greater than 0, $r^2$ is an upwardly biased estimate of $\rho^2$.</span>
-<span id="cb36-503"><a href="#cb36-503" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-504"><a href="#cb36-504" aria-hidden="true" tabindex="-1"></a>The adjusted R-squared corrects this bias. The formula for the adjustment is: </span>
-<span id="cb36-505"><a href="#cb36-505" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-506"><a href="#cb36-506" aria-hidden="true" tabindex="-1"></a>$$\tilde R^2 = 1 - (1 - R^2) \frac{N-1}{N - K - 1}$$</span>
-<span id="cb36-507"><a href="#cb36-507" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-508"><a href="#cb36-508" aria-hidden="true" tabindex="-1"></a>where $K$ is the number of predictors in the model. </span>
-<span id="cb36-509"><a href="#cb36-509" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-510"><a href="#cb36-510" aria-hidden="true" tabindex="-1"></a>The formula contains two main terms, the proportion of residual variance, $(1 - R^2)$, and the adjustment factor (the ratio of $N-1$ to $N-K-1$). We can understand how the adjustment works by considering these two terms.  </span>
-<span id="cb36-511"><a href="#cb36-511" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-512"><a href="#cb36-512" aria-hidden="true" tabindex="-1"></a>First, it can be seen that the adjustment factor is larger when the number of predictors, $K$, is large relative to the sample size, $N$. So, roughly speaking, the adjustment will be more severe when there are a lot of predictors in the model relative to the sample size. </span>
-<span id="cb36-513"><a href="#cb36-513" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-514"><a href="#cb36-514" aria-hidden="true" tabindex="-1"></a>Second, it can also be seen that the adjustment proportional to $(1 - R^2)$. This means that the adjustment is more severe if the model explains less variance in the outcome. For example, if $R^2 = .9$ and the adjustment factor is $1.1$, then adjusted $R^2 = .89$. In this case the adjustment is a decrease of 1% of variance explained. But if we start off explaining less variance, say $R^2 = .1$ and use the same adjustment factor, then adjusted $R^2 = .01$. Now the adjustment is a decrease of 9% variance explained, even though we didn't change the adjustment factor. </span>
-<span id="cb36-515"><a href="#cb36-515" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-516"><a href="#cb36-516" aria-hidden="true" tabindex="-1"></a>In summary, the overall interpretation of adusted R-squared is as follows: the adjustment will be larger when there are lots of predictors in the model but they don't explain much variance in the outcome. This situation is sometimes called "overfitting" the data, so we can think of adjusted R-squared as a correction for overfitting.  </span>
-<span id="cb36-517"><a href="#cb36-517" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-518"><a href="#cb36-518" aria-hidden="true" tabindex="-1"></a>There is no established standard for when you should reported R-squared or adjusted R-squared. I recommend that you report both whenever they would would lead to different substantive conclusions. We can discuss this more in class. </span>
-<span id="cb36-519"><a href="#cb36-519" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-520"><a href="#cb36-520" aria-hidden="true" tabindex="-1"></a><span class="fu">### The ECLS example</span></span>
-<span id="cb36-521"><a href="#cb36-521" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-522"><a href="#cb36-522" aria-hidden="true" tabindex="-1"></a>As shown in @sec-beta-3, the R-squared for the ECLS example is equal to .2726  and the adjusted R-squared is equal to .2668. **Please write down your interpretation of these value and be prepared to share your answer in class.** </span>
-<span id="cb36-523"><a href="#cb36-523" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-457"><a href="#cb36-457" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-458"><a href="#cb36-458" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!--</span></span>
+<span id="cb36-459"><a href="#cb36-459" aria-hidden="true" tabindex="-1"></a><span class="co">\begin{align}</span></span>
+<span id="cb36-460"><a href="#cb36-460" aria-hidden="true" tabindex="-1"></a><span class="co">R^2_{Y.12} &amp; = \frac{A + B + C}{A + B + C + D} \\ \\</span></span>
+<span id="cb36-461"><a href="#cb36-461" aria-hidden="true" tabindex="-1"></a><span class="co">R^2_{Y.1} &amp; = \frac{A + B}{A + B + C + D} \\ \\</span></span>
+<span id="cb36-462"><a href="#cb36-462" aria-hidden="true" tabindex="-1"></a><span class="co">R^2_{Y.2} &amp; = \frac{B + C}{A + B + C + D} \\ \\</span></span>
+<span id="cb36-463"><a href="#cb36-463" aria-hidden="true" tabindex="-1"></a><span class="co">\end{align}</span></span>
+<span id="cb36-464"><a href="#cb36-464" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-465"><a href="#cb36-465" aria-hidden="true" tabindex="-1"></a><span class="co">These equations imply </span></span>
+<span id="cb36-466"><a href="#cb36-466" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-467"><a href="#cb36-467" aria-hidden="true" tabindex="-1"></a><span class="co">\[ R^2_{Y.1} + R^2_{Y.2} = \frac{A + 2B + C}{A + B + C + D} \geq R^2_{Y.12} \] </span></span>
+<span id="cb36-468"><a href="#cb36-468" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-469"><a href="#cb36-469" aria-hidden="true" tabindex="-1"></a><span class="co">This explains the relationship among the R-squared values in Table \@ref(tab:compare). The reason that the sum of the R-squared values in the simple models is greater than the R-squared value in the two-predictor model is because the sum double counts the shared variation among the predictors (area B in the diagram). </span></span>
+<span id="cb36-470"><a href="#cb36-470" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-471"><a href="#cb36-471" aria-hidden="true" tabindex="-1"></a><span class="al">###</span><span class="co"> Relation with $\beta$-weights</span></span>
+<span id="cb36-472"><a href="#cb36-472" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-473"><a href="#cb36-473" aria-hidden="true" tabindex="-1"></a><span class="co">The squared standardized coefficients in Section \@ref(standardized-coefficients) are closely related to a quantity called the squared semi-partial correlation: </span></span>
+<span id="cb36-474"><a href="#cb36-474" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-475"><a href="#cb36-475" aria-hidden="true" tabindex="-1"></a><span class="co">\[ r^2_{Y1 \mid 2} = \beta_1^2 * (1 - r^2_{12}) \]</span></span>
+<span id="cb36-476"><a href="#cb36-476" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-477"><a href="#cb36-477" aria-hidden="true" tabindex="-1"></a><span class="co">In this notation, the subscript $Y1 \mid 2$ denotes the correlation between $Y$ and $X_1$ after removing the (linear) association between $X_1$ and $X_2$. Similarly for $Y2 \mid 1$. </span></span>
+<span id="cb36-478"><a href="#cb36-478" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-479"><a href="#cb36-479" aria-hidden="true" tabindex="-1"></a><span class="co">The squared semi-partial correspond to the areas in the Venn diagrams as follows</span></span>
+<span id="cb36-480"><a href="#cb36-480" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-481"><a href="#cb36-481" aria-hidden="true" tabindex="-1"></a><span class="co">\begin{align}</span></span>
+<span id="cb36-482"><a href="#cb36-482" aria-hidden="true" tabindex="-1"></a><span class="co">r^2_{Y1 \mid 2} &amp; = \frac{A}{A + B + C + D} \\ \\</span></span>
+<span id="cb36-483"><a href="#cb36-483" aria-hidden="true" tabindex="-1"></a><span class="co">r^2_{Y2 \mid 1} &amp; = \frac{B}{A + B + C + D} </span></span>
+<span id="cb36-484"><a href="#cb36-484" aria-hidden="true" tabindex="-1"></a><span class="co">\end{align}</span></span>
+<span id="cb36-485"><a href="#cb36-485" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-486"><a href="#cb36-486" aria-hidden="true" tabindex="-1"></a><span class="co">Using this relationship, we can see that squared semi partials (and hence the \beta-weights) </span></span>
+<span id="cb36-487"><a href="#cb36-487" aria-hidden="true" tabindex="-1"></a><span class="co">\end{align} \]</span></span>
+<span id="cb36-488"><a href="#cb36-488" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-489"><a href="#cb36-489" aria-hidden="true" tabindex="-1"></a><span class="co">--&gt;</span></span>
+<span id="cb36-490"><a href="#cb36-490" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-491"><a href="#cb36-491" aria-hidden="true" tabindex="-1"></a><span class="fu">### Adjusted R-squared</span></span>
+<span id="cb36-492"><a href="#cb36-492" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-493"><a href="#cb36-493" aria-hidden="true" tabindex="-1"></a>The sample R-squared is an upwardly biased estimate of the population R-squared. The adjusted R-squared corrects this bias. This section explains the main ideas. </span>
+<span id="cb36-494"><a href="#cb36-494" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-495"><a href="#cb36-495" aria-hidden="true" tabindex="-1"></a>The bias of R-squared is illustrated in the figure below. In the example, we are considering simple regression (one predictor), and we assume that the population correlation between the predictor and the outcome is zero (i.e., $\rho = 0$). </span>
+<span id="cb36-496"><a href="#cb36-496" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-497"><a href="#cb36-497" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, fig-adjusted, echo = F, fig.cap = "Sampling Distribution of $r$ and $r^2$ when $\rho = 0$.", fig.align = 'center'}</span></span>
+<span id="cb36-498"><a href="#cb36-498" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"files/images/adjusted_rsquared.png"</span>)</span>
+<span id="cb36-499"><a href="#cb36-499" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb36-500"><a href="#cb36-500" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-501"><a href="#cb36-501" aria-hidden="true" tabindex="-1"></a>In the left panel, we can see that "un-squared" correlation, $r$, has a sampling distribution that is centered at the true value $\rho = 0$. This means that $r$ is an unbiased estimate of $\rho$. </span>
+<span id="cb36-502"><a href="#cb36-502" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-503"><a href="#cb36-503" aria-hidden="true" tabindex="-1"></a>But in the right panel, we can see that the sampling distribution of the squared correlation,  $r^2$, must have a mean greater than zero. This is because all of the sample-to-sample deviations in left panel are now positive (because they have been squared). Since the average value of $r^2$ is greater than 0, $r^2$ is an upwardly biased estimate of $\rho^2$.</span>
+<span id="cb36-504"><a href="#cb36-504" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-505"><a href="#cb36-505" aria-hidden="true" tabindex="-1"></a>The adjusted R-squared corrects this bias. The formula for the adjustment is: </span>
+<span id="cb36-506"><a href="#cb36-506" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-507"><a href="#cb36-507" aria-hidden="true" tabindex="-1"></a>$$\tilde R^2 = 1 - (1 - R^2) \frac{N-1}{N - K - 1}$$</span>
+<span id="cb36-508"><a href="#cb36-508" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-509"><a href="#cb36-509" aria-hidden="true" tabindex="-1"></a>where $K$ is the number of predictors in the model. </span>
+<span id="cb36-510"><a href="#cb36-510" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-511"><a href="#cb36-511" aria-hidden="true" tabindex="-1"></a>The formula contains two main terms, the proportion of residual variance, $(1 - R^2)$, and the adjustment factor (the ratio of $N-1$ to $N-K-1$). We can understand how the adjustment works by considering these two terms.  </span>
+<span id="cb36-512"><a href="#cb36-512" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-513"><a href="#cb36-513" aria-hidden="true" tabindex="-1"></a>First, it can be seen that the adjustment factor is larger when the number of predictors, $K$, is large relative to the sample size, $N$. So, roughly speaking, the adjustment will be more severe when there are a lot of predictors in the model relative to the sample size. </span>
+<span id="cb36-514"><a href="#cb36-514" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-515"><a href="#cb36-515" aria-hidden="true" tabindex="-1"></a>Second, it can also be seen that the adjustment proportional to $(1 - R^2)$. This means that the adjustment is more severe if the model explains less variance in the outcome. For example, if $R^2 = .9$ and the adjustment factor is $1.1$, then adjusted $R^2 = .89$. In this case the adjustment is a decrease of 1% of variance explained. But if we start off explaining less variance, say $R^2 = .1$ and use the same adjustment factor, then adjusted $R^2 = .01$. Now the adjustment is a decrease of 9% variance explained, even though we didn't change the adjustment factor. </span>
+<span id="cb36-516"><a href="#cb36-516" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-517"><a href="#cb36-517" aria-hidden="true" tabindex="-1"></a>In summary, the overall interpretation of adusted R-squared is as follows: the adjustment will be larger when there are lots of predictors in the model but they don't explain much variance in the outcome. This situation is sometimes called "overfitting" the data, so we can think of adjusted R-squared as a correction for overfitting.  </span>
+<span id="cb36-518"><a href="#cb36-518" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-519"><a href="#cb36-519" aria-hidden="true" tabindex="-1"></a>There is no established standard for when you should reported R-squared or adjusted R-squared. I recommend that you report both whenever they would would lead to different substantive conclusions. We can discuss this more in class. </span>
+<span id="cb36-520"><a href="#cb36-520" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-521"><a href="#cb36-521" aria-hidden="true" tabindex="-1"></a><span class="fu">### The ECLS example</span></span>
+<span id="cb36-522"><a href="#cb36-522" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-523"><a href="#cb36-523" aria-hidden="true" tabindex="-1"></a>As shown in @sec-beta-3, the R-squared for the ECLS example is equal to .2726  and the adjusted R-squared is equal to .2668. **Please write down your interpretation of these value and be prepared to share your answer in class.** </span>
 <span id="cb36-524"><a href="#cb36-524" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-525"><a href="#cb36-525" aria-hidden="true" tabindex="-1"></a><span class="fu">## Inference{#sec-inference-3}</span></span>
-<span id="cb36-526"><a href="#cb36-526" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-527"><a href="#cb36-527" aria-hidden="true" tabindex="-1"></a>There isn't really any thing new that about inference with multiple regression, except the formula for the standard errors (see @fox2016 chap.6). We present the formulas for an abribrary number of predictors, denoted $k = 1, \dots K$. </span>
-<span id="cb36-528"><a href="#cb36-528" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-529"><a href="#cb36-529" aria-hidden="true" tabindex="-1"></a><span class="fu">### Inference for the coefficients {#sec-inference-for-coeffecients-3}</span></span>
-<span id="cb36-530"><a href="#cb36-530" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-531"><a href="#cb36-531" aria-hidden="true" tabindex="-1"></a>In multiple regression</span>
-<span id="cb36-532"><a href="#cb36-532" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-533"><a href="#cb36-533" aria-hidden="true" tabindex="-1"></a>$$SE({\widehat b_k}) = \frac{\text{SD}(Y)}{\text{SD}(X)} \sqrt{\frac{1 - R^2}{N - K - 1}} \times \sqrt{\frac{1}{1 - R_k^2}} </span>
-<span id="cb36-534"><a href="#cb36-534" aria-hidden="true" tabindex="-1"></a>$${#eq-se-3}</span>
-<span id="cb36-535"><a href="#cb36-535" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-536"><a href="#cb36-536" aria-hidden="true" tabindex="-1"></a>In this formula, $K$ denotes the number of predictors and $R^2_k$ is the R-squared that results from regressing predictor $k$ on the other $K-1$ predictors (without the $Y$ variable). </span>
-<span id="cb36-537"><a href="#cb36-537" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-538"><a href="#cb36-538" aria-hidden="true" tabindex="-1"></a>Notice that the first part of the standard error (before the "$\times$") is the same as simple regression (see @sec-inference-2). The last part, which includes $R^2_k$, is different and we talk about it more below.</span>
-<span id="cb36-539"><a href="#cb36-539" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-540"><a href="#cb36-540" aria-hidden="true" tabindex="-1"></a>The standard errors can be used to construct t-tests and confidence intervals using the same approach as for simple regression (see @sec-inference-2). The degrees of freedom for the t-distribution is $N - K -1$. This formula for the degrees of freedom applies to simple regression too, where $K = 1$. </span>
-<span id="cb36-541"><a href="#cb36-541" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-542"><a href="#cb36-542" aria-hidden="true" tabindex="-1"></a><span class="fu">### Precision of $\hat b$</span></span>
-<span id="cb36-543"><a href="#cb36-543" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-544"><a href="#cb36-544" aria-hidden="true" tabindex="-1"></a>We can use @eq-se-3 to understand the factors that influence the size of the standard errors of the regression coefficients. Recall that standard errors describe the sample-to-sample variability of a statistic. If there is a lot sample-to-sample variability, the statistic is said to be imprecise.  @eq-se-3 shows us what factors make $\hat b$ more or less precise. </span>
-<span id="cb36-545"><a href="#cb36-545" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-546"><a href="#cb36-546" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>The standard errors *decrease* with </span>
-<span id="cb36-547"><a href="#cb36-547" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>The sample size, $N$ </span>
-<span id="cb36-548"><a href="#cb36-548" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>The proportion of variance in the outcome explained by the predictors, $R^2$</span>
-<span id="cb36-549"><a href="#cb36-549" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-550"><a href="#cb36-550" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>The standard errors *increase* with</span>
-<span id="cb36-551"><a href="#cb36-551" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>The number of predictors, $K$</span>
-<span id="cb36-552"><a href="#cb36-552" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>The proportion of variance in the predictor that is explained by the other predictors, $R^2_k$</span>
-<span id="cb36-553"><a href="#cb36-553" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-554"><a href="#cb36-554" aria-hidden="true" tabindex="-1"></a>So, large sample sizes and a large proportion of variance explained lead to precise estimates of the regression coefficients.  On the other hand, including many predictors that are highly correlated with each other leads to less precision. In particular, the situation where $R^2_k$ approaches the value of $1$ is called *multicollinearity*. We will talk about multicollinearity in more detail in @sec-chap-5. </span>
-<span id="cb36-555"><a href="#cb36-555" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-556"><a href="#cb36-556" aria-hidden="true" tabindex="-1"></a><span class="fu">### Inference for R-squared{#inference-for-rsquared-4}</span></span>
-<span id="cb36-557"><a href="#cb36-557" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-558"><a href="#cb36-558" aria-hidden="true" tabindex="-1"></a>The R-squared statistic in multiple regression tells us how much variation in the outcome is explained by all of the predictors together. If the predictors do not explain any variation, then the population R-squared is equal to zero. </span>
-<span id="cb36-559"><a href="#cb36-559" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-560"><a href="#cb36-560" aria-hidden="true" tabindex="-1"></a>Notice that $R^2 = 0$ implies $b_1 = b_2 = ... = b_k = 0$ (in the population). So, testing the significance of R-squared is equivalent to testing whether any of the regression parameters are non-zero. When we addressed ANOVA last semester, we called this the omnibus hypothesis. But in regression analysis, it is usually just referred to as a test of R-squared. </span>
-<span id="cb36-561"><a href="#cb36-561" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-562"><a href="#cb36-562" aria-hidden="true" tabindex="-1"></a>The null hypothesis $H_0 : R^2 = 0$ can be tested using the statistic</span>
-<span id="cb36-563"><a href="#cb36-563" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-564"><a href="#cb36-564" aria-hidden="true" tabindex="-1"></a>$$F = \frac{\widehat R^2 / K}{(1 - \widehat R^2) / (N - K - 1)},$$</span>
-<span id="cb36-565"><a href="#cb36-565" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-566"><a href="#cb36-566" aria-hidden="true" tabindex="-1"></a>which has an F-distribution on $K$ and $N - K -1$ degrees of freedom when the null hypothesis is true. </span>
-<span id="cb36-567"><a href="#cb36-567" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-568"><a href="#cb36-568" aria-hidden="true" tabindex="-1"></a><span class="fu">### The ECLS example</span></span>
-<span id="cb36-569"><a href="#cb36-569" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-570"><a href="#cb36-570" aria-hidden="true" tabindex="-1"></a>The R output for the ECLS example is presented (again) below. **Please write down your conclusions about the statistical significance of the predictors and the  R-squared statistic, and be prepared to share your answer in class. Please also write down the factors that affect the precision of the regression coefficients. This would be a good opportunity to practice APA formatting.**</span>
-<span id="cb36-571"><a href="#cb36-571" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-574"><a href="#cb36-574" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb36-575"><a href="#cb36-575" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod1)</span>
-<span id="cb36-576"><a href="#cb36-576" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb36-577"><a href="#cb36-577" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-578"><a href="#cb36-578" aria-hidden="true" tabindex="-1"></a><span class="fu">## Workbook</span></span>
-<span id="cb36-579"><a href="#cb36-579" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-580"><a href="#cb36-580" aria-hidden="true" tabindex="-1"></a>This section collects the questions asked in this chapter. The lesson for this chapter will focus on discussing these questions and then working on the exercises in @sec-exercises-3. The lesson will **not** be a lecture that reviews all of the material in the chapter! So, if you haven't written down / thought about the answers to these questions before class, the lesson will not be very useful for you. Please engage with each question by writing down one or more answers, asking clarifying questions about related material, posing follow up questions, etc.  </span>
-<span id="cb36-581"><a href="#cb36-581" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-582"><a href="#cb36-582" aria-hidden="true" tabindex="-1"></a>@sec-ecls-3</span>
-<span id="cb36-583"><a href="#cb36-583" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-584"><a href="#cb36-584" aria-hidden="true" tabindex="-1"></a>If you have questions about the interpretation of a correlation matrix (below) or pairwise plots (see @sec-ecls-3), please write them down now and share them class.</span>
-<span id="cb36-585"><a href="#cb36-585" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-586"><a href="#cb36-586" aria-hidden="true" tabindex="-1"></a>Numerical output for the ECLS example: </span>
-<span id="cb36-587"><a href="#cb36-587" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-590"><a href="#cb36-590" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb36-591"><a href="#cb36-591" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(example_data)</span>
-<span id="cb36-592"><a href="#cb36-592" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb36-593"><a href="#cb36-593" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-594"><a href="#cb36-594" aria-hidden="true" tabindex="-1"></a>Mathematical notation for formulas </span>
-<span id="cb36-595"><a href="#cb36-595" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-596"><a href="#cb36-596" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb36-597"><a href="#cb36-597" aria-hidden="true" tabindex="-1"></a>\begin{array}{c}</span>
-<span id="cb36-598"><a href="#cb36-598" aria-hidden="true" tabindex="-1"></a>\text{var } Y <span class="sc">\\</span> \text{var } X_1 <span class="sc">\\</span> \text{var } X_2</span>
-<span id="cb36-599"><a href="#cb36-599" aria-hidden="true" tabindex="-1"></a>\end{array}</span>
-<span id="cb36-600"><a href="#cb36-600" aria-hidden="true" tabindex="-1"></a>\quad</span>
-<span id="cb36-601"><a href="#cb36-601" aria-hidden="true" tabindex="-1"></a>\left[ </span>
-<span id="cb36-602"><a href="#cb36-602" aria-hidden="true" tabindex="-1"></a>\begin{array}{ccc}</span>
-<span id="cb36-603"><a href="#cb36-603" aria-hidden="true" tabindex="-1"></a> 1       &amp; r_{Y1}  &amp; r_{Y2}  <span class="sc">\\</span></span>
-<span id="cb36-604"><a href="#cb36-604" aria-hidden="true" tabindex="-1"></a> r_{1Y}  &amp; 1       &amp; r_{12}  <span class="sc">\\</span></span>
-<span id="cb36-605"><a href="#cb36-605" aria-hidden="true" tabindex="-1"></a> r_{2Y}  &amp; r_{21}  &amp; 1</span>
-<span id="cb36-606"><a href="#cb36-606" aria-hidden="true" tabindex="-1"></a>\end{array}</span>
-<span id="cb36-607"><a href="#cb36-607" aria-hidden="true" tabindex="-1"></a> \right]</span>
-<span id="cb36-608"><a href="#cb36-608" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb36-609"><a href="#cb36-609" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-610"><a href="#cb36-610" aria-hidden="true" tabindex="-1"></a>@sec-interpretation-3</span>
-<span id="cb36-611"><a href="#cb36-611" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-612"><a href="#cb36-612" aria-hidden="true" tabindex="-1"></a>Below, the R output from the ECLS example is reported. Please provide a written explanation of the regression coefficients for SES and ATL. If you have questions about how to interpret the coefficients, please also note them now and be prepared to share them in class. Note that this question is not asking about whether the coefficients are significant -- it is asking what the numbers in the first column of the Coefficients table mean. </span>
-<span id="cb36-613"><a href="#cb36-613" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-525"><a href="#cb36-525" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-526"><a href="#cb36-526" aria-hidden="true" tabindex="-1"></a><span class="fu">## Inference{#sec-inference-3}</span></span>
+<span id="cb36-527"><a href="#cb36-527" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-528"><a href="#cb36-528" aria-hidden="true" tabindex="-1"></a>There isn't really any thing new that about inference with multiple regression, except the formula for the standard errors (see @fox2016 chap.6). We present the formulas for an abribrary number of predictors, denoted $k = 1, \dots K$. </span>
+<span id="cb36-529"><a href="#cb36-529" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-530"><a href="#cb36-530" aria-hidden="true" tabindex="-1"></a><span class="fu">### Inference for the coefficients {#sec-inference-for-coeffecients-3}</span></span>
+<span id="cb36-531"><a href="#cb36-531" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-532"><a href="#cb36-532" aria-hidden="true" tabindex="-1"></a>In multiple regression</span>
+<span id="cb36-533"><a href="#cb36-533" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-534"><a href="#cb36-534" aria-hidden="true" tabindex="-1"></a>$$SE({\widehat b_k}) = \frac{\text{SD}(Y)}{\text{SD}(X)} \sqrt{\frac{1 - R^2}{N - K - 1}} \times \sqrt{\frac{1}{1 - R_k^2}} </span>
+<span id="cb36-535"><a href="#cb36-535" aria-hidden="true" tabindex="-1"></a>$${#eq-se-3}</span>
+<span id="cb36-536"><a href="#cb36-536" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-537"><a href="#cb36-537" aria-hidden="true" tabindex="-1"></a>In this formula, $K$ denotes the number of predictors and $R^2_k$ is the R-squared that results from regressing predictor $k$ on the other $K-1$ predictors (without the $Y$ variable). </span>
+<span id="cb36-538"><a href="#cb36-538" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-539"><a href="#cb36-539" aria-hidden="true" tabindex="-1"></a>Notice that the first part of the standard error (before the "$\times$") is the same as simple regression (see @sec-inference-2). The last part, which includes $R^2_k$, is different and we talk about it more below.</span>
+<span id="cb36-540"><a href="#cb36-540" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-541"><a href="#cb36-541" aria-hidden="true" tabindex="-1"></a>The standard errors can be used to construct t-tests and confidence intervals using the same approach as for simple regression (see @sec-inference-2). The degrees of freedom for the t-distribution is $N - K -1$. This formula for the degrees of freedom applies to simple regression too, where $K = 1$. </span>
+<span id="cb36-542"><a href="#cb36-542" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-543"><a href="#cb36-543" aria-hidden="true" tabindex="-1"></a><span class="fu">### Precision of $\hat b$</span></span>
+<span id="cb36-544"><a href="#cb36-544" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-545"><a href="#cb36-545" aria-hidden="true" tabindex="-1"></a>We can use @eq-se-3 to understand the factors that influence the size of the standard errors of the regression coefficients. Recall that standard errors describe the sample-to-sample variability of a statistic. If there is a lot sample-to-sample variability, the statistic is said to be imprecise.  @eq-se-3 shows us what factors make $\hat b$ more or less precise. </span>
+<span id="cb36-546"><a href="#cb36-546" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-547"><a href="#cb36-547" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>The standard errors *decrease* with </span>
+<span id="cb36-548"><a href="#cb36-548" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>The sample size, $N$ </span>
+<span id="cb36-549"><a href="#cb36-549" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>The proportion of variance in the outcome explained by the predictors, $R^2$</span>
+<span id="cb36-550"><a href="#cb36-550" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-551"><a href="#cb36-551" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>The standard errors *increase* with</span>
+<span id="cb36-552"><a href="#cb36-552" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>The number of predictors, $K$</span>
+<span id="cb36-553"><a href="#cb36-553" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>The proportion of variance in the predictor that is explained by the other predictors, $R^2_k$</span>
+<span id="cb36-554"><a href="#cb36-554" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-555"><a href="#cb36-555" aria-hidden="true" tabindex="-1"></a>So, large sample sizes and a large proportion of variance explained lead to precise estimates of the regression coefficients.  On the other hand, including many predictors that are highly correlated with each other leads to less precision. In particular, the situation where $R^2_k$ approaches the value of $1$ is called *multicollinearity*. We will talk about multicollinearity in more detail in @sec-chap-5. </span>
+<span id="cb36-556"><a href="#cb36-556" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-557"><a href="#cb36-557" aria-hidden="true" tabindex="-1"></a><span class="fu">### Inference for R-squared{#inference-for-rsquared-4}</span></span>
+<span id="cb36-558"><a href="#cb36-558" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-559"><a href="#cb36-559" aria-hidden="true" tabindex="-1"></a>The R-squared statistic in multiple regression tells us how much variation in the outcome is explained by all of the predictors together. If the predictors do not explain any variation, then the population R-squared is equal to zero. </span>
+<span id="cb36-560"><a href="#cb36-560" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-561"><a href="#cb36-561" aria-hidden="true" tabindex="-1"></a>Notice that $R^2 = 0$ implies $b_1 = b_2 = ... = b_K = 0$ (in the population). So, testing the significance of R-squared is equivalent to testing whether any of the regression parameters are non-zero. When we addressed ANOVA last semester, we called this the omnibus hypothesis. But in regression analysis, it is usually just referred to as a test of R-squared. </span>
+<span id="cb36-562"><a href="#cb36-562" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-563"><a href="#cb36-563" aria-hidden="true" tabindex="-1"></a>The null hypothesis $H_0 : R^2 = 0$ can be tested using the statistic</span>
+<span id="cb36-564"><a href="#cb36-564" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-565"><a href="#cb36-565" aria-hidden="true" tabindex="-1"></a>$$F = \frac{\widehat R^2 / K}{(1 - \widehat R^2) / (N - K - 1)},$$</span>
+<span id="cb36-566"><a href="#cb36-566" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-567"><a href="#cb36-567" aria-hidden="true" tabindex="-1"></a>which has an F-distribution on $K$ and $N - K -1$ degrees of freedom when the null hypothesis is true. </span>
+<span id="cb36-568"><a href="#cb36-568" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-569"><a href="#cb36-569" aria-hidden="true" tabindex="-1"></a><span class="fu">### The ECLS example</span></span>
+<span id="cb36-570"><a href="#cb36-570" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-571"><a href="#cb36-571" aria-hidden="true" tabindex="-1"></a>The R output for the ECLS example is presented (again) below. **Please write down your conclusions about the statistical significance of the predictors and the  R-squared statistic, and be prepared to share your answer in class. Please also write down the factors that affect the precision of the regression coefficients. This would be a good opportunity to practice APA formatting.**</span>
+<span id="cb36-572"><a href="#cb36-572" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-575"><a href="#cb36-575" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb36-576"><a href="#cb36-576" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod1)</span>
+<span id="cb36-577"><a href="#cb36-577" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb36-578"><a href="#cb36-578" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-579"><a href="#cb36-579" aria-hidden="true" tabindex="-1"></a><span class="fu">## Workbook</span></span>
+<span id="cb36-580"><a href="#cb36-580" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-581"><a href="#cb36-581" aria-hidden="true" tabindex="-1"></a>This section collects the questions asked in this chapter. The lesson for this chapter will focus on discussing these questions and then working on the exercises in @sec-exercises-3. The lesson will **not** be a lecture that reviews all of the material in the chapter! So, if you haven't written down / thought about the answers to these questions before class, the lesson will not be very useful for you. Please engage with each question by writing down one or more answers, asking clarifying questions about related material, posing follow up questions, etc.  </span>
+<span id="cb36-582"><a href="#cb36-582" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-583"><a href="#cb36-583" aria-hidden="true" tabindex="-1"></a>@sec-ecls-3</span>
+<span id="cb36-584"><a href="#cb36-584" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-585"><a href="#cb36-585" aria-hidden="true" tabindex="-1"></a>If you have questions about the interpretation of a correlation matrix (below) or pairwise plots (see @sec-ecls-3), please write them down now and share them class.</span>
+<span id="cb36-586"><a href="#cb36-586" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-587"><a href="#cb36-587" aria-hidden="true" tabindex="-1"></a>Numerical output for the ECLS example: </span>
+<span id="cb36-588"><a href="#cb36-588" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-591"><a href="#cb36-591" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb36-592"><a href="#cb36-592" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(example_data)</span>
+<span id="cb36-593"><a href="#cb36-593" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb36-594"><a href="#cb36-594" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-595"><a href="#cb36-595" aria-hidden="true" tabindex="-1"></a>Mathematical notation for formulas </span>
+<span id="cb36-596"><a href="#cb36-596" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-597"><a href="#cb36-597" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb36-598"><a href="#cb36-598" aria-hidden="true" tabindex="-1"></a>\begin{array}{c}</span>
+<span id="cb36-599"><a href="#cb36-599" aria-hidden="true" tabindex="-1"></a>\text{var } Y <span class="sc">\\</span> \text{var } X_1 <span class="sc">\\</span> \text{var } X_2</span>
+<span id="cb36-600"><a href="#cb36-600" aria-hidden="true" tabindex="-1"></a>\end{array}</span>
+<span id="cb36-601"><a href="#cb36-601" aria-hidden="true" tabindex="-1"></a>\quad</span>
+<span id="cb36-602"><a href="#cb36-602" aria-hidden="true" tabindex="-1"></a>\left[ </span>
+<span id="cb36-603"><a href="#cb36-603" aria-hidden="true" tabindex="-1"></a>\begin{array}{ccc}</span>
+<span id="cb36-604"><a href="#cb36-604" aria-hidden="true" tabindex="-1"></a> 1       &amp; r_{Y1}  &amp; r_{Y2}  <span class="sc">\\</span></span>
+<span id="cb36-605"><a href="#cb36-605" aria-hidden="true" tabindex="-1"></a> r_{1Y}  &amp; 1       &amp; r_{12}  <span class="sc">\\</span></span>
+<span id="cb36-606"><a href="#cb36-606" aria-hidden="true" tabindex="-1"></a> r_{2Y}  &amp; r_{21}  &amp; 1</span>
+<span id="cb36-607"><a href="#cb36-607" aria-hidden="true" tabindex="-1"></a>\end{array}</span>
+<span id="cb36-608"><a href="#cb36-608" aria-hidden="true" tabindex="-1"></a> \right]</span>
+<span id="cb36-609"><a href="#cb36-609" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb36-610"><a href="#cb36-610" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-611"><a href="#cb36-611" aria-hidden="true" tabindex="-1"></a>@sec-interpretation-3</span>
+<span id="cb36-612"><a href="#cb36-612" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-613"><a href="#cb36-613" aria-hidden="true" tabindex="-1"></a>Below, the R output from the ECLS example is reported. Please provide a written explanation of the regression coefficients for SES and ATL. If you have questions about how to interpret the coefficients, please also note them now and be prepared to share them in class. Note that this question is not asking about whether the coefficients are significant -- it is asking what the numbers in the first column of the Coefficients table mean. </span>
 <span id="cb36-614"><a href="#cb36-614" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-617"><a href="#cb36-617" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb36-618"><a href="#cb36-618" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the regression model and print output</span></span>
-<span id="cb36-619"><a href="#cb36-619" aria-hidden="true" tabindex="-1"></a>mod1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(c1rmscal <span class="sc">~</span> wksesl <span class="sc">+</span> t1learn)</span>
-<span id="cb36-620"><a href="#cb36-620" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod1)</span>
-<span id="cb36-621"><a href="#cb36-621" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb36-622"><a href="#cb36-622" aria-hidden="true" tabindex="-1"></a>@sec-beta-3</span>
-<span id="cb36-623"><a href="#cb36-623" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-624"><a href="#cb36-624" aria-hidden="true" tabindex="-1"></a>Please write down an interpretation of the of beta (standardized) regression coefficients in the output below. Your interpretation should include reference to the fact that the variables have been standardized. Based on this analysis, do you think one predictor is more important than the other? Why or why not? </span>
-<span id="cb36-625"><a href="#cb36-625" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-628"><a href="#cb36-628" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb36-629"><a href="#cb36-629" aria-hidden="true" tabindex="-1"></a><span class="co"># Unlike other software, R doesn't have a convenience functions for beta coefficients. </span></span>
-<span id="cb36-630"><a href="#cb36-630" aria-hidden="true" tabindex="-1"></a>z_example_data <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">scale</span>(example_data))</span>
-<span id="cb36-631"><a href="#cb36-631" aria-hidden="true" tabindex="-1"></a>z_mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(Math <span class="sc">~</span> SES  <span class="sc">+</span> ATL, <span class="at">data =</span> z_example_data)</span>
-<span id="cb36-632"><a href="#cb36-632" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(z_mod)</span>
-<span id="cb36-633"><a href="#cb36-633" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb36-634"><a href="#cb36-634" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-615"><a href="#cb36-615" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-618"><a href="#cb36-618" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb36-619"><a href="#cb36-619" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the regression model and print output</span></span>
+<span id="cb36-620"><a href="#cb36-620" aria-hidden="true" tabindex="-1"></a>mod1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(c1rmscal <span class="sc">~</span> wksesl <span class="sc">+</span> t1learn)</span>
+<span id="cb36-621"><a href="#cb36-621" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod1)</span>
+<span id="cb36-622"><a href="#cb36-622" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb36-623"><a href="#cb36-623" aria-hidden="true" tabindex="-1"></a>@sec-beta-3</span>
+<span id="cb36-624"><a href="#cb36-624" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-625"><a href="#cb36-625" aria-hidden="true" tabindex="-1"></a>Please write down an interpretation of the of beta (standardized) regression coefficients in the output below. Your interpretation should include reference to the fact that the variables have been standardized. Based on this analysis, do you think one predictor is more important than the other? Why or why not? </span>
+<span id="cb36-626"><a href="#cb36-626" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-629"><a href="#cb36-629" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb36-630"><a href="#cb36-630" aria-hidden="true" tabindex="-1"></a><span class="co"># Unlike other software, R doesn't have a convenience functions for beta coefficients. </span></span>
+<span id="cb36-631"><a href="#cb36-631" aria-hidden="true" tabindex="-1"></a>z_example_data <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">scale</span>(example_data))</span>
+<span id="cb36-632"><a href="#cb36-632" aria-hidden="true" tabindex="-1"></a>z_mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(Math <span class="sc">~</span> SES  <span class="sc">+</span> ATL, <span class="at">data =</span> z_example_data)</span>
+<span id="cb36-633"><a href="#cb36-633" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(z_mod)</span>
+<span id="cb36-634"><a href="#cb36-634" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb36-635"><a href="#cb36-635" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-636"><a href="#cb36-636" aria-hidden="true" tabindex="-1"></a>@sec-rsquared-3</span>
-<span id="cb36-637"><a href="#cb36-637" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-638"><a href="#cb36-638" aria-hidden="true" tabindex="-1"></a>The Venn diagram below is useful for understanding  multiple regression. In the lesson we will discuss the following questions. Please write down your answers now so you are prepared to contribute to the discussion: </span>
-<span id="cb36-639"><a href="#cb36-639" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-640"><a href="#cb36-640" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Which area represents the correlation between the predictors? </span>
-<span id="cb36-641"><a href="#cb36-641" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-642"><a href="#cb36-642" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Which areas represent the R-squared from multiple regression?</span>
-<span id="cb36-643"><a href="#cb36-643" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-644"><a href="#cb36-644" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Which areas represent the R-squared from simple regression? </span>
-<span id="cb36-645"><a href="#cb36-645" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-646"><a href="#cb36-646" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Which areas represent the regression coefficients from multiple regression? </span>
-<span id="cb36-647"><a href="#cb36-647" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-648"><a href="#cb36-648" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Which areas represent the regression coefficients from simple regression?</span>
-<span id="cb36-649"><a href="#cb36-649" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-650"><a href="#cb36-650" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo = F, fig.cap = "Shared Variance Among $Y$, $X_1$, and $X_2$.", fig.align = 'center'}</span></span>
-<span id="cb36-651"><a href="#cb36-651" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"files/images/venn_diagram.png"</span>)</span>
-<span id="cb36-652"><a href="#cb36-652" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb36-653"><a href="#cb36-653" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-636"><a href="#cb36-636" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-637"><a href="#cb36-637" aria-hidden="true" tabindex="-1"></a>@sec-rsquared-3</span>
+<span id="cb36-638"><a href="#cb36-638" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-639"><a href="#cb36-639" aria-hidden="true" tabindex="-1"></a>The Venn diagram below is useful for understanding  multiple regression. In the lesson we will discuss the following questions. Please write down your answers now so you are prepared to contribute to the discussion: </span>
+<span id="cb36-640"><a href="#cb36-640" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-641"><a href="#cb36-641" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Which area represents the correlation between the predictors? </span>
+<span id="cb36-642"><a href="#cb36-642" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-643"><a href="#cb36-643" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Which areas represent the R-squared from multiple regression?</span>
+<span id="cb36-644"><a href="#cb36-644" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-645"><a href="#cb36-645" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Which areas represent the R-squared from simple regression? </span>
+<span id="cb36-646"><a href="#cb36-646" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-647"><a href="#cb36-647" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Which areas represent the regression coefficients from multiple regression? </span>
+<span id="cb36-648"><a href="#cb36-648" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-649"><a href="#cb36-649" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Which areas represent the regression coefficients from simple regression?</span>
+<span id="cb36-650"><a href="#cb36-650" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-651"><a href="#cb36-651" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo = F, fig.cap = "Shared Variance Among $Y$, $X_1$, and $X_2$.", fig.align = 'center'}</span></span>
+<span id="cb36-652"><a href="#cb36-652" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"files/images/venn_diagram.png"</span>)</span>
+<span id="cb36-653"><a href="#cb36-653" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb36-654"><a href="#cb36-654" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-655"><a href="#cb36-655" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Last question: The R-squared for the ECLS example is equal to .2726  and the adjusted R-squared is equal to .2668. Please write down your interpretation of these value and be prepared to share your answer in class.</span>
-<span id="cb36-656"><a href="#cb36-656" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-655"><a href="#cb36-655" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-656"><a href="#cb36-656" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Last question: The R-squared for the ECLS example is equal to .2726  and the adjusted R-squared is equal to .2668. Please write down your interpretation of these value and be prepared to share your answer in class.</span>
 <span id="cb36-657"><a href="#cb36-657" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-658"><a href="#cb36-658" aria-hidden="true" tabindex="-1"></a>@sec-inference-3</span>
-<span id="cb36-659"><a href="#cb36-659" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-658"><a href="#cb36-658" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-659"><a href="#cb36-659" aria-hidden="true" tabindex="-1"></a>@sec-inference-3</span>
 <span id="cb36-660"><a href="#cb36-660" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-661"><a href="#cb36-661" aria-hidden="true" tabindex="-1"></a>The R output for the ECLS example is presented (again) below. Please write down your conclusions about the statistical significance of the predictors and the  R-squared statistic, and be prepared to share your answer in class. This would be a good opportunity to practice APA formatting. Please also write down the factors that negatively affect the precision of the regression coefficients and address whether you think they are problematic for the example. </span>
-<span id="cb36-662"><a href="#cb36-662" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-665"><a href="#cb36-665" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb36-666"><a href="#cb36-666" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod1)</span>
-<span id="cb36-667"><a href="#cb36-667" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb36-668"><a href="#cb36-668" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-669"><a href="#cb36-669" aria-hidden="true" tabindex="-1"></a><span class="fu">## Exercises</span></span>
-<span id="cb36-670"><a href="#cb36-670" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-671"><a href="#cb36-671" aria-hidden="true" tabindex="-1"></a>These exercises collect all of the R input used in this chapter into a single step-by-step analysis. It explains how the R input works, and provides some additional exercises. We will go through this material in class together, so you don't need to work on it before class (but you can if you want.) </span>
-<span id="cb36-672"><a href="#cb36-672" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-673"><a href="#cb36-673" aria-hidden="true" tabindex="-1"></a>Before staring this section, you may find it useful to scroll to the top of the page, click on the "&lt;/&gt; Code" menu, and select "Show All Code."</span>
-<span id="cb36-674"><a href="#cb36-674" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-675"><a href="#cb36-675" aria-hidden="true" tabindex="-1"></a><span class="fu">### The ECLS250 data  </span></span>
-<span id="cb36-676"><a href="#cb36-676" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-677"><a href="#cb36-677" aria-hidden="true" tabindex="-1"></a>Let's start by getting our example data loaded into R. </span>
-<span id="cb36-678"><a href="#cb36-678" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-679"><a href="#cb36-679" aria-hidden="true" tabindex="-1"></a>Make sure to download the file <span class="in">`ECLS250.RData`</span> from Canvas and then double click the file to open it</span>
-<span id="cb36-680"><a href="#cb36-680" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-681"><a href="#cb36-681" aria-hidden="true" tabindex="-1"></a><span class="in">```{r echo = F}</span></span>
-<span id="cb36-682"><a href="#cb36-682" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(ecls)</span>
-<span id="cb36-683"><a href="#cb36-683" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb36-684"><a href="#cb36-684" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-687"><a href="#cb36-687" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb36-688"><a href="#cb36-688" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"ECLS250.RData"</span>) <span class="co"># load new example</span></span>
-<span id="cb36-689"><a href="#cb36-689" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(ecls) <span class="co"># attach </span></span>
-<span id="cb36-690"><a href="#cb36-690" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-691"><a href="#cb36-691" aria-hidden="true" tabindex="-1"></a><span class="co"># knitr and kable are just used to print nicely -- you can just use head(ecls[, 1:5]) </span></span>
-<span id="cb36-692"><a href="#cb36-692" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(ecls[, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]))</span>
-<span id="cb36-693"><a href="#cb36-693" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb36-694"><a href="#cb36-694" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-695"><a href="#cb36-695" aria-hidden="true" tabindex="-1"></a>The naming conventions for these data are bit challenging. </span>
-<span id="cb36-696"><a href="#cb36-696" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-697"><a href="#cb36-697" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Variable names begin with <span class="in">`c`</span>, <span class="in">`p`</span>, or <span class="in">`t`</span> depending on whether the respondent was the child, parent, or teacher. Variables that start with <span class="in">`wk`</span> were created by the ECLS using other data sources available in during the kindergarten year of the study. </span>
-<span id="cb36-698"><a href="#cb36-698" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-699"><a href="#cb36-699" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>The time points (1-4 denoting fall and spring of K and Gr 1) appear as the second character.</span>
-<span id="cb36-700"><a href="#cb36-700" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-701"><a href="#cb36-701" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>The rest of the name describes the variable.</span>
-<span id="cb36-702"><a href="#cb36-702" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-703"><a href="#cb36-703" aria-hidden="true" tabindex="-1"></a>The variables we will use for this illustration are:</span>
-<span id="cb36-704"><a href="#cb36-704" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-705"><a href="#cb36-705" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span><span class="in">`c1rmscal`</span>: Child's score on a math assessment, in first semester of Kindergarten . The scores can be interpreted as  number of correct responses out of a total of approximately 60 math exam questions.  </span>
-<span id="cb36-706"><a href="#cb36-706" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb36-707"><a href="#cb36-707" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span><span class="in">`wksesl`</span>: An SES composite of household factors (e.g., parental education, household income) ranging from 30-72. </span>
-<span id="cb36-708"><a href="#cb36-708" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb36-709"><a href="#cb36-709" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span><span class="in">`t1learn`</span>: Approaches to Learning Scale (ATLS), teacher reported in first semester of kindergarten. This scale measures behaviors that affect the ease with which children can benefit from the learning environment. It includes six items that rate the child’s attentiveness, task persistence, eagerness to learn, learning independence, flexibility, and organization. The items have 4 response categories (1-4), so that higher values represent more positive responses, and the scale is an unweighted average the six items. </span>
-<span id="cb36-710"><a href="#cb36-710" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb36-711"><a href="#cb36-711" aria-hidden="true" tabindex="-1"></a>To get started lets produce the simple regression of Math with SES. This is another look at the relationship between Academic Achievement and SES that we discussed in Chapter @sec-chap-2). If you do not feel comfortable running this analysis or interpreting the output, take another look at @sec-exercises-2. </span>
-<span id="cb36-712"><a href="#cb36-712" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-715"><a href="#cb36-715" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb36-716"><a href="#cb36-716" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> wksesl, </span>
-<span id="cb36-717"><a href="#cb36-717" aria-hidden="true" tabindex="-1"></a>     <span class="at">y =</span> c1rmscal, </span>
-<span id="cb36-718"><a href="#cb36-718" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">"#4B9CD3"</span>)</span>
-<span id="cb36-719"><a href="#cb36-719" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-720"><a href="#cb36-720" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(c1rmscal <span class="sc">~</span> wksesl)</span>
-<span id="cb36-721"><a href="#cb36-721" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(mod)</span>
-<span id="cb36-722"><a href="#cb36-722" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod)</span>
-<span id="cb36-723"><a href="#cb36-723" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(wksesl, c1rmscal)</span>
-<span id="cb36-724"><a href="#cb36-724" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb36-725"><a href="#cb36-725" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-726"><a href="#cb36-726" aria-hidden="true" tabindex="-1"></a><span class="fu">### Multiple regression with `lm`</span></span>
-<span id="cb36-727"><a href="#cb36-727" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-728"><a href="#cb36-728" aria-hidden="true" tabindex="-1"></a>First, let's tale a look at the "zero-order" relationship among the three variables. This type of descriptive, two-way analysis is a good way to get familiar with your data before getting into multiple regression. We can see that the variables are all moderately correlated and their relationships appear reasonably linear.</span>
-<span id="cb36-729"><a href="#cb36-729" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-661"><a href="#cb36-661" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-662"><a href="#cb36-662" aria-hidden="true" tabindex="-1"></a>The R output for the ECLS example is presented (again) below. Please write down your conclusions about the statistical significance of the predictors and the  R-squared statistic, and be prepared to share your answer in class. This would be a good opportunity to practice APA formatting. Please also write down the factors that negatively affect the precision of the regression coefficients and address whether you think they are problematic for the example. </span>
+<span id="cb36-663"><a href="#cb36-663" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-666"><a href="#cb36-666" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb36-667"><a href="#cb36-667" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod1)</span>
+<span id="cb36-668"><a href="#cb36-668" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb36-669"><a href="#cb36-669" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-670"><a href="#cb36-670" aria-hidden="true" tabindex="-1"></a><span class="fu">## Exercises {#sec-exercises-3}</span></span>
+<span id="cb36-671"><a href="#cb36-671" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-672"><a href="#cb36-672" aria-hidden="true" tabindex="-1"></a>These exercises collect all of the R input used in this chapter into a single step-by-step analysis. It explains how the R input works, and provides some additional exercises. We will go through this material in class together, so you don't need to work on it before class (but you can if you want.) </span>
+<span id="cb36-673"><a href="#cb36-673" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-674"><a href="#cb36-674" aria-hidden="true" tabindex="-1"></a>Before staring this section, you may find it useful to scroll to the top of the page, click on the "&lt;/&gt; Code" menu, and select "Show All Code."</span>
+<span id="cb36-675"><a href="#cb36-675" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-676"><a href="#cb36-676" aria-hidden="true" tabindex="-1"></a><span class="fu">### The ECLS250 data  </span></span>
+<span id="cb36-677"><a href="#cb36-677" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-678"><a href="#cb36-678" aria-hidden="true" tabindex="-1"></a>Let's start by getting our example data loaded into R. </span>
+<span id="cb36-679"><a href="#cb36-679" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-680"><a href="#cb36-680" aria-hidden="true" tabindex="-1"></a>Make sure to download the file <span class="in">`ECLS250.RData`</span> from Canvas and then double click the file to open it</span>
+<span id="cb36-681"><a href="#cb36-681" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-682"><a href="#cb36-682" aria-hidden="true" tabindex="-1"></a><span class="in">```{r echo = F}</span></span>
+<span id="cb36-683"><a href="#cb36-683" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(ecls)</span>
+<span id="cb36-684"><a href="#cb36-684" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb36-685"><a href="#cb36-685" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-688"><a href="#cb36-688" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb36-689"><a href="#cb36-689" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"ECLS250.RData"</span>) <span class="co"># load new example</span></span>
+<span id="cb36-690"><a href="#cb36-690" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(ecls) <span class="co"># attach </span></span>
+<span id="cb36-691"><a href="#cb36-691" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-692"><a href="#cb36-692" aria-hidden="true" tabindex="-1"></a><span class="co"># knitr and kable are just used to print nicely -- you can just use head(ecls[, 1:5]) </span></span>
+<span id="cb36-693"><a href="#cb36-693" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(ecls[, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]))</span>
+<span id="cb36-694"><a href="#cb36-694" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb36-695"><a href="#cb36-695" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-696"><a href="#cb36-696" aria-hidden="true" tabindex="-1"></a>The naming conventions for these data are bit challenging. </span>
+<span id="cb36-697"><a href="#cb36-697" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-698"><a href="#cb36-698" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Variable names begin with <span class="in">`c`</span>, <span class="in">`p`</span>, or <span class="in">`t`</span> depending on whether the respondent was the child, parent, or teacher. Variables that start with <span class="in">`wk`</span> were created by the ECLS using other data sources available in during the kindergarten year of the study. </span>
+<span id="cb36-699"><a href="#cb36-699" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-700"><a href="#cb36-700" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>The time points (1-4 denoting fall and spring of K and Gr 1) appear as the second character.</span>
+<span id="cb36-701"><a href="#cb36-701" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-702"><a href="#cb36-702" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>The rest of the name describes the variable.</span>
+<span id="cb36-703"><a href="#cb36-703" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-704"><a href="#cb36-704" aria-hidden="true" tabindex="-1"></a>The variables we will use for this illustration are:</span>
+<span id="cb36-705"><a href="#cb36-705" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-706"><a href="#cb36-706" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span><span class="in">`c1rmscal`</span>: Child's score on a math assessment, in first semester of Kindergarten . The scores can be interpreted as  number of correct responses out of a total of approximately 60 math exam questions.  </span>
+<span id="cb36-707"><a href="#cb36-707" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb36-708"><a href="#cb36-708" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span><span class="in">`wksesl`</span>: An SES composite of household factors (e.g., parental education, household income) ranging from 30-72. </span>
+<span id="cb36-709"><a href="#cb36-709" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb36-710"><a href="#cb36-710" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span><span class="in">`t1learn`</span>: Approaches to Learning Scale (ATLS), teacher reported in first semester of kindergarten. This scale measures behaviors that affect the ease with which children can benefit from the learning environment. It includes six items that rate the child’s attentiveness, task persistence, eagerness to learn, learning independence, flexibility, and organization. The items have 4 response categories (1-4), so that higher values represent more positive responses, and the scale is an unweighted average the six items. </span>
+<span id="cb36-711"><a href="#cb36-711" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb36-712"><a href="#cb36-712" aria-hidden="true" tabindex="-1"></a>To get started lets produce the simple regression of Math with SES. This is another look at the relationship between Academic Achievement and SES that we discussed in Chapter @sec-chap-2). If you do not feel comfortable running this analysis or interpreting the output, take another look at @sec-exercises-2. </span>
+<span id="cb36-713"><a href="#cb36-713" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-716"><a href="#cb36-716" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb36-717"><a href="#cb36-717" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="at">x =</span> wksesl, </span>
+<span id="cb36-718"><a href="#cb36-718" aria-hidden="true" tabindex="-1"></a>     <span class="at">y =</span> c1rmscal, </span>
+<span id="cb36-719"><a href="#cb36-719" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">"#4B9CD3"</span>)</span>
+<span id="cb36-720"><a href="#cb36-720" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-721"><a href="#cb36-721" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(c1rmscal <span class="sc">~</span> wksesl)</span>
+<span id="cb36-722"><a href="#cb36-722" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(mod)</span>
+<span id="cb36-723"><a href="#cb36-723" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod)</span>
+<span id="cb36-724"><a href="#cb36-724" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(wksesl, c1rmscal)</span>
+<span id="cb36-725"><a href="#cb36-725" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb36-726"><a href="#cb36-726" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-727"><a href="#cb36-727" aria-hidden="true" tabindex="-1"></a><span class="fu">### Multiple regression with `lm`</span></span>
+<span id="cb36-728"><a href="#cb36-728" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-729"><a href="#cb36-729" aria-hidden="true" tabindex="-1"></a>First, let's tale a look at the "zero-order" relationship among the three variables. This type of descriptive, two-way analysis is a good way to get familiar with your data before getting into multiple regression. We can see that the variables are all moderately correlated and their relationships appear reasonably linear.</span>
 <span id="cb36-730"><a href="#cb36-730" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-733"><a href="#cb36-733" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb36-734"><a href="#cb36-734" aria-hidden="true" tabindex="-1"></a><span class="co"># Use cbind to create a data.frame with just the 3 variables we want to examine</span></span>
-<span id="cb36-735"><a href="#cb36-735" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">cbind</span>(c1rmscal, wksesl, t1learn)</span>
-<span id="cb36-736"><a href="#cb36-736" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-737"><a href="#cb36-737" aria-hidden="true" tabindex="-1"></a><span class="co"># Correlations</span></span>
-<span id="cb36-738"><a href="#cb36-738" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(data)</span>
-<span id="cb36-739"><a href="#cb36-739" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-740"><a href="#cb36-740" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatterplots</span></span>
-<span id="cb36-741"><a href="#cb36-741" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(data, <span class="at">col =</span> <span class="st">"#4B9CD3"</span>) </span>
-<span id="cb36-742"><a href="#cb36-742" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb36-743"><a href="#cb36-743" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-744"><a href="#cb36-744" aria-hidden="true" tabindex="-1"></a>In terms of input, multiple regression with <span class="in">`lm`</span> is similar to simple regression. The only difference is the model formula. To include more predictors in a formula, just include them on the right hand side, separated by at <span class="in">`+`</span> sign. </span>
-<span id="cb36-745"><a href="#cb36-745" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-746"><a href="#cb36-746" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>e.g, <span class="in">`Y ~ Χ1 + Χ2`</span> </span>
-<span id="cb36-747"><a href="#cb36-747" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-748"><a href="#cb36-748" aria-hidden="true" tabindex="-1"></a>For our example, let's consider the regression of math achievement on SES and Approaches to Learning. We'll save our result as <span class="in">`mod1`</span> which is short for "model one".</span>
-<span id="cb36-749"><a href="#cb36-749" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-752"><a href="#cb36-752" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb36-753"><a href="#cb36-753" aria-hidden="true" tabindex="-1"></a>mod1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(c1rmscal <span class="sc">~</span> wksesl <span class="sc">+</span> t1learn)</span>
-<span id="cb36-754"><a href="#cb36-754" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod1)</span>
-<span id="cb36-755"><a href="#cb36-755" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb36-756"><a href="#cb36-756" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-757"><a href="#cb36-757" aria-hidden="true" tabindex="-1"></a>We can see from the output that regression coefficient for <span class="in">`t1learn`</span> is about 3.5. This means that, as the predictor increases by a single unit, children's predicted math scores increase by 3.5 points (out of 60), after controlling for the SES. You should be able to provide a similar interpretation of the regression coefficient for <span class="in">`wksesl`</span>. Together, both predictors accounted for about 27% of the variation in students' math scores. In education, this would be considered a pretty strong relationship.  </span>
-<span id="cb36-758"><a href="#cb36-758" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-759"><a href="#cb36-759" aria-hidden="true" tabindex="-1"></a>We will talk about the statistical tests later on. For now let's consider the relationship with simple regression. </span>
-<span id="cb36-760"><a href="#cb36-760" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-761"><a href="#cb36-761" aria-hidden="true" tabindex="-1"></a><span class="fu">### Relations between simple and multiple regression</span></span>
-<span id="cb36-762"><a href="#cb36-762" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-763"><a href="#cb36-763" aria-hidden="true" tabindex="-1"></a>First let's consider how the two simple regression compare to the multiple regression with two variables. Here is the relevant output:  </span>
-<span id="cb36-764"><a href="#cb36-764" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-767"><a href="#cb36-767" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb36-768"><a href="#cb36-768" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare the multiple regression output to the simple regressions</span></span>
-<span id="cb36-769"><a href="#cb36-769" aria-hidden="true" tabindex="-1"></a>mod2a <span class="ot">&lt;-</span> <span class="fu">lm</span>(c1rmscal <span class="sc">~</span> wksesl)</span>
-<span id="cb36-770"><a href="#cb36-770" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod2a)</span>
-<span id="cb36-771"><a href="#cb36-771" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-772"><a href="#cb36-772" aria-hidden="true" tabindex="-1"></a>mod2b <span class="ot">&lt;-</span> <span class="fu">lm</span>(c1rmscal <span class="sc">~</span> t1learn)</span>
-<span id="cb36-773"><a href="#cb36-773" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod2b)</span>
-<span id="cb36-774"><a href="#cb36-774" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb36-775"><a href="#cb36-775" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-776"><a href="#cb36-776" aria-hidden="true" tabindex="-1"></a>The important things to note here are </span>
-<span id="cb36-777"><a href="#cb36-777" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-778"><a href="#cb36-778" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>The regression coefficients from the simple models ($b_{ses} = 0.44$ and $b_{t1learn} = 4.73$) are larger than the regression coefficients from the two-predictor model. Can you explain why? (Hint: see Section @sec-interpretation-3.</span>
-<span id="cb36-779"><a href="#cb36-779" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb36-780"><a href="#cb36-780" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>The R-squared values in the two simple models (.192 + .158 = .350) add up to more than the R-squared in the two-predictor model (.273). Again, take a moment to think about why before reading on. (Hint: see Section @sec-rsquared-3.) </span>
-<span id="cb36-781"><a href="#cb36-781" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-782"><a href="#cb36-782" aria-hidden="true" tabindex="-1"></a><span class="fu">### Inference with 2 predictors</span></span>
-<span id="cb36-783"><a href="#cb36-783" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-784"><a href="#cb36-784" aria-hidden="true" tabindex="-1"></a>Let's move on now to consider the statistical tests and confidence intervals provided with the <span class="in">`lm`</span> summary output. </span>
-<span id="cb36-785"><a href="#cb36-785" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-786"><a href="#cb36-786" aria-hidden="true" tabindex="-1"></a>For regression with more than one predictor, both the t-tests and F-tests have a very similar construction and interpretation as with simple regression. The main differences are the formulas, not so much the interpretations of the procedures. Some differences: </span>
-<span id="cb36-787"><a href="#cb36-787" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-788"><a href="#cb36-788" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>The degrees of freedom for both tests now involve $K$, the number of predictors. </span>
-<span id="cb36-789"><a href="#cb36-789" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-790"><a href="#cb36-790" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>The standard error of the b-weight is more complicated, because it involves the inter-correlation among the predictors. </span>
-<span id="cb36-791"><a href="#cb36-791" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-792"><a href="#cb36-792" aria-hidden="true" tabindex="-1"></a>We can see for <span class="in">`mod1`</span> that both b-weights are significant at the .05 level, and so is the R-square. As mentioned previously, it is not usual to interpret or report results on the regression intercept unless you have a special reason to do so (e.g., see the next chapter). </span>
-<span id="cb36-793"><a href="#cb36-793" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-796"><a href="#cb36-796" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb36-797"><a href="#cb36-797" aria-hidden="true" tabindex="-1"></a><span class="co"># Revisting the output of mod1</span></span>
-<span id="cb36-798"><a href="#cb36-798" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod1)</span>
-<span id="cb36-799"><a href="#cb36-799" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb36-800"><a href="#cb36-800" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-801"><a href="#cb36-801" aria-hidden="true" tabindex="-1"></a><span class="fu">### APA reporting of results</span></span>
-<span id="cb36-802"><a href="#cb36-802" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-803"><a href="#cb36-803" aria-hidden="true" tabindex="-1"></a>This section shows how we might write out the results of our regression using APA format. When we have a regression model with many predictors, or are comparing among different models, it is more usual to put all the relevant statistics in a table rather than writing them out one by one. We will see how to do that later on in the course. For more info on APA format, see the APA publications manual: <span class="co">[</span><span class="ot">(https://www.apastyle.org/manual)</span><span class="co">](https://www.apastyle.org/manual)</span>. </span>
-<span id="cb36-804"><a href="#cb36-804" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-805"><a href="#cb36-805" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>The regression of Math Achievement on SES was positive and statistically significant at the .05 level ($b = 0.35, t(247) = 6.24, p &lt; .001$).</span>
-<span id="cb36-806"><a href="#cb36-806" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-807"><a href="#cb36-807" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>The regression of Math Achievement on Approaches to Learning was also positive and statistically significant at the .05 level ($b = 3.52, t(247) = 5.22, p &lt; .001$).</span>
-<span id="cb36-808"><a href="#cb36-808" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-809"><a href="#cb36-809" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>Together both predictors accounted for about 27\% of the variation in Math Achievement ($R^2 = .273$, $\text{adjusted} R^2 = .267$), which was also statistically significant at the .05 level ($F(2, 247) = 46.29, p &lt; .001$). </span>
-<span id="cb36-810"><a href="#cb36-810" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb36-731"><a href="#cb36-731" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-734"><a href="#cb36-734" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb36-735"><a href="#cb36-735" aria-hidden="true" tabindex="-1"></a><span class="co"># Use cbind to create a data.frame with just the 3 variables we want to examine</span></span>
+<span id="cb36-736"><a href="#cb36-736" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">cbind</span>(c1rmscal, wksesl, t1learn)</span>
+<span id="cb36-737"><a href="#cb36-737" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-738"><a href="#cb36-738" aria-hidden="true" tabindex="-1"></a><span class="co"># Correlations</span></span>
+<span id="cb36-739"><a href="#cb36-739" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(data)</span>
+<span id="cb36-740"><a href="#cb36-740" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-741"><a href="#cb36-741" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatterplots</span></span>
+<span id="cb36-742"><a href="#cb36-742" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(data, <span class="at">col =</span> <span class="st">"#4B9CD3"</span>) </span>
+<span id="cb36-743"><a href="#cb36-743" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb36-744"><a href="#cb36-744" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-745"><a href="#cb36-745" aria-hidden="true" tabindex="-1"></a>In terms of input, multiple regression with <span class="in">`lm`</span> is similar to simple regression. The only difference is the model formula. To include more predictors in a formula, just include them on the right hand side, separated by at <span class="in">`+`</span> sign. </span>
+<span id="cb36-746"><a href="#cb36-746" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-747"><a href="#cb36-747" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>e.g, <span class="in">`Y ~ Χ1 + Χ2`</span> </span>
+<span id="cb36-748"><a href="#cb36-748" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-749"><a href="#cb36-749" aria-hidden="true" tabindex="-1"></a>For our example, let's consider the regression of math achievement on SES and Approaches to Learning. We'll save our result as <span class="in">`mod1`</span> which is short for "model one".</span>
+<span id="cb36-750"><a href="#cb36-750" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-753"><a href="#cb36-753" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb36-754"><a href="#cb36-754" aria-hidden="true" tabindex="-1"></a>mod1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(c1rmscal <span class="sc">~</span> wksesl <span class="sc">+</span> t1learn)</span>
+<span id="cb36-755"><a href="#cb36-755" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod1)</span>
+<span id="cb36-756"><a href="#cb36-756" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb36-757"><a href="#cb36-757" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-758"><a href="#cb36-758" aria-hidden="true" tabindex="-1"></a>We can see from the output that regression coefficient for <span class="in">`t1learn`</span> is about 3.5. This means that, as the predictor increases by a single unit, children's predicted math scores increase by 3.5 points (out of 60), after controlling for the SES. You should be able to provide a similar interpretation of the regression coefficient for <span class="in">`wksesl`</span>. Together, both predictors accounted for about 27% of the variation in students' math scores. In education, this would be considered a pretty strong relationship.  </span>
+<span id="cb36-759"><a href="#cb36-759" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-760"><a href="#cb36-760" aria-hidden="true" tabindex="-1"></a>We will talk about the statistical tests later on. For now let's consider the relationship with simple regression. </span>
+<span id="cb36-761"><a href="#cb36-761" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-762"><a href="#cb36-762" aria-hidden="true" tabindex="-1"></a><span class="fu">### Relations between simple and multiple regression</span></span>
+<span id="cb36-763"><a href="#cb36-763" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-764"><a href="#cb36-764" aria-hidden="true" tabindex="-1"></a>First let's consider how the two simple regression compare to the multiple regression with two variables. Here is the relevant output:  </span>
+<span id="cb36-765"><a href="#cb36-765" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-768"><a href="#cb36-768" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb36-769"><a href="#cb36-769" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare the multiple regression output to the simple regressions</span></span>
+<span id="cb36-770"><a href="#cb36-770" aria-hidden="true" tabindex="-1"></a>mod2a <span class="ot">&lt;-</span> <span class="fu">lm</span>(c1rmscal <span class="sc">~</span> wksesl)</span>
+<span id="cb36-771"><a href="#cb36-771" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod2a)</span>
+<span id="cb36-772"><a href="#cb36-772" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-773"><a href="#cb36-773" aria-hidden="true" tabindex="-1"></a>mod2b <span class="ot">&lt;-</span> <span class="fu">lm</span>(c1rmscal <span class="sc">~</span> t1learn)</span>
+<span id="cb36-774"><a href="#cb36-774" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod2b)</span>
+<span id="cb36-775"><a href="#cb36-775" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb36-776"><a href="#cb36-776" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-777"><a href="#cb36-777" aria-hidden="true" tabindex="-1"></a>The important things to note here are </span>
+<span id="cb36-778"><a href="#cb36-778" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-779"><a href="#cb36-779" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>The regression coefficients from the simple models ($b_{ses} = 0.44$ and $b_{t1learn} = 4.73$) are larger than the regression coefficients from the two-predictor model. Can you explain why? (Hint: see Section @sec-interpretation-3.</span>
+<span id="cb36-780"><a href="#cb36-780" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb36-781"><a href="#cb36-781" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>The R-squared values in the two simple models (.192 + .158 = .350) add up to more than the R-squared in the two-predictor model (.273). Again, take a moment to think about why before reading on. (Hint: see Section @sec-rsquared-3.) </span>
+<span id="cb36-782"><a href="#cb36-782" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-783"><a href="#cb36-783" aria-hidden="true" tabindex="-1"></a><span class="fu">### Inference with 2 predictors</span></span>
+<span id="cb36-784"><a href="#cb36-784" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-785"><a href="#cb36-785" aria-hidden="true" tabindex="-1"></a>Let's move on now to consider the statistical tests and confidence intervals provided with the <span class="in">`lm`</span> summary output. </span>
+<span id="cb36-786"><a href="#cb36-786" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-787"><a href="#cb36-787" aria-hidden="true" tabindex="-1"></a>For regression with more than one predictor, both the t-tests and F-tests have a very similar construction and interpretation as with simple regression. The main differences are the formulas, not so much the interpretations of the procedures. Some differences: </span>
+<span id="cb36-788"><a href="#cb36-788" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-789"><a href="#cb36-789" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>The degrees of freedom for both tests now involve $K$, the number of predictors. </span>
+<span id="cb36-790"><a href="#cb36-790" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-791"><a href="#cb36-791" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>The standard error of the b-weight is more complicated, because it involves the inter-correlation among the predictors. </span>
+<span id="cb36-792"><a href="#cb36-792" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-793"><a href="#cb36-793" aria-hidden="true" tabindex="-1"></a>We can see for <span class="in">`mod1`</span> that both b-weights are significant at the .05 level, and so is the R-square. As mentioned previously, it is not usual to interpret or report results on the regression intercept unless you have a special reason to do so (e.g., see the next chapter). </span>
+<span id="cb36-794"><a href="#cb36-794" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-797"><a href="#cb36-797" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb36-798"><a href="#cb36-798" aria-hidden="true" tabindex="-1"></a><span class="co"># Revisting the output of mod1</span></span>
+<span id="cb36-799"><a href="#cb36-799" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod1)</span>
+<span id="cb36-800"><a href="#cb36-800" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb36-801"><a href="#cb36-801" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-802"><a href="#cb36-802" aria-hidden="true" tabindex="-1"></a><span class="fu">### APA reporting of results</span></span>
+<span id="cb36-803"><a href="#cb36-803" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-804"><a href="#cb36-804" aria-hidden="true" tabindex="-1"></a>This section shows how we might write out the results of our regression using APA format. When we have a regression model with many predictors, or are comparing among different models, it is more usual to put all the relevant statistics in a table rather than writing them out one by one. We will see how to do that later on in the course. For more info on APA format, see the APA publications manual: <span class="co">[</span><span class="ot">(https://www.apastyle.org/manual)</span><span class="co">](https://www.apastyle.org/manual)</span>. </span>
+<span id="cb36-805"><a href="#cb36-805" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-806"><a href="#cb36-806" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>The regression of Math Achievement on SES was positive and statistically significant at the .05 level ($b = 0.35, t(247) = 6.24, p &lt; .001$).</span>
+<span id="cb36-807"><a href="#cb36-807" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-808"><a href="#cb36-808" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>The regression of Math Achievement on Approaches to Learning was also positive and statistically significant at the .05 level ($b = 3.52, t(247) = 5.22, p &lt; .001$).</span>
+<span id="cb36-809"><a href="#cb36-809" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-810"><a href="#cb36-810" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>Together both predictors accounted for about 27\% of the variation in Math Achievement ($R^2 = .273$, $\text{adjusted} R^2 = .267$), which was also statistically significant at the .05 level ($F(2, 247) = 46.29, p &lt; .001$). </span>
 <span id="cb36-811"><a href="#cb36-811" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb36-812"><a href="#cb36-812" aria-hidden="true" tabindex="-1"></a><span class="in">```{r echo = F}</span></span>
-<span id="cb36-813"><a href="#cb36-813" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(ecls)</span>
-<span id="cb36-814"><a href="#cb36-814" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb36-812"><a href="#cb36-812" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb36-813"><a href="#cb36-813" aria-hidden="true" tabindex="-1"></a><span class="in">```{r echo = F}</span></span>
+<span id="cb36-814"><a href="#cb36-814" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(ecls)</span>
+<span id="cb36-815"><a href="#cb36-815" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
