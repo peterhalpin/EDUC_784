@@ -836,7 +836,6 @@ gap <- emmeans(mod6, specs = "gender", by = "achrdg12", cov.reduce = quantile)
 contrast(gap, method = "pairwise")
 ```
  
-
 **Section \@ref(two-continuous-predictors-6)**
 
 * To check your understanding of centering with two continuous predictors, please provide an interpretation of all four regression coefficients in the centered model (below). Your interpretations should make reference to the situation where one or both predictors are equal to zero (see Equation \@ref(eq:simple)) and should also mentioned the interpretation of the value of zero for the centered variables.

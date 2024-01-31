@@ -71,7 +71,7 @@ The choice of which contrast to use is up to the researcher. This choice should 
 
 Before getting into the math, let's consider some conceptual points. 
 
-First, some terminology. *Binary* means the a variable can take on only two values: 1 and 0. If a variable takes on two values but these are represented with other numbers (e.g., 1 and 2) or with non-numeric values ("male", "female"), it is called *dichotomous* rather than binary. Otherwise stated, a binary variable is a dichotomous variable whose values are 1 and 0. The term *categorical* is used to describe variables with two or more categories -- it includes binary and dichotomous variables, as well as variables with more categories. 
+First, some terminology. *Binary* means that a variable can take on only two values: 1 and 0. If a variable takes on two values but these are represented with other numbers (e.g., 1 and 2) or with non-numeric values ("male", "female"), it is called *dichotomous* rather than binary. Otherwise stated, a binary variable is a dichotomous variable whose values are 1 and 0. The term *categorical* is used to describe variables with two or more categories -- it includes binary and dichotomous variables, as well as variables with more categories. 
 
 Note that encoding a variable as dichotomous does not imply that the underlying social construct is dichotomous. For example, we can encode educational attainment as a dichotomous variable indicating whether or not a person has graduated high school. This does not imply that educational attainment has only two values "irl", or even that educational attainment is best conceptualized in terms of years of formal education. Nonetheless, for many outcomes of interest it can be meaningful to consider whether individuals have completed high school (e.g., [https://www.ssa.gov/policy/docs/research-summaries/education-earnings.html](https://www.ssa.gov/policy/docs/research-summaries/education-earnings.html)).
 
@@ -126,14 +126,12 @@ $$ {#eq-binary-2}
 
 Looking at @eq-binary-1 we can see that intercept ($b_0$) is equal to the predicted value of Reading Achievement for Females, and @eq-binary-2 shows that the regression slope ($b_1$) is equal to the difference between predicted Reading Achievement for Males and Females. 
 
-There is one last detail that is important for interpreting these equations: for a single categorical predictor, the predicted values for each category are just the group means on the $Y$ variable (see @sec-categorical-results-4, which is optional). 
-
-So, using the notation of @fig-reading-on-gender-4, we can re-write @eq-binary-1 and @eq-binary-2 as
+There is one last detail that is important for interpreting these equations: for a single categorical predictor, the predicted values for each category are just the group means on the $Y$ variable (see @sec-categorical-results-4, which is optional). So, using the notation of @fig-reading-on-gender-4, we can re-write @eq-binary-1 and @eq-binary-2 as
 
 $$b_0 = \bar Y_0  $$ {#eq-binary-3}  
 $$ b_1 = \bar Y_1 - \bar Y_0 $${#eq-binary-3}  
 
-We will use the equivalence between the predicted values and group means on the outcome variable throughout this chapter. However, it is important to note this equivalence holds only when there is single categorical predictor in the model, and no other predictors. Additional predictors are discussed in the next chapter. 
+We will use the equivalence between predicted values and group means throughout this chapter. However, it is important to note this equivalence holds only when there is single categorical predictor in the model, and no other predictors. Additional predictors are discussed in @sec-binary-continuous-5
 
 
 For the example data, regression coefficients are: 
@@ -176,7 +174,7 @@ When doing regression with a binary predictor:
 * The regression slope is equal to the mean of the group coded "0" subtracted from the mean of the groups coded "1". 
 
 * Testing $H_0: b_1 = 0$ is equivalent to testing the mean difference $H_0: \mu_1 – \mu_0 = 0$
-  * i.e., regression with a binary variable is the same as a t-test of means for independent groups.
+  * i.e., regression with a binary variable is the same as a t-test of means for independent samples
 
 
 ## Reference-group coding {#sec-reference-group-coding-4}
@@ -193,19 +191,19 @@ It is called reference-group coding because:
 * The intercept is interpreted as the mean of the reference-group. 
 * The $C – 1$ regression slopes are interpreted as the mean differences between the $C – 1$ other groups and the reference-group.
 
-Note that reference-group coding is a generalization of binary coding. In the example from Section @sec-binary-predictors-4:
+Note that reference-group coding is a generalization of binary coding. In the example from @sec-binary-predictors-4:
 
 * Females were the reference-group. 
 * The intercept was equal to the mean Reading Achievement for females.
 * The regression coefficient was equal to the mean difference between males and females. 
 
-The rest of this section considers how to generalize this approach to greater than 2 groups.
+The rest of this section considers how to generalize this approach to more than 2 groups.
 
 ### A hypothetical example
 
 @fig-martital-status1 presents a toy example. The data show the Age and marital status (Mstatus) of 16 hypothetical individuals. Marital status is encoded as 
 
-* Single (never married)
+* Single
 * Married
 * Divorced
 

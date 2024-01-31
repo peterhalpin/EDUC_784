@@ -24,8 +24,8 @@ format:
     highlight-style: github
     code-fold: true
     code-tools: true
-
-  # docx:
-  #   toc: true
-  #   number-sections: true
-  #   highlight-style: github
+# 
+#   docx:
+#     toc: true
+#     number-sections: true
+#     highlight-style: github
