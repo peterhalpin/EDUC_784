@@ -1,0 +1,398 @@
+---
+fold: true
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+# Interactions {#sec-chap-5}
+
+In statistics, the term *interaction* means that the relationship between two variables depends on a third variable. In the context of regression, we are usually interested in the situation where the relationship between the outcome $Y$ and a predictor $X_1$ depends on another predictor $X_2$. This situation is also referred to as *moderation* or sometimes as *effect heterogeneity*.
+
+Interactions are a big-picture idea with a lot conceptual power, especially when describing topics related to social inequality or "gaps". Some examples of interactions are:  
+
+* The relationship between wages and years of education depends on gender. This has been called the gender pay gap and it is considered a pretty important issue for gender equality (e.g., [https://en.wikipedia.org/wiki/Gender_pay_gap](https://en.wikipedia.org/wiki/Gender_pay_gap)).
+
+* The relationship between reading achievement and age depends on race. This has been interpreted in terms of racial inequality in educational outcomes (e.g., [https://cepa.stanford.edu/educational-opportunity-monitoring-project/achievement-gaps/race/](https://cepa.stanford.edu/educational-opportunity-monitoring-project/achievement-gaps/race/)).
+
+* The effect of COVID-19 school shutdowns on academic achievement depended on SES. This has been interpreted in terms of social inequality in access to educational resources outside of schools (e.g., [https://www.mckinsey.com/industries/education/our-insights/covid-19-and-student-learning-in-the-united-states-the-hurt-could-last-a-lifetime](https://www.mckinsey.com/industries/education/our-insights/covid-19-and-student-learning-in-the-united-states-the-hurt-could-last-a-lifetime)).
+
+I hope these examples convince you that some of the big issues facing education and society at large are actually about interactions -- how the relationship between two variables depends on a third variable. In this chapter we are going to talk about how you can use regression to conduct research on these types of topics.  
+
+We start by considering what happens when both categorical and continuous predictors are used together in a multiple regression model. We use this combination of predictors as bridge from the previous chapter and as a way of digging into the math behind interactions. Later sections will consider what happens when we have interactions between two continuous predictors, or two categorical predictors.
+
+In this chapter, we are exclusively interested in interactions between two predictors at a time, which are called *two-way interactions*. It is possible to consider "higher-order" interactions (e.g., interactions among three predictors or *three-way interactions*) but we aren't going to do that here. Sometimes we will use the terminology *main effect* to describe the relationship between each individual predictor and the outcome variable, as distinct from the interactions among the predictors. Up to now, we have be working with main effects only. 
+
+It might be helpful to mention that this chapter gets pretty complicated and is very long (sorry!). It is definitely the hardest material we have covered so far, because we are drawing on everything we have done up to now and adding even more stuff into the mix. So, if these readings feel daunting at moments, that is to be expected. Please don't feel disheartened. You might consider taking a break and doing the readings in smaller chunks. We are going to discuss all of this in class together, so just get what you can from these notes, provide some initial responses to the Workbook questions, and press on. This is where regression starts to get really interesting -- you got this! 
+
+## An example from NELS {#sec-example-5}
+
+For the first few sections of this chapter, we will focus on an example from the NELS data that addresses the gender gap in Math Achievement (e.g., [https://www.nctm.org/Publications/TCM-blog/Blog/Current-Research-on-Gender-Differences-in-Math/](https://www.nctm.org/Publications/TCM-blog/Blog/Current-Research-on-Gender-Differences-in-Math/)). The t-test reported below shows the gender gap in Math Achievement in 12th grade. The output shows us that, on average, males scored about 3.18 percentage points higher than females on a Grade 12 Math test. 
+```{r}
+load("NELS.RData")
+attach(NELS)
+t.test(achmat12 ~ gender, var.equal = T)
+```
+
+In this chapter, our goal is to use linear regression to better understand the gender gap in Math Achievement. To help us do this, we will also consider a third variable, Reading Achievement. The plot below shows the relationship between Math Achievement and Reading Achievement estimated just for males (Blue), and the same relationship estimated just for females (Black). 
+
+```{r fig-math-reading-1, fig.cap = 'Math Achievement, Reading Achievement, and Gender.', fig.align = 'center'}
+# Create indicators for females and males
+females <- gender == "Female"
+males <- gender == "Male"
+
+# Regress math on reading, for each group separately
+mod1 <- lm(achmat12[females] ~ achrdg12[females])
+mod2 <- lm(achmat12[males] ~ achrdg12[males])
+
+# Plot reading and math for females
+plot(achrdg12[females], 
+     achmat12[females], 
+     xlab = "Reading", 
+     ylab = "Math")
+
+abline(mod1, lwd = 2)
+
+# Add again for males
+points(achrdg12[males], 
+       achmat12[males], 
+       col = "#4B9CD3", 
+       pch = 2)
+
+abline(mod2, col = "#4B9CD3", lwd = 2)
+
+# Add a legend
+legend(x = "topleft", 
+       legend = levels(gender), 
+       pch = c(1, 2), 
+       col = c(1, "#4B9CD3"))
+```
+
+**Please take a minute to think about what this plot is telling us about the relationships among the three variables. In particular: **
+
+* **Does the gender gap in Math Achievement change as a function of Reading Achievement?**  
+* **Is the relationship between Math Achievement and Reading Achievement the the same for males and females?**
+
+Note that in @fig-math-reading-1, we estimated two separate simple regression models, one just for males and one just for females. In the next few sections, we will work our way towards a single multiple regression model that can be used to represent the relationships among these three variables.  
+
+
+## Binary + continuous {#sec-binary-continuous-5}
+
+Let's start by considering what happens when we include both Gender and Reading Achievement as predictors of Math Achievement in our usual multiple regression equation: 
+
+$$\widehat Y = b_0 + b_1X_1 + b_2 X_2$$ {#eq-yhat-5a}
+
+where
+
+* $Y$ is Math Achievement in grade 12
+* $X_1$ is Reading Achievement in grade 12
+* $X_2$ is Gender (binary, with female = 0 and male = 1)
+
+Note that this model does **not** include an interaction between the two predictors -- we are first going to consider what is "missing" from the usual regression model, and then use this to motivate inclusion of another predictor that represents the interaction. To get an initial sense of what is missing, the model in @eq-yhat-5a is plotted in @fig-math-reading-2 -- can you spot the difference with @fig-math-reading-1? 
+
+
+```{r fig-math-reading-2, fig.cap = 'Math Achievement, Reading Achievement, and Gender (No Interaction).', fig.align = 'center'}
+
+# Rund the regression
+mod3 <- lm(achmat12 ~ achrdg12 + gender, data = NELS)
+
+a_females <- coef(mod3)[1]
+b_females <- coef(mod3)[2]
+
+# Get the slope and intercept for males
+a_males <- a_females + coef(mod3)[3]
+b_males <- b_females 
+
+# Plot reading and math for females
+plot(achrdg12[females], 
+     achmat12[females], 
+     xlab = "Reading", 
+     ylab = "Math")
+
+abline(a_females, b_females, lwd = 2)
+
+# Add points and line for males
+points(achrdg12[males], 
+       achmat12[males], 
+       col = "#4B9CD3", 
+       pch = 2)
+
+abline(a_males, b_males, col = "#4B9CD3", lwd = 2)
+
+# Add a legend
+legend(x = "topleft", 
+       legend = levels(gender), 
+       pch = c(1, 2), 
+       col = c(1, "#4B9CD3"))
+```
+
+In order to interpret our multiple regression model, we can use the same overall approach as we used to interpret categorical predictors in @sec-chap-4. If we plug-in values for the categorical predictor, we get: 
+
+$$
+\begin{align}
+\text{Simple trend for females:   } \widehat Y (Female) & = b_0 + b_1X_1 + b_2 (0) \\ & = b_0 + b_1X_1
+\end{align}
+$$ {#eq-females1-5}
+
+$$
+\begin{align}
+\text{Simple trend for males:   } \widehat Y (Male) & = b_0 + b_1X_1 + b_2 (1) \\ & = (b_0 + b_2) + b_1 X_1
+\end{align} 
+$$ {#eq-males1-5}
+
+$$
+\begin{align}
+\text{Predicted gender gap in math:   } \widehat Y (Male) - \widehat Y (Female) & = b_2
+\end{align}
+$$ {#eq-gap1-5}
+
+The equations for $\widehat Y (Female)$ and $\widehat Y (Male)$ are referred to as *simple trends* or *simple slopes*. These describe the regression of Math on Reading, simply for females, or simply for males. The difference between the two simple regression equations is the predicted gender gap in Math Achievement. 
+
+Based on these equations we can interpret regression coefficients as follows
+
+* The regression intercept, $b_0$, is the intercept of the simple trend for the group coded "0" (i.e., the intercept of the regression of Math on Reading, simply for females; see @eq-females1-5). 
+* The regression slope for the continuous predictor, $b_1$, is the slope of the simple trend for the group coded "0" (females) and for the group coded "1" (males; see @eq-females1-5 and @eq-males1-5)  
+
+* The regression slope for the binary predictor, $b_2$, is the difference between the intercepts of the simple trends (i.e., we add $b_2$ to $b_0$ to get the intercept of the regression of Math on Reading, simply for males; see @eq-males1-5). 
+
+* In this model, $b_2$ is the also the predicted gender gap in Math Achievement (see @eq-gap1-5).
+
+The regression coefficients for the example data are shown below. **Please use these numbers to provide an interpretation of the simple trends and the gender gap in Math Achievement for the NELS example. (Don't worry about statistical significance, just focus on the meaning of the coefficients.)** 
+
+```{r}
+coef(mod3)
+```
+
+Here is an example to help you get started: 
+
+* Simply for females, the regression of Math Achievement on Reading Achievement has an intercept equal to 19.98 and a slope equal to 0.64. The intercept tells us that a female student with Reading Achievement score of 0% is expected to have a Math Achievement score of 19.98% (the units of the two tests are percent correct). Since the lowest value of Reading Achievement in our example is about 35%, the intercept is not very meaningful for these data. The regression slope tells us that, for females, a 1 unit increase in Reading Achievement is associated with a .64 unit increase in Math Achievement. 
+
+* Simply for males, .... 
+
+
+* The gender gap in Math Achievement was equal to ... 
+
+### Marginal means
+
+Before moving on to consider how to add an interaction to our multiple regression model, let's revisit a topic from the previous chapter. In @sec-chap-4, we noted that the regression coefficients for categorical predictors (dummy variables) can be interpreted in terms of the group means on the outcome variable. However, when additional predictors are included in the regression model, this interpretation no longer holds. This section explains why.  
+
+To see what the issue is, let's compare the output of the t-test in @sec-example-5 with the regression output shown above. In the t-test, the mean Math Achievement for females was 55.47, and for males it was 58.63. The mean difference was
+
+$$58.63 - 55.47 = 3.16$$
+
+However, the regression coefficient on Gender in the multiple regression model above is equal to $3.50$. Thus, unlike @sec-chap-4, the regression coefficient on Gender is no longer equal to the group-mean difference in Math Achievement. But why?  
+
+Remember that in the multiple regression model, the regression coefficient on Gender is interpreted as the relationship between Math Achievement and Gender, *holding Reading Achievement constant*. So, the regression coefficient on Gender is still interpreted as a mean difference, but now it is a *predicted* mean difference that represents the gender gap in Math Achievement after controlling for Reading Achievement. The t-test doesn't control for Reading.
+
+In order to emphasize the distinction between "raw" group means computed from the data and the predicted group means obtained from a multiple regression model, the latter are referred to as *marginal means*, or sometimes as *adjusted means* or *least squares means*. I think they should be called *predicted means*, but, alas. 
+
+### Summary 
+
+In a regression model with one continuous predictor and one binary predictor (and no interaction):  
+
+* The model results in two regression lines, one for each value of the binary predictor. These are called the simple trends.
+
+* The simple trends are parallel but can have a different intercept; the difference in the intercepts is equal to regression coefficient of the binary variable. 
+
+* The difference between the simple trends is often called a "gap", and the gap is also equal to the regression coefficient of the binary variable. 
+
+* It is important to note that the predicted group means for the binary variable are no longer equal to the "raw" group means computed directly from the data, because the predicted group means  control for the correlation between the predictors. The predicted group means are called marginal means to emphasize this distinction. 
+
+Keep in mind that this summary applies to the multiple regression model without an interaction. In the next section we improve our model by adding an interaction.  
+
+## Binary + continuous + interaction {#sec-binary-continuous-interaction-5}
+
+In this section, we discuss what was missing from the multiple regression model in the previous section: The interaction between Gender and Reading. 
+
+Mathematically, an interaction is just the product between two variables. @eq-yhat-5b shows how to include this product in our multiple regression model -- we just take the product of the two predictors and add it into the model as a third predictor:
+
+$$\hat Y = b_0 + b_1X_1 + b_2 X_2 + b_3 (X_1 \times X_2). $${#eq-yhat-5b}
+
+
+For the NELS example, this regression model is depicted in @fig-math-reading-3. Note the the simple trends are no longer parallel and the regression lines agree exactly with what we had in @sec-example-5. So, as promised, we have now arrived at a single multiple regression model that captures the relationships among Math Achievement, Reading Achievement, and Gender.
+
+
+```{r fig-math-reading-3, fig.cap = 'Math Achievement, Reading Achievement, and Gender (No Interaction).', fig.align = 'center'}
+
+# Interaction via hard coding
+genderXachrdg12 <- (as.numeric(gender) - 1) * achrdg12
+mod4 <- lm(achmat12 ~ achrdg12 + gender + genderXachrdg12)
+
+# Get the coefficients for females
+a_females <- coef(mod4)[1]
+b_females <- coef(mod4)[2]
+
+# Get the coefficients for males
+a_males <- a_females + coef(mod4)[3]
+b_males <- b_females + coef(mod4)[4]
+
+# Plot reading and math for females
+plot(achrdg12[females], 
+     achmat12[females], 
+     xlab = "Reading", 
+     ylab = "Math")
+
+abline(a_females, b_females, lwd = 2)
+
+# Add points and line for males
+points(achrdg12[males], 
+       achmat12[males],
+       col = "#4B9CD3", 
+       pch = 2)
+
+abline(a_males, b_males, col = "#4B9CD3", lwd = 2)
+
+# Add a legend
+legend(x = "topleft",
+       legend = levels(gender), 
+       pch = c(1, 2), 
+       col = c(1, "#4B9CD3"))
+```
+
+To see how to interpret the coefficients in this model, let's work through the model equations using our two-step procedure. As before, we first plug-in values for the categorical predictor, then we use the resulting equations solve for the simple trends and the gender gap in Math. 
+
+$$\begin{align}
+\widehat Y (Female) & = b_0 + b_1X_1 + b_2 (0) + b_3(X_1 \times 0) \\ & = b_0 + b_1X_1
+\end{align}$$ {#eq-females2-5}
+
+$$\begin{align}
+\widehat Y (Male) & = b_0 + b_1X_1 + b_2 (1) +  b_3(X_1 \times 1)\\ & = (b_0 + b_2) + (b_1 + b_3) X_1 \end{align}$$ {#eq-males2-5}
+
+$$\begin{align}
+\widehat Y (Male) - \widehat Y (Female) & = b_2 + b_3 X_1
+\end{align}$${#eq-gap2-5}
+
+These equations are summarized graphically below in @fig-interactions. 
+
+![Interaction between a categorical and a continuous predictor. Image credit: Daniela Rodriguez-Mincey, Spring 2023](files/images/Interaction.jpg){#fig-interactions width=50%}
+
+Based on the equations and figure, we can interpret regression coefficients as follows. Some of these interpretations are the same as in the previous section, but some are different. (You got this!) 
+
+* The regression intercept, $b_0$, is the intercept of the simple trend for the group coded "0" (i.e., the intercept of the regression of Math on Reading, simply for females; see @eq-females2-5). This is the **same** interpretation as for the model witout the interaction discussed in  @sec-binary-continuous-5. 
+
+* The regression slope for the continuous predictor, $b_1$, is the slope of the simple trend for the group coded "0" (females; see @eq-females2-5). This is **different** from the interpretation of the model in @sec-binary-continuous-5 -- in that model, $b_1$ was the slope of both simple trends, not just the trend for females. 
+
+* The regression slope for the binary predictor, $b_2$, is the difference between the intercepts of the simple trends (i.e., we add $b_2$ to $b_0$ to get the intercept of the regression of Math on Reading, simply for males; see @eq-males2-5). This is the **same** interpretation as for the model without the interaction discussed in  @sec-binary-continuous-5. 
+
+* The regression slope for the interaction term (or simply, the interaction), $b_3$, is the difference between the slopes of the simple trends (i.e., we add $b_3$ to $b_1$ to get the slope of the regression of Math on Reading, simply for males; see @eq-males2-5). This is **different** from the interpretation of the model in @sec-binary-continuous-5 -- in that model, $b_1$ was the slope of both simple trends, not just the trend for females. 
+
+* The difference between the predicted values (i.e., the predicted gender gap in Math Achievement) is no longer constant, but is instead a function of $X_1$ (see @eq-gap2-5). In particular, the predicted gender gap in Math changes by $b_3$ units for each unit of increase in Reading. This is **different** from the interpretation of the model in @sec-binary-continuous-5 -- in that model, the predicted gender gap was equal to $b_2$. 
+
+This last point is especially important in the context of our example. The gender gap in Math Achievement is a function of Reading Achievement. This is the mathematical meaning behind the concept of an interaction -- the relationship between two variables (Math and Gender) is changing as a function of a third variable (Reading). 
+
+### Choosing the moderator 
+
+Interpreting interactions can feel a bit unwieldy at first. This section introduces some additional terminology that helps better align the mathematical results with the kinds of research scenarios we considered in the introduction to this chapter. 
+
+First, note that it is equally valid to say 
+
+* the relationship between Math and Gender depends on Reading, or
+* the relationship between Math and Reading depends on Gender. 
+
+In other words, it is equally valid to interpret an interaction in terms of the gender gap (i.e., the relationship between Math and Gender) or in terms of the simple trends (the relationship between Math and Reading). 
+
+However, in most research settings, we will usually be more interested in one of these interpretations rather than the other. For example, our research interest in @sec-example-5 was about the gender gap in Math Achievement. So we can simplify our lives by focusing on the more interesting interpretation -- the gender gap. For our purposes, the simple trends are an equivalent but less interesting way of interpreting the interaction. 
+
+In the two bullet points above, whichever variable appears in the "depends on" clause is called the *moderator*, and the other two variables are called the focal variables. The researcher chooses which variable to treat as the moderator when interpreting an interaction. The overall idea here is to "break down" the interaction in the way that is most compatible with your research question(s). 
+
+Since our focus is the gender gap in Math (i.e., the relationship is between Math and Gender), Reading is our moderator. In particular, we might interpret the interaction as follows
+
+* The predicted gender gap in Math changes by $b_3$ units for each unit of increase in Reading.  
+
+By contrast, if we were mainly interested in the relationship between Math and Reading (i.e., the simple trends), then we could treat Gender as the moderator. For example, we might say: 
+
+* For females, predicted Math Achievement changed by $b_1$ units for each unit of increase in Reading, whereas for males, the predicted change was ($b_1 + b_3$) units for each unit of increase in Reading. 
+
+This might feel less intuitive than talking about the gender gap, but the two interpretations are mathematicaly equivalent. It is just a matter of whether you want to interpret the interaction term $b_3$ with reference to the gender gap, or with reference to the simple trends. In practice, you don't need to do both (but I am going to make you do both in the next section -- sorry!)
+
+### Back to the example 
+
+The regression coefficients for the example data are shown below. **Please use these numbers to provide an interpretation of the interaction between Gender and Reading. For practice, please attempt the interpret the interaction in terms of (a) the gender gap in Math, with Reading as the moderator; and (b) the relationship between Math and Reading, with Gender as the moderator. Don't worry about statistical significance, just focus on the interpreting the coefficients.**
+
+```{r}
+coef(mod4)
+```
+
+Some potential answers are hidden in the "Code" tab below, but don't peak until you have tried it for yourself!
+
+```{r}
+# Gender gap
+# General: The gender gap in Math is smaller for students who are also strong in Reading
+# Specific: The gender gap in Math Achievement decreases by .18 percentage points for each percentage point increase Reading Achievement
+
+# Simple slopes
+# General: The relationship between Math and Reading is stronger (i.e. has a larger slope) for females than for males
+# Specific:
+#  For females, Math scores are predicted to increase by .72 percentage points for each percentage point increase in Reading Achievement
+#  For males, Math scores are predicted to increase by .55 percentage points for each percentage point increase in Reading Achievement
+```
+
+### Centering the continuous predictor
+
+You may have noticed that the regression coefficient on Gender was wildly different in regression models with and without the interaction. In the model without the interaction (@sec-binary-continuous-5) the coefficient on Gender was 3.50, and in the model with the interaction (above), it was 13.40. So in one model, the "effect" of being male was a 3.5 percentage point gain on a Math test, but in the other model, it was a 13.40 percentage point gain. Why this huge difference in the "effect" of Gender? 
+
+The answer can be seen in the equation for the gender gap. In the model **without the interaction**, the gender gap was constant and equal to the regression coefficient on Gender (denoted as $b_2$ in the model): 
+
+$$\widehat Y (Male) - \widehat Y (Female) = b_2. $$
+
+But in the regression model **with the interaction**, the gender gap was a linear function of Reading and the regression coefficient on Gender is the intercept for that linear relationship. 
+
+$$ \widehat Y (Male) - \widehat Y (Female) = b_2 + b_3 X_1. $$
+
+This equation tell us that, in the model with the interaction, $b_2$ is the gender gap for students who score 0% on the Reading test. Since the lowest score on Reading Achievement was around 35%, the intercept in this equation (i.e., $b_2$, the regression coefficient on Gender) is not very meaningful. 
+
+In previous sections, we have ignored the regression intercept when it was not meaningful. But, ignoring the regression slopes for predictor variables can get confusing, and, in general, it is nice for the regression coefficients to be interpretable (otherwise, why are we doing this!).  
+
+One way to address this situation is to center Reading Achievement so that it has a mean of zero. To do this, define the deviation score
+
+$$D_1 = X_1 - \bar X_1.$$
+
+$D_1$ is the mean-centered version of $X_1$. If we regress Math Achievement on $D_1$ rather than $X_1$ we end up with the following equation for the gender gap in Math: 
+
+$$\widehat Y (Male) - \widehat Y (Female) = b_2 + b_3 D_1$$ 
+
+Since $D_1 = 0$ when $X_1 = \bar X_1$, the regression coefficient on Gender ($b_2$) is now interpretable as the gender gap in Math Achievement, for students with average Reading Achievement. This is a much more interpretable number than the coefficient in the original interaction model! 
+
+Using the example data, this approach yields the following regression coefficients: 
+
+```{r}
+# compute the deviation scores for reading
+reading_dev <- achrdg12 - mean(achrdg12, na.rm = T) 
+
+# Run the interaction model as above
+genderXreading_dev <- (as.numeric(gender) - 1) * reading_dev
+
+mod5 <- lm(achmat12 ~ reading_dev + gender + genderXreading_dev)
+coef(mod5)
+```
+
+The regression coefficient for Gender is now pretty close to what it was in the multiple regression model without the interaction, but the interpretation is different (i.e., it is now the predicted gender gap in Math for students with an average level of Reading, rather than the predicted gender gap in Math for all students). 
+
+Notice that the intercept in the model above has also changed compared to the previous model in which Reading was not centered. This is should make sense based on what you already know about the regression intercept. 
+
+Also note that centering Reading did not affect the regression coefficient for Reading or the interaction. So, centering makes the regression slope on Gender more interpretable, but it doesn't affect our overall interpretation of the simple trends or the gender gap. 
+
+**Please write down your interpretation of the intercept and the regression coefficient for Gender in the above regression output, and be prepared to share your answer in class**. 
+
+### Summary
+
+The interaction between two variables is just their product. When this product is added as a predictor in a multiple regression model with one continuous and one binary predictor:
+
+* The model again results in two regression lines (simple trends), one for each value of the binary predictor.
+
+* However, we now get simple trends with different intercepts *and different slopes*. The difference in slopes is equal to the regression coefficient on the interaction term. In substantive terms, the simple trends have different slopes because of the interaction. 
+
+* The difference (“gap”) between the regression lines changes as a linear function of the continuous predictor, and this change is again equal to the regression coefficient on the interaction term.
+
+* The last two points are equivalent ways of stating the central idea behind a (two-way) interaction: the relationship between two variables changes as a function of a third variable.
+
+* When interpreting an interaction, the researcher chooses which pair of variables will be the "focal relationship" and which variable will be the moderator. 
+  * In our example, we focused on the gender gap in Math (i.e., the relationship between Math and Gender) and Reading was the moderator. 
+  * But, if we were more interested in the relationship between Math and Reading, would could have focused on the simple trends and treated Gender as the moderator
+  * It is usual to only report one way of "breaking down" the interaction -- the one that is most relevant to your research question. 
+
+* Centering the continuous predictor can be helpful for ensuring that the regression coefficient on the binary variable remains interpretable in the presence of an interaction. 
+
+## Inference for interactions {#sec-inference-for-interactions-5}
+
+To be continued next week!

@@ -55,6 +55,10 @@ egB <- lm(achrdg08 ~ urban)
 # print
 summary(egA)
 summary(egB)
+
+# Reset to original contrasts
+contrasts(urban) <- contr.treatment(n = 3)
+colnames(contrasts(urban)) <- c("Suburban", "Urban")
 ```
 
 
@@ -454,13 +458,15 @@ $$H_0: R^2 = 0$$
 is equivalent to testing 
 
 $$H_0: b_1 = b_2 = \cdots = b_{C-1} = 0$$ 
-We have see above that the regression slopes can be interpreted in terms of group-mean differences. For example, under reference-group coding, we can re-write the null hypothesis above as: 
 
-$$H_0: \bar Y_1 - \bar Y_C = \bar Y_2 - \bar Y_C  = \cdots = \bar Y_{C-1} - \bar Y_C  = 0$$ 
-In this notation, we let $C$ denote the reference group. If we add $\bar Y_C$ to each equality in the null hypothesis, we have 
+We have see above that the regression slopes the regression coefficient of dummy variables can be interpreted in terms of group-mean differences. For example, under reference-group coding, we can re-write the null hypothesis above as: 
+
+$$H_0: \mu_1 - \mu_C = \mu_2 - \mu_C  = \cdots = \mu_{C-1} - \mu_C  = 0$$ 
+In this notation, we let $C$ denote the reference group. If we add $\mu_C $ to each equality in the null hypothesis, we have 
 
 
-$$H_0: \bar Y_1 = \bar Y_2  = \cdots = \bar Y_{C-1}  =  \bar Y_C $$ 
+$$H_0: \mu_1  = \mu_2  = \cdots = \mu_{C-1} = \mu_C$$ 
+
 Note that this is the same null hypothesis as one-way ANOVA -- i.e., all the group means are equal. Consequently, the F-test of R-squared using a categorical predictor is equivalent to the F-test of the omnibus hypothesis in one-way ANOVA (assuming homoskedasticity). In @sec-exercises-4, we show how the two approaches produce the same numerical values. 
 
 Although regression with a categorical predictor is mathematically equivalent to one-way ANOVA, you may have noticed that the two approahces are not used in the same way. In ANOVA, we first conduct an F-test of the omnibus hypothesis, and, if the test is significant, we follow-up by comparing the groups using procedures that control for familywise error rate. In regression, we just report the F-test along with the test of the individual contrasts, without any discussion of familywise error rate control. Which approach is correct? Depends who you ask.... 
@@ -628,9 +634,8 @@ Before staring this section, you may find it useful to scroll to the top of the 
 
 Regression with a single binary predictor is equivalent to the independent samples t-test of group means. Let's illustrate this using the NELS dataset with Reading achievement in grade 8 (`achrdg08`) as the outcome and `gender` as the predictor. Although gender need not be conceptualized as dichotomous or even categorical, the variable `gender` reported in NELS data is dichotomous, with values "Female" and "Male". 
 
-R treats variables like `gender` as "factors". Factors have special properties that we are going to work with later on, but for now let's recode `gender` to `binary_gender` by setting `Female = 0` and `Male = 1`
+To start with, let's recode `gender` to `binary_gender` by setting `Female = 0` and `Male = 1`. Below we use a little trick for doing this. First we create a logical vector (`gender == "Male"`) and then coerce the logical vector to binary by multiplying it by 1. There are other ways to do this but this approach is pretty easy. 
 
-### Recoding a factor to numeric
 
 ```{r}
 # load("NELS.RData")
@@ -647,11 +652,7 @@ binary_gender <- (gender == "Male") * 1
 table(gender, binary_gender)
 ```
 
-It is often hassle to get from factor to numeric or vice versa. Above we used a hack by of first creating a logical vector (`gender == "Male"`) and then coercing the logical vector to binary by multiplying it by 1. Other strategies can be used. See `help(factor)` for more information. 
-
-### Binary predictors and independent samples t-tests
-
-Now let's get back to regressing Reading Achievement (`achrdg08`) on `binary_gender`, and comparing this to an independent samples t-test using the same two variables.
+Next we regress Reading Achievement (`achrdg08`) on `binary_gender` and compare this to an independent samples t-test using the same two variables.
 
 ```{r}
 # Regression with a binary variable
@@ -672,23 +673,23 @@ $$b_0 = \bar Y_0 = 56.4678$$
 
 $$b_1 = \bar Y_1 - \bar Y_0 = 55.54546 - 56.4678 = -0.9223$$
   
-  * The t-test of the b-weight, and its p-value, are equivalent to the t-test mean difference (except for the sign): 
+  * The t-test of the b-weight, and its p-value, are equivalent to the t-test of the mean difference (except for the sign): 
   
   $$ t(498) = 1.1633, p = .245$$
   
-In summary, a t-test of a b-weight of a binary predictor is equal equivalent to a t-test of the mean difference. 
+In summary, a t-test of a b-weight of a binary predictor is equal equivalent to an independent samples t-test of means. 
 
 ### Reference-group coding
 
-As discussed in Section \@ref(reference-group-coding-5), the basic idea of contrast coding is to replace a categorical variable with $C$ categories with $C-1$ "dummy" variables. In reference-group coding, the dummy variables are binary, and the resulting interpretation is: 
+As discussed in @sec-reference-group-coding-4, the basic idea of contrast coding is to replace a categorical variable with $C$ categories with $C-1$ "dummy" variables. In reference-group coding, the dummy variables are binary, and the resulting interpretation is: 
 
   * The intercept is interpreted as the mean of the reference group. The reference is group is chosen by the analyst – it is the group that is coded zero on all dummies, or the group whose dummy variable is "left out" of the $C-1$ dummy variables.  
 
   * The regression coefficients of the dummy variables are interpreted as the difference between the mean of the indicated group and the mean of the reference group
 
-Reference-group coding is the default contrast coding in R. However, in order for contrast coding to be implemented, our categorical predictor needs to be represented in R as a `factor`.
+Reference-group coding is the default contrast coding in R. However, in order for contrast coding to be implemented, our categorical predictor needs to be represented in R as a special data type called a `factor`.
 
-### More about factors
+### Factors in R
 
 Factors are the way that R deals with categorical data. If you want to know if your variable is a factor or not, you can use the functions `class` or `is.factor`. Let's illustrate this with the `urban` variable from NELS.
 
@@ -701,13 +702,13 @@ is.factor(urban)
 # Find out the levels of a factor using "levels"
 levels(urban)
 
-# Find out what contrast coding R is using for a factor "constrasts"
+# Find out what contrast coding R is using for a factor "contrasts"
 contrasts(urban)
 ```
 
 In the above code, we see that `urban` is a factor with 3 levels and the default reference-group contrasts are set up so that `Rural` is the reference group. Below we will show how to change the contrasts for a variable. 
 
-If we are working with a variable that is not a factor, but we want R to treat it as a factor, we can use the `factor` command. Let's illustrate this by turning `binary_gender` back into a factor. 
+If we are working with a variable that is not a factor, but we want R to treat it as a factor, we can use the `factor` command. Let's illustrate this by turning `binary_gender` into a factor. 
 
 ```{r}
 # Change a numeric variable into a factor
@@ -717,7 +718,7 @@ class(factor_gender)
 levels(factor_gender)
 ```
 
-We can also use the `levels` function to tell R what labels we want it to use for our factor. `levels` should be assigned a text vector with length equal to the number of levels of the variable. The entries of the assigned vector will be the new level names of the factor. 
+We can also use the `levels` function to tell R what labels we want it to use for our factor. 
 
 ```{r}
 # Change the levels of factor_gender to "F" and "M"
@@ -732,11 +733,11 @@ mod2 <- lm(achrdg08 ~ urban)
 summary(mod2)
 ```
 
-In the output, we see that two regression coefficients are reported, one for `Suburban` and one for `Urban`. As discussed in Section \@ref(reference-group-coding-5), these coefficients are the mean difference between the indicated group and the reference group (`Rural`). 
+In the output, we see that two regression coefficients are reported, one for `Suburban` and one for `Urban`. As discussed in @sec-reference-group-coding-4, these coefficients are the mean difference between the indicated group and the reference group (`Rural`). 
 
 We can see that Urban students scores significantly higher than Rural students (3.125 percentage points), but there was no significant difference between Rural and Suburban students. 
 
-The intercept is the mean of the reference group (`rural`) -- about 55% on the reading test. 
+The intercept is the mean of the reference group (`Rural`) -- about 55% on the reading test. 
 
 Note the R-squared -- Urbanicity accounts for about 2% of the variation reading achievement. As usual, the F-test of R-squared has degrees of freedom $K$ and $N - K -1$, but now $K$ (the number of predictors) is equal to $C - 1$ -- the number of categories minus one.
 
@@ -777,12 +778,12 @@ Compared to the output from `mod2`, note that
   
   * The regression coefficients now represent the mean difference between the indicated group with the new reference group.
   
-  * The R-square and F stay the same -- in other words, the total amount of variation explained by the variable `urban` does not change, just because we changed the reference group. 
+  * The R-square and F-test stay the same -- in other words, the total amount of variation explained by the variable `Urban` does not change, just because we changed the reference group. 
 
 
 ### Deviation coding
 
-It is possible to change R's default contrast coding to one of the other built-in contrasts (see `help(contrasts)` for more information on the built in contrasts).
+It is possible to change R's default contrast coding to one of the other built-in contrasts (see `help(contrasts)` for more information on the built-in contrasts).
 
 For instance, to change to deviation coding, we use R's `contr.sum` function and tell it how many levels there are for the factor (`n`). In deviation coding, the intercept is equal to the unweighted mean of the predicted values, and the regression coefficients are difference between the indicated group and the unweighted mean. 
 
@@ -825,17 +826,20 @@ summary(aov1)
 summary(mod2)
 ```
 
-If we compare the output from `aov` to the F-test reported by `lm` we see that the F-stat, degrees of freedom, and p-value are all identical. If we compute eta-squared from aov, we also find that it is equal to the R-squared value from `lm`. 
+If we compare the output from `aov` to the F-test reported by `lm` we see that the F-test, degrees of freedom, and p-value are all identical. If we compute eta-squared from aov, we also find that it is equal to the R-squared value from `lm`. 
 
 ```{r}
 # Compute eta-squared from aov output
 741 / (741 + 38163)
 ```
 
-In short, ANOVA and regression are doing the same thing: R-squared is the same as omega-squared and the ANOVA omnibus F-test is the same as the F-test of R-squared. The main difference is that `lm` focuses on contrasts for analyzing and interpreting the group differences, whereas ANOVA focuses on the F-test of the omnibus hypothesis and the procedures for analyzing group difference are conducted as a follow-up step.
+In short, ANOVA and regression are doing the same thing: R-squared is the same as eta-squared and the ANOVA omnibus F-test is the same as the F-test of R-squared. 
 
-### Extra: Group-mean coding
-As a step towards addresses the issues with deviation coding, let's consider another coding procedure. If we omit the intercept term, all of the reference-group coded dummies can be included and the regression coefficients now correspond to means of each group. We omit the intercept using `-1` in the model formula. 
+### Extra: Weighted deviation coding with all groups
+
+This section presents a "hack" for addressing the two main issues with deviation coding noted in @sec-deviation-coding-4. This is a hack in the sense that we are working around R's usual procedures. The result of this hack is to provide deviation coding in which comparisons are made to the grand mean on the outcome for all $C$ categories, not just $C-1$ categories. As a side effect, the F-test for the R-squared statistic reported in `summary(lm)` no longer correct, so we show how to fix that too. 
+
+First, note that if if we omit the intercept term, all of the reference-group coded dummies can be included in the model and the regression coefficients now correspond to means of each group. We omit the intercept using `-1` in the model formula. 
 
 ```{r}
 # Omit the intercept using -1
@@ -846,48 +850,15 @@ summary(mod5)
 
 Note the following things about the output: 
 
-* The coefficients are no **longer interpreted mean differences**, just the raw means. 
+* The coefficients are no **longer interpreted as mean differences**, just the raw means. 
 
-* The R-square and F-test **do** change from `mod2`. When the intercept is omitted, R-squared can no longer interpretated as a proportion of variance   unless the variable $Y$ variable is centered. When the intercept is omitted, it also changes the degrees of freedom in the F-test, because there are now 3 predictors instead of 2. In general, when the intercept is omitted, R-square and its F-test do not have the usual interpretation. When reporting R-squared and its F-test, we should use a model with the intercept.  
+* The R-square and F-test **do** change from `mod2`. When the intercept is omitted, R-squared can no longer interpretated as a proportion of variance   unless the variable $Y$ variable is centered. When the intercept is omitted, it also changes the degrees of freedom in the F-test, because there are now 3 predictors instead of 2. In general, when the intercept is omitted, R-square and its F-test do not have the usual interpretation, so we need to be careful. 
 
-By itself, group mean coding is not very interesting uninteresting -- we don't usually want to test whether the group means are different from zero. However, we will see in the next section that it can be used to provide an alternative to deviation coding. 
-
-### Extra: Weighted versus unweighted deviation coding
-
-This section presents a "hack" for addressing the two main issues with deviation coding noted in Section \@ref(deviation-coding-5). This is a hack in the sense that we are working around R's usual procedures rather than replacing them with a completely new procedure. The result of this hack is to provide deviation coding in which comparisons are made to grand mean on the outcome for all $C$ categories, not just $C-1$ categories. As a side effect, the F-test for the R-squared statistic is no longer correct, so you should not use this approach to report R-squared. 
-
-First, note that the group sample sizes are not equal for `ubran`
+By itself, the "group-means" appoach to contrast coding is not very interesting -- we don't usually want to test whether the group means are different from zero. However, this approach can be used to provide an alternative to deviation coding if we center the $Y$ variable before using the above approach. After centering, the grand mean of $Y$ is zero, and so the group means represent deviations from the grand mean (i.e., deviations from zero) and the tests of the regression coefficients are tests of whether the group means are different from the grand mean. 
 
 ```{r}
-table(urban)
-```
-
-Because of this, the unweighted mean of the group means (i.e., the intercept in `mod4` above) is not equal to the overall mean on `achrdg08` -- we can see that the overall mean and the unweighted group means are slightly different for these data: 
-
-```{r}
-group_means <- tapply(achrdg08, INDEX = urban, FUN = mean)
-group_means
-
-# Compare the overall mean and the unweighted mean of the group means
 # Center the outcome variable
-ybar <- mean(achrdg08)
-ybar
-mean(group_means)
-```
-
-Note that the intercept in `mod4` is not equal to the overall mean, `ybar`, but is instead equal to the unweighted average of the group means, `mean(group_means)`. the difference isnt very big in this example, but it can be quite drastic with highly unequal sample sizes. 
-
-If you would like to compare the groups to the overall mean when the sample sizes are unequal, the simplest way to do this in R is by first centering the Y variable and then using group mean coding.  
-
-After centering, the grand mean of $Y$ is zero, and so the group means represent deviations from the grand mean (i.e., deviations from zero) and the tests of the regression coefficients are tests of whether the group means are different from the grand mean. 
-
-```{r}
-# Change the contrasts back to reference group
-contrasts(urban) <- contr.treatment(n = 3, base  = 1)
-colnames(contrasts(urban)) <- c("Suburban", "Urban")
-
-# Center the outcome variable
-dev_achrdg08 <- achrdg08 - ybar
+dev_achrdg08 <- achrdg08 - mean(achrdg08)
 
 # Run the regression with group mean coding
 mod6 <- lm(dev_achrdg08 ~ -1 + urban)
@@ -898,8 +869,24 @@ Note the following things about the output:
 
   * The regression coefficients compare each group's mean to the overall mean on the outcome. Urban students are significantly above average, Rural and Suburban students are below average but the difference is not significant. 
   
-  * The R-square is the same as `mod2` because the Y variable is centered, but the F test **does** change from `mod2`, because there are now 3 variables included in the model. In general, when the intercept is omitted, R-square and its F-test do not have the usual interpretation. So, when reporting R-squared and F-test, we should use a model with the intercept, rather than the approach outlined here. 
+  * The R-square is the same as `mod2` because the $Y$ variable is centered, but the F test is not the same as from `mod2`. The next two paragraphs explain why, but the explanation requires some material we won't discuss until @sec-chap-6. 
 
+The F-test of R-squared can be computed by comparing two different models, a reference model with no predictors and a focal model with the predictors. The reference model used by `lm` depends on whether the intercept is included in the focal model. If the focal model has an intercept, the reference model also has an intercept. In the focal model omits the intercept, the reference also omits the intercept.  
+
+In the present context, the focal model omits the intercept and use $C$ dummies This model has the same R-squared as if we had used the intercept and $C-1$ dummies. However, the F-statistic for the test of R-squared (as reported by `summary(lm)`) is different for the two approaches, because of the choice of reference model. You can change the reference model, but it takes a bit of fiddling around. If you are interested, just ask in class. 
+  
+What all of this mean is that we can compute the "correct" F-test of R-squared by comparing `mod6` to a model with just the intercept. The following code shows how to do this. 
+
+```{r}
+# A model with only the intercept
+mod7 <- lm(dev_achrdg08 ~ 1)
+
+# Compute the F-test of comparing mod6 to mod7
+anova(mod6, mod7)
+```
+
+This is the same F-test reported for `mod2`, `mod3` and `mod4` above. 
+  
 ```{r, echo = F}
 detach(NELS)
 ```

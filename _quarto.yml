@@ -12,6 +12,7 @@ book:
     - ch2_simple_regression.qmd
     - ch3_two_predictors.qmd
     - ch4_categorical_predictors.qmd
+    - ch5_interactions.qmd
 
 bibliography: references.bib
 
