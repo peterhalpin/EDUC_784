@@ -1,0 +1,1313 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>EDUC 784 - 5&nbsp; Interactions</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./ch4_categorical_predictors.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch5_interactions.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Interactions</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">EDUC 784</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch1_review.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Review</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch2_simple_regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Simple Regression</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch3_two_predictors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Two predictors</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch4_categorical_predictors.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Categorical predictors</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch5_interactions.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Interactions</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#sec-example-5" id="toc-sec-example-5" class="nav-link active" data-scroll-target="#sec-example-5"><span class="header-section-number">5.1</span> An example from NELS</a></li>
+  <li><a href="#sec-binary-continuous-5" id="toc-sec-binary-continuous-5" class="nav-link" data-scroll-target="#sec-binary-continuous-5"><span class="header-section-number">5.2</span> Binary + continuous</a>
+  <ul class="collapse">
+  <li><a href="#marginal-means" id="toc-marginal-means" class="nav-link" data-scroll-target="#marginal-means"><span class="header-section-number">5.2.1</span> Marginal means</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">5.2.2</span> Summary</a></li>
+  </ul></li>
+  <li><a href="#sec-binary-continuous-interaction-5" id="toc-sec-binary-continuous-interaction-5" class="nav-link" data-scroll-target="#sec-binary-continuous-interaction-5"><span class="header-section-number">5.3</span> Binary + continuous + interaction</a>
+  <ul class="collapse">
+  <li><a href="#choosing-the-moderator" id="toc-choosing-the-moderator" class="nav-link" data-scroll-target="#choosing-the-moderator"><span class="header-section-number">5.3.1</span> Choosing the moderator</a></li>
+  <li><a href="#back-to-the-example" id="toc-back-to-the-example" class="nav-link" data-scroll-target="#back-to-the-example"><span class="header-section-number">5.3.2</span> Back to the example</a></li>
+  <li><a href="#centering-the-continuous-predictor" id="toc-centering-the-continuous-predictor" class="nav-link" data-scroll-target="#centering-the-continuous-predictor"><span class="header-section-number">5.3.3</span> Centering the continuous predictor</a></li>
+  <li><a href="#summary-1" id="toc-summary-1" class="nav-link" data-scroll-target="#summary-1"><span class="header-section-number">5.3.4</span> Summary</a></li>
+  </ul></li>
+  <li><a href="#sec-inference-for-interactions-5" id="toc-sec-inference-for-interactions-5" class="nav-link" data-scroll-target="#sec-inference-for-interactions-5"><span class="header-section-number">5.4</span> Inference for interactions</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title"><span id="sec-chap-5" class="quarto-section-identifier"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Interactions</span></span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p>In statistics, the term <em>interaction</em> means that the relationship between two variables depends on a third variable. In the context of regression, we are usually interested in the situation where the relationship between the outcome <span class="math inline">\(Y\)</span> and a predictor <span class="math inline">\(X_1\)</span> depends on another predictor <span class="math inline">\(X_2\)</span>. This situation is also referred to as <em>moderation</em> or sometimes as <em>effect heterogeneity</em>.</p>
+<p>Interactions are a big-picture idea with a lot conceptual power, especially when describing topics related to social inequality or “gaps”. Some examples of interactions are:</p>
+<ul>
+<li><p>The relationship between wages and years of education depends on gender. This has been called the gender pay gap and it is considered a pretty important issue for gender equality (e.g., <a href="https://en.wikipedia.org/wiki/Gender_pay_gap">https://en.wikipedia.org/wiki/Gender_pay_gap</a>).</p></li>
+<li><p>The relationship between reading achievement and age depends on race. This has been interpreted in terms of racial inequality in educational outcomes (e.g., <a href="https://cepa.stanford.edu/educational-opportunity-monitoring-project/achievement-gaps/race/">https://cepa.stanford.edu/educational-opportunity-monitoring-project/achievement-gaps/race/</a>).</p></li>
+<li><p>The effect of COVID-19 school shutdowns on academic achievement depended on SES. This has been interpreted in terms of social inequality in access to educational resources outside of schools (e.g., <a href="https://www.mckinsey.com/industries/education/our-insights/covid-19-and-student-learning-in-the-united-states-the-hurt-could-last-a-lifetime">https://www.mckinsey.com/industries/education/our-insights/covid-19-and-student-learning-in-the-united-states-the-hurt-could-last-a-lifetime</a>).</p></li>
+</ul>
+<p>I hope these examples convince you that some of the big issues facing education and society at large are actually about interactions – how the relationship between two variables depends on a third variable. In this chapter we are going to talk about how you can use regression to conduct research on these types of topics.</p>
+<p>We start by considering what happens when both categorical and continuous predictors are used together in a multiple regression model. We use this combination of predictors as bridge from the previous chapter and as a way of digging into the math behind interactions. Later sections will consider what happens when we have interactions between two continuous predictors, or two categorical predictors.</p>
+<p>In this chapter, we are exclusively interested in interactions between two predictors at a time, which are called <em>two-way interactions</em>. It is possible to consider “higher-order” interactions (e.g., interactions among three predictors or <em>three-way interactions</em>) but we aren’t going to do that here. Sometimes we will use the terminology <em>main effect</em> to describe the relationship between each individual predictor and the outcome variable, as distinct from the interactions among the predictors. Up to now, we have be working with main effects only.</p>
+<p>It might be helpful to mention that this chapter gets pretty complicated and is very long (sorry!). It is definitely the hardest material we have covered so far, because we are drawing on everything we have done up to now and adding even more stuff into the mix. So, if these readings feel daunting at moments, that is to be expected. Please don’t feel disheartened. You might consider taking a break and doing the readings in smaller chunks. We are going to discuss all of this in class together, so just get what you can from these notes, provide some initial responses to the Workbook questions, and press on. This is where regression starts to get really interesting – you got this!</p>
+<section id="sec-example-5" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="sec-example-5"><span class="header-section-number">5.1</span> An example from NELS</h2>
+<p>For the first few sections of this chapter, we will focus on an example from the NELS data that addresses the gender gap in Math Achievement (e.g., <a href="https://www.nctm.org/Publications/TCM-blog/Blog/Current-Research-on-Gender-Differences-in-Math/">https://www.nctm.org/Publications/TCM-blog/Blog/Current-Research-on-Gender-Differences-in-Math/</a>). The t-test reported below shows the gender gap in Math Achievement in 12th grade. The output shows us that, on average, males scored about 3.18 percentage points higher than females on a Grade 12 Math test.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"NELS.RData"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(NELS)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(achmat12 <span class="sc">~</span> gender, <span class="at">var.equal =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Two Sample t-test
+
+data:  achmat12 by gender
+t = -4.5529, df = 498, p-value = 6.658e-06
+alternative hypothesis: true difference in means between group Female and group Male is not equal to 0
+95 percent confidence interval:
+ -4.527002 -1.797687
+sample estimates:
+mean in group Female   mean in group Male 
+            55.47092             58.63326 </code></pre>
+</div>
+</div>
+<p>In this chapter, our goal is to use linear regression to better understand the gender gap in Math Achievement. To help us do this, we will also consider a third variable, Reading Achievement. The plot below shows the relationship between Math Achievement and Reading Achievement estimated just for males (Blue), and the same relationship estimated just for females (Black).</p>
+<div class="cell" data-layout-align="center">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create indicators for females and males</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>females <span class="ot">&lt;-</span> gender <span class="sc">==</span> <span class="st">"Female"</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>males <span class="ot">&lt;-</span> gender <span class="sc">==</span> <span class="st">"Male"</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Regress math on reading, for each group separately</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>mod1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(achmat12[females] <span class="sc">~</span> achrdg12[females])</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(achmat12[males] <span class="sc">~</span> achrdg12[males])</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot reading and math for females</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(achrdg12[females], </span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>     achmat12[females], </span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Reading"</span>, </span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Math"</span>)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(mod1, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Add again for males</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(achrdg12[males], </span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>       achmat12[males], </span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="st">"#4B9CD3"</span>, </span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>       <span class="at">pch =</span> <span class="dv">2</span>)</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(mod2, <span class="at">col =</span> <span class="st">"#4B9CD3"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a legend</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="at">x =</span> <span class="st">"topleft"</span>, </span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="fu">levels</span>(gender), </span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>       <span class="at">pch =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), </span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="st">"#4B9CD3"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-math-reading-1" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="ch5_interactions_files/figure-html/fig-math-reading-1-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;5.1: Math Achievement, Reading Achievement, and Gender.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Please take a minute to think about what this plot is telling us about the relationships among the three variables. In particular: </strong></p>
+<ul>
+<li><strong>Does the gender gap in Math Achievement change as a function of Reading Achievement?</strong><br>
+</li>
+<li><strong>Is the relationship between Math Achievement and Reading Achievement the the same for males and females?</strong></li>
+</ul>
+<p>Note that in <a href="#fig-math-reading-1">Figure&nbsp;<span>5.1</span></a>, we estimated two separate simple regression models, one just for males and one just for females. In the next few sections, we will work our way towards a single multiple regression model that can be used to represent the relationships among these three variables.</p>
+</section>
+<section id="sec-binary-continuous-5" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="sec-binary-continuous-5"><span class="header-section-number">5.2</span> Binary + continuous</h2>
+<p>Let’s start by considering what happens when we include both Gender and Reading Achievement as predictors of Math Achievement in our usual multiple regression equation:</p>
+<p><span id="eq-yhat-5a"><span class="math display">\[\widehat Y = b_0 + b_1X_1 + b_2 X_2 \tag{5.1}\]</span></span></p>
+<p>where</p>
+<ul>
+<li><span class="math inline">\(Y\)</span> is Math Achievement in grade 12</li>
+<li><span class="math inline">\(X_1\)</span> is Reading Achievement in grade 12</li>
+<li><span class="math inline">\(X_2\)</span> is Gender (binary, with female = 0 and male = 1)</li>
+</ul>
+<p>Note that this model does <strong>not</strong> include an interaction between the two predictors – we are first going to consider what is “missing” from the usual regression model, and then use this to motivate inclusion of another predictor that represents the interaction. To get an initial sense of what is missing, the model in <a href="#eq-yhat-5a">Equation&nbsp;<span>5.1</span></a> is plotted in <a href="#fig-math-reading-2">Figure&nbsp;<span>5.2</span></a> – can you spot the difference with <a href="#fig-math-reading-1">Figure&nbsp;<span>5.1</span></a>?</p>
+<div class="cell" data-layout-align="center">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Rund the regression</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>mod3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(achmat12 <span class="sc">~</span> achrdg12 <span class="sc">+</span> gender, <span class="at">data =</span> NELS)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>a_females <span class="ot">&lt;-</span> <span class="fu">coef</span>(mod3)[<span class="dv">1</span>]</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>b_females <span class="ot">&lt;-</span> <span class="fu">coef</span>(mod3)[<span class="dv">2</span>]</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the slope and intercept for males</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>a_males <span class="ot">&lt;-</span> a_females <span class="sc">+</span> <span class="fu">coef</span>(mod3)[<span class="dv">3</span>]</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>b_males <span class="ot">&lt;-</span> b_females </span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot reading and math for females</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(achrdg12[females], </span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>     achmat12[females], </span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Reading"</span>, </span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Math"</span>)</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(a_females, b_females, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Add points and line for males</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(achrdg12[males], </span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>       achmat12[males], </span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="st">"#4B9CD3"</span>, </span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>       <span class="at">pch =</span> <span class="dv">2</span>)</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(a_males, b_males, <span class="at">col =</span> <span class="st">"#4B9CD3"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a legend</span></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="at">x =</span> <span class="st">"topleft"</span>, </span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="fu">levels</span>(gender), </span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>       <span class="at">pch =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), </span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="st">"#4B9CD3"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-math-reading-2" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="ch5_interactions_files/figure-html/fig-math-reading-2-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;5.2: Math Achievement, Reading Achievement, and Gender (No Interaction).</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>In order to interpret our multiple regression model, we can use the same overall approach as we used to interpret categorical predictors in <a href="ch4_categorical_predictors.html"><span>Chapter&nbsp;4</span></a>. If we plug-in values for the categorical predictor, we get:</p>
+<p><span id="eq-females1-5"><span class="math display">\[
+\begin{align}
+\text{Simple trend for females:   } \widehat Y (Female) &amp; = b_0 + b_1X_1 + b_2 (0) \\ &amp; = b_0 + b_1X_1
+\end{align}
+\tag{5.2}\]</span></span></p>
+<p><span id="eq-males1-5"><span class="math display">\[
+\begin{align}
+\text{Simple trend for males:   } \widehat Y (Male) &amp; = b_0 + b_1X_1 + b_2 (1) \\ &amp; = (b_0 + b_2) + b_1 X_1
+\end{align}
+\tag{5.3}\]</span></span></p>
+<p><span id="eq-gap1-5"><span class="math display">\[
+\begin{align}
+\text{Predicted gender gap in math:   } \widehat Y (Male) - \widehat Y (Female) &amp; = b_2
+\end{align}
+\tag{5.4}\]</span></span></p>
+<p>The equations for <span class="math inline">\(\widehat Y (Female)\)</span> and <span class="math inline">\(\widehat Y (Male)\)</span> are referred to as <em>simple trends</em> or <em>simple slopes</em>. These describe the regression of Math on Reading, simply for females, or simply for males. The difference between the two simple regression equations is the predicted gender gap in Math Achievement.</p>
+<p>Based on these equations we can interpret regression coefficients as follows</p>
+<ul>
+<li><p>The regression intercept, <span class="math inline">\(b_0\)</span>, is the intercept of the simple trend for the group coded “0” (i.e., the intercept of the regression of Math on Reading, simply for females; see <a href="#eq-females1-5">Equation&nbsp;<span>5.2</span></a>).</p></li>
+<li><p>The regression slope for the continuous predictor, <span class="math inline">\(b_1\)</span>, is the slope of the simple trend for the group coded “0” (females) and for the group coded “1” (males; see <a href="#eq-females1-5">Equation&nbsp;<span>5.2</span></a> and <a href="#eq-males1-5">Equation&nbsp;<span>5.3</span></a>)</p></li>
+<li><p>The regression slope for the binary predictor, <span class="math inline">\(b_2\)</span>, is the difference between the intercepts of the simple trends (i.e., we add <span class="math inline">\(b_2\)</span> to <span class="math inline">\(b_0\)</span> to get the intercept of the regression of Math on Reading, simply for males; see <a href="#eq-males1-5">Equation&nbsp;<span>5.3</span></a>).</p></li>
+<li><p>In this model, <span class="math inline">\(b_2\)</span> is the also the predicted gender gap in Math Achievement (see <a href="#eq-gap1-5">Equation&nbsp;<span>5.4</span></a>).</p></li>
+</ul>
+<p>The regression coefficients for the example data are shown below. <strong>Please use these numbers to provide an interpretation of the simple trends and the gender gap in Math Achievement for the NELS example. (Don’t worry about statistical significance, just focus on the meaning of the coefficients.)</strong></p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(mod3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Intercept)    achrdg12  genderMale 
+ 19.9812210   0.6355117   3.5016650 </code></pre>
+</div>
+</div>
+<p>Here is an example to help you get started:</p>
+<ul>
+<li><p>Simply for females, the regression of Math Achievement on Reading Achievement has an intercept equal to 19.98 and a slope equal to 0.64. The intercept tells us that a female student with Reading Achievement score of 0% is expected to have a Math Achievement score of 19.98% (the units of the two tests are percent correct). Since the lowest value of Reading Achievement in our example is about 35%, the intercept is not very meaningful for these data. The regression slope tells us that, for females, a 1 unit increase in Reading Achievement is associated with a .64 unit increase in Math Achievement.</p></li>
+<li><p>Simply for males, ….</p></li>
+<li><p>The gender gap in Math Achievement was equal to …</p></li>
+</ul>
+<section id="marginal-means" class="level3" data-number="5.2.1">
+<h3 data-number="5.2.1" class="anchored" data-anchor-id="marginal-means"><span class="header-section-number">5.2.1</span> Marginal means</h3>
+<p>Before moving on to consider how to add an interaction to our multiple regression model, let’s revisit a topic from the previous chapter. In <a href="ch4_categorical_predictors.html"><span>Chapter&nbsp;4</span></a>, we noted that the regression coefficients for categorical predictors (dummy variables) can be interpreted in terms of the group means on the outcome variable. However, when additional predictors are included in the regression model, this interpretation no longer holds. This section explains why.</p>
+<p>To see what the issue is, let’s compare the output of the t-test in <a href="#sec-example-5"><span>Section&nbsp;5.1</span></a> with the regression output shown above. In the t-test, the mean Math Achievement for females was 55.47, and for males it was 58.63. The mean difference was</p>
+<p><span class="math display">\[58.63 - 55.47 = 3.16\]</span></p>
+<p>However, the regression coefficient on Gender in the multiple regression model above is equal to <span class="math inline">\(3.50\)</span>. Thus, unlike <a href="ch4_categorical_predictors.html"><span>Chapter&nbsp;4</span></a>, the regression coefficient on Gender is no longer equal to the group-mean difference in Math Achievement. But why?</p>
+<p>Remember that in the multiple regression model, the regression coefficient on Gender is interpreted as the relationship between Math Achievement and Gender, <em>holding Reading Achievement constant</em>. So, the regression coefficient on Gender is still interpreted as a mean difference, but now it is a <em>predicted</em> mean difference that represents the gender gap in Math Achievement after controlling for Reading Achievement. The t-test doesn’t control for Reading.</p>
+<p>In order to emphasize the distinction between “raw” group means computed from the data and the predicted group means obtained from a multiple regression model, the latter are referred to as <em>marginal means</em>, or sometimes as <em>adjusted means</em> or <em>least squares means</em>. I think they should be called <em>predicted means</em>, but, alas.</p>
+</section>
+<section id="summary" class="level3" data-number="5.2.2">
+<h3 data-number="5.2.2" class="anchored" data-anchor-id="summary"><span class="header-section-number">5.2.2</span> Summary</h3>
+<p>In a regression model with one continuous predictor and one binary predictor (and no interaction):</p>
+<ul>
+<li><p>The model results in two regression lines, one for each value of the binary predictor. These are called the simple trends.</p></li>
+<li><p>The simple trends are parallel but can have a different intercept; the difference in the intercepts is equal to regression coefficient of the binary variable.</p></li>
+<li><p>The difference between the simple trends is often called a “gap”, and the gap is also equal to the regression coefficient of the binary variable.</p></li>
+<li><p>It is important to note that the predicted group means for the binary variable are no longer equal to the “raw” group means computed directly from the data, because the predicted group means control for the correlation between the predictors. The predicted group means are called marginal means to emphasize this distinction.</p></li>
+</ul>
+<p>Keep in mind that this summary applies to the multiple regression model without an interaction. In the next section we improve our model by adding an interaction.</p>
+</section>
+</section>
+<section id="sec-binary-continuous-interaction-5" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="sec-binary-continuous-interaction-5"><span class="header-section-number">5.3</span> Binary + continuous + interaction</h2>
+<p>In this section, we discuss what was missing from the multiple regression model in the previous section: The interaction between Gender and Reading.</p>
+<p>Mathematically, an interaction is just the product between two variables. <a href="#eq-yhat-5b">Equation&nbsp;<span>5.5</span></a> shows how to include this product in our multiple regression model – we just take the product of the two predictors and add it into the model as a third predictor:</p>
+<p><span id="eq-yhat-5b"><span class="math display">\[\hat Y = b_0 + b_1X_1 + b_2 X_2 + b_3 (X_1 \times X_2).  \tag{5.5}\]</span></span></p>
+<p>For the NELS example, this regression model is depicted in <a href="#fig-math-reading-3">Figure&nbsp;<span>5.3</span></a>. Note the the simple trends are no longer parallel and the regression lines agree exactly with what we had in <a href="#sec-example-5"><span>Section&nbsp;5.1</span></a>. So, as promised, we have now arrived at a single multiple regression model that captures the relationships among Math Achievement, Reading Achievement, and Gender.</p>
+<div class="cell" data-layout-align="center">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Interaction via hard coding</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>genderXachrdg12 <span class="ot">&lt;-</span> (<span class="fu">as.numeric</span>(gender) <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> achrdg12</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>mod4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(achmat12 <span class="sc">~</span> achrdg12 <span class="sc">+</span> gender <span class="sc">+</span> genderXachrdg12)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the coefficients for females</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>a_females <span class="ot">&lt;-</span> <span class="fu">coef</span>(mod4)[<span class="dv">1</span>]</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>b_females <span class="ot">&lt;-</span> <span class="fu">coef</span>(mod4)[<span class="dv">2</span>]</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the coefficients for males</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>a_males <span class="ot">&lt;-</span> a_females <span class="sc">+</span> <span class="fu">coef</span>(mod4)[<span class="dv">3</span>]</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>b_males <span class="ot">&lt;-</span> b_females <span class="sc">+</span> <span class="fu">coef</span>(mod4)[<span class="dv">4</span>]</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot reading and math for females</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(achrdg12[females], </span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>     achmat12[females], </span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Reading"</span>, </span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Math"</span>)</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(a_females, b_females, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Add points and line for males</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(achrdg12[males], </span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>       achmat12[males],</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="st">"#4B9CD3"</span>, </span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>       <span class="at">pch =</span> <span class="dv">2</span>)</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(a_males, b_males, <span class="at">col =</span> <span class="st">"#4B9CD3"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a legend</span></span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="at">x =</span> <span class="st">"topleft"</span>,</span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="fu">levels</span>(gender), </span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>       <span class="at">pch =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), </span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="st">"#4B9CD3"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-math-reading-3" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="ch5_interactions_files/figure-html/fig-math-reading-3-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption class="figure-caption">Figure&nbsp;5.3: Math Achievement, Reading Achievement, and Gender (No Interaction).</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>To see how to interpret the coefficients in this model, let’s work through the model equations using our two-step procedure. As before, we first plug-in values for the categorical predictor, then we use the resulting equations solve for the simple trends and the gender gap in Math.</p>
+<p><span id="eq-females2-5"><span class="math display">\[\begin{align}
+\widehat Y (Female) &amp; = b_0 + b_1X_1 + b_2 (0) + b_3(X_1 \times 0) \\ &amp; = b_0 + b_1X_1
+\end{align} \tag{5.6}\]</span></span></p>
+<p><span id="eq-males2-5"><span class="math display">\[\begin{align}
+\widehat Y (Male) &amp; = b_0 + b_1X_1 + b_2 (1) +  b_3(X_1 \times 1)\\ &amp; = (b_0 + b_2) + (b_1 + b_3) X_1 \end{align} \tag{5.7}\]</span></span></p>
+<p><span id="eq-gap2-5"><span class="math display">\[\begin{align}
+\widehat Y (Male) - \widehat Y (Female) &amp; = b_2 + b_3 X_1
+\end{align} \tag{5.8}\]</span></span></p>
+<p>These equations are summarized graphically below in <a href="#fig-interactions">Figure&nbsp;<span>5.4</span></a>.</p>
+<div id="fig-interactions" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="files/images/Interaction.jpg" class="img-fluid figure-img" style="width:50.0%"></p>
+<figcaption class="figure-caption">Figure&nbsp;5.4: Interaction between a categorical and a continuous predictor. Image credit: Daniela Rodriguez-Mincey, Spring 2023</figcaption>
+</figure>
+</div>
+<p>Based on the equations and figure, we can interpret regression coefficients as follows. Some of these interpretations are the same as in the previous section, but some are different. (You got this!)</p>
+<ul>
+<li><p>The regression intercept, <span class="math inline">\(b_0\)</span>, is the intercept of the simple trend for the group coded “0” (i.e., the intercept of the regression of Math on Reading, simply for females; see <a href="#eq-females2-5">Equation&nbsp;<span>5.6</span></a>). This is the <strong>same</strong> interpretation as for the model witout the interaction discussed in <a href="#sec-binary-continuous-5"><span>Section&nbsp;5.2</span></a>.</p></li>
+<li><p>The regression slope for the continuous predictor, <span class="math inline">\(b_1\)</span>, is the slope of the simple trend for the group coded “0” (females; see <a href="#eq-females2-5">Equation&nbsp;<span>5.6</span></a>). This is <strong>different</strong> from the interpretation of the model in <a href="#sec-binary-continuous-5"><span>Section&nbsp;5.2</span></a> – in that model, <span class="math inline">\(b_1\)</span> was the slope of both simple trends, not just the trend for females.</p></li>
+<li><p>The regression slope for the binary predictor, <span class="math inline">\(b_2\)</span>, is the difference between the intercepts of the simple trends (i.e., we add <span class="math inline">\(b_2\)</span> to <span class="math inline">\(b_0\)</span> to get the intercept of the regression of Math on Reading, simply for males; see <a href="#eq-males2-5">Equation&nbsp;<span>5.7</span></a>). This is the <strong>same</strong> interpretation as for the model without the interaction discussed in <a href="#sec-binary-continuous-5"><span>Section&nbsp;5.2</span></a>.</p></li>
+<li><p>The regression slope for the interaction term (or simply, the interaction), <span class="math inline">\(b_3\)</span>, is the difference between the slopes of the simple trends (i.e., we add <span class="math inline">\(b_3\)</span> to <span class="math inline">\(b_1\)</span> to get the slope of the regression of Math on Reading, simply for males; see <a href="#eq-males2-5">Equation&nbsp;<span>5.7</span></a>). This is <strong>different</strong> from the interpretation of the model in <a href="#sec-binary-continuous-5"><span>Section&nbsp;5.2</span></a> – in that model, <span class="math inline">\(b_1\)</span> was the slope of both simple trends, not just the trend for females.</p></li>
+<li><p>The difference between the predicted values (i.e., the predicted gender gap in Math Achievement) is no longer constant, but is instead a function of <span class="math inline">\(X_1\)</span> (see <a href="#eq-gap2-5">Equation&nbsp;<span>5.8</span></a>). In particular, the predicted gender gap in Math changes by <span class="math inline">\(b_3\)</span> units for each unit of increase in Reading. This is <strong>different</strong> from the interpretation of the model in <a href="#sec-binary-continuous-5"><span>Section&nbsp;5.2</span></a> – in that model, the predicted gender gap was equal to <span class="math inline">\(b_2\)</span>.</p></li>
+</ul>
+<p>This last point is especially important in the context of our example. The gender gap in Math Achievement is a function of Reading Achievement. This is the mathematical meaning behind the concept of an interaction – the relationship between two variables (Math and Gender) is changing as a function of a third variable (Reading).</p>
+<section id="choosing-the-moderator" class="level3" data-number="5.3.1">
+<h3 data-number="5.3.1" class="anchored" data-anchor-id="choosing-the-moderator"><span class="header-section-number">5.3.1</span> Choosing the moderator</h3>
+<p>Interpreting interactions can feel a bit unwieldy at first. This section introduces some additional terminology that helps better align the mathematical results with the kinds of research scenarios we considered in the introduction to this chapter.</p>
+<p>First, note that it is equally valid to say</p>
+<ul>
+<li>the relationship between Math and Gender depends on Reading, or</li>
+<li>the relationship between Math and Reading depends on Gender.</li>
+</ul>
+<p>In other words, it is equally valid to interpret an interaction in terms of the gender gap (i.e., the relationship between Math and Gender) or in terms of the simple trends (the relationship between Math and Reading).</p>
+<p>However, in most research settings, we will usually be more interested in one of these interpretations rather than the other. For example, our research interest in <a href="#sec-example-5"><span>Section&nbsp;5.1</span></a> was about the gender gap in Math Achievement. So we can simplify our lives by focusing on the more interesting interpretation – the gender gap. For our purposes, the simple trends are an equivalent but less interesting way of interpreting the interaction.</p>
+<p>In the two bullet points above, whichever variable appears in the “depends on” clause is called the <em>moderator</em>, and the other two variables are called the focal variables. The researcher chooses which variable to treat as the moderator when interpreting an interaction. The overall idea here is to “break down” the interaction in the way that is most compatible with your research question(s).</p>
+<p>Since our focus is the gender gap in Math (i.e., the relationship is between Math and Gender), Reading is our moderator. In particular, we might interpret the interaction as follows</p>
+<ul>
+<li>The predicted gender gap in Math changes by <span class="math inline">\(b_3\)</span> units for each unit of increase in Reading.</li>
+</ul>
+<p>By contrast, if we were mainly interested in the relationship between Math and Reading (i.e., the simple trends), then we could treat Gender as the moderator. For example, we might say:</p>
+<ul>
+<li>For females, predicted Math Achievement changed by <span class="math inline">\(b_1\)</span> units for each unit of increase in Reading, whereas for males, the predicted change was (<span class="math inline">\(b_1 + b_3\)</span>) units for each unit of increase in Reading.</li>
+</ul>
+<p>This might feel less intuitive than talking about the gender gap, but the two interpretations are mathematicaly equivalent. It is just a matter of whether you want to interpret the interaction term <span class="math inline">\(b_3\)</span> with reference to the gender gap, or with reference to the simple trends. In practice, you don’t need to do both (but I am going to make you do both in the next section – sorry!)</p>
+</section>
+<section id="back-to-the-example" class="level3" data-number="5.3.2">
+<h3 data-number="5.3.2" class="anchored" data-anchor-id="back-to-the-example"><span class="header-section-number">5.3.2</span> Back to the example</h3>
+<p>The regression coefficients for the example data are shown below. <strong>Please use these numbers to provide an interpretation of the interaction between Gender and Reading. For practice, please attempt the interpret the interaction in terms of (a) the gender gap in Math, with Reading as the moderator; and (b) the relationship between Math and Reading, with Gender as the moderator. Don’t worry about statistical significance, just focus on the interpreting the coefficients.</strong></p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(mod4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>    (Intercept)        achrdg12      genderMale genderXachrdg12 
+     14.8031019       0.7282359      13.3932814      -0.1779433 </code></pre>
+</div>
+</div>
+<p>Some potential answers are hidden in the “Code” tab below, but don’t peak until you have tried it for yourself!</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Gender gap</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># General: The gender gap in Math is smaller for students who are also strong in Reading</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Specific: The gender gap in Math Achievement decreases by .18 percentage points for each percentage point increase Reading Achievement</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Simple slopes</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co"># General: The relationship between Math and Reading is stronger (i.e. has a larger slope) for females than for males</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Specific:</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co">#  For females, Math scores are predicted to increase by .72 percentage points for each percentage point increase in Reading Achievement</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co">#  For males, Math scores are predicted to increase by .55 percentage points for each percentage point increase in Reading Achievement</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="centering-the-continuous-predictor" class="level3" data-number="5.3.3">
+<h3 data-number="5.3.3" class="anchored" data-anchor-id="centering-the-continuous-predictor"><span class="header-section-number">5.3.3</span> Centering the continuous predictor</h3>
+<p>You may have noticed that the regression coefficient on Gender was wildly different in regression models with and without the interaction. In the model without the interaction (<a href="#sec-binary-continuous-5"><span>Section&nbsp;5.2</span></a>) the coefficient on Gender was 3.50, and in the model with the interaction (above), it was 13.40. So in one model, the “effect” of being male was a 3.5 percentage point gain on a Math test, but in the other model, it was a 13.40 percentage point gain. Why this huge difference in the “effect” of Gender?</p>
+<p>The answer can be seen in the equation for the gender gap. In the model <strong>without the interaction</strong>, the gender gap was constant and equal to the regression coefficient on Gender (denoted as <span class="math inline">\(b_2\)</span> in the model):</p>
+<p><span class="math display">\[\widehat Y (Male) - \widehat Y (Female) = b_2. \]</span></p>
+<p>But in the regression model <strong>with the interaction</strong>, the gender gap was a linear function of Reading and the regression coefficient on Gender is the intercept for that linear relationship.</p>
+<p><span class="math display">\[ \widehat Y (Male) - \widehat Y (Female) = b_2 + b_3 X_1. \]</span></p>
+<p>This equation tell us that, in the model with the interaction, <span class="math inline">\(b_2\)</span> is the gender gap for students who score 0% on the Reading test. Since the lowest score on Reading Achievement was around 35%, the intercept in this equation (i.e., <span class="math inline">\(b_2\)</span>, the regression coefficient on Gender) is not very meaningful.</p>
+<p>In previous sections, we have ignored the regression intercept when it was not meaningful. But, ignoring the regression slopes for predictor variables can get confusing, and, in general, it is nice for the regression coefficients to be interpretable (otherwise, why are we doing this!).</p>
+<p>One way to address this situation is to center Reading Achievement so that it has a mean of zero. To do this, define the deviation score</p>
+<p><span class="math display">\[D_1 = X_1 - \bar X_1.\]</span></p>
+<p><span class="math inline">\(D_1\)</span> is the mean-centered version of <span class="math inline">\(X_1\)</span>. If we regress Math Achievement on <span class="math inline">\(D_1\)</span> rather than <span class="math inline">\(X_1\)</span> we end up with the following equation for the gender gap in Math:</p>
+<p><span class="math display">\[\widehat Y (Male) - \widehat Y (Female) = b_2 + b_3 D_1\]</span></p>
+<p>Since <span class="math inline">\(D_1 = 0\)</span> when <span class="math inline">\(X_1 = \bar X_1\)</span>, the regression coefficient on Gender (<span class="math inline">\(b_2\)</span>) is now interpretable as the gender gap in Math Achievement, for students with average Reading Achievement. This is a much more interpretable number than the coefficient in the original interaction model!</p>
+<p>Using the example data, this approach yields the following regression coefficients:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># compute the deviation scores for reading</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>reading_dev <span class="ot">&lt;-</span> achrdg12 <span class="sc">-</span> <span class="fu">mean</span>(achrdg12, <span class="at">na.rm =</span> T) </span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the interaction model as above</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>genderXreading_dev <span class="ot">&lt;-</span> (<span class="fu">as.numeric</span>(gender) <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> reading_dev</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>mod5 <span class="ot">&lt;-</span> <span class="fu">lm</span>(achmat12 <span class="sc">~</span> reading_dev <span class="sc">+</span> gender <span class="sc">+</span> genderXreading_dev)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(mod5)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>       (Intercept)        reading_dev         genderMale genderXreading_dev 
+        55.2943872          0.7282359          3.4992982         -0.1779433 </code></pre>
+</div>
+</div>
+<p>The regression coefficient for Gender is now pretty close to what it was in the multiple regression model without the interaction, but the interpretation is different (i.e., it is now the predicted gender gap in Math for students with an average level of Reading, rather than the predicted gender gap in Math for all students).</p>
+<p>Notice that the intercept in the model above has also changed compared to the previous model in which Reading was not centered. This is should make sense based on what you already know about the regression intercept.</p>
+<p>Also note that centering Reading did not affect the regression coefficient for Reading or the interaction. So, centering makes the regression slope on Gender more interpretable, but it doesn’t affect our overall interpretation of the simple trends or the gender gap.</p>
+<p><strong>Please write down your interpretation of the intercept and the regression coefficient for Gender in the above regression output, and be prepared to share your answer in class</strong>.</p>
+</section>
+<section id="summary-1" class="level3" data-number="5.3.4">
+<h3 data-number="5.3.4" class="anchored" data-anchor-id="summary-1"><span class="header-section-number">5.3.4</span> Summary</h3>
+<p>The interaction between two variables is just their product. When this product is added as a predictor in a multiple regression model with one continuous and one binary predictor:</p>
+<ul>
+<li><p>The model again results in two regression lines (simple trends), one for each value of the binary predictor.</p></li>
+<li><p>However, we now get simple trends with different intercepts <em>and different slopes</em>. The difference in slopes is equal to the regression coefficient on the interaction term. In substantive terms, the simple trends have different slopes because of the interaction.</p></li>
+<li><p>The difference (“gap”) between the regression lines changes as a linear function of the continuous predictor, and this change is again equal to the regression coefficient on the interaction term.</p></li>
+<li><p>The last two points are equivalent ways of stating the central idea behind a (two-way) interaction: the relationship between two variables changes as a function of a third variable.</p></li>
+<li><p>When interpreting an interaction, the researcher chooses which pair of variables will be the “focal relationship” and which variable will be the moderator.</p>
+<ul>
+<li>In our example, we focused on the gender gap in Math (i.e., the relationship between Math and Gender) and Reading was the moderator.</li>
+<li>But, if we were more interested in the relationship between Math and Reading, would could have focused on the simple trends and treated Gender as the moderator</li>
+<li>It is usual to only report one way of “breaking down” the interaction – the one that is most relevant to your research question.</li>
+</ul></li>
+<li><p>Centering the continuous predictor can be helpful for ensuring that the regression coefficient on the binary variable remains interpretable in the presence of an interaction.</p></li>
+</ul>
+</section>
+</section>
+<section id="sec-inference-for-interactions-5" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="sec-inference-for-interactions-5"><span class="header-section-number">5.4</span> Inference for interactions</h2>
+<p>To be continued next week!</p>
+
+
+<!-- -->
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./ch4_categorical_predictors.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Categorical predictors</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb13" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="an">fold:</span><span class="co"> true</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="an">editor:</span><span class="co"> </span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co">  markdown: </span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co">    wrap: 72</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="fu"># Interactions {#sec-chap-5}</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>In statistics, the term *interaction* means that the relationship between two variables depends on a third variable. In the context of regression, we are usually interested in the situation where the relationship between the outcome $Y$ and a predictor $X_1$ depends on another predictor $X_2$. This situation is also referred to as *moderation* or sometimes as *effect heterogeneity*.</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>Interactions are a big-picture idea with a lot conceptual power, especially when describing topics related to social inequality or "gaps". Some examples of interactions are:  </span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>The relationship between wages and years of education depends on gender. This has been called the gender pay gap and it is considered a pretty important issue for gender equality (e.g., <span class="co">[</span><span class="ot">https://en.wikipedia.org/wiki/Gender_pay_gap</span><span class="co">](https://en.wikipedia.org/wiki/Gender_pay_gap)</span>).</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>The relationship between reading achievement and age depends on race. This has been interpreted in terms of racial inequality in educational outcomes (e.g., <span class="co">[</span><span class="ot">https://cepa.stanford.edu/educational-opportunity-monitoring-project/achievement-gaps/race/</span><span class="co">](https://cepa.stanford.edu/educational-opportunity-monitoring-project/achievement-gaps/race/)</span>).</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>The effect of COVID-19 school shutdowns on academic achievement depended on SES. This has been interpreted in terms of social inequality in access to educational resources outside of schools (e.g., <span class="co">[</span><span class="ot">https://www.mckinsey.com/industries/education/our-insights/covid-19-and-student-learning-in-the-united-states-the-hurt-could-last-a-lifetime</span><span class="co">](https://www.mckinsey.com/industries/education/our-insights/covid-19-and-student-learning-in-the-united-states-the-hurt-could-last-a-lifetime)</span>).</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>I hope these examples convince you that some of the big issues facing education and society at large are actually about interactions -- how the relationship between two variables depends on a third variable. In this chapter we are going to talk about how you can use regression to conduct research on these types of topics.  </span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>We start by considering what happens when both categorical and continuous predictors are used together in a multiple regression model. We use this combination of predictors as bridge from the previous chapter and as a way of digging into the math behind interactions. Later sections will consider what happens when we have interactions between two continuous predictors, or two categorical predictors.</span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>In this chapter, we are exclusively interested in interactions between two predictors at a time, which are called *two-way interactions*. It is possible to consider "higher-order" interactions (e.g., interactions among three predictors or *three-way interactions*) but we aren't going to do that here. Sometimes we will use the terminology *main effect* to describe the relationship between each individual predictor and the outcome variable, as distinct from the interactions among the predictors. Up to now, we have be working with main effects only. </span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>It might be helpful to mention that this chapter gets pretty complicated and is very long (sorry!). It is definitely the hardest material we have covered so far, because we are drawing on everything we have done up to now and adding even more stuff into the mix. So, if these readings feel daunting at moments, that is to be expected. Please don't feel disheartened. You might consider taking a break and doing the readings in smaller chunks. We are going to discuss all of this in class together, so just get what you can from these notes, provide some initial responses to the Workbook questions, and press on. This is where regression starts to get really interesting -- you got this! </span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a><span class="fu">## An example from NELS {#sec-example-5}</span></span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>For the first few sections of this chapter, we will focus on an example from the NELS data that addresses the gender gap in Math Achievement (e.g., <span class="co">[</span><span class="ot">https://www.nctm.org/Publications/TCM-blog/Blog/Current-Research-on-Gender-Differences-in-Math/</span><span class="co">](https://www.nctm.org/Publications/TCM-blog/Blog/Current-Research-on-Gender-Differences-in-Math/)</span>). The t-test reported below shows the gender gap in Math Achievement in 12th grade. The output shows us that, on average, males scored about 3.18 percentage points higher than females on a Grade 12 Math test. </span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"NELS.RData"</span>)</span>
+<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(NELS)</span>
+<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(achmat12 <span class="sc">~</span> gender, <span class="at">var.equal =</span> T)</span>
+<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a>In this chapter, our goal is to use linear regression to better understand the gender gap in Math Achievement. To help us do this, we will also consider a third variable, Reading Achievement. The plot below shows the relationship between Math Achievement and Reading Achievement estimated just for males (Blue), and the same relationship estimated just for females (Black). </span>
+<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a><span class="in">```{r fig-math-reading-1, fig.cap = 'Math Achievement, Reading Achievement, and Gender.', fig.align = 'center'}</span></span>
+<span id="cb13-42"><a href="#cb13-42" aria-hidden="true" tabindex="-1"></a><span class="co"># Create indicators for females and males</span></span>
+<span id="cb13-43"><a href="#cb13-43" aria-hidden="true" tabindex="-1"></a>females <span class="ot">&lt;-</span> gender <span class="sc">==</span> <span class="st">"Female"</span></span>
+<span id="cb13-44"><a href="#cb13-44" aria-hidden="true" tabindex="-1"></a>males <span class="ot">&lt;-</span> gender <span class="sc">==</span> <span class="st">"Male"</span></span>
+<span id="cb13-45"><a href="#cb13-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-46"><a href="#cb13-46" aria-hidden="true" tabindex="-1"></a><span class="co"># Regress math on reading, for each group separately</span></span>
+<span id="cb13-47"><a href="#cb13-47" aria-hidden="true" tabindex="-1"></a>mod1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(achmat12[females] <span class="sc">~</span> achrdg12[females])</span>
+<span id="cb13-48"><a href="#cb13-48" aria-hidden="true" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(achmat12[males] <span class="sc">~</span> achrdg12[males])</span>
+<span id="cb13-49"><a href="#cb13-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-50"><a href="#cb13-50" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot reading and math for females</span></span>
+<span id="cb13-51"><a href="#cb13-51" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(achrdg12[females], </span>
+<span id="cb13-52"><a href="#cb13-52" aria-hidden="true" tabindex="-1"></a>     achmat12[females], </span>
+<span id="cb13-53"><a href="#cb13-53" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Reading"</span>, </span>
+<span id="cb13-54"><a href="#cb13-54" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Math"</span>)</span>
+<span id="cb13-55"><a href="#cb13-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-56"><a href="#cb13-56" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(mod1, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb13-57"><a href="#cb13-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-58"><a href="#cb13-58" aria-hidden="true" tabindex="-1"></a><span class="co"># Add again for males</span></span>
+<span id="cb13-59"><a href="#cb13-59" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(achrdg12[males], </span>
+<span id="cb13-60"><a href="#cb13-60" aria-hidden="true" tabindex="-1"></a>       achmat12[males], </span>
+<span id="cb13-61"><a href="#cb13-61" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="st">"#4B9CD3"</span>, </span>
+<span id="cb13-62"><a href="#cb13-62" aria-hidden="true" tabindex="-1"></a>       <span class="at">pch =</span> <span class="dv">2</span>)</span>
+<span id="cb13-63"><a href="#cb13-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-64"><a href="#cb13-64" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(mod2, <span class="at">col =</span> <span class="st">"#4B9CD3"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb13-65"><a href="#cb13-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-66"><a href="#cb13-66" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a legend</span></span>
+<span id="cb13-67"><a href="#cb13-67" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="at">x =</span> <span class="st">"topleft"</span>, </span>
+<span id="cb13-68"><a href="#cb13-68" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="fu">levels</span>(gender), </span>
+<span id="cb13-69"><a href="#cb13-69" aria-hidden="true" tabindex="-1"></a>       <span class="at">pch =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), </span>
+<span id="cb13-70"><a href="#cb13-70" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="st">"#4B9CD3"</span>))</span>
+<span id="cb13-71"><a href="#cb13-71" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb13-72"><a href="#cb13-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-73"><a href="#cb13-73" aria-hidden="true" tabindex="-1"></a>**Please take a minute to think about what this plot is telling us about the relationships among the three variables. In particular: **</span>
+<span id="cb13-74"><a href="#cb13-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-75"><a href="#cb13-75" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Does the gender gap in Math Achievement change as a function of Reading Achievement?**  </span>
+<span id="cb13-76"><a href="#cb13-76" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Is the relationship between Math Achievement and Reading Achievement the the same for males and females?**</span>
+<span id="cb13-77"><a href="#cb13-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-78"><a href="#cb13-78" aria-hidden="true" tabindex="-1"></a>Note that in @fig-math-reading-1, we estimated two separate simple regression models, one just for males and one just for females. In the next few sections, we will work our way towards a single multiple regression model that can be used to represent the relationships among these three variables.  </span>
+<span id="cb13-79"><a href="#cb13-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-80"><a href="#cb13-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-81"><a href="#cb13-81" aria-hidden="true" tabindex="-1"></a><span class="fu">## Binary + continuous {#sec-binary-continuous-5}</span></span>
+<span id="cb13-82"><a href="#cb13-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-83"><a href="#cb13-83" aria-hidden="true" tabindex="-1"></a>Let's start by considering what happens when we include both Gender and Reading Achievement as predictors of Math Achievement in our usual multiple regression equation: </span>
+<span id="cb13-84"><a href="#cb13-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-85"><a href="#cb13-85" aria-hidden="true" tabindex="-1"></a>$$\widehat Y = b_0 + b_1X_1 + b_2 X_2$$ {#eq-yhat-5a}</span>
+<span id="cb13-86"><a href="#cb13-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-87"><a href="#cb13-87" aria-hidden="true" tabindex="-1"></a>where</span>
+<span id="cb13-88"><a href="#cb13-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-89"><a href="#cb13-89" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$Y$ is Math Achievement in grade 12</span>
+<span id="cb13-90"><a href="#cb13-90" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$X_1$ is Reading Achievement in grade 12</span>
+<span id="cb13-91"><a href="#cb13-91" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$X_2$ is Gender (binary, with female = 0 and male = 1)</span>
+<span id="cb13-92"><a href="#cb13-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-93"><a href="#cb13-93" aria-hidden="true" tabindex="-1"></a>Note that this model does **not** include an interaction between the two predictors -- we are first going to consider what is "missing" from the usual regression model, and then use this to motivate inclusion of another predictor that represents the interaction. To get an initial sense of what is missing, the model in @eq-yhat-5a is plotted in @fig-math-reading-2 -- can you spot the difference with @fig-math-reading-1? </span>
+<span id="cb13-94"><a href="#cb13-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-95"><a href="#cb13-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-96"><a href="#cb13-96" aria-hidden="true" tabindex="-1"></a><span class="in">```{r fig-math-reading-2, fig.cap = 'Math Achievement, Reading Achievement, and Gender (No Interaction).', fig.align = 'center'}</span></span>
+<span id="cb13-97"><a href="#cb13-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-98"><a href="#cb13-98" aria-hidden="true" tabindex="-1"></a><span class="co"># Rund the regression</span></span>
+<span id="cb13-99"><a href="#cb13-99" aria-hidden="true" tabindex="-1"></a>mod3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(achmat12 <span class="sc">~</span> achrdg12 <span class="sc">+</span> gender, <span class="at">data =</span> NELS)</span>
+<span id="cb13-100"><a href="#cb13-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-101"><a href="#cb13-101" aria-hidden="true" tabindex="-1"></a>a_females <span class="ot">&lt;-</span> <span class="fu">coef</span>(mod3)[<span class="dv">1</span>]</span>
+<span id="cb13-102"><a href="#cb13-102" aria-hidden="true" tabindex="-1"></a>b_females <span class="ot">&lt;-</span> <span class="fu">coef</span>(mod3)[<span class="dv">2</span>]</span>
+<span id="cb13-103"><a href="#cb13-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-104"><a href="#cb13-104" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the slope and intercept for males</span></span>
+<span id="cb13-105"><a href="#cb13-105" aria-hidden="true" tabindex="-1"></a>a_males <span class="ot">&lt;-</span> a_females <span class="sc">+</span> <span class="fu">coef</span>(mod3)[<span class="dv">3</span>]</span>
+<span id="cb13-106"><a href="#cb13-106" aria-hidden="true" tabindex="-1"></a>b_males <span class="ot">&lt;-</span> b_females </span>
+<span id="cb13-107"><a href="#cb13-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-108"><a href="#cb13-108" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot reading and math for females</span></span>
+<span id="cb13-109"><a href="#cb13-109" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(achrdg12[females], </span>
+<span id="cb13-110"><a href="#cb13-110" aria-hidden="true" tabindex="-1"></a>     achmat12[females], </span>
+<span id="cb13-111"><a href="#cb13-111" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Reading"</span>, </span>
+<span id="cb13-112"><a href="#cb13-112" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Math"</span>)</span>
+<span id="cb13-113"><a href="#cb13-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-114"><a href="#cb13-114" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(a_females, b_females, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb13-115"><a href="#cb13-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-116"><a href="#cb13-116" aria-hidden="true" tabindex="-1"></a><span class="co"># Add points and line for males</span></span>
+<span id="cb13-117"><a href="#cb13-117" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(achrdg12[males], </span>
+<span id="cb13-118"><a href="#cb13-118" aria-hidden="true" tabindex="-1"></a>       achmat12[males], </span>
+<span id="cb13-119"><a href="#cb13-119" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="st">"#4B9CD3"</span>, </span>
+<span id="cb13-120"><a href="#cb13-120" aria-hidden="true" tabindex="-1"></a>       <span class="at">pch =</span> <span class="dv">2</span>)</span>
+<span id="cb13-121"><a href="#cb13-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-122"><a href="#cb13-122" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(a_males, b_males, <span class="at">col =</span> <span class="st">"#4B9CD3"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb13-123"><a href="#cb13-123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-124"><a href="#cb13-124" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a legend</span></span>
+<span id="cb13-125"><a href="#cb13-125" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="at">x =</span> <span class="st">"topleft"</span>, </span>
+<span id="cb13-126"><a href="#cb13-126" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="fu">levels</span>(gender), </span>
+<span id="cb13-127"><a href="#cb13-127" aria-hidden="true" tabindex="-1"></a>       <span class="at">pch =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), </span>
+<span id="cb13-128"><a href="#cb13-128" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="st">"#4B9CD3"</span>))</span>
+<span id="cb13-129"><a href="#cb13-129" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb13-130"><a href="#cb13-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-131"><a href="#cb13-131" aria-hidden="true" tabindex="-1"></a>In order to interpret our multiple regression model, we can use the same overall approach as we used to interpret categorical predictors in @sec-chap-4. If we plug-in values for the categorical predictor, we get: </span>
+<span id="cb13-132"><a href="#cb13-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-133"><a href="#cb13-133" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb13-134"><a href="#cb13-134" aria-hidden="true" tabindex="-1"></a>\begin{align}</span>
+<span id="cb13-135"><a href="#cb13-135" aria-hidden="true" tabindex="-1"></a>\text{Simple trend for females:   } \widehat Y (Female) &amp; = b_0 + b_1X_1 + b_2 (0) <span class="sc">\\</span> &amp; = b_0 + b_1X_1</span>
+<span id="cb13-136"><a href="#cb13-136" aria-hidden="true" tabindex="-1"></a>\end{align}</span>
+<span id="cb13-137"><a href="#cb13-137" aria-hidden="true" tabindex="-1"></a>$$ {#eq-females1-5}</span>
+<span id="cb13-138"><a href="#cb13-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-139"><a href="#cb13-139" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb13-140"><a href="#cb13-140" aria-hidden="true" tabindex="-1"></a>\begin{align}</span>
+<span id="cb13-141"><a href="#cb13-141" aria-hidden="true" tabindex="-1"></a>\text{Simple trend for males:   } \widehat Y (Male) &amp; = b_0 + b_1X_1 + b_2 (1) <span class="sc">\\</span> &amp; = (b_0 + b_2) + b_1 X_1</span>
+<span id="cb13-142"><a href="#cb13-142" aria-hidden="true" tabindex="-1"></a>\end{align} </span>
+<span id="cb13-143"><a href="#cb13-143" aria-hidden="true" tabindex="-1"></a>$$ {#eq-males1-5}</span>
+<span id="cb13-144"><a href="#cb13-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-145"><a href="#cb13-145" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb13-146"><a href="#cb13-146" aria-hidden="true" tabindex="-1"></a>\begin{align}</span>
+<span id="cb13-147"><a href="#cb13-147" aria-hidden="true" tabindex="-1"></a>\text{Predicted gender gap in math:   } \widehat Y (Male) - \widehat Y (Female) &amp; = b_2</span>
+<span id="cb13-148"><a href="#cb13-148" aria-hidden="true" tabindex="-1"></a>\end{align}</span>
+<span id="cb13-149"><a href="#cb13-149" aria-hidden="true" tabindex="-1"></a>$$ {#eq-gap1-5}</span>
+<span id="cb13-150"><a href="#cb13-150" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-151"><a href="#cb13-151" aria-hidden="true" tabindex="-1"></a>The equations for $\widehat Y (Female)$ and $\widehat Y (Male)$ are referred to as *simple trends* or *simple slopes*. These describe the regression of Math on Reading, simply for females, or simply for males. The difference between the two simple regression equations is the predicted gender gap in Math Achievement. </span>
+<span id="cb13-152"><a href="#cb13-152" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-153"><a href="#cb13-153" aria-hidden="true" tabindex="-1"></a>Based on these equations we can interpret regression coefficients as follows</span>
+<span id="cb13-154"><a href="#cb13-154" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-155"><a href="#cb13-155" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>The regression intercept, $b_0$, is the intercept of the simple trend for the group coded "0" (i.e., the intercept of the regression of Math on Reading, simply for females; see @eq-females1-5). </span>
+<span id="cb13-156"><a href="#cb13-156" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>The regression slope for the continuous predictor, $b_1$, is the slope of the simple trend for the group coded "0" (females) and for the group coded "1" (males; see @eq-females1-5 and @eq-males1-5)  </span>
+<span id="cb13-157"><a href="#cb13-157" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-158"><a href="#cb13-158" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>The regression slope for the binary predictor, $b_2$, is the difference between the intercepts of the simple trends (i.e., we add $b_2$ to $b_0$ to get the intercept of the regression of Math on Reading, simply for males; see @eq-males1-5). </span>
+<span id="cb13-159"><a href="#cb13-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-160"><a href="#cb13-160" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>In this model, $b_2$ is the also the predicted gender gap in Math Achievement (see @eq-gap1-5).</span>
+<span id="cb13-161"><a href="#cb13-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-162"><a href="#cb13-162" aria-hidden="true" tabindex="-1"></a>The regression coefficients for the example data are shown below. **Please use these numbers to provide an interpretation of the simple trends and the gender gap in Math Achievement for the NELS example. (Don't worry about statistical significance, just focus on the meaning of the coefficients.)** </span>
+<span id="cb13-163"><a href="#cb13-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-166"><a href="#cb13-166" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb13-167"><a href="#cb13-167" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(mod3)</span>
+<span id="cb13-168"><a href="#cb13-168" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb13-169"><a href="#cb13-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-170"><a href="#cb13-170" aria-hidden="true" tabindex="-1"></a>Here is an example to help you get started: </span>
+<span id="cb13-171"><a href="#cb13-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-172"><a href="#cb13-172" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Simply for females, the regression of Math Achievement on Reading Achievement has an intercept equal to 19.98 and a slope equal to 0.64. The intercept tells us that a female student with Reading Achievement score of 0% is expected to have a Math Achievement score of 19.98% (the units of the two tests are percent correct). Since the lowest value of Reading Achievement in our example is about 35%, the intercept is not very meaningful for these data. The regression slope tells us that, for females, a 1 unit increase in Reading Achievement is associated with a .64 unit increase in Math Achievement. </span>
+<span id="cb13-173"><a href="#cb13-173" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-174"><a href="#cb13-174" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Simply for males, .... </span>
+<span id="cb13-175"><a href="#cb13-175" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-176"><a href="#cb13-176" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-177"><a href="#cb13-177" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>The gender gap in Math Achievement was equal to ... </span>
+<span id="cb13-178"><a href="#cb13-178" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-179"><a href="#cb13-179" aria-hidden="true" tabindex="-1"></a><span class="fu">### Marginal means</span></span>
+<span id="cb13-180"><a href="#cb13-180" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-181"><a href="#cb13-181" aria-hidden="true" tabindex="-1"></a>Before moving on to consider how to add an interaction to our multiple regression model, let's revisit a topic from the previous chapter. In @sec-chap-4, we noted that the regression coefficients for categorical predictors (dummy variables) can be interpreted in terms of the group means on the outcome variable. However, when additional predictors are included in the regression model, this interpretation no longer holds. This section explains why.  </span>
+<span id="cb13-182"><a href="#cb13-182" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-183"><a href="#cb13-183" aria-hidden="true" tabindex="-1"></a>To see what the issue is, let's compare the output of the t-test in @sec-example-5 with the regression output shown above. In the t-test, the mean Math Achievement for females was 55.47, and for males it was 58.63. The mean difference was</span>
+<span id="cb13-184"><a href="#cb13-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-185"><a href="#cb13-185" aria-hidden="true" tabindex="-1"></a>$$58.63 - 55.47 = 3.16$$</span>
+<span id="cb13-186"><a href="#cb13-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-187"><a href="#cb13-187" aria-hidden="true" tabindex="-1"></a>However, the regression coefficient on Gender in the multiple regression model above is equal to $3.50$. Thus, unlike @sec-chap-4, the regression coefficient on Gender is no longer equal to the group-mean difference in Math Achievement. But why?  </span>
+<span id="cb13-188"><a href="#cb13-188" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-189"><a href="#cb13-189" aria-hidden="true" tabindex="-1"></a>Remember that in the multiple regression model, the regression coefficient on Gender is interpreted as the relationship between Math Achievement and Gender, *holding Reading Achievement constant*. So, the regression coefficient on Gender is still interpreted as a mean difference, but now it is a *predicted* mean difference that represents the gender gap in Math Achievement after controlling for Reading Achievement. The t-test doesn't control for Reading.</span>
+<span id="cb13-190"><a href="#cb13-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-191"><a href="#cb13-191" aria-hidden="true" tabindex="-1"></a>In order to emphasize the distinction between "raw" group means computed from the data and the predicted group means obtained from a multiple regression model, the latter are referred to as *marginal means*, or sometimes as *adjusted means* or *least squares means*. I think they should be called *predicted means*, but, alas. </span>
+<span id="cb13-192"><a href="#cb13-192" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-193"><a href="#cb13-193" aria-hidden="true" tabindex="-1"></a><span class="fu">### Summary </span></span>
+<span id="cb13-194"><a href="#cb13-194" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-195"><a href="#cb13-195" aria-hidden="true" tabindex="-1"></a>In a regression model with one continuous predictor and one binary predictor (and no interaction):  </span>
+<span id="cb13-196"><a href="#cb13-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-197"><a href="#cb13-197" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>The model results in two regression lines, one for each value of the binary predictor. These are called the simple trends.</span>
+<span id="cb13-198"><a href="#cb13-198" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-199"><a href="#cb13-199" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>The simple trends are parallel but can have a different intercept; the difference in the intercepts is equal to regression coefficient of the binary variable. </span>
+<span id="cb13-200"><a href="#cb13-200" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-201"><a href="#cb13-201" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>The difference between the simple trends is often called a "gap", and the gap is also equal to the regression coefficient of the binary variable. </span>
+<span id="cb13-202"><a href="#cb13-202" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-203"><a href="#cb13-203" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>It is important to note that the predicted group means for the binary variable are no longer equal to the "raw" group means computed directly from the data, because the predicted group means  control for the correlation between the predictors. The predicted group means are called marginal means to emphasize this distinction. </span>
+<span id="cb13-204"><a href="#cb13-204" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-205"><a href="#cb13-205" aria-hidden="true" tabindex="-1"></a>Keep in mind that this summary applies to the multiple regression model without an interaction. In the next section we improve our model by adding an interaction.  </span>
+<span id="cb13-206"><a href="#cb13-206" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-207"><a href="#cb13-207" aria-hidden="true" tabindex="-1"></a><span class="fu">## Binary + continuous + interaction {#sec-binary-continuous-interaction-5}</span></span>
+<span id="cb13-208"><a href="#cb13-208" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-209"><a href="#cb13-209" aria-hidden="true" tabindex="-1"></a>In this section, we discuss what was missing from the multiple regression model in the previous section: The interaction between Gender and Reading. </span>
+<span id="cb13-210"><a href="#cb13-210" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-211"><a href="#cb13-211" aria-hidden="true" tabindex="-1"></a>Mathematically, an interaction is just the product between two variables. @eq-yhat-5b shows how to include this product in our multiple regression model -- we just take the product of the two predictors and add it into the model as a third predictor:</span>
+<span id="cb13-212"><a href="#cb13-212" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-213"><a href="#cb13-213" aria-hidden="true" tabindex="-1"></a>$$\hat Y = b_0 + b_1X_1 + b_2 X_2 + b_3 (X_1 \times X_2). $${#eq-yhat-5b}</span>
+<span id="cb13-214"><a href="#cb13-214" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-215"><a href="#cb13-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-216"><a href="#cb13-216" aria-hidden="true" tabindex="-1"></a>For the NELS example, this regression model is depicted in @fig-math-reading-3. Note the the simple trends are no longer parallel and the regression lines agree exactly with what we had in @sec-example-5. So, as promised, we have now arrived at a single multiple regression model that captures the relationships among Math Achievement, Reading Achievement, and Gender.</span>
+<span id="cb13-217"><a href="#cb13-217" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-218"><a href="#cb13-218" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-219"><a href="#cb13-219" aria-hidden="true" tabindex="-1"></a><span class="in">```{r fig-math-reading-3, fig.cap = 'Math Achievement, Reading Achievement, and Gender (No Interaction).', fig.align = 'center'}</span></span>
+<span id="cb13-220"><a href="#cb13-220" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-221"><a href="#cb13-221" aria-hidden="true" tabindex="-1"></a><span class="co"># Interaction via hard coding</span></span>
+<span id="cb13-222"><a href="#cb13-222" aria-hidden="true" tabindex="-1"></a>genderXachrdg12 <span class="ot">&lt;-</span> (<span class="fu">as.numeric</span>(gender) <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> achrdg12</span>
+<span id="cb13-223"><a href="#cb13-223" aria-hidden="true" tabindex="-1"></a>mod4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(achmat12 <span class="sc">~</span> achrdg12 <span class="sc">+</span> gender <span class="sc">+</span> genderXachrdg12)</span>
+<span id="cb13-224"><a href="#cb13-224" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-225"><a href="#cb13-225" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the coefficients for females</span></span>
+<span id="cb13-226"><a href="#cb13-226" aria-hidden="true" tabindex="-1"></a>a_females <span class="ot">&lt;-</span> <span class="fu">coef</span>(mod4)[<span class="dv">1</span>]</span>
+<span id="cb13-227"><a href="#cb13-227" aria-hidden="true" tabindex="-1"></a>b_females <span class="ot">&lt;-</span> <span class="fu">coef</span>(mod4)[<span class="dv">2</span>]</span>
+<span id="cb13-228"><a href="#cb13-228" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-229"><a href="#cb13-229" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the coefficients for males</span></span>
+<span id="cb13-230"><a href="#cb13-230" aria-hidden="true" tabindex="-1"></a>a_males <span class="ot">&lt;-</span> a_females <span class="sc">+</span> <span class="fu">coef</span>(mod4)[<span class="dv">3</span>]</span>
+<span id="cb13-231"><a href="#cb13-231" aria-hidden="true" tabindex="-1"></a>b_males <span class="ot">&lt;-</span> b_females <span class="sc">+</span> <span class="fu">coef</span>(mod4)[<span class="dv">4</span>]</span>
+<span id="cb13-232"><a href="#cb13-232" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-233"><a href="#cb13-233" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot reading and math for females</span></span>
+<span id="cb13-234"><a href="#cb13-234" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(achrdg12[females], </span>
+<span id="cb13-235"><a href="#cb13-235" aria-hidden="true" tabindex="-1"></a>     achmat12[females], </span>
+<span id="cb13-236"><a href="#cb13-236" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Reading"</span>, </span>
+<span id="cb13-237"><a href="#cb13-237" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Math"</span>)</span>
+<span id="cb13-238"><a href="#cb13-238" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-239"><a href="#cb13-239" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(a_females, b_females, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb13-240"><a href="#cb13-240" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-241"><a href="#cb13-241" aria-hidden="true" tabindex="-1"></a><span class="co"># Add points and line for males</span></span>
+<span id="cb13-242"><a href="#cb13-242" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(achrdg12[males], </span>
+<span id="cb13-243"><a href="#cb13-243" aria-hidden="true" tabindex="-1"></a>       achmat12[males],</span>
+<span id="cb13-244"><a href="#cb13-244" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="st">"#4B9CD3"</span>, </span>
+<span id="cb13-245"><a href="#cb13-245" aria-hidden="true" tabindex="-1"></a>       <span class="at">pch =</span> <span class="dv">2</span>)</span>
+<span id="cb13-246"><a href="#cb13-246" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-247"><a href="#cb13-247" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(a_males, b_males, <span class="at">col =</span> <span class="st">"#4B9CD3"</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb13-248"><a href="#cb13-248" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-249"><a href="#cb13-249" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a legend</span></span>
+<span id="cb13-250"><a href="#cb13-250" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="at">x =</span> <span class="st">"topleft"</span>,</span>
+<span id="cb13-251"><a href="#cb13-251" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="fu">levels</span>(gender), </span>
+<span id="cb13-252"><a href="#cb13-252" aria-hidden="true" tabindex="-1"></a>       <span class="at">pch =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), </span>
+<span id="cb13-253"><a href="#cb13-253" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="st">"#4B9CD3"</span>))</span>
+<span id="cb13-254"><a href="#cb13-254" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb13-255"><a href="#cb13-255" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-256"><a href="#cb13-256" aria-hidden="true" tabindex="-1"></a>To see how to interpret the coefficients in this model, let's work through the model equations using our two-step procedure. As before, we first plug-in values for the categorical predictor, then we use the resulting equations solve for the simple trends and the gender gap in Math. </span>
+<span id="cb13-257"><a href="#cb13-257" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-258"><a href="#cb13-258" aria-hidden="true" tabindex="-1"></a>$$\begin{align}</span>
+<span id="cb13-259"><a href="#cb13-259" aria-hidden="true" tabindex="-1"></a>\widehat Y (Female) &amp; = b_0 + b_1X_1 + b_2 (0) + b_3(X_1 \times 0) <span class="sc">\\</span> &amp; = b_0 + b_1X_1</span>
+<span id="cb13-260"><a href="#cb13-260" aria-hidden="true" tabindex="-1"></a>\end{align}$$ {#eq-females2-5}</span>
+<span id="cb13-261"><a href="#cb13-261" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-262"><a href="#cb13-262" aria-hidden="true" tabindex="-1"></a>$$\begin{align}</span>
+<span id="cb13-263"><a href="#cb13-263" aria-hidden="true" tabindex="-1"></a>\widehat Y (Male) &amp; = b_0 + b_1X_1 + b_2 (1) +  b_3(X_1 \times 1)<span class="sc">\\</span> &amp; = (b_0 + b_2) + (b_1 + b_3) X_1 \end{align}$$ {#eq-males2-5}</span>
+<span id="cb13-264"><a href="#cb13-264" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-265"><a href="#cb13-265" aria-hidden="true" tabindex="-1"></a>$$\begin{align}</span>
+<span id="cb13-266"><a href="#cb13-266" aria-hidden="true" tabindex="-1"></a>\widehat Y (Male) - \widehat Y (Female) &amp; = b_2 + b_3 X_1</span>
+<span id="cb13-267"><a href="#cb13-267" aria-hidden="true" tabindex="-1"></a>\end{align}$${#eq-gap2-5}</span>
+<span id="cb13-268"><a href="#cb13-268" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-269"><a href="#cb13-269" aria-hidden="true" tabindex="-1"></a>These equations are summarized graphically below in @fig-interactions. </span>
+<span id="cb13-270"><a href="#cb13-270" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-271"><a href="#cb13-271" aria-hidden="true" tabindex="-1"></a><span class="al">![Interaction between a categorical and a continuous predictor. Image credit: Daniela Rodriguez-Mincey, Spring 2023](files/images/Interaction.jpg)</span>{#fig-interactions width=50%}</span>
+<span id="cb13-272"><a href="#cb13-272" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-273"><a href="#cb13-273" aria-hidden="true" tabindex="-1"></a>Based on the equations and figure, we can interpret regression coefficients as follows. Some of these interpretations are the same as in the previous section, but some are different. (You got this!) </span>
+<span id="cb13-274"><a href="#cb13-274" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-275"><a href="#cb13-275" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>The regression intercept, $b_0$, is the intercept of the simple trend for the group coded "0" (i.e., the intercept of the regression of Math on Reading, simply for females; see @eq-females2-5). This is the **same** interpretation as for the model witout the interaction discussed in  @sec-binary-continuous-5. </span>
+<span id="cb13-276"><a href="#cb13-276" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-277"><a href="#cb13-277" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>The regression slope for the continuous predictor, $b_1$, is the slope of the simple trend for the group coded "0" (females; see @eq-females2-5). This is **different** from the interpretation of the model in @sec-binary-continuous-5 -- in that model, $b_1$ was the slope of both simple trends, not just the trend for females. </span>
+<span id="cb13-278"><a href="#cb13-278" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-279"><a href="#cb13-279" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>The regression slope for the binary predictor, $b_2$, is the difference between the intercepts of the simple trends (i.e., we add $b_2$ to $b_0$ to get the intercept of the regression of Math on Reading, simply for males; see @eq-males2-5). This is the **same** interpretation as for the model without the interaction discussed in  @sec-binary-continuous-5. </span>
+<span id="cb13-280"><a href="#cb13-280" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-281"><a href="#cb13-281" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>The regression slope for the interaction term (or simply, the interaction), $b_3$, is the difference between the slopes of the simple trends (i.e., we add $b_3$ to $b_1$ to get the slope of the regression of Math on Reading, simply for males; see @eq-males2-5). This is **different** from the interpretation of the model in @sec-binary-continuous-5 -- in that model, $b_1$ was the slope of both simple trends, not just the trend for females. </span>
+<span id="cb13-282"><a href="#cb13-282" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-283"><a href="#cb13-283" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>The difference between the predicted values (i.e., the predicted gender gap in Math Achievement) is no longer constant, but is instead a function of $X_1$ (see @eq-gap2-5). In particular, the predicted gender gap in Math changes by $b_3$ units for each unit of increase in Reading. This is **different** from the interpretation of the model in @sec-binary-continuous-5 -- in that model, the predicted gender gap was equal to $b_2$. </span>
+<span id="cb13-284"><a href="#cb13-284" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-285"><a href="#cb13-285" aria-hidden="true" tabindex="-1"></a>This last point is especially important in the context of our example. The gender gap in Math Achievement is a function of Reading Achievement. This is the mathematical meaning behind the concept of an interaction -- the relationship between two variables (Math and Gender) is changing as a function of a third variable (Reading). </span>
+<span id="cb13-286"><a href="#cb13-286" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-287"><a href="#cb13-287" aria-hidden="true" tabindex="-1"></a><span class="fu">### Choosing the moderator </span></span>
+<span id="cb13-288"><a href="#cb13-288" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-289"><a href="#cb13-289" aria-hidden="true" tabindex="-1"></a>Interpreting interactions can feel a bit unwieldy at first. This section introduces some additional terminology that helps better align the mathematical results with the kinds of research scenarios we considered in the introduction to this chapter. </span>
+<span id="cb13-290"><a href="#cb13-290" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-291"><a href="#cb13-291" aria-hidden="true" tabindex="-1"></a>First, note that it is equally valid to say </span>
+<span id="cb13-292"><a href="#cb13-292" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-293"><a href="#cb13-293" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>the relationship between Math and Gender depends on Reading, or</span>
+<span id="cb13-294"><a href="#cb13-294" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>the relationship between Math and Reading depends on Gender. </span>
+<span id="cb13-295"><a href="#cb13-295" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-296"><a href="#cb13-296" aria-hidden="true" tabindex="-1"></a>In other words, it is equally valid to interpret an interaction in terms of the gender gap (i.e., the relationship between Math and Gender) or in terms of the simple trends (the relationship between Math and Reading). </span>
+<span id="cb13-297"><a href="#cb13-297" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-298"><a href="#cb13-298" aria-hidden="true" tabindex="-1"></a>However, in most research settings, we will usually be more interested in one of these interpretations rather than the other. For example, our research interest in @sec-example-5 was about the gender gap in Math Achievement. So we can simplify our lives by focusing on the more interesting interpretation -- the gender gap. For our purposes, the simple trends are an equivalent but less interesting way of interpreting the interaction. </span>
+<span id="cb13-299"><a href="#cb13-299" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-300"><a href="#cb13-300" aria-hidden="true" tabindex="-1"></a>In the two bullet points above, whichever variable appears in the "depends on" clause is called the *moderator*, and the other two variables are called the focal variables. The researcher chooses which variable to treat as the moderator when interpreting an interaction. The overall idea here is to "break down" the interaction in the way that is most compatible with your research question(s). </span>
+<span id="cb13-301"><a href="#cb13-301" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-302"><a href="#cb13-302" aria-hidden="true" tabindex="-1"></a>Since our focus is the gender gap in Math (i.e., the relationship is between Math and Gender), Reading is our moderator. In particular, we might interpret the interaction as follows</span>
+<span id="cb13-303"><a href="#cb13-303" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-304"><a href="#cb13-304" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>The predicted gender gap in Math changes by $b_3$ units for each unit of increase in Reading.  </span>
+<span id="cb13-305"><a href="#cb13-305" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-306"><a href="#cb13-306" aria-hidden="true" tabindex="-1"></a>By contrast, if we were mainly interested in the relationship between Math and Reading (i.e., the simple trends), then we could treat Gender as the moderator. For example, we might say: </span>
+<span id="cb13-307"><a href="#cb13-307" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-308"><a href="#cb13-308" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>For females, predicted Math Achievement changed by $b_1$ units for each unit of increase in Reading, whereas for males, the predicted change was ($b_1 + b_3$) units for each unit of increase in Reading. </span>
+<span id="cb13-309"><a href="#cb13-309" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-310"><a href="#cb13-310" aria-hidden="true" tabindex="-1"></a>This might feel less intuitive than talking about the gender gap, but the two interpretations are mathematicaly equivalent. It is just a matter of whether you want to interpret the interaction term $b_3$ with reference to the gender gap, or with reference to the simple trends. In practice, you don't need to do both (but I am going to make you do both in the next section -- sorry!)</span>
+<span id="cb13-311"><a href="#cb13-311" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-312"><a href="#cb13-312" aria-hidden="true" tabindex="-1"></a><span class="fu">### Back to the example </span></span>
+<span id="cb13-313"><a href="#cb13-313" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-314"><a href="#cb13-314" aria-hidden="true" tabindex="-1"></a>The regression coefficients for the example data are shown below. **Please use these numbers to provide an interpretation of the interaction between Gender and Reading. For practice, please attempt the interpret the interaction in terms of (a) the gender gap in Math, with Reading as the moderator; and (b) the relationship between Math and Reading, with Gender as the moderator. Don't worry about statistical significance, just focus on the interpreting the coefficients.**</span>
+<span id="cb13-315"><a href="#cb13-315" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-318"><a href="#cb13-318" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb13-319"><a href="#cb13-319" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(mod4)</span>
+<span id="cb13-320"><a href="#cb13-320" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb13-321"><a href="#cb13-321" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-322"><a href="#cb13-322" aria-hidden="true" tabindex="-1"></a>Some potential answers are hidden in the "Code" tab below, but don't peak until you have tried it for yourself!</span>
+<span id="cb13-323"><a href="#cb13-323" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-326"><a href="#cb13-326" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb13-327"><a href="#cb13-327" aria-hidden="true" tabindex="-1"></a><span class="co"># Gender gap</span></span>
+<span id="cb13-328"><a href="#cb13-328" aria-hidden="true" tabindex="-1"></a><span class="co"># General: The gender gap in Math is smaller for students who are also strong in Reading</span></span>
+<span id="cb13-329"><a href="#cb13-329" aria-hidden="true" tabindex="-1"></a><span class="co"># Specific: The gender gap in Math Achievement decreases by .18 percentage points for each percentage point increase Reading Achievement</span></span>
+<span id="cb13-330"><a href="#cb13-330" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-331"><a href="#cb13-331" aria-hidden="true" tabindex="-1"></a><span class="co"># Simple slopes</span></span>
+<span id="cb13-332"><a href="#cb13-332" aria-hidden="true" tabindex="-1"></a><span class="co"># General: The relationship between Math and Reading is stronger (i.e. has a larger slope) for females than for males</span></span>
+<span id="cb13-333"><a href="#cb13-333" aria-hidden="true" tabindex="-1"></a><span class="co"># Specific:</span></span>
+<span id="cb13-334"><a href="#cb13-334" aria-hidden="true" tabindex="-1"></a><span class="co">#  For females, Math scores are predicted to increase by .72 percentage points for each percentage point increase in Reading Achievement</span></span>
+<span id="cb13-335"><a href="#cb13-335" aria-hidden="true" tabindex="-1"></a><span class="co">#  For males, Math scores are predicted to increase by .55 percentage points for each percentage point increase in Reading Achievement</span></span>
+<span id="cb13-336"><a href="#cb13-336" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb13-337"><a href="#cb13-337" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-338"><a href="#cb13-338" aria-hidden="true" tabindex="-1"></a><span class="fu">### Centering the continuous predictor</span></span>
+<span id="cb13-339"><a href="#cb13-339" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-340"><a href="#cb13-340" aria-hidden="true" tabindex="-1"></a>You may have noticed that the regression coefficient on Gender was wildly different in regression models with and without the interaction. In the model without the interaction (@sec-binary-continuous-5) the coefficient on Gender was 3.50, and in the model with the interaction (above), it was 13.40. So in one model, the "effect" of being male was a 3.5 percentage point gain on a Math test, but in the other model, it was a 13.40 percentage point gain. Why this huge difference in the "effect" of Gender? </span>
+<span id="cb13-341"><a href="#cb13-341" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-342"><a href="#cb13-342" aria-hidden="true" tabindex="-1"></a>The answer can be seen in the equation for the gender gap. In the model **without the interaction**, the gender gap was constant and equal to the regression coefficient on Gender (denoted as $b_2$ in the model): </span>
+<span id="cb13-343"><a href="#cb13-343" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-344"><a href="#cb13-344" aria-hidden="true" tabindex="-1"></a>$$\widehat Y (Male) - \widehat Y (Female) = b_2. $$</span>
+<span id="cb13-345"><a href="#cb13-345" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-346"><a href="#cb13-346" aria-hidden="true" tabindex="-1"></a>But in the regression model **with the interaction**, the gender gap was a linear function of Reading and the regression coefficient on Gender is the intercept for that linear relationship. </span>
+<span id="cb13-347"><a href="#cb13-347" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-348"><a href="#cb13-348" aria-hidden="true" tabindex="-1"></a>$$ \widehat Y (Male) - \widehat Y (Female) = b_2 + b_3 X_1. $$</span>
+<span id="cb13-349"><a href="#cb13-349" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-350"><a href="#cb13-350" aria-hidden="true" tabindex="-1"></a>This equation tell us that, in the model with the interaction, $b_2$ is the gender gap for students who score 0% on the Reading test. Since the lowest score on Reading Achievement was around 35%, the intercept in this equation (i.e., $b_2$, the regression coefficient on Gender) is not very meaningful. </span>
+<span id="cb13-351"><a href="#cb13-351" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-352"><a href="#cb13-352" aria-hidden="true" tabindex="-1"></a>In previous sections, we have ignored the regression intercept when it was not meaningful. But, ignoring the regression slopes for predictor variables can get confusing, and, in general, it is nice for the regression coefficients to be interpretable (otherwise, why are we doing this!).  </span>
+<span id="cb13-353"><a href="#cb13-353" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-354"><a href="#cb13-354" aria-hidden="true" tabindex="-1"></a>One way to address this situation is to center Reading Achievement so that it has a mean of zero. To do this, define the deviation score</span>
+<span id="cb13-355"><a href="#cb13-355" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-356"><a href="#cb13-356" aria-hidden="true" tabindex="-1"></a>$$D_1 = X_1 - \bar X_1.$$</span>
+<span id="cb13-357"><a href="#cb13-357" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-358"><a href="#cb13-358" aria-hidden="true" tabindex="-1"></a>$D_1$ is the mean-centered version of $X_1$. If we regress Math Achievement on $D_1$ rather than $X_1$ we end up with the following equation for the gender gap in Math: </span>
+<span id="cb13-359"><a href="#cb13-359" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-360"><a href="#cb13-360" aria-hidden="true" tabindex="-1"></a>$$\widehat Y (Male) - \widehat Y (Female) = b_2 + b_3 D_1$$ </span>
+<span id="cb13-361"><a href="#cb13-361" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-362"><a href="#cb13-362" aria-hidden="true" tabindex="-1"></a>Since $D_1 = 0$ when $X_1 = \bar X_1$, the regression coefficient on Gender ($b_2$) is now interpretable as the gender gap in Math Achievement, for students with average Reading Achievement. This is a much more interpretable number than the coefficient in the original interaction model! </span>
+<span id="cb13-363"><a href="#cb13-363" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-364"><a href="#cb13-364" aria-hidden="true" tabindex="-1"></a>Using the example data, this approach yields the following regression coefficients: </span>
+<span id="cb13-365"><a href="#cb13-365" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-368"><a href="#cb13-368" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb13-369"><a href="#cb13-369" aria-hidden="true" tabindex="-1"></a><span class="co"># compute the deviation scores for reading</span></span>
+<span id="cb13-370"><a href="#cb13-370" aria-hidden="true" tabindex="-1"></a>reading_dev <span class="ot">&lt;-</span> achrdg12 <span class="sc">-</span> <span class="fu">mean</span>(achrdg12, <span class="at">na.rm =</span> T) </span>
+<span id="cb13-371"><a href="#cb13-371" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-372"><a href="#cb13-372" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the interaction model as above</span></span>
+<span id="cb13-373"><a href="#cb13-373" aria-hidden="true" tabindex="-1"></a>genderXreading_dev <span class="ot">&lt;-</span> (<span class="fu">as.numeric</span>(gender) <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> reading_dev</span>
+<span id="cb13-374"><a href="#cb13-374" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-375"><a href="#cb13-375" aria-hidden="true" tabindex="-1"></a>mod5 <span class="ot">&lt;-</span> <span class="fu">lm</span>(achmat12 <span class="sc">~</span> reading_dev <span class="sc">+</span> gender <span class="sc">+</span> genderXreading_dev)</span>
+<span id="cb13-376"><a href="#cb13-376" aria-hidden="true" tabindex="-1"></a><span class="fu">coef</span>(mod5)</span>
+<span id="cb13-377"><a href="#cb13-377" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb13-378"><a href="#cb13-378" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-379"><a href="#cb13-379" aria-hidden="true" tabindex="-1"></a>The regression coefficient for Gender is now pretty close to what it was in the multiple regression model without the interaction, but the interpretation is different (i.e., it is now the predicted gender gap in Math for students with an average level of Reading, rather than the predicted gender gap in Math for all students). </span>
+<span id="cb13-380"><a href="#cb13-380" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-381"><a href="#cb13-381" aria-hidden="true" tabindex="-1"></a>Notice that the intercept in the model above has also changed compared to the previous model in which Reading was not centered. This is should make sense based on what you already know about the regression intercept. </span>
+<span id="cb13-382"><a href="#cb13-382" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-383"><a href="#cb13-383" aria-hidden="true" tabindex="-1"></a>Also note that centering Reading did not affect the regression coefficient for Reading or the interaction. So, centering makes the regression slope on Gender more interpretable, but it doesn't affect our overall interpretation of the simple trends or the gender gap. </span>
+<span id="cb13-384"><a href="#cb13-384" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-385"><a href="#cb13-385" aria-hidden="true" tabindex="-1"></a>**Please write down your interpretation of the intercept and the regression coefficient for Gender in the above regression output, and be prepared to share your answer in class**. </span>
+<span id="cb13-386"><a href="#cb13-386" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-387"><a href="#cb13-387" aria-hidden="true" tabindex="-1"></a><span class="fu">### Summary</span></span>
+<span id="cb13-388"><a href="#cb13-388" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-389"><a href="#cb13-389" aria-hidden="true" tabindex="-1"></a>The interaction between two variables is just their product. When this product is added as a predictor in a multiple regression model with one continuous and one binary predictor:</span>
+<span id="cb13-390"><a href="#cb13-390" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-391"><a href="#cb13-391" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>The model again results in two regression lines (simple trends), one for each value of the binary predictor.</span>
+<span id="cb13-392"><a href="#cb13-392" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-393"><a href="#cb13-393" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>However, we now get simple trends with different intercepts *and different slopes*. The difference in slopes is equal to the regression coefficient on the interaction term. In substantive terms, the simple trends have different slopes because of the interaction. </span>
+<span id="cb13-394"><a href="#cb13-394" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-395"><a href="#cb13-395" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>The difference (“gap”) between the regression lines changes as a linear function of the continuous predictor, and this change is again equal to the regression coefficient on the interaction term.</span>
+<span id="cb13-396"><a href="#cb13-396" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-397"><a href="#cb13-397" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>The last two points are equivalent ways of stating the central idea behind a (two-way) interaction: the relationship between two variables changes as a function of a third variable.</span>
+<span id="cb13-398"><a href="#cb13-398" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-399"><a href="#cb13-399" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>When interpreting an interaction, the researcher chooses which pair of variables will be the "focal relationship" and which variable will be the moderator. </span>
+<span id="cb13-400"><a href="#cb13-400" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>In our example, we focused on the gender gap in Math (i.e., the relationship between Math and Gender) and Reading was the moderator. </span>
+<span id="cb13-401"><a href="#cb13-401" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>But, if we were more interested in the relationship between Math and Reading, would could have focused on the simple trends and treated Gender as the moderator</span>
+<span id="cb13-402"><a href="#cb13-402" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>It is usual to only report one way of "breaking down" the interaction -- the one that is most relevant to your research question. </span>
+<span id="cb13-403"><a href="#cb13-403" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-404"><a href="#cb13-404" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Centering the continuous predictor can be helpful for ensuring that the regression coefficient on the binary variable remains interpretable in the presence of an interaction. </span>
+<span id="cb13-405"><a href="#cb13-405" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-406"><a href="#cb13-406" aria-hidden="true" tabindex="-1"></a><span class="fu">## Inference for interactions {#sec-inference-for-interactions-5}</span></span>
+<span id="cb13-407"><a href="#cb13-407" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-408"><a href="#cb13-408" aria-hidden="true" tabindex="-1"></a>To be continued next week!</span>
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+</body></html>
