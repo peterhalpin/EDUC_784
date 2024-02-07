@@ -5,7 +5,7 @@ editor:
     wrap: 72
 ---
 
-# Simple Regression {#sec-chap-2}
+# Simple regression {#sec-chap-2}
 
 The focus of this course is linear regression with multiple predictors (AKA *multiple regression*), but we start by reviewing regression with one predictor (AKA *simple regression*). Most of this material should be familiar from EDUC 710. 
 

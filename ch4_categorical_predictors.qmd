@@ -470,7 +470,7 @@ Note that this is the same null hypothesis as one-way ANOVA -- i.e., all the gro
 Although regression with a categorical predictor is mathematically equivalent to one-way ANOVA, you may have noticed that the two approahces are not used in the same way. In ANOVA, we first conduct an F-test of the omnibus hypothesis, and, if the test is significant, we follow-up by comparing the groups using procedures that control for familywise error rate. In regression, we just report the F-test along with the test of the individual contrasts, without any discussion of familywise error rate control. Which approach is correct? Depends who you ask.... 
 
 
-## Some details about categorical data* {#sec-categorical-results-4}
+## More about categorical data* {#sec-categorical-results-4}
 Check back later for: 
 
 - mean and variance of binary variables
