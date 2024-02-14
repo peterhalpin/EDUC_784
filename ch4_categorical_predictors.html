@@ -172,6 +172,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Interactions</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch6_model_building.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Model building</span></span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -735,7 +741,7 @@ b_0 = \frac{n_1 \widehat Y( \text{Group 1}) + n_2 \widehat Y( \text{Group 2}) + 
 <p>Using the two step approach, it is easy to show that the regression coefficients are just the means of the indicated group. Since the overall mean of <span class="math inline">\(Y\)</span> is zero (because of Step 1), the group means can be interpreted as deviations from the overall mean on <span class="math inline">\(Y\)</span>.</p>
 <p>Using the <code>lm</code> function in R, you can remove the intercept from the model using <code>-1</code> in the formula syntax:</p>
 <p><code>Y ~ -1 + X1 + ...</code></p>
-<p>As noted, this will affect the statistical significance of R-squared, as reported in <code>summary(lm)</code>. So, you shouldn’t use this approach when you want to report R-squared. The next two paragraphs explain why, but the explanation requires some material we won’t discuss until <span class="quarto-unresolved-ref">?sec-chap-6</span>.</p>
+<p>As noted, this will affect the statistical significance of R-squared, as reported in <code>summary(lm)</code>. So, you shouldn’t use this approach when you want to report R-squared. The next two paragraphs explain why, but the explanation requires some material we won’t discuss until <a href="ch6_model_building.html"><span>Chapter&nbsp;6</span></a>.</p>
 <p>The F-test of R-squared can be computed by comparing two different models, a reference model with no predictors and a focal model with the predictors. The reference model used by <code>lm</code> depends on whether the intercept is included in the focal model. If the focal model has an intercept, the reference model also has an intercept. In the focal model omits the intercept, the reference also omits the intercept.</p>
 <p>In the present context, the focal model omits the intercept and use <span class="math inline">\(C\)</span> dummies This model has the same R-squared as if we had used the intercept and <span class="math inline">\(C-1\)</span> dummies. However, the F-statistic for the test of R-squared (as reported by <code>summary(lm)</code>) is different for the two approaches, because of the choice of reference model. You can change the reference model, but it takes a bit of fiddling around. If you are interested, just ask in class.</p>
 </section>
@@ -1439,7 +1445,7 @@ F-statistic: 3.216 on 3 and 497 DF,  p-value: 0.02264</code></pre>
 <p>Note the following things about the output:</p>
 <ul>
 <li><p>The regression coefficients compare each group’s mean to the overall mean on the outcome. Urban students are significantly above average, Rural and Suburban students are below average but the difference is not significant.</p></li>
-<li><p>The R-square is the same as <code>mod2</code> because the <span class="math inline">\(Y\)</span> variable is centered, but the F test is not the same as from <code>mod2</code>. The next two paragraphs explain why, but the explanation requires some material we won’t discuss until <span class="quarto-unresolved-ref">?sec-chap-6</span>.</p></li>
+<li><p>The R-square is the same as <code>mod2</code> because the <span class="math inline">\(Y\)</span> variable is centered, but the F test is not the same as from <code>mod2</code>. The next two paragraphs explain why, but the explanation requires some material we won’t discuss until <a href="ch6_model_building.html"><span>Chapter&nbsp;6</span></a>.</p></li>
 </ul>
 <p>The F-test of R-squared can be computed by comparing two different models, a reference model with no predictors and a focal model with the predictors. The reference model used by <code>lm</code> depends on whether the intercept is included in the focal model. If the focal model has an intercept, the reference model also has an intercept. In the focal model omits the intercept, the reference also omits the intercept.</p>
 <p>In the present context, the focal model omits the intercept and use <span class="math inline">\(C\)</span> dummies This model has the same R-squared as if we had used the intercept and <span class="math inline">\(C-1\)</span> dummies. However, the F-statistic for the test of R-squared (as reported by <code>summary(lm)</code>) is different for the two approaches, because of the choice of reference model. You can change the reference model, but it takes a bit of fiddling around. If you are interested, just ask in class.</p>
