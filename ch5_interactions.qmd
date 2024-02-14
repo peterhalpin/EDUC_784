@@ -446,7 +446,7 @@ $$MEM =  \Delta(\bar X_1) $$
  
 $$AVE =  \frac{\sum_i \Delta(X_{i1})}{N} $$
 
-* Marginal effects at representative values (MERV): Report the marginal effect for a range of "interesting" values chosen by the researcher (denoted by *, $\dagger$, etc.)
+* Marginal effects at representative values (MERV): Report the marginal effect for a range of "interesting values" chosen by the researcher (denoted by *, $\dagger$, etc.)
 
 $$ MERV =  \{\Delta(X^*_1), \Delta(X^\dagger_1), \dots \} $$ 
  
@@ -481,7 +481,7 @@ Note that the computations going on "under the hood" when testing marginal effec
 
 ### Simple trends
 
-In this section show how to test whether the slope of each of the simple trends is significantly different from zero. Like the marginal effects in the previous section, this is information was not entirely available in the `summary(lm)` output discussed in @sec-binary-continuous-interaction-5. From the `summary(lm)` output we learned the following two points about the simple trends: 
+In this section we test whether the slope of each of the simple trends is significantly different from zero. Like the marginal effects in the previous section, this is information was not entirely available in the `summary(lm)` output discussed in @sec-binary-continuous-interaction-5. From the `summary(lm)` output we learned the following two points about the simple trends: 
 
 * The regression coefficient on Reading told us about the relationship between Math and Reading, simply for the group designated as zero on the binary predictor (simply for  females). 
 
@@ -489,7 +489,7 @@ In this section show how to test whether the slope of each of the simple trends 
 
 Note that what is missing, or implicit, is a test of whether the simple trend for males is different from zero. This test is of less relevance to our example (since we are treating Reading as the moderator), but we consider it for illustrative purposes. 
 
-The test of the slopes of the simple trends for the example are reported below. As stated, these aren't super interesting in the context of our example, but you should **check your understanding of simple trends by writing down an interpretation of the output below**. 
+The tests of the simple trends for the example data are reported below. As stated, these aren't super interesting in the context of our example, but you should **check your understanding of simple trends by writing down an interpretation of the output below**. 
 
 ```{r}
 # The regression coefficients on reading, broken down by gender
@@ -559,11 +559,11 @@ $$\begin{align}
 
 The first equation shows us that $b_1$ is the slope of relationship between $Y$ and $X_1$, when $X_2$ is equal to zero -- in our example, the relationship between Math and Reading when SES is equal to zero. Similarly, the second equation shows us that $b_2$ is the slope of relationship between $Y$ and $X_2$ when $X_1$ is equal to zero --  in our example, the relationship between Math and SES when Reading is equal to zero.
 
-In general, the value of zero may not be meaningful for a given predictor. But, when the predictor is *centered* (i.e., a deviation score), the value of zero is always the mean of the original variable. For example, if we centered SES, then $b_1$ would represent the relationship between Math and Reading for students with average SES. Similar considerations apply if we treat Reading as the moderator instead of SES. Note that this is just the same trick as @sec-binary-continuous-interaction-5, but this time both predictors are continuous  and so both can be centered.  
+In general, the value of zero may not be meaningful for continuous predictors. But, when the predictor is *centered* (i.e., a deviation score), the value of zero is always the mean of the original variable. For example, if we centered SES, then $b_1$ would represent the relationship between Math and Reading for students with average SES. Similar considerations apply if we treat Reading as the moderator instead of SES. Note that this is just the same trick as @sec-binary-continuous-interaction-5, but this time both predictors are continuous  and so both can be centered.  
 
-The second main reason for centering is a bit more technical. It has to do with reducing the correlation between the predictors and their interaction. In general, the interaction term will be correlated with both predictors if (a) the predictors themselves are correlated and (b) both predictors take on strictly positive (or strictly negative) values. Highly correlated predictors lead to redundant information the model, so we want to avoid this situation (this is technically called *multicollinearity* and we discuss it in more detail in a  @sec-multicollinearity-6). Centering can "break" the correlation between the preditors and the interaction, thereby making the predictors less redundant with their interaction and mitigating the problem.
+The second main reason for centering is a bit more technical. It has to do with reducing the correlation between the predictors and their interaction. In general, the interaction term will be correlated with both predictors if (a) the predictors themselves are correlated and (b) both predictors take on strictly positive (or strictly negative) values. Highly correlated predictors lead to redundant information the model, so we want to avoid this situation (this is technically called *multicollinearity* and we discuss it in more detail in a  @sec-multicollinearity-6). 
 
-To see how this works, let's take a look at @fig-centering-5. The left hand panel shows the relationship between SES and its interaction with Reading. We can see that they are highly correlated. This is because (a) SES and Reading are themselves correlated, and (b) both SES and Reading take on strictly positive values. As mentioned above, the interaction term will be correlated with both predictors whenever these two conditions hold. (The figure shows the correlation just for SES and the interaction, but the same situation holds for Reading.) 
+To see how centering can reduce the correlation between the predictors and their interaction, let's take a look at @fig-centering-5. The left hand panel shows the relationship between SES and its interaction with Reading. We can see that they are highly correlated. This is because (a) SES and Reading are themselves correlated, and (b) both SES and Reading take on strictly positive values. As mentioned above, the interaction term will be correlated with both predictors whenever these two conditions hold. (The figure shows the correlation just for SES and the interaction, but the same situation holds for Reading.) 
 
 ```{r fig-centering-5, fig.cap = 'Correlation Between SES and SES X Reading, With and Without Centering', fig.align = 'center'}
 
@@ -618,9 +618,9 @@ Note that the interaction and the R-squared are the same in the centered and unc
 
 ### Simple trends
 
-Centering helps us interpret the main effects of the individual predictors, but we haven't yet discussed how to interpret the interaction term when both predictors are continuous. In the case with a binary predictor, we had two different regression lines. So what do we get when both predictors are continuous? (Hint: see @fig-readingXses-5). 
+Centering helps us interpret the main effects of the individual predictors, but we haven't yet discussed how to interpret the interaction term. As shown in @fig-readingXses-5, the overall situation is not that different than with a binary predictor.
 
-One way to answer this question using the MERV approach discussed in @sec-inference-for-interactions-5. Using this approach, we consider the focal relationship for some "interesting values" of the moderator. As with MERV, the choice of values of the moderator is up to the researcher, but some usual choices are 
+The usual way to follow up a significant interaction between two continuous is using the MERV approach discussed in @sec-inference-for-interactions-5. Using this approach, we consider the focal relationship for some "interesting values" of the moderator. As with MERV, the choice of values of the moderator is up to the researcher, but some usual choices are 
 
 * The quartiles of the moderator
 * M $\pm$ 1 SD of the moderator
@@ -737,7 +737,7 @@ The main points about the interpretation of this model are as follows.
 \widehat Y(PREK = 1, SES = 1) - \widehat Y(PREK = 0, SES = 1) & = b_1
 \end{align}
 
-* Because the model in @eq-prek-ses-5 does not include an interaction, we already know that it implies that the effect of pre-K is constant over levels of SES.  Below we show that effect of Pre-K for SES = 2 is the same as the effect for SES = 1. The same approach can be used to show the effect is constant over all levels of SES. Note that this implication of the model is inconsistent with what is shown in @fig-prek-by-ses-5, and so we will improve on this model by adding an interaction in the following section.
+* Because the model in @eq-prek-ses-5 does not include an interaction, we already know that it implies that the effect of Pre-K is constant over levels of SES.  Below we show that effect of Pre-K for SES = 2 is the same as the effect for SES = 1. The same approach can be used to show the effect is constant over all levels of SES. Note that while the model assumes the effect of Pre-K is constant over levels of SES, this is actually inconsistent with what is shown in @fig-prek-by-ses-5. We will improve on this model by adding an interaction in the following section.
 
 \begin{align}
 \widehat Y(PREK = 0, SES = 2) & = b_0 + b_1 (0) + b_2(1 )+ b_3(0) + b_4 (0) + b_5 (0)\\  
@@ -751,15 +751,15 @@ The main points about the interpretation of this model are as follows.
 \widehat Y(PREK = 1, SES = 2) - \widehat Y(PREK = 0, SES = 2) = b_1  
 \end{align}
 
-Combined with the previous equation, this equation says that the difference between the red and blue lines in the second column of @fig-prek-by-ses-5 is the same as the difference in the first column -- i.e., they both equal $b_1$. This is what it means for there to be no interaction between two categorical predictors. 
+This equation says that the difference between the red and blue lines in the second column of @fig-prek-by-ses-5 is the same as the difference in the first column -- i.e., they both equal $b_1$. This is what it means for there to be no interaction between two categorical predictors. 
 
 If you want more practice with this, you can show that @eq-prek-ses-5 implies the effect of Pre-K is constant over all levels of SES. Additionally, you can use the 2-step approach to show that the effect of SES is constant over levels of Pre-K attendance. 
 
 ### Adding the interaction(s)
 
-We have just seen that @eq-prek-ses-5 implies that the effect of Pre-K is constant over levels SES, and vise versa. In order to address our research question about whether the relationship between Pre-K attendance and Math Achievement depends on children's SES, we will need to add something to the model -- an interaction (surprise!). 
+We have just seen that @eq-prek-ses-5 implies that the effect of Pre-K is constant over levels of SES, and vise versa. In order to address our research question about whether the relationship between Pre-K attendance and Math Achievement depends on children's SES, we will need to add something to the model -- an interaction (surprise!). 
 
-We know that interactions are just products (multiplication) of predictor variables. But, since SES is represented as 4 dummies, this means we need 4 products in order to represent the interaction of Pre-K with SES. The resulting model can be written: 
+We know that interactions are just products (multiplication) of predictor variables. Since SES is represented as 4 dummies, this means we need 4 products to represent the interaction of Pre-K with SES. The resulting model can be written: 
 
 $$\begin{align}
 \widehat Y  = & b_0 + b_1 PREK + b_2SES_2 + b_3SES_3 + b_4 SES_4 + b_5 SES_5 + \\ 
