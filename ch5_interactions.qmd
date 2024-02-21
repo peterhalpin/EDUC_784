@@ -406,7 +406,6 @@ The overall idea is illustrated @fig-visreg-1. Compared to the plots we have see
 
 Note that this information was not available from the `summary(lm)` output in the previous section. The `summary(lm)` output told us that the interaction term was statistically significant, which means that the gender gap in Math changes as a function of reading. The plot provides more information about *how* the gender gap depends on Reading -- it is statistical significant for students at lower levels of Reading Achievement, but appears to shrink and eventually disappear as Reading Achievement increases. 
 
-
 ```{r fig-visreg-1, fig.cap = 'Example of a plot using the `visreg` package.', fig.align = 'center'}
 # Install the package if you haven't already done so
 # install.packages("visreg")

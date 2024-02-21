@@ -14,7 +14,8 @@ book:
     - ch4_categorical_predictors.qmd
     - ch5_interactions.qmd
     - ch6_model_building.qmd
-
+    - ch7_assumption_checking.qmd
+    
 bibliography: references.bib
 
 css: style.css
@@ -25,8 +26,8 @@ format:
     highlight-style: github
     code-fold: true
     code-tools: true
- 
-  docx:
-    toc: true
-    number-sections: true
-    highlight-style: github
+# 
+#   docx:
+#     toc: true
+#     number-sections: true
+#     highlight-style: github
