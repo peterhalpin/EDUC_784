@@ -711,7 +711,7 @@ exp(conf.b) - 1
 exp(confint(mod2)[2, ]) - 1
 ```
 
-## Write up
+### Write up
 
 Approximate: 
 
