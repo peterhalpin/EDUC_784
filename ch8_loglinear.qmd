@@ -316,17 +316,17 @@ As we discuss in the next chapter, we can address non-linearity of regression by
 
 ## Interpretation {#sec-interpretation-8}
 
-The final point about the log-linear model is how it affects the interpretation of the model parameters. For example, in linear regression we know that a one unit increase in $X$ leads to a $b$-unit increase in $\hat Y$. But how do we interpret a $b$-unit increase in $\log(Y)$? 
+The final point about the log-linear model is how it affects the interpretation of the model parameters. For example, in linear regression we know that a one-unit increase in $X$ leads to a $b$-unit increase in $\hat Y$. But how do we interpret a $b$-unit increase in $\log(Y)$? 
 
 In general, one of the main shortcomings of "transforming your data" is that it can lead to uninformative or unclear interpretations of model parameters. If the results don't make sense, its not much of a consolation to know that the model assumptions looked OK! 
 
 However, it turns out that there is very nice interpretation of the log-linear model. It is because of this interpretation that we often use the log transform to address skew in $Y$, rather than some other transformation. 
 
-There two ways to interpret the regression coefficients in the log-linear model. First, we consider the easy but approximate way (you're welcome!). Second, we consider the more complicated but accurate way, which involves reverse transforming the regression coefficients using exponentiation (see @sec-math-review-8). 
+There are two ways to interpret the regression coefficients in the log-linear model. First, we consider the easy but approximate way (you're welcome!). Second, we consider the more complicated but accurate way, which involves reverse transforming the regression coefficients using exponentiation (see @sec-math-review-8). 
 
 ### Approximate interpretation {#sec-approximate-8}
 
-In a log-linear model, the regression coefficients can be interpreted as the *approximate* proportion change in $Y$, in the original units. So, in this equation, 
+In a log-linear model, the regression slope can be interpreted as the *approximate* proportionate change in $Y$, in the original units. So, in this equation, 
 
 $$ \log(Y) = a + bX + \epsilon$$ {#eq-logy}
 
@@ -345,7 +345,7 @@ Before moving on, let's get clear on what "proportionate change" means. Consider
 
 $$ \text{proportionate change} = \frac{Y^* - Y}{Y} = Y^*/Y - 1.$$
 
-Multiplying the proportionate change by 100 gives us the percentage change, which is usually easier to talk about in words. The numerical examples listed above used percentage change. If we want to talk about the change without specifying the units (e.g, proportion or percentage), we say "relative change." 
+Multiplying the proportionate change by 100 gives us the percentage change, which is usually easier to talk about in a sentence (the numerical examples listed above used percentage change). If we want to talk about the change without specifying the units (e.g, proportion or percentage), we say "relative change." 
 
 Note that relative change is not the same as relative magnitude. $Y'/Y$ is the magnitude of $Y^*$ relative to $Y$. As shown in the above equation for proportionate change, we need to subtract 1 from relative magnitude to get relative change. 
 
@@ -360,7 +360,7 @@ Alternatively, we could say that I have *gained* 50%, or 1/2, over the initial a
 $$ Y^*/Y - 1 = 150/100 - 1 = .5 $$
 This is relative *change*. 
 
-As an example of relative loss rather than gain, assume $Y^* = 40$ and $Y = 100$, then $Y^*$ is 40% of $Y$ (relative magnitude) and the relative change (decrease) from 100 to 40 is 60%. 
+As an example of relative loss rather than gain, assume $Y^* = 40$ and $Y = 100$. Then $Y^*$ is 40% of $Y$ (relative magnitude) and the relative change (decrease) from 100 to 40 is 60%. 
 
 Here are some more examples. **Please write down your answers and be prepared to share them in class.**
 
@@ -393,7 +393,7 @@ To get a better idea of how the interpretation of log-linear regression differs 
 * $Y$ is wages (dollars per week) 
 * $X$ is hours worked per week
 
-A linear relationship between $Y$ and $X$ would means
+A linear relationship between $Y$ and $X$ could be written
 
 $$ \widehat Y = a + bX. $$
 
@@ -403,10 +403,10 @@ Let's further assume that $b = 20$. With this information, you should be able to
 
 2.  What about for someone who was expected to earn $1000/week? 
 
-Now let's consider a log-linear model, this time with a regression coefficient of $b = .2$:
+Now let's consider a log-linear model: 
 
 $$ \log(\widehat Y) = a + bX. $$
-Using this log-linear equation, please answer the following questions: 
+This time we will assume the regression coefficient is $b = .2$. Using this log-linear model, please answer the following questions: 
 
 3.  For someone who is expected to earn \$100/week, what would be their  predicted earnings if they worked one hour more per week? To answer this question, use the interpretation of $b$ in terms of proportionate change, as outlined in the previous section. 
 
@@ -438,7 +438,7 @@ Some real life examples of this kind of interpretation are linked below.
 * Proportional tuition based on income and number of dependents. 
 [https://ronclarkacademy.com/tuition-and-financial-aid](https://ronclarkacademy.com/tuition-and-financial-aid)
 
-### Exact interpretation {#sec-exact-9}
+### Exact interpretation {#sec-exact-8}
 
 If we want an exact interpretation of the regression coefficients in a log-linear model, we need to do some "follow-up math" with exponents. The main result is about the relative magnitude of $\hat Y$ corresponding to a one-unit change in $X$
 
@@ -447,7 +447,7 @@ $$ {#eq-expb}
 
 where $\widehat Y(X)$ is the predicted value of $Y$ for a given value of $X$. This is result derived in @sec-derivation-8 below (optional).
 
-Based on @eq-expb, we can interpret the exponentiated regression coefficient in a log-linear model in terms of relative magnitude. In practice, people often prer to use relative change instead. From @eq-expb and the definition of proportion change in @sec-approximate-8, it follows that the proportion of change in $\widehat Y$ for a 1 unit increase in $X$ is *exactly* equal to $\exp(b) - 1$. 
+Based on @eq-expb, we can interpret the exponentiated regression coefficient in a log-linear model in terms of relative magnitude. In practice, people often prefer to use relative change instead. From @eq-expb and the definition of proportionate change in @sec-approximate-8, it follows that the proportionate change in $\widehat Y$ for a one-unit increase in $X$ is *exactly* equal to $\exp(b) - 1$. 
 
 In the hypothetical example above (wages and hours worked), the exact proportion change in the log-linear model is
 
@@ -459,11 +459,11 @@ or about 22%.
 
 While there are many transformations that can be used to address skew, the log-linear model has the advantage that it is still interpretable in terms of the original $Y$ variable. In fact, in many applications, notably those in which $Y$ is monetary, the interpretation is arguably better than for linear regression! 
 
-There are two ways to interpret the regression coefficients in the log-linear model
+There are two ways to interpret the regression coefficients in the log-linear model.
 
-* The approximate interpretation: a one unit of change in $X$ is expected to yield a $(b \times 100)\%$ change in $Y$. This interpretation only applies when $b$ is small (e.g., less than .5 in absolute value).
+* The approximate interpretation: a one-unit change in $X$ is expected to yield a $(b \times 100)\%$ change in $Y$. This interpretation only applies when $b$ is small (e.g., less than .5 in absolute value).
 
-* The exact interpretation: a one unit of change in $X$ is expected to yield a $(\exp(b) - 1)  \times 100\%$ change in $Y$, and this applies for any value of $b$. 
+* The exact interpretation: a one-unit change in $X$ is expected to yield a $(\exp(b) - 1)  \times 100\%$ change in $Y$, and this applies for any value of $b$. 
 
 ### Derivation of @eq-expb * {#sec-derivation-8}
 
@@ -561,17 +561,14 @@ plot(mod2, 2, col = "#4B9CD3")
 
 We can see that the log transformation helped with positive skew, although didn't do much for the negative tail. It also reduced the apparent heteroskedasticity. However, the relationship still appears non-linear, perhaps more so than in the original linear model. We will address non-linearity in the following chapter, and for now just focus on interpreting the log-linear model in this example. 
 
-The R-output is below. 
-
-
-But before moving on, let's make sure we have a good understanding of what the regression coefficients for the log-linear model mean. The model output is reported below. 
+The model output is shown below. 
 
 ```{r}
 #summary(mod2)
 knitr::include_graphics("files/images/log_linear_output.png", dpi = 125)
 ```
 
-Plugging the values from the R output into the equation for log-linear regression, we have
+Plugging-in the values from the output using the equation for log-linear regression, we have
 
 $$
 \begin{align}
@@ -639,6 +636,10 @@ detach(wages)
 
 There isn't much new in terms of R code in this chapter. The code for the worked example is presented below, but please refer to @sec-worked-example-8 for the interpretation.
 
+We will go through this material in class together, so you don't need to work on it before class (but you can if you want.) 
+
+Before staring this section, you may find it useful to scroll to the top of the page, click on the "</> Code" menu, and select "Show All Code."
+
 
 ```{r}
 # Load the data and take a look
@@ -683,18 +684,17 @@ mod2 <- lm(log_wage ~ educ)
 par(mfrow = c(1,2))
 plot(mod2, 1, col = "#4B9CD3")
 plot(mod2, 2, col = "#4B9CD3")
-detach(wages)
 ```
 
 The log transformation helped with positive skew, although didn't do much for the negative tail. It reduced the apparent heteroskedasticity. However, the relationship still appears non-linear, perhaps more so than in the original linear model. We will address non-linearity in the following chapter, and for now just focus on interpreting the log-linear model in this example. 
 
-* The usual summary output provides the regression slope, which can be interpreted using the "approximate" interpretation of relative change: 
+The usual summary output provides the regression slope, which can be interpreted using the "approximate" interpretation of relative change: 
 
 ```{r}
 summary(mod2)
 ```
 
-* Some follow up math to get the exact interpretation of the regression slope in terms of relative change. First $\exp(b) - 1$: 
+Some follow-up math to get the exact interpretation of the regression slope in terms of relative change. First $\exp(b) - 1$: 
 
 ```{r}
 # Get the regression slope from the output 
@@ -704,7 +704,7 @@ conf.b <- coef(mod2)[2]
 exp(conf.b) - 1
 ```
 
-* Next we compute a confidence interval for $\exp(b) - 1$:
+Let's also compute a confidence interval for $\exp(b) - 1$:
 
 ```{r}
 # Compute a confidence interval for exact relative change
@@ -715,14 +715,15 @@ exp(confint(mod2)[2, ]) - 1
 
 Approximate: 
 
-* Using a log-linear regression model, it was found that a one unit increase in years of education led to a predicted increase in wages of 7.4% ($b = .074, t(398) = 10.30, p < .001$). 
+* Using a log-linear regression model, it was found that each additional year of education led to a predicted increase in wages of 7.4% ($b = .074, t(398) = 10.30, p < .001$). 
 
 Exact:
 
-* Using a log-linear regression model, it was found that a one unit increase in years of education led to a predicted increase in wages of 7.8% ($\exp(b) - 1 = .078, 95\% \text{ CI: }[0.062, 0.093]$). 
+* Using a log-linear regression model, it was found that each additional year of education led to a predicted increase in wages of 7.8% ($\exp(b) - 1 = .078, 95\% \text{ CI: }[0.062, 0.093]$). 
 
 
 ```{r, echo = F}
 rm(list = ls())
+detach(wages)
 ```
   
