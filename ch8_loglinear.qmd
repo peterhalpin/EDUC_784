@@ -282,6 +282,8 @@ The moral of this section is that, if you are considering log-transforming an ou
 
 ## Relationship with $X$ {#sec-relationship-8}
 
+<!-- Mention that if relation looks exp then log will make it more linear --> 
+
 In addition to affecting normality,(non-linear) transformations of the $Y$ variable necessarily affect the linearity of regression. In particular, if $Y$ is linearly related to $X$, then $\log(Y)$ cannot also be linearly related to $X$. 
 
 Stated more formally, if
@@ -632,7 +634,7 @@ summary(mod2)
 detach(wages)
 ```
   
-## Exercises {#exercises-9}
+## Exercises {#sec-exercises-8}
 
 There isn't much new in terms of R code in this chapter. The code for the worked example is presented below, but please refer to @sec-worked-example-8 for the interpretation.
 

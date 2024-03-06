@@ -221,7 +221,6 @@ This overall approach is illustrated in the next section. However, there are a c
 Both approaches are illustrated in the next section. 
     
 
-
 ## Worked Example {#worked-example-10}
 
 ```{r, echo=FALSE, results='asis'}

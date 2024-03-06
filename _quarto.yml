@@ -16,6 +16,7 @@ book:
     - ch6_model_building.qmd
     - ch7_assumption_checking.qmd
     - ch8_loglinear.qmd
+    - ch9_polynomial.qmd
     
 bibliography: references.bib
 
@@ -28,7 +29,7 @@ format:
     code-fold: true
     code-tools: true
 # 
-  # docx:
-  #   toc: true
-  #   number-sections: true
-  #   highlight-style: github
+# docx:
+#   toc: true
+#   number-sections: true
+#   highlight-style: github
