@@ -190,6 +190,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Log-linear regression</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch9_polynomial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Polynomial regression, etc</span></span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -392,7 +398,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>If the plot does not show a systematic trend other than a horizontal line at Residuals = 0, then there is no evidence against the assumption.</p></li>
 <li><p>If the residuals do show a trend away from Residuals = 0, then we should worry about the assumption.</p></li>
 <li><p>Don’t over interpret the tails of the lowess (red) lines in the R plots.</p></li>
-<li><p>If the assumption is violated: consider a non-linear transformations of the <span class="math inline">\(Y\)</span> variable (<a href="ch8_loglinear.html"><span>Chapter&nbsp;8</span></a>) or adding quadratic or other non-linear terms to the model (<span class="quarto-unresolved-ref">?sec-chap-9</span>).</p></li>
+<li><p>If the assumption is violated: consider a non-linear transformations of the <span class="math inline">\(Y\)</span> variable (<a href="ch8_loglinear.html"><span>Chapter&nbsp;8</span></a>) or adding quadratic or other non-linear terms to the model (<a href="ch9_polynomial.html"><span>Chapter&nbsp;9</span></a>).</p></li>
 </ul>
 </section>
 </section>
@@ -670,7 +676,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <li><p>If the assumption is violated, the central limit theorem implies that significance tests used in OLS regression will be robust to violations of normality when sample sizes are large.</p>
 <ul>
 <li>Practically this means we can often ignore mild violations of normality when <span class="math inline">\(N / K &gt; 30\)</span> (but other guidelines are used too).</li>
-<li>For some specific types of violations, notably positive skew, it is also common to transform the Y variable (see <span class="quarto-unresolved-ref">?sec-chap-9</span>).</li>
+<li>For some specific types of violations, notably positive skew, it is also common to transform the Y variable (see <a href="ch9_polynomial.html"><span>Chapter&nbsp;9</span></a>).</li>
 <li>When we are worried that non-normality arises from a relatively small subset of the data that may be unduly influencing the results, this can be addressed through regression diagnostics (see <a href="#sec-diagnostics-7"><span>Section&nbsp;7.6</span></a>) and robust statistics (which is an advanced topic).</li>
 </ul></li>
 <li><p>Oh, and one last thing: The line in a qq plot is <em>not a regression line!</em></p></li>

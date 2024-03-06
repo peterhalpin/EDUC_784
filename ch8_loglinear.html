@@ -64,6 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./ch9_polynomial.html" rel="next">
 <link href="./ch7_assumption_checking.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -189,6 +190,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Log-linear regression</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch9_polynomial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Polynomial regression, etc</span></span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -228,7 +235,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#log-linear-regression-of-wages-on-education" id="toc-log-linear-regression-of-wages-on-education" class="nav-link" data-scroll-target="#log-linear-regression-of-wages-on-education"><span class="header-section-number">8.6.1</span> Log-linear regression of Wages on Education</a></li>
   </ul></li>
   <li><a href="#sec-workbook-8" id="toc-sec-workbook-8" class="nav-link" data-scroll-target="#sec-workbook-8"><span class="header-section-number">8.7</span> Workbook</a></li>
-  <li><a href="#exercises-9" id="toc-exercises-9" class="nav-link" data-scroll-target="#exercises-9"><span class="header-section-number">8.8</span> Exercises</a>
+  <li><a href="#sec-exercises-8" id="toc-sec-exercises-8" class="nav-link" data-scroll-target="#sec-exercises-8"><span class="header-section-number">8.8</span> Exercises</a>
   <ul class="collapse">
   <li><a href="#linear-regression-of-wages-on-education" id="toc-linear-regression-of-wages-on-education" class="nav-link" data-scroll-target="#linear-regression-of-wages-on-education"><span class="header-section-number">8.8.1</span> Linear regression of Wages on Education</a></li>
   <li><a href="#log-linear-regression-of-wages-on-education-1" id="toc-log-linear-regression-of-wages-on-education-1" class="nav-link" data-scroll-target="#log-linear-regression-of-wages-on-education-1"><span class="header-section-number">8.8.2</span> Log-linear regression of Wages on Education</a></li>
@@ -367,7 +374,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="the-log-linear-model" class="level2" data-number="8.2">
 <h2 data-number="8.2" class="anchored" data-anchor-id="the-log-linear-model"><span class="header-section-number">8.2</span> The log-linear model</h2>
-<p>There are a various ways to apply log-transformations in regression analysis, which are outlined in the following table and discussed in more detail in <span class="citation" data-cites="cite-fox">(<a href="#ref-cite-fox" role="doc-biblioref"><strong>cite-fox?</strong></a>)</span>. The focus of this chapter is log-linear regression, but the overall approach to linear-log and log-log is the similar. A worked example is coming up in <span class="quarto-unresolved-ref">?sec-worked-example-9</span>. (Note that the term “log-linear” is also the name of a family of models for contingency table data – that is not what we are talking about here.)</p>
+<p>There are a various ways to apply log-transformations in regression analysis, which are outlined in the following table and discussed in more detail in <span class="citation" data-cites="cite-fox">(<a href="#ref-cite-fox" role="doc-biblioref"><strong>cite-fox?</strong></a>)</span>. The focus of this chapter is log-linear regression, but the overall approach to linear-log and log-log is the similar. A worked example is coming up in <a href="ch9_polynomial.html#sec-worked-example-9"><span>Section&nbsp;9.2</span></a>. (Note that the term “log-linear” is also the name of a family of models for contingency table data – that is not what we are talking about here.)</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div id="fig-log-table" class="quarto-figure quarto-figure-center anchored">
@@ -509,6 +516,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="sec-relationship-8" class="level2" data-number="8.4">
 <h2 data-number="8.4" class="anchored" data-anchor-id="sec-relationship-8"><span class="header-section-number">8.4</span> Relationship with <span class="math inline">\(X\)</span></h2>
+<!-- Mention that if relation looks exp then log will make it more linear -->
 <p>In addition to affecting normality,(non-linear) transformations of the <span class="math inline">\(Y\)</span> variable necessarily affect the linearity of regression. In particular, if <span class="math inline">\(Y\)</span> is linearly related to <span class="math inline">\(X\)</span>, then <span class="math inline">\(\log(Y)\)</span> cannot also be linearly related to <span class="math inline">\(X\)</span>.</p>
 <p>Stated more formally, if</p>
 <p><span class="math display">\[ Y = a + bX + \epsilon \]</span></p>
@@ -847,7 +855,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="sec-workbook-8" class="level2" data-number="8.7">
 <h2 data-number="8.7" class="anchored" data-anchor-id="sec-workbook-8"><span class="header-section-number">8.7</span> Workbook</h2>
-<p>This section collects the questions asked in this chapter. The lessons for this chapter will focus on discussing these questions and then working on the exercises in <span class="quarto-unresolved-ref">?sec-exercises-8</span>. The lesson will <strong>not</strong> be a lecture that reviews all of the material in the chapter! So, if you haven’t written down / thought about the answers to these questions before class, the lesson will not be very useful for you. Please engage with each question by writing down one or more answers, asking clarifying questions about related material, posing follow up questions, etc.</p>
+<p>This section collects the questions asked in this chapter. The lessons for this chapter will focus on discussing these questions and then working on the exercises in <a href="#sec-exercises-8"><span>Section&nbsp;8.8</span></a>. The lesson will <strong>not</strong> be a lecture that reviews all of the material in the chapter! So, if you haven’t written down / thought about the answers to these questions before class, the lesson will not be very useful for you. Please engage with each question by writing down one or more answers, asking clarifying questions about related material, posing follow up questions, etc.</p>
 <p><a href="#sec-math-review-8"><span>Section&nbsp;8.1</span></a></p>
 <p>I’ll ask some questions like the following to start class off. You check your answers by pasting the questions into <span class="math inline">\(R\)</span> or Google’s search bar.</p>
 <ul>
@@ -916,8 +924,8 @@ F-statistic: 106.1 on 1 and 398 DF,  p-value: &lt; 2.2e-16</code></pre>
 </details>
 </div>
 </section>
-<section id="exercises-9" class="level2" data-number="8.8">
-<h2 data-number="8.8" class="anchored" data-anchor-id="exercises-9"><span class="header-section-number">8.8</span> Exercises</h2>
+<section id="sec-exercises-8" class="level2" data-number="8.8">
+<h2 data-number="8.8" class="anchored" data-anchor-id="sec-exercises-8"><span class="header-section-number">8.8</span> Exercises</h2>
 <p>There isn’t much new in terms of R code in this chapter. The code for the worked example is presented below, but please refer to <a href="#sec-worked-example-8"><span>Section&nbsp;8.6</span></a> for the interpretation.</p>
 <p>We will go through this material in class together, so you don’t need to work on it before class (but you can if you want.)</p>
 <p>Before staring this section, you may find it useful to scroll to the top of the page, click on the “&lt;/&gt; Code” menu, and select “Show All Code.”</p>
@@ -1424,6 +1432,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./ch9_polynomial.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Polynomial regression, etc</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="sourceCode" id="cb21" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
@@ -1710,451 +1721,453 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb21-282"><a href="#cb21-282" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-283"><a href="#cb21-283" aria-hidden="true" tabindex="-1"></a><span class="fu">## Relationship with $X$ {#sec-relationship-8}</span></span>
 <span id="cb21-284"><a href="#cb21-284" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-285"><a href="#cb21-285" aria-hidden="true" tabindex="-1"></a>In addition to affecting normality,(non-linear) transformations of the $Y$ variable necessarily affect the linearity of regression. In particular, if $Y$ is linearly related to $X$, then $\log(Y)$ cannot also be linearly related to $X$. </span>
+<span id="cb21-285"><a href="#cb21-285" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- Mention that if relation looks exp then log will make it more linear --&gt;</span> </span>
 <span id="cb21-286"><a href="#cb21-286" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-287"><a href="#cb21-287" aria-hidden="true" tabindex="-1"></a>Stated more formally, if</span>
+<span id="cb21-287"><a href="#cb21-287" aria-hidden="true" tabindex="-1"></a>In addition to affecting normality,(non-linear) transformations of the $Y$ variable necessarily affect the linearity of regression. In particular, if $Y$ is linearly related to $X$, then $\log(Y)$ cannot also be linearly related to $X$. </span>
 <span id="cb21-288"><a href="#cb21-288" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-289"><a href="#cb21-289" aria-hidden="true" tabindex="-1"></a>$$ Y = a + bX + \epsilon $$ </span>
+<span id="cb21-289"><a href="#cb21-289" aria-hidden="true" tabindex="-1"></a>Stated more formally, if</span>
 <span id="cb21-290"><a href="#cb21-290" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-291"><a href="#cb21-291" aria-hidden="true" tabindex="-1"></a>then</span>
+<span id="cb21-291"><a href="#cb21-291" aria-hidden="true" tabindex="-1"></a>$$ Y = a + bX + \epsilon $$ </span>
 <span id="cb21-292"><a href="#cb21-292" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-293"><a href="#cb21-293" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb21-294"><a href="#cb21-294" aria-hidden="true" tabindex="-1"></a>\begin{align} </span>
-<span id="cb21-295"><a href="#cb21-295" aria-hidden="true" tabindex="-1"></a>\log(Y) &amp; = \log(a + bX + \epsilon) <span class="sc">\\</span></span>
-<span id="cb21-296"><a href="#cb21-296" aria-hidden="true" tabindex="-1"></a> &amp; \neq a + bX + \epsilon. <span class="sc">\\</span></span>
-<span id="cb21-297"><a href="#cb21-297" aria-hidden="true" tabindex="-1"></a>\end{align}</span>
-<span id="cb21-298"><a href="#cb21-298" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb21-299"><a href="#cb21-299" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-300"><a href="#cb21-300" aria-hidden="true" tabindex="-1"></a>In practice, this means that addressing positive skew using a log transform can sometimes create more problems than it solves. @fig-nonlinear1 illustrates this issue. In the top row, we see the residual versus fitted plot and qqplot of residuals for the regression of Math Achievement (<span class="in">`c1rmscal`</span>) on SES (<span class="in">`wksesl`</span>). The linear regression resulted in a clear violation of normality (positive skew). In the bottom row, we see same output after log transforming Math Achievement -- it addressed the issue with normality, but also made the nonlinearity more apparent.  </span>
+<span id="cb21-293"><a href="#cb21-293" aria-hidden="true" tabindex="-1"></a>then</span>
+<span id="cb21-294"><a href="#cb21-294" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-295"><a href="#cb21-295" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb21-296"><a href="#cb21-296" aria-hidden="true" tabindex="-1"></a>\begin{align} </span>
+<span id="cb21-297"><a href="#cb21-297" aria-hidden="true" tabindex="-1"></a>\log(Y) &amp; = \log(a + bX + \epsilon) <span class="sc">\\</span></span>
+<span id="cb21-298"><a href="#cb21-298" aria-hidden="true" tabindex="-1"></a> &amp; \neq a + bX + \epsilon. <span class="sc">\\</span></span>
+<span id="cb21-299"><a href="#cb21-299" aria-hidden="true" tabindex="-1"></a>\end{align}</span>
+<span id="cb21-300"><a href="#cb21-300" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb21-301"><a href="#cb21-301" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-302"><a href="#cb21-302" aria-hidden="true" tabindex="-1"></a><span class="in">```{r fig-nonlinear1, echo = F, fig.cap = "Nonlinear vs non-normality when log transforming Y", fig.align = 'center', fig.height=8}</span></span>
-<span id="cb21-303"><a href="#cb21-303" aria-hidden="true" tabindex="-1"></a>mod1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(c1rmscal <span class="sc">~</span> wksesl)</span>
-<span id="cb21-304"><a href="#cb21-304" aria-hidden="true" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log</span>(c1rmscal <span class="sc">+</span> <span class="dv">1</span>) <span class="sc">~</span> wksesl)</span>
-<span id="cb21-305"><a href="#cb21-305" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
-<span id="cb21-306"><a href="#cb21-306" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod1, <span class="dv">1</span>)</span>
-<span id="cb21-307"><a href="#cb21-307" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod1, <span class="dv">2</span>)</span>
-<span id="cb21-308"><a href="#cb21-308" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod2, <span class="dv">1</span>)</span>
-<span id="cb21-309"><a href="#cb21-309" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod2, <span class="dv">2</span>)</span>
-<span id="cb21-310"><a href="#cb21-310" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-311"><a href="#cb21-311" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb21-302"><a href="#cb21-302" aria-hidden="true" tabindex="-1"></a>In practice, this means that addressing positive skew using a log transform can sometimes create more problems than it solves. @fig-nonlinear1 illustrates this issue. In the top row, we see the residual versus fitted plot and qqplot of residuals for the regression of Math Achievement (<span class="in">`c1rmscal`</span>) on SES (<span class="in">`wksesl`</span>). The linear regression resulted in a clear violation of normality (positive skew). In the bottom row, we see same output after log transforming Math Achievement -- it addressed the issue with normality, but also made the nonlinearity more apparent.  </span>
+<span id="cb21-303"><a href="#cb21-303" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-304"><a href="#cb21-304" aria-hidden="true" tabindex="-1"></a><span class="in">```{r fig-nonlinear1, echo = F, fig.cap = "Nonlinear vs non-normality when log transforming Y", fig.align = 'center', fig.height=8}</span></span>
+<span id="cb21-305"><a href="#cb21-305" aria-hidden="true" tabindex="-1"></a>mod1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(c1rmscal <span class="sc">~</span> wksesl)</span>
+<span id="cb21-306"><a href="#cb21-306" aria-hidden="true" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log</span>(c1rmscal <span class="sc">+</span> <span class="dv">1</span>) <span class="sc">~</span> wksesl)</span>
+<span id="cb21-307"><a href="#cb21-307" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb21-308"><a href="#cb21-308" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod1, <span class="dv">1</span>)</span>
+<span id="cb21-309"><a href="#cb21-309" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod1, <span class="dv">2</span>)</span>
+<span id="cb21-310"><a href="#cb21-310" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod2, <span class="dv">1</span>)</span>
+<span id="cb21-311"><a href="#cb21-311" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod2, <span class="dv">2</span>)</span>
 <span id="cb21-312"><a href="#cb21-312" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-313"><a href="#cb21-313" aria-hidden="true" tabindex="-1"></a>The take home message is that when we transform $Y$ (or $X$) we necessarily affect the relationship between the variables, as well as their individual distributions. It is often the case that when we try to “fix” the normality of the $Y$ variable, we can inadvertently make its relationship to $X$ more non-linear.</span>
+<span id="cb21-313"><a href="#cb21-313" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb21-314"><a href="#cb21-314" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-315"><a href="#cb21-315" aria-hidden="true" tabindex="-1"></a>As we discuss in the next chapter, we can address non-linearity of regression by transforming the $X$ variable(s). But we should be sure that the problem we are trying to solve (normality) isn’t worse than the the problem we end up with (non-linearity). </span>
+<span id="cb21-315"><a href="#cb21-315" aria-hidden="true" tabindex="-1"></a>The take home message is that when we transform $Y$ (or $X$) we necessarily affect the relationship between the variables, as well as their individual distributions. It is often the case that when we try to “fix” the normality of the $Y$ variable, we can inadvertently make its relationship to $X$ more non-linear.</span>
 <span id="cb21-316"><a href="#cb21-316" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-317"><a href="#cb21-317" aria-hidden="true" tabindex="-1"></a><span class="fu">## Interpretation {#sec-interpretation-8}</span></span>
+<span id="cb21-317"><a href="#cb21-317" aria-hidden="true" tabindex="-1"></a>As we discuss in the next chapter, we can address non-linearity of regression by transforming the $X$ variable(s). But we should be sure that the problem we are trying to solve (normality) isn’t worse than the the problem we end up with (non-linearity). </span>
 <span id="cb21-318"><a href="#cb21-318" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-319"><a href="#cb21-319" aria-hidden="true" tabindex="-1"></a>The final point about the log-linear model is how it affects the interpretation of the model parameters. For example, in linear regression we know that a one-unit increase in $X$ leads to a $b$-unit increase in $\hat Y$. But how do we interpret a $b$-unit increase in $\log(Y)$? </span>
+<span id="cb21-319"><a href="#cb21-319" aria-hidden="true" tabindex="-1"></a><span class="fu">## Interpretation {#sec-interpretation-8}</span></span>
 <span id="cb21-320"><a href="#cb21-320" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-321"><a href="#cb21-321" aria-hidden="true" tabindex="-1"></a>In general, one of the main shortcomings of "transforming your data" is that it can lead to uninformative or unclear interpretations of model parameters. If the results don't make sense, its not much of a consolation to know that the model assumptions looked OK! </span>
+<span id="cb21-321"><a href="#cb21-321" aria-hidden="true" tabindex="-1"></a>The final point about the log-linear model is how it affects the interpretation of the model parameters. For example, in linear regression we know that a one-unit increase in $X$ leads to a $b$-unit increase in $\hat Y$. But how do we interpret a $b$-unit increase in $\log(Y)$? </span>
 <span id="cb21-322"><a href="#cb21-322" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-323"><a href="#cb21-323" aria-hidden="true" tabindex="-1"></a>However, it turns out that there is very nice interpretation of the log-linear model. It is because of this interpretation that we often use the log transform to address skew in $Y$, rather than some other transformation. </span>
+<span id="cb21-323"><a href="#cb21-323" aria-hidden="true" tabindex="-1"></a>In general, one of the main shortcomings of "transforming your data" is that it can lead to uninformative or unclear interpretations of model parameters. If the results don't make sense, its not much of a consolation to know that the model assumptions looked OK! </span>
 <span id="cb21-324"><a href="#cb21-324" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-325"><a href="#cb21-325" aria-hidden="true" tabindex="-1"></a>There are two ways to interpret the regression coefficients in the log-linear model. First, we consider the easy but approximate way (you're welcome!). Second, we consider the more complicated but accurate way, which involves reverse transforming the regression coefficients using exponentiation (see @sec-math-review-8). </span>
+<span id="cb21-325"><a href="#cb21-325" aria-hidden="true" tabindex="-1"></a>However, it turns out that there is very nice interpretation of the log-linear model. It is because of this interpretation that we often use the log transform to address skew in $Y$, rather than some other transformation. </span>
 <span id="cb21-326"><a href="#cb21-326" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-327"><a href="#cb21-327" aria-hidden="true" tabindex="-1"></a><span class="fu">### Approximate interpretation {#sec-approximate-8}</span></span>
+<span id="cb21-327"><a href="#cb21-327" aria-hidden="true" tabindex="-1"></a>There are two ways to interpret the regression coefficients in the log-linear model. First, we consider the easy but approximate way (you're welcome!). Second, we consider the more complicated but accurate way, which involves reverse transforming the regression coefficients using exponentiation (see @sec-math-review-8). </span>
 <span id="cb21-328"><a href="#cb21-328" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-329"><a href="#cb21-329" aria-hidden="true" tabindex="-1"></a>In a log-linear model, the regression slope can be interpreted as the *approximate* proportionate change in $Y$, in the original units. So, in this equation, </span>
+<span id="cb21-329"><a href="#cb21-329" aria-hidden="true" tabindex="-1"></a><span class="fu">### Approximate interpretation {#sec-approximate-8}</span></span>
 <span id="cb21-330"><a href="#cb21-330" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-331"><a href="#cb21-331" aria-hidden="true" tabindex="-1"></a>$$ \log(Y) = a + bX + \epsilon$$ {#eq-logy}</span>
+<span id="cb21-331"><a href="#cb21-331" aria-hidden="true" tabindex="-1"></a>In a log-linear model, the regression slope can be interpreted as the *approximate* proportionate change in $Y$, in the original units. So, in this equation, </span>
 <span id="cb21-332"><a href="#cb21-332" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-333"><a href="#cb21-333" aria-hidden="true" tabindex="-1"></a>we can interpret $b$ as the proportionate change in $Y$ associated with a one unit increase in $X$. This should seem like surprising: $Y$ is not the outcome variable -- $\log(Y)$ is. But, we can still interpret the model with respect to $Y$! </span>
+<span id="cb21-333"><a href="#cb21-333" aria-hidden="true" tabindex="-1"></a>$$ \log(Y) = a + bX + \epsilon$$ {#eq-logy}</span>
 <span id="cb21-334"><a href="#cb21-334" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-335"><a href="#cb21-335" aria-hidden="true" tabindex="-1"></a>Below are some numerical examples illustrating how to interpret the regression slope in @eq-logy: </span>
+<span id="cb21-335"><a href="#cb21-335" aria-hidden="true" tabindex="-1"></a>we can interpret $b$ as the proportionate change in $Y$ associated with a one unit increase in $X$. This should seem like surprising: $Y$ is not the outcome variable -- $\log(Y)$ is. But, we can still interpret the model with respect to $Y$! </span>
 <span id="cb21-336"><a href="#cb21-336" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-337"><a href="#cb21-337" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>if $b = .25$, then $Y$ is expected to increase by 25% when $X$ increases by 1 unit. </span>
-<span id="cb21-338"><a href="#cb21-338" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>if $b = 0$, then $Y$ is expected to be the same when $X$ increases by 1 unit (i.e., no relationship)</span>
-<span id="cb21-339"><a href="#cb21-339" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-340"><a href="#cb21-340" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>if $b = -.45$, then $Y$ is expected to decrease by 45% when $X$ increases by 1 unit. </span>
+<span id="cb21-337"><a href="#cb21-337" aria-hidden="true" tabindex="-1"></a>Below are some numerical examples illustrating how to interpret the regression slope in @eq-logy: </span>
+<span id="cb21-338"><a href="#cb21-338" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-339"><a href="#cb21-339" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>if $b = .25$, then $Y$ is expected to increase by 25% when $X$ increases by 1 unit. </span>
+<span id="cb21-340"><a href="#cb21-340" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>if $b = 0$, then $Y$ is expected to be the same when $X$ increases by 1 unit (i.e., no relationship)</span>
 <span id="cb21-341"><a href="#cb21-341" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-342"><a href="#cb21-342" aria-hidden="true" tabindex="-1"></a>It is important to note that this interpretation is approximate and it only applies when $|b|$ is small (e.g., $|b|&lt; .5$). We will see how the approximation works and how to deal with other values of $b$ when we get to the exact interpretation in @sec-exact-8. </span>
+<span id="cb21-342"><a href="#cb21-342" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>if $b = -.45$, then $Y$ is expected to decrease by 45% when $X$ increases by 1 unit. </span>
 <span id="cb21-343"><a href="#cb21-343" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-344"><a href="#cb21-344" aria-hidden="true" tabindex="-1"></a>Before moving on, let's get clear on what "proportionate change" means. Consider two values of a variable. We let $Y$ denote the original value and $Y^*$ denote a new value. The "change" is the difference $Y^* - Y$. Treating the change as a proportion of the original value $Y$ gives us the proportionate change: </span>
+<span id="cb21-344"><a href="#cb21-344" aria-hidden="true" tabindex="-1"></a>It is important to note that this interpretation is approximate and it only applies when $|b|$ is small (e.g., $|b|&lt; .5$). We will see how the approximation works and how to deal with other values of $b$ when we get to the exact interpretation in @sec-exact-8. </span>
 <span id="cb21-345"><a href="#cb21-345" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-346"><a href="#cb21-346" aria-hidden="true" tabindex="-1"></a>$$ \text{proportionate change} = \frac{Y^* - Y}{Y} = Y^*/Y - 1.$$</span>
+<span id="cb21-346"><a href="#cb21-346" aria-hidden="true" tabindex="-1"></a>Before moving on, let's get clear on what "proportionate change" means. Consider two values of a variable. We let $Y$ denote the original value and $Y^*$ denote a new value. The "change" is the difference $Y^* - Y$. Treating the change as a proportion of the original value $Y$ gives us the proportionate change: </span>
 <span id="cb21-347"><a href="#cb21-347" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-348"><a href="#cb21-348" aria-hidden="true" tabindex="-1"></a>Multiplying the proportionate change by 100 gives us the percentage change, which is usually easier to talk about in a sentence (the numerical examples listed above used percentage change). If we want to talk about the change without specifying the units (e.g, proportion or percentage), we say "relative change." </span>
+<span id="cb21-348"><a href="#cb21-348" aria-hidden="true" tabindex="-1"></a>$$ \text{proportionate change} = \frac{Y^* - Y}{Y} = Y^*/Y - 1.$$</span>
 <span id="cb21-349"><a href="#cb21-349" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-350"><a href="#cb21-350" aria-hidden="true" tabindex="-1"></a>Note that relative change is not the same as relative magnitude. $Y'/Y$ is the magnitude of $Y^*$ relative to $Y$. As shown in the above equation for proportionate change, we need to subtract 1 from relative magnitude to get relative change. </span>
+<span id="cb21-350"><a href="#cb21-350" aria-hidden="true" tabindex="-1"></a>Multiplying the proportionate change by 100 gives us the percentage change, which is usually easier to talk about in a sentence (the numerical examples listed above used percentage change). If we want to talk about the change without specifying the units (e.g, proportion or percentage), we say "relative change." </span>
 <span id="cb21-351"><a href="#cb21-351" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-352"><a href="#cb21-352" aria-hidden="true" tabindex="-1"></a>For example, say I loan $Y = 100$ dollars to a friend and they pay me back $Y^* = 150$ dollars. The amount my friend paid me back is 1.5 times, or 150%, of what I initially lent them:</span>
+<span id="cb21-352"><a href="#cb21-352" aria-hidden="true" tabindex="-1"></a>Note that relative change is not the same as relative magnitude. $Y'/Y$ is the magnitude of $Y^*$ relative to $Y$. As shown in the above equation for proportionate change, we need to subtract 1 from relative magnitude to get relative change. </span>
 <span id="cb21-353"><a href="#cb21-353" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-354"><a href="#cb21-354" aria-hidden="true" tabindex="-1"></a>$$ Y^*/Y = 150/100 = 1.5 $$</span>
+<span id="cb21-354"><a href="#cb21-354" aria-hidden="true" tabindex="-1"></a>For example, say I loan $Y = 100$ dollars to a friend and they pay me back $Y^* = 150$ dollars. The amount my friend paid me back is 1.5 times, or 150%, of what I initially lent them:</span>
 <span id="cb21-355"><a href="#cb21-355" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-356"><a href="#cb21-356" aria-hidden="true" tabindex="-1"></a>This is the relative *magnitude* of the two amounts.</span>
+<span id="cb21-356"><a href="#cb21-356" aria-hidden="true" tabindex="-1"></a>$$ Y^*/Y = 150/100 = 1.5 $$</span>
 <span id="cb21-357"><a href="#cb21-357" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-358"><a href="#cb21-358" aria-hidden="true" tabindex="-1"></a>Alternatively, we could say that I have *gained* 50%, or 1/2, over the initial amount:</span>
+<span id="cb21-358"><a href="#cb21-358" aria-hidden="true" tabindex="-1"></a>This is the relative *magnitude* of the two amounts.</span>
 <span id="cb21-359"><a href="#cb21-359" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-360"><a href="#cb21-360" aria-hidden="true" tabindex="-1"></a>$$ Y^*/Y - 1 = 150/100 - 1 = .5 $$</span>
-<span id="cb21-361"><a href="#cb21-361" aria-hidden="true" tabindex="-1"></a>This is relative *change*. </span>
-<span id="cb21-362"><a href="#cb21-362" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-363"><a href="#cb21-363" aria-hidden="true" tabindex="-1"></a>As an example of relative loss rather than gain, assume $Y^* = 40$ and $Y = 100$. Then $Y^*$ is 40% of $Y$ (relative magnitude) and the relative change (decrease) from 100 to 40 is 60%. </span>
+<span id="cb21-360"><a href="#cb21-360" aria-hidden="true" tabindex="-1"></a>Alternatively, we could say that I have *gained* 50%, or 1/2, over the initial amount:</span>
+<span id="cb21-361"><a href="#cb21-361" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-362"><a href="#cb21-362" aria-hidden="true" tabindex="-1"></a>$$ Y^*/Y - 1 = 150/100 - 1 = .5 $$</span>
+<span id="cb21-363"><a href="#cb21-363" aria-hidden="true" tabindex="-1"></a>This is relative *change*. </span>
 <span id="cb21-364"><a href="#cb21-364" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-365"><a href="#cb21-365" aria-hidden="true" tabindex="-1"></a>Here are some more examples. **Please write down your answers and be prepared to share them in class.**</span>
+<span id="cb21-365"><a href="#cb21-365" aria-hidden="true" tabindex="-1"></a>As an example of relative loss rather than gain, assume $Y^* = 40$ and $Y = 100$. Then $Y^*$ is 40% of $Y$ (relative magnitude) and the relative change (decrease) from 100 to 40 is 60%. </span>
 <span id="cb21-366"><a href="#cb21-366" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-367"><a href="#cb21-367" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>How many times larger is $Y^* = 6$ than $Y = 2$?  </span>
+<span id="cb21-367"><a href="#cb21-367" aria-hidden="true" tabindex="-1"></a>Here are some more examples. **Please write down your answers and be prepared to share them in class.**</span>
 <span id="cb21-368"><a href="#cb21-368" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-369"><a href="#cb21-369" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>What is the relative increase from $Y = 2$ to $Y^* = 6$?  </span>
+<span id="cb21-369"><a href="#cb21-369" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>How many times larger is $Y^* = 6$ than $Y = 2$?  </span>
 <span id="cb21-370"><a href="#cb21-370" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-371"><a href="#cb21-371" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>What is the percent increase from $Y = 200$ to $Y^* = 600$?</span>
+<span id="cb21-371"><a href="#cb21-371" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>What is the relative increase from $Y = 2$ to $Y^* = 6$?  </span>
 <span id="cb21-372"><a href="#cb21-372" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-373"><a href="#cb21-373" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>What is the percent decrease from $Y = 600$ to $Y^* = 200$?</span>
+<span id="cb21-373"><a href="#cb21-373" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>What is the percent increase from $Y = 200$ to $Y^* = 600$?</span>
 <span id="cb21-374"><a href="#cb21-374" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-375"><a href="#cb21-375" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>What is the percent change from $Y = 1$ to $Y^* = 1$?</span>
+<span id="cb21-375"><a href="#cb21-375" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>What is the percent decrease from $Y = 600$ to $Y^* = 200$?</span>
 <span id="cb21-376"><a href="#cb21-376" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-377"><a href="#cb21-377" aria-hidden="true" tabindex="-1"></a>The answers are hidden below and can be viewed by pressing the "code" button. But please keep in mind that you won't learn anything by viewing the answers before trying the questions. </span>
+<span id="cb21-377"><a href="#cb21-377" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>What is the percent change from $Y = 1$ to $Y^* = 1$?</span>
 <span id="cb21-378"><a href="#cb21-378" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-381"><a href="#cb21-381" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb21-382"><a href="#cb21-382" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. 6 is 3 times larger than 2, or 300% percent larger than 2 (6/2 = 3)</span></span>
-<span id="cb21-383"><a href="#cb21-383" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. 6 is a 200% increase from 2 (6/2 - 1 = 2)</span></span>
-<span id="cb21-384"><a href="#cb21-384" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. 600 is a 200% increase from 200 </span></span>
-<span id="cb21-385"><a href="#cb21-385" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. 200 is a 66% decrease from 600</span></span>
-<span id="cb21-386"><a href="#cb21-386" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. 1 is a zero percent increase from 1 (but 100% as large as 1!)</span></span>
-<span id="cb21-387"><a href="#cb21-387" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb21-388"><a href="#cb21-388" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-389"><a href="#cb21-389" aria-hidden="true" tabindex="-1"></a><span class="fu">### A hypothetical example </span></span>
+<span id="cb21-379"><a href="#cb21-379" aria-hidden="true" tabindex="-1"></a>The answers are hidden below and can be viewed by pressing the "code" button. But please keep in mind that you won't learn anything by viewing the answers before trying the questions. </span>
+<span id="cb21-380"><a href="#cb21-380" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-383"><a href="#cb21-383" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb21-384"><a href="#cb21-384" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. 6 is 3 times larger than 2, or 300% percent larger than 2 (6/2 = 3)</span></span>
+<span id="cb21-385"><a href="#cb21-385" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. 6 is a 200% increase from 2 (6/2 - 1 = 2)</span></span>
+<span id="cb21-386"><a href="#cb21-386" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. 600 is a 200% increase from 200 </span></span>
+<span id="cb21-387"><a href="#cb21-387" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. 200 is a 66% decrease from 600</span></span>
+<span id="cb21-388"><a href="#cb21-388" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. 1 is a zero percent increase from 1 (but 100% as large as 1!)</span></span>
+<span id="cb21-389"><a href="#cb21-389" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb21-390"><a href="#cb21-390" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-391"><a href="#cb21-391" aria-hidden="true" tabindex="-1"></a>This section provides a hypothetical example comparing the interpretation of linear regression and log-linear regression. We will work though the example in class, so **please write down your answers to the questions in this section and be prepared to share your responses**. </span>
+<span id="cb21-391"><a href="#cb21-391" aria-hidden="true" tabindex="-1"></a><span class="fu">### A hypothetical example </span></span>
 <span id="cb21-392"><a href="#cb21-392" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-393"><a href="#cb21-393" aria-hidden="true" tabindex="-1"></a>To get a better idea of how the interpretation of log-linear regression differs from the interpretation of linear regression, let's consider the following variables:</span>
+<span id="cb21-393"><a href="#cb21-393" aria-hidden="true" tabindex="-1"></a>This section provides a hypothetical example comparing the interpretation of linear regression and log-linear regression. We will work though the example in class, so **please write down your answers to the questions in this section and be prepared to share your responses**. </span>
 <span id="cb21-394"><a href="#cb21-394" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-395"><a href="#cb21-395" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$Y$ is wages (dollars per week) </span>
-<span id="cb21-396"><a href="#cb21-396" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$X$ is hours worked per week</span>
-<span id="cb21-397"><a href="#cb21-397" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-398"><a href="#cb21-398" aria-hidden="true" tabindex="-1"></a>A linear relationship between $Y$ and $X$ could be written</span>
+<span id="cb21-395"><a href="#cb21-395" aria-hidden="true" tabindex="-1"></a>To get a better idea of how the interpretation of log-linear regression differs from the interpretation of linear regression, let's consider the following variables:</span>
+<span id="cb21-396"><a href="#cb21-396" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-397"><a href="#cb21-397" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$Y$ is wages (dollars per week) </span>
+<span id="cb21-398"><a href="#cb21-398" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$X$ is hours worked per week</span>
 <span id="cb21-399"><a href="#cb21-399" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-400"><a href="#cb21-400" aria-hidden="true" tabindex="-1"></a>$$ \widehat Y = a + bX. $$</span>
+<span id="cb21-400"><a href="#cb21-400" aria-hidden="true" tabindex="-1"></a>A linear relationship between $Y$ and $X$ could be written</span>
 <span id="cb21-401"><a href="#cb21-401" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-402"><a href="#cb21-402" aria-hidden="true" tabindex="-1"></a>Let's further assume that $b = 20$. With this information, you should be able to work out answers to the following two questions pretty easily: </span>
+<span id="cb21-402"><a href="#cb21-402" aria-hidden="true" tabindex="-1"></a>$$ \widehat Y = a + bX. $$</span>
 <span id="cb21-403"><a href="#cb21-403" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-404"><a href="#cb21-404" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>For someone who is expected to earn $100/week, what would be their predicted earnings if they worked one hour more per week? </span>
+<span id="cb21-404"><a href="#cb21-404" aria-hidden="true" tabindex="-1"></a>Let's further assume that $b = 20$. With this information, you should be able to work out answers to the following two questions pretty easily: </span>
 <span id="cb21-405"><a href="#cb21-405" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-406"><a href="#cb21-406" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>What about for someone who was expected to earn $1000/week? </span>
+<span id="cb21-406"><a href="#cb21-406" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>For someone who is expected to earn $100/week, what would be their predicted earnings if they worked one hour more per week? </span>
 <span id="cb21-407"><a href="#cb21-407" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-408"><a href="#cb21-408" aria-hidden="true" tabindex="-1"></a>Now let's consider a log-linear model: </span>
+<span id="cb21-408"><a href="#cb21-408" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>What about for someone who was expected to earn $1000/week? </span>
 <span id="cb21-409"><a href="#cb21-409" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-410"><a href="#cb21-410" aria-hidden="true" tabindex="-1"></a>$$ \log(\widehat Y) = a + bX. $$</span>
-<span id="cb21-411"><a href="#cb21-411" aria-hidden="true" tabindex="-1"></a>This time we will assume the regression coefficient is $b = .2$. Using this log-linear model, please answer the following questions: </span>
-<span id="cb21-412"><a href="#cb21-412" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-413"><a href="#cb21-413" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>For someone who is expected to earn \$100/week, what would be their  predicted earnings if they worked one hour more per week? To answer this question, use the interpretation of $b$ in terms of proportionate change, as outlined in the previous section. </span>
+<span id="cb21-410"><a href="#cb21-410" aria-hidden="true" tabindex="-1"></a>Now let's consider a log-linear model: </span>
+<span id="cb21-411"><a href="#cb21-411" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-412"><a href="#cb21-412" aria-hidden="true" tabindex="-1"></a>$$ \log(\widehat Y) = a + bX. $$</span>
+<span id="cb21-413"><a href="#cb21-413" aria-hidden="true" tabindex="-1"></a>This time we will assume the regression coefficient is $b = .2$. Using this log-linear model, please answer the following questions: </span>
 <span id="cb21-414"><a href="#cb21-414" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-415"><a href="#cb21-415" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span>What about for someone who was expected to earn $1000/week? </span>
+<span id="cb21-415"><a href="#cb21-415" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>For someone who is expected to earn \$100/week, what would be their  predicted earnings if they worked one hour more per week? To answer this question, use the interpretation of $b$ in terms of proportionate change, as outlined in the previous section. </span>
 <span id="cb21-416"><a href="#cb21-416" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-417"><a href="#cb21-417" aria-hidden="true" tabindex="-1"></a>The answers are hidden below. You can use the "code" button to see them, but please try to answer on your own first. </span>
+<span id="cb21-417"><a href="#cb21-417" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span>What about for someone who was expected to earn $1000/week? </span>
 <span id="cb21-418"><a href="#cb21-418" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-419"><a href="#cb21-419" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, results = F}</span></span>
-<span id="cb21-420"><a href="#cb21-420" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. 120 dollars per week</span></span>
-<span id="cb21-421"><a href="#cb21-421" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. 1020 dollars per week</span></span>
-<span id="cb21-422"><a href="#cb21-422" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. 120 dollars per week</span></span>
-<span id="cb21-423"><a href="#cb21-423" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. 1200 dollars per week</span></span>
-<span id="cb21-424"><a href="#cb21-424" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb21-425"><a href="#cb21-425" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-426"><a href="#cb21-426" aria-hidden="true" tabindex="-1"></a>This example shows that, while the linear model represents change in fixed units (e.g., dollars), the log-linear model represents change that is relative to an initial value of $Y$. This is particularly useful in applications involving monetary outcomes, where it has been argued that people’s "subjective evaluation" of money is more like the latter than the former. </span>
+<span id="cb21-419"><a href="#cb21-419" aria-hidden="true" tabindex="-1"></a>The answers are hidden below. You can use the "code" button to see them, but please try to answer on your own first. </span>
+<span id="cb21-420"><a href="#cb21-420" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-421"><a href="#cb21-421" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, results = F}</span></span>
+<span id="cb21-422"><a href="#cb21-422" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. 120 dollars per week</span></span>
+<span id="cb21-423"><a href="#cb21-423" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. 1020 dollars per week</span></span>
+<span id="cb21-424"><a href="#cb21-424" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. 120 dollars per week</span></span>
+<span id="cb21-425"><a href="#cb21-425" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. 1200 dollars per week</span></span>
+<span id="cb21-426"><a href="#cb21-426" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb21-427"><a href="#cb21-427" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-428"><a href="#cb21-428" aria-hidden="true" tabindex="-1"></a>The contrast between "fixed units" and "subject value" interpretions can be illustrated as follows. </span>
+<span id="cb21-428"><a href="#cb21-428" aria-hidden="true" tabindex="-1"></a>This example shows that, while the linear model represents change in fixed units (e.g., dollars), the log-linear model represents change that is relative to an initial value of $Y$. This is particularly useful in applications involving monetary outcomes, where it has been argued that people’s "subjective evaluation" of money is more like the latter than the former. </span>
 <span id="cb21-429"><a href="#cb21-429" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-430"><a href="#cb21-430" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>At \$100/week, \$20 for an additional hour is equivalent to a 20% increase in wages for only a 2.5% (1/40) increase in hours worked. </span>
+<span id="cb21-430"><a href="#cb21-430" aria-hidden="true" tabindex="-1"></a>The contrast between "fixed units" and "subject value" interpretions can be illustrated as follows. </span>
 <span id="cb21-431"><a href="#cb21-431" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-432"><a href="#cb21-432" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>At \$1000/week, \$20 is a 2% increase in wages, which is less than the 2.5% increase in hours worked.</span>
+<span id="cb21-432"><a href="#cb21-432" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>At \$100/week, \$20 for an additional hour is equivalent to a 20% increase in wages for only a 2.5% (1/40) increase in hours worked. </span>
 <span id="cb21-433"><a href="#cb21-433" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-434"><a href="#cb21-434" aria-hidden="true" tabindex="-1"></a>Thus, the same fixed amount, \$20, doesn't have the same "subject value" for someone making \$100/week as compared to someone making \$1000/week. On the other hand, a 20% increase for both people might be considered as having equal subjective value.  On this logic, the person making \$1000/ week would need a \$200 increase in order experience the same subject value as the \$20 increase provides to the person making \$100/ week.  </span>
+<span id="cb21-434"><a href="#cb21-434" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>At \$1000/week, \$20 is a 2% increase in wages, which is less than the 2.5% increase in hours worked.</span>
 <span id="cb21-435"><a href="#cb21-435" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-436"><a href="#cb21-436" aria-hidden="true" tabindex="-1"></a>Some real life examples of this kind of interpretation are linked below.</span>
+<span id="cb21-436"><a href="#cb21-436" aria-hidden="true" tabindex="-1"></a>Thus, the same fixed amount, \$20, doesn't have the same "subject value" for someone making \$100/week as compared to someone making \$1000/week. On the other hand, a 20% increase for both people might be considered as having equal subjective value.  On this logic, the person making \$1000/ week would need a \$200 increase in order experience the same subject value as the \$20 increase provides to the person making \$100/ week.  </span>
 <span id="cb21-437"><a href="#cb21-437" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-438"><a href="#cb21-438" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Sliding scales for parking, car pool / day care late pick-up, bail and fines, <span class="co">[</span><span class="ot">https://www.theatlantic.com/business/archive/2015/03/finland-home-of-the-103000-speeding-ticket/387484/</span><span class="co">](https://www.theatlantic.com/business/archive/2015/03/finland-home-of-the-103000-speeding-ticket/387484/)</span></span>
+<span id="cb21-438"><a href="#cb21-438" aria-hidden="true" tabindex="-1"></a>Some real life examples of this kind of interpretation are linked below.</span>
 <span id="cb21-439"><a href="#cb21-439" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-440"><a href="#cb21-440" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Proportional tuition based on income and number of dependents. </span>
-<span id="cb21-441"><a href="#cb21-441" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">https://ronclarkacademy.com/tuition-and-financial-aid</span><span class="co">](https://ronclarkacademy.com/tuition-and-financial-aid)</span></span>
-<span id="cb21-442"><a href="#cb21-442" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-443"><a href="#cb21-443" aria-hidden="true" tabindex="-1"></a><span class="fu">### Exact interpretation {#sec-exact-8}</span></span>
+<span id="cb21-440"><a href="#cb21-440" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Sliding scales for parking, car pool / day care late pick-up, bail and fines, <span class="co">[</span><span class="ot">https://www.theatlantic.com/business/archive/2015/03/finland-home-of-the-103000-speeding-ticket/387484/</span><span class="co">](https://www.theatlantic.com/business/archive/2015/03/finland-home-of-the-103000-speeding-ticket/387484/)</span></span>
+<span id="cb21-441"><a href="#cb21-441" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-442"><a href="#cb21-442" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Proportional tuition based on income and number of dependents. </span>
+<span id="cb21-443"><a href="#cb21-443" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">https://ronclarkacademy.com/tuition-and-financial-aid</span><span class="co">](https://ronclarkacademy.com/tuition-and-financial-aid)</span></span>
 <span id="cb21-444"><a href="#cb21-444" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-445"><a href="#cb21-445" aria-hidden="true" tabindex="-1"></a>If we want an exact interpretation of the regression coefficients in a log-linear model, we need to do some "follow-up math" with exponents. The main result is about the relative magnitude of $\hat Y$ corresponding to a one-unit change in $X$</span>
+<span id="cb21-445"><a href="#cb21-445" aria-hidden="true" tabindex="-1"></a><span class="fu">### Exact interpretation {#sec-exact-8}</span></span>
 <span id="cb21-446"><a href="#cb21-446" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-447"><a href="#cb21-447" aria-hidden="true" tabindex="-1"></a>$$ \frac{\widehat Y(X + 1)}{\widehat Y(X)} = \exp(b) </span>
-<span id="cb21-448"><a href="#cb21-448" aria-hidden="true" tabindex="-1"></a>$$ {#eq-expb}</span>
-<span id="cb21-449"><a href="#cb21-449" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-450"><a href="#cb21-450" aria-hidden="true" tabindex="-1"></a>where $\widehat Y(X)$ is the predicted value of $Y$ for a given value of $X$. This is result derived in @sec-derivation-8 below (optional).</span>
+<span id="cb21-447"><a href="#cb21-447" aria-hidden="true" tabindex="-1"></a>If we want an exact interpretation of the regression coefficients in a log-linear model, we need to do some "follow-up math" with exponents. The main result is about the relative magnitude of $\hat Y$ corresponding to a one-unit change in $X$</span>
+<span id="cb21-448"><a href="#cb21-448" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-449"><a href="#cb21-449" aria-hidden="true" tabindex="-1"></a>$$ \frac{\widehat Y(X + 1)}{\widehat Y(X)} = \exp(b) </span>
+<span id="cb21-450"><a href="#cb21-450" aria-hidden="true" tabindex="-1"></a>$$ {#eq-expb}</span>
 <span id="cb21-451"><a href="#cb21-451" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-452"><a href="#cb21-452" aria-hidden="true" tabindex="-1"></a>Based on @eq-expb, we can interpret the exponentiated regression coefficient in a log-linear model in terms of relative magnitude. In practice, people often prefer to use relative change instead. From @eq-expb and the definition of proportionate change in @sec-approximate-8, it follows that the proportionate change in $\widehat Y$ for a one-unit increase in $X$ is *exactly* equal to $\exp(b) - 1$. </span>
+<span id="cb21-452"><a href="#cb21-452" aria-hidden="true" tabindex="-1"></a>where $\widehat Y(X)$ is the predicted value of $Y$ for a given value of $X$. This is result derived in @sec-derivation-8 below (optional).</span>
 <span id="cb21-453"><a href="#cb21-453" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-454"><a href="#cb21-454" aria-hidden="true" tabindex="-1"></a>In the hypothetical example above (wages and hours worked), the exact proportion change in the log-linear model is</span>
+<span id="cb21-454"><a href="#cb21-454" aria-hidden="true" tabindex="-1"></a>Based on @eq-expb, we can interpret the exponentiated regression coefficient in a log-linear model in terms of relative magnitude. In practice, people often prefer to use relative change instead. From @eq-expb and the definition of proportionate change in @sec-approximate-8, it follows that the proportionate change in $\widehat Y$ for a one-unit increase in $X$ is *exactly* equal to $\exp(b) - 1$. </span>
 <span id="cb21-455"><a href="#cb21-455" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-456"><a href="#cb21-456" aria-hidden="true" tabindex="-1"></a>$$ \exp(.2) - 1 = 1.2214 - 1= .2214 $$</span>
+<span id="cb21-456"><a href="#cb21-456" aria-hidden="true" tabindex="-1"></a>In the hypothetical example above (wages and hours worked), the exact proportion change in the log-linear model is</span>
 <span id="cb21-457"><a href="#cb21-457" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-458"><a href="#cb21-458" aria-hidden="true" tabindex="-1"></a>or about 22%. </span>
+<span id="cb21-458"><a href="#cb21-458" aria-hidden="true" tabindex="-1"></a>$$ \exp(.2) - 1 = 1.2214 - 1= .2214 $$</span>
 <span id="cb21-459"><a href="#cb21-459" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-460"><a href="#cb21-460" aria-hidden="true" tabindex="-1"></a><span class="fu">### Summary</span></span>
+<span id="cb21-460"><a href="#cb21-460" aria-hidden="true" tabindex="-1"></a>or about 22%. </span>
 <span id="cb21-461"><a href="#cb21-461" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-462"><a href="#cb21-462" aria-hidden="true" tabindex="-1"></a>While there are many transformations that can be used to address skew, the log-linear model has the advantage that it is still interpretable in terms of the original $Y$ variable. In fact, in many applications, notably those in which $Y$ is monetary, the interpretation is arguably better than for linear regression! </span>
+<span id="cb21-462"><a href="#cb21-462" aria-hidden="true" tabindex="-1"></a><span class="fu">### Summary</span></span>
 <span id="cb21-463"><a href="#cb21-463" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-464"><a href="#cb21-464" aria-hidden="true" tabindex="-1"></a>There are two ways to interpret the regression coefficients in the log-linear model.</span>
+<span id="cb21-464"><a href="#cb21-464" aria-hidden="true" tabindex="-1"></a>While there are many transformations that can be used to address skew, the log-linear model has the advantage that it is still interpretable in terms of the original $Y$ variable. In fact, in many applications, notably those in which $Y$ is monetary, the interpretation is arguably better than for linear regression! </span>
 <span id="cb21-465"><a href="#cb21-465" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-466"><a href="#cb21-466" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>The approximate interpretation: a one-unit change in $X$ is expected to yield a $(b \times 100)\%$ change in $Y$. This interpretation only applies when $b$ is small (e.g., less than .5 in absolute value).</span>
+<span id="cb21-466"><a href="#cb21-466" aria-hidden="true" tabindex="-1"></a>There are two ways to interpret the regression coefficients in the log-linear model.</span>
 <span id="cb21-467"><a href="#cb21-467" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-468"><a href="#cb21-468" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>The exact interpretation: a one-unit change in $X$ is expected to yield a $(\exp(b) - 1)  \times 100\%$ change in $Y$, and this applies for any value of $b$. </span>
+<span id="cb21-468"><a href="#cb21-468" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>The approximate interpretation: a one-unit change in $X$ is expected to yield a $(b \times 100)\%$ change in $Y$. This interpretation only applies when $b$ is small (e.g., less than .5 in absolute value).</span>
 <span id="cb21-469"><a href="#cb21-469" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-470"><a href="#cb21-470" aria-hidden="true" tabindex="-1"></a><span class="fu">### Derivation of @eq-expb * {#sec-derivation-8}</span></span>
+<span id="cb21-470"><a href="#cb21-470" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>The exact interpretation: a one-unit change in $X$ is expected to yield a $(\exp(b) - 1)  \times 100\%$ change in $Y$, and this applies for any value of $b$. </span>
 <span id="cb21-471"><a href="#cb21-471" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-472"><a href="#cb21-472" aria-hidden="true" tabindex="-1"></a>Start with the log-linear model, exponentiate both sides, and then use the multiplication rule for exponents:</span>
+<span id="cb21-472"><a href="#cb21-472" aria-hidden="true" tabindex="-1"></a><span class="fu">### Derivation of @eq-expb * {#sec-derivation-8}</span></span>
 <span id="cb21-473"><a href="#cb21-473" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-474"><a href="#cb21-474" aria-hidden="true" tabindex="-1"></a>\begin{align}</span>
-<span id="cb21-475"><a href="#cb21-475" aria-hidden="true" tabindex="-1"></a>\log(\widehat Y) &amp; = a + bX <span class="sc">\\</span></span>
-<span id="cb21-476"><a href="#cb21-476" aria-hidden="true" tabindex="-1"></a>\implies &amp; <span class="sc">\\</span></span>
-<span id="cb21-477"><a href="#cb21-477" aria-hidden="true" tabindex="-1"></a>\exp(\log(\widehat Y)) &amp; = \exp(a + bX) <span class="sc">\\</span></span>
+<span id="cb21-474"><a href="#cb21-474" aria-hidden="true" tabindex="-1"></a>Start with the log-linear model, exponentiate both sides, and then use the multiplication rule for exponents:</span>
+<span id="cb21-475"><a href="#cb21-475" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-476"><a href="#cb21-476" aria-hidden="true" tabindex="-1"></a>\begin{align}</span>
+<span id="cb21-477"><a href="#cb21-477" aria-hidden="true" tabindex="-1"></a>\log(\widehat Y) &amp; = a + bX <span class="sc">\\</span></span>
 <span id="cb21-478"><a href="#cb21-478" aria-hidden="true" tabindex="-1"></a>\implies &amp; <span class="sc">\\</span></span>
-<span id="cb21-479"><a href="#cb21-479" aria-hidden="true" tabindex="-1"></a>\widehat Y &amp; = \exp(a)\exp(bX) <span class="sc">\\</span></span>
-<span id="cb21-480"><a href="#cb21-480" aria-hidden="true" tabindex="-1"></a>\end{align}</span>
-<span id="cb21-481"><a href="#cb21-481" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-482"><a href="#cb21-482" aria-hidden="true" tabindex="-1"></a>Then do the same thing for $X+1$ in place of $X$: </span>
+<span id="cb21-479"><a href="#cb21-479" aria-hidden="true" tabindex="-1"></a>\exp(\log(\widehat Y)) &amp; = \exp(a + bX) <span class="sc">\\</span></span>
+<span id="cb21-480"><a href="#cb21-480" aria-hidden="true" tabindex="-1"></a>\implies &amp; <span class="sc">\\</span></span>
+<span id="cb21-481"><a href="#cb21-481" aria-hidden="true" tabindex="-1"></a>\widehat Y &amp; = \exp(a)\exp(bX) <span class="sc">\\</span></span>
+<span id="cb21-482"><a href="#cb21-482" aria-hidden="true" tabindex="-1"></a>\end{align}</span>
 <span id="cb21-483"><a href="#cb21-483" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-484"><a href="#cb21-484" aria-hidden="true" tabindex="-1"></a>\begin{align}</span>
-<span id="cb21-485"><a href="#cb21-485" aria-hidden="true" tabindex="-1"></a>\log(\widehat Y^*) &amp; = a + b(X + 1) <span class="sc">\\</span></span>
-<span id="cb21-486"><a href="#cb21-486" aria-hidden="true" tabindex="-1"></a>\implies &amp; <span class="sc">\\</span></span>
-<span id="cb21-487"><a href="#cb21-487" aria-hidden="true" tabindex="-1"></a>\widehat Y^*&amp; = \exp(a)\exp(bX)\exp(b) <span class="sc">\\</span></span>
-<span id="cb21-488"><a href="#cb21-488" aria-hidden="true" tabindex="-1"></a>\end{align}</span>
-<span id="cb21-489"><a href="#cb21-489" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-490"><a href="#cb21-490" aria-hidden="true" tabindex="-1"></a>Finally, take the ratio of $\widehat Y^*$ to $\widehat Y$: </span>
+<span id="cb21-484"><a href="#cb21-484" aria-hidden="true" tabindex="-1"></a>Then do the same thing for $X+1$ in place of $X$: </span>
+<span id="cb21-485"><a href="#cb21-485" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-486"><a href="#cb21-486" aria-hidden="true" tabindex="-1"></a>\begin{align}</span>
+<span id="cb21-487"><a href="#cb21-487" aria-hidden="true" tabindex="-1"></a>\log(\widehat Y^*) &amp; = a + b(X + 1) <span class="sc">\\</span></span>
+<span id="cb21-488"><a href="#cb21-488" aria-hidden="true" tabindex="-1"></a>\implies &amp; <span class="sc">\\</span></span>
+<span id="cb21-489"><a href="#cb21-489" aria-hidden="true" tabindex="-1"></a>\widehat Y^*&amp; = \exp(a)\exp(bX)\exp(b) <span class="sc">\\</span></span>
+<span id="cb21-490"><a href="#cb21-490" aria-hidden="true" tabindex="-1"></a>\end{align}</span>
 <span id="cb21-491"><a href="#cb21-491" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-492"><a href="#cb21-492" aria-hidden="true" tabindex="-1"></a>$$ \frac{\widehat Y^*}{\widehat Y} = \frac{\exp(a)\exp(bX)\exp(b)}{\exp(a)\exp(bX)} = \exp(b) $$</span>
+<span id="cb21-492"><a href="#cb21-492" aria-hidden="true" tabindex="-1"></a>Finally, take the ratio of $\widehat Y^*$ to $\widehat Y$: </span>
 <span id="cb21-493"><a href="#cb21-493" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-494"><a href="#cb21-494" aria-hidden="true" tabindex="-1"></a>This gives @eq-expb. </span>
+<span id="cb21-494"><a href="#cb21-494" aria-hidden="true" tabindex="-1"></a>$$ \frac{\widehat Y^*}{\widehat Y} = \frac{\exp(a)\exp(bX)\exp(b)}{\exp(a)\exp(bX)} = \exp(b) $$</span>
 <span id="cb21-495"><a href="#cb21-495" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-496"><a href="#cb21-496" aria-hidden="true" tabindex="-1"></a>The reason that the approximate interpretation in @sec-approximate-8 works is because </span>
+<span id="cb21-496"><a href="#cb21-496" aria-hidden="true" tabindex="-1"></a>This gives @eq-expb. </span>
 <span id="cb21-497"><a href="#cb21-497" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-498"><a href="#cb21-498" aria-hidden="true" tabindex="-1"></a>$$ \exp(b) - 1 \approx b $$</span>
+<span id="cb21-498"><a href="#cb21-498" aria-hidden="true" tabindex="-1"></a>The reason that the approximate interpretation in @sec-approximate-8 works is because </span>
 <span id="cb21-499"><a href="#cb21-499" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-500"><a href="#cb21-500" aria-hidden="true" tabindex="-1"></a>for $|b| &lt; .5$. This is illustrated in the graph below, where the blue line is $\exp(b)-1$ and black line is $b$. We can see that the two lines are pretty close over the range (-.5, .5). </span>
+<span id="cb21-500"><a href="#cb21-500" aria-hidden="true" tabindex="-1"></a>$$ \exp(b) - 1 \approx b $$</span>
 <span id="cb21-501"><a href="#cb21-501" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-502"><a href="#cb21-502" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-503"><a href="#cb21-503" aria-hidden="true" tabindex="-1"></a><span class="in">```{r fig-expb, echo = F, fig.cap = "exp(b) - 1 (blue) versus b (black)", fig.align = 'center'}</span></span>
-<span id="cb21-504"><a href="#cb21-504" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="at">by =</span> .<span class="dv">1</span>)</span>
-<span id="cb21-505"><a href="#cb21-505" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, x, <span class="at">type =</span> <span class="st">"l"</span>, <span class="at">ylab =</span> <span class="st">"exact vs approx proportion change"</span>, <span class="at">xlab =</span> <span class="st">"value of regression coefficient"</span>)</span>
-<span id="cb21-506"><a href="#cb21-506" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(x, <span class="fu">exp</span>(x)<span class="sc">-</span><span class="dv">1</span>, <span class="at">type =</span> <span class="st">"l"</span>, <span class="at">col =</span> <span class="st">"#4b9cd3"</span>)</span>
-<span id="cb21-507"><a href="#cb21-507" aria-hidden="true" tabindex="-1"></a><span class="co">#abline(h = 0, col = "grey", lty = 2)</span></span>
-<span id="cb21-508"><a href="#cb21-508" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb21-509"><a href="#cb21-509" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-510"><a href="#cb21-510" aria-hidden="true" tabindex="-1"></a><span class="fu">## Worked example {#sec-worked-example-8} </span></span>
+<span id="cb21-502"><a href="#cb21-502" aria-hidden="true" tabindex="-1"></a>for $|b| &lt; .5$. This is illustrated in the graph below, where the blue line is $\exp(b)-1$ and black line is $b$. We can see that the two lines are pretty close over the range (-.5, .5). </span>
+<span id="cb21-503"><a href="#cb21-503" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-504"><a href="#cb21-504" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-505"><a href="#cb21-505" aria-hidden="true" tabindex="-1"></a><span class="in">```{r fig-expb, echo = F, fig.cap = "exp(b) - 1 (blue) versus b (black)", fig.align = 'center'}</span></span>
+<span id="cb21-506"><a href="#cb21-506" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="at">by =</span> .<span class="dv">1</span>)</span>
+<span id="cb21-507"><a href="#cb21-507" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, x, <span class="at">type =</span> <span class="st">"l"</span>, <span class="at">ylab =</span> <span class="st">"exact vs approx proportion change"</span>, <span class="at">xlab =</span> <span class="st">"value of regression coefficient"</span>)</span>
+<span id="cb21-508"><a href="#cb21-508" aria-hidden="true" tabindex="-1"></a><span class="fu">points</span>(x, <span class="fu">exp</span>(x)<span class="sc">-</span><span class="dv">1</span>, <span class="at">type =</span> <span class="st">"l"</span>, <span class="at">col =</span> <span class="st">"#4b9cd3"</span>)</span>
+<span id="cb21-509"><a href="#cb21-509" aria-hidden="true" tabindex="-1"></a><span class="co">#abline(h = 0, col = "grey", lty = 2)</span></span>
+<span id="cb21-510"><a href="#cb21-510" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb21-511"><a href="#cb21-511" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-512"><a href="#cb21-512" aria-hidden="true" tabindex="-1"></a>This section works through log-linear regression using a new example, the <span class="in">`Wages.Rdata`</span> data (source: Weinberg &amp; Abramowitz (2017) Statistics using Stata: An integrative approach. Cambridge University Press). The dataset was collected in 1985 from $N = 400$ respondents and contains the following variables.   </span>
+<span id="cb21-512"><a href="#cb21-512" aria-hidden="true" tabindex="-1"></a><span class="fu">## Worked example {#sec-worked-example-8} </span></span>
 <span id="cb21-513"><a href="#cb21-513" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-516"><a href="#cb21-516" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb21-517"><a href="#cb21-517" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the data and take a look</span></span>
-<span id="cb21-518"><a href="#cb21-518" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"Wages.RData"</span>)</span>
-<span id="cb21-519"><a href="#cb21-519" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(wages))</span>
-<span id="cb21-520"><a href="#cb21-520" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb21-521"><a href="#cb21-521" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-522"><a href="#cb21-522" aria-hidden="true" tabindex="-1"></a>We will focus on regressing hourly wage (<span class="in">`wage`</span>) on years of education (<span class="in">`educ`</span>). The distribution of the outcome variable and its relationship with the predictor are depicted below. </span>
+<span id="cb21-514"><a href="#cb21-514" aria-hidden="true" tabindex="-1"></a>This section works through log-linear regression using a new example, the <span class="in">`Wages.Rdata`</span> data (source: Weinberg &amp; Abramowitz (2017) Statistics using Stata: An integrative approach. Cambridge University Press). The dataset was collected in 1985 from $N = 400$ respondents and contains the following variables.   </span>
+<span id="cb21-515"><a href="#cb21-515" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-518"><a href="#cb21-518" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb21-519"><a href="#cb21-519" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the data and take a look</span></span>
+<span id="cb21-520"><a href="#cb21-520" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"Wages.RData"</span>)</span>
+<span id="cb21-521"><a href="#cb21-521" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(wages))</span>
+<span id="cb21-522"><a href="#cb21-522" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb21-523"><a href="#cb21-523" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-524"><a href="#cb21-524" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-527"><a href="#cb21-527" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb21-528"><a href="#cb21-528" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(wages)</span>
-<span id="cb21-529"><a href="#cb21-529" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
-<span id="cb21-530"><a href="#cb21-530" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(wage,  <span class="at">col =</span> <span class="st">"#4B9CD3"</span>)</span>
-<span id="cb21-531"><a href="#cb21-531" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(educ, wage, <span class="at">col =</span> <span class="st">"#4B9CD3"</span>)</span>
-<span id="cb21-532"><a href="#cb21-532" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb21-533"><a href="#cb21-533" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-534"><a href="#cb21-534" aria-hidden="true" tabindex="-1"></a>This example is a good candidate for log-linear regression because</span>
+<span id="cb21-524"><a href="#cb21-524" aria-hidden="true" tabindex="-1"></a>We will focus on regressing hourly wage (<span class="in">`wage`</span>) on years of education (<span class="in">`educ`</span>). The distribution of the outcome variable and its relationship with the predictor are depicted below. </span>
+<span id="cb21-525"><a href="#cb21-525" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-526"><a href="#cb21-526" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-529"><a href="#cb21-529" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb21-530"><a href="#cb21-530" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(wages)</span>
+<span id="cb21-531"><a href="#cb21-531" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb21-532"><a href="#cb21-532" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(wage,  <span class="at">col =</span> <span class="st">"#4B9CD3"</span>)</span>
+<span id="cb21-533"><a href="#cb21-533" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(educ, wage, <span class="at">col =</span> <span class="st">"#4B9CD3"</span>)</span>
+<span id="cb21-534"><a href="#cb21-534" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb21-535"><a href="#cb21-535" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-536"><a href="#cb21-536" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`wages`</span> is positively skewed</span>
-<span id="cb21-537"><a href="#cb21-537" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Its relationship with <span class="in">`educ`</span> appears somewhat exponential</span>
-<span id="cb21-538"><a href="#cb21-538" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>The log-transform provides a suitable interpretation when the outcome is monetary</span>
-<span id="cb21-539"><a href="#cb21-539" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-540"><a href="#cb21-540" aria-hidden="true" tabindex="-1"></a>Moreover, a quick a look at the linear regression model (below) shows that *all* of the model assumptions are violated. So, time to try something other than regular regression!</span>
+<span id="cb21-536"><a href="#cb21-536" aria-hidden="true" tabindex="-1"></a>This example is a good candidate for log-linear regression because</span>
+<span id="cb21-537"><a href="#cb21-537" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-538"><a href="#cb21-538" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`wages`</span> is positively skewed</span>
+<span id="cb21-539"><a href="#cb21-539" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Its relationship with <span class="in">`educ`</span> appears somewhat exponential</span>
+<span id="cb21-540"><a href="#cb21-540" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>The log-transform provides a suitable interpretation when the outcome is monetary</span>
 <span id="cb21-541"><a href="#cb21-541" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-544"><a href="#cb21-544" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb21-545"><a href="#cb21-545" aria-hidden="true" tabindex="-1"></a>mod1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(wage <span class="sc">~</span> educ)</span>
-<span id="cb21-546"><a href="#cb21-546" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-547"><a href="#cb21-547" aria-hidden="true" tabindex="-1"></a><span class="co"># Check out model fit</span></span>
-<span id="cb21-548"><a href="#cb21-548" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
-<span id="cb21-549"><a href="#cb21-549" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod1, <span class="dv">1</span>, <span class="at">col =</span> <span class="st">"#4B9CD3"</span>)</span>
-<span id="cb21-550"><a href="#cb21-550" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod1, <span class="dv">2</span>, <span class="at">col =</span> <span class="st">"#4B9CD3"</span>)</span>
-<span id="cb21-551"><a href="#cb21-551" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb21-552"><a href="#cb21-552" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-553"><a href="#cb21-553" aria-hidden="true" tabindex="-1"></a><span class="fu">### Log-linear regression of Wages on Education</span></span>
+<span id="cb21-542"><a href="#cb21-542" aria-hidden="true" tabindex="-1"></a>Moreover, a quick a look at the linear regression model (below) shows that *all* of the model assumptions are violated. So, time to try something other than regular regression!</span>
+<span id="cb21-543"><a href="#cb21-543" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-546"><a href="#cb21-546" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb21-547"><a href="#cb21-547" aria-hidden="true" tabindex="-1"></a>mod1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(wage <span class="sc">~</span> educ)</span>
+<span id="cb21-548"><a href="#cb21-548" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-549"><a href="#cb21-549" aria-hidden="true" tabindex="-1"></a><span class="co"># Check out model fit</span></span>
+<span id="cb21-550"><a href="#cb21-550" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb21-551"><a href="#cb21-551" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod1, <span class="dv">1</span>, <span class="at">col =</span> <span class="st">"#4B9CD3"</span>)</span>
+<span id="cb21-552"><a href="#cb21-552" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod1, <span class="dv">2</span>, <span class="at">col =</span> <span class="st">"#4B9CD3"</span>)</span>
+<span id="cb21-553"><a href="#cb21-553" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb21-554"><a href="#cb21-554" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-555"><a href="#cb21-555" aria-hidden="true" tabindex="-1"></a>To run a log-linear model, we can transform the $Y$-variable (wages) using the <span class="in">`log`</span> function, and then run the model as usual. The diagnostic plots are shown below. </span>
+<span id="cb21-555"><a href="#cb21-555" aria-hidden="true" tabindex="-1"></a><span class="fu">### Log-linear regression of Wages on Education</span></span>
 <span id="cb21-556"><a href="#cb21-556" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-559"><a href="#cb21-559" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb21-560"><a href="#cb21-560" aria-hidden="true" tabindex="-1"></a><span class="co"># Create log transform of wage</span></span>
-<span id="cb21-561"><a href="#cb21-561" aria-hidden="true" tabindex="-1"></a>log_wage <span class="ot">&lt;-</span> <span class="fu">log</span>(wage <span class="sc">+</span> <span class="dv">1</span>)</span>
-<span id="cb21-562"><a href="#cb21-562" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-563"><a href="#cb21-563" aria-hidden="true" tabindex="-1"></a><span class="co"># Regress it on educ</span></span>
-<span id="cb21-564"><a href="#cb21-564" aria-hidden="true" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(log_wage <span class="sc">~</span> educ)</span>
-<span id="cb21-565"><a href="#cb21-565" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-566"><a href="#cb21-566" aria-hidden="true" tabindex="-1"></a><span class="co"># Check out model fit</span></span>
-<span id="cb21-567"><a href="#cb21-567" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
-<span id="cb21-568"><a href="#cb21-568" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod2, <span class="dv">1</span>, <span class="at">col =</span> <span class="st">"#4B9CD3"</span>)</span>
-<span id="cb21-569"><a href="#cb21-569" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod2, <span class="dv">2</span>, <span class="at">col =</span> <span class="st">"#4B9CD3"</span>)</span>
-<span id="cb21-570"><a href="#cb21-570" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb21-571"><a href="#cb21-571" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-572"><a href="#cb21-572" aria-hidden="true" tabindex="-1"></a>We can see that the log transformation helped with positive skew, although didn't do much for the negative tail. It also reduced the apparent heteroskedasticity. However, the relationship still appears non-linear, perhaps more so than in the original linear model. We will address non-linearity in the following chapter, and for now just focus on interpreting the log-linear model in this example. </span>
+<span id="cb21-557"><a href="#cb21-557" aria-hidden="true" tabindex="-1"></a>To run a log-linear model, we can transform the $Y$-variable (wages) using the <span class="in">`log`</span> function, and then run the model as usual. The diagnostic plots are shown below. </span>
+<span id="cb21-558"><a href="#cb21-558" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-561"><a href="#cb21-561" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb21-562"><a href="#cb21-562" aria-hidden="true" tabindex="-1"></a><span class="co"># Create log transform of wage</span></span>
+<span id="cb21-563"><a href="#cb21-563" aria-hidden="true" tabindex="-1"></a>log_wage <span class="ot">&lt;-</span> <span class="fu">log</span>(wage <span class="sc">+</span> <span class="dv">1</span>)</span>
+<span id="cb21-564"><a href="#cb21-564" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-565"><a href="#cb21-565" aria-hidden="true" tabindex="-1"></a><span class="co"># Regress it on educ</span></span>
+<span id="cb21-566"><a href="#cb21-566" aria-hidden="true" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(log_wage <span class="sc">~</span> educ)</span>
+<span id="cb21-567"><a href="#cb21-567" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-568"><a href="#cb21-568" aria-hidden="true" tabindex="-1"></a><span class="co"># Check out model fit</span></span>
+<span id="cb21-569"><a href="#cb21-569" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb21-570"><a href="#cb21-570" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod2, <span class="dv">1</span>, <span class="at">col =</span> <span class="st">"#4B9CD3"</span>)</span>
+<span id="cb21-571"><a href="#cb21-571" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod2, <span class="dv">2</span>, <span class="at">col =</span> <span class="st">"#4B9CD3"</span>)</span>
+<span id="cb21-572"><a href="#cb21-572" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb21-573"><a href="#cb21-573" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-574"><a href="#cb21-574" aria-hidden="true" tabindex="-1"></a>The model output is shown below. </span>
+<span id="cb21-574"><a href="#cb21-574" aria-hidden="true" tabindex="-1"></a>We can see that the log transformation helped with positive skew, although didn't do much for the negative tail. It also reduced the apparent heteroskedasticity. However, the relationship still appears non-linear, perhaps more so than in the original linear model. We will address non-linearity in the following chapter, and for now just focus on interpreting the log-linear model in this example. </span>
 <span id="cb21-575"><a href="#cb21-575" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-578"><a href="#cb21-578" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb21-579"><a href="#cb21-579" aria-hidden="true" tabindex="-1"></a><span class="co">#summary(mod2)</span></span>
-<span id="cb21-580"><a href="#cb21-580" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"files/images/log_linear_output.png"</span>, <span class="at">dpi =</span> <span class="dv">125</span>)</span>
-<span id="cb21-581"><a href="#cb21-581" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb21-582"><a href="#cb21-582" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-583"><a href="#cb21-583" aria-hidden="true" tabindex="-1"></a>Plugging-in the values from the output using the equation for log-linear regression, we have</span>
+<span id="cb21-576"><a href="#cb21-576" aria-hidden="true" tabindex="-1"></a>The model output is shown below. </span>
+<span id="cb21-577"><a href="#cb21-577" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-580"><a href="#cb21-580" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb21-581"><a href="#cb21-581" aria-hidden="true" tabindex="-1"></a><span class="co">#summary(mod2)</span></span>
+<span id="cb21-582"><a href="#cb21-582" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"files/images/log_linear_output.png"</span>, <span class="at">dpi =</span> <span class="dv">125</span>)</span>
+<span id="cb21-583"><a href="#cb21-583" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb21-584"><a href="#cb21-584" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-585"><a href="#cb21-585" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb21-586"><a href="#cb21-586" aria-hidden="true" tabindex="-1"></a>\begin{align}</span>
-<span id="cb21-587"><a href="#cb21-587" aria-hidden="true" tabindex="-1"></a>\widehat{\log(WAGES)} &amp; = a + b (EDUC) <span class="sc">\\</span></span>
-<span id="cb21-588"><a href="#cb21-588" aria-hidden="true" tabindex="-1"></a>\widehat{\log(WAGES)} &amp; = 1.188730 + 0.074802 (EDUC)</span>
-<span id="cb21-589"><a href="#cb21-589" aria-hidden="true" tabindex="-1"></a>\end{align}</span>
-<span id="cb21-590"><a href="#cb21-590" aria-hidden="true" tabindex="-1"></a>$$ </span>
-<span id="cb21-591"><a href="#cb21-591" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-592"><a href="#cb21-592" aria-hidden="true" tabindex="-1"></a>**Please take a moment to write down both the approximate and exact interpretation of the regression coefficient for <span class="in">`educ`</span>. Hint: you need to do some follow-up math with exponents to get the exact interpretation. ** </span>
+<span id="cb21-585"><a href="#cb21-585" aria-hidden="true" tabindex="-1"></a>Plugging-in the values from the output using the equation for log-linear regression, we have</span>
+<span id="cb21-586"><a href="#cb21-586" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-587"><a href="#cb21-587" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb21-588"><a href="#cb21-588" aria-hidden="true" tabindex="-1"></a>\begin{align}</span>
+<span id="cb21-589"><a href="#cb21-589" aria-hidden="true" tabindex="-1"></a>\widehat{\log(WAGES)} &amp; = a + b (EDUC) <span class="sc">\\</span></span>
+<span id="cb21-590"><a href="#cb21-590" aria-hidden="true" tabindex="-1"></a>\widehat{\log(WAGES)} &amp; = 1.188730 + 0.074802 (EDUC)</span>
+<span id="cb21-591"><a href="#cb21-591" aria-hidden="true" tabindex="-1"></a>\end{align}</span>
+<span id="cb21-592"><a href="#cb21-592" aria-hidden="true" tabindex="-1"></a>$$ </span>
 <span id="cb21-593"><a href="#cb21-593" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-594"><a href="#cb21-594" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo = F}</span></span>
-<span id="cb21-595"><a href="#cb21-595" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(wages)</span>
-<span id="cb21-596"><a href="#cb21-596" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb21-597"><a href="#cb21-597" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-598"><a href="#cb21-598" aria-hidden="true" tabindex="-1"></a><span class="fu">## Workbook {#sec-workbook-8}</span></span>
+<span id="cb21-594"><a href="#cb21-594" aria-hidden="true" tabindex="-1"></a>**Please take a moment to write down both the approximate and exact interpretation of the regression coefficient for <span class="in">`educ`</span>. Hint: you need to do some follow-up math with exponents to get the exact interpretation. ** </span>
+<span id="cb21-595"><a href="#cb21-595" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-596"><a href="#cb21-596" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo = F}</span></span>
+<span id="cb21-597"><a href="#cb21-597" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(wages)</span>
+<span id="cb21-598"><a href="#cb21-598" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb21-599"><a href="#cb21-599" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-600"><a href="#cb21-600" aria-hidden="true" tabindex="-1"></a>This section collects the questions asked in this chapter. The lessons for this chapter will focus on discussing these questions and then working on the exercises in @sec-exercises-8. The lesson will **not** be a lecture that reviews all of the material in the chapter! So, if you haven't written down / thought about the answers to these questions before class, the lesson will not be very useful for you. Please engage with each question by writing down one or more answers, asking clarifying questions about related material, posing follow up questions, etc. </span>
+<span id="cb21-600"><a href="#cb21-600" aria-hidden="true" tabindex="-1"></a><span class="fu">## Workbook {#sec-workbook-8}</span></span>
 <span id="cb21-601"><a href="#cb21-601" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-602"><a href="#cb21-602" aria-hidden="true" tabindex="-1"></a>@sec-math-review-8</span>
+<span id="cb21-602"><a href="#cb21-602" aria-hidden="true" tabindex="-1"></a>This section collects the questions asked in this chapter. The lessons for this chapter will focus on discussing these questions and then working on the exercises in @sec-exercises-8. The lesson will **not** be a lecture that reviews all of the material in the chapter! So, if you haven't written down / thought about the answers to these questions before class, the lesson will not be very useful for you. Please engage with each question by writing down one or more answers, asking clarifying questions about related material, posing follow up questions, etc. </span>
 <span id="cb21-603"><a href="#cb21-603" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-604"><a href="#cb21-604" aria-hidden="true" tabindex="-1"></a>I'll ask some questions like the following to start class off. You check your answers by pasting the questions into $R$ or Google's search bar. </span>
+<span id="cb21-604"><a href="#cb21-604" aria-hidden="true" tabindex="-1"></a>@sec-math-review-8</span>
 <span id="cb21-605"><a href="#cb21-605" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-606"><a href="#cb21-606" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$\log(2.7182) = ?$</span>
-<span id="cb21-607"><a href="#cb21-607" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$\log(1) = ?$</span>
-<span id="cb21-608"><a href="#cb21-608" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$\log(0) = ?$ </span>
-<span id="cb21-609"><a href="#cb21-609" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$\log(-1) = ?$ </span>
-<span id="cb21-610"><a href="#cb21-610" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$\exp(1) = ?$</span>
-<span id="cb21-611"><a href="#cb21-611" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$\exp(0) = ?$</span>
-<span id="cb21-612"><a href="#cb21-612" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$\exp(-1) = ?$</span>
-<span id="cb21-613"><a href="#cb21-613" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>What is larger, $\log(10)$ or $\exp(10)$? </span>
-<span id="cb21-614"><a href="#cb21-614" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$\log(\exp(x)) = ?$ </span>
-<span id="cb21-615"><a href="#cb21-615" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$\exp(\log(x)) = ?$</span>
-<span id="cb21-616"><a href="#cb21-616" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-617"><a href="#cb21-617" aria-hidden="true" tabindex="-1"></a>@sec-interpretation-8</span>
+<span id="cb21-606"><a href="#cb21-606" aria-hidden="true" tabindex="-1"></a>I'll ask some questions like the following to start class off. You check your answers by pasting the questions into $R$ or Google's search bar. </span>
+<span id="cb21-607"><a href="#cb21-607" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-608"><a href="#cb21-608" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$\log(2.7182) = ?$</span>
+<span id="cb21-609"><a href="#cb21-609" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$\log(1) = ?$</span>
+<span id="cb21-610"><a href="#cb21-610" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$\log(0) = ?$ </span>
+<span id="cb21-611"><a href="#cb21-611" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$\log(-1) = ?$ </span>
+<span id="cb21-612"><a href="#cb21-612" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$\exp(1) = ?$</span>
+<span id="cb21-613"><a href="#cb21-613" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$\exp(0) = ?$</span>
+<span id="cb21-614"><a href="#cb21-614" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$\exp(-1) = ?$</span>
+<span id="cb21-615"><a href="#cb21-615" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>What is larger, $\log(10)$ or $\exp(10)$? </span>
+<span id="cb21-616"><a href="#cb21-616" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$\log(\exp(x)) = ?$ </span>
+<span id="cb21-617"><a href="#cb21-617" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$\exp(\log(x)) = ?$</span>
 <span id="cb21-618"><a href="#cb21-618" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-619"><a href="#cb21-619" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Please write down your answers to the questions below and be prepared to share in clas: s</span>
+<span id="cb21-619"><a href="#cb21-619" aria-hidden="true" tabindex="-1"></a>@sec-interpretation-8</span>
 <span id="cb21-620"><a href="#cb21-620" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-621"><a href="#cb21-621" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>How many times larger is $Y^* = 6$ than $Y = 2$?  </span>
+<span id="cb21-621"><a href="#cb21-621" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Please write down your answers to the questions below and be prepared to share in clas: s</span>
 <span id="cb21-622"><a href="#cb21-622" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-623"><a href="#cb21-623" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>What is the relative increase from $Y = 2$ to $Y^* = 6$?  </span>
+<span id="cb21-623"><a href="#cb21-623" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>How many times larger is $Y^* = 6$ than $Y = 2$?  </span>
 <span id="cb21-624"><a href="#cb21-624" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-625"><a href="#cb21-625" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>What is the percent increase from $Y = 200$ to $Y^* = 600$?</span>
+<span id="cb21-625"><a href="#cb21-625" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>What is the relative increase from $Y = 2$ to $Y^* = 6$?  </span>
 <span id="cb21-626"><a href="#cb21-626" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-627"><a href="#cb21-627" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>What is the percent decrease from $Y = 600$ to $Y^* = 200$?</span>
+<span id="cb21-627"><a href="#cb21-627" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>What is the percent increase from $Y = 200$ to $Y^* = 600$?</span>
 <span id="cb21-628"><a href="#cb21-628" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-629"><a href="#cb21-629" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>What is the percent change from $Y = 1$ to $Y^* = 1$?</span>
+<span id="cb21-629"><a href="#cb21-629" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>What is the percent decrease from $Y = 600$ to $Y^* = 200$?</span>
 <span id="cb21-630"><a href="#cb21-630" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-631"><a href="#cb21-631" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Please write down your answers to the four questions about the hypothetical example in and be prepared to share your responses in class. *</span>
-<span id="cb21-632"><a href="#cb21-632" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb21-633"><a href="#cb21-633" aria-hidden="true" tabindex="-1"></a>@sec-worked-example-8 </span>
-<span id="cb21-634"><a href="#cb21-634" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-635"><a href="#cb21-635" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Please take a moment to write down your interpretation of the regression coefficient for <span class="in">`educ`</span> in the summary output below.</span>
+<span id="cb21-631"><a href="#cb21-631" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>What is the percent change from $Y = 1$ to $Y^* = 1$?</span>
+<span id="cb21-632"><a href="#cb21-632" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-633"><a href="#cb21-633" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Please write down your answers to the four questions about the hypothetical example in and be prepared to share your responses in class. *</span>
+<span id="cb21-634"><a href="#cb21-634" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb21-635"><a href="#cb21-635" aria-hidden="true" tabindex="-1"></a>@sec-worked-example-8 </span>
 <span id="cb21-636"><a href="#cb21-636" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-639"><a href="#cb21-639" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb21-640"><a href="#cb21-640" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(wages)</span>
-<span id="cb21-641"><a href="#cb21-641" aria-hidden="true" tabindex="-1"></a>log_wage <span class="ot">&lt;-</span> <span class="fu">log</span>(wage <span class="sc">+</span> <span class="dv">1</span>)</span>
-<span id="cb21-642"><a href="#cb21-642" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-643"><a href="#cb21-643" aria-hidden="true" tabindex="-1"></a><span class="co"># Regress it on educ</span></span>
-<span id="cb21-644"><a href="#cb21-644" aria-hidden="true" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(log_wage <span class="sc">~</span> educ)</span>
-<span id="cb21-645"><a href="#cb21-645" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod2)</span>
-<span id="cb21-646"><a href="#cb21-646" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(wages)</span>
-<span id="cb21-647"><a href="#cb21-647" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb21-648"><a href="#cb21-648" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb21-649"><a href="#cb21-649" aria-hidden="true" tabindex="-1"></a><span class="fu">## Exercises {#exercises-9}</span></span>
-<span id="cb21-650"><a href="#cb21-650" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-651"><a href="#cb21-651" aria-hidden="true" tabindex="-1"></a>There isn't much new in terms of R code in this chapter. The code for the worked example is presented below, but please refer to @sec-worked-example-8 for the interpretation.</span>
+<span id="cb21-637"><a href="#cb21-637" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Please take a moment to write down your interpretation of the regression coefficient for <span class="in">`educ`</span> in the summary output below.</span>
+<span id="cb21-638"><a href="#cb21-638" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-641"><a href="#cb21-641" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb21-642"><a href="#cb21-642" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(wages)</span>
+<span id="cb21-643"><a href="#cb21-643" aria-hidden="true" tabindex="-1"></a>log_wage <span class="ot">&lt;-</span> <span class="fu">log</span>(wage <span class="sc">+</span> <span class="dv">1</span>)</span>
+<span id="cb21-644"><a href="#cb21-644" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-645"><a href="#cb21-645" aria-hidden="true" tabindex="-1"></a><span class="co"># Regress it on educ</span></span>
+<span id="cb21-646"><a href="#cb21-646" aria-hidden="true" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(log_wage <span class="sc">~</span> educ)</span>
+<span id="cb21-647"><a href="#cb21-647" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod2)</span>
+<span id="cb21-648"><a href="#cb21-648" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(wages)</span>
+<span id="cb21-649"><a href="#cb21-649" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb21-650"><a href="#cb21-650" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb21-651"><a href="#cb21-651" aria-hidden="true" tabindex="-1"></a><span class="fu">## Exercises {#sec-exercises-8}</span></span>
 <span id="cb21-652"><a href="#cb21-652" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-653"><a href="#cb21-653" aria-hidden="true" tabindex="-1"></a>We will go through this material in class together, so you don't need to work on it before class (but you can if you want.) </span>
+<span id="cb21-653"><a href="#cb21-653" aria-hidden="true" tabindex="-1"></a>There isn't much new in terms of R code in this chapter. The code for the worked example is presented below, but please refer to @sec-worked-example-8 for the interpretation.</span>
 <span id="cb21-654"><a href="#cb21-654" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-655"><a href="#cb21-655" aria-hidden="true" tabindex="-1"></a>Before staring this section, you may find it useful to scroll to the top of the page, click on the "&lt;/&gt; Code" menu, and select "Show All Code."</span>
+<span id="cb21-655"><a href="#cb21-655" aria-hidden="true" tabindex="-1"></a>We will go through this material in class together, so you don't need to work on it before class (but you can if you want.) </span>
 <span id="cb21-656"><a href="#cb21-656" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-657"><a href="#cb21-657" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-660"><a href="#cb21-660" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb21-661"><a href="#cb21-661" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the data and take a look</span></span>
-<span id="cb21-662"><a href="#cb21-662" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"Wages.RData"</span>)</span>
-<span id="cb21-663"><a href="#cb21-663" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(wages))</span>
-<span id="cb21-664"><a href="#cb21-664" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb21-665"><a href="#cb21-665" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-666"><a href="#cb21-666" aria-hidden="true" tabindex="-1"></a>We will focus on regressing hourly wage (<span class="in">`wage`</span>) on years of education (<span class="in">`educ`</span>). The distribution of the outcome variable and its relationship with the predictor are depicted below. </span>
+<span id="cb21-657"><a href="#cb21-657" aria-hidden="true" tabindex="-1"></a>Before staring this section, you may find it useful to scroll to the top of the page, click on the "&lt;/&gt; Code" menu, and select "Show All Code."</span>
+<span id="cb21-658"><a href="#cb21-658" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-659"><a href="#cb21-659" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-662"><a href="#cb21-662" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb21-663"><a href="#cb21-663" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the data and take a look</span></span>
+<span id="cb21-664"><a href="#cb21-664" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"Wages.RData"</span>)</span>
+<span id="cb21-665"><a href="#cb21-665" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(wages))</span>
+<span id="cb21-666"><a href="#cb21-666" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb21-667"><a href="#cb21-667" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-670"><a href="#cb21-670" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb21-671"><a href="#cb21-671" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(wages)</span>
-<span id="cb21-672"><a href="#cb21-672" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
-<span id="cb21-673"><a href="#cb21-673" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(wage,  <span class="at">col =</span> <span class="st">"#4B9CD3"</span>)</span>
-<span id="cb21-674"><a href="#cb21-674" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(educ, wage, <span class="at">col =</span> <span class="st">"#4B9CD3"</span>)</span>
-<span id="cb21-675"><a href="#cb21-675" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb21-676"><a href="#cb21-676" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-677"><a href="#cb21-677" aria-hidden="true" tabindex="-1"></a><span class="fu">### Linear regression of Wages on Education</span></span>
+<span id="cb21-668"><a href="#cb21-668" aria-hidden="true" tabindex="-1"></a>We will focus on regressing hourly wage (<span class="in">`wage`</span>) on years of education (<span class="in">`educ`</span>). The distribution of the outcome variable and its relationship with the predictor are depicted below. </span>
+<span id="cb21-669"><a href="#cb21-669" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-672"><a href="#cb21-672" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb21-673"><a href="#cb21-673" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(wages)</span>
+<span id="cb21-674"><a href="#cb21-674" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb21-675"><a href="#cb21-675" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(wage,  <span class="at">col =</span> <span class="st">"#4B9CD3"</span>)</span>
+<span id="cb21-676"><a href="#cb21-676" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(educ, wage, <span class="at">col =</span> <span class="st">"#4B9CD3"</span>)</span>
+<span id="cb21-677"><a href="#cb21-677" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb21-678"><a href="#cb21-678" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-679"><a href="#cb21-679" aria-hidden="true" tabindex="-1"></a>Working with linear model, we can see that *all* of the assumptions of the model are violated -- we are going to need to try another approach!</span>
+<span id="cb21-679"><a href="#cb21-679" aria-hidden="true" tabindex="-1"></a><span class="fu">### Linear regression of Wages on Education</span></span>
 <span id="cb21-680"><a href="#cb21-680" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-683"><a href="#cb21-683" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb21-684"><a href="#cb21-684" aria-hidden="true" tabindex="-1"></a>mod1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(wage <span class="sc">~</span> educ)</span>
-<span id="cb21-685"><a href="#cb21-685" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-686"><a href="#cb21-686" aria-hidden="true" tabindex="-1"></a><span class="co"># Check out model fit</span></span>
-<span id="cb21-687"><a href="#cb21-687" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
-<span id="cb21-688"><a href="#cb21-688" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod1, <span class="dv">1</span>, <span class="at">col =</span> <span class="st">"#4B9CD3"</span>)</span>
-<span id="cb21-689"><a href="#cb21-689" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod1, <span class="dv">2</span>, <span class="at">col =</span> <span class="st">"#4B9CD3"</span>)</span>
-<span id="cb21-690"><a href="#cb21-690" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb21-691"><a href="#cb21-691" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-692"><a href="#cb21-692" aria-hidden="true" tabindex="-1"></a><span class="fu">### Log-linear regression of Wages on Education</span></span>
+<span id="cb21-681"><a href="#cb21-681" aria-hidden="true" tabindex="-1"></a>Working with linear model, we can see that *all* of the assumptions of the model are violated -- we are going to need to try another approach!</span>
+<span id="cb21-682"><a href="#cb21-682" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-685"><a href="#cb21-685" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb21-686"><a href="#cb21-686" aria-hidden="true" tabindex="-1"></a>mod1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(wage <span class="sc">~</span> educ)</span>
+<span id="cb21-687"><a href="#cb21-687" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-688"><a href="#cb21-688" aria-hidden="true" tabindex="-1"></a><span class="co"># Check out model fit</span></span>
+<span id="cb21-689"><a href="#cb21-689" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb21-690"><a href="#cb21-690" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod1, <span class="dv">1</span>, <span class="at">col =</span> <span class="st">"#4B9CD3"</span>)</span>
+<span id="cb21-691"><a href="#cb21-691" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod1, <span class="dv">2</span>, <span class="at">col =</span> <span class="st">"#4B9CD3"</span>)</span>
+<span id="cb21-692"><a href="#cb21-692" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb21-693"><a href="#cb21-693" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-694"><a href="#cb21-694" aria-hidden="true" tabindex="-1"></a>To run a log-linear model, we can transform the Y-variable using the <span class="in">`log`</span> function, and then run the model as usual.</span>
+<span id="cb21-694"><a href="#cb21-694" aria-hidden="true" tabindex="-1"></a><span class="fu">### Log-linear regression of Wages on Education</span></span>
 <span id="cb21-695"><a href="#cb21-695" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-698"><a href="#cb21-698" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb21-699"><a href="#cb21-699" aria-hidden="true" tabindex="-1"></a><span class="co"># Create log transform of wage</span></span>
-<span id="cb21-700"><a href="#cb21-700" aria-hidden="true" tabindex="-1"></a>log_wage <span class="ot">&lt;-</span> <span class="fu">log</span>(wage <span class="sc">+</span> <span class="dv">1</span>)</span>
-<span id="cb21-701"><a href="#cb21-701" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-702"><a href="#cb21-702" aria-hidden="true" tabindex="-1"></a><span class="co"># Regress it on educ</span></span>
-<span id="cb21-703"><a href="#cb21-703" aria-hidden="true" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(log_wage <span class="sc">~</span> educ)</span>
-<span id="cb21-704"><a href="#cb21-704" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-705"><a href="#cb21-705" aria-hidden="true" tabindex="-1"></a><span class="co"># Check out model fit</span></span>
-<span id="cb21-706"><a href="#cb21-706" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
-<span id="cb21-707"><a href="#cb21-707" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod2, <span class="dv">1</span>, <span class="at">col =</span> <span class="st">"#4B9CD3"</span>)</span>
-<span id="cb21-708"><a href="#cb21-708" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod2, <span class="dv">2</span>, <span class="at">col =</span> <span class="st">"#4B9CD3"</span>)</span>
-<span id="cb21-709"><a href="#cb21-709" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb21-710"><a href="#cb21-710" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-711"><a href="#cb21-711" aria-hidden="true" tabindex="-1"></a>The log transformation helped with positive skew, although didn't do much for the negative tail. It reduced the apparent heteroskedasticity. However, the relationship still appears non-linear, perhaps more so than in the original linear model. We will address non-linearity in the following chapter, and for now just focus on interpreting the log-linear model in this example. </span>
+<span id="cb21-696"><a href="#cb21-696" aria-hidden="true" tabindex="-1"></a>To run a log-linear model, we can transform the Y-variable using the <span class="in">`log`</span> function, and then run the model as usual.</span>
+<span id="cb21-697"><a href="#cb21-697" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-700"><a href="#cb21-700" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb21-701"><a href="#cb21-701" aria-hidden="true" tabindex="-1"></a><span class="co"># Create log transform of wage</span></span>
+<span id="cb21-702"><a href="#cb21-702" aria-hidden="true" tabindex="-1"></a>log_wage <span class="ot">&lt;-</span> <span class="fu">log</span>(wage <span class="sc">+</span> <span class="dv">1</span>)</span>
+<span id="cb21-703"><a href="#cb21-703" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-704"><a href="#cb21-704" aria-hidden="true" tabindex="-1"></a><span class="co"># Regress it on educ</span></span>
+<span id="cb21-705"><a href="#cb21-705" aria-hidden="true" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(log_wage <span class="sc">~</span> educ)</span>
+<span id="cb21-706"><a href="#cb21-706" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-707"><a href="#cb21-707" aria-hidden="true" tabindex="-1"></a><span class="co"># Check out model fit</span></span>
+<span id="cb21-708"><a href="#cb21-708" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb21-709"><a href="#cb21-709" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod2, <span class="dv">1</span>, <span class="at">col =</span> <span class="st">"#4B9CD3"</span>)</span>
+<span id="cb21-710"><a href="#cb21-710" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod2, <span class="dv">2</span>, <span class="at">col =</span> <span class="st">"#4B9CD3"</span>)</span>
+<span id="cb21-711"><a href="#cb21-711" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb21-712"><a href="#cb21-712" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-713"><a href="#cb21-713" aria-hidden="true" tabindex="-1"></a>The usual summary output provides the regression slope, which can be interpreted using the "approximate" interpretation of relative change: </span>
+<span id="cb21-713"><a href="#cb21-713" aria-hidden="true" tabindex="-1"></a>The log transformation helped with positive skew, although didn't do much for the negative tail. It reduced the apparent heteroskedasticity. However, the relationship still appears non-linear, perhaps more so than in the original linear model. We will address non-linearity in the following chapter, and for now just focus on interpreting the log-linear model in this example. </span>
 <span id="cb21-714"><a href="#cb21-714" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-717"><a href="#cb21-717" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb21-718"><a href="#cb21-718" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod2)</span>
-<span id="cb21-719"><a href="#cb21-719" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb21-720"><a href="#cb21-720" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-721"><a href="#cb21-721" aria-hidden="true" tabindex="-1"></a>Some follow-up math to get the exact interpretation of the regression slope in terms of relative change. First $\exp(b) - 1$: </span>
+<span id="cb21-715"><a href="#cb21-715" aria-hidden="true" tabindex="-1"></a>The usual summary output provides the regression slope, which can be interpreted using the "approximate" interpretation of relative change: </span>
+<span id="cb21-716"><a href="#cb21-716" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-719"><a href="#cb21-719" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb21-720"><a href="#cb21-720" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod2)</span>
+<span id="cb21-721"><a href="#cb21-721" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb21-722"><a href="#cb21-722" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-725"><a href="#cb21-725" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb21-726"><a href="#cb21-726" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the regression slope from the output </span></span>
-<span id="cb21-727"><a href="#cb21-727" aria-hidden="true" tabindex="-1"></a>conf.b <span class="ot">&lt;-</span> <span class="fu">coef</span>(mod2)[<span class="dv">2</span>]</span>
-<span id="cb21-728"><a href="#cb21-728" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-729"><a href="#cb21-729" aria-hidden="true" tabindex="-1"></a><span class="co"># Exp and subtract one to get exact relative change</span></span>
-<span id="cb21-730"><a href="#cb21-730" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(conf.b) <span class="sc">-</span> <span class="dv">1</span></span>
-<span id="cb21-731"><a href="#cb21-731" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb21-732"><a href="#cb21-732" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-733"><a href="#cb21-733" aria-hidden="true" tabindex="-1"></a>Let's also compute a confidence interval for $\exp(b) - 1$:</span>
+<span id="cb21-723"><a href="#cb21-723" aria-hidden="true" tabindex="-1"></a>Some follow-up math to get the exact interpretation of the regression slope in terms of relative change. First $\exp(b) - 1$: </span>
+<span id="cb21-724"><a href="#cb21-724" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-727"><a href="#cb21-727" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb21-728"><a href="#cb21-728" aria-hidden="true" tabindex="-1"></a><span class="co"># Get the regression slope from the output </span></span>
+<span id="cb21-729"><a href="#cb21-729" aria-hidden="true" tabindex="-1"></a>conf.b <span class="ot">&lt;-</span> <span class="fu">coef</span>(mod2)[<span class="dv">2</span>]</span>
+<span id="cb21-730"><a href="#cb21-730" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-731"><a href="#cb21-731" aria-hidden="true" tabindex="-1"></a><span class="co"># Exp and subtract one to get exact relative change</span></span>
+<span id="cb21-732"><a href="#cb21-732" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(conf.b) <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb21-733"><a href="#cb21-733" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb21-734"><a href="#cb21-734" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-737"><a href="#cb21-737" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb21-738"><a href="#cb21-738" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute a confidence interval for exact relative change</span></span>
-<span id="cb21-739"><a href="#cb21-739" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fu">confint</span>(mod2)[<span class="dv">2</span>, ]) <span class="sc">-</span> <span class="dv">1</span></span>
-<span id="cb21-740"><a href="#cb21-740" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb21-741"><a href="#cb21-741" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-742"><a href="#cb21-742" aria-hidden="true" tabindex="-1"></a><span class="fu">### Write up</span></span>
+<span id="cb21-735"><a href="#cb21-735" aria-hidden="true" tabindex="-1"></a>Let's also compute a confidence interval for $\exp(b) - 1$:</span>
+<span id="cb21-736"><a href="#cb21-736" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-739"><a href="#cb21-739" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb21-740"><a href="#cb21-740" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute a confidence interval for exact relative change</span></span>
+<span id="cb21-741"><a href="#cb21-741" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(<span class="fu">confint</span>(mod2)[<span class="dv">2</span>, ]) <span class="sc">-</span> <span class="dv">1</span></span>
+<span id="cb21-742"><a href="#cb21-742" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb21-743"><a href="#cb21-743" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-744"><a href="#cb21-744" aria-hidden="true" tabindex="-1"></a>Approximate: </span>
+<span id="cb21-744"><a href="#cb21-744" aria-hidden="true" tabindex="-1"></a><span class="fu">### Write up</span></span>
 <span id="cb21-745"><a href="#cb21-745" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-746"><a href="#cb21-746" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Using a log-linear regression model, it was found that each additional year of education led to a predicted increase in wages of 7.4% ($b = .074, t(398) = 10.30, p &lt; .001$). </span>
+<span id="cb21-746"><a href="#cb21-746" aria-hidden="true" tabindex="-1"></a>Approximate: </span>
 <span id="cb21-747"><a href="#cb21-747" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-748"><a href="#cb21-748" aria-hidden="true" tabindex="-1"></a>Exact:</span>
+<span id="cb21-748"><a href="#cb21-748" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Using a log-linear regression model, it was found that each additional year of education led to a predicted increase in wages of 7.4% ($b = .074, t(398) = 10.30, p &lt; .001$). </span>
 <span id="cb21-749"><a href="#cb21-749" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-750"><a href="#cb21-750" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Using a log-linear regression model, it was found that each additional year of education led to a predicted increase in wages of 7.8% ($\exp(b) - 1 = .078, 95\% \text{ CI: }<span class="co">[</span><span class="ot">0.062, 0.093</span><span class="co">]</span>$). </span>
+<span id="cb21-750"><a href="#cb21-750" aria-hidden="true" tabindex="-1"></a>Exact:</span>
 <span id="cb21-751"><a href="#cb21-751" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-752"><a href="#cb21-752" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-753"><a href="#cb21-753" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo = F}</span></span>
-<span id="cb21-754"><a href="#cb21-754" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>())</span>
-<span id="cb21-755"><a href="#cb21-755" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(wages)</span>
-<span id="cb21-756"><a href="#cb21-756" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb21-757"><a href="#cb21-757" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb21-752"><a href="#cb21-752" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Using a log-linear regression model, it was found that each additional year of education led to a predicted increase in wages of 7.8% ($\exp(b) - 1 = .078, 95\% \text{ CI: }<span class="co">[</span><span class="ot">0.062, 0.093</span><span class="co">]</span>$). </span>
+<span id="cb21-753"><a href="#cb21-753" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-754"><a href="#cb21-754" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-755"><a href="#cb21-755" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo = F}</span></span>
+<span id="cb21-756"><a href="#cb21-756" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list =</span> <span class="fu">ls</span>())</span>
+<span id="cb21-757"><a href="#cb21-757" aria-hidden="true" tabindex="-1"></a><span class="fu">detach</span>(wages)</span>
+<span id="cb21-758"><a href="#cb21-758" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb21-759"><a href="#cb21-759" aria-hidden="true" tabindex="-1"></a>  </span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
