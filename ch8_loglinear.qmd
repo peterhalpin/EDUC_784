@@ -212,7 +212,7 @@ The upshot for log-linear regression is as follows: if your $Y$ variable takes o
 
 @fig-skew4 provides an example. The top row shows is the example as @fig-skew1 above, (math achievement in ECLS), and the bottom shows the same variable but transformed to proportion correct. In the left-hand panels we can see that the distribution of the proportion is qualitatively the same the as the distribution of the original variable. However, the log transform behaves differently for these two cases. Why? Because logs are "weird" on the range $(0, 1)$. 
 
-```{r fig-skew4, echo = F, fig.cap = "Comparing Log transforms of ECLS math total score versus proportion correct", fig.align = 'center', fig.height=8}
+```{r fig-skew4,, fig.align = 'center', fig.height=8}
 par(mfrow = c(2,2))
 prop_c1rmscal <- (c1rmscal - min(c1rmscal))/100
 hist(c1rmscal, col = "#4b9cd3")

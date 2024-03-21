@@ -10,10 +10,9 @@ This chapter will cover two widely-used techniques for addressing violations of 
 
 * Polynomial regression, which means raising $X$-variables to a power (e.g., $X^2$ and $X^3$), and 
 * Piecewise or segmented regression, which involves using different regression lines over different ranges of a predictor. 
-
 These techniques involve transforming the $X$-variable(s), which can be done in addition to (or instead of) transforming the $Y$ variable (see @sec-chap-8). 
 
-Both polynomial and piecewise regression areuseful in practice and lead to advanced topics like splines and semi-parametric regression. They also turn out to be special cases of interactions, so we have already covered a lot of the technical details in @sec-chap-5 -- phew! 
+Both polynomial and piecewise regression are useful in practice and lead to advanced topics like splines and semi-parametric regression. They also turn out to be special cases of interactions, so we have already covered a lot of the technical details in @sec-chap-5 -- phew! 
 
 ## Polynomial regression {#sec-polynomial-9}
 
@@ -440,11 +439,11 @@ This section collects the questions asked in this chapter. The lessons for this 
 
 $$ \widehat Y = 20 + 1 X - 2X^2.$$
 
-  * What is the overall shape of the relationship: U or inverted-U? ** 
+  * What is the overall shape of the relationship: U or inverted-U? 
 
-  * What is the value of stress at which predicted performance reaches a maximum?**
+  * What is the value of stress at which predicted performance reaches a maximum?
 
-  * Bonus: what is the maximum value of predicted performance? **
+  * Bonus: what is the maximum value of predicted performance? 
 
 
 @sec-worked-example-9
@@ -484,10 +483,6 @@ emmeans::emtrends(mod4, specs = "educ12", var = "educ")
 * Using the 2-step approach from @sec-binary-continuous-interaction-5, please take a moment to work out the interpretation of main effect on $EDUC$ $b_1 = 0.01736$ and the interaction $b_3 = 0.06144$ in the model above. It might help to draw a plot like @fig-piecewise2 and label it accordingly. (The interpretation of $b_0$ and $b_2$ is not very interesting but you can work them out too if you like.)
 
 * Please take a moment to write down your interpretation of the results of the piecewise regression, addressing the diagnostic plots, the parameter estimates, and the simple slopes.
-
-* **Using the 2-step approach from @sec-binary-continuous-interaction-5, please take a moment to work out the interpretation of main effect on $EDUC$ $b_1 = 0.01736$ and the interaction $b_3 = 0.06144$ in the model above. It might help to draw a plot like @fig-piecewise2 and label it accordingly. (The interpretation of $b_0$ and $b_2$ is not very interesting but you can work them out too if you like.)** 
-
-* **Please take a moment to write down your interpretation of the results of the piecewise regression, addressing the diagnostic plots, the parameter estimates, and the simple slopes.**
 
 ```{r}
 # clean up!

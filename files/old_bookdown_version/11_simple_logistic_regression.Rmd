@@ -299,7 +299,7 @@ In this section we move onto logistic regression proper. For the CHD example, th
 
 \[ \text{logit}(CHD) = a + b (\text{age}). \]
 
-We are going to skip a few steps and go right into the interpretation of the R output. Once we know how to interpret the output, we will loop back to discuss technicals details of estimation and inference in the following sections. 
+We are going to skip a few steps and go right into the interpretation of the R output. Once we know how to interpret the output, we will loop back to discuss details of estimation and inference in the following sections. 
 
 The summary R output for the example is below. The focus for now is just the interpretation of the values under the "Estimate" heading. 
 
