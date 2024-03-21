@@ -196,6 +196,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Polynomial regression, etc</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch10_logistic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Logistic regression</span></span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -748,7 +754,7 @@ F-statistic: 141.9 on 3 and 496 DF,  p-value: &lt; 2.2e-16</code></pre>
 <section id="marginal-effects" class="level3" data-number="5.4.1">
 <h3 data-number="5.4.1" class="anchored" data-anchor-id="marginal-effects"><span class="header-section-number">5.4.1</span> Marginal effects</h3>
 <p>Since we are interested in the gender gap in Math Achievement, we will start by considering the values of Reading for which the gap is statistically significant. Note that this information was not available from the standard <code>summary(lm)</code> output shown in <a href="#sec-binary-continuous-interaction-5"><span>Section&nbsp;5.3</span></a> – the output showed that the regression coefficient representing the interaction was statistically significant, but it didn’t tell us for the values of Reading for which the gender gap was statistically significant. We can answer this type of question using the marginal “effects” discussed in this section.</p>
-<p>There are three main types of marginal effects. For linear models, they are all basically the same, and we will only use one of them in this section. However, it is important that you can distinguish among them, especially when we get into non-linear models (e.g., logistic regression; see <span class="quarto-unresolved-ref">?sec-chap-10</span>). In general, when you report marginal effects in your research, you should be able to tell your reader which approach you used so they understand what you did and how to interpret the results.</p>
+<p>There are three main types of marginal effects. For linear models, they are all basically the same, and we will only use one of them in this section. However, it is important that you can distinguish among them, especially when we get into non-linear models (e.g., logistic regression; see <a href="ch10_logistic.html"><span>Chapter&nbsp;10</span></a>). In general, when you report marginal effects in your research, you should be able to tell your reader which approach you used so they understand what you did and how to interpret the results.</p>
 <p>To explain the three approaches, first let’s write the gender gap in Math Achievement using a slightly more compact notation (“<span class="math inline">\(\Delta\)</span>” for difference):</p>
 <p><span class="math display">\[ \widehat Y (Male) - \widehat Y (Female) = b_2 + b_3 X_1 = \Delta(X_1)\]</span></p>
 <p>The three types of marginal effects are:</p>
@@ -764,7 +770,7 @@ F-statistic: 141.9 on 3 and 496 DF,  p-value: &lt; 2.2e-16</code></pre>
 <li>Marginal effects at representative values (MERV): Report the marginal effect for a range of “interesting values” chosen by the researcher (denoted by *, <span class="math inline">\(\dagger\)</span>, etc.)</li>
 </ul>
 <p><span class="math display">\[ MERV =  \{\Delta(X^*_1), \Delta(X^\dagger_1), \dots \} \]</span></p>
-<p>MEM and AVE are equivalent in linear models, but are different for nonlinear models (see <span class="quarto-unresolved-ref">?sec-chap-10</span>). The MERV approach also overlaps with MEM and AVE, because usually we choose the mean (or median) as one of the representative values of the predictor.</p>
+<p>MEM and AVE are equivalent in linear models, but are different for nonlinear models (see <a href="ch10_logistic.html"><span>Chapter&nbsp;10</span></a>). The MERV approach also overlaps with MEM and AVE, because usually we choose the mean (or median) as one of the representative values of the predictor.</p>
 <p>In this section we focus on MERV, because it is widely used. One common choice for the “interesting values” is the quartiles of <span class="math inline">\(X_1\)</span>, which are reported below for the example data. The output shows the gender gap in Math Achievement for 5 values of Reading Achievement. The values of Reading Achievement are its 5 quartiles. You can think of the output as a tabular summary of <a href="#fig-visreg-1">Figure&nbsp;<span>5.5</span></a>.</p>
 <div class="cell">
 <details>
