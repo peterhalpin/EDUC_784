@@ -315,7 +315,7 @@ At this point we have covered the overall logic of how we can model a binary out
 
 In this section we move onto logistic regression proper. For the CHD example, the model we are interested in is 
 
-$$\text{logit}(CHD) = a + b (\text{AGE}). $$
+$$\text{logit}(CHD) = a + b (\text{age}). $$
 
 We are going to skip a few steps and go right into the interpretation of the R output. Once we know how to interpret the output, we will loop back to discuss details of estimation and inference in the following sections. 
 
@@ -453,7 +453,7 @@ The logistic model also provides us with a way "diagnosing" whether the linear p
 
 The simple logistic regression model 
 
-$$ \text{logit}(CHD) = a + b (\text{AGE}) $$
+$$ \text{logit}(CHD) = a + b (\text{age}) $$
 
 has the following interpretations. 
 
@@ -545,11 +545,9 @@ knitr::include_graphics("files/images/logit-table.png")
   * If $b=.25$ what is the OR equal to? What is the percent change in the odds for a one unit increase in $X$? 
   * If $b=-.025$ what is the OR equal to? What is the percent change in the odds for a 10 unit increase in $X$? 
   * If the odds increase 100% for a one unit increase in $X$, what $b$ equal to? 
+ 
   
-* Please write down the numerical values of each of the above summaries for the CHD example (except the predicted probability plot). You can select any values of age to report the predicted probabilities and risk ratios, and you can "eye ball" the probabilities using @fig-pred-prob. 
-
-  
-$$ \text{logit}(CHD) = -5.31  + .11 (\text{age}). $$
+* For the CHD example (model given below), please write down the numerical values of each of the  summaries listed below. You can select any values of age to report the predicted probabilities and risk ratios, and you can "eye ball" the probabilities using @fig-pred-prob. 
   * In terms of the logit. 
   * In terms of the odds. 
   * In terms of predicted probabilities
@@ -557,5 +555,9 @@ $$ \text{logit}(CHD) = -5.31  + .11 (\text{age}). $$
       * The age at which the probability of having CHD is "50-50"
       * The approximate rate of increase (slope) of the probability of having CHD for people close to the "50-50" point.  
 
+
+  
+$$ \text{logit}(CHD) = -5.31  + .11 (\text{age}). $$
+   
 
 
