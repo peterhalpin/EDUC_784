@@ -307,44 +307,44 @@ The CHD example
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">41</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">30</td>
 </tr>
 <tr class="even">
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">57</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">35</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">47</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">38</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">60</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">28</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">39</td>
+</tr>
+<tr class="odd">
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">33</td>
 </tr>
-<tr class="odd">
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">60</td>
-</tr>
 <tr class="even">
 <td style="text-align: right;">1</td>
-<td style="text-align: right;">59</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">64</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">23</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">42</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">42</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">49</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">43</td>
+<td style="text-align: right;">56</td>
 </tr>
 </tbody>
 </table>
@@ -360,43 +360,43 @@ The CHD example
 <tbody>
 <tr class="odd">
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">32</td>
+<td style="text-align: right;">45</td>
 </tr>
 <tr class="even">
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">43</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">62</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">55</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">56</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">37</td>
+<td style="text-align: right;">52</td>
 </tr>
 <tr class="even">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">48</td>
+</tr>
+<tr class="odd">
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">53</td>
 </tr>
-<tr class="odd">
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">59</td>
-</tr>
 <tr class="even">
 <td style="text-align: right;">1</td>
-<td style="text-align: right;">42</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">49</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">34</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">0</td>
 <td style="text-align: right;">44</td>
 </tr>
+<tr class="odd">
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">47</td>
+</tr>
 <tr class="even">
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">30</td>
+<td style="text-align: right;">58</td>
 </tr>
 </tbody>
 </table>
@@ -714,7 +714,7 @@ p(CHD = 1) &amp; = \frac{\text{odds}(CHD = 1)}{1 + \text{odds}(CHD = 1)} \\ \\
 <section id="sec-simple-10" class="level2" data-number="10.3">
 <h2 data-number="10.3" class="anchored" data-anchor-id="sec-simple-10"><span class="header-section-number">10.3</span> Simple logistic regression</h2>
 <p>In this section we move onto logistic regression proper. For the CHD example, the model we are interested in is</p>
-<p><span class="math display">\[\text{logit}(CHD) = a + b (\text{AGE}). \]</span></p>
+<p><span class="math display">\[\text{logit}(CHD) = a + b (\text{age}). \]</span></p>
 <p>We are going to skip a few steps and go right into the interpretation of the R output. Once we know how to interpret the output, we will loop back to discuss details of estimation and inference in the following sections.</p>
 <p>The summary R output for the example is below. The focus for now is just the interpretation of the values under the “Estimate” heading.</p>
 <div class="cell">
@@ -881,7 +881,7 @@ Intervals are back-transformed from the logit scale </code></pre>
 <section id="summary-1" class="level3" data-number="10.3.6">
 <h3 data-number="10.3.6" class="anchored" data-anchor-id="summary-1"><span class="header-section-number">10.3.6</span> Summary</h3>
 <p>The simple logistic regression model</p>
-<p><span class="math display">\[ \text{logit}(CHD) = a + b (\text{AGE}) \]</span></p>
+<p><span class="math display">\[ \text{logit}(CHD) = a + b (\text{age}) \]</span></p>
 <p>has the following interpretations.</p>
 <ul>
 <li>In terms of the logit:
@@ -1016,9 +1016,19 @@ F-statistic: 35.15 on 1 and 98 DF,  p-value: 4.575e-08</code></pre>
 <li>If <span class="math inline">\(b=-.025\)</span> what is the OR equal to? What is the percent change in the odds for a 10 unit increase in <span class="math inline">\(X\)</span>?</li>
 <li>If the odds increase 100% for a one unit increase in <span class="math inline">\(X\)</span>, what <span class="math inline">\(b\)</span> equal to?</li>
 </ul></li>
-<li>Please write down the numerical values of each of the above summaries for the CHD example (except the predicted probability plot). You can select any values of age to report the predicted probabilities and risk ratios, and you can “eye ball” the probabilities using <a href="#fig-pred-prob">Figure&nbsp;<span>10.9</span></a>.</li>
+<li>For the CHD example (model given below), please write down the numerical values of each of the summaries listed below. You can select any values of age to report the predicted probabilities and risk ratios, and you can “eye ball” the probabilities using <a href="#fig-pred-prob">Figure&nbsp;<span>10.9</span></a>.
+<ul>
+<li>In terms of the logit.</li>
+<li>In terms of the odds.</li>
+<li>In terms of predicted probabilities
+<ul>
+<li>Risk ratios / relative risk for some chosen ages</li>
+<li>The age at which the probability of having CHD is “50-50”</li>
+<li>The approximate rate of increase (slope) of the probability of having CHD for people close to the “50-50” point.</li>
+</ul></li>
+</ul></li>
 </ul>
-<p><span class="math display">\[ \text{logit}(CHD) = -5.31  + .11 (\text{age}). \]</span> * In terms of the logit. * In terms of the odds. * In terms of predicted probabilities * Risk ratios / relative risk for some chosen ages * The age at which the probability of having CHD is “50-50” * The approximate rate of increase (slope) of the probability of having CHD for people close to the “50-50” point.</p>
+<p><span class="math display">\[ \text{logit}(CHD) = -5.31  + .11 (\text{age}). \]</span></p>
 
 
 <!-- -->
@@ -1636,7 +1646,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb21-317"><a href="#cb21-317" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-318"><a href="#cb21-318" aria-hidden="true" tabindex="-1"></a>In this section we move onto logistic regression proper. For the CHD example, the model we are interested in is </span>
 <span id="cb21-319"><a href="#cb21-319" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-320"><a href="#cb21-320" aria-hidden="true" tabindex="-1"></a>$$\text{logit}(CHD) = a + b (\text{AGE}). $$</span>
+<span id="cb21-320"><a href="#cb21-320" aria-hidden="true" tabindex="-1"></a>$$\text{logit}(CHD) = a + b (\text{age}). $$</span>
 <span id="cb21-321"><a href="#cb21-321" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-322"><a href="#cb21-322" aria-hidden="true" tabindex="-1"></a>We are going to skip a few steps and go right into the interpretation of the R output. Once we know how to interpret the output, we will loop back to discuss details of estimation and inference in the following sections. </span>
 <span id="cb21-323"><a href="#cb21-323" aria-hidden="true" tabindex="-1"></a></span>
@@ -1774,7 +1784,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb21-461"><a href="#cb21-461" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-462"><a href="#cb21-462" aria-hidden="true" tabindex="-1"></a>The simple logistic regression model </span>
 <span id="cb21-463"><a href="#cb21-463" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-464"><a href="#cb21-464" aria-hidden="true" tabindex="-1"></a>$$ \text{logit}(CHD) = a + b (\text{AGE}) $$</span>
+<span id="cb21-464"><a href="#cb21-464" aria-hidden="true" tabindex="-1"></a>$$ \text{logit}(CHD) = a + b (\text{age}) $$</span>
 <span id="cb21-465"><a href="#cb21-465" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-466"><a href="#cb21-466" aria-hidden="true" tabindex="-1"></a>has the following interpretations. </span>
 <span id="cb21-467"><a href="#cb21-467" aria-hidden="true" tabindex="-1"></a></span>
@@ -1866,19 +1876,21 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb21-555"><a href="#cb21-555" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>If $b=.25$ what is the OR equal to? What is the percent change in the odds for a one unit increase in $X$? </span>
 <span id="cb21-556"><a href="#cb21-556" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>If $b=-.025$ what is the OR equal to? What is the percent change in the odds for a 10 unit increase in $X$? </span>
 <span id="cb21-557"><a href="#cb21-557" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>If the odds increase 100% for a one unit increase in $X$, what $b$ equal to? </span>
-<span id="cb21-558"><a href="#cb21-558" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb21-559"><a href="#cb21-559" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Please write down the numerical values of each of the above summaries for the CHD example (except the predicted probability plot). You can select any values of age to report the predicted probabilities and risk ratios, and you can "eye ball" the probabilities using @fig-pred-prob. </span>
-<span id="cb21-560"><a href="#cb21-560" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-561"><a href="#cb21-561" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb21-562"><a href="#cb21-562" aria-hidden="true" tabindex="-1"></a>$$ \text{logit}(CHD) = -5.31  + .11 (\text{age}). $$</span>
-<span id="cb21-563"><a href="#cb21-563" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>In terms of the logit. </span>
-<span id="cb21-564"><a href="#cb21-564" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>In terms of the odds. </span>
-<span id="cb21-565"><a href="#cb21-565" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>In terms of predicted probabilities</span>
-<span id="cb21-566"><a href="#cb21-566" aria-hidden="true" tabindex="-1"></a><span class="ss">      * </span>Risk ratios / relative risk for some chosen ages</span>
-<span id="cb21-567"><a href="#cb21-567" aria-hidden="true" tabindex="-1"></a><span class="ss">      * </span>The age at which the probability of having CHD is "50-50"</span>
-<span id="cb21-568"><a href="#cb21-568" aria-hidden="true" tabindex="-1"></a><span class="ss">      * </span>The approximate rate of increase (slope) of the probability of having CHD for people close to the "50-50" point.  </span>
-<span id="cb21-569"><a href="#cb21-569" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-570"><a href="#cb21-570" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-558"><a href="#cb21-558" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb21-559"><a href="#cb21-559" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb21-560"><a href="#cb21-560" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>For the CHD example (model given below), please write down the numerical values of each of the  summaries listed below. You can select any values of age to report the predicted probabilities and risk ratios, and you can "eye ball" the probabilities using @fig-pred-prob. </span>
+<span id="cb21-561"><a href="#cb21-561" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>In terms of the logit. </span>
+<span id="cb21-562"><a href="#cb21-562" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>In terms of the odds. </span>
+<span id="cb21-563"><a href="#cb21-563" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>In terms of predicted probabilities</span>
+<span id="cb21-564"><a href="#cb21-564" aria-hidden="true" tabindex="-1"></a><span class="ss">      * </span>Risk ratios / relative risk for some chosen ages</span>
+<span id="cb21-565"><a href="#cb21-565" aria-hidden="true" tabindex="-1"></a><span class="ss">      * </span>The age at which the probability of having CHD is "50-50"</span>
+<span id="cb21-566"><a href="#cb21-566" aria-hidden="true" tabindex="-1"></a><span class="ss">      * </span>The approximate rate of increase (slope) of the probability of having CHD for people close to the "50-50" point.  </span>
+<span id="cb21-567"><a href="#cb21-567" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-568"><a href="#cb21-568" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-569"><a href="#cb21-569" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb21-570"><a href="#cb21-570" aria-hidden="true" tabindex="-1"></a>$$ \text{logit}(CHD) = -5.31  + .11 (\text{age}). $$</span>
+<span id="cb21-571"><a href="#cb21-571" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb21-572"><a href="#cb21-572" aria-hidden="true" tabindex="-1"></a></span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
