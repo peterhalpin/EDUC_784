@@ -37,7 +37,10 @@ Since we are starting with a new modeling approach, let's kick things off with a
 
 ## The CHD example {#sec-chd-example-10}
 
-As a working example, we will use data contained in the file `CHD.RData` to explore the relationship between age in years ("age") and evidence (absence or presence) of coronary heart disease ("chd"). The data set contains 100 cases. Respondents' ages range from 20 to 69, while evidence of CHD is coded 0 when it is absent and 1 when it is present. A sample of 20 cases is shown  below. (Source: Applied Logistic Regression by David W. Hosmer and Stanley Lemeshow, 1989, John Wiley and Sons.) 
+As a working example, we will use data contained in the file `CHD.RData` to explore the relationship between age in years ("age") and evidence (absence or presence) of coronary heart disease ("chd"). The data set contains 100 cases. Respondents' ages range from 20 to 69, while clinical evidence of CHD is coded 0 when it is absent and 1 when it is present. A sample of 20 cases is shown  below. (Source: Applied Logistic Regression by David W. Hosmer and Stanley Lemeshow, 1989, John Wiley and Sons.) 
+
+For the sake of brevity, I will say that a person either "has CHD" or not. This is less accurate (but much simpler) than saying that the variable denotes clinical evidence about the presence or absence of CHD.
+
 
 ```{r, fig.align='center'}
 load("CHD.RData")
@@ -47,6 +50,8 @@ knitr::kable(list(chd.data[sample(1:100, 10),2:3],
              row.names = F, 
              caption = "The CHD example")
 ```
+
+ 
 
 If we regress CHD on age using linear regression, this is referred to as the "linear probability model." The diagnostic plots and summary output are below: 
 
@@ -447,7 +452,7 @@ It turns out that the slope of the tangent line is equal to exactly $b/4$. The d
 
 Notice that in our example, the logistic function is roughly linear for probabilities in the range $[.2, .8]$. As mentioned in the introduction of this chapter, this is the situation in which using linear regression with a binary outcome (i.e., the linear probability model) works "well enough". Also note that the regression coefficient from the linear probability model in @sec-chd-example-10 ($b_{OLS} = .0218$) is in the ballpark of the coefficient computed above ($b_{logistic} / 4 = .0275$). These numbers are both describing how the probability of CHD is related to a person's age. 
 
-The logistic model also provides us with a way "diagnosing" whether the linear probability model is a good approximation. As noted, the logistic function is roughly linear for probabilities in the range $[.2, .8]$. If we ran a linear regression on CHD and none of the fitted / predicted values are outside the range $[.2, .8]$, we would be in the situation where we might prefer to use linear regression (despite it being technically wrong). Referring back to residual vs. plotted in @sec-chd-example-10, we can see that the predicted values were outside of this range, so the logistic model is the better way to approach for this example. 
+The logistic model also provides us with a way of "diagnosing" whether the linear probability model is a good approximation. As noted, the logistic function is roughly linear for probabilities in the range $[.2, .8]$. If we ran a linear regression on CHD and all of the fitted / predicted values were within the range $[.2, .8]$, we would be in the situation where we might prefer to use linear regression (despite it being technically wrong). Referring back to residual vs. plotted in @sec-chd-example-10, we can see that the predicted values were outside of this range, so the logistic model is the better way to approach for this example. 
 
 ### Summary 
 
@@ -459,17 +464,17 @@ has the following interpretations.
 
 * In terms of the logit: 
     * The intercept ($a$) is the predicted value of the log-odds of CHD when age = 0. 
-    * The slope ($b$) is how much the predicted log-odds of CHD changes for one unit (year) of increase in age.
+    * The slope ($b$) is how much the predicted log-odds of CHD changes for a one unit (year) increase in age.
 
 * In terms of the odds: 
-    * The exponent of the regression parameter, $\exp(b)$, is odds ratio associated with a one unit of increase in age (relative magnitude).
+    * The exponent of the regression parameter, $\exp(b)$, is the odds ratio associated with a one unit increase in age (relative magnitude).
     * $(\exp(b) - 1) \times 100$ is the percentage change in the odds of CHD for a one unit increase in age (relative change). 
     * For the intercept, $\exp(a)$ is the predicted odds of having CHD when $age = 0$. This isn't a very useful number in our example, but it can be useful when the predictor(s) are centered.  
 
-* In terms of predicted probabilities
-    * The logistic plot provides a visual summary of how the probability of CHD changes as a function of age -- if you want to report in terms of probabilities, this plot is usually a good choice! 
+* In terms of predicted probabilities:
+    * The logistic plot provides a visual summary of how the probability of CHD changes as a function of age -- if you want to report in terms of probabilities, this plot is usually a good choice.
     * Predicted probabilities can be reported for specific values of age (MERVs), and risk ratios / relative risk can be computed to compare the predicted probabilities at specific ages. This is the same approach we used for following-up interactions in @sec-inference-for-interactions-5 (i.e., you can use `emmeans` in R).
-    * $–a / b$ corresponds the age at which the probability of having CHD is "50-50"
+    * $–a / b$ corresponds the age at which the probability of having CHD is "50-50".
     * $b / 4$ is the approximate rate of increase (slope) of the probability of having CHD for people close to the "50-50" point.  
 
 **Please write down the numerical values of each of the above summaries for the CHD example (except the predicted probability plot). You can select any values of age to report the predicted probabilities and risk ratios, and you can "eye ball" the probabilities using @fig-pred-prob.** 
@@ -491,14 +496,355 @@ Answers are hidden below (use the Code button), but please try them yourself fir
 # Rate of change at "50-50" age: b/4 = .11/4 = .0275
 ```
 
+## Estimation {#sec-estimation-10} 
+
+The previous section discussed the interpretation of simple logistic regression.
+In this section we discuss how to get the numbers in the “Estimate” column of the R `summary()` table, and in the next section we discuss how to compute statistical tests and confidence intervals. 
+
+The material in these next two sections involves a lot of mathematical and statistical concepts, although I try to keep the formulas to a minimum. Because the material is so technical, there will be a mini-lecture on these sections during class. It may also take some extra time to read through these next couple of sections, and you may want to write down any additional questions you have about the material so that we can address them in class together. Basically, the next two sections are pretty tough, so hang in there :) 
+
+The short version: 
+
+* In logistic regression, we use maximum likelihood (ML) rather than ordinary least squares (OLS) to estimate the model parameters. 
+* The resulting estimates are called the maximum likelihood estimates (MLEs). 
+* Unlike OLS estimates in linear regression, MLEs in logistic regression cannot be written down in "closed form." This means that we need to define MLEs algorithmically, rather algebraically -- more on this below. 
+* Inference for the MLEs is based on *asymptotics*. In statistics, "asymptotic" means "as the sample size goes to infinity...and beyond!" The implication is that using ML also changes how we compute standard errors, statistical tests, confidence intervals, etc. 
+* Our overall goal is to know enough about this technical stuff to be able to interpret and recognize the limitations of logistic regression. 
+
+
+### ML vs OLS
+
+Let's start by contrasting ML with OLS. Recall that in linear regression, OLS leads to "closed form" expressions for the regression coefficients ( @sec-ols-2). This means we can write down an explicit algebraic equation for the regression coefficients, e.g., 
+
+$$ b = \text{cov}(Y, X) / s^2_X. $$ 
+
+As we discussed in @sec-chd-example-10, these estimates often aren't very good when the outcome is binary. So, instead we use ML. 
+
+Unlike OLS with linear regression, ML with logistic regression does not lead to closed-form expressions for the regression coefficients. This means we can't  write down the other side of the equation $b = ?$ using an algebraic expression like the one above. Instead, we must define the regression parameters in terms of a computational procedure (i.e., an algorithm) that produces the intended result. That computational procedure is maximization of the likelihood function. 
+
+We discussed the difference between algebraic and algorithmic definitions when we compared the mean and median last semester, and we can address it again in class if you have further questions. In the present context, the take home message is:
+
+* In OLS, we didn’t really need to know much about least squares *per se*, because we could just work with the formulas for the regression coefficients.  
+* In ML, we don’t get any  formulas for the coefficients, so were are going to have to dig into what the likelihood is and how to use it. 
+
+### The likelihood 
+
+The likelihood is a function that tells us the probability of a sample being drawn from a population. For our CHD example data, we have $N = 100$ cases in which there are 43 people with CHD and 57 people without CHD. The likelihood tells us the probability of this sample being drawn from the population. In this section, we build up a mathematical expression for the likelihood function. Note that when the outcome variable in a regression is binary, this is more specifically called the *binomial* likelihood. 
+
+The building block of the binomial likelihood is the probability of a person having CHD, which we denote as
+
+$$ p = p(CHD = 1). $$
+
+Keep in mind that we are defining the probability of sample being drawn from a population. So, we are imaging that a person is sampled from a population, and some proportion of that population has CHD. That proportion is what we are representing as the probability $p$. 
+
+For a single person (i.e., a sample of $N = 1$), the likelihood describes the probability that the person either does or does not have CHD. The likelihood is given by the following formula:
+
+$$ L = p \times CHD + (1 - p) \times (1 - CHD) $${#eq-Li}
+
+This looks complicated, but its just a way of writing the population probability of having CHD, or not having CHD, in a single equation. All it says is: 
+
+* The probability of sampling someone with CHD is $p$.
+    * i.e., plug in $CHD = 1$ into @eq-Li and the result is $L = p$.
+
+* The probability of sampling someone without CHD is $1 - p$.
+    * i.e., plug in $CHD = 0$ into @eq-Li and the answer is $L = 1 - p$.
+    
+You should do the plugging-in now to see how this works. 
+    
+For a simple random sample of $i = 1, \dots, N$ people, the likelihood of observing the ful sample is just the product of the likelihoods for each person in the sample. To write the likelihood for  person $i$, we will use the notation $L_i$, and to write the likelihood for the entire sample, we will keep using $L$ without a subscript:
+
+$$ L = \Pi_{i = 1}^N L_i = L_1 \times  L_2 \times \cdots \times L_N $${#eq-L}
+ 
+
+(The symbol $\Pi$ is shorthand for multiplication, just like $\Sigma$ is used for addition. )
+
+If we plug-in to @eq-L using the values of $CHD$ in our sample, this gives us the likelihood of observing the sample. For example, the values of CHD for the first four cases in the data set (1, 1, 0, 1). So, the first four terms in the likelihood are: 
+
+$$ L = p_1 \times  p_2 \times (1-p_3) \times p_4 \times\cdots $$
+**Please take a moment to verify this result for yourself using @eq-Li and @eq-L, and we will walk through the derivation together in class.** 
+
+
+
+### Maximizing the likelihood 
+
+So far we have addressed the general form of the likelihood for a binary variable. But we haven't talked about how to get the probabilities $p_i$. This is where the logistic regression comes in. As discussed in @sec-logit-10, the purpose of logistic regression is to model the probability of having CHD. Thus, in order to turn @eq-L into the likelihood function for logistic regression, we just plug-in for $p_i$ using @eq-logistic. 
+
+As you might expect, this equation turns out to be pretty complicated to write down, and we aren't going to do that here. The point is that we *can* write down the likelihood for logistic regression, and once we have it written down we can use standard procedures from calculus to find its maximum (e.g., Newton's method).  
+
+This is about as much math as we need to state the overall idea behind maximum likelihood estimation: We select the regression coefficients of the logistic model so that the likelihood in @eq-L is maximized. 
+
+You might be asking, why is maximizing the likelihood a good way to get regression coefficients for logistic regression? There are lots of ways to answer this question, but I think the best answer is that the resulting estimates have good properties -- they are unbiased and precise, at least with large samples. We can discuss the rationale behind maximum likelihood more in class, so if you are interested please just let me know. 
+
+Doing the computations that maximize the likelihood is quite complicated, and the details are beyond the scope of this course (for more details, check out Chapter 15 of @cite:fox). However, there is one issue that we should be aware of: the likelihood can cause so-called "underflow" issues in computing. This is because we are multiplying together lots of numbers less than 1, which can lead to very, very small values -- too small for a computer represent (i.e., underflow). To address this issue, we usually work with the log-likelihood, rather than the likelihood itself: 
+
+$$ \ell = \log(L) = \log \prod_{i = 1}^N L_i = \sum_{i = 1}^N \log(L_i) $${#eq-ell}
+
+The last equality uses the "addition with logs" rule from @sec-math-review-8. For our purposes here, we just need to know that taking the log of the likelihood changes a very small number (the likelihood) into a large negative number (the log-likelihood), which prevents our computer from breaking when doing the computations. 
+
+The log-likelihood, $\ell$, also shows up a lot in what follows. Its main uses are summarized below
+
+  * $-2 \times \ell$ is called the *deviance* of the model. I am not sure how it got this name, but you will see it a lot in the R output. 
+  * We can use the deviance to compute R-squared-like statistics that describe the overall quality of the predictions made using a logistic regression model (see @sec-pseudo-rsquared-10)  
+  * Two logistic regression models can be compared using their deviances. This leads to the logistic regression equivalent of the F-test of R-squared change (@sec-chap-6), which is called the likelihood ratio test (see @sec-inference-10). 
+  
+### Summary 
+
+Lets take a look at our `summary()` output for the CHD data again: 
+
+```{r}
+summary(mod2)
+```
+
+This section has addressed the question: how do we get the numbers in the "Estimate" column of the output shown above? The answer is maximum likelihood (ML). In short: 
+
+* The likelihood function tells us the probability of randomly sampling $N$ people from a population.
+   * When the outcome variable is binary, it is called the binomial likelihood. 
+
+* ML is based on the idea that the values of the model parameters that make the data most likely are the “best”
+    * The resulting values are called the maximum likelihood estimates (MLEs). 
+
+* In logistic regression, ML is accomplished using a computer algorithm -- we can't write down algebraic expressions for the MLEs, we only have an algorithmic definition, which is to maximize the likelihood
+  * FYI: The algorithm `R` uses for logistic regression is a version of Newton-Raphson called Fisher Scoring. 
+
+## Inference {#sec-inference-10}
+
+In this section we talk about statistical tests and confidence intervals for logistic regression. There are three main types of inference for logistic regression: 
+
+1. *Wald test of regression coefficients*. The Wald test is a z-test that can be used with large samples ($N > 100$). This is what is reported in R's `summary()` output for logistic regression. 
+    * Although the Wald test is reported by default in `R`, you should be careful when interpreting it. The Wald test is computed just like a regular t-test. However, rather than using a t-distribution, the Wald test is based on the normal distribution. This approach only applies in large samples (technically, when $N \rightarrow \infty$). In smaller samples ($N < 100$), the standard errors can be too large, especially if the coefficient is large in value. This means that the Wald test can be under-powered, leading to too many Type I Errors in small samples. So, when you have fewer than 100 cases, it is good practice to use one of the other two procedures discussed below.  
+
+2. *Confidence intervals for odds ratios*. Odds ratios can be tested using confidence intervals. If the confidence interval includes the value 1, then the odds ratio is not statistically significant at the chosen level of alpha / confidence. Confidence intervals can be computed in two ways for logistic regression, either using the Wald test (just like a usual confidence based on a t-test), or using a procedure called *profile likelihood*. The latter is preferred because it is more accurate, and it is the default in `R`. Ask in class if you want to know more :) 
+
+3. *Likelihood ratio test of nested models*. The likelihood ratio test plays the same role as the F-test of $\Delta R^2$ in OLS regression. It allows you to compare nested models. We will talk about the analogue statistic for $\Delta R^2$ in @sec-pseudo-rsquared-10.
+
+You might be wondering how the likelihood-based procedures (2 and 3) avoid the issues with the Wald test. Technically, the likelihood-based procedures also assume large samples sizes ($N \rightarrow \infty$), but they do not require computing the standard errors of the regression coefficients, which is the problem with the Wald test. So, although both procedures have the same assumptions, the likelihood-based procedures perform better than the Wald test in practice, especially with smaller samples.  
+
+The rest this section briefly illustrates each of these three methods using our example data. 
+
+### Wald test
+
+The MLEs are asymptotically normally (based on the central limit theorem), so we can divide the MLEs by their standard errors to get an asymptotic z-test. This test is called a Wald test, named after the person (Abraham Wald) who first invented it. The Wald test is what R reports in the `summary()` table below.   
+
+```{r}
+summary(mod2)
+```
+
+At this point in the semester, you should have no problem interpreting whether these tests are statistically significant or not. The main wrinkle that comes up in logistic regression is that we are working with an (asymptotic) z-test rather than usual t-test from OLS regression. As noted, this z-test is also called Wald test. 
+
+In summary: 
+
+* The null hypotheses $H_0: b = b_0$ can be tested against the alternative $H_A: b \neq b_0$ using the following z-test, which has a standard normal distribution when the null hypothesis is true:
+
+$$ z = (\hat b - b_0) / SE({\hat b}), $$
+
+* This tests assumes: 
+
+  * $\hat b$ is the MLE (this requires that model is correct -- more on this in @sec-assumption-checking-10)
+  * The sample size is "approximately" infinite ($N > 100$ is a practical lower limit). 
+
+The Wald test also applies to the intercept. 
+
+### Odds ratio (OR)
+
+In @sec-simple-10, the OR was introduced as a more intuitive way of interpreting logistic regression. But, how do we make inferences about this more interpretable quantity? The short answer: use confidence intervals. 
+
+The reason we use confidence intervals instead of tests of significance is because the null hypothesis $b = 0$ corresponds to 
+
+$$OR = \exp(b) = \exp(0) = 1. $$ 
+
+So, if the regression coefficient is zero (i.e., no relationship), this means the OR is one. In terms of percent change, $OR = 1$ means 0% percent change: 
+
+$$(OR - 1) \times 100   = (1 - 1) \times 100 = 0. $$
+To obtain confidence intervals on the OR, we can use the following two steps:
+
+1. Compute the confidence intervals for the regression coefficient $b$: 
+
+$$ [b_{\text{lower}} ,b_{\text{upper}}]. $$
+
+2.  Then exponentiate the confidence intervals to get a confidence interval for the OR.
+
+$$ [\exp(b_{\text{lower}}) ,\exp(b_{\text{upper}})]. $$
+
+The output below shows the result of this procedure for the CHD data.
+
+```{r, message=F}
+ci.b <- confint(mod2)
+ci.table <- cbind(coefs = coef(mod2), ci.b)
+exp(ci.table)
+```
+
+In APA notation, we could write the results for age as $OR = 1.12, 95\% \text{ CI: } [1.07, 1.19]$. **Please write down your interpretation of the OR for age and its confidence interval. In your interpretation, please mention the relative change in the odds that is associated with each additional year of age and whether or not this is statistically different from zero.**
+
+Note that the confidence intervals produced by $R$ use the likelihood rather than the Wald test. So, the problems we discussed with the Wald test don't apply to these confidence intervals. (You can get Wald confidence intervals form the `confint` function, but this is not the default.)
+
+### Likelihood ratio test
+
+The likelihood ratio (LR) test is analogous to the F-test of R-squared change in OLS regression. Its a general workhorse for model building and can be used in other creative ways. For example, the LR test can be used to replace the Wald test in simple logistic regression. To do this, we compare a model with only the intercept to a model with one predictor. And as noted above, the LR test avoids the problems associated with the Wald test, so it is usually preferred when the sample size is smaller ($N < 100$). 
+
+The LR tests works as follows:
+
+* Assume that Model 1 with $K_1$ predictors is nested within Model 2 with $K_2$ predictors (i.e., the predictors in Model 1 are a subset of the predictors in Model 2; see @sec-chap-6 for a refresher on nested models).
+
+* If it is true that the additional predictors in Model 2 all have regression coefficients equal to zero in the population, then it is also true that the models have equal likelihoods. This leads to the null hypothesis that the ratio of the likelihoods is equal to 1 (this is why its called a likelihood ratio test):    
+
+$$H_0: \frac{L_1}{L_2} = 1$$
+
+* When $H_0$ is true, the following test statistic has a chi-square distribution with degrees of freedom equal to $df = K_2 - K_1$. 
+
+$$\chi^2 = -2 \log \frac{\hat L_1}{\hat L_2} = 2 (\hat \ell_2 - \hat \ell_1) $$
+
+
+In this equation, the symbol $\chi$ is the Greek letter for lower-case "x" and is pronounced "chi". The chi-square test is computed as negative 2 times the log of the likelihood ratio, which ends up being the difference of the deviances of the two models (remember, the deviance is just a weird word for -2 times the log likelihood). Also note that the "hats" denote the likelihoods /  log-likelihoods evaluated at the MLEs.
+
+We have not covered the chi-square distribution previously, but it is a lot like the F-distribution. In fact, the F-static is a ratio of two chi-square statistics. Some examples of the chi-square distribution are shown below ($k$ denotes the degrees of freedom). 
+
+![Chi-square distributions (Source: https://en.wikipedia.org/wiki/Chi-squared_distribution)]( https://upload.wikimedia.org/wikipedia/commons/3/35/Chi-square_pdf.svg)
+
+To sum up: 
+
+* The LR test is the analogue of the F-test of R-squared change from linear regression (see @sec-chap-6). It is used to compare two nested models. 
+
+* If LR test is significant, we conclude that model with more predictors does a better job or explaining our data (in the sense of R-squared). In practical terms, this means that we reject the models with fewer predictors in favor of the model with more predictors.  
+
+* If the LR test is not significant, we conclude that the model with more predictors does not add anything beyond the model with fewer predictors. In practical terms, this means that we reject the models with more predictors and stick with the model with fewer predictors.  
+
+
+* In the case where the two models differ by only one predictor, the LR test is conceptually equivalent to testing whether the regression coefficient of that predictor is equal to zero, and hence the LR test can replace the Wald test reported in R's `summary()` output. This is again analogous to testing R-squared change in linear regression (see @sec-chap-6). 
+
+Using our example, let's conduct an LR test of the model with age as a predictor against a model without this predictor (i.e., the model with only the intercept). To do this, we can use the `lrtest` function of the `lmtest` package which produces the following output: 
+
+```{r}
+# The model with no predictors
+mod0 <- glm(chd ~ 1, family = "binomial", data = chd.data)
+
+# The LR test (enter the smaller model first)
+lmtest::lrtest(mod0, mod2)
+```
+
+In APA format, we could write this output as $\chi^2(1) = 29.31, p < .001$.
+**Please write down your interpretation of the LR test for the CHD example. Your interpretation should mention which two models were compared, whether the LR test was significant or not, and your conclusion about which model provided a better explanation of the data.**
+
+## (Pseudo) R-squared {#sec-pseudo-rsquared-10}
+
+As we have just discussed, the likelihood ratio test in logistic regression is analogous to the F-test of R-squared change in linear regression. But we have not yet discussed how to compute R-squared for logistic regression. That is what this section is about. 
+
+There are actually a number of statistics, called *pseudo R-squareds*, that have been developed to play the role of R-squared in logistic regression. The pseudo R-squareds are not computed as proportions of variance, which is why the are called *pseudo*. But they each try to describe the "preditive utility" of the logistic regression model, and each has their own shortcomings and limitations. 
+
+There is no clear “victor” in the battle of pseudo R-squareds, so we will just present one widely used exemplar that is straight forward to compute and interpret. You can learn about some other options here: [https://stats.oarc.ucla.edu/other/mult-pkg/faq/general/faq-what-are-pseudo-r-squareds/](https://stats.oarc.ucla.edu/other/mult-pkg/faq/general/faq-what-are-pseudo-r-squareds/)
+
+### McFadden's Pseudo R-squared
+
+McFadden’s Pseudo R-squared focuses on how much the likelihood improves when comparing two nested models. This is close to, but not quite the same as, the interpretation of $\Delta R^2$ in linear regression. 
+
+McFadden’s Pseudo R-squared takes on values between 0 and 1 and its interpretation can be explained by considering these two extreme values. 
+
+For Model 1 nested within Model 2, McFadden’s R-squared is defined as:
+
+$$ R^2 = 1 - \frac{ \ell_2}{\ell_1} $$
+
+Note that if Model 2 does not "add anything" to Model 1, then the two models have the same likelihood (see the discussion of the LR test in @sec-inference-10). In this situation,  
+
+$$\frac{ \ell_2}{ \ell_1} = 1 $$
+
+which implies $R^2 = 0.$
+
+On the other hand, if Model 2 provides perfect predictions for all cases, (i.e., $L_i = 1$ for each $i$), then 
+
+$$ \hat \ell_2 = \sum_i \log L_{2i} = \sum_i \log 1 = 0. $$
+
+This implies 
+ 
+$$ R^2 = 1 - \frac{\hat \ell_2}{\hat \ell_1} = 1 - \frac{0}{\hat \ell_1} = 1. $$ 
+
+In summary, McFadden's Rsquared
+
+* is equal to zero if Model 2 does not add anything to Model 1, 
+
+* is equal to 1 if Model 2 provides perfect prediction of each data point (but model 1 does not). 
+
+
+Because McFadden's  R-squared is not a proportion of variance, we can't interpret it the same way as OLS R-squared. Instead, it is usually interpreted in terms of model *fit*. Here "fit" means how much better a nesting model's predictions are compared to a nested model, with zero meaning "not at all" and one meaning "as good as it gets". 
+
+The following output shows McFadden's R-squared for the example data. **Please write down an interpretation of the R-square value and we will discuss your interpretations in class.** 
+
+McFadden's R-squared: 
+```{r}
+# Using the deviance of the models
+1 - mod2$deviance/mod0$deviance
+```
+
+You can use the "show code" button to see an example interpretation below (but try it by yourself first!)
+
+```{r}
+# Interpretation: Relative a model with no predictors, 
+# the inclusion of age improved model fit by about 21.4% 
+# as much as a model with perfect predictions. 
+
+# More elliptically: Using McFadden's R-squared the inclusion 
+# of age improved model fit by about 21.4\%
+```
+
+
+## Assumption checking {#sec-assumption-checking-10}
+
+The final topic we need to cover is assumption checking. As we saw when deriving the binomial likelihood in @sec-estimation-10, there are two main assumptions in play when estimating logistic regression using maximum likelihood.
+
+1. The different respondents (person, units) are independent (i.e., a simple random sample). 
+
+2. We have the right model for each individual’s probability of CHD, $p_i$, which in this case is the logistic model. 
+
+Assumption 1 is ensured by random sampling. If your data wasn't collected using random sampling, you'll need to use a different modeling approach (e.g, multilevel modeling, see EDUC 935). 
+
+Assumption 2 can be checked with the Hosmer-Lemeshow (HL) test. The HL test is a chi-square test that compares the empirical probabilities of the outcome variable to the probabilities implied by the logistic regression model. In other words, we want to compare the two curves depicted below: 
+
+```{r, HLtest, echo = F, fig.cap = "The idea behind the HL test", fig.align = 'center'}
+knitr::include_graphics("files/images/HL_test.png")
+```
+
+The null hypothesis of the HL test is that these two curves are equivalent representations of the data. So, if we reject the null hypothesis, we reject claim that the model fits the data. 
+
+The HL test for the example data is reported below. The R code is shown by default to provide details about how the test is computed.
+
+The `logitgof` function uses 3 arguments:
+
+* `obs` is the binary outcome variable (chd)
+* `exp` is the fitted values (predicted probabilities) from the logistic regression.
+* `g` is the number of groups / bins to use. For this example, 5 is a good number. 
+
+```{r}
+#| code-fold: false
+## Note: Install package "generalhoslem" if you haven't do so already
+# install.packages("generalhoslem")
+
+hl_test <- generalhoslem::logitgof(obs = chd, exp = fitted(mod2), g = 5)
+hl_test
+```
+
+Using APA notation, we could write the results of the test as $\chi^2(3) = .05, p = .99$. **Please write down your interpretation of the HL test and be prepared to share you answer in class. Your interpretation should mention whether the assumption that the logistic model fits the data is problematic or not.**
+
+### More details on the HL test*
+
+The HL statistic is computed using the observed and expected (model-implied) counts in each of the groups. Computational details are given below. The number of groups must be chosen by the researcher and should be based on considerations about sample size (e.g., the number of observation per group should be at least 20 to estimate a proportion).     
+
+```{r}
+# Observed and expected counts
+cbind(hl_test$observed, hl_test$expected)
+```
+
+The test statistic is the built up using the differences between the observed and expected values:
+
+$$HL = \sum_{g = 1}^5 \left(\frac{(\text{y0}_g - \text{yhat0}_g)^2}{\text{yhat0}_g} + \frac{(\text{y1}_g - \text{yhat1}_g)^2}{\text{yhat1}_g}\right)$$
+
+Hosmer and Lemeshow showed that this statistic has a chi-square distribution on $df = N_\text{groups} - 2$ when the null hypothesis is true (i.e., when the model fits the data). 
+
 ## Workbook 
 
-This section collects the questions asked in this chapter. The lessons for this chapter will focus on discussing these questions and then working on the exercises in @sec-exercises-10. The lessons will **not** be a lecture that reviews all of the material in the chapter! So, if you haven't written down / thought about the answers to these questions before class, the lesson will not be very useful for you. Please engage with each question by writing down one or more answers, asking clarifying questions about related material, posing follow up questions, etc. 
+This section collects the questions asked in this chapter. The lessons for this chapter will focus on discussing these questions and then working on the exercises in @sec-exercises-10. If you haven't written down / thought about the answers to these questions before class, the lesson will not be very useful for you. Please engage with each question by writing down one or more answers, asking clarifying questions about related material, posing follow up questions, etc. 
 
 
-@sec-CHD-example-10
+@sec-chd-example-10
 
-* Before moving on, please take a moment to write down you conclusions (and rationale) about whether the assumptions of linear regression are met for the CHD data.
+* Please take a moment to write down you conclusions (and rationale) about whether the assumptions of linear regression are met for the CHD data.
 
 
 ```{r, echo = F, fig.cap = "Linear probability model with CHD example", fig.align = 'center', fig.width = 12}
@@ -512,11 +858,7 @@ summary(mod1)
 @sec-logit-10
 
 
-```{r, echo = T, fig.cap = "Proportions and odds", fig.align = 'center'}
-knitr::include_graphics("files/images/odds.png")
-```
-
-* Using the Table above, please write down your answers to the following questions and be prepared to share them in class. For each question provide a verbal interpretation of the numerical answer (e.g, odds of 2 to 1 means that for every two people with a trait, there is one without.) 
+* Using the Table below, please write down your answers to the following questions and be prepared to share them in class. For each question provide a verbal interpretation of the numerical answer (e.g, odds of 2 to 1 means that for every two people with a trait, there is one without). 
 
   1. What is the probability of a person in their 40s having CHD? 
   2. What are the odds of a person in their 40s having CHD? 
@@ -524,19 +866,25 @@ knitr::include_graphics("files/images/odds.png")
   4. What are the odds of someone in their 50s **not** having CHD? 
   5. What is probability of having CHD in your 40s, compared to your 30s? (e.g., is 3 times higher? 4 times higher?)
   6. What are the odds of having CHD in your 40s, compared to your 30s? 
-  
-  
-```{r, echo = F, fig.cap = "Logistic, odds, and logit", fig.align = 'center'}
-knitr::include_graphics("files/images/logit-table.png")
-```
 
-* Using the Table above, please answer the following questions
+
+```{r, echo = T, fig.cap = "Proportions and odds", fig.align = 'center'}
+knitr::include_graphics("files/images/odds.png")
+```
+  
+  
+* Using the Table below, please answer the following questions.
 
   * If probability of an event is equal to .1, what are the odds the event? What is the logit of the event? 
   * If odds of an event are 4 to 1, what is the probability of the event? What is the logit of the event? 
   * If logit < 0 then probability <  ? and odds < ? 
   * What is more likely: a event with probability of .9 or an event with odds of .9? 
   * If a probability of $p$ corresponds to a  $\text{logit}$ of $x$, what is the logit corresponding to $1-p$? (Hint, try some numerical examples from the table). 
+
+```{r, echo = F, fig.cap = "Logistic, odds, and logit", fig.align = 'center'}
+knitr::include_graphics("files/images/logit-table.png")
+```
+
   
 @sec-simple-10
 
@@ -550,14 +898,187 @@ knitr::include_graphics("files/images/logit-table.png")
 * For the CHD example (model given below), please write down the numerical values of each of the  summaries listed below. You can select any values of age to report the predicted probabilities and risk ratios, and you can "eye ball" the probabilities using @fig-pred-prob. 
   * In terms of the logit. 
   * In terms of the odds. 
-  * In terms of predicted probabilities
-      * Risk ratios / relative risk for some chosen ages
-      * The age at which the probability of having CHD is "50-50"
+  * In terms of predicted probabilities.
+      * Risk ratios / relative risk for some chosen ages.
+      * The age at which the probability of having CHD is "50-50".
       * The approximate rate of increase (slope) of the probability of having CHD for people close to the "50-50" point.  
 
-
-  
 $$ \text{logit}(CHD) = -5.31  + .11 (\text{age}). $$
    
 
+@sec-estimation-10
+
+To write the likelihood for person $i$, we use the notation $L_i$
+
+$$ L = p_i \times CHD_i + (1 - p_i) \times (1 - CHD_i) $$
+and to write the likelihood for the full sample, we use use $L$ without a subscript:
+
+$$ L = \Pi_{i = 1}^N L_i = L_1 \times  L_2 \times \cdots \times L_N. $$
+
+
+If we plug into the last equation using the values of $CHD$ in our sample, this gives us the likelihood of observing the sample. For example, the values of CHD for the first four cases in the example are (1, 1, 0, 1). So, the first four terms in the likelihood are: 
+
+$$ L = p_1 \times  p_2 \times (1-p_3) \times p_4 \times\cdots $$
+
+Please take a moment to verify this result for yourself and we will walk through the derivation together in class.
+
+@sec-inference-10
+
+* The output below shows the odds ratios and confidence intervals for the example data. In APA notation we could write the results for age as $OR = 1.12, 95\% \text{ CI: } [1.07, 1.19]$. Please write down your interpretation of the OR for age and its confidence interval. In your interpretation, please mention the relative change in the odds that is associated with each additional year of age and whether or not this is statistically different from zero. 
+
+```{r, message=F}
+ci.b <- confint(mod2)
+ci.table <- cbind(coefs = coef(mod2), ci.b)
+exp(ci.table)
+```
+
+
+* To conduct an LR test of the model with age as a predictor against a model without this predictor (i.e., the model with only the intercept), we can use the `lrtest` function of the `lmtest` package to obtain the following output. In APA format, we could write this output as $\chi^2(1) = 29.31, p < .001$ Please write down your interpretation of the LR test for the example. Your interpretation should mention which two models were compared, whether the LR test was significant or not, and your conclusion about which model provided a better explanation of the data.
+
+```{r}
+# The model with no predictors
+mod0 <- glm(chd ~ 1, family = "binomial", data = chd.data)
+
+# The LR test (enter the smaller model first)
+lmtest::lrtest(mod0, mod2)
+```
+
+@sec-pseudo-rsquared-10
+
+* The following output shows McFadden's R-squared for the example data (i.e., comparing a model with age as a predictor to a model with just the intercept). Please write down an interpretation of the R-square value and we will discuss you interpretations in class.
+
+```{r}
+# Using the deviance of the models
+1 - mod2$deviance/mod0$deviance
+```
+
+
+@sec-assumption-checking-10
+
+The HL test for the example data is reported below. Using APA notation, we could write the results of the test as $\chi^2(3) = .05, p = .99$. Please write down your interpretation of the HL test and be prepared to share you answer in class. Your interpretation should mention whether the assumption that the logistic model fits the data is problematic or not.
+
+```{r}
+## Note: Install package "generalhoslem" if you haven't do so already
+# install.packages("generalhoslem")
+
+hl_test <- generalhoslem::logitgof(obs = chd, exp = fitted(mod2), g = 5)
+hl_test
+```
+
+## Exercises: Multiple logistic regression {#sec-exercise-10}
+
+These exercises are a bit different than usual. Rather than repeating the code that produced the previously discussed example, we extend the example to illustrate multiple logistic regression. The general idea is that, everything you can do in OLS linear regression you can also do in logistic regression, but some of the details are different. 
+
+We will go through this material in class together, so you don't need to work on it before class (but you can if you want.) Before staring this section, you may find it useful to scroll to the top of the page, click on the "</> Code" menu, and select "Show All Code."
+
+### CHD and smoking
+
+This section works through multiple logistic regression with interactions using the CHD data again. Coronary Heart Disease (`chd`; 1 = yes, 0 = no) is still the outcome, and we predict it using a person's age in years (`age`) as well as an indicator for whether a person has ever (or currently) smokes (`smokes`: 1 = yes, 0 = no).
+
+```{r}
+# Load the data, take a look
+#load("CHD.RData")
+#attach(chd.data)
+
+summary(cbind(chd, age, smokes))
+```
+
+Let's start by regressing CHD on smoking and age, and refreshing our interpretations of the parameter estimates and tests. The regression coefficients are interpreted analogously to multiple regression (e.g., as holding constant or controlling for the other predictors). 
+
+```{r}
+# Regress CHD on smokes and age
+mod <- glm(chd ~ age + smokes, family = binomial)
+summary(mod)
+```
+
+For illustrative purposes, let’s double check that smoking predicts CHD over and above age using the LR test. Recall that this test is analogous to the F-test of R-squared change in OLS regression
+
+```{r}
+# LR test coefficient on age, and age + smokes 
+mod1 <- glm(chd ~ age, family = binomial)
+mod2 <- glm(chd ~ age + smokes, family = binomial)
+lmtest::lrtest(mod1, mod2)
+```
+
+Both the Wald test and LR test lead to the same overall interpretation for smoking.
+
+How should we compute R-squared for the two-predictor model? Two different approaches are shown below. Both of these are defensible, but note the difference in interpretation as we change the "baseline model". 
+
+```{r}
+# Compare against model 1
+(R_21 <- 1 - mod2$deviance/mod1$deviance)
+
+# Compare against model with only the intercept
+mod0 <- glm(chd ~ 1, family = binomial)
+(R_20 <- 1 - mod2$deviance/mod0$deviance)
+```
+
+Recall that it is common to report the output using odds ratios rather than logits. Make sure to check your interpretation of the ORs. 
+
+```{r}
+exp(cbind(OR = coef(mod2), confint(mod2)))
+```
+
+### Predicted probabilities
+
+We can plot the regression lines for smokers and non-smokers using the same techniques as for linear regression.
+
+```{r}
+# Plots of the regression lines in logit scale
+visreg::visreg(mod2, 
+               xvar = "age", 
+               by = "smokes", 
+               scale = "linear", 
+               overlay = T)
+
+# Plots of the regression lines in probability scale
+visreg::visreg(mod2, 
+               xvar = "age", 
+               by = "smokes", 
+               scale = "response", 
+               overlay = T)
+```
+
+We can also test for differences between smokers and non-smokers at specific ages, just like we did for the OLS regression. Below is an example of using `emmeans` to compute the risk ratio associated with smoking at +/- 1SD on age.
+
+```{r}
+# Step 1. Make a function to compute +/- SD on age
+sd_function <- function(x) { c(mean(x) - sd(x), mean(x) + sd(x)) }
+
+# Step 2. Compute and test the values on the odds scale
+library(emmeans)
+gap_odds <- emmeans(mod2, 
+                    specs = "smokes", 
+                    by = "age", 
+                    cov.reduce = sd_function, 
+                    type = "response")
+
+# Convert odds to probabilities
+gap_prob <- regrid(gap_odds, "log")
+
+# Compute risk ratios for smoking, at different ages.
+contrast(gap_prob, method = "revpairwise")
+```
+
+### Interactions
+
+Next, let's consider the interaction between age (centered) and smoking. This interaction addresses whether the relationship between age and CHD changes as a function of smoking status. 
+
+
+```{r}
+# Interacting smoking with age (centered)
+age_centered <- age - mean(age)
+
+mod4 <- glm(chd ~ age_centered*smokes, family = binomial)
+exp(cbind(OR = coef(mod4), confint(mod4)))
+
+visreg::visreg(mod4, 
+               xvar = "age_centered", 
+               by = "smokes", 
+               scale = "response", 
+               overlay = T)
+detach(chd.data)
+```
+
+We will talk about the interpretation of this model in class. 
 
