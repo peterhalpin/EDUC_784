@@ -240,7 +240,6 @@ The formula for the logistic function (i.e., the function that produced the curv
 
 $$p = \frac{\exp(x)}{1 + \exp(x)}.$$ {#eq-logistic}
  
-
 This function maps the variable $x$ onto the interval $(0, 1)$. In @fig-chd3 we saw that the logistic function can provide a nice model for probabilities. We also saw that the logistic function is  non-linear function of $x$ (i.e., it is sigmoidal or S-shaped). 
 
 However, a nice thing about the logistic function is that we can transform it into a linear function of $x$. Since we already know how to deal with linear functions (that is what this whole course has been about!), transforming the logistic into a linear function of $x$ will let us port over a lot of what we know about linear regression to situations in which the outcome variable is binary. (In fact, the real motivation for choosing the logistic function in the first place, rather than some other S-shaped curve.)
@@ -378,7 +377,7 @@ Answers hidden below (use Code button), but please try out the questions yoursel
 ```{r}
 # 1. OR = exp(0) = 1 and percent change equals (exp(0) - 1) X 100 = 0%. So, "no relationship" means OR = 1. 
 # 2. OR = exp(.25) = 1.2840 and percent change equals (exp(.25) - 1) X 100 = 28.40% increase
-# 3. OR = exp(-.025) = 0.9753 and percent change for one unit equals (exp(-.025) - 1) X 100 = (-.02469 X 100 -2.469%. For 10 units of change, multiply by 10, which gives 24.69% decrease (negative sign is decrease). 
+# 3. OR = exp(-.025) = 0.9753 and percent change for one unit equals (exp(-.025) - 1) X 100 = (-.02469 X 100 = -2.469%. For 10 units of change, multiply by 10, which gives 24.69% decrease (negative sign is decrease). 
 # 4. (exp(b) - 1) X 100 = 100 --> exp(b) = 2 --> b = log(2) = .6931
 ```
 
@@ -498,8 +497,7 @@ Answers are hidden below (use the Code button), but please try them yourself fir
 
 ## Estimation {#sec-estimation-10} 
 
-The previous section discussed the interpretation of simple logistic regression.
-In this section we discuss how to get the numbers in the “Estimate” column of the R `summary()` table, and in the next section we discuss how to compute statistical tests and confidence intervals. 
+The previous section discussed the interpretation of simple logistic regression. In this section we discuss how to get the numbers in the “Estimate” column of the R `summary()` table, and in the next section we discuss how to compute statistical tests and confidence intervals. 
 
 The material in these next two sections involves a lot of mathematical and statistical concepts, although I try to keep the formulas to a minimum. Because the material is so technical, there will be a mini-lecture on these sections during class. It may also take some extra time to read through these next couple of sections, and you may want to write down any additional questions you have about the material so that we can address them in class together. Basically, the next two sections are pretty tough, so hang in there :) 
 
@@ -539,7 +537,7 @@ Keep in mind that we are defining the probability of sample being drawn from a p
 
 For a single person (i.e., a sample of $N = 1$), the likelihood describes the probability that the person either does or does not have CHD. The likelihood is given by the following formula:
 
-$$ L = p \times CHD + (1 - p) \times (1 - CHD) $${#eq-Li}
+$$ L = p ^ {CHD} \times (1 - p)^{1 - CHD} $${#eq-Li}
 
 This looks complicated, but its just a way of writing the population probability of having CHD, or not having CHD, in a single equation. All it says is: 
 
@@ -551,7 +549,7 @@ This looks complicated, but its just a way of writing the population probability
     
 You should do the plugging-in now to see how this works. 
     
-For a simple random sample of $i = 1, \dots, N$ people, the likelihood of observing the ful sample is just the product of the likelihoods for each person in the sample. To write the likelihood for  person $i$, we will use the notation $L_i$, and to write the likelihood for the entire sample, we will keep using $L$ without a subscript:
+For a simple random sample of $i = 1, \dots, N$ people, the likelihood of observing the full sample is just the product of the likelihoods for each person in the sample. To write the likelihood for  person $i$, we will use the notation $L_i$, and to write the likelihood for the entire sample, we will keep using $L$ without a subscript:
 
 $$ L = \Pi_{i = 1}^N L_i = L_1 \times  L_2 \times \cdots \times L_N $${#eq-L}
  
@@ -562,7 +560,6 @@ If we plug-in to @eq-L using the values of $CHD$ in our sample, this gives us th
 
 $$ L = p_1 \times  p_2 \times (1-p_3) \times p_4 \times\cdots $$
 **Please take a moment to verify this result for yourself using @eq-Li and @eq-L, and we will walk through the derivation together in class.** 
-
 
 
 ### Maximizing the likelihood 
@@ -675,7 +672,7 @@ exp(ci.table)
 
 In APA notation, we could write the results for age as $OR = 1.12, 95\% \text{ CI: } [1.07, 1.19]$. **Please write down your interpretation of the OR for age and its confidence interval. In your interpretation, please mention the relative change in the odds that is associated with each additional year of age and whether or not this is statistically different from zero.**
 
-Note that the confidence intervals produced by $R$ use the likelihood rather than the Wald test. So, the problems we discussed with the Wald test don't apply to these confidence intervals. (You can get Wald confidence intervals form the `confint` function, but this is not the default.)
+Note that the confidence intervals produced by $R$ use the likelihood rather than the Wald test. So, the problems we discussed with the Wald test don't apply to these confidence intervals. You can get Wald confidence intervals form the `confint` function, but this is not the default. Computing likelihood-based confidence intervals is complicated; you can learn about the overall approach here: [https://documentation.sas.com/doc/en/etscdc/14.2/etsug/etsug_model_sect148.htm](https://documentation.sas.com/doc/en/etscdc/14.2/etsug/etsug_model_sect148.htm)
 
 ### Likelihood ratio test
 
@@ -692,7 +689,6 @@ $$H_0: \frac{L_1}{L_2} = 1$$
 * When $H_0$ is true, the following test statistic has a chi-square distribution with degrees of freedom equal to $df = K_2 - K_1$. 
 
 $$\chi^2 = -2 \log \frac{\hat L_1}{\hat L_2} = 2 (\hat \ell_2 - \hat \ell_1) $$
-
 
 In this equation, the symbol $\chi$ is the Greek letter for lower-case "x" and is pronounced "chi". The chi-square test is computed as negative 2 times the log of the likelihood ratio, which ends up being the difference of the deviances of the two models (remember, the deviance is just a weird word for -2 times the log likelihood). Also note that the "hats" denote the likelihoods /  log-likelihoods evaluated at the MLEs.
 
@@ -892,7 +888,7 @@ knitr::include_graphics("files/images/logit-table.png")
   * If $b=0$ what is the OR equal to? What is the percent change in the odds for a one unit increase in $X$? 
   * If $b=.25$ what is the OR equal to? What is the percent change in the odds for a one unit increase in $X$? 
   * If $b=-.025$ what is the OR equal to? What is the percent change in the odds for a 10 unit increase in $X$? 
-  * If the odds increase 100% for a one unit increase in $X$, what $b$ equal to? 
+  * If the odds increase 100% for a one unit increase in $X$, what $b$ equal to?
  
   
 * For the CHD example (model given below), please write down the numerical values of each of the  summaries listed below. You can select any values of age to report the predicted probabilities and risk ratios, and you can "eye ball" the probabilities using @fig-pred-prob. 
@@ -910,7 +906,7 @@ $$ \text{logit}(CHD) = -5.31  + .11 (\text{age}). $$
 
 To write the likelihood for person $i$, we use the notation $L_i$
 
-$$ L = p_i \times CHD_i + (1 - p_i) \times (1 - CHD_i) $$
+$$ L = p ^ {CHD} \times (1 - p)^{1 - CHD} $$
 and to write the likelihood for the full sample, we use use $L$ without a subscript:
 
 $$ L = \Pi_{i = 1}^N L_i = L_1 \times  L_2 \times \cdots \times L_N. $$
